@@ -1,0 +1,133 @@
+<div class="box_general pb-3">
+    <div class="header_box">
+        <h2 class="d-inline-block">Edit Order ID 12</h2>
+
+    </div>
+    <div class="list_general order">
+        <ul>
+            <li>
+                <!-- <figure><img src="assets/img/item_1.jpg" alt="" /></figure> -->
+                <h4>Da Alfredo <i class="pending">Pending</i></h4>
+                <ul class="booking_list">
+                    <li><strong>Order Type</strong> Take Away</li>
+                    <li>
+                        <strong>Date and time</strong> 5 November 2020 08.30pm
+                    </li>
+                    <li>
+                        <strong>Address</strong> Barda Bonilla 24 apt. 10, 2414
+                        London
+                    </li>
+                    <li>
+                        <strong> Contacts</strong>
+                        <a href="#0">98432983242</a> -
+                        <a href="#0">mark@hotmail.com</a>
+                    </li>
+                    <li><strong>Payment Status</strong> Paid via Paypal</li>
+                    <li><strong>Cooking and Serving Request</strong></li>
+                </ul>
+                <!-- <p>
+            <a
+              href="#0"
+              class="btn_1"
+              data-toggle="modal"
+              data-target="#client_detail_modal"
+              ><i class="fa fa-fw fa-pencil"></i> Edit order detail</a
+            >
+          </p> -->
+                <ul class="buttons">
+                    <li (click)="openAcceptDialog()">
+                        <a class="btn_1 gray approve"
+                            ><i class="fa fa-fw fa-check-circle-o"></i> Accept
+                            order</a
+                        >
+                    </li>
+                    <li (click)="openCancelOrderDialog()">
+                        <a class="btn_1 gray delete"
+                            ><i class="fa fa-fw fa-times-circle-o"></i>
+                            Cancel</a
+                        >
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <h5>Order detail</h5>
+    <div class="table-responsive">
+        <table
+            class="table table-bordered"
+            id="dataTable"
+            width="100%"
+            cellspacing="0"
+        >
+            <thead>
+                <tr>
+                    <th scope="col">Food Item</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Dish Type</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total Price</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <th scope="col">Food Item</th>
+                <th scope="col">Size</th>
+                <th scope="col">Dish Type</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total Price</th>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <td class="ms-table-f-w">Pizza</td>
+                    <td>Full</td>
+                    <td>Veg</td>
+                    <td>1</td>
+                    <td>$19.99</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td class="ms-table-f-w">French Fries</td>
+                    <td>Full</td>
+                    <td>Veg</td>
+                    <td>1</td>
+                    <td>$14.59</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td class="ms-table-f-w">Multigrain Hot Cereal</td>
+                    <td>Full</td>
+                    <td>Veg</td>
+                    <td>1</td>
+                    <td>$25.22</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td class="ms-table-f-w">Fried Egg Sandwich</td>
+                    <td>Full</td>
+                    <td>Veg</td>
+                    <td>1</td>
+                    <td>$11.23</td>
+                    <td>100</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row justify-content-end total_order">
+        <div class="col-xl-3 col-lg-4 col-md-5">
+            <ul>
+                <li><span>Subtotal</span> $40.00</li>
+                <li><span>Delivery Fee</span> $7.00</li>
+                <li><span>Total</span> $47.00</li>
+            </ul>
+            <!-- <a
+          href="#0"
+          class="btn_1 full-width cart"
+          style="width: 100%; text-align: center"
+          >Place Order</a
+        > -->
+        </div>
+    </div>
+    <!-- /total_order-->
+</div>

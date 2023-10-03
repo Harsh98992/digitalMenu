@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="content">
+        <div class="head">
+          <div class="card-header bg-dark text-light">
+            Himanshu (991991991) 29 May 2022
+          </div>
+
+          <!-- <p class="text-muted">Current year website visitor data</p> -->
+          <br />
+
+          <button type="button" class="btn active-button purple-shade ml-1">
+            Print Settings
+          </button>
+          <button type="button" class="btn active-button purple-shade ml-1">
+            Print Order
+          </button>
+        </div>
+        <br />
+        <div class="col-12">
+          <ngx-datatable
+            class="bootstrap w-100"
+            [rows]="rows"
+            [columns]="[
+              { name: 'Name' },
+              { name: 'Gender' },
+              { name: 'Company' }
+            ]"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [scrollbarH]="true"
+          >
+          </ngx-datatable>
+        </div>
+        <hr />
+        <div class="row mt-3">
+          <div class="col-12">
+            <h5 class="text-center mb-4" style="text-decoration: underline">
+              Customer Detail
+            </h5>
+
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td>Mark</td>
+                </tr>
+                <tr>
+                  <th scope="row">Mobile</th>
+                  <td>991991991</td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td>Jacob@gmail.com</td>
+                </tr>
+                <tr>
+                  <th scope="row">Address</th>
+                  <td>123 Main Street, Anytown, USA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

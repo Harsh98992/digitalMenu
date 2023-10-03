@@ -1,0 +1,31 @@
+.radio_c_group {
+  display: inline-block;
+}
+.container_radio {
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+#upload {
+  opacity: 0;
+}
+.rounded-pill {
+  border: 1px solid #d2d8dd;
+}
+
+#upload-label {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+.fa-solid {
+  vertical-align: -webkit-baseline-middle;
+  margin-right: .5rem;
+}
+
+
+.uploadImage{
+  max-height: 100px;
+  max-width: 100px;
+}

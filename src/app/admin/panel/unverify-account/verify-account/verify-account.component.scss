@@ -1,0 +1,25 @@
+// ... (other styles) ...
+
+.form-control {
+    height: 36px;
+}
+
+.verifyButton {
+    margin-bottom: 2px;
+}
+
+.verify-button-div {
+    margin: auto;
+}
+
+.verified-button-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.text-danger {
+    color: red; // Adjust the color as needed
+}

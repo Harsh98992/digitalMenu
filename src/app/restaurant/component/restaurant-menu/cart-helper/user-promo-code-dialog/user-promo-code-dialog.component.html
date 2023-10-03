@@ -1,0 +1,65 @@
+<div class="small-dialog-header">
+    <h3>APPLY COUPONS</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <div class="newsletter-subscribe">
+        <div class="col-md-12">
+            <form class="form-inline" method="post">
+                <div class="form-group">
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="text"
+                        placeholder="Enter Coupon Code"
+                        [(ngModel)]="promoCodeName"
+                    />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" (click)="applyPromoCode()">APPLY</button>
+                </div>
+            </form>
+        </div>
+        <hr />
+        <div class="col-md-12">
+            <div class="row mb-4 pb-2">
+                <div class="col-md-12" *ngFor="let promoCode of promoCodes">
+                    <div class="card offer-card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <!-- <img src="{{ promoCode.image }}" /> -->
+                                {{ promoCode.codeName }}
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-block">
+                                {{ promoCode.description }}
+                            </h6>
+                            <p class="card-text">
+                                {{ promoCode.details }}
+                            </p>
+                            <button
+                                *ngIf="promoCode.isValid"
+                                class="card-link"
+                                (click)="applyPromoCode(promoCode.codeName)"
+                            >
+                                APPLY COUPON
+                            </button>
+                            <span *ngIf="!promoCode.isValid" class="text-danger">{{ promoCode.error }}</span>
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <button class="card-link" (click)="copyPromoCode(promoCode.codeName)">COPY CODE</button>
+                            <button
+                                mat-icon-button
+                                [mat-dialog-close]="promoCode"
+                                (click)="openDialog(promoCode)"
+                                aria-label="Know more"
+                            >
+                                <mat-icon>info</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

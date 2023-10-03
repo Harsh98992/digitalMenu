@@ -1,0 +1,133 @@
+<main>
+    <div class="hero_single version_2 kenburns_slider">
+        <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
+            <div class="container">
+                <div class="row justify-content-lg-start justify-content-md-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <h1>Delivery or Takeaway Food</h1>
+                        <p>The best restaurants at the best price</p>
+
+                        <div class="row g-0">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="text" id="restaurantSearch" class="form-control no_border_r"
+                                        placeholder="Search for restaurant...." [matAutocomplete]="auto" (input)="
+                                            onSearchInput($event.target.value)
+                                        " [value]="searchQuery" />
+
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="
+                                                let result of autocompleteResults
+                                            " (click)="selectSearchResult(result)">
+                                            {{ result.restaurantName }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <ul class="autocomplete-results" *ngIf="autocompleteResults.length > 0">
+                                <li >
+                                    {{ result.restaurantName }}
+                                </li>
+                            </ul> -->
+
+                        <!-- /row -->
+                        <div class="search_trends">
+                            <h5>Trending:</h5>
+                            <ul>
+                                <li><a href="#0">Sushi</a></li>
+                                <li><a href="#0">Burger</a></li>
+                                <li><a href="#0">Chinese</a></li>
+                                <li><a href="#0">Pizza</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="scanLogin">
+                            <button class="scanner" style="width: 200px" routerLink="/scanner">
+                                <i class="fa-solid fa-qrcode fa-xl" style="color: #ffffff"></i>
+                                Scan QR
+                            </button>
+                            <button style="
+                                    width: 200px;
+                                    margin: 20px;
+                                    padding: 15px;
+                                    font-weight: bold;
+                                    background-image: linear-gradient(to right, #65d585, #1e8e00);
+                                " class="btn_1 btn-success full-width" (click)="openLoginDialog()"
+                                *ngIf="!userLoginFlag">
+                                <i class="fa-solid fa-right-to-bracket fa-xl" style="color: #ffffff"></i>
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave hero"></div>
+    </div>
+
+    <div class="container margin_30_60">
+        <div class="main_title center">
+            <span><em></em></span>
+            <h2>Previous Restaurents</h2>
+            <p>Restaurant you have visited previously</p>
+        </div>
+        <button type="button" *ngIf="!userLoginFlag" (click)="openLoginDialog()" class="custom-button colorPast">
+            Please log in to see your past restaurant data.
+        </button>
+        <div class="row add_bottom_25" *ngIf="userLoginFlag">
+            <div class="col-lg-6" *ngFor="let data of restaurantData">
+                <div class="list_home">
+                    <ul>
+                        <li>
+                            <a routerLink="/restaurant" [queryParams]="{ detail: data.restaurantUrl }">
+                                <figure>
+                                    <img [src]="
+                                            data.restaurantBackgoundImage
+                                                ? data.restaurantBackgoundImage
+                                                : '../assets/img/detail_1.jpg'
+                                        " alt="" class="lazy loaded" width="350" height="100%"
+                                        data-was-processed="true" />
+                                </figure>
+                                <!-- <div class="score"><strong>9.5</strong></div> -->
+                                <em>{{ data.restaurantType.join(",") }}</em>
+                                <h3>{{ data.restaurantName }}</h3>
+                                <small>
+                                    {{ data.address.street }} ,{{
+                                    data.address.city
+                                    }},{{ data.address.state }}
+                                    (Pin Code:-
+                                    {{ data.address.pincode }})</small>
+                                <button class="button-87" (click)="openContactPopUp(data,$event)">
+                                    <i class="fa-solid fa-phone" style="
+                                            color: #ffffff;
+                                            margin-right: 3px;
+                                        "></i>
+
+                                    Contact
+                                </button>
+                            </a>
+                            <ul>
+                                <li>
+                                    <!-- <span class="badge badge-warning"
+                                            ><i class="fa-solid fa-phone"></i
+                                            >{{
+                                                data.restaurantPhoneNumber
+                                            }}</span -->
+                                    <!-- > -->
+                                </li>
+                                <!-- <li>Average price $35</li> -->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /container -->
+
+    <!-- /bg_gray -->
+
+    <!-- /shape_element_2 -->
+</main>
+<!-- /main -->

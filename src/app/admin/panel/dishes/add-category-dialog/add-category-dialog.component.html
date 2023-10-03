@@ -1,0 +1,42 @@
+<div mat-dialog-title class="head">
+    <h3>Add New Category</h3>
+    <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+    <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+        <form
+            class="needs-validation"
+            novalidate=""
+            style="width: -webkit-fill-available"
+            accept-charset="utf-8"
+        >
+            <div class="mb-3">
+                <label for="category" class="form-label required"
+                    >Enter category name</label
+                >
+                <input
+                    type="text"
+                    class="form-control mt-1"
+                    name="category"
+                    [ngClass]="categoryErrorFlag ? 'is-invalid' : ''"
+                    (keyup)="changeCategoryFlag()"
+                    maxlength="30"
+                    [(ngModel)]="category"
+                    [required]="true"
+                    value=""
+                />
+                <small *ngIf="categoryErrorFlag" class="text-danger"
+                    >Please provide category name</small
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn_1 gradient w-100"
+                (click)="addCategory()"
+            >
+                {{ data ? "Update Category" : "Add Category" }}
+            </button>
+        </form>
+    </div>
+</div>

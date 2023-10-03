@@ -1,0 +1,142 @@
+<div class="row">
+    <div class="col-lg-12">
+        <!-- GST Setting Card -->
+        <div class="card">
+            <div class="card-header">
+                GST Setting
+                <button class="btn btn-primary" (click)="toggleEditMode()">
+                    {{ isEditing ? "Save" : "Edit" }}
+                </button>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="gstForm" accept-charset="utf-8">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label required">Is Pricing Inclusive of GST?</label>
+                                <ng-select [clearable]="false" formControlName="isPricingInclusiveOfGST" class="custom">
+                                    <ng-option [value]="true">Yes</ng-option>
+                                    <ng-option [value]="false">No</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label required">GST Percentage</label>
+                                <ng-select [clearable]="false" formControlName="customGSTPercentage" class="custom">
+                                    <ng-option [value]="5">5%</ng-option>
+                                    <ng-option [value]="12">12%</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Google Review Setting Card -->
+        <div class="card">
+            <div class="card-header">
+                Google Review Setting
+                <button class="btn btn-primary" (click)="toggleGoogleReviewEditMode()">
+                    {{ isEditingGoogleReview ? "Save" : "Edit" }}
+                </button>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="googleReviewForm" accept-charset="utf-8">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label required">Google Place ID</label>
+                                <input type="text" formControlName="placeId" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Delivery Setting Card -->
+        <div class="card">
+            <div class="card-header">
+                Delivery Setting
+                <button class="btn btn-primary" (click)="toggleDeliveryEditMode()">
+                    {{ isEditingDelivery ? "Save" : "Edit" }}
+                </button>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="deliveryForm" accept-charset="utf-8">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label required">Provide Delivery?</label>
+                                <ng-select [clearable]="false" formControlName="provideDelivery" class="custom">
+                                    <ng-option [value]="true">Yes</ng-option>
+                                    <ng-option [value]="false">No</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label required">Maximum Delivery Distance (in km)</label>
+                                <input type="number" formControlName="maxDeliveryDistance" class="form-control"
+                                    min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label required">Minimum Order Value for Free Delivery</label>
+                                <input type="number" formControlName="minOrderValueForFreeDelivery" class="form-control"
+                                    min="0">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label required">Delivery Fee for Orders Below Minimum Value</label>
+                                <input type="number" formControlName="deliveryFeeBelowMinValue" class="form-control"
+                                    min="0">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Social Media Setting Card -->
+        <div class="card">
+            <div class="card-header">
+                Social Media Handles
+                <button class="btn btn-primary" (click)="toggleSocialMediaEditMode()">
+                    {{ isEditingSocialMedia ? "Save" : "Edit" }}
+                </button>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="socialMediaForm" accept-charset="utf-8">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label">Facebook</label>
+                                <input type="text" formControlName="facebookUrl" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label">Instagram</label>
+                                <input type="text" formControlName="instagramUrl" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label">YouTube</label>
+                                <input type="text" formControlName="youtubeUrl" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <app-add-payment></app-add-payment>
+    </div>
+</div>

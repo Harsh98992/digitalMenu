@@ -1,0 +1,24 @@
+sudo apt -y update
+sudo apt -y upgrade
+sudo apt -y install unzip wget
+wget "https://r4---sn-5pop-qxal.gvt1.com/edgedl/android/studio/ide-zips/2022.3.1.19/android-studio-2022.3.1.19-linux.tar.gz?cms_redirect=yes&mh=69&mip=103.68.23.91&mm=28&mn=sn-5pop-qxal&ms=nvh&mt=1694675789&mv=m&mvi=4&pl=24&rmhost=r1---sn-5pop-qxal.gvt1.com&shardbypass=sd"
+
+sudo tar -xvf "/workspaces/DigitalMenu/android/android-studio-2022.3.1.19-linux.tar.gz?cms_redirect=yes&mh=69&mip=103.68.23.91&mm=28&mn=sn-5pop-qxal&ms=nvh&mt=1694675789&mv=m&mvi=4&pl=24&rmhost=r1---sn-5pop-qxal.gvt1.com&shardbypass=sd"
+
+sudo mv android-studio ~/android-studio
+
+
+nano ~/.bashrc
+
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+source ~/.bashrc
+
+sudo apt install openjdk-11-jdk
+
+
+
+./gradlew assembleDebug

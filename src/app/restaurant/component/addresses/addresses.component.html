@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="py-4">
+        <h4 class="mb-3">My Addresses</h4>
+        <button class="btn btn-primary mb-3" (click)="openAddAddressDialog()">Add Address</button>
+
+        <div *ngFor="let address of addresses" class="address-item">
+            <div class="address-details">
+                <p class="font-weight-bold">{{ address.address }}</p>
+                <p class="text-muted">{{ address.pinCode }}</p>
+            </div>
+            <div class="address-actions">
+                <button class="btn btn-danger" (click)="deleteAddress(address._id)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

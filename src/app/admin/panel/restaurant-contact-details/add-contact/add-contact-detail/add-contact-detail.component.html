@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-dark text-light">Add Contact</div>
+            <div class="card-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="newPassword" class="required"
+                            >Contact Type</label
+                        >
+                        <ng-select
+                            formControlName="categoryType"
+                            (change)="changeValidation()"
+                        >
+                            <ng-option aria-selected="true" value="email">
+                                <i class="fa-regular fa-envelope"></i>
+                                Email</ng-option
+                            >
+                            <ng-option value="whatsapp"
+                                ><i class="fa-brands fa-whatsapp"></i>
+                                Whatsapp</ng-option
+                            >
+                            <ng-option value="phone"
+                                ><i class="fa-solid fa-phone"></i> Phone.
+                                No</ng-option
+                            >
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cnPassword" class="required"
+                            >Contact Detail</label
+                        >
+                        <input
+                            class="form-control"
+                            type="text"
+                            formControlName="categoryDetail"
+                            [ngClass]="{
+                                'is-invalid':
+                                    checkForError(
+                                        'categoryDetail',
+                                        'required'
+                                    ) ||
+                                    checkForError(
+                                        'categoryDetail',
+                                        'pattern'
+                                    ) ||
+                                    checkForError('categoryDetail', 'email')
+                            }"
+                        />
+                        <small
+                            *ngIf="checkForError('categoryDetail', 'required')"
+                            class="text-danger"
+                            >Please provide category details.</small
+                        >
+                        <small
+                            *ngIf="checkForError('categoryDetail', 'pattern')"
+                            class="text-danger"
+                            >Please provide a valid phone number.</small
+                        >
+                        <small
+                            *ngIf="checkForError('categoryDetail', 'email')"
+                            class="text-danger"
+                            >Please provide a valid email.</small
+                        >
+                    </div>
+                    <button type="submit" class="btn btn_1 gradient w-100">
+                        <i class="fa-solid fa-floppy-disk"></i> Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

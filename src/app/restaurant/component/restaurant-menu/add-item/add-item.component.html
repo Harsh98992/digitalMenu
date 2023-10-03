@@ -1,0 +1,150 @@
+<div class="small-dialog-header">
+  <h3>{{ dish.dishName }}</h3>
+  <a mat-dialog-close class="close_panel_mobile"><span class="icon_close_alt"></span></a>
+</div>
+
+<mat-dialog-content>
+  <!-- <div class="content">
+    <h5>Quantity</h5>
+    <div class="numbers-row">
+      <input
+        type="text"
+        [(ngModel)]="dishQuantitiy"
+        min="1"
+        max="30"
+        id="qty_1"
+        class="qty2 form-control"
+        name="quantity"
+        readonly
+      />
+      <div class="inc button_inc" (click)="changeDishQuantity('inc')">+</div>
+      <div class="dec button_inc" (click)="changeDishQuantity('dec')">-</div>
+    </div>
+    <ng-container *ngIf="dish.sizeAvailable && dish.sizeAvailable.length > 0">
+      <h5>Size</h5>
+      <ul class="clearfix">
+        <li *ngFor="let item of dish.sizeAvailable">
+          <label class="container_radio"
+            >{{ item.size | titlecase }} <small>( {{ item.sizeDescription }} )</small><span
+              >+ {{ item.price | currency : "INR" : "symbol" : "1.0-0" }}</span
+            >
+            <input
+              type="radio"
+              (click)="pickedSize(item)"
+              value="option1"
+              name="options_1"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container
+      *ngIf="dish.addOns && dish.addOns.length > 0"
+    >
+      <h5>Add Ons</h5>
+      <ul class="clearfix">
+        <li *ngFor="let item of dish.addOns">
+          <label class="container_check"
+            >{{ getAddOnName(item.name) | titlecase
+            }}<span>{{
+              item.price | currency : "INR" : "symbol" : "1.0-0"
+            }}</span>
+            <input type="checkbox" (click)="pickIngredents(item, $event)" />
+            <span class="checkmark"></span>
+          </label>
+        </li>
+      </ul>
+    </ng-container>
+  </div> -->
+
+  <h5>Quantity</h5>
+  <div class="numbers-row">
+    <input type="text" [(ngModel)]="dishQuantitiy" min="1" max="30" id="qty_1" class="qty2 form-control" name="quantity"
+      readonly />
+    <div class="inc button_inc" (click)="changeDishQuantity('inc')">+</div>
+    <div class="dec button_inc" (click)="changeDishQuantity('dec')">-</div>
+  </div>
+  <mat-vertical-stepper linear #stepper>
+
+    <mat-step [stepControl]="false" *ngIf="dish.sizeAvailable && dish.sizeAvailable.length > 0" [editable]="isEditable">
+      <div class="content">
+        <ng-template matStepLabel>
+          <h7>Size (required)</h7>
+        </ng-template>
+
+        <ul class="clearfix">
+          <li *ngFor="let item of dish.sizeAvailable">
+            <label class="container_radio">{{ item.size | titlecase }}
+              <small *ngIf="item.sizeDescription">( {{ item.sizeDescription }} )</small><span>
+                {{ item.price | currency : "INR" : "symbol" : "1.0-0" }}</span>
+              <input type="radio" (click)="pickedSize(item)" [checked]="item.defaultSize" name="options_1" />
+              <span class="checkmark"></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </mat-step>
+    <div *ngFor="let choicesArrayData of getDishChoicesData()">
+      <mat-step [editable]="isEditable">
+        <div class="content">
+          <ng-container>
+            <ng-template matStepLabel>
+              <h7>{{ choicesArrayData.choicesDisplayName | titlecase }} ({{
+                choicesArrayData.choicesMinValue === 0
+                ? "Optional"
+                : getChooseText(choicesArrayData.choicesMinValue)
+                }})</h7>
+            </ng-template>
+            <ul class="clearfix">
+              <li *ngFor="let item of choicesArrayData.choicesGroup">
+                <label class="container_check">{{ item.choiceName | titlecase }}
+                  <input type="checkbox" (click)="pickedChoices(item, choicesArrayData, $event)" />
+                  <span class="checkmark"></span>
+                </label>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </mat-step>
+    </div>
+    <div *ngFor="let addOnGroup of getSizeAddOn()">
+      <mat-step [editable]="isEditable">
+        <div class="content">
+          <ng-container *ngIf="getSizeAddOn()">
+            <ng-template matStepLabel>
+              <h7>{{ addOnGroup.addOnDisplayName | titlecase }} ({{
+                addOnGroup.addOnMinValue === 0
+                ? "Optional"
+                : getChooseText(addOnGroup.addOnMinValue)
+                }})</h7>
+            </ng-template>
+            <ul class="clearfix">
+              <li *ngFor="let item of addOnGroup.addOns">
+                <label class="container_check">{{ item.addOnName | titlecase
+                  }}<span>{{
+                    item.addOnPrice | currency : "INR" : "symbol" : "1.0-0"
+                    }}</span>
+                  <input type="checkbox" (click)="pickIngredents(item, addOnGroup, $event)" />
+                  <span class="checkmark"></span>
+                </label>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </mat-step>
+    </div>
+  </mat-vertical-stepper>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <div class="footer">
+    <div class="row">
+      <div class="col-md-12">
+        <button type="reset" class="btn_1 full-width" (click)="addItemToCart()">
+          Add to cart (
+          {{ totalPrice | currency : "INR" : "symbol" : "1.0-0" }} )
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-dialog-actions>

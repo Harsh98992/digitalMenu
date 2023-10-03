@@ -1,0 +1,96 @@
+<div class="container margin_60_20">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="box_general write_review">
+                <h1 class="add_bottom_15 contact-heading">Contact Us</h1>
+                <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label class="required">Email Address</label>
+                        <input
+                            class="form-control"
+                            formControlName="email"
+                            type="email"
+                            maxlength="50"
+                            [ngClass]="
+                                checkForError('email', 'required')
+                                    ? 'is-invalid'
+                                    : ''
+                            "
+                            placeholder="Kindly share your email address for contact purposes."
+                        />
+                        <small
+                            *ngIf="checkForError('email', 'email')"
+                            class="text-danger"
+                            >Please provide a valid email.</small
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Subject</label>
+                        <input
+                            class="form-control"
+                            formControlName="subject"
+                            maxlength="50"
+                            type="text"
+                            [ngClass]="
+                                checkForError('subject', 'required')
+                                    ? 'is-invalid'
+                                    : ''
+                            "
+                            placeholder="Please provide a suitable subject."
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Write Your Message</label>
+                        <textarea
+                            class="form-control"
+                            formControlName="message"
+                            style="height: 180px"
+                            maxlength="250"
+                            [ngClass]="{
+                                'is-invalid':
+                                checkForError('email' , 'required') ||
+                                checkForError('email', 'pattern')
+                              }"
+                            
+                            placeholder="Write your message."
+                        ></textarea>
+
+                        <!--[ngClass]="{
+                                    'is-invalid':
+                                        checkError('email', 'required') ||
+                                        checkError('email', 'email')
+                                }"-->
+
+                    </div>
+                    <button type="submit" class="btn_1 mb-3">
+                        Submit Details
+                    </button>
+                </form>
+                <div class="horizontal-line-container">
+                    <div class="horizontal-line"></div>
+                    <div class="or-text">OR</div>
+                    <div class="horizontal-line"></div>
+                </div>
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Write Us At:</h2>
+                            <p>
+                                Email:
+                                <a href="mailto:goqrorder@gmail.com"
+                                    >goqrorder@gmail.com</a
+                                >
+                            </p>
+                            <!-- <p>
+                                Address: GF-08, Ansal Sundaram, RDC, Ghaziabad
+                                ,Uttar Pardesh (Pin code :201002)
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /row -->
+</div>

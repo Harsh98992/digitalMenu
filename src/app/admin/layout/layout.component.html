@@ -1,0 +1,335 @@
+<div class="wrapper">
+    <nav id="sidebar" [ngClass]="showSideBarFlag ? 'active' : ''">
+        <div class="sidebar-header">
+            <!-- <img
+          src="assets/img/bootstraper-logo.png"
+          alt="bootraper logo"
+          class="app-logo"
+        /> -->
+        </div>
+        <ul class="list-unstyled components text-secondary">
+            <li routerLink="/admin" *ngIf="verifiedAccountFlag">
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fas fa-home"></i> Dashboard</a
+                >
+            </li>
+            <li
+                routerLink="/admin/restaurent-contact-details/view"
+                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fas fa-home"></i> Contact Details</a
+                >
+            </li>
+
+            <li
+                routerLink="/admin/promocode/view"
+                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa-tags"></i> . View Promo Code
+                </a>
+            </li>
+
+            <li
+                routerLink="/admin/promocode/add"
+                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa-tags"></i> . Add Promo Code
+                </a>
+            </li>
+
+            <li
+                routerLink="/admin/restaurant-orders"
+                *ngIf="verifiedAccountFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-book"></i> Orders</a
+                >
+            </li>
+            <li
+                routerLink="/admin/customers"
+                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-users"></i> Customers</a
+                >
+            </li>
+
+            <!-- <li *ngIf="verifiedAccountFlag">
+                <a data-target="#demo" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
+                        class="fa-solid fa fa-bullhorn"></i> Marketing
+                    <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </a>
+
+                <ul #collapse class="collapse out" id="demo">
+                    <li routerLink="/admin/marketing/coupon">
+                        <a><i class="fas fa-angle-right"></i> Add Restaurant
+                            Request</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+                <a
+                    data-target="#dishes"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Dishes
+                    <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </a>
+
+                <ul #collapse class="collapse out" id="dishes">
+                    <li routerLink="/admin/dishes/view-category">
+                        <a><i class="fas fa-angle-right"></i> Categories</a>
+                    </li>
+                    <li routerLink="/admin/dishes/extras">
+                        <a><i class="fas fa-angle-right"></i> Extras</a>
+                    </li>
+                    <li routerLink="/admin/dishes/choices">
+                        <a><i class="fas fa-angle-right"></i>Dish Choices</a>
+                    </li>
+                    <li routerLink="/admin/dishes/add-dish">
+                        <a><i class="fas fa-angle-right"></i> Add Dish</a>
+                    </li>
+                    <li routerLink="/admin/dishes/view-dish">
+                        <a><i class="fas fa-angle-right"></i> View Dish</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li *ngIf="!adminRouteFlag && !this.staffRoleFlag">
+                <a routerLink="/admin/restaurant-profile"
+                    ><i class="fas fa-table"></i> Restaurant Details</a
+                >
+            </li>
+            <li *ngIf="!adminRouteFlag && verifiedAccountFlag && !this.staffRoleFlag">
+                <a routerLink="/admin/restaurant-tables/view"
+                    ><i class="fas fa-table"></i> Restaurant Tables</a
+                >
+            </li>
+
+            <li
+                routerLink="/admin/restaurant-images"
+                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa icon_images"></i> Restaurant Images</a
+                >
+            </li>
+
+            <!-- add user profile -->
+
+            <li *ngIf="verifiedAccountFlag" routerLink="/admin/user-profile">
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-user"></i> My Profile</a
+                >
+            </li>
+
+            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+                <a routerLink="/admin/user-managment/view"
+                    ><i class="fa-solid fa fa-user"></i> User Managment</a
+                >
+            </li>
+            <li *ngIf="verifiedAccountFlag">
+                <a routerLink="/admin/restaurantQrCode"
+                    ><i class="fa-solid fa fa-user"></i> Restaurant QrCode</a
+                >
+            </li>
+            <li *ngIf="adminRouteFlag">
+                <a routerLink="/admin/unVerifyRequest"
+                    ><i class="fa-solid fa fa-user"></i>Un-Verify Account</a
+                >
+            </li>
+
+            <!-- <li *ngIf="verifiedAccountFlag">
+                <a routerLink="/admin/review"
+                    ><i class="fa-solid fa fa-user"></i> Review</a
+                >
+            </li> -->
+            <li *ngIf="verifiedAccountFlag">
+                <a routerLink="/admin/profile/resetPassword"
+                    ><i class="fa-solid fa fa-user"></i> Change Password</a
+                >
+            </li>
+            <li *ngIf="verifiedAccountFlag">
+                <a
+                    href="https://tawk.to/chat/64de485494cf5d49dc6afe68/1h824l3a8"
+                    target="blank"
+                    ><i class="fas fa-cog"></i>Support</a
+                >
+            </li>
+            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+                <a routerLink="/admin/setting/store"
+                    ><i class="fas fa-cog"></i>Store Settings</a
+                >
+            </li>
+        </ul>
+    </nav>
+    <div id="body" class="active">
+        <nav class="navbar navbar-expand-lg navbar-white bg-white">
+            <button
+                type="button"
+                id="sidebarCollapse"
+                class="btn btn-light"
+                (click)="toggleSideBar()"
+            >
+                <i class="fas fa-bars"></i><span></span>
+            </button>
+            <div
+                class="collapse navbar-collapse"
+               
+                id="navbarSupportedContent"
+            >
+                <ng-select
+                *ngIf="verifiedAccountFlag && !staffRoleFlag"
+                    [(ngModel)]="selectedStatus"
+                    (change)="changeRestaurantStatus()"
+                    style="min-width: 130px"
+                    class="mr-3"
+                    [clearable]="false"
+                >
+                    <ng-option value="online"
+                        ><i
+                            class="fa-solid fa-circle mr-2"
+                            style="color: #3d9b17"
+                        ></i
+                        >Online</ng-option
+                    >
+                    <ng-option value="offline"
+                        ><i
+                            class="fa-solid fa-circle mr-2"
+                            style="color: red"
+                        ></i
+                        >Offline</ng-option
+                    >
+                </ng-select>
+                <!-- <button
+                    type="button"
+                    class="btn active-button purple-shade mr-2"
+                    (click)="openOrderDialog()"
+                >
+                    FAQ
+                </button> -->
+
+                <!-- <div class="dropdown mx-1" matBadge="8">
+                    <a class="btn purple-shade dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-book"></i>
+                    </a>
+
+                    <div class="dropdown-menu open dropdown-menu-right">
+                        <a class="dropdown-item">
+                            <h6>Pending Orders:-</h6>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">
+                            <span class="text-success">
+                                <strong>
+                                    <i class="fa fa-long-arrow-up fa-fw"></i>Order Recieved</strong>
+                            </span>
+                            <span class="small float-right text-muted">11:21 AM</span>
+                            <div class="dropdown-message small">
+                                This is an automated server response message.
+                                All systems are online.
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" (click)="navigateToOrder()">
+                            <span class="text-success">
+                                <strong>
+                                    <i class="fa fa-long-arrow-up fa-fw"></i>Order Recieved</strong>
+                            </span>
+                            <span class="small float-right text-muted">11:27 AM</span>
+                            <div class="dropdown-message small">
+                                This is an automated server response message.
+                                All systems are online.
+                            </div>
+                        </a>
+                    </div>
+                </div> -->
+                <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <div class="nav-dropdown">
+                            <a
+                                [matMenuTriggerFor]="userMenu"
+                                class="nav-item nav-link dropdown-toggle text-secondary"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <!-- <i class="fas fa-user"></i>
+                 -->
+                                <ngx-avatars
+                                    *ngIf="userDetail?.name"
+                                    [name]="userDetail?.name"
+                                    size="35"
+                                ></ngx-avatars>
+                            </a>
+                            <div>
+                                <ul class="nav-list">
+                                    <mat-menu #userMenu="matMenu">
+                                        <li
+                                            mat-menu-item
+                                            routerLink="/admin/user-profile"
+                                        >
+                                            <a class="dropdown-item"
+                                                ><i
+                                                    class="fas fa-address-card"
+                                                ></i>
+                                                Profile</a
+                                            >
+                                        </li>
+                                        <li
+                                            mat-menu-item
+                                            routerLink="/admin/restaurantQrCode"
+                                            *ngIf="verifiedAccountFlag"
+                                        >
+                                            <a class="dropdown-item"
+                                                ><i
+                                                    class="fa-solid fa-qrcode"
+                                                ></i>
+                                                Qr Code</a
+                                            >
+                                        </li>
+                                        <li
+                                            mat-menu-item
+                                            routerLink="/admin/setting/store"
+                                            *ngIf="
+                                                verifiedAccountFlag &&
+                                                !staffRoleFlag
+                                            "
+                                        >
+                                            <a class="dropdown-item"
+                                                ><i class="fas fa-cog"></i>
+                                                Settings</a
+                                            >
+                                        </li>
+
+                                        <div class="dropdown-divider"></div>
+                                        <li mat-menu-item>
+                                            <a
+                                                (click)="logout()"
+                                                class="dropdown-item"
+                                                ><i
+                                                    class="fas fa-sign-out-alt"
+                                                ></i>
+                                                Logout</a
+                                            >
+                                        </li>
+                                    </mat-menu>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="content" [ngClass]="!showSideBarFlag ? 'content-max' : ''">
+            <div class="container">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

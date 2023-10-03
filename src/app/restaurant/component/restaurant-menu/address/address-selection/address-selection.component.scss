@@ -1,0 +1,48 @@
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+
+.example-radio-button {
+    margin: 5px;
+}
+
+.address-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.address-item button {
+    margin-left: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.address-item button:hover {
+    background-color: #f44336;
+    color: #ffffff;
+}
+
+.address-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80%;
+}
+
+.pointer {
+    width: 20%;
+    text-align: right;
+}

@@ -1,0 +1,89 @@
+<div id="register_bg">
+  <div id="register">
+    <aside>
+      <figure>
+        <img src="/assets/img/logo_sticky.svg" width="140" height="35" alt="" />
+      </figure>
+      <h4 class="my-4 text-center">Login here..</h4>
+
+      <form autocomplete="off" [formGroup]="loginForm" (submit)="submitForm()">
+        <div class="form-group">
+          <input 
+            class="form-control"
+            type="email"
+            maxlength="30"
+            formControlName="email"
+            placeholder="Email"
+            [ngClass]="{
+              'is-invalid':
+              checkForError('email' , 'required') ||
+              checkForError('email', 'pattern')
+            }"
+          />
+          <i class="icon_mail_alt"></i>
+          <span
+            class="text-danger error-message"
+            *ngIf="checkForError('email', 'required')"
+            >Email is required.</span
+          >
+          <span
+            class="text-danger error-message"
+            *ngIf="checkForError('email', 'email')"
+            >Please provide a valid email.</span
+          >
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="password"
+            id="password1"
+            maxlength="30"
+            #password1
+            formControlName="password"
+            placeholder="Password"[ngClass]="{
+              'is-invalid':
+              checkForError('password' , 'required') ||
+              checkForError('password', 'pattern')
+            }"
+          />
+          <button
+            type="button"
+            role="button"
+            (click)="togglePassowrdHide(password1)"
+            aria-label="Show Password"
+            title="Show Password"
+            tabindex="0"
+            class="my-toggle hideShowPassword-toggle-show"
+            aria-pressed="false"
+            style="position: absolute; right: 0px; top: 7%"
+          >
+            {{ passwordFlag ? "Show" : "Hide" }}
+          </button>
+
+          <i class="icon_lock_alt"></i>
+          <span
+            class="text-danger error-message"
+            *ngIf="checkForError('password', 'required')"
+            >Password is required.</span
+          >
+        </div>
+
+        <div class="clearfix add_bottom_15">
+          <div class="float-end">
+            <a id="forgot" routerLink="/admin/forgotPassword"
+              >Forgot Password?</a
+            >
+          </div>
+        </div>
+        <button type="submit" class="btn_1 gradient full-width">Login Now!</button>
+        <div class="text-center mt-2">
+          <small
+            >Don't have an acccount?
+            <strong><a routerLink="/admin/register">Sign Up</a></strong></small
+          >
+        </div>
+      </form>
+      <!-- <div class="copy">© 2020 FooYes</div> -->
+    </aside>
+  </div>
+</div>

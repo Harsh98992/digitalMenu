@@ -1,0 +1,55 @@
+<div class="small-dialog-header">
+    <h3>Choose Address</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+
+<mat-dialog-content>
+    <!-- Add the search bar with autocomplete -->
+    <input
+        type="text"
+        id="locationSearch"
+        class="form-control"
+        placeholder="Search for a location"
+        (input)="onSearchInput($event.target.value)"
+        [value]="searchQuery"
+    />
+    <ul class="autocomplete-results" *ngIf="autocompleteResults.length > 0">
+        <li
+            *ngFor="let result of autocompleteResults"
+            (click)="onSelectLocation(result)"
+        >
+            {{ result.description }}
+        </li>
+    </ul>
+
+    <div class="map-container mt-3">
+        <google-map
+            [center]="mapCenter"
+            [zoom]="mapZoom"
+            (mapClick)="onMapClick($event)"
+        >
+            <map-marker [position]="markerPosition"></map-marker>
+        </google-map>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button
+        *ngIf="showCompleteAddressButton"
+        mat-raised-button
+        color="primary"
+        (click)="openAddCompleteAddressDialog()"
+    >
+        Add Complete Address
+    </button>
+    <button
+        *ngIf="!showCompleteAddressButton"
+        mat-raised-button
+        color="primary"
+        (click)="onSelectLocationButton()"
+    >
+        Select Location
+    </button>
+</mat-dialog-actions>

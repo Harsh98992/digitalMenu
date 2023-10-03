@@ -1,0 +1,25 @@
+<div class="small-dialog-header">
+    <h3>Order Notification</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <div class="my-3">
+        <div class="col-md-12 text-center">
+            <div class="circle">
+                <span class="icon-food_icon_cloche"></span>
+            </div>
+        </div>
+        <h5 class="mt-3">An order has recieved. Please check the dashboard!</h5>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button
+        type="button"
+        class="btn btn_1 gradient w-100"
+        (click)="navigateToDashboard()"
+    >
+        Go to dashboard
+    </button>
+</mat-dialog-actions>

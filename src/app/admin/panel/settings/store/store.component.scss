@@ -1,0 +1,52 @@
+/* Styles for the Store Component */
+.row {
+    margin-top: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.card-header button {
+    margin-left: 10px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+// /* Styling for Google Review Setting Card */
+// .google-review-card {
+//     /* Add your custom styles here */
+// }
+
+// /* Styling for Delivery Setting Card */
+// .delivery-card {
+//     /* Add your custom styles here */
+// }
+
+/* Styling for ng-select (you may need to adjust based on your UI library) */
+.custom .ng-arrow-wrapper {
+    display: none;
+}

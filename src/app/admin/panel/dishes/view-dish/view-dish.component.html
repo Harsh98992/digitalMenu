@@ -1,0 +1,142 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header bg-dark text-light">Dishes</div>
+      <br />
+      <div class="row mx-2 my-1">
+        <div class="form-group col-lg-2 col-md-12">
+          <input type="text" placeholder="Search" class="form-control" />
+        </div>
+        <div class="mb-3 form-group col-lg-2 col-md-12">
+          <ng-select class="custom">
+            <ng-option ngDefaultControl>All</ng-option>
+            <ng-option>Completed</ng-option>
+            <ng-option>Pending</ng-option>
+            <ng-option>Cancelled</ng-option>
+          </ng-select>
+        </div>
+
+        <div class="col-lg-2 col-md-12">
+          <button type="reset" class="btn btn-danger">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+            Export
+          </button>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <button
+            type="reset"
+            class="btn btn-danger"
+            style="float: right"
+            routerLink="/admin/dishes/add-dish"
+          >
+            <i class="fa-solid fa-user"></i>
+            Add new
+          </button>
+        </div>
+      </div>
+      <ngx-datatable
+        class="bootstrap"
+        [rows]="rows"
+        [columns]="columns"
+        [columnMode]="ColumnMode.force"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        rowHeight="auto"
+        [scrollbarH]="true"
+        [limit]="10"
+      >
+        <ngx-datatable-column name="Action" prop="action" [sortable]="false">
+          <ng-template
+            #menu
+            let-row="row"
+            let-value="value"
+            ngx-datatable-cell-template
+          >
+            <i
+              class="fa-solid fa-ellipsis-vertical fa-xl pointer"
+              [matMenuTriggerFor]="menu"
+            ></i>
+            <div>
+              <mat-menu #menu="matMenu">
+                <button
+                  class="pointer"
+                  mat-menu-item
+                  (click)="navigateToEditDish(row)"
+               
+                >
+                  <i class="fa-solid fa-pen-to-square"></i> Edit
+                </button>
+                <div class="dropdown-divider"></div>
+                <button class="pointer" (click)="deleteDish(row)" mat-menu-item>
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
+              </mat-menu>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column
+          name="Dish Image"
+          prop="imageUrl"
+          [sortable]="false"
+        >
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <img
+              alt="Dish Image"
+              class="rounded-circle"
+              style="width: 40px; height: 40px"
+              [src]="value"
+            />
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Dish Name" prop="dishName">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value | titlecase }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Price" prop="dishPrice">
+          <ng-template
+            let-value="value"
+            let-row="row"
+            ngx-datatable-cell-template
+          >
+            <span>{{ value | currency : "INR" : "symbol" : "1.0-0" }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Dish Type" prop="dishType">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div class="badge badge-success" *ngIf="value === 'veg'">
+              {{ value | titlecase }}
+            </div>
+            <div class="badge badge-danger" *ngIf="value === 'nonVeg'">
+              {{ value | titlecase }}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Availability" prop="availableFlag">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <h5 class="badge badge-success" *ngIf="value">Available</h5>
+            <h5 class="badge badge-danger" *ngIf="!value">Not Available</h5>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Dish Order Option" prop="dishOrderOption">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value | titlecase }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Dish Description" prop="dishDescription">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value | titlecase }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Spicy" prop="chilliFlag">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <i
+              *ngIf="value"
+              class="fa-solid fa-pepper-hot ml-2 text-danger ng-star-inserted"
+            ></i>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

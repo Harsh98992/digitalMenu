@@ -1,0 +1,8 @@
+<div>
+  <h2>Email Dialog</h2>
+
+  <p>Enter your message here:</p>
+  <textarea [(ngModel)]="message" class="form-control" rows="5"></textarea>
+  <button (click)="onSendClick()" class="btn btn-primary mt-3">Send Email</button>
+  <button (click)="onCancelClick()" class="btn btn-secondary mt-3">Cancel</button>
+</div>

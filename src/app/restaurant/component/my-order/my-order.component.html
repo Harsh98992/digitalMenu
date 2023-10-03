@@ -1,0 +1,452 @@
+<main class="main-section">
+    <section class="py-4 osahan-main-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <ul
+                        class="nav nav-tabsa custom-tabsa border-0 flex-column bg-white rounded overflow-hidden shadow-sm p-2 c-t-order"
+                        id="myTab"
+                        role="tablist"
+                    >
+                        <li
+                            class="nav-item border-top"
+                            role="presentation"
+                            *ngFor="let tab of tabs"
+                        >
+                            <a
+                                class="nav-link border-0 text-dark py-3"
+                                [ngClass]="
+                                    tab.key === 'progress' ? 'active' : ''
+                                "
+                                id="{{ tab.key }}-tab"
+                                data-toggle="tab"
+                                href="#{{ tab.key }}"
+                                role="tab"
+                                aria-controls="{{ tab.key }}"
+                                aria-selected="false"
+                            >
+                                <i
+                                    *ngIf="tab.key === 'completed'"
+                                    class="fa-solid fa-check mr-2 text-warning mb-0"
+                                ></i>
+                                <i
+                                    *ngIf="tab.key === 'progress'"
+                                    class="fa-solid fa-clock mr-2 text-warning mb-0"
+                                ></i>
+                                <i
+                                    *ngIf="tab.key === 'canceled'"
+                                    class="fa-solid fa-xmark mr-2 text-danger mb-0"
+                                ></i>
+                                {{ tab.value }}</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content col-md-9" id="myTabContent">
+                    <div
+                        class="tab-pane fade show"
+                        id="completed"
+                        role="tabpanel"
+                        aria-labelledby="completed-tab"
+                    >
+                        <div class="order-body">
+                            <h5
+                                class="text-center"
+                                *ngIf="
+                                    !completedOrder ||
+                                    completedOrder.length === 0
+                                "
+                            >
+                                No Records Found.
+                            </h5>
+                            <div
+                                class="pb-3"
+                                *ngFor="let orderData of completedOrder"
+                            >
+                                <div class="p-3 rounded shadow-sm bg-white">
+                                    <div class="d-flex border-bottom pb-3">
+                                        <div class="text-muted mr-3">
+                                            <img
+                                                alt="#"
+                                                [src]="bannerImg"
+                                                class="img-fluid order_img rounded"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 font-weight-bold">
+                                                <a
+                                                    *ngIf="
+                                                        orderData
+                                                            ?.restaurantData
+                                                            .length
+                                                    "
+                                                    class="text-dark"
+                                                    >{{
+                                                        orderData
+                                                            .restaurantData[0]
+                                                            .restaurantName
+                                                    }}</a
+                                                >
+                                            </p>
+                                            <p class="mb-0">
+                                                {{
+                                                    orderData.restaurantData[0]
+                                                        .address.city
+                                                }},
+                                                {{
+                                                    orderData.restaurantData[0]
+                                                        .address.state
+                                                }}
+                                            </p>
+                                            <p>
+                                                ORDERID:-
+                                                {{ orderData.orderId }}
+                                            </p>
+                                            <!-- <p class="mb-0 small">
+                                                <a
+                                                    (click)="
+                                                        generateBill(
+                                                            orderData.orderId
+                                                        )
+                                                    "
+                                                    >Print Bill</a
+                                                >
+                                            </p> -->
+                                        </div>
+                                        <div class="ml-auto">
+                                            <p
+                                                class="bg-success text-white py-1 px-2 rounded small mb-1"
+                                            >
+                                                Completed
+                                            </p>
+                                            <p
+                                                class="small font-weight-bold text-center"
+                                            >
+                                                <i
+                                                    class="fa-regular fa-clock"
+                                                ></i>
+                                                {{
+                                                    orderData.orderDate
+                                                        | date : "medium"
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex pt-3">
+                                        <!-- <div class="small">
+                                            <p
+                                                class="text- font-weight-bold mb-0"
+                                            >
+                                                Kesar Sweet x 1
+                                            </p>
+                                            <p
+                                                class="text- font-weight-bold mb-0"
+                                            >
+                                                Gulab Jamun x 4
+                                            </p>
+                                        </div> -->
+                                       
+                                        <div class="text-right">
+                                            <a
+                                                class="btn btn-primary px-3"
+                                                (click)="
+                                                    showOrderDetails(orderData)
+                                                "
+                                                >Order Details</a
+                                            >
+                                            <a
+                                                *ngIf="
+                                                    orderData?.restaurantData[0]
+                                                        ?.contact?.length
+                                                "
+                                                (click)="
+                                                    openContactPopUp(
+                                                        orderData?.restaurantData
+                                                    )
+                                                "
+                                                class="btn btn-outline-primary mx-2"
+                                                >Help</a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="tab-pane fade show active"
+                        id="progress"
+                        role="tabpanel"
+                        aria-labelledby="progress-tab"
+                    >
+                        <div class="order-body">
+                            <h5
+                                class="text-center"
+                                *ngIf="
+                                    !processingOrder ||
+                                    processingOrder.length === 0
+                                "
+                            >
+                                No Records Found.
+                            </h5>
+                            <div
+                                class="pb-3"
+                                *ngFor="let orderData of processingOrder"
+                            >
+                                <div class="p-3 rounded shadow-sm bg-white">
+                                    <div class="d-flex border-bottom pb-3">
+                                        <div class="text-muted mr-3">
+                                            <img
+                                                alt="#"
+                                                [src]="getImage(orderData)"
+                                                class="img-fluid order_img rounded"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 font-weight-bold">
+                                                <a
+                                                    *ngIf="
+                                                        orderData
+                                                            ?.restaurantData
+                                                            .length
+                                                    "
+                                                    class="text-dark"
+                                                    >{{
+                                                        orderData
+                                                            .restaurantData[0]
+                                                            .restaurantName
+                                                    }}</a
+                                                >
+                                            </p>
+                                            <p class="mb-0">
+                                                {{
+                                                    orderData.restaurantData[0]
+                                                        .address.city
+                                                }},
+                                                {{
+                                                    orderData.restaurantData[0]
+                                                        .address.state
+                                                }}
+                                            </p>
+                                            <p>
+                                                ORDER ID:-
+                                                {{ orderData.orderId }}
+                                            </p>
+                                            <!-- <p class="mb-0 small">
+                                                <a
+                                                    (click)="
+                                                        generateBill(
+                                                            orderData._id,
+                                                            orderData.orderId
+                                                        )
+                                                    "
+                                                    >Print Bill</a
+                                                >
+                                            </p> -->
+                                        </div>
+                                        <div class="ml-auto">
+                                            <!-- if the data.orderStatus === "processing" the show the below code -->
+                                            <div
+                                                *ngIf="
+                                                    orderData.orderStatus ===
+                                                    'processing'
+                                                "
+                                            >
+                                                <p
+                                                    class="bg-success text-white py-1 px-2 rounded small mb-1"
+                                                >
+                                                    Order Accepted, Getting
+                                                    Ready
+                                                </p>
+                                            </div>
+                                            <div
+                                                *ngIf="
+                                                    orderData.orderStatus ===
+                                                    'pending'
+                                                "
+                                            >
+                                                <p
+                                                    class="bg-warning text-white py-1 px-2 rounded small mb-1"
+                                                >
+                                                    Awaiting confirmation from
+                                                    the restaurant.
+                                                </p>
+                                            </div>
+                                            <p
+                                                class="small font-weight-bold text-center"
+                                            >
+                                                <i
+                                                    class="fa-regular fa-clock"
+                                                ></i>
+                                                {{
+                                                    orderData.orderDate
+                                                        | date : "medium"
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex pt-3">
+                                       
+                                        <div class="text-right">
+                                            <a
+                                                class="btn btn-primary px-3"
+                                                (click)="
+                                                    showOrderDetails(orderData)
+                                                "
+                                                >Order Details</a
+                                            >
+                                            <a
+                                                *ngIf="
+                                                    orderData?.restaurantData[0]
+                                                        ?.contact?.length
+                                                "
+                                                (click)="
+                                                    openContactPopUp(
+                                                        orderData?.restaurantData
+                                                    )
+                                                "
+                                                class="btn btn-outline-primary mx-2"
+                                                >Help</a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="canceled"
+                        role="tabpanel"
+                        aria-labelledby="canceled-tab"
+                    >
+                        <div class="order-body">
+                            <h5
+                                class="text-center"
+                                *ngIf="
+                                    !cancelledOrder ||
+                                    cancelledOrder.length === 0
+                                "
+                            >
+                                No Records Found.
+                            </h5>
+
+                            <div
+                                class="pb-3"
+                                *ngFor="let orderData of cancelledOrder"
+                            >
+                                <div class="p-3 rounded shadow-sm bg-white">
+                                    <div class="d-flex border-bottom pb-3">
+                                        <div class="text-muted mr-3">
+                                            <img
+                                                alt="#"
+                                                [src]="bannerImg"
+                                                class="img-fluid order_img rounded"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 font-weight-bold">
+                                                <a
+                                                    *ngIf="
+                                                        orderData
+                                                            ?.restaurantData
+                                                            .length
+                                                    "
+                                                    class="text-dark"
+                                                    >{{
+                                                        orderData
+                                                            .restaurantData[0]
+                                                            .restaurantName
+                                                    }}</a
+                                                >
+                                            </p>
+                                            <p class="mb-0">
+                                                {{
+                                                    orderData.restaurantData[0]
+                                                        .address.city
+                                                }},
+                                                {{
+                                                    orderData.restaurantData[0]
+                                                        .address.state
+                                                }}
+                                            </p>
+                                            <p>
+                                                ORDERID :-
+                                                {{ orderData.orderId }}
+                                            </p>
+                                            <!-- <p class="mb-0 small">
+                                                <a
+                                                    (click)="
+                                                        generateBill(
+                                                            orderData.orderId
+                                                        )
+                                                    "
+                                                    >Print Bill</a
+                                                >
+                                            </p> -->
+                                        </div>
+                                        <div class="ml-auto">
+                                            <p
+                                                class="bg-danger text-white py-1 px-2 rounded small mb-1"
+                                            >
+                                                Canceled
+                                            </p>
+                                            <p
+                                                class="small font-weight-bold text-center"
+                                            >
+                                                <i
+                                                    class="fa-regular fa-clock"
+                                                ></i>
+                                                {{
+                                                    orderData.orderDate
+                                                        | date : "medium"
+                                                }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex pt-3">
+                                        <!-- <div class="small">
+                                    <p
+                                        class="text- font-weight-bold mb-0"
+                                    >
+                                        Kesar Sweet x 1
+                                    </p>
+                                    <p
+                                        class="text- font-weight-bold mb-0"
+                                    >
+                                        Gulab Jamun x 4
+                                    </p>
+                                </div> -->
+                                       
+                                        <div class="text-right">
+                                            <a
+                                                class="btn btn-primary px-3"
+                                                (click)="
+                                                    showOrderDetails(orderData)
+                                                "
+                                                >Order Details</a
+                                            >
+                                            <a
+                                                *ngIf="
+                                                    orderData?.restaurantData[0]
+                                                        ?.contact?.length
+                                                "
+                                                (click)="
+                                                    openContactPopUp(
+                                                        orderData?.restaurantData
+                                                    )
+                                                "
+                                                class="btn btn-outline-primary mx-2"
+                                                >Help</a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

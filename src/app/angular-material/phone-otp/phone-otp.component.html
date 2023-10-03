@@ -1,0 +1,42 @@
+<div mat-dialog-title class="head">
+    <h3>OTP Verification</h3>
+    <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+    <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+        <form class="needs-validation" novalidate="" accept-charset="utf-8">
+            <div class="mb-3 mw">
+
+                <!--
+                <label for="otp" class="form-label"
+                    >Kindly input the OTP sent to
+                    {{ this.data.phoneNumber }} for the purpose of verifying
+                    your account.</label
+                > -->
+
+                <label for="otp" class="form-label" *ngIf="isWhatsappLogin">Kindly input the OTP sent to your WhatsApp
+                    number
+                    {{ this.data.phoneNumber }} for the purpose of verifying
+                    your account.</label>
+
+                <label for="otp" class="form-label" *ngIf="!isWhatsappLogin">Kindly input the OTP sent to your mobile
+                    number
+                    {{ this.data.phoneNumber }} for the purpose of verifying
+                    your account.</label>
+
+
+
+                <input type="text" class="form-control mt-1" name="otp" maxlength="4" #otpField [required]="true"
+                    value="" />
+                <div>
+                    <a id="forgot" class="pointer" (click)="resendOtp()">Resend OTP?</a>
+                    {{timerDisplay}}
+                </div>
+            </div>
+
+            <button type="button" class="btn btn_1 gradient w-100" (click)="validateOtp(otpField)">
+                <i class="fas fa-lock"></i> Validate OTP
+            </button>
+        </form>
+    </div>
+</div>

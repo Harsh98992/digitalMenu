@@ -1,0 +1,50 @@
+<div class="container padding-bottom-3x mb-1">
+    <div class="card mb-3">
+        <div class="p-4 text-center text-white text-lg bg-dark rounded-top">
+            <span class="text-uppercase">Tracking Order No - </span
+            ><span class="text-medium">{{ orderId }}</span>
+        </div>
+
+        <div class="card-body">
+            <div
+                class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x"
+            >
+                <div class="step completed">
+                    <div class="step-icon-wrap">
+                        <div class="step-icon">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <h4 class="step-title">Order Placed</h4>
+                </div>
+                <div class="step processing">
+                    <div class="step-icon-wrap">
+                        <div class="step-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                    </div>
+                    <h4 class="step-title">
+                        Awaiting Confirmation From Restaurant
+                    </h4>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon-wrap">
+                        <div class="step-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                    </div>
+                    <h4 class="step-title">Payment</h4>
+                </div>
+            </div>
+            <div class="countdown-container">
+                <div
+                    class="countdown-circle"
+                    [style.animation-duration.seconds]="seconds"
+                >
+                    <div class="countdown-timer">{{ seconds }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

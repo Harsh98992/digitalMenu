@@ -1,0 +1,25 @@
+<div class="container">
+    <button
+        type="button"
+        (click)="openAddAddressDialog()"
+        class="btn btn-primary btn-lg btn-block mb-3"
+    >
+        Add New Address
+    </button>
+    <div class="card" *ngFor="let address of addresses">
+        <div class="card-body">
+            <h5 class="card-title">Address Details</h5>
+            <p class="card-text">
+                {{ address.address }}
+                {{ address.pinCode }}
+                ,<span class="d-block" *ngIf="address.landmark">
+                    Landmark: "FDASF"</span
+                >
+            </p>
+            <p></p>
+            <button class="btn btn-danger" (click)="deleteAddress(address._id)">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>

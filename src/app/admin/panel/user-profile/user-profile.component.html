@@ -1,0 +1,60 @@
+<div class="card">
+    <div class="card-header bg-dark text-light">User Profile</div>
+    <div class="container mt-2">
+        <div class="user-profile">
+            
+
+            <form [formGroup]="userForm" (ngSubmit)="editUser()" class="needs-validation" novalidate>
+                <!-- Form fields -->
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="required" for="name">Name</label>
+                        <input type="text" class="form-control" id="name" [formControl]="nameControl" required
+                            [ngClass]="{ 'is-invalid': nameControl.invalid && (nameControl.dirty || nameControl.touched) }" />
+                        <div *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)"
+                            class="invalid-feedback">
+                            <span *ngIf="nameControl.errors.required">Name is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="required" for="email">Email</label>
+                        <input type="email" class="form-control" id="email" [formControl]="emailControl" required
+                            [ngClass]="{ 'is-invalid': emailControl.invalid && (emailControl.dirty || emailControl.touched) }" />
+                        <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)"
+                            class="invalid-feedback">
+                            <span *ngIf="emailControl.errors.required">Email is required.</span>
+                            <span *ngIf="emailControl.errors.email">Invalid email format.</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="required" for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber" [formControl]="phoneNumberControl"
+                            required
+                            [ngClass]="{ 'is-invalid': phoneNumberControl.invalid && (phoneNumberControl.dirty || phoneNumberControl.touched) }" />
+                        <div *ngIf="phoneNumberControl.invalid && (phoneNumberControl.dirty || phoneNumberControl.touched)"
+                            class="invalid-feedback">
+                            <span *ngIf="phoneNumberControl.errors.required">Phone number is required.</span>
+                            <span *ngIf="phoneNumberControl.errors.invalidPhoneNumber">Invalid phone number format (10
+                                digits required).</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="role">Role</label>
+                        <input type="text" class="form-control" id="role" [formControl]="roleControl" required
+                            [ngClass]="{ 'is-invalid': roleControl.invalid && (roleControl.dirty || roleControl.touched) }" />
+                        <div *ngIf="roleControl.invalid && (roleControl.dirty || roleControl.touched)"
+                            class="invalid-feedback">
+                            <span *ngIf="roleControl.errors.required">Role is required.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary w-100">
+                    <span class="fa" [ngClass]="editMode ? 'fa-save' : 'fa-edit'"></span>
+                    {{ editMode ? "Save" : "Edit" }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

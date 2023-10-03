@@ -1,0 +1,167 @@
+<div mat-dialog-title class="dialog-title">
+  <h4>Add Ons</h4>
+  <!-- <i class="icon_close fr pointer" [mat-dialog-close]="true"></i> -->
+</div>
+<mat-dialog-content class="mat-typography">
+  <form
+    class="needs-validation"
+    [formGroup]="addOnForm"
+    novalidate=""
+    accept-charset="utf-8"
+  >
+    <div class="row g-2">
+      <div class="mb-3 col-md-4">
+        <label for="addOnGroupName" class="form-label required"
+          >Add-on group key (eg: Dips-small)</label
+        >
+        <input
+          type="text"
+          maxlength="30"
+          class="form-control"
+          [ngClass]="
+            checkForError('addOnGroupName', 'required') ? 'is-invalid' : ''
+          "
+          formControlName="addOnGroupName"
+          name="addOnGroupName"
+          placeholder="Enter Add-on group name (eg: Dips)"
+        />
+      </div>
+      <div class="mb-3 col-md-3">
+        <label for="addOnDisplayName" class="form-label required"
+          >Add-on group name (eg: Dips)</label
+        >
+        <input
+          type="text"
+          maxlength="30"
+          class="form-control"
+          [ngClass]="
+            checkForError('addOnDisplayName', 'required') ? 'is-invalid' : ''
+          "
+          formControlName="addOnDisplayName"
+          name="addOnDisplayName"
+          placeholder="Enter Add-on Heading (eg: Dips)"
+        />
+      </div>
+      <div class="mb-3 col-md-2">
+        <label for="min" class="form-label required">Min</label>
+        <input
+          type="number"
+          class="form-control"
+          [ngClass]="
+            checkForError('addOnMinValue', 'required') ? 'is-invalid' : ''
+          "
+          formControlName="addOnMinValue"
+          name="min"
+          placeholder="Min"
+        />
+      </div>
+      <div class="mb-3 col-md-2">
+        <label for="max" class="form-label required">Max</label>
+        <input
+          type="number"
+          class="form-control"
+          [ngClass]="
+            checkForError('addOnMaxValue', 'required') ? 'is-invalid' : ''
+          "
+          formControlName="addOnMaxValue"
+          name="max"
+          placeholder="Max"
+        />
+      </div>
+    </div>
+    <ng-container formArrayName="addOns">
+      <div
+        class="row g-2"
+        *ngFor="let addOnGroup of addOns?.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="mb-3 col-md-3">
+          <label for="Category" class="form-label required">Category</label>
+          <ng-select formControlName="category">
+            <ng-option aria-selected="true" value="veg">
+              <img
+                src="assets/img/vegGreenIcon.png"
+                alt="veg"
+                class="vegIcon"
+              />Veg</ng-option
+            >
+            <ng-option value="nonVeg"
+              ><img src="assets/img/nonVeg.png" alt="veg" class="vegIcon" />Non
+              Veg</ng-option
+            >
+          </ng-select>
+        </div>
+        <div class="mb-3 col-md-3">
+          <label for="addOnName" class="form-label required">Add-on Name</label>
+          <input
+            type="text"
+            maxlength="30"
+            formControlName="addOnName"
+            [ngClass]="
+              checkForVariantsError(i, 'addOnName', 'required')
+                ? 'is-invalid'
+                : ''
+            "
+            class="form-control"
+            maxlength="50"
+            name="addOnName"
+            placeholder="Add-on Name"
+          />
+          <!-- <small
+              *ngIf="checkForError('dishName', 'required')"
+              class="text-danger"
+              >Please provide dish name</small
+            > -->
+        </div>
+        <div class="mb-3 col-md-3">
+          <label for="inlineFormInputGroup" class="form-label required"> Price</label>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="height: 36px">₹</div>
+            </div>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="addOnPrice"
+              [ngClass]="
+                checkForVariantsError(i, 'addOnPrice', 'required')
+                  ? 'is-invalid'
+                  : ''
+              "
+              id="inlineFormInputGroup"
+              placeholder="Price"
+            />
+          </div>
+          <!-- <small
+                    *ngIf="checkForError('dishPrice', 'required')"
+                    class="text-danger"
+                    >Please provide dish price</small
+                  > -->
+        </div>
+        <div class="mb-3 col-md-3">
+          <label class="form-label d-block">Action</label>
+          <i
+            class="fa-solid fa-trash bin-color pointer"
+            (click)="deleteField(i)"
+          ></i>
+        </div>
+      </div>
+    </ng-container>
+    <div class="row g-2 mb-3">
+      <div class="icon-text poiner" (click)="addAddOns()">
+        <i class="fa-solid fa-plus pointer"></i>
+        <span class="poiner"> Add Option</span>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="mat-dialog-actions" align="end">
+  <button class="btn btn-danger mr-2"  mat-dialog-close>Cancel</button>
+  <button class="btn purple-shade" *ngIf="disableFlag" cdkFocusInitial (click)="enableForm()">
+    Edit
+  </button>
+  <button class="btn purple-shade" *ngIf="!disableFlag" cdkFocusInitial (click)="saveAddOn()">
+    Accept
+  </button>
+</mat-dialog-actions>

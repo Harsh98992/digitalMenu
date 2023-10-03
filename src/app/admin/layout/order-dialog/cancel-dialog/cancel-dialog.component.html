@@ -1,0 +1,32 @@
+<div mat-dialog-title class="head">
+    <h3>Cancel Order</h3>
+    <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+    <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+        <form
+            class="needs-validation"
+            novalidate=""
+            accept-charset="utf-8"
+            [formGroup]="cancelOrderForm"
+            (submit)="submitForm()"
+        >
+            <div class="mb-8">
+                <label for="name" class="form-label">Reason</label>
+                <textarea
+                    class="form-control form-textarea mb-3"
+                    rows="3"
+                    formControlName="reason"
+                    [ngClass]="
+                        checkForError('reason', 'required') ? 'is-invalid' : ''
+                    "
+                    placeholder="Reason"
+                ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn_1 gradient w-100">
+                <i class="fa-solid fa-rectangle-xmark"></i> Cancel
+            </button>
+        </form>
+    </div>
+</div>

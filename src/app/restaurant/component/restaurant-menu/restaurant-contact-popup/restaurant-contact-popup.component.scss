@@ -1,0 +1,35 @@
+.small-dialog-header {
+  font-size: 18px;
+  width: 100%;
+  position: relative;
+  left: 0;
+  top: 0;
+  -webkit-border-radius: 4px 4px;
+  -moz-border-radius: 4px 4px;
+  -ms-border-radius: 4px 4px;
+  border-radius: 4px 4px;
+  display: inline-block;
+  //   background-color: #f6f6f6;
+  padding: 0px 20px 15px 0px;
+}
+.small-dialog-header h3 {
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+a.close_panel_mobile {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  color: #fff;
+  font-size: 26px;
+  font-size: 1.625rem;
+  display: none;
+}
+a.close_panel_mobile {
+  display: inline-block;
+  margin-top: -13px;
+  color: grey;
+}

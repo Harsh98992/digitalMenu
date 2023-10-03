@@ -1,0 +1,59 @@
+<div mat-dialog-title class="head">
+    <h3>Table Details</h3>
+    <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+    <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+        <form [formGroup]="tableForm" (ngSubmit)="submitForm()">
+            <div class="mb-3">
+                <label for="tableName" class="form-label" class="required"
+                    >Table Name</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="tableName"
+                    formControlName="tableName"
+                    name="tableName"
+                    maxlength="15"
+                    [ngClass]="
+                        checkForError('tableName', 'required')
+                            ? 'is-invalid'
+                            : ''
+                    "
+                />
+            </div>
+            <div class="mb-3">
+                <label for="availability" class="form-label" class="required"
+                    >Availability</label
+                >
+                <ng-select formControlName="availability">
+                    <ng-option aria-selected="true" [value]="true">
+                        Available</ng-option
+                    >
+                    <ng-option [value]="false">Not Available </ng-option>
+                </ng-select>
+            </div>
+            <div class="mb-3">
+                <label for="capacity" class="form-label" class="required"
+                    >Capacity</label
+                >
+                <input
+                    [ngClass]="
+                        checkForError('capacity', 'required')
+                            ? 'is-invalid'
+                            : ''
+                    "
+                    type="number"
+
+                    formControlName="capacity"
+                    class="form-control"
+                    id="capacity"
+                    name="capacity"
+                    required
+                />
+            </div>
+            <button type="submit" class="btn btn_1 gradient w-100">Save</button>
+        </form>
+    </div>
+</div>

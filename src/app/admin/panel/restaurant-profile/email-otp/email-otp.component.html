@@ -1,0 +1,38 @@
+<div mat-dialog-title class="head">
+    <h3>OTP Verification</h3>
+    <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+    <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+        <form class="needs-validation" novalidate="" accept-charset="utf-8">
+            <div class="mb-3">
+                <label for="address" class="form-label"
+                    >Please input the OTP that has been sent to
+                    {{ data.restaurantEmail }}
+                </label>
+                <input
+                    type="number"
+                    class="form-control mt-1"
+                    name="address"
+                    maxlength="4"
+                    #otpField
+                    [required]="true"
+                    value=""
+                />
+                <div>
+                    <a id="forgot" class="pointer" (click)="resendOtp()"
+                        >Resend OTP?</a
+                    >
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn_1 gradient w-100"
+                (click)="validateOtp(otpField)"
+            >
+                <i class="fas fa-lock"></i> Validate OTP
+            </button>
+        </form>
+    </div>
+</div>

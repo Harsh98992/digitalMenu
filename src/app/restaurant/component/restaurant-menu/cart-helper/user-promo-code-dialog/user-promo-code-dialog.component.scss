@@ -1,0 +1,121 @@
+.newsletter-subscribe {
+    color: #313437;
+    background-color: #fff;
+    padding: 50px 0;
+}
+
+.newsletter-subscribe .intro {
+    font-size: 16px;
+    // max-width:500px;
+    margin: 0 auto 25px;
+}
+
+.newsletter-subscribe form {
+    justify-content: center;
+}
+
+.newsletter-subscribe form .form-control {
+    background: #eff1f4;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 9px;
+    height: 45px;
+    margin-right: 10px;
+}
+@media (min-width: 800px) {
+    .newsletter-subscribe form .form-control {
+        min-width: 20rem;
+    }
+    /* CSS that should be displayed if width is equal to or less than 800px goes here */
+}
+.newsletter-subscribe form .btn {
+    padding: 16px 32px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    line-height: 1;
+}
+
+.newsletter-subscribe form .btn:hover {
+    opacity: 1;
+}
+
+.newsletter-subscribe form .btn:active {
+    transform: translateY(1px);
+}
+
+.newsletter-subscribe form .btn-primary {
+    background-color: #055ada !important;
+    color: #fff;
+    outline: none !important;
+}
+
+.card offer-card h5.card-title {
+    border: 2px dotted #000;
+}
+.card.offer-card h5 {
+    border: 1px dotted #daceb7;
+    display: inline-table;
+    color: #17a2b8;
+    margin: 0 0 19px 0;
+    font-size: 15px;
+    padding: 6px 10px 6px 6px;
+    border-radius: 2px;
+    background: #fffae6;
+    position: relative;
+}
+.card.offer-card h5 img {
+    height: 22px;
+    object-fit: cover;
+    width: 22px;
+    margin: 0 8px 0 0;
+    border-radius: 2px;
+}
+.card.offer-card h5:after {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #daceb7;
+    content: "";
+    left: 30px;
+    position: absolute;
+    bottom: 0;
+}
+.card.offer-card h5:before {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #daceb7;
+    content: "";
+    left: 30px;
+    position: absolute;
+    top: 0;
+}
+.mat-dialog-content {
+    padding: 0px;
+}
+
+// give margin to the button
+button {
+    margin: 10px;
+}
+.card-link{
+    display: inline-block;
+  padding: 10px 20px;
+  background-color: #3498db; /* Light blue color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.card-link:hover {
+    background-color: #2980b9;
+}

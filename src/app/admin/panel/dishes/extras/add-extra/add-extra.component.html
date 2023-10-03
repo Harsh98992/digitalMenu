@@ -1,0 +1,49 @@
+<div mat-dialog-title class="head">
+  <h3>Add Extra's</h3>
+  <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+  <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+    <form
+      class="needs-validation"
+      novalidate=""
+      accept-charset="utf-8"
+      [formGroup]="extraForm"
+      (ngSubmit)="submitForm()"
+    >
+      <div class="row g-2">
+        <div class="mb-3 col-md-12">
+          <label for="name" class="form-label">Extra's Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            formControlName="name"
+          />
+          <small
+            *ngIf="checkForError('name', 'required')"
+            class="text-danger"
+            >Please provide Extra's Name</small
+          >
+        </div>
+        <div class="mb-3 col-md-12">
+          <label for="price" class="form-label"
+            >Extra's Price (In Rupees)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="price"
+            formControlName="price"
+          />
+          <small *ngIf="checkForError('price', 'required')" class="text-danger"
+            >Please provide Extra's Price</small
+          >
+        </div>
+      </div>
+      <button type="submit" class="btn btn_1 gradient w-100">
+        Save
+      </button>
+    </form>
+  </div>
+</div>

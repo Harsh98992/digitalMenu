@@ -1,0 +1,44 @@
+<div class="small-dialog-header">
+    <h3>Prepration Time</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <div class="mt-3">
+        <div class="row">
+            <div class="col-12">
+                <label>Cash On Delivery Available</label>
+                <ng-select
+                    [(ngModel)]="cashOnDeliveryAvailable"
+                    style="min-width: 130px"
+                    class="mr-3"
+                    [clearable]="false"
+                >
+                    <ng-option [value]="false">No</ng-option>
+                    <ng-option [value]="true">Yes</ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <form
+            class="needs-validation"
+            novalidate=""
+            accept-charset="utf-8"
+            (submit)="submitForm()"
+        >
+            <div class="col-12 mt-3">
+                <label for="">Prepration Time</label>
+                <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button
+        type="button"
+        class="btn btn_1 gradient w-100"
+        (click)="submitForm()"
+    >
+        Proceed to payment
+    </button>
+</mat-dialog-actions>

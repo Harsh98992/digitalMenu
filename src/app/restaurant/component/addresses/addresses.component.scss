@@ -1,0 +1,16 @@
+.address-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.address-details {
+    flex: 1;
+}
+
+.address-actions {
+    flex-shrink: 0;
+}

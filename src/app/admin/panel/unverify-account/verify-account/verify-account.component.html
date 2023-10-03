@@ -1,0 +1,171 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-dark text-light">Restaurant Details</div>
+            <div class="card-body">
+                <form class="needs-validation" novalidate="" accept-charset="utf-8" [formGroup]="restaurantForm">
+                    <div class="row g-2">
+                        <div class="mb-3 col-md-6">
+                            <label for="restaurantName" class="form-label required">Restaurant Name</label>
+                            <input type="text" class="form-control" maxlength="50" formControlName="restaurantName"
+                                name="restaurantName" placeholder="Restaurant Name" required="" />
+
+                            <small *ngIf="checkForError('restaurantName', 'required')" class="text-danger">Please
+                                provide Restaurant
+                                Name</small>
+                        </div>
+                        <div class="mb-3 form-group col-md-6">
+                            <label for="inputState required">Restaurant Type</label>
+                            <ng-select class="custom" formControlName="restaurantType" [multiple]="true">
+                                <ng-option *ngFor="let dish of restaurantType" [value]="dish">{{
+                                    dish
+                                    }}</ng-option>
+                            </ng-select>
+                            <small *ngIf="checkForError('restaurantType', 'required')" class="text-danger">Please
+                                provide Restaurant
+                                Type</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <label for="restaurantEmail" class="form-label">Email</label>
+                            <div class="input-group mb-3">
+                                <input type="restaurantEmail" class="form-control" name="restaurantEmail"
+                                    formControlName="restaurantEmail" maxlength="50" placeholder="Email" required="" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <label for="phoneNumber" class="form-label required">phone Number</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="phoneNumber"
+                                    formControlName="restaurantPhoneNumber" maxlength="15" placeholder="Phone Number"
+                                    required="" />
+                            </div>
+                            <small *ngIf="checkForError('restaurantPhoneNumber', 'required')" class="text-danger">Please
+                                provide Phone
+                                Number</small>
+                        </div>
+                    </div>
+                    <ng-container formGroupName="address">
+                        <div class="mb-3">
+                            <label for="address" class="form-label required">Address</label>
+                            <input type="text" class="form-control" formControlName="street" name="address"
+                                maxlength="50" placeholder="1234 Main St, Unit, Building, or Floor" required="" />
+                            <small *ngIf="checkForErrorAddress('street', 'required')" class="text-danger">Please provide
+                                Address</small>
+                        </div>
+                        <div class="row g-2">
+                            <div class="mb-3 col-md-6">
+                                <label for="city" class="form-label required">City</label>
+                                <input type="text" class="form-control" name="city" formControlName="city"
+                                    maxlength="50" placeholder="City" required="" />
+                                <small *ngIf="checkForErrorAddress('city', 'required')" class="text-danger">Please
+                                    provide City</small>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="state" class="form-label required"> State</label>
+                                <ng-select formControlName="state">
+                                    <ng-option *ngFor="let state of indianStates" [value]="state">{{ state
+                                        }}</ng-option>
+                                </ng-select>
+                                <small *ngIf="checkForErrorAddress('state', 'required')" class="text-danger">Please
+                                    provide
+                                    State</small>
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label for="zip" class="form-label required">Pin code</label>
+                                <input type="text" class="form-control" formControlName="pinCode" name="zip"
+                                    maxlength="15" placeholder="00000" required="" />
+                                <small *ngIf="checkForErrorAddress('pinCode', 'required')" class="text-danger">Please
+                                    provide Pin
+                                    Code</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="landmark" class="form-label">Landmark</label>
+                            <input type="text" class="form-control" name="landmark" formControlName="landmark"
+                                maxlength="150" placeholder="Landmark" />
+                        </div>
+
+
+                        <div class="mb-3 row">
+
+                            <div class="col-12 col-lg-4">
+                                <label for="googleLocation" class="form-label">Google Location</label> <br />
+                                <button type="button" class="btn btn-primary" (click)="openAddAddressDialog()">
+                                    <i class="fa-solid fa-map-marker"></i> Select Location
+                                </button>
+
+                            </div>
+
+                            <!-- ... (other form fields) ... -->
+
+                            <div class="mb-3 col-md-4">
+                                <label for="latitude" class="form-label required">Latitude</label>
+                                <input type="text" class="form-control" name="latitude" formControlName="latitude"
+                                    placeholder="Latitude" required />
+                                <small *ngIf="checkForErrorAddress('latitude', 'required')" class="text-danger">Please
+                                    provide Latitude</small>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <label for="longitude" class="form-label required">Longitude</label>
+                                <input type="text" class="form-control" name="longitude" formControlName="longitude"
+                                    placeholder="Longitude" required />
+                                <small *ngIf="checkForErrorAddress('longitude', 'required')" class="text-danger">Please
+                                    provide Longitude</small>
+                            </div>
+
+                            <!-- ... (other form fields) ... -->
+
+                        </div>
+                    </ng-container>
+                    <div class="row g-2">
+                        <div class="mb-3 col-md-6">
+                            <label for="gstNmber" class="form-label ">GST Number</label>
+                            <input type="text" class="form-control" name="gstNumber" formControlName="gstNumber"
+                                maxlength="50" placeholder="GST Number" />
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="fssaiLicenseNumber" class="form-label required">FSSAI Number</label>
+                            <input type="text" class="form-control" name="fssaiLicenseNumber"
+                                formControlName="fssaiLicenseNumber" maxlength="50" placeholder="FSSAI Number"
+                                required="" />
+                            <small *ngIf="checkForError('fssaiLicenseNumber', 'required')" class="text-danger">Please
+                                provide FSSAI
+                                Number</small>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="mb-3 col-md-12">
+                            <label for="restaurantUrl" class="form-label">Restaurant Url</label>
+                            <input type="text" class="form-control" name="restaurantUrl" formControlName="restaurantUrl"
+                                maxlength="100" placeholder="Restaurant Url" />
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-warning w-100 mt-2" (click)="editRestaurant()">
+                        <i class="fas fa-pencil-alt"></i> {{editFlag ? 'Edit' : 'Save'}}
+                    </button>
+
+
+                    <button type="button" (click)="verifyDetail()" class="btn  w-100 mt-2"
+                        [ngClass]="{'btn-success': !restaurantVerified, 'btn-danger': restaurantVerified}">
+                        <i class="fas fa-pencil"></i> {{!restaurantVerified ? 'Verify' : 'Disable'}}
+                    </button>
+
+
+                    <button type="button" class="btn btn-primary w-100 mt-2" (click)="viewAllUsers()">
+                        <i class="fas fa-users"></i> View All Users of Restaurant
+                    </button>
+
+                    <!-- a button to send the email to the restaurantEmail address of the restaurant to tell something about the -->
+
+                    <button type="button" class="btn btn-primary w-100 mt-2" (click)="sendEmailToRestaurant()">
+                        <i class="fas fa-envelope"></i> Send Email to Restaurant
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

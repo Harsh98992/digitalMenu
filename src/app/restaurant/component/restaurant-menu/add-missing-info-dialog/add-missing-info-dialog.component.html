@@ -1,0 +1,29 @@
+<div class="add-missing-info-dialog">
+    <h2 class="dialog-title">Add Missing Customer Information</h2>
+    <form [formGroup]="customerForm" (submit)="submitForm()">
+        <div class="form-group" *ngIf="!customerData.name">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" formControlName="name" class="form-input">
+            <div *ngIf="checkInvalid('name')" class="error-message">Name is required.</div>
+        </div>
+        <div class="form-group" *ngIf="!customerData.email">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" formControlName="email" class="form-input">
+            <div *ngIf="checkInvalid('email')" class="error-message">
+                <ng-container *ngIf="customerForm.get('email').hasError('required')">Email is required.</ng-container>
+                <ng-container *ngIf="customerForm.get('email').hasError('email')">Invalid email format.</ng-container>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="!customerData.phoneNumber">
+            <label for="phoneNumber" class="form-label">Phone Number:</label>
+            <input type="tel" id="phoneNumber" formControlName="phoneNumber" class="form-input">
+            <div *ngIf="checkInvalid('phoneNumber')" class="error-message">
+                <ng-container *ngIf="customerForm.get('phoneNumber').hasError('required')">Phone Number is
+                    required.</ng-container>
+                <ng-container *ngIf="customerForm.get('phoneNumber').hasError('pattern')">Phone Number must be a
+                    10-digit number.</ng-container>
+            </div>
+        </div>
+        <button type="submit" [disabled]="customerForm.invalid" class="submit-button">Submit</button>
+    </form>
+</div>

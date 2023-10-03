@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-dark text-light">Create Promo Code</div>
+            <br />
+            <form [formGroup]="promoCodeForm" (ngSubmit)="onSubmit()" class="container">
+                <div class="row">
+                    <div class="mb-3 col-md-3">
+                        <label class="form-label required">Coupon Type</label>
+                        <select class="custom-select" formControlName="discountType">
+                            <option value="flat">Flat Coupon</option>
+                            <option value="percentage">Percentage Coupon</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                        <label class="form-label required">Coupon Code</label>
+                        <input type="text" class="form-control" formControlName="codeName" required />
+                        <small *ngIf="checkForError('codeName', 'required')" class="text-danger">
+                            Coupon Code is required.
+                        </small>
+                    </div>
+
+                    <div class="mb-3 col-md-3" *ngIf="promoCodeForm.get('discountType').value !== 'flat'">
+                        <label class="form-label required">Discount(%)</label>
+                        <input type="number" class="form-control" formControlName="discountAmount" />
+                        <small
+                            *ngIf="checkForError('discountAmount', 'required') && promoCodeForm.get('discountType').value !== 'flat'">
+                            Please provide Discount%.
+                        </small>
+                        <small *ngIf="!isDiscountAmountValid() && promoCodeForm.get('discountType').value !== 'flat'"
+                            class="text-danger">
+                            Please provide valid Discount% (0-100).
+                        </small>
+
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                        <label class="form-label required">Min Order Value</label>
+                        <input type="number" class="form-control" formControlName="minOrderValue" required />
+                        <small *ngIf="checkForError('minOrderValue', 'required')" class="text-danger">
+                            Minimum value is required.
+                        </small>
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+
+                        <div *ngIf="promoCodeForm.get('discountType').value === 'flat'">
+                            <label class="form-label">Max Discount Amount</label>
+                        </div>
+
+                        <div *ngIf="promoCodeForm.get('discountType').value !== 'flat'">
+                            <label class="form-label required">Discount Amount Upto</label>
+
+                        </div>
+
+                        <input type="number" class="form-control" formControlName="maxDiscount" />
+                        <small *ngIf="checkForError('maxDiscount', 'required')" class="text-danger">Please provide
+                            Discount upto amount</small>
+<!-- 
+                        <small *ngIf="!isMaxDiscountValid()" class="text-danger">
+                            Please provide valid Discount upto amount less than Min Order Value.
+                        </small> -->
+
+                    </div>
+
+
+                    <div class="mb-3 col-md-3">
+                        <label class="form-label required">Discount Applicable For</label>
+                        <select class="custom-select" formControlName="applicableFor">
+                            <option value="all">All users</option>
+                            <option value="new">New users</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                        <label class="form-label required">Total Limit</label>
+                        <input type="number" class="form-control" formControlName="totalUsageLimit" required />
+                        <small *ngIf="checkForError('totalUsageLimit', 'required')" class="text-danger">
+                            Total Limit is required.
+                        </small>
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                        <label class="form-label required">Per User Limit</label>
+                        <input type="number" class="form-control" formControlName="perUserLimit" required />
+                        <small *ngIf="checkForError('perUserLimit', 'required')" class="text-danger">
+                            Per User Limit is required.
+                        </small>
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label class="form-label required">Meal Time</label>
+                        <select class="custom-select" formControlName="mealTime">
+                            <option *ngFor="let data of meal_times" [value]="data.name">{{ data.name }} {{ data.time }}
+                            </option>
+                        </select>
+                        <small *ngIf="checkForError('mealTime', 'required')" class="text-danger">
+                            Please select Meal time.
+                        </small>
+                    </div>
+
+                    <div class="mb-3 col-md-8">
+                        <label class="required" for="days">Select Days to Run Offer:</label>
+                        <ng-select id="days" name="days" [multiple]="true" formControlName="days">
+                            <ng-option *ngFor="let day of allDays" [value]="day">{{ day }}</ng-option>
+                        </ng-select>
+                        <small *ngIf="checkForError('days', 'required')" class="text-danger">
+                            Select at least one day.
+                        </small>
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Choose a start date"
+                                formControlName="startDate" />
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="topicker" placeholder="Choose an end date"
+                                formControlName="endDate" />
+                            <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                            <mat-datepicker #topicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="active" name="active"
+                                formControlName="active" />
+                            <label class="form-check-label" for="active">Active</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <span class="fa fa-edit" aria-hidden="true"></span>
+                    Save
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

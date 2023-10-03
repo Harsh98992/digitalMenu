@@ -1,0 +1,93 @@
+<div class="small-dialog-header">
+    <h3>Add Complete Address</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<div class="mt-3">
+    <form [formGroup]="addressForm" (ngSubmit)="onSaveClick()" novalidate>
+        <div class="form-group">
+            <label for="completeAddress">Complete Address</label>
+            <textarea
+                class="form-control"
+                id="completeAddress"
+                placeholder="Enter complete address"
+                formControlName="completeAddress"
+                maxlength="200"
+                [ngClass]="
+                    checkForError('completeAddress', 'required') ? 'is-invalid' : ''
+                "
+                required
+            ></textarea>
+            <small
+                *ngIf="
+                    addressForm.get('completeAddress').invalid &&
+                    addressForm.get('completeAddress').touched
+                "
+                class="text-danger"
+            >
+                Address is required.
+            </small>
+        </div>
+
+        <!-- add an uneditable google location address field here  this is not a input field -->
+        <div class="form-group">
+            <label for="googleLocationAddress"
+                >Google Location Address
+                <i class="fa-regular fa-pen-to-square"></i
+            ></label>
+            <textarea
+                class="form-control"
+                style="resize: none"
+                formControlName="googleLocationAddress"
+                disabled
+            ></textarea>
+        </div>
+
+        <!-- 
+        <div class="form-group">
+            <label for="pinCode">Pin Code</label>
+            <input type="text" class="form-control" id="pinCode" placeholder="Enter pin code" formControlName="pinCode"
+                required />
+            <small *ngIf="addressForm.get('pinCode').invalid && addressForm.get('pinCode').touched" class="text-danger">
+                Pin Code is required.
+            </small>
+        </div> -->
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input
+                type="number"
+                class="form-control"
+                id="phoneNumber"
+                placeholder="Enter phone number"
+                formControlName="phoneNumber"
+                [ngClass]="
+                checkForError('phoneNumber', 'required') ? 'is-invalid' : ''
+            "
+                pattern="[0-9]{10}"
+            />
+            <small
+                *ngIf="
+                    addressForm.get('phoneNumber').invalid &&
+                    addressForm.get('phoneNumber').touched
+                "
+                class="text-danger"
+            >
+                Phone Number must be a 10-digit number.
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="landmark">Landmark</label>
+            <input
+                type="text"
+                class="form-control"
+                id="landmark"
+                placeholder="Enter landmark"
+                formControlName="landmark"
+            />
+        </div>
+        <div class="action-buttons mt-3">
+            <button class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

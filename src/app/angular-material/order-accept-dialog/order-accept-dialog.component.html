@@ -1,0 +1,296 @@
+<h2 mat-dialog-title>
+    Order ID {{ this.orderData?.orderId }}
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="list_general order">
+        <ul>
+            <li>
+                <!-- <figure><img src="assets/img/item_1.jpg" alt="" /></figure> -->
+                <h4>
+                    {{ this.orderData.customerName }}
+                    <i class="pending">{{
+                        this.orderData.orderStatus | titlecase
+                    }}</i>
+                </h4>
+                <ul class="booking_list">
+                    <li>
+                        <strong>Order Type</strong>
+                        {{
+                            this.orderData.customerPreferences.preference
+                                | titlecase
+                        }}
+                    </li>
+                    <li>
+                        <strong>Date and time</strong>
+                        {{ this.orderData.orderDate | date : "medium" }}
+                    </li>
+
+                    <li>
+                        <strong>
+                            {{
+                                this.orderData.customerPreferences.preference
+                                    | titlecase
+                            }}</strong
+                        >
+                        <span
+                            *ngIf="
+                                this.orderData.customerPreferences
+                                    .preference === 'Dine In'
+                            "
+                        >
+                            Table Name:-
+                            {{ this.orderData.customerPreferences?.value }}
+                        </span>
+                        <span
+                            *ngIf="
+                                this.orderData.customerPreferences
+                                    .preference === 'Take Away' ||
+                                this.orderData.customerPreferences
+                                    .preference === 'Scheduled Dining'
+                            "
+                        >
+                            {{
+                                this.orderData.customerPreferences?.value
+                                    | titlecase
+                            }}
+                        </span>
+                        <span
+                            *ngIf="
+                                this.orderData.customerPreferences
+                                    .preference === 'Delivery'
+                            "
+                        >
+                            {{
+                                this.orderData.customerPreferences?.value
+                                    .address
+                            }},{{
+                                this.orderData.customerPreferences?.value
+                                    .pincode
+                            }}
+                        </span>
+                    </li>
+                    <li>
+                        <strong> Contacts</strong>
+                        <a>{{ this.orderData.customerPhoneNumber }}</a> -
+                        <a> {{ this.orderData.customerEmail }}</a>
+                    </li>
+                    <li *ngIf="!this.orderData.payment_method">
+                        <strong>Payment Status</strong>
+                        Pending
+                    </li>
+                    <li *ngIf="this.orderData.payment_method">
+                        <strong>Payment Status</strong>
+                        {{ "Paid via " +  this.orderData.payment_method }}
+                    </li>
+                    <li *ngIf="this.orderData.payment_id">
+                        <strong>Payment Id</strong>
+                        {{ this.orderData.payment_id }}
+                    </li>
+                    <li *ngIf="this.orderData.payment_order_id">
+                        <strong>Payment Order Id</strong>
+                        {{ this.orderData.payment_order_id }}
+                    </li>
+                    <li *ngIf="this.orderData.payment_time">
+                        <strong>Payment Time</strong>
+                        {{
+                            this.orderData.payment_time * 1000 | date : "medium"
+                        }}
+                    </li>
+                    <li *ngIf="this.orderData.payment_amount">
+                        <strong>Payment Amount</strong>
+                        {{
+                            this.orderData.payment_amount
+                                | currency : "INR" : "symbol" : "1.0-0"
+                        }}
+                    </li>
+                    <li>
+                        <strong>Order Status</strong>
+                        {{ this.orderData.orderStatus | titlecase }}
+                    </li>
+                    <li *ngIf="this.orderData.orderStatus === 'rejected'">
+                        <strong>Rejection Reason</strong>
+                        {{ this.orderData.reason | titlecase }}
+                    </li>
+                </ul>
+                <!-- <p>
+                  <a
+                    href="#0"
+                    class="btn_1"
+                    data-toggle="modal"
+                    data-target="#client_detail_modal"
+                    ><i class="fa fa-fw fa-pencil"></i> Edit order detail</a
+                  >
+                </p> -->
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <strong>Order Details:-</strong>
+    <ng-container *ngFor="let orderDetail of orderData.orderDetails">
+        <ul class="booking_list">
+            <li *ngIf="orderDetail.preprationTime">
+                <strong>Prepration Time</strong>
+                {{ orderDetail.preprationTime }}
+            </li>
+            <li>
+                <strong>Cooking and Serving Request</strong>
+                {{ orderDetail.cookingInstruction }}
+            </li>
+            <li>
+                <strong>Order Date & Time</strong>
+                {{ orderDetail.orderPlaceDateAndTime | date : "medium" }}
+            </li>
+        </ul>
+        <div class="table-responsive">
+            <table
+                class="table table-bordered"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+            >
+                <thead>
+                    <tr>
+                        <th scope="col">Dish Name</th>
+                        <th scope="col">Dish Type</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Extra Selected</th>
+                        <th scope="col">Choices Selected</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price One Item</th>
+                        <th scope="col">Total Price</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <th scope="col">Dish Name</th>
+                    <th scope="col">Dish Type</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Extra Selected</th>
+                    <th scope="col">Choices Selected</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price One Item</th>
+                    <th scope="col">Total Price</th>
+                </tfoot>
+                <tbody>
+                    <tr *ngFor="let order of orderDetail.orderSummary">
+                        <td class="ms-table-f-w">{{ order.dishName }}</td>
+                        <td>{{ order.dishType }}</td>
+                        <td>
+                            <ng-container *ngIf="order.itemSizeSelected">
+                                <p>
+                                    {{ order.itemSizeSelected.size }}
+                                </p>
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container
+                                *ngIf="
+                                    order.extraSelected &&
+                                    order.extraSelected.length
+                                "
+                            >
+                                <p>
+                                    {{ getExtrasList(order.extraSelected) }}
+                                </p>
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container
+                                *ngIf="
+                                    order.dishChoicesSelected &&
+                                    order.dishChoicesSelected.length
+                                "
+                            >
+                                <p>
+                                    {{
+                                        getChoicesList(
+                                            order.dishChoicesSelected
+                                        )
+                                    }}
+                                </p>
+                            </ng-container>
+                        </td>
+                        <td>{{ order.dishQuantity }}</td>
+                        <td>
+                            {{
+                                order.priceOneItem
+                                    | currency : "INR" : "symbol" : "1.0-0"
+                            }}
+                        </td>
+                        <td>
+                            {{
+                                order.totalPrice
+                                    | currency : "INR" : "symbol" : "1.0-0"
+                            }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+    <div class="row justify-content-end total_order">
+        <div class="col-xl-3 col-lg-4 col-md-5">
+            <ul>
+                <li>
+                    <span>Subtotal</span>
+                    {{ orderAmount | currency : "INR" : "symbol" : "1.0-0" }}
+                </li>
+                <li>
+                    <span>Delivery Fee</span
+                    >{{
+                        deliveryAmount | currency : "INR" : "symbol" : "1.0-0"
+                    }}
+                </li>
+                <li>
+                    <span>GST Amount</span
+                    >{{ gstAmount | currency : "INR" : "symbol" : "1.0-0" }}
+                </li>
+                <li class="text-danger" *ngIf="discountAmount">
+                    <span>DiscountAmount</span>-
+                    {{ discountAmount | currency : "INR" : "symbol" : "1.0-0" }}
+                </li>
+                <li>
+                    <span>Total</span>
+                    {{
+                        orderAmount +
+                            gstAmount +
+                            deliveryAmount -
+                            discountAmount
+                            | currency : "INR" : "symbol" : "1.0-0"
+                    }}
+                </li>
+            </ul>
+            <!-- <a
+                href="#0"
+                class="btn_1 full-width cart"
+                style="width: 100%; text-align: center"
+                >Place Order</a
+              > -->
+        </div>
+    </div>
+    <!-- /total_order-->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <ng-container *ngIf="!orderData?.customerMode">
+        <a
+            class="btn_1 gray delete"
+            *ngIf="orderData.orderStatus !== 'completed'"
+            (click)="openCancelOrderDialog()"
+            ><i class="fa fa-fw fa-times-circle-o"></i> Reject Order</a
+        >
+        <a
+            class="btn_1 gray approve ml-2"
+            *ngIf="orderData.orderStatus === 'pending'"
+            (click)="openAcceptDialog()"
+            ><i class="fa fa-fw fa-check-circle-o"></i> Accept order</a
+        >
+        <a
+            class="btn_1 gray approve ml-2"
+            *ngIf="orderData.orderStatus === 'processing'"
+            (click)="completeOrder()"
+            ><i class="fa fa-fw fa-check-circle-o"></i> Complete Order</a
+        >
+    </ng-container>
+</mat-dialog-actions>

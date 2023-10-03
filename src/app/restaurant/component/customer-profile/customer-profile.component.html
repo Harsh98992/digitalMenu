@@ -1,0 +1,166 @@
+<div class="container position-relative">
+    <div class="py-5 row osahan-profile">
+        <div class="col-lg-4 mb-3">
+            <div
+                class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden"
+            >
+                <div
+                    class="d-flex align-items-center p-3 pointer"
+                    (click)="updateUserPageFlag(true)"
+                >
+                    <div class="left mr-3">
+                        <ngx-avatars
+                            [name]="
+                                userDetail?.name
+                                    ? userDetail?.name
+                                    : userDetail?.phoneNumber
+                            "
+                        ></ngx-avatars>
+                    </div>
+                    <div class="right">
+                        <h6 class="mb-1 font-weight-bold">
+                            {{   userDetail?.name
+                                ? userDetail?.name
+                                : userDetail?.phoneNumber }}
+                            <i class="feather-check-circle text-success"></i>
+                        </h6>
+                        <p class="text-muted m-0 small">
+                            {{ userDetail?.email }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white profile-details">
+                    <a
+                        data-toggle="modal"
+                        data-target="#paycard"
+                        class="d-flex w-100 align-items-center border-bottom p-3"
+                    >
+                        <div class="right ml-auto">
+                            <h6 class="font-weight-bold m-0">
+                                <i class="feather-chevron-right"></i>
+                            </h6>
+                        </div>
+                    </a>
+                    <a
+                        (click)="updateUserPageFlag(false)"
+                        class="d-flex w-100 align-items-center border-bottom p-3 pointer"
+                    >
+                        <div class="left mr-3">
+                            <h6 class="font-weight-bold mb-1 text-dark">
+                                Address
+                            </h6>
+                            <p class="small text-muted m-0">
+                                Add or remove a delivery address
+                            </p>
+                        </div>
+                        <div class="right ml-auto">
+                            <h6 class="font-weight-bold m-0">
+                                <i class="feather-chevron-right"></i>
+                            </h6>
+                        </div>
+                    </a>
+
+                    <a
+                        routerLink="/orders"
+                        class="d-flex w-100 align-items-center border-bottom px-3 py-4"
+                    >
+                        <div class="left mr-3">
+                            <h6 class="font-weight-bold m-0 text-dark">
+                                <i
+                                    class="fa-solid fa-utensils bg-danger text-white p-2 rounded-circle mr-2"
+                                ></i>
+                                My Orders
+                            </h6>
+                        </div>
+                        <div class="right ml-auto">
+                            <h6 class="font-weight-bold m-0">
+                                <i class="feather-chevron-right"></i>
+                            </h6>
+                        </div>
+                    </a>
+                    <a
+                        routerLink="/contact"
+                        class="d-flex w-100 align-items-center border-bottom px-3 py-4"
+                    >
+                        <div class="left mr-3">
+                            <h6 class="font-weight-bold m-0 text-dark">
+                                <i
+                                    class="fa-regular fa-address-card bg-primary text-white p-2 rounded-circle mr-2"
+                                ></i>
+                                Contact
+                            </h6>
+                        </div>
+                        <div class="right ml-auto">
+                            <h6 class="font-weight-bold m-0">
+                                <i class="feather-chevron-right"></i>
+                            </h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 mb-3">
+            <div class="rounded shadow-sm p-4 bg-white" *ngIf="userPageFlag">
+                <h5 class="mb-4">My account</h5>
+                <div id="edit_profile">
+                    <div>
+                        <form
+                            [formGroup]="customerForm"
+                            (ngSubmit)="onSubmit()"
+                        >
+                            <div class="form-group">
+                                <label for="exampleInputName1">Name</label>
+                                <input
+                                    type="text"
+                                    formControlName="name"
+                                    class="form-control"
+                                    id="exampleInputName1d"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputNumber1"
+                                    >Mobile Number</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="exampleInputNumber1"
+                                    formControlName="phoneNumber"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="exampleInputEmail1"
+                                    formControlName="email"
+                                />
+                            </div>
+                            <!-- <div class="text-center">
+                                <button
+                                    type="submit"
+                                    *ngIf="customerForm.disabled"
+                                    (click)="enableForm()"
+                                    class="btn btn-info btn-block"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    type="submit"
+                                    *ngIf="!customerForm.disabled"
+                                    class="btn btn-primary btn-block"
+                                >
+                                    Save Changes
+                                </button>
+                            </div> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <app-customer-address *ngIf="!userPageFlag"></app-customer-address>
+        </div>
+    </div>
+</div>

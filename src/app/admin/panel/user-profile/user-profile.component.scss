@@ -1,0 +1,19 @@
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: block;
+    margin: 20px auto;
+    width: 100px;
+}
+
+.is-invalid {
+    border-color: red !important;
+}
+
+.invalid-feedback {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

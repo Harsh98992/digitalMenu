@@ -1,0 +1,84 @@
+.bin-color {
+    color: #ea5649;
+}
+// .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+//   margin-left: 16px;
+//   margin-right: 16px;
+// }
+.dotted-border {
+    border: 1px dotted #999;
+    border-collapse: separate;
+      border-spacing: 10px;
+  }
+.vegIcon {
+    height: 1rem;
+    margin-right: 5px;
+}
+
+.emptyCartText {
+    font-size: 1.3rem;
+}
+.cart-item-price {
+    min-width: 2.2rem;
+    text-align: end;
+}
+.not-available-item {
+    color: #d3d3d3 !important;
+}
+.cokking-request-container {
+    height: 0px;
+}
+.cokking-request-container.active {
+    height: auto;
+}
+#cooking_request {
+    opacity: 0;
+    height: 0px;
+
+    transition: opacity 0.7s, height 0.7s;
+}
+#cooking_request.active {
+    opacity: 1;
+    height: auto;
+}
+
+.restaurant-title {
+    font-family: "Poppins", Helvetica, sans-serif;
+    margin-bottom: 1rem;
+}
+.round {
+    border-radius: 8px;
+}
+.red-background {
+    background-color: #e54750;
+}
+.cartItem {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (max-width: 380px) {
+    .cartItem {
+        padding: 0;
+    }
+    .cartItemName {
+        font-size: 13px;
+    }
+    .media-body {
+   
+        max-width: 11rem;
+    }
+}
+.color{
+    color: green;
+}
+.coupon-button {
+    display: inline-block;
+    padding: 10px 29px;
+    background-color: #4CAF50; /* Green color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}

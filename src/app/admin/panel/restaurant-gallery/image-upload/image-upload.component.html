@@ -1,0 +1,47 @@
+<div mat-dialog-title class="head">
+  <h3>Edit background image</h3>
+  <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+  <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+    <form class="needs-validation" novalidate="" accept-charset="utf-8">
+      <div class="row py-4">
+        <div class="col-12 mx-auto">
+          <!-- Upload image input-->
+          <div class="input-group px-2 py-2 rounded-pill bg-white shadow-sm">
+            <input
+              id="upload"
+              type="file"
+              (change)="imageUpload($event)"
+              accept="image/*"
+              class="form-control border-0"
+            />
+            <label
+              id="upload-label"
+              for="upload"
+              class="font-weight-light text-muted"
+              >{{ fileChooseText }}</label
+            >
+            <div class="input-group-append">
+              <label for="upload" class="btn btn-light m-0 rounded-pill px-4">
+                <i class="fa fa-cloud-upload mr-2 text-muted"></i
+                ><small class="text-uppercase font-weight-bold text-muted"
+                  >Choose file</small
+                ></label
+              >
+            </div>
+          </div>
+          <small *ngIf="showErrorFlag" class="text-danger ml-3">Please upload a image.</small>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn_1 gradient w-100"
+        (click)="uploadFile()"
+      >
+        <i class="fas fa-lock"></i> Upload Image
+      </button>
+    </form>
+  </div>
+</div>

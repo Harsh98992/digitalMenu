@@ -1,0 +1,23 @@
+.contact-heading{
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #222;
+    font-family: "Poppins",Helvetica,sans-serif;
+}
+.horizontal-line-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.horizontal-line {
+    flex-grow: 1;
+    border-top: 1px solid #000; /* Adjust the line color and style */
+}
+
+.or-text {
+    padding: 0 10px;
+    color: #000; /* Adjust the text color */
+}

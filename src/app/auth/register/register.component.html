@@ -1,0 +1,93 @@
+<div id="register_bg">
+  <div id="register">
+    <aside>
+      <figure>
+        <img src="/assets/img/logo_sticky.svg" width="140" height="35" alt="" />
+      </figure>
+      <h4 class="my-4 text-center">Register here..</h4>
+
+      <form [formGroup]="registerForm" autocomplete="off" (submit)="submitForm()">
+        <div class="form-group">
+          <input class="form-control" type="text" formControlName="name" placeholder="Name" maxlength="20"  [ngClass]="{
+            'is-invalid':
+            checkForError('name' , 'required')
+          }" />
+          <i class="fa-regular fa-user"></i>
+          <span class="text-danger error-message" *ngIf="checkForError('name', 'required')">Name is required.</span>
+        </div>
+
+
+        <div class="form-group">
+          <input class="form-control" type="email" formControlName="email" placeholder="Email" maxlength="30" [ngClass]="{
+            'is-invalid':
+            checkForError('email' , 'required') ||
+            checkForError('email', 'pattern')
+          }" />
+          <i class="icon_mail_alt"></i>
+          <span class="text-danger error-message" *ngIf="checkForError('email', 'required')">Email is required.</span>
+          <span class="text-danger error-message" *ngIf="checkForError('email', 'email')">Please provide a valid
+            email.</span>
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Phone Number" formControlName="phoneNumber"
+            maxlength="10"  [ngClass]="{
+              'is-invalid':
+              checkForError('phoneNumber','required') ||
+              checkForError('phoneNumber', 'maxlength')
+            }" />
+          <i class="icon_phone"></i>
+          <span class="text-danger error-message" *ngIf="checkForError('phoneNumber', 'required')"  >Phone Number is
+            required.</span>
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="password" id="password1" formControlName="password" #password1
+            placeholder="Password" maxlength="30"  [ngClass]="{
+              'is-invalid':
+              checkForError('password' , 'required') ||
+              checkForError('password', 'pattern')
+            }" />
+          <button type="button" role="button" (click)="togglePassowrdHide(password1)" aria-label="Show Password"
+            title="Show Password" tabindex="0" class="my-toggle hideShowPassword-toggle-show" aria-pressed="false"
+            style="position: absolute; right: 0px; top: 4%">
+            {{ passwordFlag ? "Show" : "Hide" }}
+          </button>
+
+          <i class="icon_lock_alt"></i>
+          <span class="text-danger error-message" *ngIf="checkForError('password', 'required')">Password is
+            required.</span>
+
+          <span class="text-danger error-message" *ngIf="checkForError('password', 'pattern')">Password must be at least
+            8 characters long and include a
+            combination of uppercase letters, lowercase letters, numbers, and
+            special characters.</span>
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="password" formControlName="confirmPassword" id="password2" maxlength="30"
+            #password2 placeholder="Confirm Password"  [ngClass]="{
+              'is-invalid':
+              checkForError('password' , 'required') ||
+              checkForError('password', 'pattern')
+            }" />
+          <button type="button" role="button" (click)="toggleConfirmPassword(password2)" aria-label="Show Password"
+            title="Show Password" tabindex="0" class="my-toggle hideShowPassword-toggle-show" aria-pressed="false"
+            style="position: absolute; right: 0px; top: 4%">
+            {{ confirmPasswordFlag ? "Show" : "Hide" }}
+          </button>
+          <i class="icon_lock_alt"></i>
+          <span class="text-danger error-message" *ngIf="checkForError('confirmPassword', 'required')">Confirm Password
+            is required.</span>
+          <span class="text-danger error-message"
+            *ngIf="checkForError('confirmPassword', 'confirmedValidator')">Password and Confirm Password must be
+            match.</span>
+        </div>
+
+        <button class="btn_1 gradient full-width">Register Now!</button>
+        <div class="text-center mt-2">
+          <small>Already have an acccount?
+            <strong><a routerLink="/admin/login">Sign In</a></strong></small>
+        </div>
+      </form>
+      <!-- <div class="copy">© 2020 FooYes</div> -->
+    </aside>
+  </div>
+</div>

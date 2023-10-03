@@ -1,0 +1,318 @@
+.kenburns_slider {
+    background-image: linear-gradient(
+            180deg,
+            rgba(226, 226, 226, 0.2),
+            rgba(0, 0, 0, 0.8)
+        ),
+        url("../../../../assets/img/slide_home_1.jpg");
+}
+
+.scanner {
+    border: none;
+    background-image: linear-gradient(to right, #00c5e6, #004a8d);
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    margin-top: 2px;
+    border-radius: 6px;
+}
+
+.scanLogin {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+@media only screen and (max-width: 990px) {
+    .scanLogin {
+        flex-direction: column;
+        // justify-content: center;
+    }
+}
+.custom-button {
+    padding: 0 25px;
+    height: 50px;
+    width: 100%;
+    margin-right: -1px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.list_home ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.list_home ul li {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+.list_home ul li a {
+    background-color: #fff;
+    -webkit-box-shadow: 0px 22px 24px 0px rgba(46, 51, 51, 0.05);
+    -moz-box-shadow: 0px 22px 24px 0px rgba(46, 51, 51, 0.05);
+    box-shadow: 0px 22px 24px 0px rgba(46, 51, 51, 0.05);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    padding: 15px 15px 15px 225px;
+    color: #444;
+    margin-bottom: 30px;
+    min-height: 130px;
+    display: block;
+}
+@media (max-width: 1199px) {
+    .list_home ul li a {
+        padding: 15px 15px 15px 145px;
+    }
+}
+@media (max-width: 991px) {
+    .list_home ul li a {
+        padding: 15px 15px 15px 165px;
+    }
+}
+@media (max-width: 575px) {
+    .list_home ul li a {
+        padding: 145px 15px 15px 15px;
+        min-height: inherit;
+    }
+}
+.list_home ul li a figure {
+    -webkit-border-radius: 5px 0 0 5px;
+    -moz-border-radius: 5px 0 0 5px;
+    -ms-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+    width: 200px;
+    height: 130px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+@media (max-width: 1199px) {
+    .list_home ul li a figure {
+        width: 120px;
+    }
+}
+@media (max-width: 991px) {
+    .list_home ul li a figure {
+        width: 150px;
+    }
+}
+@media (max-width: 575px) {
+    .list_home ul li a figure {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        -webkit-border-radius: 5px 5px 0 0;
+        -moz-border-radius: 5px 5px 0 0;
+        -ms-border-radius: 5px 5px 0 0;
+        border-radius: 5px 5px 0 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    figure {
+        min-height: 75%;
+    }
+    /* Your CSS rules for iPad and PC screens go here */
+    /* This will apply to screens with a minimum width of 768 pixels */
+}
+.list_home ul li a figure img {
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%) scale(1.1);
+    -moz-transform: translate(-50%, -50%) scale(1.1);
+    -ms-transform: translate(-50%, -50%) scale(1.1);
+    -o-transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1.1);
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+@media (max-width: 575px) {
+    .list_home ul li a figure img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+}
+.list_home ul li a .score {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+@media (max-width: 767px) {
+    .list_home ul li a .score {
+        position: static;
+        float: right;
+        margin: -5px 0 0 0;
+    }
+}
+.list_home ul li a em {
+    font-size: 12px;
+    font-size: 0.75rem;
+}
+.list_home ul li a h3 {
+    font-size: 18px;
+    font-size: 1.125rem;
+    margin-bottom: 0;
+}
+.list_home ul li a small {
+    font-size: 14px;
+    font-size: 0.875rem;
+    color: #777;
+}
+.list_home ul li a ul {
+    margin-top: 10px;
+}
+.list_home ul li a ul li {
+    display: inline-block;
+    width: auto;
+    margin: 0 5px 0 0;
+}
+.list_home ul li a ul li:last-child {
+    margin: 0;
+    font-size: 12px;
+    font-size: 0.75rem;
+}
+.list_home ul li a ul li .ribbon {
+    position: static;
+}
+.list_home ul li a:hover {
+    -webkit-box-shadow: 0px 22px 24px 0px rgba(46, 51, 51, 0.1);
+    -moz-box-shadow: 0px 22px 24px 0px rgba(46, 51, 51, 0.1);
+    box-shadow: 0px 22px 24px 0px rgba(46, 51, 51, 0.1);
+}
+.list_home ul li a:hover img {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -moz-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    -o-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+}
+.list_home ul li a:hover h3 {
+    color: #e54750;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.autocomplete-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+
+    li {
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        background-color: #fff;
+        color: #000;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}
+.no_border_r {
+    height: 50px;
+}
+
+/* Style for computers */
+.accordion-section .accordion-content {
+    display: block;
+}
+
+/* Style for phones */
+@media (max-width: 768px) {
+    .accordion-section .accordion-content {
+        display: none;
+    }
+}
+a {
+    color: black;
+}
+
+@media (min-width: 768px) {
+    #collapseone {
+        display: block;
+    }
+}
+
+/* Hide the collapsible content by default on smaller screens */
+@media (max-width: 767px) {
+    #collapseone {
+        display: none;
+    }
+}
+.highlight-button {
+    transition: background-color 0.3s;
+}
+.highlight-button:hover {
+    background-color: #2980b9;
+}
+.colorPast {
+    background-color: #ff9542;
+    color: #ffffff;
+    box-shadow: rgb(0 0 0 / 51%) 2px 2px 8px;
+    border: none;
+}
+
+.button-87 {
+    margin: 10px;
+    padding: 5px 5px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px 0 10px 10px;
+    display: block;
+    border: 0px;
+    font-weight: 700;
+    box-shadow: 0px 0px 14px -7px #f09819;
+    background-image: linear-gradient(
+        45deg,
+        #ff512f 0%,
+        #f09819 51%,
+        #ff512f 100%
+    );
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-87:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.button-87:active {
+    transform: scale(0.95);
+}

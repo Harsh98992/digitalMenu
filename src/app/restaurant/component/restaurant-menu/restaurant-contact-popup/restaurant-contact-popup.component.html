@@ -1,0 +1,54 @@
+<div class="small-dialog-header">
+    <h3>Contact Details</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<div mat-dialog-content>
+    <table class="table">
+        <tbody>
+            <tr *ngFor="let data of contactDetails">
+                <td>
+                    <div class="d-flex align-items-center">
+                        <button
+                            type="button"
+                            class="btn-sm round right inc btn btn-secondary"
+                        >
+                            <i
+                                class="icon_mail"
+                                *ngIf="data.contactType === 'email'"
+                            ></i>
+                            <i
+                                class="fa-brands fa-whatsapp"
+                                *ngIf="data.contactType === 'whatsapp'"
+                            ></i>
+                            <i
+                                *ngIf="data.contactType === 'phone'"
+                                class="icon_phone"
+                            ></i></button
+                        ><a
+                            *ngIf="data.contactType === 'email'"
+                            href="mailto:Goqrorder@gmail.com"
+                            class="ml-2 contact-text"
+                            >{{ data.contactDetails }}</a
+                        >
+                        <a
+                            *ngIf="data.contactType === 'whatsapp'"
+                            href="https://api.whatsapp.com/send?phone={{
+                                data.contactDetails
+                            }}"
+                            class="ml-2 contact-text"
+                            >{{ data.contactDetails }}</a
+                        >
+                        <a
+                            *ngIf="data.contactType === 'phone'"
+                            href="tel:+91 {{ data.contactDetails }}"
+                            class="ml-2 contact-text"
+                            >+91 {{ data.contactDetails }}</a
+                        >
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

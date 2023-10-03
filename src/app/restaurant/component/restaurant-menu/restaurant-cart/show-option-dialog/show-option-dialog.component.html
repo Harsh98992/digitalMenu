@@ -1,0 +1,37 @@
+<div class="small-dialog-header">
+    <h3>Selected options</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <div class="my-3">
+        <h5>Dish Name</h5>
+
+        <p>{{ this.dishData.dishDetail.dishName }}</p>
+        <ng-container *ngIf="this.dishData.itemSizeSelected">
+            <h5>Size</h5>
+            <p>{{ this.dishData.itemSizeSelected.size | titlecase }}</p>
+        </ng-container>
+        <ng-container *ngIf="this.dishData.dishChoicesSelected">
+            <div *ngFor="let data of this.dishData.dishChoicesSelected">
+                <h5>{{ data.choicesDisplayName | titlecase }}</h5>
+                <ul>
+                    <li *ngFor="let choice of data.choicesSelected">
+                        {{ choice.choiceName | titlecase }}
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="this.dishData.extraSelected">
+            <div *ngFor="let data of this.dishData.extraSelected">
+                <h5>{{ data.addOnDisplayName | titlecase }}</h5>
+                <ul>
+                    <li *ngFor="let choice of data.addOnsSelected">
+                        {{ choice.addOnName | titlecase }}
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+    </div>
+</mat-dialog-content>

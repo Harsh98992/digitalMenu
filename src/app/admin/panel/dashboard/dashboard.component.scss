@@ -1,0 +1,83 @@
+
+
+
+
+.order-card {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .order-card .row {
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 10px;
+    margin-right: 0px;
+  }
+
+  .order-card .col-md-4 {
+    border-right: 1px dotted #ccc;
+    padding-right: 20px;
+  }
+
+  .order-card .col-md-4:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .order-card .order-items {
+    margin-bottom: 10px;
+  }
+
+  .order-card .order-items a {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .order-card .order-items img {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+  }
+
+  .order-card .total-bill {
+    margin-bottom: 10px;
+  }
+
+  .order-card .delivery-address {
+    margin-bottom: 10px;
+  }
+
+  .green-tick {
+    margin-right: 5px;
+  }
+
+  .logo {
+    height: 20px;
+    width: 20px;
+  }
+
+  .total-bill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .total-bill p {
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+
+  .total-bill.print-reciept {
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  .order-ready-div button {
+    margin-top: 10px;
+    width: 100%;
+  }
+.dateText{
+  font-size: .9rem;
+}

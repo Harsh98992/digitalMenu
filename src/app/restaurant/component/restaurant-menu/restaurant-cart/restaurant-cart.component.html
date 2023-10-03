@@ -1,0 +1,35 @@
+<div mat-dialog-title class="head">
+    <h3>Order Summary</h3>
+    <a (click)="closeCart()" class="close_panel_mobile"
+        ><i class="icon_close"></i
+    ></a>
+</div>
+<app-cart-helper
+    mat-dialog-content
+    #cartHelperComponent
+    [restaurantData]="restaurantData"
+></app-cart-helper>
+<div class="btn_reserve_fixed">
+    <a
+        class="btn_1 btn-success full-width"
+        (click)="openLoginDialog()"
+        *ngIf="!userLoginFlag"
+        >Login</a
+    >
+    <a
+        class="btn_1 gradient full-width"
+        (click)="openOrderOptionDialog()"
+        *ngIf="userLoginFlag && !orderOptionFlag"
+        >{{ getOrderOptionText() }}</a
+    >
+
+    <!-- <a class="btn_1 gradient full-width" *ngIf="orderOption === 'delivery'" (click)="openAddressSelectionDialog()">
+        Proceed to choose address
+    </a> -->
+    <a
+        class="btn_1 gradient full-width"
+        (click)="placeOrder()"
+        *ngIf="userLoginFlag && orderOptionFlag"
+        >Place Order</a
+    >
+</div>

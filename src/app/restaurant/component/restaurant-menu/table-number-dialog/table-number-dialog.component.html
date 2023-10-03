@@ -1,0 +1,38 @@
+<div class="small-dialog-header">
+    <h3>Select Table Name</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <form [formGroup]="form" class="container mt-4">
+        <div class="form-group">
+            <label for="tableName" class="required">Table Name</label>
+            <input
+                type="text"
+                [ngClass]="
+                    checkForError('tableName', 'required') ? 'is-invalid' : ''
+                "
+                id="tableName"
+                class="form-control"
+                maxlength="5"
+                formControlName="tableName"
+            />
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button
+                    type="reset"
+                    class="btn_1 full-width"
+                    (click)="onSubmit()"
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-actions>

@@ -1,0 +1,23 @@
+<!-- Use a simple template to display the details of the promo code -->
+<h1 mat-dialog-title>{{ data.codeName }}</h1>
+<div mat-dialog-content>
+    <p><strong>Description:</strong> {{ data.description }}</p>
+    <p><strong>Discount Amount:</strong> {{ data.discountAmount }}</p>
+    <p><strong>Discount Type:</strong> {{ data.discountType }}</p>
+    <p><strong>Minimum Order Value:</strong> {{ data.minOrderValue }}</p>
+    <p><strong>Start Date:</strong> {{ data.startDate | date }}</p>
+    <p><strong>End Date:</strong> {{ data.endDate | date }}</p>
+    <p><strong>Per User Limit:</strong> {{ data.perUserLimit }}</p>
+    <p><strong>Total Usage Limit:</strong> {{ data.totalUsageLimit }}</p>
+    <p><strong>Applicable For:</strong> {{ data.applicableFor }}</p>
+    <p><strong>Meal Time:</strong> {{ data.mealTime }}</p>
+    <p><strong>Run This Offer:</strong> {{ data.runThisOffer ? 'Yes' : 'No' }}</p>
+    <p><strong>Used Count:</strong> {{ data.usedCount }}</p>
+    <p><strong>Day Of Week:</strong> {{ data.days | date:'EEEE' }}</p>
+    <p><strong>Max Discount:</strong> {{ data.maxDiscount }}</p>
+    <p><strong>Active:</strong> {{ data.active ? 'Yes' : 'No' }}</p>
+</div>
+<div mat-dialog-actions>
+    <!-- Use a button to close the dialog -->
+    <button mat-button (click)="closeDialog()" cdkFocusInitial>CLOSE</button>
+</div>

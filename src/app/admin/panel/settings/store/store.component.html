@@ -79,8 +79,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="mb-3">
                                 <label class="form-label required">Maximum Delivery Distance (in km)</label>
-                                <input type="number" formControlName="maxDeliveryDistance" class="form-control"
-                                    min="0">
+                                <input type="number" formControlName="maxDeliveryDistance" class="form-control" min="0">
                             </div>
                         </div>
                     </div>
@@ -137,6 +136,62 @@
                 </form>
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Availability Setting Card -->
+                <div class="card">
+                    <div class="card-header">
+                        Availability Setting
+                        <button class="btn btn-primary" (click)="toggleAvailabilityEditMode()">
+                            {{ isEditingAvailability ? "Save" : "Edit" }}
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="availabilityForm" accept-charset="utf-8">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label class="form-label required">Open Time</label>
+                                        <ngb-timepicker formControlName="openTime" [meridian]="false"></ngb-timepicker>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label class="form-label required">Close Time</label>
+                                        <ngb-timepicker formControlName="closeTime" [meridian]="false"></ngb-timepicker>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label class="form-label required">Open Days</label>
+                                        <ng-select [clearable]="false" formControlName="openDays" class="custom"
+                                            multiple="true">
+                                            <ng-option [value]="'Monday'">Monday</ng-option>
+                                            <ng-option [value]="'Tuesday'">Tuesday</ng-option>
+                                            <ng-option [value]="'Wednesday'">Wednesday</ng-option>
+                                            <ng-option [value]="'Thursday'">Thursday</ng-option>
+                                            <ng-option [value]="'Friday'">Friday</ng-option>
+                                            <ng-option [value]="'Saturday'">Saturday</ng-option>
+                                            <ng-option [value]="'Sunday'">Sunday</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
         <app-add-payment></app-add-payment>
     </div>
 </div>

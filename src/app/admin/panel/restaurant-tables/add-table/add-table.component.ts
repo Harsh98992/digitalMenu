@@ -24,8 +24,8 @@ export class AddTableComponent implements OnInit {
     generateForm() {
         this.tableForm = this.formBuilder.group({
             tableName: ["", Validators.required],
-            availability: ["", Validators.required],
-            capacity: ["", Validators.required],
+            availability: ["true", Validators.required],
+            capacity: ["4", Validators.required],
         });
         this.checkForEdit();
     }

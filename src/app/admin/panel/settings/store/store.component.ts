@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 import { UtilService } from "src/app/api/util.service";
 
@@ -18,9 +18,11 @@ export class StoreComponent implements OnInit {
     deliveryForm: FormGroup;
     isEditingDelivery: boolean = false;
 
-
     socialMediaForm: FormGroup;
     isEditingSocialMedia: boolean = false;
+
+    availabilityForm: FormGroup;
+    isEditingAvailability: boolean = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -40,7 +42,6 @@ export class StoreComponent implements OnInit {
             isPricingInclusiveOfGST: [true],
             customGSTPercentage: [5],
         });
-        
 
         this.getGSTFormDetails();
 
@@ -89,6 +90,30 @@ export class StoreComponent implements OnInit {
         this.socialMediaForm.get("instagramUrl").disable();
 
         this.socialMediaForm.get("youtubeUrl").disable();
+
+        // Availability Setting Form
+        this.availabilityForm = this.formBuilder.group({
+            openTime: [, Validators.required],
+            closeTime: [, Validators.required],
+            openDays: [
+                [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                ],
+                Validators.required,
+            ],
+        });
+
+        this.getAvailabilityFormDetails();
+
+        this.availabilityForm.get("openTime").disable();
+        this.availabilityForm.get("closeTime").disable();
+        this.availabilityForm.get("openDays").disable();
     }
 
     // GST Setting Functions
@@ -260,6 +285,52 @@ export class StoreComponent implements OnInit {
                     "Social Media Details updated successfully"
                 );
                 this.isEditingSocialMedia = !this.isEditingSocialMedia;
+            });
+    }
+
+    // Availability Setting Functions
+
+    getAvailabilityFormDetails() {
+        // Fetch availability settings from the API and populate the form
+        // Update this section to fetch actual data from your API
+        this.restaurantPanelService.getRestaurnatDetail().subscribe((res) => {
+            this.availabilityForm.patchValue({
+                openTime: res["data"]["restaurantDetail"]["openTime"],
+                closeTime: res["data"]["restaurantDetail"]["closeTime"],
+                openDays: res["data"]["restaurantDetail"]["openDays"],
+            });
+        });
+    }
+
+    toggleAvailabilityEditMode() {
+        if (!this.isEditingAvailability) {
+            this.availabilityForm.get("openTime").enable();
+            this.availabilityForm.get("closeTime").enable();
+            this.availabilityForm.get("openDays").enable();
+            this.isEditingAvailability = !this.isEditingAvailability;
+        } else {
+            this.updateAvailabilityData();
+        }
+    }
+
+    updateAvailabilityData() {
+        // Update the availability settings in the API using this.availabilityForm.value
+        // After successful update, disable the form controls and display a success message
+        // Update this section to send data to your API and handle the response
+        this.restaurantPanelService
+            .updateStoreSettings(this.availabilityForm.value)
+            .subscribe((res) => {
+                console.log(res);
+
+                this.getAvailabilityFormDetails();
+                this.availabilityForm.get("openTime").disable();
+                this.availabilityForm.get("closeTime").disable();
+                this.availabilityForm.get("openDays").disable();
+
+                this.utilService.openSnackBar(
+                    "Availability Details updated successfully"
+                );
+                this.isEditingAvailability = !this.isEditingAvailability;
             });
     }
 }

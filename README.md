@@ -7,10 +7,18 @@ This is a website like a digital menu for a restaurant.
 ## Installation
 
 1. clone the repository
-2. run `npm install` after removing the     "ngx-scanner-qrcode": "1.0.17"
-    from package.json
-3. after the above step run add the above line again and run `npm install --force` to install the ngx-scanner-qrcode package
-4. run `ng serve` to run the project
+2. run `npm install`
+3. run `ng serve` to run the project
+
+or paste the following command in your terminal
+
+```bash
+git clone
+cd DigitalMenu
+npm install
+ng serve
+```
+
 
 ## Usage
 

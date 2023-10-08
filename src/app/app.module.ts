@@ -22,9 +22,9 @@ import {
 import { UserLoginComponent } from "./user-auth/user-login/user-login.component";
 import { PhoneNumberDialogComponent } from "./user-auth/user-login/phone-number-dialog/phone-number-dialog.component";
 import { PositiveNumberDirective } from "./api/positive-number.directive";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { environment } from "../environments/environment";
+import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
     declarations: [
         AppComponent,
@@ -42,18 +42,19 @@ import { environment } from '../environments/environment';
         BrowserAnimationsModule,
         AngularMaterialModule,
         HttpClientModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule, // Add ReactiveFormsModule
+        NgbTimepickerModule, // Add NgbTimepickerModule
+
         FormsModule,
         ReactiveFormsModule,
         SocialLoginModule,
         NgxSpinnerModule.forRoot({ type: "square-jelly-box" }),
-        ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: environment.production,
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
+        ServiceWorkerModule.register("ngsw-worker.js", {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: "registerWhenStable:30000",
         }),
-        
     ],
     providers: [
         RestaurantAuthGuard,

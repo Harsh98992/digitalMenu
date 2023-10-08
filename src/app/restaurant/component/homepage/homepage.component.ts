@@ -48,6 +48,10 @@ export class HomepageComponent implements OnInit {
             .subscribe((query) => {
                 this.onSearchInputChanged(query);
             });
+
+        if (this.userLoginFlag) {
+            this.getPastRestaurant(this.customerAuthService.customerDetail.value);
+        }
     }
     onSearchInputChanged(query: string) {
         console.log("running onSearchInputChanged");

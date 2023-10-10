@@ -50,18 +50,12 @@ export class HomepageComponent implements OnInit {
             });
 
         if (this.userLoginFlag) {
-            this.getPastRestaurant(this.customerAuthService.customerDetail.value);
+            this.getPastRestaurant(
+                this.customerAuthService.customerDetail.value
+            );
         }
     }
     onSearchInputChanged(query: string) {
-        console.log("running onSearchInputChanged");
-
-        console.log("onSearchInputChanged", query);
-
-        console.log("this.searchResults", this.searchResults);
-
-        console.log("this.autocompleteResults", this.autocompleteResults);
-
         // If the search query is empty, clear the autocomplete results and return
         if (query === "") {
             this.autocompleteResults = [];
@@ -74,8 +68,6 @@ export class HomepageComponent implements OnInit {
                     .includes(query.toLowerCase());
             });
         }
-
-        console.log("this.autocompleteResults", this.autocompleteResults);
     }
 
     // Push the search query to the subject for debouncing
@@ -186,6 +178,9 @@ export class HomepageComponent implements OnInit {
     }
 
     navigateToRestaurant(data) {
+        console.log(data);
+        debugger
+        
         this.router.navigate(["/restaurant"], {
             queryParams: { detail: data.restaurantUrl },
         });

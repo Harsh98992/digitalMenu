@@ -428,7 +428,7 @@ export class RestaurantMenuComponent implements OnInit {
         }
     }
     getReviews(restaurnatData) {
-        const placeId = restaurnatData.placeId;
+        const placeId = restaurnatData?.placeId;
         if (placeId) {
             this.restaurantService.getRestaurantReview(placeId).subscribe({
                 next: (res: any) => {

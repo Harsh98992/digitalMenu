@@ -11,18 +11,22 @@ import { PaymentDialogComponent } from "src/app/angular-material/payment-dialog/
 export class OrderTrackingComponent implements OnInit {
     seconds: number = 60; // Initial countdown value
     interval: any;
-    orderId=''
-    constructor(private dialog: MatDialog,private route: ActivatedRoute) {}
+    orderId = "";
+    constructor(private dialog: MatDialog, private route: ActivatedRoute) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
 
     ngOnInit(): void {
         this.startCountdown();
-        this.getOrderId()
+        this.getOrderId();
     }
     getOrderId() {
-        this.route.params.subscribe(params => {
-            this.orderId = params['orderId']; // 'id' should match the parameter defined in the route
-    
-          });
+        this.route.params.subscribe((params) => {
+            this.orderId = params["orderId"]; // 'id' should match the parameter defined in the route
+        });
     }
 
     startCountdown(): void {

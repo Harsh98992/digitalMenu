@@ -21,14 +21,17 @@ export class TokenInterceptor implements HttpInterceptor {
         next: HttpHandler
     ): Observable<HttpEvent<unknown>> {
         const token = this.customerAuth.getUserToken();
+        const restaurantToken = this.auth.getUserToken();
+        if (token || restaurantToken) {
+            request = request.clone({
+                setHeaders: {
+                    Authorization: restaurantToken
+                        ? `Bearer ${restaurantToken}`
+                        : `Bearer ${token}`,
+                },
+            });
+        }
 
-        request = request.clone({
-            setHeaders: {
-                Authorization: token
-                    ? `Bearer ${token}`
-                    : `Bearer ${this.auth.getUserToken()}`,
-            },
-        });
         return next.handle(request);
     }
 }

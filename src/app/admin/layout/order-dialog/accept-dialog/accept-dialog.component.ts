@@ -13,7 +13,7 @@ import { environment } from "src/environments/environment";
 })
 export class AcceptDialogComponent implements OnInit {
     //  time=['15 min','30 min','45 min','1 hour','1 hour 15 min','1 hour 30 min'],
-    cashOnDeliveryAvailable = false;
+    cashOnDeliveryAvailable = true;
     ctrl = new FormControl<NgbTimeStruct | null>(
         null,
         (control: FormControl<NgbTimeStruct | null>) => {

@@ -173,14 +173,14 @@ export class HomepageComponent implements OnInit {
         });
     }
 
-    selectSearchResult(restaurantUrl) {
-        this.navigateToRestaurant(restaurantUrl);
+    selectSearchResult(result) {
+        this.navigateToRestaurant(result);
     }
 
     navigateToRestaurant(data) {
         console.log(data);
         debugger
-        
+
         this.router.navigate(["/restaurant"], {
             queryParams: { detail: data.restaurantUrl },
         });

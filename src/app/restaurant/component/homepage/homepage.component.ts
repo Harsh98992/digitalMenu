@@ -38,6 +38,8 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit(): void {
         this.checkLogin();
+        this.restaurantService.setCartItem([]);
+        this.restaurantService.setCartSate(null);
         this.initSearch();
         // Subscribe to the search query subject with debounceTime and distinctUntilChanged
         this.searchQuerySubject
@@ -179,7 +181,7 @@ export class HomepageComponent implements OnInit {
 
     navigateToRestaurant(data) {
         console.log(data);
-        debugger
+        debugger;
 
         this.router.navigate(["/restaurant"], {
             queryParams: { detail: data.restaurantUrl },

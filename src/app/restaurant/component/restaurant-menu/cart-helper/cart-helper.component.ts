@@ -406,7 +406,7 @@ export class CartHelperComponent implements OnInit {
                     if (this.userPreference.preference === "Dine In") {
                         this.router.navigateByUrl("/orders");
                     } else {
-                       
+
                         console.log(res.data.orderId);
 
                         this.router.navigate([

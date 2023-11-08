@@ -39,6 +39,10 @@ export class DashboardComponent implements OnInit {
             (order) => order._id === updatedOrder._id
         );
 
+        console.log("index", index);
+
+        console.log("updatedOrder", updatedOrder);
+
         if (index !== -1) {
             this.allOrders[index] = updatedOrder;
         } else {
@@ -71,7 +75,9 @@ export class DashboardComponent implements OnInit {
             this.socket.on("orderUpdate", (updatedOrder: any) => {
                 console.log("called orderUpdate", updatedOrder);
 
-                this.handleOrderUpdate(updatedOrder);
+                // this.handleOrderUpdate(updatedOrder);
+                this.getOrders();
+
             });
         });
     }

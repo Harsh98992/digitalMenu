@@ -1,7 +1,7 @@
 <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
     <img
         alt="osahan"
-        [src]="restaurantData.restaurantBackgroundImage"
+        [src]="restaurantData.restaurantBackgroundImage ? restaurantData.restaurantBackgroundImage :'assets/img/hero_general.jpg'"
         class="mr-3 rounded-circle img-fluid"
         style="height: 50px; width: 50px"
     />

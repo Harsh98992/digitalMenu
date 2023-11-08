@@ -5,15 +5,16 @@
       <br />
       <div class="row mx-2 my-1">
         <div class="form-group col-lg-2 col-md-12">
-          <input type="text" placeholder="Search" class="form-control" />
+          <input type="text" placeholder="Search"  [(ngModel)]="searchTerm"
+          (keyup)="applyFilter()" class="form-control" />
         </div>
         <div class="mb-3 form-group col-lg-2 col-md-12">
-          <ng-select class="custom">
+          <!-- <ng-select class="custom">
             <ng-option ngDefaultControl>All</ng-option>
             <ng-option>Completed</ng-option>
             <ng-option>Pending</ng-option>
             <ng-option>Cancelled</ng-option>
-          </ng-select>
+          </ng-select> -->
         </div>
 
         <div class="col-lg-2 col-md-12">
@@ -36,7 +37,8 @@
       </div>
       <ngx-datatable
         class="bootstrap"
-        [rows]="rows"
+        #myTable
+        [rows]="this.filteredData || rows"
         [columns]="columns"
         [columnMode]="ColumnMode.force"
         [headerHeight]="50"

@@ -104,7 +104,10 @@ export class AddItemComponent implements OnInit {
         const result = [];
         if (this.itemSizeSelected) {
             const filterAddOn = this.dish.addOns.filter((data) => {
-                return data.size === this.itemSizeSelected.size;
+                return (
+                    data.size === this.itemSizeSelected.size ||
+                    data.size === "All"
+                );
             });
 
             for (const data of filterAddOn) {

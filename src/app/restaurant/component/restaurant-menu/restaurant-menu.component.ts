@@ -48,9 +48,9 @@ export class RestaurantMenuComponent implements OnInit {
     userPreference = {};
     cookingInstruction = "";
     bannerImage = "";
-    reviews=[];
-    
-    rating='';
+    reviews = [];
+
+    rating = "";
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -59,7 +59,12 @@ export class RestaurantMenuComponent implements OnInit {
         private router: Router,
         private customerAuthService: CustomerAuthService,
         private customerService: CustomerService
-    ) {}
+    ) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
 
     ngOnInit(): void {
         this.getRestaurantData();

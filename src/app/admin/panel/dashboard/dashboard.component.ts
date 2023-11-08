@@ -126,11 +126,11 @@ export class DashboardComponent implements OnInit {
                 this.pendingPayment.push(data);
             }
         }
-        // this.checkForSoundPause();
+         this.checkForSoundPause();
     }
     checkForSoundPause() {
         if (this.pendingOrder && this.pendingOrder.length) {
-            this.restaurantService.playSound(true);
+            // this.restaurantService.playSound(true);
         } else {
             this.restaurantService.playSound(false);
         }

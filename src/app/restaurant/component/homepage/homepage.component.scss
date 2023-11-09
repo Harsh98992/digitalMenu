@@ -316,3 +316,18 @@ a {
 .button-87:active {
     transform: scale(0.95);
 }
+
+.search-bar {
+    position: relative; /* Set the search bar position to relative */
+
+    /* Adjust the icon styles */
+    .search-icon {
+        position: absolute;
+        right: 10px; /* Adjust the icon's right position as needed */
+        top: 50%; /* Vertically center the icon within the input */
+        transform: translateY(-50%);
+        font-size: 18px; /* Adjust the icon size as needed */
+        color: #333; /* Adjust the icon color as needed */
+        cursor: pointer;
+    }
+}

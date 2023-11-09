@@ -44,7 +44,7 @@ export class HomepageComponent implements OnInit {
         // Subscribe to the search query subject with debounceTime and distinctUntilChanged
         this.searchQuerySubject
             .pipe(
-                debounceTime(1000), // Adjust the debounceTime value as needed
+                debounceTime(500), // Adjust the debounceTime value as needed
                 distinctUntilChanged() // Only emit if the search query has changed since the last emission
             )
             .subscribe((query) => {
@@ -59,16 +59,16 @@ export class HomepageComponent implements OnInit {
     }
     onSearchInputChanged(query: string) {
         // If the search query is empty, clear the autocomplete results and return
-        if (query === "") {
-            this.autocompleteResults = [];
-            return;
-        } else {
+        if (query){
             // filter the search results
             this.autocompleteResults = this.searchResults.filter((res) => {
                 return res.restaurantName
                     .toLowerCase()
                     .includes(query.toLowerCase());
             });
+        }
+        else{
+            this.autocompleteResults = this.searchResults;
         }
     }
 
@@ -173,6 +173,22 @@ export class HomepageComponent implements OnInit {
                 }
             },
         });
+    }
+
+    onSearchIconClick() {
+
+        console.log("Search icon clicked");
+
+        console.log("Search query:", this.searchQuery);
+
+        this.onSearchInputChanged(this.searchQuery);
+
+        // this.router.navigate(["/search"], {
+        console.log("Search results:", this.searchResults);
+
+        console.log("Autocomplete results:", this.autocompleteResults);
+
+
     }
 
     selectSearchResult(result) {

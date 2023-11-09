@@ -59,15 +59,14 @@ export class HomepageComponent implements OnInit {
     }
     onSearchInputChanged(query: string) {
         // If the search query is empty, clear the autocomplete results and return
-        if (query){
+        if (query) {
             // filter the search results
             this.autocompleteResults = this.searchResults.filter((res) => {
                 return res.restaurantName
                     .toLowerCase()
                     .includes(query.toLowerCase());
             });
-        }
-        else{
+        } else {
             this.autocompleteResults = this.searchResults;
         }
     }
@@ -176,19 +175,18 @@ export class HomepageComponent implements OnInit {
     }
 
     onSearchIconClick() {
+        this.navigateToRestaurant(this.searchResults[0]);
 
-        console.log("Search icon clicked");
+        // console.log("Search icon clicked");
 
-        console.log("Search query:", this.searchQuery);
+        // console.log("Search query:", this.searchQuery);
 
-        this.onSearchInputChanged(this.searchQuery);
+        // this.onSearchInputChanged(this.searchQuery);
 
-        // this.router.navigate(["/search"], {
-        console.log("Search results:", this.searchResults);
+        // // this.router.navigate(["/search"], {
+        // console.log("Search results:", this.searchResults);
 
-        console.log("Autocomplete results:", this.autocompleteResults);
-
-
+        // console.log("Autocomplete results:", this.autocompleteResults);
     }
 
     selectSearchResult(result) {

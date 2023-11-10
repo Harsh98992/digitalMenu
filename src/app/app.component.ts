@@ -10,7 +10,7 @@ import { OrderService } from "./api/order.service";
     styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-    title = "digitalMenuApp";
+    title = "QrSay";
     constructor(
         private authService: AuthenticationService,
         private customerAuthService: CustomerAuthService,

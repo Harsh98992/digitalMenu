@@ -50,6 +50,8 @@ export class RestaurantMenuComponent implements OnInit {
     bannerImage = "";
     reviews = [];
 
+    googleMapUrl = "";
+
     rating = "";
     constructor(
         public dialog: MatDialog,
@@ -71,6 +73,35 @@ export class RestaurantMenuComponent implements OnInit {
         this.getCartItem();
         this.checkLogin();
         this.getCartState();
+
+        // https://www.google.com/maps/search/?api=1&query=<address>&query_place_id=<placeId>
+
+        // const addressSchema = new mongoose.Schema({
+        //     street: {
+        //         type: "String",
+        //     },
+        //     city: {
+        //         type: "String",
+        //     },
+        //     state: {
+        //         type: "String",
+        //     },
+        //     pinCode: {
+        //         type: "string",
+        //     },
+        //     googleLocation: {
+        //         type: "string",
+        //     },
+        //     latitude: {
+        //         type: Number,
+        //     },
+        //     longitude: {
+        //         type: Number,
+        //     },
+        //     landmark: {
+        //         type: "string",
+        //     },
+        // });
     }
     getCartState() {
         this.restaurantService.getCartState().subscribe({
@@ -477,6 +508,8 @@ export class RestaurantMenuComponent implements OnInit {
                     this.restaurantMenu = _.clone(
                         this.restaurantDetail.cuisine
                     );
+
+                    this.googleMapUrl = `https://www.google.com/maps/search/?api=1&query=${this.restaurantDetail?.restaurantName},${this.restaurantDetail?.address?.street},${this.restaurantDetail?.address?.city},${this.restaurantDetail?.address?.state},${this.restaurantDetail?.address?.pinCode}&query_place_id=${this.restaurantDetail?.googlePlaceId}`;
                 },
             });
         });

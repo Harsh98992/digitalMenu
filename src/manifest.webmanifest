@@ -1,6 +1,6 @@
 {
-  "name": "digitalMenuApp",
-  "short_name": "digitalMenuApp",
+  "name": "QrSay",
+  "short_name": "QrSay",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

@@ -8,21 +8,25 @@
     <button type="reset" class="btn_1 full-width mb-3 mt-3" (click)="openAddAddressMapDialog()">
         Add a new address
     </button>
-    <label id="example-radio-group-label"> Select a saved address </label>
-    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
-        [(ngModel)]="selectedAddress" (change)="selectAddress()">
-        <ng-container *ngFor="let address of addresses">
-            <div class="address-item">
-                <mat-radio-button class="example-radio-button" [value]="{
-                    address: address.address,
-                    pincode: address.pinCode
-                }" [disabled]="address.disabled">
-                    {{ address.address }} ,{{ address.pinCode }}
-                </mat-radio-button>
-                <button class="pointer" (click)="deleteAddress(address._id)">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-        </ng-container>
-    </mat-radio-group>
+
+    <!-- Check if there are saved addresses before displaying the section -->
+    <ng-container *ngIf="addresses && addresses.length > 0">
+        <label id="example-radio-group-label"> Select a saved address </label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+            [(ngModel)]="selectedAddress" (change)="selectAddress()">
+            <ng-container *ngFor="let address of addresses">
+                <div class="address-item">
+                    <mat-radio-button class="example-radio-button" [value]="{
+                        address: address.address,
+                        pincode: address.pinCode
+                    }" [disabled]="address.disabled">
+                        {{ address.address }} ,{{ address.pinCode }}
+                    </mat-radio-button>
+                    <button class="pointer" (click)="deleteAddress(address._id)">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </ng-container>
+        </mat-radio-group>
+    </ng-container>
 </mat-dialog-content>

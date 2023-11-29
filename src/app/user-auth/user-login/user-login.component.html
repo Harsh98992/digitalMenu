@@ -2,9 +2,9 @@
     <div class="modal-content">
         <div class="modal-header border-bottom-0">
             <button type="button" class="close" aria-label="Close">
-                <span (click)="closeDialog()"
-                    ><i class="fa-solid fa-sm fa-xmark"></i
-                ></span>
+                <span (click)="closeDialog()">
+                    <i class="fa-solid fa-sm fa-xmark"></i>
+                </span>
             </button>
         </div>
         <div class="modal-body">
@@ -12,30 +12,21 @@
                 <h4>Login</h4>
             </div>
 
-            <div class="d-flex justify-content-center social-buttons">
-                <button
-                    type="button"
-                    (click)="openPhoneNumberDialog('whatsApp')"
-                    class="btn btn-outline-success btn-block whatsapp-btn"
-                >
-                    <i class="fa-brands fa-whatsapp"></i>
-                    WhatsApp
-                </button>
-            </div>
-            <div class="d-flex justify-content-center social-buttons">
-                <button
-                    type="button"
-                    (click)="openPhoneNumberDialog('sms')"
-                    class="btn btn-outline-success btn-block whatsapp-btn"
-                >
-                    SMS Login
-                </button>
-            </div>
-            <div class="d-flex justify-content-center social-buttons">
-                <asl-google-signin-button
-                    type="standard"
-                    size="large"
-                ></asl-google-signin-button>
+            <div class="d-flex justify-content-center">
+                <form [formGroup]="phoneNumberForm" (ngSubmit)="submitForm()" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Enter your phone number:</label>
+                        <input type="tel" class="form-control" name="phoneNumber" formControlName="phoneNumber" />
+                        <small *ngIf="checkForError('phoneNumber', 'required')" class="text-danger">
+                            Phone number is required.
+                        </small>
+                        <small *ngIf="checkForError('phoneNumber', 'pattern')" class="text-danger">
+                            Please enter a valid 10-digit phone number.
+                        </small>
+                    </div>
+
+                    <button type="submit" class="btn btn_1 gradient w-100">Submit</button>
+                </form>
             </div>
         </div>
         <br />

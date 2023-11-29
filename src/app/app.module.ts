@@ -20,7 +20,6 @@ import {
     SocialLoginModule,
 } from "@abacritt/angularx-social-login";
 import { UserLoginComponent } from "./user-auth/user-login/user-login.component";
-import { PhoneNumberDialogComponent } from "./user-auth/user-login/phone-number-dialog/phone-number-dialog.component";
 import { PositiveNumberDirective } from "./api/positive-number.directive";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
@@ -33,7 +32,6 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
         ForgotPasswordComponent,
         ResetPasswordComponent,
         UserLoginComponent,
-        PhoneNumberDialogComponent,
         PositiveNumberDirective,
     ],
     imports: [

@@ -6,7 +6,8 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { AuthenticationService } from "src/app/api/authentication.service";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
-import { PhoneNumberDialogComponent } from "./phone-number-dialog/phone-number-dialog.component";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { PhoneOtpComponent } from "src/app/angular-material/phone-otp/phone-otp.component";
 
 @Component({
     selector: "app-user-login",
@@ -18,8 +19,10 @@ export class UserLoginComponent implements OnInit {
         private authService: SocialAuthService,
         private dialogRef: MatDialogRef<any>,
         private customerAuthService: CustomerAuthService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private fb: FormBuilder ,
     ) {}
+    phoneNumberForm: FormGroup;
 
     ngOnInit(): void {
         this.authService.authState.subscribe((user) => {
@@ -37,6 +40,14 @@ export class UserLoginComponent implements OnInit {
                 },
             });
         });
+
+        this.phoneNumberForm = this.fb.group({
+            phoneNumber: [
+                "",
+                [Validators.required, Validators.pattern("^[0-9]{10}$")],
+            ],
+        });
+
     }
 
     signOut(): void {
@@ -45,14 +56,38 @@ export class UserLoginComponent implements OnInit {
     closeDialog() {
         this.dialogRef.close();
     }
-    openPhoneNumberDialog(socialLogin) {
-        let dialogRef = this.dialog.open(PhoneNumberDialogComponent, {
-            disableClose: true,
-            data: {
-                socialLogin: socialLogin,
-            },
 
-            panelClass: "app-full-bleed-dialog",
-        });
+
+
+    submitForm() {
+        this.phoneNumberForm.markAllAsTouched();
+        if (this.phoneNumberForm.valid) {
+            const phoneNumber = this.phoneNumberForm.get("phoneNumber").value;
+            const reqData = {
+                phoneNumber: phoneNumber,
+                verificationType: "login",
+            };
+            this.customerAuthService
+                .sendWhatsappVerificationCode(reqData)
+                .subscribe({
+                    next: (res) => {
+                        this.dialog.open(PhoneOtpComponent, {
+                            disableClose: true,
+                            data: reqData,
+                            panelClass: "app-full-bleed-dialog",
+                        });
+                    },
+                });
+
+            // Do something with the phoneNumber, e.g., send to server or process locally
+        }
+    }
+    checkForError(fieldName: string, errorString: string) {
+        return (
+            this.phoneNumberForm.get(fieldName).errors &&
+            this.phoneNumberForm.get(fieldName).errors[errorString] &&
+            (this.phoneNumberForm.get(fieldName).dirty ||
+                this.phoneNumberForm.get(fieldName).touched)
+        );
     }
 }

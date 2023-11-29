@@ -31,6 +31,8 @@ export class UserPromoCodeDialogComponent implements OnInit {
     promoCodeName: string = "";
 
     ngOnInit(): void {
+        console.log(this.data);
+        
         this.getPromoCodesForRestaurantUrl();
     }
     getPromoCodesForRestaurantUrl() {
@@ -58,7 +60,8 @@ export class UserPromoCodeDialogComponent implements OnInit {
                         this.customerService
                             .checkIfPromoCodeIsValid(
                                 promoCode["codeName"],
-                                this.data.amountToBePaid
+                                this.data.amountToBePaid,
+                                restaurantUrl
                             )
                             .subscribe({
                                 next: (res) => {
@@ -129,9 +132,12 @@ export class UserPromoCodeDialogComponent implements OnInit {
         }
 
         let nowPromoCode = promoCode || this.promoCodeName;
+        let restaurantUrl = window.location.href;
 
+        // // take out yoursPizza from the url http://localhost:4200/restaurant?detail=yoursPizza details=
+        restaurantUrl = restaurantUrl.split("?detail=")[1];
         this.customerService
-            .checkIfPromoCodeIsValid(nowPromoCode, this.data.amountToBePaid)
+            .checkIfPromoCodeIsValid(nowPromoCode, this.data.amountToBePaid,restaurantUrl)
             .subscribe({
                 next: (res) => {
                     console.log(res);

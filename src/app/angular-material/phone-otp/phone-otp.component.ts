@@ -105,14 +105,14 @@ export class PhoneOtpComponent implements OnInit {
                                     this.customerAuthService.setUserDetail(
                                         res.data.userData
                                     );
-                                    this.dialog.closeAll();
+                                    this.dialogRef.close('apiCall');
                                 },
                             });
                     }
 
                     if (this.data.verificationType === "update") {
                         // close this dialog phone-otp
-                        this.dialogRef.close();
+                        this.dialogRef.close('apiCall');
                     }
                 },
             });

@@ -75,7 +75,11 @@ export class UserLoginComponent implements OnInit {
                             disableClose: true,
                             data: reqData,
                             panelClass: "app-full-bleed-dialog",
-                        });
+                        }).afterClosed().subscribe((res)=>{
+                            if(res==="apiCall"){
+                                this.dialogRef.close()
+                            }
+                        })
                     },
                 });
 

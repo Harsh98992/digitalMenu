@@ -129,6 +129,7 @@ export class RestaurantCartComponent implements OnInit {
             orderOption: this.orderOption,
             orderOptionFlag: this.orderOptionFlag,
             userPreference: this.userPreference,
+            cookingInstruction: this.cartHelperComponent.cookingInstruction,
         });
     }
     //this one
@@ -166,6 +167,7 @@ export class RestaurantCartComponent implements OnInit {
     }
     closeCart() {
         this.restaurantService.setCartItem(this.cartItems);
+        this.setCartStateData();
         this.dialogRef.close();
     }
 
@@ -282,8 +284,6 @@ export class RestaurantCartComponent implements OnInit {
                                 this.customerData.email =
                                     response.customerData.email;
                             }
-
-                           
 
                             // update the customer data
                             this.customerService

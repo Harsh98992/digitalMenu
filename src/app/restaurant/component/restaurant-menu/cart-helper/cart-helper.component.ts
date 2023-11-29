@@ -110,6 +110,12 @@ export class CartHelperComponent implements OnInit {
                 this.userPreference = res?.userPreference;
                 this.cookingInstruction = res?.cookingInstruction;
                 this.calculateItemTotal();
+                if(res?.cookingInstruction){
+                    this.showCookingRequestFlag=true
+                }
+                else{
+                    this.showCookingRequestFlag=false
+                }
             },
         });
     }

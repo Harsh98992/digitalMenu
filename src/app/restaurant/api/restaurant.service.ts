@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 export class RestaurantService {
     apiUrl = environment.apiUrl;
     cartItem = new BehaviorSubject([]);
-    cartState = new Subject();
+    cartState = new BehaviorSubject({});
 
     constructor(private http: HttpClient) {}
     getRestaurantData(url: string) {

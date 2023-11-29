@@ -539,9 +539,9 @@ export class RestaurantMenuComponent implements OnInit {
     }
     navigateToSection(menu, index) {
         const section = document.getElementById(menu._id);
+      
+        
         if (section) {
-            console.log(index);
-
             if (index === 0) {
                 section.scrollIntoView({ block: "center" });
             } else {

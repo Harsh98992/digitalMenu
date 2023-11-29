@@ -168,7 +168,7 @@
             </li>
           </ng-container> -->
 
-                    <li class="pointer" (click)="navigateToSection({ _id: 'review' })">
+                    <li class="pointer" (click)="navigateToSection({ _id: 'review' },0)">
                         <a><i class="icon_chat_alt"></i>Reviews</a>
                     </li>
                 </ul>
@@ -319,7 +319,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <app-restaurant-review id="review" [restaurnatData]="restaurantDetail"
+                <app-restaurant-review  [restaurnatData]="restaurantDetail"
                     [reviews]="reviews"></app-restaurant-review>
             </div>
             <div class="col-md-5 pt-3" id="sidebar_fixed">

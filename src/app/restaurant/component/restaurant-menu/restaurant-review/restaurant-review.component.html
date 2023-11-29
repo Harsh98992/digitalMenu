@@ -1,5 +1,5 @@
-<div class="mb-3">
-  <!-- <div
+<div class="mb-3" >
+    <!-- <div
             id="ratings-and-reviews"
             class="bg-white shadow-sm d-flex align-items-center rounded p-3 mb-3 clearfix restaurant-detailed-star-rating"
           >
@@ -15,32 +15,70 @@
               <b class="text-black ml-2">334</b>
             </div>
           </div> -->
+    <div class="bg-white p-3 rating-review-select-page rounded shadow-sm" id="review">
+        <h6 class="mb-3">Leave Comment</h6>
 
-  <div class="bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded">
-    <a class="text-primary float-right top" href="#">Top Rated</a>
-    <h6 class="mb-1" class="google-review">Google Reviews</h6>
-    <div class="reviews-members py-3" *ngFor="let review of reviews">
-      <div class="media">
-        <a><img alt="#" [src]="review['profile_photo_url']" class="mr-3 rounded-pill" /></a>
-        <div class="media-body">
-          <div class="reviews-members-header">
-            <div class="star-rating float-right">
-              <div class="d-inline-block" style="font-size: 14px"></div>
-            </div>
-            <h6 class="mb-0">
-              <a class="text-dark" href="#">{{ review.author_name }}</a>
-            </h6>
-            <small>{{ review.rating }}
-              <i class="fa-regular fa-star" style="color: #ffd700"></i></small>
+        <!-- <div class="form-group">
+                        <label class="form-label small">Your Comment</label
+                        ><textarea class="form-control"></textarea>
+                      </div> -->
+        <div class="form-group mb-0">
+            <a
+                href="https://search.google.com/local/writereview?placeid={{
+                    placeId
+                }}"
+                target="_blank"
+            >
+                <button type="button" class="google-review-button">
+                    Submit Google Review
+                </button>
+            </a>
+        </div>
+    </div>
+    <div
+        class="bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded"
+    >
+        <a class="text-primary float-right top" href="#">Top Rated</a>
+        <h6 class="mb-1" class="google-review">Google Reviews</h6>
+        <div class="reviews-members py-3" *ngFor="let review of reviews">
+            <div class="media">
+                <a
+                    ><img
+                        alt="#"
+                        [src]="review['profile_photo_url']"
+                        class="mr-3 rounded-pill"
+                /></a>
+                <div class="media-body">
+                    <div class="reviews-members-header">
+                        <div class="star-rating float-right">
+                            <div
+                                class="d-inline-block"
+                                style="font-size: 14px"
+                            ></div>
+                        </div>
+                        <h6 class="mb-0">
+                            <a class="text-dark" href="#">{{
+                                review.author_name
+                            }}</a>
+                        </h6>
+                        <small
+                            >{{ review.rating }}
+                            <i
+                                class="fa-regular fa-star"
+                                style="color: #ffd700"
+                            ></i
+                        ></small>
 
-            <p class="text-muted small">{{ review.time * 1000 | date }}</p>
-          </div>
-          <div class="reviews-members-body">
-            <p>
-              {{ review.text }}
-            </p>
-          </div>
-          <!-- <div class="reviews-members-footer">
+                        <p class="text-muted small">
+                            {{ review.time * 1000 | date }}
+                        </p>
+                    </div>
+                    <div class="reviews-members-body">
+                        <p>
+                            {{ review.text }}
+                        </p>
+                    </div>
+                    <!-- <div class="reviews-members-footer">
                     <a
                       class="total-like btn btn-sm btn-outline-primary mr-1"
                       href="#"
@@ -52,28 +90,21 @@
                       ><i class="fa-regular fa-thumbs-down"></i> 158K</a
                     >
                   </div> -->
+                </div>
+            </div>
+            <hr />
         </div>
-      </div>
-      <hr />
+        <a
+            *ngIf="!reviews.length"
+            class="text-center w-100 d-block mt-3 font-weight-bold"
+            >No Review</a
+        >
+        <a
+            *ngIf="reviews.length"
+            href="https://search.google.com/local/reviews?placeid={{ placeId }}"
+            target="_blank"
+            class="text-center w-100 d-block mt-3 font-weight-bold"
+            >See All Google Reviews</a
+        >
     </div>
-    <a *ngIf="!reviews.length" class="text-center w-100 d-block mt-3 font-weight-bold">No Review</a>
-    <a *ngIf="reviews.length" href="https://search.google.com/local/reviews?placeid={{placeId}}" target="_blank"
-      class="text-center w-100 d-block mt-3 font-weight-bold">See All Google Reviews</a>
-  </div>
-  <div class="bg-white p-3 rating-review-select-page rounded shadow-sm">
-    <h6 class="mb-3">Leave Comment</h6>
-   
-
-    <!-- <div class="form-group">
-                <label class="form-label small">Your Comment</label
-                ><textarea class="form-control"></textarea>
-              </div> -->
-    <div class="form-group mb-0">
-      <a href="https://search.google.com/local/writereview?placeid={{placeId}}" target="_blank">
-        <button  type="button" class=" google-review-button ">
-          Submit Google Review
-        </button>
-      </a>
-    </div>
-  </div>
 </div>

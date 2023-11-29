@@ -673,15 +673,15 @@ p {
   border-radius: 0;
 }
 .count-number-input {
-  width: 24px;
+  width: 1.5rem;
   text-align: center;
   margin: 0 -4px;
   background: #6c757d;
   border: none;
   color: #fff;
-  height: 24px;
+  height: 1.5rem;
   border-radius: 0;
-  vertical-align: bottom;
+  vertical-align: middle;
 }
 .non_veg,
 .veg {

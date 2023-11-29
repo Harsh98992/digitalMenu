@@ -69,10 +69,10 @@ export class CustomerService {
         );
     }
 
-    checkIfPromoCodeIsValid(promoCodeName, amountToBePaid) {
+    checkIfPromoCodeIsValid(promoCodeName, amountToBePaid, restaurantUrl) {
         const data = {
             amountToBePaid: amountToBePaid,
-            restaurantUrl: this.restaurantData["restaurantUrl"],
+            restaurantUrl: restaurantUrl,
             promoCodeName: promoCodeName,
         };
         return this.http.post(

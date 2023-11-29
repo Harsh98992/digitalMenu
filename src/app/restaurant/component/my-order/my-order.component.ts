@@ -49,7 +49,6 @@ export class MyOrderComponent implements OnInit {
                         const date2 = new Date(b["orderDate"]) as any;
                         return date2 - date1;
                     });
-                    console.log(orderData);
 
                     this.setOrder(orderData);
                 }

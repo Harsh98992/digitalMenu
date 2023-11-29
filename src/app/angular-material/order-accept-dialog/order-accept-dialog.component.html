@@ -237,7 +237,7 @@
                     <span>Subtotal</span>
                     {{ orderAmount | currency : "INR" : "symbol" : "1.0-0" }}
                 </li>
-                <li>
+                <li *ngIf="deliveryAmount">
                     <span>Delivery Fee</span
                     >{{
                         deliveryAmount | currency : "INR" : "symbol" : "1.0-0"

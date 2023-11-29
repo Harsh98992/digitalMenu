@@ -13,6 +13,7 @@ import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/
     templateUrl: "./address-selection.component.html",
     styleUrls: ["./address-selection.component.scss"],
 })
+
 export class AddressSelectionComponent implements OnInit {
     addresses: any[]; // Array of addresses to be fetched or provided
     selectedAddress: string;
@@ -64,8 +65,6 @@ export class AddressSelectionComponent implements OnInit {
 
                 address.distance = distance; // Add the calculated distance to the address object
                 address.disabled = distance > this.maxDeliveryDistance; // Disable the address if the distance is greater than the maximum delivery distance
-
-                // address.disabled = false;
             }
         }
     }

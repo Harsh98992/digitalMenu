@@ -326,7 +326,7 @@
                 <app-cart-helper #cartHelperComponent [restaurantData]="restaurantDetail"></app-cart-helper>
                 <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3" *ngIf="!showCartItem()">
                     <a class="btn btn-success btn-block btn-lg" (click)="openLoginDialog()" *ngIf="!userLoginFlag">Log
-                        in and place an order.
+                        in and place an order
                     </a>
                     <a class="btn btn-success btn-block btn-lg" (click)="openOrderOptionDialog()"
                         *ngIf="userLoginFlag && !orderOptionFlag">{{ getOrderOptionText() }}</a>

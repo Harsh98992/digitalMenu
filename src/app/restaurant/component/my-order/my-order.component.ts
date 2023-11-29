@@ -44,7 +44,14 @@ export class MyOrderComponent implements OnInit {
         this.orderService.getCustomerOrder().subscribe({
             next: (res: any) => {
                 if (res && res?.data && res.data && res.data?.orderData) {
-                    this.setOrder(res.data.orderData);
+                    const orderData = res.data.orderData.sort((a, b) => {
+                        const date1 = new Date(a["orderDate"]) as any;
+                        const date2 = new Date(b["orderDate"]) as any;
+                        return date2 - date1;
+                    });
+                    console.log(orderData);
+
+                    this.setOrder(orderData);
                 }
             },
         });

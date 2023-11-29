@@ -117,7 +117,11 @@ export class AddItemComponent implements OnInit {
                     }
                 }
             }
-            this.addOnStore = result;
+            this.addOnStore = [];
+            setTimeout(() => {
+                this.addOnStore = [...result];
+            }, 0);
+           
             return result;
         } else if (this.dish?.sizeAvailable?.length === 0) {
             for (const data of this.dish.addOns) {
@@ -127,7 +131,10 @@ export class AddItemComponent implements OnInit {
                     }
                 }
             }
-            this.addOnStore = result;
+            this.addOnStore = [];
+            setTimeout(() => {
+                this.addOnStore = [...result];
+            }, 0);
             return result;
         }
 

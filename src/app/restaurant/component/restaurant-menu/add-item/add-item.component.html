@@ -65,7 +65,7 @@
     <div class="inc button_inc" (click)="changeDishQuantity('inc')">+</div>
     <div class="dec button_inc" (click)="changeDishQuantity('dec')">-</div>
   </div>
-  <mat-vertical-stepper linear #stepper>
+  <mat-vertical-stepper  #stepper>
 
     <mat-step [stepControl]="false" *ngIf="dish.sizeAvailable && dish.sizeAvailable.length > 0" [editable]="isEditable">
       <div class="content">
@@ -108,10 +108,10 @@
         </div>
       </mat-step>
     </div>
-    <div *ngFor="let addOnGroup of getSizeAddOn()">
+    <div *ngFor="let addOnGroup of addOnStore">
       <mat-step [editable]="isEditable">
         <div class="content">
-          <ng-container *ngIf="getSizeAddOn()">
+          <ng-container *ngIf="addOnStore">
             <ng-template matStepLabel>
               <h7>{{ addOnGroup.addOnDisplayName | titlecase }} ({{
                 addOnGroup.addOnMinValue === 0

@@ -118,7 +118,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
     toggleSideBar() {
         this.showSideBarFlag = !this.showSideBarFlag;
     }
-
+    hideSideBar(){
+        this.showSideBarFlag=true
+    }
     openOrderDialog() {
         let dialogRef = this.dialog.open(OrderDialogComponent, {
             disableClose: true,

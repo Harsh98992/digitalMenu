@@ -77,3 +77,26 @@
 a {
     color: black;
 }
+@media only screen and (max-width: 767px) {
+    /* Styles for mobile screens */
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        /* Optional: Add some styling like background color or opacity to make it visually appealing */
+        background-color: rgba(
+            0,
+            0,
+            0,
+            0.5
+        ); /* Semi-transparent black background */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+    /* Add styles specific to mobile screens here */
+  }
+

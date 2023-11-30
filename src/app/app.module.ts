@@ -62,12 +62,12 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
             useValue: {
                 autoLogin: false,
                 providers: [
-                    {
-                        id: GoogleLoginProvider.PROVIDER_ID,
-                        provider: new GoogleLoginProvider(
-                            "503347741402-6md4jq747sncq0i21goufb0uc39m351k.apps.googleusercontent.com"
-                        ),
-                    },
+                    // {
+                    //     id: GoogleLoginProvider.PROVIDER_ID,
+                    //     provider: new GoogleLoginProvider(
+                    //         "503347741402-6md4jq747sncq0i21goufb0uc39m351k.apps.googleusercontent.com"
+                    //     ),
+                    // },
                 ],
             } as SocialAuthServiceConfig,
         },

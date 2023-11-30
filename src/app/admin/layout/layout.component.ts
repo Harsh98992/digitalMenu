@@ -41,6 +41,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.restaurantService.setRestaurantData();
         this.getRestaurantDetail();
+        // this.restaurantService.callStatusApi();
 
         this.socket.on("connect", () => {
             console.log("connected");

@@ -15,7 +15,13 @@ export class OrderRecievedDialogComponent implements OnInit {
 
     ngOnInit(): void {}
     navigateToDashboard() {
-        this.router.navigateByUrl("/admin");
+        // this.router.navigateByUrl("/admin");
+
+        //  go to /admin but reload the page
+        window.location.href = "/admin";
+
+        // close the dialog
+
         this.dialogRef.close();
     }
 }

@@ -10,6 +10,7 @@ import { UtilService } from "src/app/api/util.service";
     styleUrls: ["./time-selector-dialog.component.scss"],
 })
 export class TimeSelectorDialogComponent implements OnInit {
+    selectedValue="ASAP"
     ctrl = new FormControl<NgbTimeStruct | null>(
         null,
         (control: FormControl<NgbTimeStruct | null>) => {
@@ -55,7 +56,12 @@ export class TimeSelectorDialogComponent implements OnInit {
         });
     }
     submitTime() {
-        if (!this.ctrl.valid) {
+        if(this.selectedValue==="ASAP"){
+            this.dialogRef.close({
+                selectedTime: `As soon as possible`,
+            });
+        }
+        else if (!this.ctrl.valid) {
             if (this.ctrl.hasError("earlyTime")) {
                 this.utilService.openSnackBar(
                     "Please choose a longer time.",

@@ -40,9 +40,10 @@ export class RestaurantPanelService {
                 // Check if it's not already playing
                 this.audio.muted = false;
                 this.isPlaying = true;
-
+                
                 this.audio.play().catch((err) => {
                     console.log(err);
+                    
                     
                     this.showOrderPopUp();
                 });

@@ -16,7 +16,7 @@ import { environment } from "src/environments/environment";
     styleUrls: ["./layout.component.scss"],
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-    showSideBarFlag = false;
+    showSideBarFlag = true;
     verifiedAccountFlag = false;
     selectedStatus = "online";
     adminRouteFlag = false;

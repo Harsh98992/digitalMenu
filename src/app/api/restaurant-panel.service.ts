@@ -41,7 +41,9 @@ export class RestaurantPanelService {
                 this.audio.muted = false;
                 this.isPlaying = true;
 
-                this.audio.play().catch(() => {
+                this.audio.play().catch((err) => {
+                    console.log(err);
+                    
                     this.showOrderPopUp();
                 });
 

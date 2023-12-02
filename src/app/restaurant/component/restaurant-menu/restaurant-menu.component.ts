@@ -539,8 +539,8 @@ export class RestaurantMenuComponent implements OnInit {
     }
     navigateToSection(menu, index) {
         const section = document.getElementById(menu._id);
-      
-        
+
+
         if (section) {
             if (index === 0) {
                 section.scrollIntoView({ block: "center" });
@@ -701,25 +701,17 @@ export class RestaurantMenuComponent implements OnInit {
             temp["categoryName"] = cuisine.categoryName;
             temp["_id"] = cuisine._id;
             temp["items"] = [];
+
             for (let dish of cuisine["items"]) {
                 if (
-                    filterValue === "all" &&
-                    dish.dishName.toLowerCase().includes(searchText)
-                ) {
-                    result.push(dish);
-                } else if (
-                    filterValue === "spicy" &&
-                    dish.chilliFlag &&
-                    dish.dishName.toLowerCase().includes(searchText)
-                ) {
-                    result.push(dish);
-                } else if (
-                    dish.dishType === filterValue &&
-                    dish.dishName.toLowerCase().includes(searchText)
+                    (filterValue === "all" || dish.dishType === filterValue) &&
+                    dish.dishName.toLowerCase().includes(searchText) &&
+                    dish.orderOption !== "none"  // Exclude dishes with order option set to "none"
                 ) {
                     result.push(dish);
                 }
             }
+
             temp["items"] = result;
             final.push(temp);
             result = [];
@@ -727,6 +719,7 @@ export class RestaurantMenuComponent implements OnInit {
 
         this.restaurantMenu = final;
     }
+
     searchDishes(event: any, foodSelect: any) {
         const searchText = event.target.value.toLowerCase();
 

@@ -17,8 +17,15 @@
     margin-bottom: 20px;
 }
 
+
 .form-label {
     font-weight: bold;
+
+    /* Style for the required star */
+    .required-star {
+        color: red; /* You can change the color as needed */
+        margin-left: 2px; /* Adjust the spacing between the label and the star */
+    }
 }
 
 .form-input {

@@ -2,7 +2,7 @@
     <h2 class="dialog-title">Add Missing Customer Information</h2>
     <form [formGroup]="customerForm" (submit)="submitForm()">
         <div class="form-group" *ngIf="!customerData.name">
-            <label for="name" class="form-label">Name:</label>
+            <label for="name" class="form-label">Name<span class="required-star">*</span>:</label>
             <input type="text" id="name" formControlName="name" class="form-input">
             <div *ngIf="checkInvalid('name')" class="error-message">Name is required.</div>
         </div>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="form-group" *ngIf="!customerData.phoneNumber">
-            <label for="phoneNumber" class="form-label">Phone Number:</label>
+            <label for="phoneNumber" class="form-label">Phone Number<span class="required-star">*</span>:</label>
             <input type="tel" id="phoneNumber" formControlName="phoneNumber" class="form-input">
             <div *ngIf="checkInvalid('phoneNumber')" class="error-message">
                 <ng-container *ngIf="customerForm.get('phoneNumber').hasError('required')">Phone Number is

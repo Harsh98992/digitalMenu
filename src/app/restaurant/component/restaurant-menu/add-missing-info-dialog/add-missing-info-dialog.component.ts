@@ -30,7 +30,7 @@ export class AddMissingInfoDialogComponent implements OnInit {
                 this.customerData.email || "",
                 this.customerData.email
                     ? []
-                    : [Validators.required, Validators.email],
+                    : [ Validators.email],
             ],
             phoneNumber: [
                 this.customerData.phoneNumber || "",

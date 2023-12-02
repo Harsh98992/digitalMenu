@@ -725,4 +725,13 @@ export class RestaurantMenuComponent implements OnInit {
 
         this.filterRestaurantMenu(foodSelect, searchText);
     }
+
+    formatTime(timeObj: { hour: number; minute: number; second: number }): string {
+        const { hour, minute, second } = timeObj;
+        const formattedHour = hour % 12 || 12; // Convert 0 to 12
+        const meridian = hour >= 12 ? 'PM' : 'AM';
+        return `${formattedHour}:${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second} ${meridian}`;
+      }
+
+
 }

@@ -74,6 +74,20 @@
                                     target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"
                                         style="cursor: pointer; color: #c4302b"></i></a>
                             </div>
+                            <!-- Inside the existing structure, add the following code -->
+                            <!-- <div class="opening-closing-times">
+                                <p>Opening Time: {{ formatTime(restaurantDetail.openTime) }}</p>
+                                <p>Closing Time: {{ formatTime(restaurantDetail.closeTime) }}</p>
+                            </div> -->
+
+                            <div class="gst-number">
+                                <span>Opeing Time :-
+                                    {{ formatTime(restaurantDetail.openTime) }}</span>
+
+                                <span>Closing Time :-
+                                    {{ formatTime(restaurantDetail.closeTime) }}</span>
+                            </div>
+
 
                             <div class="gst-number">
                                 <span>GST Number :-
@@ -138,7 +152,7 @@
                         <select class="food-type-select pointer" #foodSelect
                             (change)="changeDishType($event, searchbox.value)">
                             <option value="all">
-                                Veg/Non-Veg  <i class="icon_chat_alt"></i>
+                                Veg/Non-Veg <i class="icon_chat_alt"></i>
                             </option>
                             <option value="veg">Veg</option>
                             <option value="nonVeg">Non Veg</option>
@@ -319,8 +333,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <app-restaurant-review  [restaurnatData]="restaurantDetail"
-                    [reviews]="reviews"></app-restaurant-review>
+                <app-restaurant-review [restaurnatData]="restaurantDetail" [reviews]="reviews"></app-restaurant-review>
             </div>
             <div class="col-md-5 pt-3" id="sidebar_fixed">
                 <app-cart-helper #cartHelperComponent [restaurantData]="restaurantDetail"></app-cart-helper>

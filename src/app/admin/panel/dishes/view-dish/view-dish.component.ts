@@ -71,22 +71,36 @@ export class ViewDishComponent implements OnInit {
             queryParams: { edit: true },
         });
     }
-    getAllDishes(cuisine) {
-        const result = [];
-        if (cuisine) {
-            for (let dish of cuisine) {
-                if (dish["items"] && dish["items"].length) {
-                    console.log(dish["items"]);
-                    const newArray = dish["items"].map((obj) => ({
-                        ...obj,
-                        categoryId: dish["_id"],
-                    }));
-                    result.push(...newArray);
-                }
+// Inside your ViewDishComponent class in view-dish.component.ts
+
+// ...
+
+getAllDishes(cuisine) {
+    const result = [];
+
+    // Create a mapping between categoryId and category value
+    const categoryMap = {};
+    if (cuisine) {
+        for (let dish of cuisine) {
+            categoryMap[dish["_id"]] = dish["categoryName"]; // Assuming categoryName is the property holding the category value
+            if (dish["items"] && dish["items"].length) {
+                console.log(dish["items"]);
+                const newArray = dish["items"].map((obj) => ({
+                    ...obj,
+                    categoryId: dish["_id"],
+                }));
+                result.push(...newArray);
             }
         }
-        return result;
     }
+
+    // Sort the result array by category value
+    result.sort((a, b) => (categoryMap[a.categoryId] > categoryMap[b.categoryId] ? 1 : -1));
+
+    return result;
+}
+
+// ...
     deleteDish(row: any) {
         const dialogData = {
             title: "Confirm",

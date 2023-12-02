@@ -65,4 +65,8 @@ export class CancelDialogComponent implements OnInit {
             },
         });
     }
+
+    back() {
+        this.dialogRef.close({ successFlag: false });
+    }
 }

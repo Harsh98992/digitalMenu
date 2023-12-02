@@ -1,26 +1,21 @@
 <div class="small-dialog-header">
     <h3>Select desired time</h3>
-    <a mat-dialog-close class="close_panel_mobile"
-        ><span class="icon_close_alt"></span
-    ></a>
+    <a mat-dialog-close class="close_panel_mobile"><span class="icon_close_alt"></span></a>
 </div>
 <mat-dialog-content>
     <div class="row d-flex justify-content-center">
         <div class="my-3">
             <div class="row">
-            <div class="col-12">
-            <label class="form-label required"> Desired Time</label>
-            <select class="custom-select" [(ngModel)]="selectedValue">
-                <option value="ASAP">As soon as possible</option>
-                <option value="Custom">Custom</option>
-            </select>
-        </div>
-        </div>
+                <div class="col-12">
+                    <label class="form-label required"> Desired Time</label>
+                    <select class="custom-select" [(ngModel)]="selectedValue">
+                        <option value="ASAP">ASAP</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </div>
+            </div>
             <div class="align-center mt-2">
-                <ngb-timepicker
-                    [formControl]="ctrl"
-                    *ngIf="selectedValue === 'Custom'"
-                ></ngb-timepicker>
+                <ngb-timepicker [formControl]="ctrl" *ngIf="selectedValue === 'Custom'"></ngb-timepicker>
             </div>
         </div>
     </div>
@@ -29,11 +24,7 @@
     <div class="footer">
         <div class="row">
             <div class="col-md-12">
-                <button
-                    type="reset"
-                    class="btn_1 full-width"
-                    (click)="submitTime()"
-                >
+                <button type="reset" class="btn_1 full-width" (click)="submitTime()">
                     Submit
                 </button>
             </div>

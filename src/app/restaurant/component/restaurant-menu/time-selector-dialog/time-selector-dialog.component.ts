@@ -58,7 +58,7 @@ export class TimeSelectorDialogComponent implements OnInit {
     submitTime() {
         if(this.selectedValue==="ASAP"){
             this.dialogRef.close({
-                selectedTime: `As soon as possible`,
+                selectedTime: `ASAP`,
             });
         }
         else if (!this.ctrl.valid) {

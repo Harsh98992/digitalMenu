@@ -3,6 +3,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { OrderAcceptDialogComponent } from "src/app/angular-material/order-accept-dialog/order-accept-dialog.component";
 import { OrderService } from "src/app/api/order.service";
 import { RestaurantContactPopupComponent } from "../restaurant-menu/restaurant-contact-popup/restaurant-contact-popup.component";
+import { Observable, interval } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: "app-my-order",
@@ -29,13 +31,37 @@ export class MyOrderComponent implements OnInit {
             value: "Canceled",
         },
     ];
+    private refreshInterval$ = new Observable<number>();
+
     constructor(
         private orderService: OrderService,
         private dialog: MatDialog
-    ) {}
+    ) {
+        // Set up the auto-refresh interval (every 30 seconds)
+        this.refreshInterval$ = interval(30000);
+    }
+
 
     ngOnInit(): void {
-        this.getCustomerOrders();
+        // Combine auto-refresh with the existing order retrieval logic
+        this.refreshInterval$
+            .pipe(
+                startWith(0), // To trigger the first fetch immediately
+                switchMap(() => this.orderService.getCustomerOrder())
+            )
+            .subscribe({
+                next: (res: any) => {
+                    if (res && res?.data && res.data && res.data?.orderData) {
+                        const orderData = res.data.orderData.sort((a, b) => {
+                            const date1 = new Date(a['orderDate']) as any;
+                            const date2 = new Date(b['orderDate']) as any;
+                            return date2 - date1;
+                        });
+
+                        this.setOrder(orderData);
+                    }
+                },
+            });
     }
     changeStatus(tab) {
         this.selectedTab = tab.key;

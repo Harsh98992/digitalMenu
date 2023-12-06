@@ -67,7 +67,7 @@ export class HomepageComponent implements OnInit {
                     .includes(query.toLowerCase());
             });
         } else {
-            this.autocompleteResults = this.searchResults;
+            // this.autocompleteResults = this.searchResults;
         }
     }
 

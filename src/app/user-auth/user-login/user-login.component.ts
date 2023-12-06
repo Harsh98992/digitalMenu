@@ -8,6 +8,8 @@ import { AuthenticationService } from "src/app/api/authentication.service";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PhoneOtpComponent } from "src/app/angular-material/phone-otp/phone-otp.component";
+import { CustomerNameDialogComponent } from "src/app/angular-material/customer-name-dialog/customer-name-dialog.component";
+import { CustomerService } from "src/app/api/customer.service";
 
 @Component({
     selector: "app-user-login",
@@ -21,8 +23,10 @@ export class UserLoginComponent implements OnInit {
         private customerAuthService: CustomerAuthService,
         private dialog: MatDialog,
         private fb: FormBuilder ,
+        private customerService: CustomerService
     ) {}
     phoneNumberForm: FormGroup;
+    customerData: any;
 
     ngOnInit(): void {
         this.authService.authState.subscribe((user) => {
@@ -57,8 +61,6 @@ export class UserLoginComponent implements OnInit {
         this.dialogRef.close();
     }
 
-
-
     submitForm() {
         this.phoneNumberForm.markAllAsTouched();
         if (this.phoneNumberForm.valid) {
@@ -77,13 +79,59 @@ export class UserLoginComponent implements OnInit {
                             panelClass: "app-full-bleed-dialog",
                         }).afterClosed().subscribe((res)=>{
                             if(res==="apiCall"){
-                                this.dialogRef.close()
+                                this.dialogRef.close();
+                                // // Open the dialog to ask for the customer's name
+                                // const dialogRef = this.dialog.open(CustomerNameDialogComponent);
+
+                                // // After the dialog is closed, get the customer's name from the result
+                                // dialogRef.afterClosed().subscribe(result => {
+                                //     if (result) {
+                                //         // Save the customer's name
+                                //         this.customerService.updateCustomerData
+                                //         ({name: result}).subscribe({
+                                //             next: (res) => {
+                                //                 console.log(res);
+                                //             }
+                                //         });
+                                //     }
+                                // });
+
+                                // check if the customer's name is already saved
+                                this.customerService.getCustomer().subscribe({
+                                    next: (res: any) => {
+
+                                        console.log("the customer data is", res.data);
+
+                                        this.customerData = res.data.customer;
+                                        
+                                        if (res.data.customer.name) {
+                                            // The customer's name is already saved
+                                            this.dialogRef.close();
+                                        } else {
+                                            // Open the dialog to ask for the customer's name
+                                            const dialogRef = this.dialog.open(CustomerNameDialogComponent);
+
+                                            // After the dialog is closed, get the customer's name from the result
+                                            dialogRef.afterClosed().subscribe(result => {
+                                                if (result) {
+                                                    // Save the customer's name
+                                                    this.customerService.updateCustomerData
+                                                    ({name: result}).subscribe({
+                                                        next: (res) => {
+                                                            console.log(res);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    },
+                                })
+
+
                             }
                         })
                     },
                 });
-
-            // Do something with the phoneNumber, e.g., send to server or process locally
         }
     }
     checkForError(fieldName: string, errorString: string) {

@@ -1,0 +1,64 @@
+/* customer-name-dialog.component.scss */
+.custom-popup {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+
+    .header {
+      margin-bottom: 20px;
+
+      h2 {
+        font-size: 28px;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      p {
+        font-size: 16px;
+        color: #555;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .form-group {
+        margin-bottom: 16px;
+
+        label {
+          font-size: 16px;
+          margin-bottom: 8px;
+          color: #333;
+        }
+
+        input {
+          width: 100%;
+          padding: 10px;
+          font-size: 14px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          transition: border-color 0.3s;
+
+          &:focus {
+            outline: none;
+            border-color: #4caf50;
+          }
+        }
+
+        .error-message {
+          color: #d9534f;
+          font-size: 12px;
+          margin-top: 5px;
+        }
+      }
+
+      .buttons {
+        button {
+          font-size: 16px;
+        }
+      }
+    }
+  }

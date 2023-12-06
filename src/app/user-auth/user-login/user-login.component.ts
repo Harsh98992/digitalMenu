@@ -28,6 +28,10 @@ export class UserLoginComponent implements OnInit {
     phoneNumberForm: FormGroup;
     customerData: any;
 
+    customerName: any;
+
+    customerEmail: any;
+
     ngOnInit(): void {
         this.authService.authState.subscribe((user) => {
             user["socialLogin"] = true;
@@ -69,6 +73,8 @@ export class UserLoginComponent implements OnInit {
                 phoneNumber: phoneNumber,
                 verificationType: "login",
             };
+
+
             this.customerAuthService
                 .sendWhatsappVerificationCode(reqData)
                 .subscribe({
@@ -103,7 +109,15 @@ export class UserLoginComponent implements OnInit {
                                         console.log("the customer data is", res.data);
 
                                         this.customerData = res.data.customer;
-                                        
+
+
+                                        // make a customer email from the phone number if it is not already saved and phone number is saved
+
+                                        if (!this.customerData.email && this.customerData.phoneNumber) {
+                                            this.customerEmail = this.customerData.phoneNumber + "@qrsay.com";
+
+                                        }
+
                                         if (res.data.customer.name) {
                                             // The customer's name is already saved
                                             this.dialogRef.close();
@@ -114,13 +128,26 @@ export class UserLoginComponent implements OnInit {
                                             // After the dialog is closed, get the customer's name from the result
                                             dialogRef.afterClosed().subscribe(result => {
                                                 if (result) {
-                                                    // Save the customer's name
+                                                    // Save the customer's nam\\
+
+                                                    if(this.customerData.email){
                                                     this.customerService.updateCustomerData
-                                                    ({name: result}).subscribe({
+                                                    ({name: result,
+                                                    email : }).subscribe({
                                                         next: (res) => {
                                                             console.log(res);
                                                         }
                                                     });
+                                                }
+                                                else{
+                                                    this.customerService.updateCustomerData
+                                                    ({name: result,
+                                                    email : this.customerEmail}).subscribe({
+                                                        next: (res) => {
+                                                            console.log(res);
+                                                        }
+                                                    });
+                                                }
                                                 }
                                             });
                                         }

@@ -113,6 +113,16 @@ ng-select.ng-invalid .ng-select-container {
     display: none;
 }
 
-.mat-dialog-container  {
+.mat-dialog-container {
+    overflow: scroll !important;
+}
+.mat-tab-header {
+    overflow-x: scroll !important;
+}
+
+.mat-tab-label-container {
     overflow: visible !important;
 }
+.mat-tab-header::-webkit-scrollbar {
+    display: none;
+  }

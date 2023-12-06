@@ -18,7 +18,7 @@ export class AddCompleteAddressComponent {
         this.addressForm = this.formBuilder.group({
             completeAddress: ["", Validators.required],
             pinCode: ["", Validators.required],
-            phoneNumber: ["", [Validators.pattern("[0-9]{10}"),Validators.required]],
+            phoneNumber: ["", [Validators.pattern("[0-9]{10}")]],
             landmark: [""],
             googleLocationAddress: [""],
         });

@@ -113,7 +113,15 @@ export class AddressSelectionComponent implements OnInit {
                         // Successfully saved the address
                         console.log("Address saved:", response);
 
+
+
                         this.getRestaurantDetailsFromRestaurantUrl();
+
+
+                        // auto select the address after adding
+                        this.selectedAddress = response["data"]["address"]["_id"];
+
+                        this.selectAddress();
                     },
                     (error) => {
                         // Handle error if saving address fails
@@ -152,6 +160,8 @@ export class AddressSelectionComponent implements OnInit {
                     (response) => {
                         // Successfully updated the address
                         console.log("Address updated:", response);
+
+                        //
 
                         this.getRestaurantDetailsFromRestaurantUrl();
                     },

@@ -78,7 +78,7 @@
             <label class="container_radio">{{ item.size | titlecase }}
               <small *ngIf="item.sizeDescription">( {{ item.sizeDescription }} )</small><span>
                 {{ item.price | currency : "INR" : "symbol" : "1.0-0" }}</span>
-              <input type="radio" (click)="pickedSize(item)" [checked]="item.defaultSize" name="options_1" />
+              <input type="radio" (click)="pickedSize(item)" name="options_1" />
               <span class="checkmark"></span>
             </label>
           </li>

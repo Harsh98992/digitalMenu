@@ -189,124 +189,124 @@ export class RestaurantCartComponent implements OnInit {
 
         console.log("Customer Data: ", this.customerData);
 
-        // check if the customer data is complete or not by checking the name, email and phone number
-        if (
-            !this.customerData.name ||
-            !this.customerData.email ||
-            !this.customerData.phoneNumber
-        ) {
-            let AddMissingInfoDialogComponentRef = this.dialog.open(
-                AddMissingInfoDialogComponent,
+        // // check if the customer data is complete or not by checking the name, email and phone number
+        // if (
+        //     !this.customerData.name ||
+        //     !this.customerData.email ||
+        //     !this.customerData.phoneNumber
+        // ) {
+        //     let AddMissingInfoDialogComponentRef = this.dialog.open(
+        //         AddMissingInfoDialogComponent,
 
-                {
-                    disableClose: true,
-                    panelClass: "app-full-bleed-dialog",
-                    data: this.customerData,
-                }
-            );
-            AddMissingInfoDialogComponentRef.afterClosed().subscribe(
-                (response) => {
-                    if (response.customerData) {
-                        if (!this.customerData.phoneNumber) {
-                            // open the dialog to have the phone number otp verification
+        //         {
+        //             disableClose: true,
+        //             panelClass: "app-full-bleed-dialog",
+        //             data: this.customerData,
+        //         }
+        //     );
+        //     AddMissingInfoDialogComponentRef.afterClosed().subscribe(
+        //         (response) => {
+        //             if (response.customerData) {
+        //                 if (!this.customerData.phoneNumber) {
+        //                     // open the dialog to have the phone number otp verification
 
-                            console.log(
-                                "Customer Form: ",
-                                response.customerData
-                            );
+        //                     console.log(
+        //                         "Customer Form: ",
+        //                         response.customerData
+        //                     );
 
-                            const phoneNumber =
-                                response.customerData.phoneNumber;
-                            const reqData = {
-                                phoneNumber: phoneNumber,
-                                socialLogin: "sms",
-                                verificationType: "update",
-                            };
-                            this.customerAuthService
-                                .sendWhatsappVerificationCode(reqData)
-                                .subscribe({
-                                    next: (res) => {
-                                        let PhoneOtpComponentDialogRef =
-                                            this.dialog.open(
-                                                PhoneOtpComponent,
-                                                {
-                                                    disableClose: true,
-                                                    data: reqData,
-                                                    panelClass:
-                                                        "app-full-bleed-dialog",
-                                                }
-                                            );
+        //                     const phoneNumber =
+        //                         response.customerData.phoneNumber;
+        //                     const reqData = {
+        //                         phoneNumber: phoneNumber,
+        //                         socialLogin: "sms",
+        //                         verificationType: "update",
+        //                     };
+        //                     this.customerAuthService
+        //                         .sendWhatsappVerificationCode(reqData)
+        //                         .subscribe({
+        //                             next: (res) => {
+        //                                 let PhoneOtpComponentDialogRef =
+        //                                     this.dialog.open(
+        //                                         PhoneOtpComponent,
+        //                                         {
+        //                                             disableClose: true,
+        //                                             data: reqData,
+        //                                             panelClass:
+        //                                                 "app-full-bleed-dialog",
+        //                                         }
+        //                                     );
 
-                                        PhoneOtpComponentDialogRef.afterClosed().subscribe(
-                                            (res) => {
-                                                this.customerData.phoneNumber =
-                                                    response.customerData.phoneNumber;
+        //                                 PhoneOtpComponentDialogRef.afterClosed().subscribe(
+        //                                     (res) => {
+        //                                         this.customerData.phoneNumber =
+        //                                             response.customerData.phoneNumber;
 
-                                                if (!this.customerData.name) {
-                                                    this.customerData.name =
-                                                        response.customerData.name;
-                                                }
+        //                                         if (!this.customerData.name) {
+        //                                             this.customerData.name =
+        //                                                 response.customerData.name;
+        //                                         }
 
-                                                if (!this.customerData.email) {
-                                                    this.customerData.email =
-                                                        response.customerData.email;
-                                                }
+        //                                         if (!this.customerData.email) {
+        //                                             this.customerData.email =
+        //                                                 response.customerData.email;
+        //                                         }
 
-                                                // update the customer data
-                                                this.customerService
-                                                    .updateCustomerData(
-                                                        this.customerData
-                                                    )
-                                                    .subscribe({
-                                                        next: (res) => {
-                                                            console.log(
-                                                                "Customer data updated successfully"
-                                                            );
-                                                            this.customerAuthService.setUserDetail(
-                                                                this
-                                                                    .customerData
-                                                            );
+        //                                         // update the customer data
+        //                                         this.customerService
+        //                                             .updateCustomerData(
+        //                                                 this.customerData
+        //                                             )
+        //                                             .subscribe({
+        //                                                 next: (res) => {
+        //                                                     console.log(
+        //                                                         "Customer data updated successfully"
+        //                                                     );
+        //                                                     this.customerAuthService.setUserDetail(
+        //                                                         this
+        //                                                             .customerData
+        //                                                     );
 
-                                                            this.cartHelperComponent.placeOrder();
-                                                        },
-                                                    });
-                                            }
-                                        );
-                                    },
-                                });
-                        } else {
-                            if (!this.customerData.name) {
-                                this.customerData.name =
-                                    response.customerData.name;
-                            }
+        //                                                     this.cartHelperComponent.placeOrder();
+        //                                                 },
+        //                                             });
+        //                                     }
+        //                                 );
+        //                             },
+        //                         });
+        //                 } else {
+        //                     if (!this.customerData.name) {
+        //                         this.customerData.name =
+        //                             response.customerData.name;
+        //                     }
 
-                            if (!this.customerData.email) {
-                                this.customerData.email =
-                                    response.customerData.email;
-                            }
+        //                     if (!this.customerData.email) {
+        //                         this.customerData.email =
+        //                             response.customerData.email;
+        //                     }
 
-                            // update the customer data
-                            this.customerService
-                                .updateCustomerData(response.customerData)
-                                .subscribe({
-                                    next: (res) => {
-                                        console.log(
-                                            "Customer data updated successfully"
-                                        );
-                                        this.customerAuthService.setUserDetail(
-                                            this.customerData
-                                        );
+        //                     // update the customer data
+        //                     this.customerService
+        //                         .updateCustomerData(response.customerData)
+        //                         .subscribe({
+        //                             next: (res) => {
+        //                                 console.log(
+        //                                     "Customer data updated successfully"
+        //                                 );
+        //                                 this.customerAuthService.setUserDetail(
+        //                                     this.customerData
+        //                                 );
 
-                                        this.cartHelperComponent.placeOrder();
-                                    },
-                                });
-                        }
-                    }
-                }
-            );
+        //                                 this.cartHelperComponent.placeOrder();
+        //                             },
+        //                         });
+        //                 }
+        //             }
+        //         }
+        //     );
 
-            return;
-        }
+        //     return;
+        // }
 
         this.cartHelperComponent.placeOrder();
     }

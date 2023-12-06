@@ -121,7 +121,7 @@ export class AddItemComponent implements OnInit {
             setTimeout(() => {
                 this.addOnStore = [...result];
             }, 0);
-           
+
             return result;
         } else if (this.dish?.sizeAvailable?.length === 0) {
             for (const data of this.dish.addOns) {
@@ -145,10 +145,9 @@ export class AddItemComponent implements OnInit {
         this.itemPrice = item.price;
         this.extraSelected = [];
         this.getSizeAddOn();
-        // setTimeout(() => {
-        //   this.myStepper.next();
-        // });
+
         this.changePrice();
+        this.myStepper.next();
     }
     pickedChoices(item: any, choicesGroup: any, event: any) {
         const elementIdx = this.dishChoicesSelected.findIndex((data) => {
@@ -193,6 +192,7 @@ export class AddItemComponent implements OnInit {
                 this.dishChoicesSelected.splice(elementIdx, 1);
             }
         }
+
     }
     pickIngredents(item: any, addOnGroup: any, event: any) {
         const elementIdx = this.extraSelected.findIndex((data) => {
@@ -375,5 +375,15 @@ export class AddItemComponent implements OnInit {
         return str.toLowerCase().replace(/(?:^|\s)\w/g, function (match) {
             return match.toUpperCase();
         });
+    }
+
+    onSizeSelect() {
+        this.myStepper.next();
+    }
+    onChoiceSelect() {
+        this.myStepper.next();
+    }
+    onExtraSelect() {
+        this.myStepper.next();
     }
 }

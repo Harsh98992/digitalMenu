@@ -132,8 +132,7 @@ export class UserLoginComponent implements OnInit {
 
                                                     if(this.customerData.email){
                                                     this.customerService.updateCustomerData
-                                                    ({name: result,
-                                                    email : }).subscribe({
+                                                    ({name: result }).subscribe({
                                                         next: (res) => {
                                                             console.log(res);
                                                         }

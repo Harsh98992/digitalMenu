@@ -175,3 +175,4 @@ dist
 .pnp.*
 src/python/gen.py
 python/gen.py
+.firebaserc

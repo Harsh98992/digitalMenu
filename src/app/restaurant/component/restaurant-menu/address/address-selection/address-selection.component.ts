@@ -111,15 +111,15 @@ export class AddressSelectionComponent implements OnInit {
                 this.customerService.addCustomerAddress(data).subscribe(
                     (response) => {
                         // Successfully saved the address
-                        console.log("Address saved:", response);
+                        console.log("Address saved successfully the response is:", response);
 
 
-
-                        this.getRestaurantDetailsFromRestaurantUrl();
-
+                        // this.getRestaurantDetailsFromRestaurantUrl();
 
                         // auto select the address after adding
-                        this.selectedAddress = response["data"]["address"]["_id"];
+                        this.selectedAddress = response["data"]["address"];
+
+                        console.log("Selected Address: ", this.selectedAddress);
 
                         this.selectAddress();
                     },

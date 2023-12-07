@@ -4,59 +4,7 @@
 </div>
 
 <mat-dialog-content>
-  <!-- <div class="content">
-    <h5>Quantity</h5>
-    <div class="numbers-row">
-      <input
-        type="text"
-        [(ngModel)]="dishQuantitiy"
-        min="1"
-        max="30"
-        id="qty_1"
-        class="qty2 form-control"
-        name="quantity"
-        readonly
-      />
-      <div class="inc button_inc" (click)="changeDishQuantity('inc')">+</div>
-      <div class="dec button_inc" (click)="changeDishQuantity('dec')">-</div>
-    </div>
-    <ng-container *ngIf="dish.sizeAvailable && dish.sizeAvailable.length > 0">
-      <h5>Size</h5>
-      <ul class="clearfix">
-        <li *ngFor="let item of dish.sizeAvailable">
-          <label class="container_radio"
-            >{{ item.size | titlecase }} <small>( {{ item.sizeDescription }} )</small><span
-              >+ {{ item.price | currency : "INR" : "symbol" : "1.0-0" }}</span
-            >
-            <input
-              type="radio"
-              (click)="pickedSize(item)"
-              value="option1"
-              name="options_1"
-            />
-            <span class="checkmark"></span>
-          </label>
-        </li>
-      </ul>
-    </ng-container>
-    <ng-container
-      *ngIf="dish.addOns && dish.addOns.length > 0"
-    >
-      <h5>Add Ons</h5>
-      <ul class="clearfix">
-        <li *ngFor="let item of dish.addOns">
-          <label class="container_check"
-            >{{ getAddOnName(item.name) | titlecase
-            }}<span>{{
-              item.price | currency : "INR" : "symbol" : "1.0-0"
-            }}</span>
-            <input type="checkbox" (click)="pickIngredents(item, $event)" />
-            <span class="checkmark"></span>
-          </label>
-        </li>
-      </ul>
-    </ng-container>
-  </div> -->
+
 
   <h5>Quantity</h5>
   <div class="numbers-row">

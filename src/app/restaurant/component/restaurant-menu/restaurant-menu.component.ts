@@ -53,6 +53,16 @@ export class RestaurantMenuComponent implements OnInit {
     googleMapUrl = "";
 
     rating = "";
+
+    allDays = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ];
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -73,35 +83,6 @@ export class RestaurantMenuComponent implements OnInit {
         this.getCartItem();
         this.checkLogin();
         this.getCartState();
-
-        // https://www.google.com/maps/search/?api=1&query=<address>&query_place_id=<placeId>
-
-        // const addressSchema = new mongoose.Schema({
-        //     street: {
-        //         type: "String",
-        //     },
-        //     city: {
-        //         type: "String",
-        //     },
-        //     state: {
-        //         type: "String",
-        //     },
-        //     pinCode: {
-        //         type: "string",
-        //     },
-        //     googleLocation: {
-        //         type: "string",
-        //     },
-        //     latitude: {
-        //         type: Number,
-        //     },
-        //     longitude: {
-        //         type: Number,
-        //     },
-        //     landmark: {
-        //         type: "string",
-        //     },
-        // });
     }
     getCartState() {
         this.restaurantService.getCartState().subscribe({
@@ -131,10 +112,6 @@ export class RestaurantMenuComponent implements OnInit {
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
         } else if (text === "takeAway" || text === "scheduledDining") {
-            // const modalRef = this.modalService.open(ChooseTimeDialogComponent,{
-            //     backdrop:false,
-            //     centered:true,
-            // });
             this.dialog
                 .open(TimeSelectorDialogComponent, {
                     panelClass: "add-item-dialog",
@@ -185,130 +162,11 @@ export class RestaurantMenuComponent implements OnInit {
         });
     }
 
-    //this one
     placeOrder() {
         this.customerData = this.customerAuthService.getUserDetail();
 
         console.log("Customer Data: ", this.customerData);
 
-        // // check if the customer data is complete or not by checking the name, email and phone number
-        // if (
-        //     !this.customerData.name ||
-        //     !this.customerData.email ||
-        //     !this.customerData.phoneNumber
-        // ) {
-        //     let AddMissingInfoDialogComponentRef = this.dialog.open(
-        //         AddMissingInfoDialogComponent,
-
-        //         {
-        //             disableClose: true,
-        //             panelClass: "app-full-bleed-dialog",
-        //             data: this.customerData,
-        //         }
-        //     );
-        //     AddMissingInfoDialogComponentRef.afterClosed().subscribe(
-        //         (response) => {
-        //             if (response.customerData) {
-        //                 if (!this.customerData.phoneNumber) {
-        //                     // open the dialog to have the phone number otp verification
-
-        //                     console.log(
-        //                         "Customer Form: ",
-        //                         response.customerData
-        //                     );
-
-        //                     const phoneNumber =
-        //                         response.customerData.phoneNumber;
-        //                     const reqData = {
-        //                         phoneNumber: phoneNumber,
-        //                         socialLogin: "sms",
-        //                         verificationType: "update",
-        //                     };
-        //                     this.customerAuthService
-        //                         .sendWhatsappVerificationCode(reqData)
-        //                         .subscribe({
-        //                             next: (res) => {
-        //                                 let PhoneOtpComponentDialogRef =
-        //                                     this.dialog.open(
-        //                                         PhoneOtpComponent,
-        //                                         {
-        //                                             disableClose: true,
-        //                                             data: reqData,
-        //                                             panelClass:
-        //                                                 "app-full-bleed-dialog",
-        //                                         }
-        //                                     );
-
-        //                                 PhoneOtpComponentDialogRef.afterClosed().subscribe(
-        //                                     (res) => {
-        //                                         this.customerData.phoneNumber =
-        //                                             response.customerData.phoneNumber;
-
-        //                                         if (!this.customerData.name) {
-        //                                             this.customerData.name =
-        //                                                 response.customerData.name;
-        //                                         }
-
-        //                                         if (!this.customerData.email) {
-        //                                             this.customerData.email =
-        //                                                 response.customerData.email;
-        //                                         }
-
-        //                                         // update the customer data
-        //                                         this.customerService
-        //                                             .updateCustomerData(
-        //                                                 this.customerData
-        //                                             )
-        //                                             .subscribe({
-        //                                                 next: (res) => {
-        //                                                     console.log(
-        //                                                         "Customer data updated successfully"
-        //                                                     );
-        //                                                     this.customerAuthService.setUserDetail(
-        //                                                         this
-        //                                                             .customerData
-        //                                                     );
-
-        //                                                     this.cartHelperComponent.placeOrder();
-        //                                                 },
-        //                                             });
-        //                                     }
-        //                                 );
-        //                             },
-        //                         });
-        //                 } else {
-        //                     if (!this.customerData.name) {
-        //                         this.customerData.name =
-        //                             response.customerData.name;
-        //                     }
-
-        //                     if (!this.customerData.email) {
-        //                         this.customerData.email =
-        //                             response.customerData.email;
-        //                     }
-
-        //                     // update the customer data
-        //                     this.customerService
-        //                         .updateCustomerData(response.customerData)
-        //                         .subscribe({
-        //                             next: (res) => {
-        //                                 console.log(
-        //                                     "Customer data updated successfully"
-        //                                 );
-        //                                 this.customerAuthService.setUserDetail(
-        //                                     this.customerData
-        //                                 );
-
-        //                                 this.cartHelperComponent.placeOrder();
-        //                             },
-        //                         });
-        //                 }
-        //             }
-        //         }
-        //     );
-
-        //     return;
-        // }
 
         this.cartHelperComponent.placeOrder();
     }
@@ -502,6 +360,16 @@ export class RestaurantMenuComponent implements OnInit {
                     this.restaurantPanelService.restaurantData.next(
                         this.restaurantDetail
                     );
+
+                    // sort the restaurant data cuisine such that offers are shown first
+                    this.restaurantDetail.cuisine.sort((a, b) => {
+                        if (a.categoryName.toLowerCase() === "offers") {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    });
+
                     this.restaurantMenuStore = _.clone(
                         this.restaurantDetail.cuisine
                     );
@@ -510,6 +378,8 @@ export class RestaurantMenuComponent implements OnInit {
                     );
 
                     this.googleMapUrl = `https://www.google.com/maps/search/?api=1&query=${this.restaurantDetail?.restaurantName},${this.restaurantDetail?.address?.street},${this.restaurantDetail?.address?.city},${this.restaurantDetail?.address?.state},${this.restaurantDetail?.address?.pinCode}&query_place_id=${this.restaurantDetail?.googlePlaceId}`;
+
+                    this.filterRestaurantMenu("all");
                 },
             });
         });
@@ -539,7 +409,6 @@ export class RestaurantMenuComponent implements OnInit {
     }
     navigateToSection(menu, index) {
         const section = document.getElementById(menu._id);
-
 
         if (section) {
             if (index === 0) {
@@ -695,6 +564,16 @@ export class RestaurantMenuComponent implements OnInit {
 
         const final = [];
 
+        // get the todays day
+        const today = new Date().getDay();
+
+        console.log("Today: ", today);
+
+        // print the day
+        const day = this.allDays[today - 1];
+
+        console.log("Today is: ", day);
+
         for (const cuisine of this.restaurantMenuStore) {
             const temp: any = {};
 
@@ -702,13 +581,25 @@ export class RestaurantMenuComponent implements OnInit {
             temp["_id"] = cuisine._id;
             temp["items"] = [];
 
+
+            console.log("Category Name: ", cuisine.categoryName);
+
             for (let dish of cuisine["items"]) {
+
                 if (
                     (filterValue === "all" || dish.dishType === filterValue) &&
                     dish.dishName.toLowerCase().includes(searchText) &&
-                    dish.orderOption !== "none"  // Exclude dishes with order option set to "none"
+                    dish.orderOption !== "none"
                 ) {
-                    result.push(dish);
+                    if (dish.days && dish.days.length > 0) {
+
+                        console.log("Dish Days: ", dish.days);
+                        if (dish.days.includes(day)) {
+                            result.push(dish);
+                        }
+                    } else {
+                        result.push(dish);
+                    }
                 }
             }
 
@@ -726,12 +617,16 @@ export class RestaurantMenuComponent implements OnInit {
         this.filterRestaurantMenu(foodSelect, searchText);
     }
 
-    formatTime(timeObj: { hour: number; minute: number; second: number }): string {
+    formatTime(timeObj: {
+        hour: number;
+        minute: number;
+        second: number;
+    }): string {
         const { hour, minute, second } = timeObj;
         const formattedHour = hour % 12 || 12; // Convert 0 to 12
-        const meridian = hour >= 12 ? 'PM' : 'AM';
-        return `${formattedHour}:${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second} ${meridian}`;
-      }
-
-
+        const meridian = hour >= 12 ? "PM" : "AM";
+        return `${formattedHour}:${minute < 10 ? "0" + minute : minute}:${
+            second < 10 ? "0" + second : second
+        } ${meridian}`;
+    }
 }

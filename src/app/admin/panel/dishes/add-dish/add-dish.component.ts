@@ -84,23 +84,20 @@ export class AddDishComponent implements OnInit {
             (values: Array<File>) => this.getImage(values[0])
         );
 
-        this.dishesForm.get('dishCategory').valueChanges.subscribe(value => {
-
+        this.dishesForm.get("dishCategory").valueChanges.subscribe((value) => {
             // get the content of the selected option
             this.categories.forEach((item) => {
                 if (item._id === value) {
-                    this.selectedCategoryName = item.categoryName;
+                    this.selectedCategoryName = item.categoryName.toLowerCase();
                 }
-            }
-            );
-
+            });
 
             // console.log("the value of the dish category is", value      )
             // if (this.selectedCategoryName === 'offers') {
             // } else {
             //   this.dishesForm.get('days').reset();
             // }
-          });
+        });
     }
     private getImage(file: File): void {
         if (FileReader && file) {
@@ -118,8 +115,6 @@ export class AddDishComponent implements OnInit {
     getCategoryValue() {
         this.restaurantService.getCategory().subscribe({
             next: (res: any) => {
-
-
                 if (res && res.data && res.data.category.length) {
                     this.categories = res.data.category;
                 }
@@ -133,7 +128,15 @@ export class AddDishComponent implements OnInit {
         });
     }
 
-    allDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    allDays = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ];
     generateAddDishForm() {
         this.dishesForm = this.fb.group({
             dishName: ["", [Validators.required]],
@@ -185,7 +188,7 @@ export class AddDishComponent implements OnInit {
                     this.patchDishChoicesForm(dishData);
                     this.base64 = dishData.imageUrl;
 
-                    this.onImageChange()
+                    this.onImageChange();
                     this.dishesForm.patchValue(dishData);
                 }
             } else {
@@ -193,21 +196,21 @@ export class AddDishComponent implements OnInit {
             }
         });
     }
-  onImageChange() {
-    const binaryData = atob(this.base64.split(',')[1]);
+    onImageChange() {
+        const binaryData = atob(this.base64.split(",")[1]);
         const byteArray = new Uint8Array(binaryData.length);
         for (let i = 0; i < binaryData.length; i++) {
-          byteArray[i] = binaryData.charCodeAt(i);
+            byteArray[i] = binaryData.charCodeAt(i);
         }
-        const blob = new Blob([byteArray], { type: 'image/jpeg' }); // Change the type accordingly
+        const blob = new Blob([byteArray], { type: "image/jpeg" }); // Change the type accordingly
 
         // Create FormData and append the Blob to it
         const formData = new FormData();
-        formData.append('imageFile', blob);
+        formData.append("imageFile", blob);
 
         // Patch the form control with the FormData
-        this.control.setValue([formData.get('imageFile') as any]);
-  }
+        this.control.setValue([formData.get("imageFile") as any]);
+    }
     deleteFormField() {
         this.choicesGroup.removeAt(0);
         this.addOnGroup.removeAt(0);

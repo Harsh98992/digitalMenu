@@ -139,7 +139,7 @@
                                     maxlength="100" placeholder="Description" />
                             </div>
 
-                            <div class="mb-3 col-md-8">
+                            <div class="mb-3 col-md-8" *ngIf="selectedCategoryName === 'offers'">
                                 <label class="required" for="days">Select Days to Run Offer:</label>
                                 <ng-select id="days" name="days" [multiple]="true" formControlName="days">
                                     <ng-option *ngFor="let day of allDays" [value]="day">{{ day }}</ng-option>
@@ -149,40 +149,7 @@
                                 </small>
                             </div>
                             <div class="row mb-5">
-                                <!-- <div class="mb-3 custom-file col-md-4">
-                                    <div
-                                        class="input-group px-2 py-2 rounded-pill bg-white shadow-sm"
-                                    >
-                                        <input
-                                            id="upload"
-                                            type="file"
-                                            (change)="imageUpload($event)"
-                                            accept="image/*"
-                                            class="form-control border-0"
-                                        />
-                                        <label
-                                            id="upload-label"
-                                            for="upload"
-                                            class="font-weight-light text-muted"
-                                            >Upload Image</label
-                                        >
-                                        <div class="input-group-append">
-                                            <label
-                                                for="upload"
-                                                class="btn btn-light m-0 rounded-pill px-4"
-                                            >
-                                                <i
-                                                    class="fa fa-cloud-upload mr-2 text-muted"
-                                                ></i
-                                                ><small
-                                                    class="text-uppercase font-weight-bold text-muted"
-                                                    >{{ fileChooseText }}</small
-                                                ></label
-                                            >
-                                        </div>
-                                    </div>
 
-                                </div> -->
                                 <div class="col-md-6">
                                     <file-upload [control]="control" accept="image/*" maxsize="2 MB"
                                         [animation]="false">

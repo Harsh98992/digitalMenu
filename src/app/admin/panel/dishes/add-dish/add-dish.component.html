@@ -35,6 +35,7 @@
                                     <label for="dishType" class="required">Dish Category</label>
                                     <ng-select class="custom" name="dishType" formControlName="dishCategory"
                                         [multiple]="false">
+
                                         <ng-option [value]="data._id" *ngFor="let data of categories">{{
                                             data.categoryName | titlecase
                                             }}</ng-option>
@@ -136,6 +137,16 @@
                                 <label for="address" class="form-label">Description</label>
                                 <input type="text" class="form-control" name="address" formControlName="dishDescription"
                                     maxlength="100" placeholder="Description" />
+                            </div>
+
+                            <div class="mb-3 col-md-8">
+                                <label class="required" for="days">Select Days to Run Offer:</label>
+                                <ng-select id="days" name="days" [multiple]="true" formControlName="days">
+                                    <ng-option *ngFor="let day of allDays" [value]="day">{{ day }}</ng-option>
+                                </ng-select>
+                                <small *ngIf="checkForError('days', 'required')" class="text-danger">
+                                    Select at least one day.
+                                </small>
                             </div>
                             <div class="row mb-5">
                                 <!-- <div class="mb-3 custom-file col-md-4">

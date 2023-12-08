@@ -48,6 +48,8 @@ export class AddDishComponent implements OnInit {
     editFlag: any;
     radioSelected = "";
 
+    selectedCategoryName = "";
+
     public readonly uploadedFile: BehaviorSubject<string> = new BehaviorSubject(
         null
     );
@@ -81,6 +83,24 @@ export class AddDishComponent implements OnInit {
         this.subscription = this.control.valueChanges.subscribe(
             (values: Array<File>) => this.getImage(values[0])
         );
+
+        this.dishesForm.get('dishCategory').valueChanges.subscribe(value => {
+
+            // get the content of the selected option
+            this.categories.forEach((item) => {
+                if (item._id === value) {
+                    this.selectedCategoryName = item.categoryName;
+                }
+            }
+            );
+
+
+            // console.log("the value of the dish category is", value      )
+            // if (this.selectedCategoryName === 'offers') {
+            // } else {
+            //   this.dishesForm.get('days').reset();
+            // }
+          });
     }
     private getImage(file: File): void {
         if (FileReader && file) {
@@ -98,6 +118,8 @@ export class AddDishComponent implements OnInit {
     getCategoryValue() {
         this.restaurantService.getCategory().subscribe({
             next: (res: any) => {
+
+
                 if (res && res.data && res.data.category.length) {
                     this.categories = res.data.category;
                 }
@@ -111,6 +133,7 @@ export class AddDishComponent implements OnInit {
         });
     }
 
+    allDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     generateAddDishForm() {
         this.dishesForm = this.fb.group({
             dishName: ["", [Validators.required]],
@@ -120,6 +143,7 @@ export class AddDishComponent implements OnInit {
             dishDescription: [""],
             dishOrderOption: ["", [Validators.required]],
             spicy: ["", [Validators.required]],
+            days: [this.allDays],
         });
         this.variantsForm = new FormGroup({
             defaultSize: new FormControl(0, Validators.required),
@@ -167,7 +191,6 @@ export class AddDishComponent implements OnInit {
             } else {
                 this.deleteFormField();
             }
-            // Do something with the query parameters
         });
     }
   onImageChange() {

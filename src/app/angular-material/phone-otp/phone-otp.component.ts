@@ -37,6 +37,13 @@ export class PhoneOtpComponent implements OnInit {
             this.isPhoneLogin = true;
         }
     }
+    checkLength(event) {
+        const value = event.target.value;
+        if (value && String(value).length > 3) {
+            return false;
+        }
+        return true;
+    }
     resendOtp() {
         console.log(this.timeRemaining);
 
@@ -105,14 +112,14 @@ export class PhoneOtpComponent implements OnInit {
                                     this.customerAuthService.setUserDetail(
                                         res.data.userData
                                     );
-                                    this.dialogRef.close('apiCall');
+                                    this.dialogRef.close("apiCall");
                                 },
                             });
                     }
 
                     if (this.data.verificationType === "update") {
                         // close this dialog phone-otp
-                        this.dialogRef.close('apiCall');
+                        this.dialogRef.close("apiCall");
                     }
                 },
             });

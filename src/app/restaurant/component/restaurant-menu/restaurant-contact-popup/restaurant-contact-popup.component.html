@@ -28,7 +28,7 @@
                             ></i></button
                         ><a
                             *ngIf="data.contactType === 'email'"
-                            href="mailto:qrsayteam@gmail.com"
+                            href="mailto:{{ data.contactDetails }}"
                             class="ml-2 contact-text"
                             >{{ data.contactDetails }}</a
                         >

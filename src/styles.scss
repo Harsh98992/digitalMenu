@@ -113,9 +113,9 @@ ng-select.ng-invalid .ng-select-container {
     display: none;
 }
 
-.mat-dialog-container {
-    overflow: scroll !important;
-}
+// .mat-dialog-container {
+//    overflow: scroll !important;
+// }
 .mat-tab-header {
     overflow-x: scroll !important;
 }
@@ -125,4 +125,7 @@ ng-select.ng-invalid .ng-select-container {
 }
 .mat-tab-header::-webkit-scrollbar {
     display: none;
-  }
+}
+.mat-step-text-label {
+    white-space: pre-line;
+}

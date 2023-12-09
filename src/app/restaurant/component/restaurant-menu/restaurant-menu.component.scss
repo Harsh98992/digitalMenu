@@ -926,3 +926,14 @@ ul.tags li a:hover {
     display: inline-block;
 }
 /* Add this CSS to your existing styles or create a new CSS file */
+.offer-section {
+    background-image: linear-gradient(
+        45deg,
+        #ff512f 0%,
+        #f09819 51%,
+        #ff512f 100%
+    );
+}
+.general-section {
+    background-color: #c0c0c0 !important;
+}

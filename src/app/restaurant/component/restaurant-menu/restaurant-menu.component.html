@@ -1,19 +1,26 @@
 <main class="bg_gray" *ngIf="restaurantDetail">
-    <div class="hero_in detail_page background-image" [ngStyle]="{
+    <div
+        class="hero_in detail_page background-image"
+        [ngStyle]="{
             backgroundImage: bannerImage
                 ? bannerImage
                 : 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(\'assets/img/hero_general.jpg\')'
-        }">
-        <div class="wrapper opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+        }"
+    >
+        <div
+            class="wrapper opacity-mask"
+            data-opacity-mask="rgba(0, 0, 0, 0.5)"
+        >
             <div class="container">
                 <div class="main_info">
                     <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-6">
                             <div class="head">
                                 <div class="score">
-                                    <span>Superb<em>350 Reviews</em></span><strong>{{
+                                    <span>Superb<em>350 Reviews</em></span
+                                    ><strong>{{
                                         rating ? rating : 4.0
-                                        }}</strong>
+                                    }}</strong>
                                 </div>
                             </div>
 
@@ -27,12 +34,13 @@
                                     <div>
                                         {{ restaurantDetail.address.street }}
                                         ,{{ restaurantDetail.address.city }},{{
-                                        restaurantDetail.address.state
+                                            restaurantDetail.address.state
                                         }}
                                         (Pin Code:-
                                         {{ restaurantDetail.address.pinCode }})
                                     </div>
-                                    <span style="
+                                    <span
+                                        style="
                                             margin-left: 20px;
                                             background: -webkit-linear-gradient(
                                                 rgb(255, 0, 0),
@@ -41,23 +49,45 @@
                                             -webkit-background-clip: text;
                                             background-clip: text;
                                             -webkit-text-fill-color: transparent;
-                                        "><a href="{{googleMapUrl}}" target="_blank">
-                                            <i class="fa-solid fa-location-dot" style="
-                                                color: crimson;
-                                                cursor: pointer;
-                                                width: 20px;
-                                            "></i></a></span>
-
+                                        "
+                                        ><a
+                                            href="{{ googleMapUrl }}"
+                                            target="_blank"
+                                        >
+                                            <i
+                                                class="fa-solid fa-location-dot"
+                                                style="
+                                                    color: crimson;
+                                                    cursor: pointer;
+                                                    width: 20px;
+                                                "
+                                            ></i></a
+                                    ></span>
                                 </div>
                             </div>
 
                             <div class="socail-icons">
-                                <a *ngIf="restaurantDetail?.facebookUrl" [href]="restaurantDetail?.facebookUrl"
-                                    target="_blank"><i target="_blank" class="fa fa-facebook" aria-hidden="true"
-                                        style="cursor: pointer; color: #1674ea"></i></a>
+                                <a
+                                    *ngIf="restaurantDetail?.facebookUrl"
+                                    [href]="restaurantDetail?.facebookUrl"
+                                    target="_blank"
+                                    ><i
+                                        target="_blank"
+                                        class="fa fa-facebook"
+                                        aria-hidden="true"
+                                        style="cursor: pointer; color: #1674ea"
+                                    ></i
+                                ></a>
 
-                                <a *ngIf="restaurantDetail?.instagramUrl" [href]="restaurantDetail?.instagramUrl"
-                                    target="_blank"><i target="_blank" class="fa fa-instagram" aria-hidden="true" style="
+                                <a
+                                    *ngIf="restaurantDetail?.instagramUrl"
+                                    [href]="restaurantDetail?.instagramUrl"
+                                    target="_blank"
+                                    ><i
+                                        target="_blank"
+                                        class="fa fa-instagram"
+                                        aria-hidden="true"
+                                        style="
                                             cursor: pointer;
 
                                             background-image: radial-gradient(
@@ -70,10 +100,19 @@
                                             );
                                             background-clip: text;
                                             border-radius: 5px;
-                                        "></i></a>
-                                <a *ngIf="restaurantDetail?.youtubeUrl" [href]="restaurantDetail?.youtubeUrl"
-                                    target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"
-                                        style="cursor: pointer; color: #c4302b"></i></a>
+                                        "
+                                    ></i
+                                ></a>
+                                <a
+                                    *ngIf="restaurantDetail?.youtubeUrl"
+                                    [href]="restaurantDetail?.youtubeUrl"
+                                    target="_blank"
+                                    ><i
+                                        class="fa fa-youtube-play"
+                                        aria-hidden="true"
+                                        style="cursor: pointer; color: #c4302b"
+                                    ></i
+                                ></a>
                             </div>
                             <!-- Inside the existing structure, add the following code -->
                             <!-- <div class="opening-closing-times">
@@ -82,39 +121,66 @@
                             </div> -->
 
                             <div class="gst-number">
-                                <span>Opening Time -
-                                    {{ formatTime(restaurantDetail.openTime) }}</span>
+                                <span
+                                    >Opening Time -
+                                    {{
+                                        formatTime(restaurantDetail.openTime)
+                                    }}</span
+                                >
 
-                                <span>Closing Time -
-                                    {{ formatTime(restaurantDetail.closeTime) }}</span>
+                                <span
+                                    >Closing Time -
+                                    {{
+                                        formatTime(restaurantDetail.closeTime)
+                                    }}</span
+                                >
                             </div>
-
 
                             <div class="gst-number">
-                                <span>GST Number :-
-                                    {{ restaurantDetail.gstNumber }}</span>
+                                <span
+                                    >GST Number :-
+                                    {{ restaurantDetail.gstNumber }}</span
+                                >
 
-                                <span>FSSAI Number :-
+                                <span
+                                    >FSSAI Number :-
                                     {{
-                                    restaurantDetail.fssaiLicenseNumber
-                                    }}</span>
+                                        restaurantDetail.fssaiLicenseNumber
+                                    }}</span
+                                >
                             </div>
                         </div>
-                        <div class="col-xl-8 col-lg-7 col-md-6 position-relative">
+                        <div
+                            class="col-xl-8 col-lg-7 col-md-6 position-relative"
+                        >
                             <div class="buttons clearfix">
                                 <span class="magnific-gallery">
-                                    <a (click)="openPhotoDialog()" class="btn_hero mr-3 mb-3" title="Photo title"
-                                        data-effect="mfp-zoom-in" *ngIf="
+                                    <a
+                                        (click)="openPhotoDialog()"
+                                        class="btn_hero mr-3 mb-3"
+                                        title="Photo title"
+                                        data-effect="mfp-zoom-in"
+                                        *ngIf="
                                             restaurantDetail?.restaurantImages
                                                 ?.length
-                                        "><i class="icon_image"></i>View
-                                        photos</a>
+                                        "
+                                        ><i class="icon_image"></i>View
+                                        photos</a
+                                    >
                                 </span>
-                                <a class="button-87" *ngIf="restaurantDetail?.contact?.length"
-                                    (click)="openContactPopUp()"><i class="fa-solid fa-phone" style="
+                                <a
+                                    class="button-87"
+                                    *ngIf="restaurantDetail?.contact?.length"
+                                    (click)="openContactPopUp()"
+                                    ><i
+                                        class="fa-solid fa-phone"
+                                        style="
                                             color: #ffffff;
                                             margin-right: 3px;
-                                        "></i>Contact</a>
+                                        "
+                                    ></i
+                                    >Contact</a
+                                >
                             </div>
                         </div>
                     </div>
@@ -135,8 +201,13 @@
           </div> -->
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="search_bar_list">
-                            <input type="text" class="form-control" placeholder="Search Dishes..." #searchbox
-                                (keyup)="searchDishes($event, foodSelect.value)" />
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Search Dishes..."
+                                #searchbox
+                                (keyup)="searchDishes($event, foodSelect.value)"
+                            />
                             <button type="submit">
                                 <i class="icon_search"></i>
                             </button>
@@ -150,8 +221,11 @@
             <div class="container">
                 <ul id="secondary_nav">
                     <li>
-                        <select class="food-type-select pointer" #foodSelect
-                            (change)="changeDishType($event, searchbox.value)">
+                        <select
+                            class="food-type-select pointer"
+                            #foodSelect
+                            (change)="changeDishType($event, searchbox.value)"
+                        >
                             <option value="all">
                                 Veg/Non-Veg <i class="icon_chat_alt"></i>
                             </option>
@@ -165,18 +239,27 @@
                     </li>
                     <mat-menu #menu="matMenu" yPosition="below">
                         <div style="max-height: 300px; min-width: 80px">
-                            <ng-container *ngFor="
+                            <ng-container
+                                *ngFor="
                                     let menu of restaurantMenu;
                                     let i = index
-                                ">
-                                <button (click)="navigateToSection(menu, i)" mat-menu-item *ngIf="menu?.items?.length">
+                                "
+                            >
+                                <button
+                                    (click)="navigateToSection(menu, i)"
+                                    mat-menu-item
+                                    *ngIf="menu?.items?.length"
+                                >
                                     {{ convertTitleCase(menu.categoryName) }}
                                 </button>
                             </ng-container>
                         </div>
                     </mat-menu>
 
-                    <li class="pointer" (click)="navigateToSection({ _id: 'review' },0)">
+                    <li
+                        class="pointer"
+                        (click)="navigateToSection({ _id: 'review' }, 0)"
+                    >
                         <a><i class="icon_chat_alt"></i>Reviews</a>
                     </li>
                 </ul>
@@ -192,58 +275,96 @@
                     <div class="d-flex item-aligns-center">
                         <p class="menu-heading">Menu</p>
                     </div>
-                    <div class="row m-0" *ngFor="let menu of restaurantMenu; index as i">
+                    <div
+                        class="row m-0"
+                        *ngFor="let menu of restaurantMenu; index as i"
+                    >
                         <ng-container *ngIf="menu.items && menu.items.length">
-                            <h6 class="p-3 m-0 bg-light w-100" [ngClass]="
-                                    i === 0 ? 'scroll-first' : 'scroll-default'
-                                " [id]="menu._id">
+                            <h6
+                                class="p-3 m-0 bg-light w-100"
+                                [ngClass]="{
+                                    'scroll-first': i === 0,
+                                    'scroll-default': i !== 0,
+                                    'offer-section':
+                                        menu.categoryName === 'offers',
+                                    'general-section':
+                                        menu.categoryName !== 'offers'
+                                }"
+                                [id]="menu._id"
+                            >
                                 {{ menu.categoryName | titlecase }}
-                                <small class="text-black-50">{{ menu.items.length }} ITEMS</small>
+                                <small>{{ menu.items.length }} ITEMS</small>
                             </h6>
                             <div class="col-md-12 px-0 border-top">
                                 <div class="">
-                                    <div class="p-3 border-bottom menu-list" *ngFor="let item of menu.items">
-                                        <span class="float-right button-container" matTooltip="Currently Unavailable"
+                                    <div
+                                        class="p-3 border-bottom menu-list"
+                                        *ngFor="let item of menu.items"
+                                    >
+                                        <span
+                                            class="float-right button-container"
+                                            matTooltip="Currently Unavailable"
                                             [matTooltipDisabled]="
                                                 item.availableFlag &&
                                                 restaurantDetail.restaurantStatus ===
                                                     'online'
-                                            ">
-                                            <button *ngIf="
+                                            "
+                                        >
+                                            <button
+                                                *ngIf="
                                                     !checkForItemPresent(item)
-                                                " [disabled]="
+                                                "
+                                                [disabled]="
                                                     !item.availableFlag ||
                                                     restaurantDetail.restaurantStatus ===
                                                         'offline'
-                                                " (click)="openAddItemModal(item)"
-                                                class="btn btn-outline-secondary btn-sm" style="
+                                                "
+                                                (click)="openAddItemModal(item)"
+                                                class="btn btn-outline-secondary btn-sm"
+                                                style="
                                                     box-shadow: 1px 3px 3px -1px
                                                         #888888;
                                                     border: 1px solid green;
                                                     color: green;
                                                     font-size: 13px;
                                                     padding: 0px 10px;
-                                                ">
+                                                "
+                                            >
                                                 ADD
                                             </button>
-                                            <p class="button-text" *ngIf="
+                                            <p
+                                                class="button-text"
+                                                *ngIf="
                                                     !checkForItemPresent(
                                                         item
                                                     ) &&
                                                     checkCustomizeable(item)
-                                                ">
+                                                "
+                                            >
                                                 Customize
                                             </p>
-                                            <div class="d-flex align-items-center" *ngIf="
+                                            <div
+                                                class="d-flex align-items-center"
+                                                *ngIf="
                                                     checkForItemPresent(item)
-                                                ">
-                                                <span class="count-number float-right"><button type="button"
+                                                "
+                                            >
+                                                <span
+                                                    class="count-number float-right"
+                                                    ><button
+                                                        type="button"
                                                         class="btn-sm left dec btn btn-outline-secondary"
-                                                        style="border-radius: 5px;" [matTooltipDisabled]="
+                                                        style="
+                                                            border-radius: 5px;
+                                                        "
+                                                        [matTooltipDisabled]="
                                                             true
-                                                        " #myTooltip="matTooltip" (mouseenter)="
+                                                        "
+                                                        #myTooltip="matTooltip"
+                                                        (mouseenter)="
                                                             $event.stopImmediatePropagation()
-                                                        " (mouseleave)="
+                                                        "
+                                                        (mouseleave)="
                                                             $event.stopImmediatePropagation()
                                                         "
                                                         matTooltip="This item has multiple customizations added. Remove the correct item from the cart."
@@ -252,73 +373,114 @@
                                                                 'dec',
                                                                 item
                                                             )
-                                                        ">
-                                                        <i class="fa-solid fa-minus"></i></button><input
-                                                        class="count-number-input" type="text" readonly [value]="
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="fa-solid fa-minus"
+                                                        ></i></button
+                                                    ><input
+                                                        class="count-number-input"
+                                                        type="text"
+                                                        readonly
+                                                        [value]="
                                                             getItemQuantityFromCart(
                                                                 item
                                                             )
-                                                        " /><button type="button" (click)="
+                                                        " /><button
+                                                        type="button"
+                                                        (click)="
                                                             changeQuantity(
                                                                 'inc',
                                                                 item
                                                             )
-                                                        " class="btn-sm right inc btn btn-outline-secondary"
-                                                        style="border-radius: 5px;">
-                                                        <i class="fa-solid fa-plus"></i></button></span>
+                                                        "
+                                                        class="btn-sm right inc btn btn-outline-secondary"
+                                                        style="
+                                                            border-radius: 5px;
+                                                        "
+                                                    >
+                                                        <i
+                                                            class="fa-solid fa-plus"
+                                                        ></i></button
+                                                ></span>
                                             </div>
                                         </span>
 
                                         <div class="media">
-                                            <img alt="#" [src]="
+                                            <img
+                                                alt="#"
+                                                [src]="
                                                     item.imageUrl
                                                         ? item.imageUrl
                                                         : 'assets/img/defaultDishimg.jpg'
-                                                " alt="Dish Image" class="mr-3 rounded-pill" />
+                                                "
+                                                alt="Dish Image"
+                                                class="mr-3 rounded-pill"
+                                            />
                                             <div class="media-body">
-                                                <h6 class="mb-1 item-style" [ngClass]="{
+                                                <h6
+                                                    class="mb-1 item-style"
+                                                    [ngClass]="{
                                                         'not-available-item':
                                                             !item.availableFlag ||
                                                             restaurantDetail.restaurantStatus ===
                                                                 'offline'
-                                                    }">
+                                                    }"
+                                                >
                                                     {{
-                                                    item.dishName
-                                                    | titlecase
+                                                        item.dishName
+                                                            | titlecase
                                                     }}
-                                                    <span class="badge badge-danger" *ngIf="
+                                                    <span
+                                                        class="badge badge-danger"
+                                                        *ngIf="
                                                             item.dishType ===
                                                             'nonVeg'
-                                                        ">Non Veg</span>
-                                                    <span class="badge badge-success" *ngIf="
+                                                        "
+                                                        >Non Veg</span
+                                                    >
+                                                    <span
+                                                        class="badge badge-success"
+                                                        *ngIf="
                                                             item.dishType ===
                                                             'veg'
-                                                        ">Veg</span>
-                                                    <i class="fa-solid fa-pepper-hot ml-2 text-danger"
-                                                        *ngIf="item.chilliFlag"></i>
+                                                        "
+                                                        >Veg</span
+                                                    >
+                                                    <i
+                                                        class="fa-solid fa-pepper-hot ml-2 text-danger"
+                                                        *ngIf="item.chilliFlag"
+                                                    ></i>
                                                 </h6>
-                                                <p class="text-bold mb-0" [ngClass]="{
+                                                <p
+                                                    class="text-bold mb-0"
+                                                    [ngClass]="{
                                                         'not-available-item':
                                                             !item.availableFlag ||
                                                             restaurantDetail.restaurantStatus ===
                                                                 'offline'
-                                                    }">
+                                                    }"
+                                                >
                                                     {{
-                                                    item.dishPrice
-                                                    | currency
-                                                    : "INR"
-                                                    : "symbol"
-                                                    : "1.0-0"
+                                                        item.dishPrice
+                                                            | currency
+                                                                : "INR"
+                                                                : "symbol"
+                                                                : "1.0-0"
                                                     }}
                                                 </p>
-                                                <small [ngClass]="{
+                                                <small
+                                                    [ngClass]="{
                                                         'not-available-item':
                                                             !item.availableFlag ||
                                                             restaurantDetail.restaurantStatus ===
                                                                 'offline'
-                                                    }" *ngIf="item.dishDescription">{{
-                                                    item.dishDescription
-                                                    }}</small>
+                                                    }"
+                                                    *ngIf="item.dishDescription"
+                                                    >{{
+                                                        item.dishDescription
+                                                    }}</small
+                                                >
                                             </div>
                                         </div>
                                     </div>
@@ -327,22 +489,46 @@
                         </ng-container>
                     </div>
                 </div>
-                <app-restaurant-review [restaurnatData]="restaurantDetail" [reviews]="reviews"></app-restaurant-review>
+                <app-restaurant-review
+                    [restaurnatData]="restaurantDetail"
+                    [reviews]="reviews"
+                ></app-restaurant-review>
             </div>
             <div class="col-md-5 pt-3" id="sidebar_fixed">
-                <app-cart-helper #cartHelperComponent [restaurantData]="restaurantDetail"></app-cart-helper>
-                <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3" *ngIf="!showCartItem()">
-                    <a class="btn btn-success btn-block btn-lg" (click)="openLoginDialog()" *ngIf="!userLoginFlag">Log
-                        in and place an order
+                <app-cart-helper
+                    #cartHelperComponent
+                    [restaurantData]="restaurantDetail"
+                ></app-cart-helper>
+                <div
+                    class="d-flex border-bottom osahan-cart-item-profile bg-white p-3"
+                    *ngIf="!showCartItem()"
+                >
+                    <a
+                        class="btn btn-success btn-block btn-lg"
+                        (click)="openLoginDialog()"
+                        *ngIf="!userLoginFlag"
+                        >Log in and place an order
                     </a>
-                    <a class="btn btn-success btn-block btn-lg" (click)="openOrderOptionDialog()"
-                        *ngIf="userLoginFlag && !orderOptionFlag">{{ getOrderOptionText() }}</a>
+                    <a
+                        class="btn btn-success btn-block btn-lg"
+                        (click)="openOrderOptionDialog()"
+                        *ngIf="userLoginFlag && !orderOptionFlag"
+                        >{{ getOrderOptionText() }}</a
+                    >
 
-                    <a class="btn btn-success btn-block btn-lg" (click)="placeOrder()"
-                        *ngIf="userLoginFlag && orderOptionFlag">Place Order</a>
+                    <a
+                        class="btn btn-success btn-block btn-lg"
+                        (click)="placeOrder()"
+                        *ngIf="userLoginFlag && orderOptionFlag"
+                        >Place Order</a
+                    >
                 </div>
             </div>
-            <div *ngIf="!cartFlag" class="btn_reserve_fixed" (click)="openDialog()">
+            <div
+                *ngIf="!cartFlag"
+                class="btn_reserve_fixed"
+                (click)="openDialog()"
+            >
                 <a class="btn_1 gradient full-width">View Basket</a>
             </div>
         </div>

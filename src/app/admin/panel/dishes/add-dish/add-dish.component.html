@@ -138,6 +138,14 @@
                                 <input type="text" class="form-control" name="address" formControlName="dishDescription"
                                     maxlength="100" placeholder="Description" />
                             </div>
+                            <!-- // add non mandatory field of dish priority -->
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Dish Priority</label>
+                                <input type="number" class="form-control" name="address" formControlName="dishPriority"
+                                    maxlength="100" placeholder="Dish Priority" />
+                            </div>
+
+
 
                             <div class="mb-3 col-md-8" *ngIf="selectedCategoryName === 'offers'">
                                 <label class="required" for="days">Select Days to Run Offer:</label>

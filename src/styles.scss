@@ -125,4 +125,7 @@ ng-select.ng-invalid .ng-select-container {
 }
 .mat-tab-header::-webkit-scrollbar {
     display: none;
-  }
+}
+.mat-step-text-label {
+    white-space: pre-line;
+}

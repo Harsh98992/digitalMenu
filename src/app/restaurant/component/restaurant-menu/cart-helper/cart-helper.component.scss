@@ -85,3 +85,8 @@
     cursor: pointer;
     font-size: 18px;
 }
+@media only screen and (max-width: 767px) {
+    .w-37{
+        min-width: 37%;
+    }
+  }

@@ -13,7 +13,7 @@
     <div class="inc button_inc" (click)="changeDishQuantity('inc')">+</div>
     <div class="dec button_inc" (click)="changeDishQuantity('dec')">-</div>
   </div>
-  <mat-vertical-stepper  #stepper>
+  <mat-vertical-stepper #stepper>
 
     <mat-step [stepControl]="false" *ngIf="dish.sizeAvailable && dish.sizeAvailable.length > 0" [editable]="isEditable">
       <div class="content">
@@ -50,6 +50,7 @@
                   <input type="checkbox" (click)="pickedChoices(item, choicesArrayData, $event)" />
                   <span class="checkmark"></span>
                 </label>
+                <p *ngIf="item.choiceDescription" class="choice-description">{{ item.choiceDescription }}</p>
               </li>
             </ul>
           </ng-container>

@@ -3,137 +3,73 @@
     <!-- <i class="icon_close fr pointer" [mat-dialog-close]="true"></i> -->
 </div>
 <mat-dialog-content class="mat-typography">
-    <form
-        class="needs-validation"
-        [formGroup]="choicesForm"
-        novalidate=""
-        accept-charset="utf-8"
-    >
+    <form class="needs-validation" [formGroup]="choicesForm" novalidate="" accept-charset="utf-8">
         <div class="row g-2">
             <div class="mb-3 col-md-4">
-                <label for="choicesGroupName" class="form-label required"
-                    >Choices group key (eg: PizzaChoice)</label
-                >
-                <input
-                    type="text"
-                    class="form-control"
-                    maxlength="50"
-                    [ngClass]="
+                <label for="choicesGroupName" class="form-label required">Choices group key (eg: PizzaChoice)</label>
+                <input type="text" class="form-control" maxlength="50" [ngClass]="
                         checkForError('choicesGroupName', 'required')
                             ? 'is-invalid'
                             : ''
-                    "
-                    formControlName="choicesGroupName"
-                    name="choicesGroupName"
-                    placeholder="Enter Choice group name (eg: PizzaChoice)"
-                />
+                    " formControlName="choicesGroupName" name="choicesGroupName"
+                    placeholder="Enter Choice group name (eg: PizzaChoice)" />
             </div>
             <div class="mb-3 col-md-3">
-                <label for="choicesDisplayName" class="form-label required"
-                    >Choice group name (eg: Onion)</label
-                >
-                <input
-                    type="text"
-                    class="form-control"
-                    maxlength="50"
-                    [ngClass]="
+                <label for="choicesDisplayName" class="form-label required">Choice group name (eg: Onion)</label>
+                <input type="text" class="form-control" maxlength="50" [ngClass]="
                         checkForError('choicesDisplayName', 'required')
                             ? 'is-invalid'
                             : ''
-                    "
-                    formControlName="choicesDisplayName"
-                    name="choicesDisplayName"
-                    placeholder="Enter Choice Heading (eg: Onion)"
-                />
+                    " formControlName="choicesDisplayName" name="choicesDisplayName"
+                    placeholder="Enter Choice Heading (eg: Onion)" />
             </div>
             <div class="mb-3 col-md-2">
                 <label for="min" class="form-label required">Min</label>
-                <input
-                    type="number"
-                    class="form-control"
-                    [ngClass]="
+                <input type="number" class="form-control" [ngClass]="
                         checkForError('choicesMinValue', 'required')
                             ? 'is-invalid'
                             : ''
-                    "
-                    formControlName="choicesMinValue"
-                    name="min"
-                    placeholder="Min"
-                />
+                    " formControlName="choicesMinValue" name="min" placeholder="Min" />
             </div>
             <div class="mb-3 col-md-2">
                 <label for="max" class="form-label required">Max</label>
-                <input
-                    type="number"
-                    class="form-control"
-                    [ngClass]="
+                <input type="number" class="form-control" [ngClass]="
                         checkForError('choicesMaxValue', 'required')
                             ? 'is-invalid'
                             : ''
-                    "
-                    formControlName="choicesMaxValue"
-                    name="max"
-                    placeholder="Max"
-                />
+                    " formControlName="choicesMaxValue" name="max" placeholder="Max" />
             </div>
         </div>
         <ng-container formArrayName="choicesGroup">
-            <div
-                class="row g-2"
-                *ngFor="let choices of choicesGroup?.controls; let i = index"
-                [formGroupName]="i"
-            >
+            <div class="row g-2" *ngFor="let choices of choicesGroup?.controls; let i = index" [formGroupName]="i">
                 <div class="mb-3 col-md-3">
-                    <label for="Category" class="form-label required"
-                        >Category</label
-                    >
+                    <label for="Category" class="form-label required">Category</label>
                     <ng-select formControlName="category">
                         <ng-option aria-selected="true" value="veg">
-                            <img
-                                src="assets/img/vegGreenIcon.png"
-                                alt="veg"
-                                class="vegIcon"
-                            />Veg</ng-option
-                        >
-                        <ng-option value="nonVeg"
-                            ><img
-                                src="assets/img/nonVeg.png"
-                                alt="veg"
-                                class="vegIcon"
-                            />Non Veg</ng-option
-                        >
+                            <img src="assets/img/vegGreenIcon.png" alt="veg" class="vegIcon" />Veg</ng-option>
+                        <ng-option value="nonVeg"><img src="assets/img/nonVeg.png" alt="veg" class="vegIcon" />Non
+                            Veg</ng-option>
                     </ng-select>
                 </div>
                 <div class="mb-3 col-md-3">
-                    <label for="choiceName" class="form-label required"
-                        >Choice Name</label
-                    >
-                    <input
-                        type="text"
-                        formControlName="choiceName"
-                        [ngClass]="
+                    <label for="choiceName" class="form-label required">Choice Name</label>
+                    <input type="text" formControlName="choiceName" [ngClass]="
                             checkForChoicesError(i, 'choiceName', 'required')
                                 ? 'is-invalid'
                                 : ''
-                        "
-                        class="form-control"
-                        maxlength="50"
-                        name="choiceName"
-                        placeholder="Choice Name"
-                    />
-                    <!-- <small
-                *ngIf="checkForError('dishName', 'required')"
-                class="text-danger"
-                >Please provide dish name</small
-              > -->
+                        " class="form-control" maxlength="50" name="choiceName" placeholder="Choice Name" />
+
+                </div>
+                <!-- div for choice description -->
+                <div class="mb-3 col-md-3">
+                    <label for="choiceDescription" class="form-label">Choice Description</label>
+                    <input type="text" formControlName="choiceDescription" class="form-control" maxlength="50"
+                        name="choiceDescription" placeholder="Choice Description" />
                 </div>
 
                 <div class="mb-3 col-md-3">
                     <label class="form-label d-block">Action</label>
-                    <i
-                        class="fa-solid fa-trash bin-color pointer"
-                        (click)="deleteField(i)"
-                    ></i>
+                    <i class="fa-solid fa-trash bin-color pointer" (click)="deleteField(i)"></i>
                 </div>
             </div>
         </ng-container>
@@ -147,20 +83,10 @@
 </mat-dialog-content>
 <mat-dialog-actions class="mat-dialog-actions" align="end">
     <button class="btn btn-danger mr-2" mat-dialog-close>Cancel</button>
-    <button
-        class="btn purple-shade"
-        *ngIf="disableFormFlag"
-        cdkFocusInitial
-        (click)="enableForm()"
-    >
+    <button class="btn purple-shade" *ngIf="disableFormFlag" cdkFocusInitial (click)="enableForm()">
         Enable
     </button>
-    <button
-        class="btn purple-shade"
-        *ngIf="!disableFormFlag"
-        cdkFocusInitial
-        (click)="saveChoices()"
-    >
+    <button class="btn purple-shade" *ngIf="!disableFormFlag" cdkFocusInitial (click)="saveChoices()">
         Accept
     </button>
 </mat-dialog-actions>

@@ -147,6 +147,7 @@ export class AddDishComponent implements OnInit {
             dishOrderOption: ["", [Validators.required]],
             spicy: ["", [Validators.required]],
             days: [this.allDays],
+            dishPriority: [""],
         });
         this.variantsForm = new FormGroup({
             defaultSize: new FormControl(0, Validators.required),

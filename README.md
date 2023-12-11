@@ -20,6 +20,30 @@ ng serve
 ```
 
 
+## firebase setup
+
+<!-- [5:31 PM, 12/11/2023] Himanshu Sharma Depaak Ka Bhai: npm run dev
+[5:31 PM, 12/11/2023] Himanshu Sharma Depaak Ka Bhai: firebase use staging
+[5:31 PM, 12/11/2023] Himanshu Sharma Depaak Ka Bhai: firebase deploy -->
+
+1. create a firebase project
+2. enable firestore and storage
+3. create a web app
+4. copy the firebase config and paste it in the environment.ts file
+5. run `npm run dev` to run the project in development mode
+6. run `firebase use staging` to use the staging environment
+7. run `firebase deploy` to deploy the project
+
+or paste the following command in your terminal
+
+```bash
+npm run dev
+firebase use qrsay-c617e --- prod
+firebase use staging
+firebase deploy
+```
+
+
 ## Usage
 
 1. go to the login page by visiting the url `localhost:4200/admin/login`

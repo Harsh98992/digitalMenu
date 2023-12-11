@@ -101,80 +101,80 @@
                     </div>
                     <!-- Minimum order value for Delivery -->
                     <div>
-                        div class="col-lg-6 col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label required">Minimum Order Value for Delivery</label>
-                            <input type="number" formControlName="minOrderValueForDelivery" class="form-control"
-                                min="0">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label required">Minimum Order Value for Delivery</label>
+                                <input type="number" formControlName="minOrderValueForDelivery" class="form-control"
+                                    min="0">
+                            </div>
                         </div>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
-    </div>
 
-    <!-- Social Media Setting Card -->
-    <div class="card">
-        <div class="card-header">
-            Social Media Handles
-            <button class="btn btn-primary" (click)="toggleSocialMediaEditMode()">
-                {{ isEditingSocialMedia ? "Save" : "Edit" }}
-            </button>
-        </div>
-        <div class="card-body">
-            <form [formGroup]="socialMediaForm" accept-charset="utf-8">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="mb-3">
-                            <label class="form-label">Facebook</label>
-                            <input type="text" formControlName="facebookUrl" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="mb-3">
-                            <label class="form-label">Instagram</label>
-                            <input type="text" formControlName="instagramUrl" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="mb-3">
-                            <label class="form-label">YouTube</label>
-                            <input type="text" formControlName="youtubeUrl" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- Availability Setting Card -->
-            <div class="card">
-                <div class="card-header">
-                    Availability Setting
-                    <button class="btn btn-primary" (click)="toggleAvailabilityEditMode()">
-                        {{ isEditingAvailability ? "Save" : "Edit" }}
-                    </button>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="availabilityForm" accept-charset="utf-8">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="mb-3">
-                                    <label class="form-label required">Open Time</label>
-                                    <ngb-timepicker formControlName="openTime" [meridian]="false"></ngb-timepicker>
-                                </div>
+        <!-- Social Media Setting Card -->
+        <div class="card">
+            <div class="card-header">
+                Social Media Handles
+                <button class="btn btn-primary" (click)="toggleSocialMediaEditMode()">
+                    {{ isEditingSocialMedia ? "Save" : "Edit" }}
+                </button>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="socialMediaForm" accept-charset="utf-8">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label">Facebook</label>
+                                <input type="text" formControlName="facebookUrl" class="form-control" />
                             </div>
-                            <div class="col-lg-4">
-                                <div class="mb-3">
-                                    <label class="form-label required">Close Time</label>
-                                    <ngb-timepicker formControlName="closeTime" [meridian]="false"></ngb-timepicker>
-                                </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label">Instagram</label>
+                                <input type="text" formControlName="instagramUrl" class="form-control" />
                             </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label">YouTube</label>
+                                <input type="text" formControlName="youtubeUrl" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-                            <!-- <div class="col-lg-4">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Availability Setting Card -->
+                <div class="card">
+                    <div class="card-header">
+                        Availability Setting
+                        <button class="btn btn-primary" (click)="toggleAvailabilityEditMode()">
+                            {{ isEditingAvailability ? "Save" : "Edit" }}
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="availabilityForm" accept-charset="utf-8">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label class="form-label required">Open Time</label>
+                                        <ngb-timepicker formControlName="openTime" [meridian]="false"></ngb-timepicker>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label class="form-label required">Close Time</label>
+                                        <ngb-timepicker formControlName="closeTime" [meridian]="false"></ngb-timepicker>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label class="form-label required">Open Days</label>
                                         <ng-select [clearable]="false" formControlName="openDays" class="custom"
@@ -189,19 +189,19 @@
                                         </ng-select>
                                     </div>
                                 </div> -->
-                        </div>
-                    </form>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+        <app-add-payment></app-add-payment>
     </div>
-
-
-
-
-
-
-
-    <app-add-payment></app-add-payment>
-</div>
 </div>

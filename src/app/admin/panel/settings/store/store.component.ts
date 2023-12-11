@@ -65,6 +65,7 @@ export class StoreComponent implements OnInit {
             maxDeliveryDistance: [0],
             minOrderValueForFreeDelivery: [0],
             deliveryFeeBelowMinValue: [0],
+            minOrderValueForDelivery: [0],
         });
 
         this.getDeliveryFormDetails();
@@ -212,6 +213,8 @@ export class StoreComponent implements OnInit {
                     ],
                 deliveryFeeBelowMinValue:
                     res["data"]["restaurantDetail"]["deliveryFeeBelowMinValue"],
+                minOrderValueForDelivery:
+                    res["data"]["restaurantDetail"]["minOrderValueForDelivery"],
             });
         });
     }
@@ -222,6 +225,7 @@ export class StoreComponent implements OnInit {
             this.deliveryForm.get("maxDeliveryDistance").enable();
             this.deliveryForm.get("minOrderValueForFreeDelivery").enable();
             this.deliveryForm.get("deliveryFeeBelowMinValue").enable();
+            this.deliveryForm.get("minOrderValueForDelivery").enable();
             this.isEditingDelivery = !this.isEditingDelivery;
         } else {
             this.updateDeliveryData();
@@ -239,6 +243,7 @@ export class StoreComponent implements OnInit {
                 this.deliveryForm.get("maxDeliveryDistance").disable();
                 this.deliveryForm.get("minOrderValueForFreeDelivery").disable();
                 this.deliveryForm.get("deliveryFeeBelowMinValue").disable();
+                this.deliveryForm.get("minOrderValueForDelivery").disable();
 
                 this.utilService.openSnackBar(
                     "Delivery Details updated successfully"

@@ -14,6 +14,12 @@
             Export
           </button>
         </div>
+        <!-- // button to go to verified accounts -->
+        <div class="col-lg-2 col-md-12">
+          <button type="reset" class="btn btn-success" routerLink="/admin/verifiedAccounts">
+            <i class="fa-solid fa-check"></i>
+            Verified Accounts
+          </button>
       </div>
       <ngx-datatable class="bootstrap" [rows]="rows" [columns]="columns" [columnMode]="ColumnMode.force"
         [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [scrollbarH]="true" [limit]="10">

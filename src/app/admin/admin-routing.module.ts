@@ -34,6 +34,7 @@ import { AddContactDetailsComponent } from "./panel/restaurant-contact-details/a
 import { RestaurantTablesComponent } from "./panel/restaurant-tables/restaurant-tables.component";
 import { PromoCodeListComponent } from "./panel/promo-code-list/promo-code-list.component";
 import { RestaurntOwnerGuard } from "../api/guard/restaurnt-owner.guard";
+import { verifiedComponent } from "./panel/unverify-account/verified/verified.component";
 const routes: Routes = [
     {
         path: "",
@@ -67,7 +68,10 @@ const routes: Routes = [
             },
             {
                 path: "restaurant-tables",
-                canActivateChild: [VerifiedAccountChildGuard,RestaurntOwnerGuard],
+                canActivateChild: [
+                    VerifiedAccountChildGuard,
+                    RestaurntOwnerGuard,
+                ],
                 children: [
                     {
                         path: "view",
@@ -93,9 +97,14 @@ const routes: Routes = [
                 component: UnverifyAccountComponent,
             },
             {
+                path: "VerifiedAccount",
+                component: verifiedComponent,
+            },
+            {
                 path: "verifyAccount/:id",
                 component: VerifyAccountComponent,
             },
+
             {
                 path: "view-users/:id",
                 component: ViewUsersComponent,
@@ -103,7 +112,7 @@ const routes: Routes = [
             {
                 path: "customers",
                 component: CustomersComponent,
-                canActivate: [VerifiedAccountGuard,RestaurntOwnerGuard],
+                canActivate: [VerifiedAccountGuard, RestaurntOwnerGuard],
             },
             {
                 path: "restaurantQrCode",
@@ -113,7 +122,7 @@ const routes: Routes = [
             {
                 path: "restaurant-images",
                 component: RestaurantGalleryComponent,
-                canActivate: [VerifiedAccountGuard,RestaurntOwnerGuard],
+                canActivate: [VerifiedAccountGuard, RestaurntOwnerGuard],
             },
             {
                 path: "review",
@@ -133,7 +142,10 @@ const routes: Routes = [
             },
             {
                 path: "dishes",
-                canActivateChild: [VerifiedAccountChildGuard,RestaurntOwnerGuard],
+                canActivateChild: [
+                    VerifiedAccountChildGuard,
+                    RestaurntOwnerGuard,
+                ],
                 children: [
                     {
                         path: "extras",
@@ -181,7 +193,10 @@ const routes: Routes = [
             },
             {
                 path: "user-managment",
-                canActivateChild: [VerifiedAccountChildGuard,RestaurntOwnerGuard],
+                canActivateChild: [
+                    VerifiedAccountChildGuard,
+                    RestaurntOwnerGuard,
+                ],
                 children: [
                     {
                         path: "view",
@@ -199,7 +214,10 @@ const routes: Routes = [
             },
             {
                 path: "setting",
-                canActivateChild: [VerifiedAccountChildGuard,RestaurntOwnerGuard],
+                canActivateChild: [
+                    VerifiedAccountChildGuard,
+                    RestaurntOwnerGuard,
+                ],
                 children: [
                     {
                         path: "store",
@@ -219,7 +237,10 @@ const routes: Routes = [
             },
             {
                 path: "promocode",
-                canActivateChild: [VerifiedAccountChildGuard,RestaurntOwnerGuard],
+                canActivateChild: [
+                    VerifiedAccountChildGuard,
+                    RestaurntOwnerGuard,
+                ],
                 children: [
                     {
                         path: "add",

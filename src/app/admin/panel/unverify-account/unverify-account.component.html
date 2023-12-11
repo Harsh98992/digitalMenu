@@ -15,53 +15,54 @@
           </button>
         </div>
         <!-- // button to go to verified accounts -->
-        <div class="col-lg-2 col-md-12">
-          <button type="reset" class="btn btn-success" routerLink="/admin/verifiedAccounts">
+        <div>
+
+          <button type="reset" class="btn btn-success" routerLink="/admin/VerifiedAccount">
             <i class="fa-solid fa-check"></i>
             Verified Accounts
           </button>
-      </div>
-      <ngx-datatable class="bootstrap" [rows]="rows" [columns]="columns" [columnMode]="ColumnMode.force"
-        [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [scrollbarH]="true" [limit]="10">
-        <ngx-datatable-column name="Action" prop="action" [sortable]="false">
-          <ng-template #menu let-row="row" let-value="value" ngx-datatable-cell-template>
-            <i class="fa-solid fa-ellipsis-vertical fa-xl pointer" [matMenuTriggerFor]="menu"></i>
-            <div>
-              <mat-menu #menu="matMenu">
-                <button class="pointer" mat-menu-item routerLink="/admin/verifyAccount/{{row._id}}">
-                  <i class="fa-solid fa-pen-to-square"></i> Take Action
-                </button>
-              </mat-menu>
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
+        </div>
+        <ngx-datatable class="bootstrap" [rows]="rows" [columns]="columns" [columnMode]="ColumnMode.force"
+          [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [scrollbarH]="true" [limit]="10">
+          <ngx-datatable-column name="Action" prop="action" [sortable]="false">
+            <ng-template #menu let-row="row" let-value="value" ngx-datatable-cell-template>
+              <i class="fa-solid fa-ellipsis-vertical fa-xl pointer" [matMenuTriggerFor]="menu"></i>
+              <div>
+                <mat-menu #menu="matMenu">
+                  <button class="pointer" mat-menu-item routerLink="/admin/verifyAccount/{{row._id}}">
+                    <i class="fa-solid fa-pen-to-square"></i> Take Action
+                  </button>
+                </mat-menu>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
 
-        <ngx-datatable-column name="Restaurant Name" prop="restaurantName">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            {{ value }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Restaurant Phone Number" prop="restaurantPhoneNumber">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            {{ value }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="GST Number" prop="gstNumber">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            {{ value }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="FSSAI Licence Number" prop="fssaiLicenseNumber">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            {{ value }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Restaurant Email" prop="restaurantEmail">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            {{ value }}
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
+          <ngx-datatable-column name="Restaurant Name" prop="restaurantName">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Restaurant Phone Number" prop="restaurantPhoneNumber">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="GST Number" prop="gstNumber">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="FSSAI Licence Number" prop="fssaiLicenseNumber">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Restaurant Email" prop="restaurantEmail">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{ value }}
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
     </div>
   </div>
-</div>

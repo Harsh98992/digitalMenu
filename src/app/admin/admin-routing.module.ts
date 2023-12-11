@@ -21,7 +21,6 @@ import { ViewDishComponent } from "./panel/dishes/view-dish/view-dish.component"
 import { VerifiedAccountGuard } from "../api/guard/verified-account.guard";
 import { VerifiedAccountChildGuard } from "../api/guard/verified-account-child.guard";
 import { UnverifyAccountComponent } from "./panel/unverify-account/unverify-account.component";
-
 import { VerifyAccountComponent } from "./panel/unverify-account/verify-account/verify-account.component";
 import { ViewUsersComponent } from "./panel/unverify-account/view-users/view-users.component";
 import { ChoicesComponent } from "./panel/dishes/choices/choices.component";

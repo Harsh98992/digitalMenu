@@ -52,7 +52,7 @@ import { AddTableComponent } from "./panel/restaurant-tables/add-table/add-table
 import { PromocodeComponent } from "./panel/promocode/promocode.component";
 import { PromoCodeListComponent } from './panel/promo-code-list/promo-code-list.component';
 import { AddPaymentComponent } from './panel/settings/add-payment/add-payment.component';
-import { VerifiedComponent } from './panel/unverify-account/verified/verified.component';
+import { verifiedComponent } from './panel/unverify-account/verified/verified.component';
 
 @NgModule({
     declarations: [
@@ -101,7 +101,7 @@ import { VerifiedComponent } from './panel/unverify-account/verified/verified.co
         PromocodeComponent,
         PromoCodeListComponent,
         AddPaymentComponent,
-        VerifiedComponent,
+        verifiedComponent,
     ],
     imports: [
         CommonModule,

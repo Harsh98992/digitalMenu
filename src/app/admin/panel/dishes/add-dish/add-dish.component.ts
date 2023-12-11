@@ -403,6 +403,8 @@ export class AddDishComponent implements OnInit {
         } else {
             const dishData = this.restaurantService.getSelectedDish();
             data["dishId"] = dishData["_id"];
+            data['previousDishCategory']=dishData['categoryId']
+           
             this.restaurantService.editDish(data).subscribe({
                 next: (res) => {
                     this.restaurantService.setRestaurantData(res);

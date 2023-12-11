@@ -55,13 +55,13 @@ export class RestaurantMenuComponent implements OnInit {
     rating = "";
 
     allDays = [
+        "Sunday",
         "Monday",
         "Tuesday",
         "Wednesday",
         "Thursday",
         "Friday",
         "Saturday",
-        "Sunday",
     ];
     constructor(
         public dialog: MatDialog,
@@ -165,9 +165,6 @@ export class RestaurantMenuComponent implements OnInit {
     placeOrder() {
         this.customerData = this.customerAuthService.getUserDetail();
 
-        console.log("Customer Data: ", this.customerData);
-
-
         this.cartHelperComponent.placeOrder();
     }
     customerData: any;
@@ -193,7 +190,7 @@ export class RestaurantMenuComponent implements OnInit {
         dialogRef.afterClosed().subscribe((resp) => {
             if (resp) {
                 // Handle the selected address (Add logic to update the delivery address)
-                console.log("Selected Address: ", resp);
+
                 if (resp && resp.selectedAddress) {
                     this.orderOptionFlag = true;
                     this.userPreference = {
@@ -346,7 +343,6 @@ export class RestaurantMenuComponent implements OnInit {
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
                     this.getReviews(this.restaurantDetail);
-                    console.log(this.restaurantDetail.restaurantImages);
 
                     if (!this.restaurantDetail) {
                         this.showNotFound = true;
@@ -565,14 +561,11 @@ export class RestaurantMenuComponent implements OnInit {
         const final = [];
 
         // get the todays day
+
         const today = new Date().getDay();
 
-        console.log("Today: ", today);
-
         // print the day
-        const day = this.allDays[today - 1];
-
-        console.log("Today is: ", day);
+        const day = this.allDays[today];
 
         for (const cuisine of this.restaurantMenuStore) {
             const temp: any = {};
@@ -581,19 +574,13 @@ export class RestaurantMenuComponent implements OnInit {
             temp["_id"] = cuisine._id;
             temp["items"] = [];
 
-
-            console.log("Category Name: ", cuisine.categoryName);
-
             for (let dish of cuisine["items"]) {
-
                 if (
                     (filterValue === "all" || dish.dishType === filterValue) &&
                     dish.dishName.toLowerCase().includes(searchText) &&
                     dish.orderOption !== "none"
                 ) {
                     if (dish.days && dish.days.length > 0) {
-
-                        console.log("Dish Days: ", dish.days);
                         if (dish.days.includes(day)) {
                             result.push(dish);
                         }

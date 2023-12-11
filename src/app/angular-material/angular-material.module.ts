@@ -39,6 +39,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { OrderRecievedDialogComponent } from './order-recieved-dialog/order-recieved-dialog.component';
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 import { CustomerNameDialogComponent } from './customer-name-dialog/customer-name-dialog.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 
 
@@ -52,6 +53,7 @@ import { CustomerNameDialogComponent } from './customer-name-dialog/customer-nam
         OrderRecievedDialogComponent,
         PaymentDialogComponent,
         CustomerNameDialogComponent,
+        RedirectComponent,
     ],
     imports: [
         CommonModule,

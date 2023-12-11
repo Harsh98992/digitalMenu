@@ -74,6 +74,7 @@ export class StoreComponent implements OnInit {
         this.deliveryForm.get("minOrderValueForFreeDelivery").disable();
         this.deliveryForm.get("deliveryFeeBelowMinValue").disable();
         this.deliveryForm.get("provideDelivery").disable();
+        this.deliveryForm.get("minOrderValueForDelivery").disable();
 
         // Social Media Setting Form
         this.socialMediaForm = this.formBuilder.group({

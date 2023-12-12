@@ -41,6 +41,9 @@ npm run dev
 firebase use qrsay-c617e --- prod
 firebase deploy
 
+
+
+
 ```
 
 for staging

@@ -18,7 +18,7 @@ export class RestaurantOrderComponent implements OnInit {
     columns = [];
     ColumnMode = ColumnMode;
     statusOption = [];
-    selectedOption = "completed";
+    selectedOption = "all";
     extraIngredents = [];
     searchTerm = "";
     filteredData: any;
@@ -30,7 +30,7 @@ export class RestaurantOrderComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.getOrders();
+        this.changeStatus();
         this.applyColumn();
     }
 
@@ -101,6 +101,9 @@ export class RestaurantOrderComponent implements OnInit {
             next: (res: any) => {
                 if (res?.data?.orderData) {
                     this.rows = res.data.orderData;
+
+                    // reverse the array
+                    this.rows = this.rows.reverse();
                     this.applyFilter();
                 } else {
                     this.filteredData = [];

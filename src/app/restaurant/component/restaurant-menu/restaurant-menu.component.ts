@@ -366,6 +366,43 @@ export class RestaurantMenuComponent implements OnInit {
                         }
                     });
 
+                    // sort the cuisine with category priority
+                    // if category priority is not present then sort by categoryName but
+                    // lower category priority will be shown first
+
+                    
+
+
+                    // sort the dishes with dishpriority for each cuisine
+                    // if dishpriority is not present then sort by dishName
+                    // lower dishpriority will be shown first
+
+                    for (const cuisine of this.restaurantDetail.cuisine) {
+                        cuisine.items.sort((a, b) => {
+
+                            console.log(a.dishPriority, b.dishPriority)
+                            if (a.dishPriority && b.dishPriority) {
+                                return a.dishPriority - b.dishPriority;
+                            } else if (a.dishPriority) {
+                                return -1;
+                            } else if (b.dishPriority) {
+                                return 1;
+                            } else {
+                                if (a.dishName < b.dishName) {
+                                    return -1;
+                                } else if (a.dishName > b.dishName) {
+                                    return 1;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        });
+                    }
+
+
+
+
+
                     this.restaurantMenuStore = _.clone(
                         this.restaurantDetail.cuisine
                     );

@@ -293,7 +293,7 @@
             }}</span>
         </p>
 
-        <p class="mb-1 cartItemName" style="font-weight: 400">
+        <p class="mb-1 cartItemName" style="font-weight: 400" *ngIf="gstAmount">
             Goods and Services Tax (GST)
             <span class="float-right text-dark" style="font-weight: 600">{{
                 gstAmount | currency : "INR" : "symbol" : "1.0-0"

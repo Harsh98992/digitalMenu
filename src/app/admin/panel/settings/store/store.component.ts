@@ -40,7 +40,7 @@ export class StoreComponent implements OnInit {
         // both are either true or false and not empty
         this.gstForm = this.formBuilder.group({
             isPricingInclusiveOfGST: [true],
-            customGSTPercentage: [5],
+            customGSTPercentage: [0],
         });
 
         this.getGSTFormDetails();

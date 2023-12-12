@@ -24,8 +24,10 @@
                             <div class="mb-3">
                                 <label class="form-label required">GST Percentage</label>
                                 <ng-select [clearable]="false" formControlName="customGSTPercentage" class="custom">
+                                    <ng-option [value]="0">0%</ng-option>
                                     <ng-option [value]="5">5%</ng-option>
                                     <ng-option [value]="12">12%</ng-option>
+
                                 </ng-select>
                             </div>
                         </div>

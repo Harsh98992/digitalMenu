@@ -39,8 +39,17 @@ or paste the following command in your terminal
 ```bash
 npm run dev
 firebase use qrsay-c617e --- prod
+firebase deploy
+
+```
+
+for staging
+
+```bash
+npm run dev
 firebase use staging
 firebase deploy
+
 ```
 
 

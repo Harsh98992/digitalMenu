@@ -37,8 +37,8 @@ ng serve
 or paste the following command in your terminal
 
 ```bash
-npm run dev
-firebase use qrsay-c617e --- prod
+ng build --configuration production
+firebase use qrsay-c617e
 firebase deploy
 
 
@@ -50,7 +50,7 @@ for staging
 
 ```bash
 npm run dev
-firebase use staging
+firebase use qrsay-testing
 firebase deploy
 
 ```

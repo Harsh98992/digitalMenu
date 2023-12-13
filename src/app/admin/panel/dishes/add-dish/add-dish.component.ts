@@ -346,17 +346,10 @@ export class AddDishComponent implements OnInit {
         this.showErrorImageFlag = false;
 
         this.dishesForm.markAllAsTouched();
-        //if (!this.base64) {
-        //this.showErrorImageFlag = true;
-        //}
-        //if (!this.dishesForm.valid || !this.base64) {
-        //  return;
-        //}
+
 
         this.myStepper.next();
-        // this.restaurantService.addDish(data).subscribe({
-        //   next: (res) => {},
-        // });
+
     }
     saveDish() {
         const variantData = this.variants.value.map((data, i) => {

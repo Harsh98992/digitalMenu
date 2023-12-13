@@ -40,11 +40,10 @@ export class RestaurantPanelService {
                 // Check if it's not already playing
                 this.audio.muted = false;
                 this.isPlaying = true;
-                
+
                 this.audio.play().catch((err) => {
                     console.log(err);
-                    
-                    
+
                     this.showOrderPopUp();
                 });
 
@@ -255,11 +254,12 @@ export class RestaurantPanelService {
             data
         );
     }
-    addCategory(categoryName: string) {
+    addCategory(categoryName, categoryPriority) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
             {
                 category: categoryName,
+                categoryPriority: categoryPriority,
             }
         );
     }

@@ -357,6 +357,19 @@ export class RestaurantMenuComponent implements OnInit {
                         this.restaurantDetail
                     );
 
+                    // remove category categoryAvailable is false
+                    // don't remove category if categoryAvailable is not present
+                    this.restaurantDetail.cuisine =
+                        this.restaurantDetail.cuisine.filter((data) => {
+                            if (data.categoryAvailable === false) {
+                                return false;
+                            } else if (data.categoryAvailable === true) {
+                                return true;
+                            } else {
+                                return true;
+                            }
+                        });
+
                     // sort the restaurant data cuisine such that offers are shown first
                     this.restaurantDetail.cuisine.sort((a, b) => {
                         if (a.categoryName.toLowerCase() === "offers") {

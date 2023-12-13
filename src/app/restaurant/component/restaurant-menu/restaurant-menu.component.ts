@@ -347,7 +347,7 @@ export class RestaurantMenuComponent implements OnInit {
                     if (!this.restaurantDetail) {
                         this.showNotFound = true;
                         return;
-                        // this.router.navigateByUrl("/notFound")
+                       
                     }
                     if (this.restaurantDetail.restaurantBackgroundImage) {
                         this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImage}')`;
@@ -357,8 +357,6 @@ export class RestaurantMenuComponent implements OnInit {
                         this.restaurantDetail
                     );
 
-                    // remove category categoryAvailable is false
-                    // don't remove category if categoryAvailable is not present
                     this.restaurantDetail.cuisine =
                         this.restaurantDetail.cuisine.filter((data) => {
                             if (data.categoryAvailable === false) {
@@ -379,9 +377,6 @@ export class RestaurantMenuComponent implements OnInit {
                         }
                     });
 
-                    // sort the cuisine with category priority
-                    // if category priority is not present then sort by categoryName but
-                    // lower category priority will be shown first
 
                     for (const cuisine of this.restaurantDetail.cuisine) {
                         cuisine.items.sort((a, b) => {

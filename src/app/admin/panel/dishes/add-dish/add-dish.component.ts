@@ -64,7 +64,7 @@ export class AddDishComponent implements OnInit {
             multiple: false,
         },
         [
-            FileUploadValidators.accept(["image/*"]),
+            // FileUploadValidators.accept(["image/*"]),
             FileUploadValidators.filesLimit(1),
         ]
     );
@@ -91,20 +91,13 @@ export class AddDishComponent implements OnInit {
                     this.selectedCategoryName = item.categoryName.toLowerCase();
                 }
             });
-
         });
     }
     private getImage(file: File): void {
         if (FileReader && file) {
-            const fr = new FileReader();
-            fr.onload = (e: any) => {
-                this.base64 = e.target.result;
-
-                this.uploadedFile.next(this.base64);
-            };
-            fr.readAsDataURL(file);
+            this.uploadedFile.next(this.base64);
         } else {
-            this.uploadedFile.next(null);
+            this.uploadedFile.next("");
         }
     }
     getCategoryValue() {
@@ -193,16 +186,16 @@ export class AddDishComponent implements OnInit {
         });
     }
     onImageChange() {
-        const binaryData = atob(this.base64.split(",")[1]);
-        const byteArray = new Uint8Array(binaryData.length);
-        for (let i = 0; i < binaryData.length; i++) {
-            byteArray[i] = binaryData.charCodeAt(i);
-        }
-        const blob = new Blob([byteArray], { type: "image/jpeg" }); // Change the type accordingly
+        // const binaryData = atob(this.base64.split(",")[1]);
+        // const byteArray = new Uint8Array(binaryData.length);
+        // for (let i = 0; i < binaryData.length; i++) {
+        //     byteArray[i] = binaryData.charCodeAt(i);
+        // }
+        // const blob = new Blob([byteArray], { type: "image/jpeg" }); // Change the type accordingly
 
         // Create FormData and append the Blob to it
         const formData = new FormData();
-        formData.append("imageFile", blob);
+        formData.append("imageFile", this.base64);
 
         // Patch the form control with the FormData
         this.control.setValue([formData.get("imageFile") as any]);

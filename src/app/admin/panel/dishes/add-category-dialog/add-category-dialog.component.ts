@@ -11,6 +11,7 @@ export class AddCategoryDialogComponent implements OnInit {
     categoryErrorFlag = false;
     category = "";
     categoryPriority: number;
+    categoryAvailable: boolean = false; // New boolean field
 
     constructor(
         private restaurantService: RestaurantPanelService,
@@ -45,6 +46,7 @@ export class AddCategoryDialogComponent implements OnInit {
                 categoryId: this.data._id,
                 categoryName: this.category.toLowerCase(),
                 categoryPriority: this.categoryPriority,
+                categoryAvailable: this.categoryAvailable, // Include the new field
             };
             this.restaurantService.updateCategory(reqBody).subscribe({
                 next: (res) => {
@@ -53,7 +55,11 @@ export class AddCategoryDialogComponent implements OnInit {
             });
         } else {
             this.restaurantService
-                .addCategory(this.category.toLowerCase(), this.categoryPriority)
+                .addCategory(
+                    this.category.toLowerCase(),
+                    this.categoryPriority,
+                    this.categoryAvailable // Include the new field
+                )
                 .subscribe({
                     next: (res) => {
                         this.dialogRef.close({ apiCallFlag: true });

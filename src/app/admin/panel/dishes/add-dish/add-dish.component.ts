@@ -92,11 +92,6 @@ export class AddDishComponent implements OnInit {
                 }
             });
 
-            // console.log("the value of the dish category is", value      )
-            // if (this.selectedCategoryName === 'offers') {
-            // } else {
-            //   this.dishesForm.get('days').reset();
-            // }
         });
     }
     private getImage(file: File): void {

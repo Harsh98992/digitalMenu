@@ -370,8 +370,25 @@ export class RestaurantMenuComponent implements OnInit {
                     // if category priority is not present then sort by categoryName but
                     // lower category priority will be shown first
 
-                    
-
+                    for (const cuisine of this.restaurantDetail.cuisine) {
+                        cuisine.items.sort((a, b) => {
+                            if (a.categoryPriority && b.categoryPriority) {
+                                return a.categoryPriority - b.categoryPriority;
+                            } else if (a.categoryPriority) {
+                                return -1;
+                            } else if (b.categoryPriority) {
+                                return 1;
+                            } else {
+                                if (a.categoryName < b.categoryName) {
+                                    return -1;
+                                } else if (a.categoryName > b.categoryName) {
+                                    return 1;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        });
+                    }
 
                     // sort the dishes with dishpriority for each cuisine
                     // if dishpriority is not present then sort by dishName
@@ -379,8 +396,7 @@ export class RestaurantMenuComponent implements OnInit {
 
                     for (const cuisine of this.restaurantDetail.cuisine) {
                         cuisine.items.sort((a, b) => {
-
-                            console.log(a.dishPriority, b.dishPriority)
+                            console.log(a.dishPriority, b.dishPriority);
                             if (a.dishPriority && b.dishPriority) {
                                 return a.dishPriority - b.dishPriority;
                             } else if (a.dishPriority) {
@@ -398,10 +414,6 @@ export class RestaurantMenuComponent implements OnInit {
                             }
                         });
                     }
-
-
-
-
 
                     this.restaurantMenuStore = _.clone(
                         this.restaurantDetail.cuisine

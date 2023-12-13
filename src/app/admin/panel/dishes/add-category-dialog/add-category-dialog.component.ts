@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 
 @Component({
@@ -11,6 +10,8 @@ import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 export class AddCategoryDialogComponent implements OnInit {
     categoryErrorFlag = false;
     category = "";
+    categoryPriority: number;
+
     constructor(
         private restaurantService: RestaurantPanelService,
         public dialogRef: MatDialogRef<any>,
@@ -22,14 +23,17 @@ export class AddCategoryDialogComponent implements OnInit {
             this.category = this.toTitleCase(this.data.categoryName);
         }
     }
+
     toTitleCase(str) {
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
     }
+
     changeCategoryFlag() {
         this.categoryErrorFlag = false;
     }
+
     addCategory() {
         this.categoryErrorFlag = false;
         if (!this.category) {
@@ -40,6 +44,7 @@ export class AddCategoryDialogComponent implements OnInit {
             const reqBody = {
                 categoryId: this.data._id,
                 categoryName: this.category.toLowerCase(),
+                categoryPriority: this.categoryPriority,
             };
             this.restaurantService.updateCategory(reqBody).subscribe({
                 next: (res) => {
@@ -48,7 +53,7 @@ export class AddCategoryDialogComponent implements OnInit {
             });
         } else {
             this.restaurantService
-                .addCategory(this.category.toLowerCase())
+                .addCategory(this.category.toLowerCase(), this.categoryPriority)
                 .subscribe({
                     next: (res) => {
                         this.dialogRef.close({ apiCallFlag: true });

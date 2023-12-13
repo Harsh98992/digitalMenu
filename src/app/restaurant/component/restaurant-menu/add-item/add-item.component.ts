@@ -60,6 +60,10 @@ export class AddItemComponent implements OnInit {
                 }
             });
         }
+        else{
+
+            this.getSizeAddOn()
+        }
     }
     getRestaurantData() {
         this.restaurantPanelService.restaurantData.subscribe({

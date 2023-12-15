@@ -424,6 +424,28 @@ export class RestaurantMenuComponent implements OnInit {
                         });
                     }
 
+                    // capitalize the first letter of each word in dishName and dishDescription
+                    for (const cuisine of this.restaurantDetail.cuisine) {
+                        for (const dish of cuisine.items) {
+                            dish.dishName = this.convertTitleCase(
+                                dish.dishName
+                            );
+                            // don't user convertTitleCase for dishDescription
+                            // as it is not working for some reason
+                            dish.dishDescription =
+                                dish.dishDescription.charAt(0).toUpperCase() +
+                                dish.dishDescription.slice(1);
+
+                            if (dish.addOns && dish.addOns.length > 0) {
+                                for (const addOn of dish.addOns) {
+                                    addOn.addOnName = this.convertTitleCase(
+                                        addOn.addOnName
+                                    );
+                                }
+                            }
+                        }
+                    }
+
                     this.restaurantMenuStore = _.clone(
                         this.restaurantDetail.cuisine
                     );

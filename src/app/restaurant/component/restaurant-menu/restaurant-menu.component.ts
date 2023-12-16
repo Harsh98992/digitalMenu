@@ -51,6 +51,7 @@ export class RestaurantMenuComponent implements OnInit {
     reviews = [];
 
     googleMapUrl = "";
+    placeId = "";
 
     rating = "";
 
@@ -335,6 +336,13 @@ export class RestaurantMenuComponent implements OnInit {
             });
         }
     }
+
+    capitalizeWords(dishName: string): string {
+        return dishName
+            .split(" ")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+    }
     getRestaurantData() {
         this.route.queryParams.subscribe((params) => {
             const restaurnatUrl = params["detail"];
@@ -347,7 +355,6 @@ export class RestaurantMenuComponent implements OnInit {
                     if (!this.restaurantDetail) {
                         this.showNotFound = true;
                         return;
-                       
                     }
                     if (this.restaurantDetail.restaurantBackgroundImage) {
                         this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImage}')`;
@@ -356,6 +363,8 @@ export class RestaurantMenuComponent implements OnInit {
                     this.restaurantPanelService.restaurantData.next(
                         this.restaurantDetail
                     );
+
+                    this.placeId = this.restaurantDetail.placeId;
 
                     this.restaurantDetail.cuisine =
                         this.restaurantDetail.cuisine.filter((data) => {
@@ -376,7 +385,6 @@ export class RestaurantMenuComponent implements OnInit {
                             return 1;
                         }
                     });
-
 
                     for (const cuisine of this.restaurantDetail.cuisine) {
                         cuisine.items.sort((a, b) => {
@@ -423,6 +431,40 @@ export class RestaurantMenuComponent implements OnInit {
                         });
                     }
 
+                    // capitalize the first letter of each word in dishName and dishDescription
+                    for (const cuisine of this.restaurantDetail.cuisine) {
+                        for (const dish of cuisine.items) {
+                            try {
+                                dish.dishName = this.capitalizeWords(
+                                    dish.dishName
+                                );
+                            } catch (error) {
+                                console.log(error);
+                            }
+                            //
+                            //
+                            try {
+                                dish.dishDescription = this.capitalizeWords(
+                                    dish.dishDescription
+                                );
+                            } catch (error) {
+                                console.log(error);
+                            }
+
+                            if (dish.addOns && dish.addOns.length > 0) {
+                                for (const addOn of dish.addOns) {
+                                    try {
+                                        addOn.addOnName = this.capitalizeWords(
+                                            addOn.addOnName
+                                        );
+                                    } catch (error) {
+                                        console.log(error);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     this.restaurantMenuStore = _.clone(
                         this.restaurantDetail.cuisine
                     );
@@ -430,7 +472,9 @@ export class RestaurantMenuComponent implements OnInit {
                         this.restaurantDetail.cuisine
                     );
 
-                    this.googleMapUrl = `https://www.google.com/maps/search/?api=1&query=${this.restaurantDetail?.restaurantName},${this.restaurantDetail?.address?.street},${this.restaurantDetail?.address?.city},${this.restaurantDetail?.address?.state},${this.restaurantDetail?.address?.pinCode}&query_place_id=${this.restaurantDetail?.googlePlaceId}`;
+                    // this.googleMapUrl = `https://www.google.com/maps/search/?api=1&query=${this.restaurantDetail?.restaurantName},${this.restaurantDetail?.address?.street},${this.restaurantDetail?.address?.city},${this.restaurantDetail?.address?.state},${this.restaurantDetail?.address?.pinCode}&query_place_id=${this.restaurantDetail?.googlePlaceId}`;
+
+                    this.googleMapUrl = `https://www.google.com/maps?q=${this.restaurantDetail?.address?.latitude},${this.restaurantDetail?.address?.longitude}&ll=${this.restaurantDetail?.address?.latitude},${this.restaurantDetail?.address?.longitude}&z=17`;
 
                     this.filterRestaurantMenu("all");
                 },

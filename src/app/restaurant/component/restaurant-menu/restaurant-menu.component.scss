@@ -940,3 +940,12 @@ ul.tags li a:hover {
 .inline-block {
     display: inline-block;
 }
+@media only screen and (max-width: 767px) {
+    /* Styles for phones */
+    /* Add your CSS rules here */
+    .button-87{
+        display: block;
+        min-width: 200px;
+        margin-top: 1rem;
+    }
+  }

@@ -64,7 +64,7 @@ export class AddDishComponent implements OnInit {
             multiple: false,
         },
         [
-            FileUploadValidators.accept(["image/*"]),
+            //  FileUploadValidators.accept(["image/*"]),
             FileUploadValidators.filesLimit(1),
         ]
     );
@@ -91,11 +91,12 @@ export class AddDishComponent implements OnInit {
                     this.selectedCategoryName = item.categoryName.toLowerCase();
                 }
             });
-
         });
     }
     private getImage(file: File): void {
-        if (FileReader && file) {
+        console.log(file);
+
+        if (FileReader && file && file?.name) {
             const fr = new FileReader();
             fr.onload = (e: any) => {
                 this.base64 = e.target.result;
@@ -103,6 +104,8 @@ export class AddDishComponent implements OnInit {
                 this.uploadedFile.next(this.base64);
             };
             fr.readAsDataURL(file);
+        } else if (file) {
+            this.uploadedFile.next(this.base64);
         } else {
             this.uploadedFile.next(null);
         }
@@ -192,20 +195,34 @@ export class AddDishComponent implements OnInit {
             }
         });
     }
-    onImageChange() {
-        const binaryData = atob(this.base64.split(",")[1]);
-        const byteArray = new Uint8Array(binaryData.length);
-        for (let i = 0; i < binaryData.length; i++) {
-            byteArray[i] = binaryData.charCodeAt(i);
+    isBase64(str) {
+        try {
+            // Check if decoding the string using atob produces valid UTF-8
+            return btoa(atob(str)) === str;
+        } catch (err) {
+            // If an error occurs during decoding, it's not valid base64
+            return false;
         }
-        const blob = new Blob([byteArray], { type: "image/jpeg" }); // Change the type accordingly
+    }
+    onImageChange() {
+        if (this.isBase64(this.base64)) {
+            const binaryData = atob(this.base64.split(",")[1]);
+            const byteArray = new Uint8Array(binaryData.length);
+            for (let i = 0; i < binaryData.length; i++) {
+                byteArray[i] = binaryData.charCodeAt(i);
+            }
+            const blob = new Blob([byteArray], { type: "image/jpeg" }); // Change the type accordingly
 
-        // Create FormData and append the Blob to it
-        const formData = new FormData();
-        formData.append("imageFile", blob);
-
+            // Create FormData and append the Blob to it
+            const formData = new FormData();
+            formData.append("imageFile", blob);
+            this.control.setValue([formData.get("imageFile") as any]);
+        } else {
+            const formData = new FormData();
+            formData.append("imageFile", this.base64);
+            this.control.setValue([formData.get("imageFile") as any]);
+        }
         // Patch the form control with the FormData
-        this.control.setValue([formData.get("imageFile") as any]);
     }
     deleteFormField() {
         this.choicesGroup.removeAt(0);

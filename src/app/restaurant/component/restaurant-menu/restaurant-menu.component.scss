@@ -34,7 +34,8 @@
 }
 
 .button-87 {
-    margin: 10px;
+    margin: 10px 40px 10px 10px; // top, right, bottom, left
+    display: inline-block;
     padding: 15px 15px;
     text-align: center;
     text-transform: uppercase;
@@ -42,7 +43,6 @@
     background-size: 200% auto;
     color: white;
     border-radius: 10px 0 10px 10px;
-    display: block;
     border: 0px;
     font-weight: 700;
     box-shadow: 0px 0px 14px -7px #f09819;
@@ -937,6 +937,6 @@ ul.tags li a:hover {
 .general-section {
     background-color: #c0c0c0 !important;
 }
-.inline-block{
+.inline-block {
     display: inline-block;
 }

@@ -64,7 +64,7 @@ export class AddDishComponent implements OnInit {
             multiple: false,
         },
         [
-            // FileUploadValidators.accept(["image/*"]),
+            FileUploadValidators.accept(["image/*"]),
             FileUploadValidators.filesLimit(1),
         ]
     );
@@ -91,13 +91,20 @@ export class AddDishComponent implements OnInit {
                     this.selectedCategoryName = item.categoryName.toLowerCase();
                 }
             });
+
         });
     }
     private getImage(file: File): void {
         if (FileReader && file) {
-            this.uploadedFile.next(this.base64);
+            const fr = new FileReader();
+            fr.onload = (e: any) => {
+                this.base64 = e.target.result;
+
+                this.uploadedFile.next(this.base64);
+            };
+            fr.readAsDataURL(file);
         } else {
-            this.uploadedFile.next("");
+            this.uploadedFile.next(null);
         }
     }
     getCategoryValue() {
@@ -186,16 +193,16 @@ export class AddDishComponent implements OnInit {
         });
     }
     onImageChange() {
-        // const binaryData = atob(this.base64.split(",")[1]);
-        // const byteArray = new Uint8Array(binaryData.length);
-        // for (let i = 0; i < binaryData.length; i++) {
-        //     byteArray[i] = binaryData.charCodeAt(i);
-        // }
-        // const blob = new Blob([byteArray], { type: "image/jpeg" }); // Change the type accordingly
+        const binaryData = atob(this.base64.split(",")[1]);
+        const byteArray = new Uint8Array(binaryData.length);
+        for (let i = 0; i < binaryData.length; i++) {
+            byteArray[i] = binaryData.charCodeAt(i);
+        }
+        const blob = new Blob([byteArray], { type: "image/jpeg" }); // Change the type accordingly
 
         // Create FormData and append the Blob to it
         const formData = new FormData();
-        formData.append("imageFile", this.base64);
+        formData.append("imageFile", blob);
 
         // Patch the form control with the FormData
         this.control.setValue([formData.get("imageFile") as any]);
@@ -346,10 +353,17 @@ export class AddDishComponent implements OnInit {
         this.showErrorImageFlag = false;
 
         this.dishesForm.markAllAsTouched();
-
+        //if (!this.base64) {
+        //this.showErrorImageFlag = true;
+        //}
+        //if (!this.dishesForm.valid || !this.base64) {
+        //  return;
+        //}
 
         this.myStepper.next();
-
+        // this.restaurantService.addDish(data).subscribe({
+        //   next: (res) => {},
+        // });
     }
     saveDish() {
         const variantData = this.variants.value.map((data, i) => {

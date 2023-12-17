@@ -47,13 +47,14 @@ export class AddOtherOptionDialogComponent implements OnInit {
         this.choicesForm.enable();
     }
     patchAddOns() {
-        console.log(this.data);
+       
 
         for (let i = 0; i < this.data.choicesGroup.length - 1; i++) {
             this.choicesGroup.push(
                 new FormGroup({
                     category: new FormControl("", Validators.required),
                     choiceName: new FormControl("", Validators.required),
+                    choiceDescription: new FormControl(""),
                 })
             );
         }
@@ -118,7 +119,7 @@ export class AddOtherOptionDialogComponent implements OnInit {
     }
     addChoices() {
         this.choicesForm.markAllAsTouched();
-        if (!this.choicesGroup.valid) {
+        if (this.choicesGroup.errors) {
             return;
         }
 
@@ -126,6 +127,7 @@ export class AddOtherOptionDialogComponent implements OnInit {
             new FormGroup({
                 category: new FormControl("", Validators.required),
                 choiceName: new FormControl("", Validators.required),
+                choiceDescription: new FormControl(""),
             })
         );
     }

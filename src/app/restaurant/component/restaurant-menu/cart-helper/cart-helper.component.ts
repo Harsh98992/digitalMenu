@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import {  MatDialog } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { AddressSelectionComponent } from "../address/address-selection/address-selection.component";
 import { Component, Input, OnInit } from "@angular/core";
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
@@ -14,6 +14,7 @@ import { TimeSelectorDialogComponent } from "../time-selector-dialog/time-select
 import { UserPromoCodeDialogComponent } from "./user-promo-code-dialog/user-promo-code-dialog.component";
 import { environment } from "src/environments/environment";
 import { io } from "socket.io-client";
+import { UtilService } from "src/app/api/util.service";
 
 @Component({
     selector: "app-cart-helper",
@@ -49,9 +50,9 @@ export class CartHelperComponent implements OnInit {
         private customerAuthService: CustomerAuthService,
         private dialog: MatDialog,
         private orderService: OrderService,
-
         private router: Router,
-        private customerService: CustomerService
+        private customerService: CustomerService,
+        private utilityService: UtilService
     ) {}
 
     applyPromoCode() {
@@ -90,16 +91,13 @@ export class CartHelperComponent implements OnInit {
         this.getCartState();
         console.log(this.restaurantData);
 
-        this.customerService.isDineInAvailable(this.restaurantData._id).subscribe({
-            next: (res: any) => {
-                this.isDineInAvailable = res.data.isDineInAvailable;
-            },
-        });
-
-
-
-
-
+        this.customerService
+            .isDineInAvailable(this.restaurantData._id)
+            .subscribe({
+                next: (res: any) => {
+                    this.isDineInAvailable = res.data.isDineInAvailable;
+                },
+            });
     }
 
     getCartState() {
@@ -110,11 +108,10 @@ export class CartHelperComponent implements OnInit {
                 this.userPreference = res?.userPreference;
                 this.cookingInstruction = res?.cookingInstruction;
                 this.calculateItemTotal();
-                if(res?.cookingInstruction){
-                    this.showCookingRequestFlag=true
-                }
-                else{
-                    this.showCookingRequestFlag=false
+                if (res?.cookingInstruction) {
+                    this.showCookingRequestFlag = true;
+                } else {
+                    this.showCookingRequestFlag = false;
                 }
             },
         });
@@ -148,6 +145,15 @@ export class CartHelperComponent implements OnInit {
                         this.setCartStateHelper();
                     },
                 });
+        } else if (
+            this.orderOption === "delivery" &&
+            this.itemTotal < this.restaurantData.minOrderValueForDelivery
+        ) {
+            this.utilityService.openSnackBar(
+                `Delivery not available below Rs. ${this.restaurantData.minOrderValueForDelivery}`,
+                true
+            );
+            this.orderOption = null;
         } else {
             this.setCartStateHelper();
         }
@@ -264,8 +270,7 @@ export class CartHelperComponent implements OnInit {
         ) {
             if (
                 totalAmount &&
-                totalAmount <
-                    this.restaurantData?.minOrderValueForFreeDelivery
+                totalAmount < this.restaurantData?.minOrderValueForFreeDelivery
             ) {
                 this.deliveryAmount = this.restaurantData
                     ?.deliveryFeeBelowMinValue
@@ -412,7 +417,6 @@ export class CartHelperComponent implements OnInit {
                     if (this.userPreference.preference === "Dine In") {
                         this.router.navigateByUrl("/orders");
                     } else {
-
                         console.log(res.data.orderId);
 
                         this.router.navigate([
@@ -435,5 +439,40 @@ export class CartHelperComponent implements OnInit {
                 // this.dialog.closeAll();
             },
         });
+    }
+    // provideDelivery: {
+    //     type: Boolean,
+
+    //     default: false,
+    // },
+    // maxDeliveryDistance: {
+    //     type: Number,
+    //     default: 0,
+    // },
+    // minOrderValueForFreeDelivery: {
+    //     type: Number,
+    //     default: 0,
+    // },
+    // deliveryFeeBelowMinValue: {
+    //     type: Number,
+    //     default: 0,
+    // },
+    // minOrderValueForDelivery: {
+    //     type: Number,
+    //     default: 0,
+    // },
+
+    deliveryDisabled = false;
+
+    getDeliveryRadiobuttonText() {
+        if (this.itemTotal < this.restaurantData.minOrderValueForDelivery) {
+            this.deliveryDisabled = true;
+            return `Delivery (Not Available Below Rs. ${this.restaurantData.minOrderValueForDelivery})`;
+        }
+        if (this.itemTotal < this.restaurantData.minOrderValueForFreeDelivery) {
+            // show rs symbol
+            return `Delivery (Rs. ${this.restaurantData.deliveryFeeBelowMinValue})`;
+        }
+        return "Delivery (Free)";
     }
 }

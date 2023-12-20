@@ -352,9 +352,6 @@ export class RestaurantMenuComponent implements OnInit {
                     this.restaurantDetail = res.data;
 
 
-
-                    // get restaurant status
-
                     this.customerService.getRestaurantStatus(this.restaurantDetail._id).subscribe({
                         next: (res: any) => {
                             if (res && res.data && res.data.restaurantStatus) {
@@ -362,11 +359,6 @@ export class RestaurantMenuComponent implements OnInit {
                             }
                         },
                     });
-
-
-
-
-
 
 
                     this.getReviews(this.restaurantDetail);

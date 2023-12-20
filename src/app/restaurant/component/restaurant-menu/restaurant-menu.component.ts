@@ -350,6 +350,25 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
+
+
+
+                    // get restaurant status
+
+                    this.customerService.getRestaurantStatus(this.restaurantDetail._id).subscribe({
+                        next: (res: any) => {
+                            if (res && res.data && res.data.restaurantStatus) {
+                                this.restaurantDetail.restaurantStatus = res.data.restaurantStatus;
+                            }
+                        },
+                    });
+
+
+
+
+
+
+
                     this.getReviews(this.restaurantDetail);
 
                     if (!this.restaurantDetail) {

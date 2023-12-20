@@ -93,4 +93,10 @@ export class CustomerService {
             `${this.apiUrl}/v1/customer/isDineInAvailable/${restaurantId}`
         );
     }
+
+    getRestaurantStatus(restaurantId) {
+        return this.http.get(
+            `${this.apiUrl}/v1/customer/getRestaurantStatus/${restaurantId}`
+        );
+    }
 }

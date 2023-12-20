@@ -42,8 +42,6 @@ firebase use qrsay-c617e
 firebase deploy
 
 
-
-
 ```
 
 for staging

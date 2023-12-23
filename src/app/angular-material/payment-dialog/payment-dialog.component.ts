@@ -14,12 +14,12 @@ declare var Razorpay: any;
 })
 export class PaymentDialogComponent implements OnInit {
     paymentMethod: string;
-    // paymentOption = [
-    //     { key: "payOnline", value: "Pay Online" },
-    //     { key: "cashOnDelivery", value: "Cash On Delivery" },
-    // ];
+    paymentOption = [
+        { key: "payOnline", value: "Pay Online" },
+        { key: "cashOnDelivery", value: "Cash On Delivery" },
+    ];
 
-    paymentOption = [{ key: "cashOnDelivery", value: "Cash On Delivery" }];
+   // paymentOption = [{ key: "cashOnDelivery", value: "Cash On Delivery" }];
 
     socket: any;
     socketApiUrl = environment.socketApiUrl;

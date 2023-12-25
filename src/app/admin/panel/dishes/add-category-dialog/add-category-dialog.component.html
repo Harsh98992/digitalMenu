@@ -19,13 +19,17 @@
                 <input type="number" class="form-control mt-1" name="categoryPriority" [(ngModel)]="categoryPriority" />
             </div>
 
-            <div class="mb-3">
-                <label for="categoryAvailable" class="form-label">Category Available</label>
-                <input type="checkbox" class="form-check-input mt-1" name="categoryAvailable" [(ngModel)]="categoryAvailable" />
-            </div>
+           
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="exampleCheckbox" [(ngModel)]="categoryAvailable">
+                    <label class="form-check-label" for="exampleCheckbox">Category unavailable. </label>
+                  </div>
+                <!-- <input type="checkbox" class="form-check-input mt-1" name="categoryAvailable"  />
+                <label for="categoryAvailable" class="form-label">Category Available</label> -->
+           
 
 
-            <button type="submit" class="btn btn_1 gradient w-100" (click)="addCategory()">
+            <button type="submit" class="btn btn_1 mt-3 gradient w-100" (click)="addCategory()">
                 {{ data ? "Update Category" : "Add Category" }}
             </button>
             <!-- ... (existing code) ... -->

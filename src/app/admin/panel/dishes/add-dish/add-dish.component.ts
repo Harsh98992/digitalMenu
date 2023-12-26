@@ -153,7 +153,7 @@ export class AddDishComponent implements OnInit {
             dishPriority: [""],
             applyDiscount: [false],
         });
-        
+
         this.variantsForm = new FormGroup({
             defaultSize: new FormControl(0, Validators.required),
             variants: new FormArray([
@@ -213,7 +213,6 @@ export class AddDishComponent implements OnInit {
                     this.dishesForm.patchValue(dishData);
                     this.checkForDishDiscountFlag();
                     this.dishesForm.patchValue(dishData);
-                    
                 }
             } else {
                 this.deleteFormField();
@@ -402,13 +401,27 @@ export class AddDishComponent implements OnInit {
         //  return;
         //}
 
-       // this.myStepper.next();
+        this.myStepper.next();
         // this.restaurantService.addDish(data).subscribe({
         //   next: (res) => {},
         // });
     }
     saveDish() {
-        
+        if (this.dishDiscountFlag) {
+            const dishPrice = this.dishesForm.get("dishPrice").value;
+            const dishActualPrice =
+                this.dishesForm.get("dishActualPrice").value;
+            {
+                if (dishActualPrice < dishPrice) {
+                    this.utilService.openSnackBar(
+                        "The discounted price of a dish must not exceed the original price of the dish.",
+                        true
+                    );
+                    return;
+                }
+            }
+        }
+
         const variantData = this.variants.value.map((data, i) => {
             if (i === this.variantsForm.get("defaultSize").value) {
                 this.dishesForm.get("dishPrice").setValue(data.price);
@@ -423,7 +436,7 @@ export class AddDishComponent implements OnInit {
                 };
             }
         });
-       
+
         const data = {
             ...this.dishesForm.value,
             imageUrl: this.base64,
@@ -431,8 +444,7 @@ export class AddDishComponent implements OnInit {
             addOns: this.addOnGroup.value,
             choicesAvailable: this.choicesGroup.value,
         };
-     
-        
+
         if (!this.editFlag) {
             this.restaurantService.addDish(data).subscribe({
                 next: (res) => {

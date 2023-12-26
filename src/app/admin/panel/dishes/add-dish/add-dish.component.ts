@@ -38,6 +38,8 @@ export class AddDishComponent implements OnInit {
     base64: string;
     variantsForm: FormGroup;
     categories = [];
+
+    discountOption = "Yes";
     addOnsList = [];
     dishChoicesList = [];
     sizesAvailable = [{ size: "All" }];
@@ -68,6 +70,8 @@ export class AddDishComponent implements OnInit {
             FileUploadValidators.filesLimit(1),
         ]
     );
+    discountOptionSelected: any;
+    dishDiscountFlag = false;
     constructor(
         private utilService: UtilService,
         public dialog: MatDialog,
@@ -79,6 +83,7 @@ export class AddDishComponent implements OnInit {
 
     ngOnInit(): void {
         this.generateAddDishForm();
+        this.discountOptionSelected = this.discountOption[1];
         this.getCategoryValue();
         this.subscription = this.control.valueChanges.subscribe(
             (values: Array<File>) => this.getImage(values[0])
@@ -146,7 +151,9 @@ export class AddDishComponent implements OnInit {
             spicy: ["", [Validators.required]],
             days: [""],
             dishPriority: [""],
+            applyDiscount: [false],
         });
+        
         this.variantsForm = new FormGroup({
             defaultSize: new FormControl(0, Validators.required),
             variants: new FormArray([
@@ -174,6 +181,21 @@ export class AddDishComponent implements OnInit {
         });
         this.checkForEditMode();
     }
+    checkForDishDiscountFlag() {
+        const val = this.dishesForm.get("applyDiscount").value;
+
+        if (val) {
+            this.dishesForm.addControl(
+                "dishActualPrice",
+                this.fb.control("", Validators.required)
+            );
+            this.dishDiscountFlag = true;
+        } else {
+            this.dishesForm.removeControl("dishActualPrice");
+
+            this.dishDiscountFlag = false;
+        }
+    }
     checkForEditMode() {
         this.route.queryParams.subscribe((params) => {
             this.editFlag = params["edit"];
@@ -189,6 +211,9 @@ export class AddDishComponent implements OnInit {
 
                     this.onImageChange();
                     this.dishesForm.patchValue(dishData);
+                    this.checkForDishDiscountFlag();
+                    this.dishesForm.patchValue(dishData);
+                    
                 }
             } else {
                 this.deleteFormField();
@@ -377,12 +402,13 @@ export class AddDishComponent implements OnInit {
         //  return;
         //}
 
-        this.myStepper.next();
+       // this.myStepper.next();
         // this.restaurantService.addDish(data).subscribe({
         //   next: (res) => {},
         // });
     }
     saveDish() {
+        
         const variantData = this.variants.value.map((data, i) => {
             if (i === this.variantsForm.get("defaultSize").value) {
                 this.dishesForm.get("dishPrice").setValue(data.price);
@@ -397,7 +423,7 @@ export class AddDishComponent implements OnInit {
                 };
             }
         });
-
+       
         const data = {
             ...this.dishesForm.value,
             imageUrl: this.base64,
@@ -405,6 +431,8 @@ export class AddDishComponent implements OnInit {
             addOns: this.addOnGroup.value,
             choicesAvailable: this.choicesGroup.value,
         };
+     
+        
         if (!this.editFlag) {
             this.restaurantService.addDish(data).subscribe({
                 next: (res) => {

@@ -4,36 +4,67 @@
 </div>
 <div class="col-12">
     <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
-        <form class="needs-validation" novalidate="" style="width: -webkit-fill-available" accept-charset="utf-8">
+        <form
+            class="needs-validation"
+            novalidate=""
+            style="width: -webkit-fill-available"
+            accept-charset="utf-8"
+        >
             <!-- ... (existing code) ... -->
             <div class="mb-3">
-                <label for="category" class="form-label required">Enter category name</label>
-                <input type="text" class="form-control mt-1" name="category"
-                    [ngClass]="categoryErrorFlag ? 'is-invalid' : ''" (keyup)="changeCategoryFlag()" maxlength="30"
-                    [(ngModel)]="category" [required]="true" value="" />
-                <small *ngIf="categoryErrorFlag" class="text-danger">Please provide category name</small>
+                <label for="category" class="form-label required"
+                    >Enter category name</label
+                >
+                <input
+                    type="text"
+                    class="form-control mt-1"
+                    name="category"
+                    [ngClass]="categoryErrorFlag ? 'is-invalid' : ''"
+                    (keyup)="changeCategoryFlag()"
+                    maxlength="100"
+                    [(ngModel)]="category"
+                    [required]="true"
+                    value=""
+                />
+                <small *ngIf="categoryErrorFlag" class="text-danger"
+                    >Please provide category name</small
+                >
             </div>
 
             <div class="mb-3">
-                <label for="categoryPriority" class="form-label">Enter category priority</label>
-                <input type="number" class="form-control mt-1" name="categoryPriority" [(ngModel)]="categoryPriority" />
+                <label for="categoryPriority" class="form-label"
+                    >Enter category priority</label
+                >
+                <input
+                    type="number"
+                    class="form-control mt-1"
+                    name="categoryPriority"
+                    [(ngModel)]="categoryPriority"
+                />
             </div>
 
-           
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="exampleCheckbox" [(ngModel)]="categoryAvailable">
-                    <label class="form-check-label" for="exampleCheckbox">Category unavailable. </label>
-                  </div>
-                <!-- <input type="checkbox" class="form-check-input mt-1" name="categoryAvailable"  />
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="exampleCheckbox"
+                    [(ngModel)]="categoryAvailable"
+                />
+                <label class="form-check-label" for="exampleCheckbox"
+                    >Category unavailable.
+                </label>
+            </div>
+            <!-- <input type="checkbox" class="form-check-input mt-1" name="categoryAvailable"  />
                 <label for="categoryAvailable" class="form-label">Category Available</label> -->
-           
 
-
-            <button type="submit" class="btn btn_1 mt-3 gradient w-100" (click)="addCategory()">
+            <button
+                type="submit"
+                class="btn btn_1 mt-3 gradient w-100"
+                (click)="addCategory()"
+            >
                 {{ data ? "Update Category" : "Add Category" }}
             </button>
             <!-- ... (existing code) ... -->
-
         </form>
     </div>
 </div>

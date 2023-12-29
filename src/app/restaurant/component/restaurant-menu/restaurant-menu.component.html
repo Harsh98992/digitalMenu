@@ -325,6 +325,13 @@
                                                     : "symbol"
                                                     : "1.0-0"
                                                     }}
+                                                    <del *ngIf="item?.applyDiscount"> {{
+                                                        item.dishActualPrice
+                                                        | currency
+                                                        : "INR"
+                                                        : "symbol"
+                                                        : "1.0-0"
+                                                        }}</del>
                                                 </p>
                                                 <small [ngClass]="{
                                                         'not-available-item':

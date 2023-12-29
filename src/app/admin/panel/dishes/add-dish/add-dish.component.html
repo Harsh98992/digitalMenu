@@ -7,176 +7,404 @@
         <div class="card">
             <div class="card-header bg-dark text-light">Add Dishes</div>
             <div class="card-body">
-                <mat-stepper linear #stepper (selectionChange)="selectionChange($event)">
-                    <mat-step [stepControl]="dishesForm" [editable]="isEditable">
+                <mat-stepper
+                    linear
+                    #stepper
+                    (selectionChange)="selectionChange($event)"
+                >
+                    <mat-step
+                        [stepControl]="dishesForm"
+                        [editable]="isEditable"
+                    >
                         <form [formGroup]="dishesForm">
-                            <ng-template matStepLabel>Fill out dish details</ng-template>
+                            <ng-template matStepLabel
+                                >Fill out dish details</ng-template
+                            >
 
                             <div class="row g-2">
                                 <div class="mb-3 col-md-6">
-                                    <label for="dishName" class="form-label required">Dish Name</label>
-                                    <input type="text" class="form-control" [ngClass]="
+                                    <label
+                                        for="dishName"
+                                        class="form-label required"
+                                        >Dish Name</label
+                                    >
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        [ngClass]="
                                             checkForError(
                                                 'dishName',
                                                 'required'
                                             )
                                                 ? 'is-invalid'
                                                 : ''
-                                        " maxlength="50" name="dishName" formControlName="dishName"
-                                        placeholder="Dish Name" required="" />
-                                    <small *ngIf="
+                                        "
+                                        maxlength="50"
+                                        name="dishName"
+                                        formControlName="dishName"
+                                        placeholder="Dish Name"
+                                        required=""
+                                    />
+                                    <small
+                                        *ngIf="
                                             checkForError(
                                                 'dishName',
                                                 'required'
                                             )
-                                        " class="text-danger">Please provide dish name</small>
+                                        "
+                                        class="text-danger"
+                                        >Please provide dish name</small
+                                    >
                                 </div>
                                 <div class="mb-3 form-group col-md-4">
-                                    <label for="dishType" class="required">Dish Category</label>
-                                    <ng-select class="custom" name="dishType" formControlName="dishCategory"
-                                        [multiple]="false">
-
-                                        <ng-option [value]="data._id" *ngFor="let data of categories">{{
-                                            data.categoryName | titlecase
-                                            }}</ng-option>
+                                    <label for="dishType" class="required"
+                                        >Dish Category</label
+                                    >
+                                    <ng-select
+                                        class="custom"
+                                        name="dishType"
+                                        formControlName="dishCategory"
+                                        [multiple]="false"
+                                    >
+                                        <ng-option
+                                            [value]="data._id"
+                                            *ngFor="let data of categories"
+                                            >{{
+                                                data.categoryName | titlecase
+                                            }}</ng-option
+                                        >
                                     </ng-select>
-                                    <small *ngIf="
+                                    <small
+                                        *ngIf="
                                             checkForError(
                                                 'dishCategory',
                                                 'required'
                                             )
-                                        " class="text-danger">Please provide dish category</small>
+                                        "
+                                        class="text-danger"
+                                        >Please provide dish category</small
+                                    >
                                 </div>
                                 <div class="mt-4 col-md-2">
-                                    <button type="button" class="btn btn-primary" (click)="openCategoryDialog()">
+                                    <button
+                                        type="button"
+                                        class="btn btn-primary"
+                                        (click)="openCategoryDialog()"
+                                    >
                                         Add New Category
                                     </button>
                                 </div>
                             </div>
                             <div class="row mb-3">
+                                <div class="mb-3 form-group col-md-3">
+                                    <label for="applyDiscount"
+                                        >Apply Discount:</label
+                                    >
+
+                                    <ng-select
+                                        class="custom"
+                                        id="applyDiscount"
+                                        formControlName="applyDiscount"
+                                        (change)="checkForDishDiscountFlag()"
+                                        name="applyDiscount"
+                                    >
+                                        <ng-option [value]="false"
+                                            >No</ng-option
+                                        >
+                                        <ng-option [value]="true"
+                                            >Yes</ng-option
+                                        >
+                                    </ng-select>
+                                </div>
                                 <div class="col-md-3">
-                                    <label for="inlineFormInputGroup" class="form-label required">Dish Price</label>
+                                    <label
+                                        for="inlineFormInputGroup"
+                                        class="form-label required"
+                                        >{{
+                                            dishDiscountFlag
+                                                ? "Dish Discounted Price"
+                                                : "Dish Price"
+                                        }}</label
+                                    >
 
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <div class="input-group-text" style="height: 36px">
+                                            <div
+                                                class="input-group-text"
+                                                style="height: 36px"
+                                            >
                                                 ₹
                                             </div>
                                         </div>
-                                        <input type="number" [ngClass]="
-                                            checkForError(
-                                                'dishPrice',
-                                                'required'
-                                            )
-                                                ? 'is-invalid'
-                                                : ''
-                                        " class="form-control" formControlName="dishPrice" id="inlineFormInputGroup"
-                                            placeholder="Dish Price" />
+                                        <input
+                                            type="number"
+                                            [ngClass]="
+                                                checkForError(
+                                                    'dishPrice',
+                                                    'required'
+                                                )
+                                                    ? 'is-invalid'
+                                                    : ''
+                                            "
+                                            class="form-control"
+                                            formControlName="dishPrice"
+                                            id="inlineFormInputGroup"
+                                            placeholder="{{
+                                                dishDiscountFlag
+                                                    ? 'Dish Discounted Price'
+                                                    : 'Dish Price'
+                                            }}"
+                                        />
                                     </div>
-                                    <small *ngIf="
+                                    <small
+                                        *ngIf="
                                             checkForError(
                                                 'dishPrice',
                                                 'required'
                                             )
-                                        " class="text-danger">Please provide dish price</small>
+                                        "
+                                        class="text-danger"
+                                        >Please provide
+                                        {{
+                                            dishDiscountFlag
+                                                ? "dish discounted price"
+                                                : "dish price"
+                                        }}</small
+                                    >
+                                </div>
+                                <div class="col-md-3" *ngIf="dishDiscountFlag">
+                                    <label
+                                        for="inlineFormInputGroup"
+                                        class="form-label required"
+                                        >Dish Actual Price</label
+                                    >
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div
+                                                class="input-group-text"
+                                                style="height: 36px"
+                                            >
+                                                ₹
+                                            </div>
+                                        </div>
+                                        <input
+                                            type="number"
+                                            [ngClass]="
+                                                checkForError(
+                                                    'dishActualPrice',
+                                                    'required'
+                                                )
+                                                    ? 'is-invalid'
+                                                    : ''
+                                            "
+                                            class="form-control"
+                                            formControlName="dishActualPrice"
+                                            id="inlineFormInputGroup"
+                                            placeholder="Dish Actual Price"
+                                        />
+                                    </div>
+                                    <small
+                                        *ngIf="
+                                            checkForError(
+                                                'dishActualPrice',
+                                                'required'
+                                            )
+                                        "
+                                        class="text-danger"
+                                        >Please provide dish actual price</small
+                                    >
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="type" class="form-label required">Dish Type</label>
+                                    <label
+                                        for="type"
+                                        class="form-label required"
+                                        >Dish Type</label
+                                    >
                                     <ng-select formControlName="dishType">
-                                        <ng-option aria-selected="true" value="veg">
-                                            <img src="assets/img/vegGreenIcon.png" alt="veg"
-                                                class="vegIcon" />Veg</ng-option>
-                                        <ng-option value="nonVeg"><img src="assets/img/nonVeg.png" alt="veg"
-                                                class="vegIcon" />Non-Veg</ng-option>
+                                        <ng-option
+                                            aria-selected="true"
+                                            value="veg"
+                                        >
+                                            <img
+                                                src="assets/img/vegGreenIcon.png"
+                                                alt="veg"
+                                                class="vegIcon"
+                                            />Veg</ng-option
+                                        >
+                                        <ng-option value="nonVeg"
+                                            ><img
+                                                src="assets/img/nonVeg.png"
+                                                alt="veg"
+                                                class="vegIcon"
+                                            />Non-Veg</ng-option
+                                        >
                                     </ng-select>
-                                    <small *ngIf="
+                                    <small
+                                        *ngIf="
                                             checkForError(
                                                 'dishType',
                                                 'required'
                                             )
-                                        " class="text-danger">Please provide dish type</small>
+                                        "
+                                        class="text-danger"
+                                        >Please provide dish type</small
+                                    >
                                 </div>
                                 <div class="mb-3 form-group col-md-3">
-                                    <label for="spicy" class="required">Spicy</label>
-                                    <ng-select class="custom" name="spicy" formControlName="spicy" [multiple]="false">
-                                        <ng-option [value]="data.result" *ngFor="let data of spicy">{{
-                                            data.name | titlecase
-                                            }}</ng-option>
+                                    <label for="spicy" class="required"
+                                        >Spicy</label
+                                    >
+                                    <ng-select
+                                        class="custom"
+                                        name="spicy"
+                                        formControlName="spicy"
+                                        [multiple]="false"
+                                    >
+                                        <ng-option
+                                            [value]="data.result"
+                                            *ngFor="let data of spicy"
+                                            >{{
+                                                data.name | titlecase
+                                            }}</ng-option
+                                        >
                                     </ng-select>
-                                    <small *ngIf="
+                                    <small
+                                        *ngIf="
                                             checkForError('spicy', 'required')
-                                        " class="text-danger">Please provide spicy value</small>
+                                        "
+                                        class="text-danger"
+                                        >Please provide spicy value</small
+                                    >
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="type" class="form-label required">Dish Availability</label>
-                                    <ng-select formControlName="dishOrderOption">
-                                        <ng-option aria-selected="true" value="delivery">
-                                            Delivery</ng-option>
-                                        <ng-option value="takeAway">Take Away</ng-option>
+                                    <label
+                                        for="type"
+                                        class="form-label required"
+                                        >Dish Availability</label
+                                    >
+                                    <ng-select
+                                        formControlName="dishOrderOption"
+                                    >
+                                        <ng-option
+                                            aria-selected="true"
+                                            value="delivery"
+                                        >
+                                            Delivery</ng-option
+                                        >
+                                        <ng-option value="takeAway"
+                                            >Take Away</ng-option
+                                        >
                                         <ng-option value="both">Both</ng-option>
-
 
                                         <!-- add option of none in dish availability -->
 
-                                        <ng-option value="none">Out of Stock</ng-option>
-
-
+                                        <ng-option value="none"
+                                            >Out of Stock</ng-option
+                                        >
                                     </ng-select>
-                                    <small *ngIf="
+                                    <small
+                                        *ngIf="
                                             checkForError(
                                                 'dishOrderOption',
                                                 'required'
                                             )
-                                        " class="text-danger">Please provide dish Availability</small>
+                                        "
+                                        class="text-danger"
+                                        >Please provide dish Availability</small
+                                    >
                                 </div>
                                 <div class="col-2 verify-button-div"></div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="address" class="form-label">Description</label>
-                                <input type="text" class="form-control" name="address" formControlName="dishDescription"
-                                    maxlength="130" placeholder="Description" />
+                                <label for="address" class="form-label"
+                                    >Description</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="address"
+                                    formControlName="dishDescription"
+                                    maxlength="130"
+                                    placeholder="Description"
+                                />
                             </div>
                             <!-- // add non mandatory field of dish priority -->
                             <div class="mb-3">
-                                <label for="address" class="form-label">Dish Priority</label>
-                                <input type="number" class="form-control" name="address" formControlName="dishPriority"
-                                    maxlength="100" placeholder="Dish Priority" />
+                                <label for="address" class="form-label"
+                                    >Dish Priority</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="address"
+                                    formControlName="dishPriority"
+                                    maxlength="100"
+                                    placeholder="Dish Priority"
+                                />
                             </div>
 
-
-
-                            <div class="mb-3 col-md-8" *ngIf="selectedCategoryName === 'offers'">
-                                <label class="required" for="days">Select Days to Run Offer:</label>
-                                <ng-select id="days" name="days" [multiple]="true" formControlName="days">
-                                    <ng-option *ngFor="let day of allDays" [value]="day">{{ day }}</ng-option>
+                            <div
+                                class="mb-3 col-md-8"
+                                *ngIf="selectedCategoryName === 'offers'"
+                            >
+                                <label class="required" for="days"
+                                    >Select Days to Run Offer:</label
+                                >
+                                <ng-select
+                                    id="days"
+                                    name="days"
+                                    [multiple]="true"
+                                    formControlName="days"
+                                >
+                                    <ng-option
+                                        *ngFor="let day of allDays"
+                                        [value]="day"
+                                        >{{ day }}</ng-option
+                                    >
                                 </ng-select>
-                                <small *ngIf="checkForError('days', 'required')" class="text-danger">
+                                <small
+                                    *ngIf="checkForError('days', 'required')"
+                                    class="text-danger"
+                                >
                                     Select at least one day.
                                 </small>
                             </div>
                             <div class="row mb-5">
-
                                 <div class="col-md-6">
-                                    <file-upload [control]="control" accept="image/*" maxsize="2 MB"
-                                        [animation]="false">
-                                        <ng-template let-isFileDragDropAvailable="isFileDragDropAvailable" #placeholder>
+                                    <file-upload
+                                        [control]="control"
+                                        accept="image/*"
+                                        maxsize="2 MB"
+                                        [animation]="false"
+                                    >
+                                        <ng-template
+                                            let-isFileDragDropAvailable="isFileDragDropAvailable"
+                                            #placeholder
+                                        >
                                             <div *ngIf="control.size === 0">
                                                 <div class="icon">
-                                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                                    <i
+                                                        class="fa-solid fa-cloud-arrow-up"
+                                                    ></i>
                                                 </div>
 
                                                 <div class="upload-text">
-                                                    <ng-container *ngIf="
+                                                    <ng-container
+                                                        *ngIf="
                                                             isFileDragDropAvailable;
                                                             else isNotDragDropAvailable
-                                                        ">
+                                                        "
+                                                    >
                                                         <b>Drag and drop</b>
                                                         files<br />
                                                         or click here
                                                     </ng-container>
-                                                    <ng-template #isNotDragDropAvailable>
+                                                    <ng-template
+                                                        #isNotDragDropAvailable
+                                                    >
                                                         <b>Click here</b>
                                                         to<br />
                                                         choose a files
@@ -185,15 +413,28 @@
                                             </div>
                                         </ng-template>
 
-                                        <ng-template let-i="index" let-file="file" let-control="control" #item>
+                                        <ng-template
+                                            let-i="index"
+                                            let-file="file"
+                                            let-control="control"
+                                            #item
+                                        >
                                             <div class="overlay">
-                                                <span class="delete-button pointer" (click)="
+                                                <span
+                                                    class="delete-button pointer"
+                                                    (click)="
                                                         control.removeFile(file)
-                                                    ">
-                                                    <i class="fa-solid fa-trash"></i>
+                                                    "
+                                                >
+                                                    <i
+                                                        class="fa-solid fa-trash"
+                                                    ></i>
                                                 </span>
-                                                <img *ngIf="control.valid" class="uploadImage"
-                                                    [src]="uploadedFile | async" />
+                                                <img
+                                                    *ngIf="control.valid"
+                                                    class="uploadImage"
+                                                    [src]="uploadedFile | async"
+                                                />
                                             </div>
                                         </ng-template>
                                     </file-upload>
@@ -207,66 +448,110 @@
                             </div>
                         </form>
                     </mat-step>
-                    <mat-step [stepControl]="choicesForm" [editable]="isEditable">
+                    <mat-step
+                        [stepControl]="choicesForm"
+                        [editable]="isEditable"
+                    >
                         <div class="header_box version_2">
                             <h2><i class="fa fa-list"></i>Choices</h2>
-                            <button type="reset" class="btn btn-danger" style="float: right"
-                                (click)="addChoicesGroup()">
+                            <button
+                                type="reset"
+                                class="btn btn-danger"
+                                style="float: right"
+                                (click)="addChoicesGroup()"
+                            >
                                 Add new
                             </button>
                         </div>
                         <div class="wrapper_indent">
                             <div class="strip_menu_items">
                                 <form [formGroup]="choicesForm">
-                                    <ng-template matStepLabel>Fill out dishes Choices</ng-template>
+                                    <ng-template matStepLabel
+                                        >Fill out dishes Choices</ng-template
+                                    >
 
                                     <div class="row">
-                                        <div class="col-xl-12" formArrayName="choicesGroup">
+                                        <div
+                                            class="col-xl-12"
+                                            formArrayName="choicesGroup"
+                                        >
                                             <div class="form-group">
-                                                <div class="item_opt_wrapper" *ngFor="
+                                                <div
+                                                    class="item_opt_wrapper"
+                                                    *ngFor="
                                                         let addOn of choicesGroup?.controls;
                                                         let i = index
-                                                    " [formGroupName]="i">
+                                                    "
+                                                    [formGroupName]="i"
+                                                >
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="required">Select
-                                                                    Choice</label>
-                                                                <ng-select class="custom" name="choicesId"
-                                                                    formControlName="choicesId" [multiple]="
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    class="required"
+                                                                    >Select
+                                                                    Choice</label
+                                                                >
+                                                                <ng-select
+                                                                    class="custom"
+                                                                    name="choicesId"
+                                                                    formControlName="choicesId"
+                                                                    [multiple]="
                                                                         false
-                                                                    ">
-                                                                    <ng-option *ngFor="
+                                                                    "
+                                                                >
+                                                                    <ng-option
+                                                                        *ngFor="
                                                                             let data of dishChoicesList
-                                                                        " [value]="
+                                                                        "
+                                                                        [value]="
                                                                             data._id
-                                                                        ">{{
-                                                                        data.choicesGroupName
-                                                                        | titlecase
-                                                                        }}</ng-option>
+                                                                        "
+                                                                        >{{
+                                                                            data.choicesGroupName
+                                                                                | titlecase
+                                                                        }}</ng-option
+                                                                    >
                                                                 </ng-select>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="d-block">Action</label>
-                                                                <i class="fa-solid fa-eye pointer" (click)="
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    class="d-block"
+                                                                    >Action</label
+                                                                >
+                                                                <i
+                                                                    class="fa-solid fa-eye pointer"
+                                                                    (click)="
                                                                         openEditDishChoicesDialog(
                                                                             i
                                                                         )
-                                                                    "></i>
-                                                                <i class="fa-solid fa-circle-plus pointer" style="
+                                                                    "
+                                                                ></i>
+                                                                <i
+                                                                    class="fa-solid fa-circle-plus pointer"
+                                                                    style="
                                                                         color: #ae4624;
-                                                                    " (click)="
+                                                                    "
+                                                                    (click)="
                                                                         openChoicesDialog(
                                                                             choicesGroup
                                                                         )
-                                                                    "></i>
-                                                                <i class="fa-solid fa-trash bin-color pointer" (click)="
+                                                                    "
+                                                                ></i>
+                                                                <i
+                                                                    class="fa-solid fa-trash bin-color pointer"
+                                                                    (click)="
                                                                         deleteDishChoicesField(
                                                                             i
                                                                         )
-                                                                    "></i>
+                                                                    "
+                                                                ></i>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -274,8 +559,11 @@
 
                                                     <!-- /row-->
                                                 </div>
-                                                <button type="button" (click)="addChoicesGroup()"
-                                                    class="btn btn-danger btn-block">
+                                                <button
+                                                    type="button"
+                                                    (click)="addChoicesGroup()"
+                                                    class="btn btn-danger btn-block"
+                                                >
                                                     Add New
                                                 </button>
                                                 <!-- /item_opt_wrapper-->
@@ -301,31 +589,58 @@
                             </div>
                         </div>
                     </mat-step>
-                    <mat-step [stepControl]="variantsForm" [editable]="isEditable">
+                    <mat-step
+                        [stepControl]="variantsForm"
+                        [editable]="isEditable"
+                    >
                         <div class="header_box version_2">
                             <h2><i class="fa fa-list"></i>Add Variants</h2>
-                            <button type="reset" class="btn btn-danger" style="float: right" (click)="addVariants()">
+                            <button
+                                type="reset"
+                                class="btn btn-danger"
+                                style="float: right"
+                                (click)="addVariants()"
+                            >
                                 Add new
                             </button>
                         </div>
                         <div class="wrapper_indent">
                             <div class="strip_menu_items">
                                 <form [formGroup]="variantsForm">
-                                    <ng-template matStepLabel>Fill out dishes variants</ng-template>
+                                    <ng-template matStepLabel
+                                        >Fill out dishes variants</ng-template
+                                    >
 
                                     <div class="row">
-                                        <div class="col-xl-12" formArrayName="variants">
+                                        <div
+                                            class="col-xl-12"
+                                            formArrayName="variants"
+                                        >
                                             <div class="form-group">
-                                                <div class="item_opt_wrapper" *ngFor="
+                                                <div
+                                                    class="item_opt_wrapper"
+                                                    *ngFor="
                                                         let variantsGroup of variants?.controls;
                                                         let i = index
-                                                    " [formGroupName]="i">
+                                                    "
+                                                    [formGroupName]="i"
+                                                >
                                                     <div class="row">
-                                                        <div class="col-lg-3 col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="required">Price</label>
-                                                                <input type="number" formControlName="price"
-                                                                    class="form-control" [ngClass]="
+                                                        <div
+                                                            class="col-lg-3 col-md-4"
+                                                        >
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    class="required"
+                                                                    >Price</label
+                                                                >
+                                                                <input
+                                                                    type="number"
+                                                                    formControlName="price"
+                                                                    class="form-control"
+                                                                    [ngClass]="
                                                                         checkForVariantsError(
                                                                             i,
                                                                             'price',
@@ -333,14 +648,26 @@
                                                                         )
                                                                             ? 'is-invalid'
                                                                             : ''
-                                                                    " placeholder="+ ₹350" />
+                                                                    "
+                                                                    placeholder="+ ₹350"
+                                                                />
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="required">Quantity
-                                                                    Name</label>
-                                                                <input type="text" maxlength="50" formControlName="size"
+                                                        <div
+                                                            class="col-lg-3 col-md-6"
+                                                        >
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    class="required"
+                                                                    >Quantity
+                                                                    Name</label
+                                                                >
+                                                                <input
+                                                                    type="text"
+                                                                    maxlength="50"
+                                                                    formControlName="size"
                                                                     [ngClass]="
                                                                         checkForVariantsError(
                                                                             i,
@@ -349,50 +676,84 @@
                                                                         )
                                                                             ? 'is-invalid'
                                                                             : ''
-                                                                    " class="form-control" placeholder="Ex. Medium" />
+                                                                    "
+                                                                    class="form-control"
+                                                                    placeholder="Ex. Medium"
+                                                                />
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Quantity
-                                                                    Description</label>
-                                                                <input type="text" formControlName="sizeDescription"
-                                                                    class="form-control" placeholder="Ex. 4 Pieces"
-                                                                    maxlength="100" />
+                                                        <div
+                                                            class="col-lg-3 col-md-6"
+                                                        >
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    >Quantity
+                                                                    Description</label
+                                                                >
+                                                                <input
+                                                                    type="text"
+                                                                    formControlName="sizeDescription"
+                                                                    class="form-control"
+                                                                    placeholder="Ex. 4 Pieces"
+                                                                    maxlength="100"
+                                                                />
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-1 col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Default</label>
+                                                        <div
+                                                            class="col-lg-1 col-md-6"
+                                                        >
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    >Default</label
+                                                                >
                                                                 <mat-radio-group
                                                                     aria-labelledby="example-radio-group-label"
-                                                                    class="example-radio-group" name="primary"
+                                                                    class="example-radio-group"
+                                                                    name="primary"
                                                                     [formControl]="
                                                                         this
                                                                             .variantsForm
                                                                             .controls
                                                                             .defaultSize
-                                                                    ">
-                                                                    <mat-radio-button [value]="
+                                                                    "
+                                                                >
+                                                                    <mat-radio-button
+                                                                        [value]="
                                                                             i
-                                                                        "></mat-radio-button>
+                                                                        "
+                                                                    ></mat-radio-button>
                                                                 </mat-radio-group>
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-1 col-md-1">
-                                                            <label class="d-block">Action</label>
-                                                            <i class="fa-solid fa-trash bin-color pointer" (click)="
+                                                        <div
+                                                            class="col-lg-1 col-md-1"
+                                                        >
+                                                            <label
+                                                                class="d-block"
+                                                                >Action</label
+                                                            >
+                                                            <i
+                                                                class="fa-solid fa-trash bin-color pointer"
+                                                                (click)="
                                                                     deleteField(
                                                                         i
                                                                     )
-                                                                "></i>
+                                                                "
+                                                            ></i>
                                                         </div>
                                                     </div>
 
                                                     <hr />
                                                 </div>
-                                                <button type="button" (click)="addVariants()"
-                                                    class="btn btn-danger btn-block">
+                                                <button
+                                                    type="button"
+                                                    (click)="addVariants()"
+                                                    class="btn btn-danger btn-block"
+                                                >
                                                     Add New
                                                 </button>
                                             </div>
@@ -403,7 +764,10 @@
                                         <button mat-button matStepperPrevious>
                                             Back
                                         </button>
-                                        <button mat-button (click)="addVariantToDish()">
+                                        <button
+                                            mat-button
+                                            (click)="addVariantToDish()"
+                                        >
                                             Next
                                         </button>
                                     </div>
@@ -411,90 +775,151 @@
                             </div>
                         </div>
                     </mat-step>
-                    <mat-step [stepControl]="addOnGroupForm" [editable]="isEditable">
+                    <mat-step
+                        [stepControl]="addOnGroupForm"
+                        [editable]="isEditable"
+                    >
                         <div class="header_box version_2">
                             <h2><i class="fa fa-list"></i>Add-Ons</h2>
-                            <button type="reset" class="btn btn-danger" style="float: right" (click)="addAddon()">
+                            <button
+                                type="reset"
+                                class="btn btn-danger"
+                                style="float: right"
+                                (click)="addAddon()"
+                            >
                                 Add new
                             </button>
                         </div>
                         <div class="wrapper_indent">
                             <div class="strip_menu_items">
                                 <form [formGroup]="addOnGroupForm">
-                                    <ng-template matStepLabel>Fill out dishes Add-Ons</ng-template>
+                                    <ng-template matStepLabel
+                                        >Fill out dishes Add-Ons</ng-template
+                                    >
 
                                     <div class="row">
-                                        <div class="col-xl-12" formArrayName="addOnGroup">
+                                        <div
+                                            class="col-xl-12"
+                                            formArrayName="addOnGroup"
+                                        >
                                             <div class="form-group">
-                                                <div class="item_opt_wrapper" *ngFor="
+                                                <div
+                                                    class="item_opt_wrapper"
+                                                    *ngFor="
                                                         let addOn of addOnGroup?.controls;
                                                         let i = index
-                                                    " [formGroupName]="i">
+                                                    "
+                                                    [formGroupName]="i"
+                                                >
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="required">Add On
-                                                                    Group</label>
-                                                                <ng-select class="custom" name="addOnGroup"
-                                                                    formControlName="addOnGroupId" [multiple]="
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    class="required"
+                                                                    >Add On
+                                                                    Group</label
+                                                                >
+                                                                <ng-select
+                                                                    class="custom"
+                                                                    name="addOnGroup"
+                                                                    formControlName="addOnGroupId"
+                                                                    [multiple]="
                                                                         false
-                                                                    ">
-                                                                    <ng-option [value]="
+                                                                    "
+                                                                >
+                                                                    <ng-option
+                                                                        [value]="
                                                                             data._id
-                                                                        " *ngFor="
+                                                                        "
+                                                                        *ngFor="
                                                                             let data of addOnsList
-                                                                        ">{{
-                                                                        data.addOnGroupName
-                                                                        | titlecase
-                                                                        }}</ng-option>
+                                                                        "
+                                                                        >{{
+                                                                            data.addOnGroupName
+                                                                                | titlecase
+                                                                        }}</ng-option
+                                                                    >
                                                                 </ng-select>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="required">Size</label>
-                                                                <ng-select class="custom" name="addOnGroup"
-                                                                    formControlName="size" [multiple]="
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    class="required"
+                                                                    >Size</label
+                                                                >
+                                                                <ng-select
+                                                                    class="custom"
+                                                                    name="addOnGroup"
+                                                                    formControlName="size"
+                                                                    [multiple]="
                                                                         false
-                                                                    ">
-                                                                    <ng-option [value]="
+                                                                    "
+                                                                >
+                                                                    <ng-option
+                                                                        [value]="
                                                                             data.size
-                                                                        " *ngFor="
+                                                                        "
+                                                                        *ngFor="
                                                                             let data of sizesAvailable
-                                                                        ">{{
-                                                                        data.size
-                                                                        | titlecase
-                                                                        }}</ng-option>
+                                                                        "
+                                                                        >{{
+                                                                            data.size
+                                                                                | titlecase
+                                                                        }}</ng-option
+                                                                    >
                                                                 </ng-select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <label class="d-block">Action</label>
-                                                                <i class="fa-solid fa-eye pointer" (click)="
+                                                            <div
+                                                                class="form-group"
+                                                            >
+                                                                <label
+                                                                    class="d-block"
+                                                                    >Action</label
+                                                                >
+                                                                <i
+                                                                    class="fa-solid fa-eye pointer"
+                                                                    (click)="
                                                                         openEditAddonDialog(
                                                                             i
                                                                         )
-                                                                    "></i>
-                                                                <i class="fa-solid fa-circle-plus pointer" style="
+                                                                    "
+                                                                ></i>
+                                                                <i
+                                                                    class="fa-solid fa-circle-plus pointer"
+                                                                    style="
                                                                         color: #ae4624;
-                                                                    " (click)="
+                                                                    "
+                                                                    (click)="
                                                                         openAddOnDialog()
-                                                                    "></i>
-                                                                <i class="fa-solid fa-trash bin-color pointer" (click)="
+                                                                    "
+                                                                ></i>
+                                                                <i
+                                                                    class="fa-solid fa-trash bin-color pointer"
+                                                                    (click)="
                                                                         deleteAddonField(
                                                                             i
                                                                         )
-                                                                    "></i>
+                                                                    "
+                                                                ></i>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <hr />
                                                     <!-- /row-->
                                                 </div>
-                                                <button type="button" (click)="addAddon()"
-                                                    class="btn btn-danger btn-block">
+                                                <button
+                                                    type="button"
+                                                    (click)="addAddon()"
+                                                    class="btn btn-danger btn-block"
+                                                >
                                                     Add New
                                                 </button>
                                                 <!-- /item_opt_wrapper-->
@@ -512,7 +937,10 @@
                                         <button mat-button matStepperPrevious>
                                             Back
                                         </button>
-                                        <button mat-button (click)="addAddOnToDish()">
+                                        <button
+                                            mat-button
+                                            (click)="addAddOnToDish()"
+                                        >
                                             Next
                                         </button>
                                     </div>

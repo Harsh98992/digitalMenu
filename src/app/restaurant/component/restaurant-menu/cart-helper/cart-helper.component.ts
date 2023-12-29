@@ -45,6 +45,8 @@ export class CartHelperComponent implements OnInit {
     razorPayData: any;
     discountAmount: any = 0;
     deliveryAmount: any;
+
+    defaultOrderOption = null;
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -259,6 +261,7 @@ export class CartHelperComponent implements OnInit {
         this.itemTotal = 0;
         let totalAmount = 0;
         this.deliveryAmount = 0;
+        this.getDeliveryRadiobuttonText();
         for (const item of this.cartItems) {
             for (const dish of item.cartItems) {
                 totalAmount += dish.totalPrice;
@@ -331,6 +334,7 @@ export class CartHelperComponent implements OnInit {
                 cartItem["totalPrice"] - cartItem["priceOneItem"];
             this.calculateItemTotal();
         }
+        this.orderOption = this.defaultOrderOption;
     }
 
     showCartItem() {
@@ -425,42 +429,12 @@ export class CartHelperComponent implements OnInit {
                         ]);
                     }
                     this.restaurantService.setCartItem([]);
-                    // this.socket.on("connect", () => {
-                    //     console.log("connected to socket");
-                    //     this.socket.emit(
-                    //         "orderPlaced",
-                    //         res["data"]["savedData"]
-                    //     );
 
-                    //     console.log("order placed event emitted");
-                    // });
                 }
 
-                // this.dialog.closeAll();
             },
         });
     }
-    // provideDelivery: {
-    //     type: Boolean,
-
-    //     default: false,
-    // },
-    // maxDeliveryDistance: {
-    //     type: Number,
-    //     default: 0,
-    // },
-    // minOrderValueForFreeDelivery: {
-    //     type: Number,
-    //     default: 0,
-    // },
-    // deliveryFeeBelowMinValue: {
-    //     type: Number,
-    //     default: 0,
-    // },
-    // minOrderValueForDelivery: {
-    //     type: Number,
-    //     default: 0,
-    // },
 
     deliveryDisabled = false;
 

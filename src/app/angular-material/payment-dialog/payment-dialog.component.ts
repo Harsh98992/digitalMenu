@@ -14,12 +14,9 @@ declare var Razorpay: any;
 })
 export class PaymentDialogComponent implements OnInit {
     paymentMethod: string;
-    paymentOption = [
-        { key: "payOnline", value: "Pay Online" },
-        { key: "cashOnDelivery", value: "Cash On Delivery" },
-    ];
+    paymentOption = [{ key: "cashOnDelivery", value: "Cash On Delivery" }];
 
-   // paymentOption = [{ key: "cashOnDelivery", value: "Cash On Delivery" }];
+    // paymentOption = [{ key: "cashOnDelivery", value: "Cash On Delivery" }];
 
     socket: any;
     socketApiUrl = environment.socketApiUrl;
@@ -60,6 +57,13 @@ export class PaymentDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.orderData);
+        if (this.orderData?.paymentOnlineAvailable) {
+            this.paymentOption.unshift({
+                key: "payOnline",
+                value: "Pay Online",
+            });
+        }
         this.getOrderTotal();
         this.checkForCashOnDelivery();
     }

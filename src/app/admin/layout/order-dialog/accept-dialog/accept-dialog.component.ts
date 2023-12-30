@@ -83,6 +83,7 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
             const reqData = {
                 orderStatus: "accepted",
                 preprationTime: preprationTime,
+                paymentOnlineAvailable: this.paymentGatewayFlag,
                 cashOnDeliveryAvailable: this.cashOnDeliveryAvailable,
                 orderId: this.orderData._id,
             };

@@ -3,7 +3,7 @@
 <div mat-dialog-actions>
   <a class="btn_1 gray delete" [mat-dialog-close]="true"> Cancel</a>
 
-  <a class="btn_1 gray approve ml-2" (click)="okAction()"> Yes</a>
+  <a class="btn_1 gray approve ml-2" *ngIf="data?.yesButtonFlag!=false" (click)="okAction()"> Yes</a>
 
   <!-- <button mat-button >Cancel</button>
   <button mat-button  cdkFocusInitial>OK</button> -->

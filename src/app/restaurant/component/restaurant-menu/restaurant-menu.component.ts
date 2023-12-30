@@ -20,6 +20,7 @@ import { TableNumberDialogComponent } from "./table-number-dialog/table-number-d
 import { PhoneOtpComponent } from "src/app/angular-material/phone-otp/phone-otp.component";
 import { AddMissingInfoDialogComponent } from "./add-missing-info-dialog/add-missing-info-dialog.component";
 import { CustomerService } from "src/app/api/customer.service";
+import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: "app-restaurant-menu",
@@ -351,15 +352,32 @@ export class RestaurantMenuComponent implements OnInit {
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
 
+                    if (this.restaurantDetail.restaurantStatus === "offline") {
+                        const dialogData = {
+                            title: "Restaurant Closed",
+                            yesButtonFlag:false,
+                            message:
+                                "We're sorry, but the selected restaurant is currently closed. Please check the operating hours and try again during their next opening time.",
+                        };
+                        this.dialog.open(ConfirmDialogComponent, {
+                            data: dialogData,
+                        });
+                    }
 
-                    this.customerService.getRestaurantStatus(this.restaurantDetail._id).subscribe({
-                        next: (res: any) => {
-                            if (res && res.data && res.data.restaurantStatus) {
-                                this.restaurantDetail.restaurantStatus = res.data.restaurantStatus;
-                            }
-                        },
-                    });
-
+                    this.customerService
+                        .getRestaurantStatus(this.restaurantDetail._id)
+                        .subscribe({
+                            next: (res: any) => {
+                                if (
+                                    res &&
+                                    res.data &&
+                                    res.data.restaurantStatus
+                                ) {
+                                    this.restaurantDetail.restaurantStatus =
+                                        res.data.restaurantStatus;
+                                }
+                            },
+                        });
 
                     this.getReviews(this.restaurantDetail);
 

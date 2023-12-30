@@ -15,7 +15,7 @@
                     class="mr-3"
                     [clearable]="false"
                 >
-                    <ng-option [value]="false">No</ng-option>
+                    <ng-option *ngIf="paymentGatewayFlag" [value]="false">No</ng-option>
                     <ng-option [value]="true">Yes</ng-option>
                 </ng-select>
             </div>

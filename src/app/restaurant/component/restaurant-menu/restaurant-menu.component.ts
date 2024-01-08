@@ -340,7 +340,7 @@ export class RestaurantMenuComponent implements OnInit {
 
     capitalizeWords(dishName: string): string {
         return dishName
-            .split(" ")
+            ?.split(" ")
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
     }
@@ -355,7 +355,7 @@ export class RestaurantMenuComponent implements OnInit {
                     if (this.restaurantDetail.restaurantStatus === "offline") {
                         const dialogData = {
                             title: "Restaurant Closed",
-                            yesButtonFlag:false,
+                            yesButtonFlag: false,
                             message:
                                 "We're sorry, but the selected restaurant is currently closed. Please check the operating hours and try again during their next opening time.",
                         };
@@ -364,20 +364,20 @@ export class RestaurantMenuComponent implements OnInit {
                         });
                     }
 
-                    this.customerService
-                        .getRestaurantStatus(this.restaurantDetail._id)
-                        .subscribe({
-                            next: (res: any) => {
-                                if (
-                                    res &&
-                                    res.data &&
-                                    res.data.restaurantStatus
-                                ) {
-                                    this.restaurantDetail.restaurantStatus =
-                                        res.data.restaurantStatus;
-                                }
-                            },
-                        });
+                    // this.customerService
+                    //     .getRestaurantStatus(this.restaurantDetail._id)
+                    //     .subscribe({
+                    //         next: (res: any) => {
+                    //             if (
+                    //                 res &&
+                    //                 res.data &&
+                    //                 res.data.restaurantStatus
+                    //             ) {
+                    //                 this.restaurantDetail.restaurantStatus =
+                    //                     res.data.restaurantStatus;
+                    //             }
+                    //         },
+                    //     });
 
                     this.getReviews(this.restaurantDetail);
 

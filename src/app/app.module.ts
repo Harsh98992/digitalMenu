@@ -57,20 +57,20 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
     providers: [
         RestaurantAuthGuard,
 
-        {
-            provide: "SocialAuthServiceConfig",
-            useValue: {
-                autoLogin: false,
-                providers: [
-                    // {
-                    //     id: GoogleLoginProvider.PROVIDER_ID,
-                    //     provider: new GoogleLoginProvider(
-                    //         "503347741402-6md4jq747sncq0i21goufb0uc39m351k.apps.googleusercontent.com"
-                    //     ),
-                    // },
-                ],
-            } as SocialAuthServiceConfig,
-        },
+        // {
+        //     provide: "SocialAuthServiceConfig",
+        //     useValue: {
+        //         autoLogin: false,
+        //         providers: [
+        //             // {
+        //             //     id: GoogleLoginProvider.PROVIDER_ID,
+        //             //     provider: new GoogleLoginProvider(
+        //             //         "503347741402-6md4jq747sncq0i21goufb0uc39m351k.apps.googleusercontent.com"
+        //             //     ),
+        //             // },
+        //         ],
+        //     } as SocialAuthServiceConfig,
+        // },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

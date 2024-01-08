@@ -14,11 +14,7 @@ import { RestaurantAuthGuard } from "./api/guard/restaurant-auth.guard";
 import { TokenInterceptor } from "./api/interceptor/token.interceptor";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LoadingInterceptor } from "./api/interceptor/loading.interceptor";
-import {
-    GoogleLoginProvider,
-    SocialAuthServiceConfig,
-    SocialLoginModule,
-} from "@abacritt/angularx-social-login";
+
 import { UserLoginComponent } from "./user-auth/user-login/user-login.component";
 import { PositiveNumberDirective } from "./api/positive-number.directive";
 import { ServiceWorkerModule } from "@angular/service-worker";
@@ -45,7 +41,7 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 
         FormsModule,
         ReactiveFormsModule,
-        SocialLoginModule,
+       
         NgxSpinnerModule.forRoot({ type: "square-jelly-box" }),
         ServiceWorkerModule.register("ngsw-worker.js", {
             enabled: environment.production,

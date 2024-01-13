@@ -378,4 +378,17 @@ export class RestaurantPanelService {
     getPromoCode() {
         return this.http.get(`${this.apiUrl}/v1/restaurant/getPromoCode`);
     }
+
+        // Add these methods to your RestaurantPanelService
+    toggleLoyalStatus(customerId: string,  isLoyal: boolean) {
+        let url = `/v1/restaurant/loyal/${isLoyal ? 'add' : 'remove'}/${customerId}`;
+
+        return this.http.get(`${this.apiUrl}${url}`);
+    }
+
+    toggleBlockedStatus(customerId: string,  isBlocked: boolean) {
+        const url = `/v1/restaurant/block/${isBlocked ? 'add' : 'remove'}/${customerId}`;
+        return this.http.get(`${this.apiUrl}${url}`);
+    }
+
 }

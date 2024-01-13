@@ -7,15 +7,10 @@
             <br />
             <div class="row mx-2 my-1">
                 <div class="form-group col-lg-6 col-md-12">
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        class="form-control"
-                        [(ngModel)]="searchTerm"
-                        (keyup)="applyFilter()"
-                    />
+                    <input type="text" placeholder="Search" class="form-control" [(ngModel)]="searchTerm"
+                        (keyup)="applyFilter()" />
                 </div>
-              
+
 
                 <div class="col-lg-2 col-md-12">
                     <button type="reset" class="btn btn-danger">
@@ -24,22 +19,26 @@
                     </button>
                 </div>
             </div>
-            <ngx-datatable
-                #myTable
-                class="bootstrap"
-                [rows]="this.filteredData || rows"
-                [columns]="[
-                    { prop: 'name', name: 'Name' },
-                    { prop: 'email', name: 'Email' },
-                    { prop: 'phoneNumber', name: 'Phone Number' }
-                ]"
-                [columnMode]="ColumnMode.force"
-                [headerHeight]="50"
-                [footerHeight]="50"
-                rowHeight="auto"
-                [limit]="10"
-            >
+            <ngx-datatable #myTable class="bootstrap" [rows]="this.filteredData || rows" [columns]="[
+                { prop: 'name', name: 'Name' },
+                { prop: 'email', name: 'Email' },
+                { prop: 'phoneNumber', name: 'Phone Number' },
+                { prop: 'loyal', name: 'Loyal', cellTemplate: loyalColumnTemplate },
+                { prop: 'blocked', name: 'Blocked', cellTemplate: blockedColumnTemplate }
+            ]" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10">
             </ngx-datatable>
+            <ng-template #loyalColumnTemplate let-row="row">
+                <button class="btn btn-info" (click)="toggleLoyalStatus(row)">
+                    {{ row.loyal ? 'Remove Loyal' : 'Add Loyal' }}
+                </button>
+            </ng-template>
+
+            <ng-template #blockedColumnTemplate let-row="row">
+                <button class="btn btn-warning" (click)="toggleBlockedStatus(row)">
+                    {{ row.blocked ? 'Unblock' : 'Block' }}
+                </button>
+            </ng-template>
+
         </div>
     </div>
 </div>

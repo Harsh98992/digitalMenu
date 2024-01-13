@@ -15,6 +15,7 @@ import { TermsConditionComponent } from "./component/policy/terms-condition/term
 import { CancellationPolicyComponent } from "./component/policy/cancellation-policy/cancellation-policy.component";
 import { ShoppingDeliveryPolicyComponent } from "./component/policy/shopping-delivery-policy/shopping-delivery-policy.component";
 import { OrderTrackingComponent } from "./component/order-tracking/order-tracking.component";
+import { RestaurantMenuGuard } from "./api/restaurant-menu.guard";
 
 const routes: Routes = [
     {
@@ -22,7 +23,7 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             { path: "", component: HomepageComponent },
-            { path: "restaurant", component: RestaurantMenuComponent },
+            { path: "restaurant", component: RestaurantMenuComponent,canDeactivate:[RestaurantMenuGuard] },
             {
                 path: "orders",
                 component: MyOrderComponent,

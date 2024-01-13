@@ -10,7 +10,7 @@ import { take } from "rxjs";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 import { RepeatDialogComponent } from "src/app/angular-material/repeat-dialog/repeat-dialog.component";
 import { MatTooltip } from "@angular/material/tooltip";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
 import { CustomerAuthService } from "../../api/customer-auth.service";
 import { UserLoginComponent } from "src/app/user-auth/user-login/user-login.component";
 import { TimeSelectorDialogComponent } from "./time-selector-dialog/time-selector-dialog.component";
@@ -578,6 +578,8 @@ export class RestaurantMenuComponent implements OnInit {
             width: "100%",
             data: this.restaurantDetail,
             panelClass: "app-full-bleed-dialog",
+            closeOnNavigation: false
+
         });
 
         dialogRef.afterClosed().subscribe((result) => {

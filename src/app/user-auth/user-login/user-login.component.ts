@@ -1,7 +1,7 @@
-import {
-    GoogleLoginProvider,
-    SocialAuthService,
-} from "@abacritt/angularx-social-login";
+// import {
+//     GoogleLoginProvider,
+//     SocialAuthService,
+// } from "@abacritt/angularx-social-login";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { AuthenticationService } from "src/app/api/authentication.service";
@@ -18,7 +18,7 @@ import { CustomerService } from "src/app/api/customer.service";
 })
 export class UserLoginComponent implements OnInit {
     constructor(
-        private authService: SocialAuthService,
+        // private authService: SocialAuthService,
         private dialogRef: MatDialogRef<any>,
         private customerAuthService: CustomerAuthService,
         private dialog: MatDialog,
@@ -33,21 +33,21 @@ export class UserLoginComponent implements OnInit {
     customerEmail: any;
 
     ngOnInit(): void {
-        this.authService.authState.subscribe((user) => {
-            user["socialLogin"] = true;
-            this.customerAuthService.customerLogin(user).subscribe({
-                next: (res: any) => {
-                    if (res.data.token) {
-                        user["role"] = "user";
-                        this.customerAuthService.setUserToken(res.data.token);
-                        this.customerAuthService.setUserDetail(
-                            res.data.userData
-                        );
-                        this.dialogRef.close();
-                    }
-                },
-            });
-        });
+        // this.authService.authState.subscribe((user) => {
+        //     user["socialLogin"] = true;
+        //     this.customerAuthService.customerLogin(user).subscribe({
+        //         next: (res: any) => {
+        //             if (res.data.token) {
+        //                 user["role"] = "user";
+        //                 this.customerAuthService.setUserToken(res.data.token);
+        //                 this.customerAuthService.setUserDetail(
+        //                     res.data.userData
+        //                 );
+        //                 this.dialogRef.close();
+        //             }
+        //         },
+        //     });
+        // });
 
         this.phoneNumberForm = this.fb.group({
             phoneNumber: [
@@ -59,7 +59,7 @@ export class UserLoginComponent implements OnInit {
     }
 
     signOut(): void {
-        this.authService.signOut();
+        // this.authService.signOut();
     }
     closeDialog() {
         this.dialogRef.close();

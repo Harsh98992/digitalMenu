@@ -52,10 +52,16 @@ body {
 .app-full-order-dialog .mat-dialog-container {
     background-color: cornsilk;
 }
+
 .add-item-dialog .mat-dialog-container {
     background-color: #f6f6f6;
 
     //  min-width: 19rem;
+}
+@media only screen and (max-width: 767px) {
+    .add-item-dialog {
+        min-width: 77vw;
+    }
 }
 button[mat-menu-item]:focus {
     outline: none;

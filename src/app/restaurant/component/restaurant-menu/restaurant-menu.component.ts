@@ -65,6 +65,7 @@ export class RestaurantMenuComponent implements OnInit {
         "Friday",
         "Saturday",
     ];
+    activeRestaurantUrl: any;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -85,6 +86,42 @@ export class RestaurantMenuComponent implements OnInit {
         this.getCartItem();
         this.checkLogin();
         this.getCartState();
+    }
+    checkForCartActiveData(url) {
+        const cartData = this.restaurantService.getCartSessionData();
+        const cartState = this.restaurantService.getCartSessionData();
+        const restaurantActiveUrl = this.restaurantService.getRestaurantUrl();
+
+        if (
+            cartData?.length &&
+            restaurantActiveUrl &&
+            restaurantActiveUrl !== this.activeRestaurantUrl
+        ) {
+            const dialogData = {
+                title: "Confirm",
+                message:
+                    "Your cart contains items from other restaurant. Would you like to reset your cart for adding items from this restaurant?",
+                cancelBtnText: "NO",
+                successBtnText: "YES, START AFRESH",
+            };
+            this.dialog
+                .open(ConfirmDialogComponent, { data: dialogData })
+                .afterClosed()
+                .subscribe({
+                    next: (res: any) => {
+                        if (res && res.okFlag) {
+                            this.restaurantService.setCartItem([]);
+                            this.restaurantService.setCartSate([]);
+                            this.restaurantService.setRestaurantUrl(null);
+                        } else {
+                            this.restaurantService.setCartItem(cartData);
+
+                            this.restaurantService.setCartSate(cartState);
+                            this.router.navigateByUrl("/");
+                        }
+                    },
+                });
+        }
     }
     getCartState() {
         this.restaurantService.getCartState().subscribe({
@@ -232,7 +269,7 @@ export class RestaurantMenuComponent implements OnInit {
         });
     }
     calculateItemTotal() {
-        this.cartHelperComponent.calculateItemTotal();
+        this.cartHelperComponent?.calculateItemTotal();
     }
     changeQuantity(flag: string, item: any) {
         if (this.checkCustomizeable(item)) {
@@ -347,7 +384,8 @@ export class RestaurantMenuComponent implements OnInit {
     getRestaurantData() {
         this.route.queryParams.subscribe((params) => {
             const restaurnatUrl = params["detail"];
-
+            this.activeRestaurantUrl = params["detail"];
+            this.checkForCartActiveData(restaurnatUrl);
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
@@ -441,7 +479,6 @@ export class RestaurantMenuComponent implements OnInit {
 
                     for (const cuisine of this.restaurantDetail.cuisine) {
                         cuisine.items.sort((a, b) => {
-                            console.log(a.dishPriority, b.dishPriority);
                             if (a.dishPriority && b.dishPriority) {
                                 return a.dishPriority - b.dishPriority;
                             } else if (a.dishPriority) {
@@ -467,18 +504,14 @@ export class RestaurantMenuComponent implements OnInit {
                                 dish.dishName = this.capitalizeWords(
                                     dish.dishName
                                 );
-                            } catch (error) {
-                                console.log(error);
-                            }
+                            } catch (error) {}
                             //
                             //
                             try {
                                 dish.dishDescription = this.capitalizeWords(
                                     dish.dishDescription
                                 );
-                            } catch (error) {
-                                console.log(error);
-                            }
+                            } catch (error) {}
 
                             if (dish.addOns && dish.addOns.length > 0) {
                                 for (const addOn of dish.addOns) {
@@ -486,9 +519,7 @@ export class RestaurantMenuComponent implements OnInit {
                                         addOn.addOnName = this.capitalizeWords(
                                             addOn.addOnName
                                         );
-                                    } catch (error) {
-                                        console.log(error);
-                                    }
+                                    } catch (error) {}
                                 }
                             }
                         }
@@ -578,8 +609,7 @@ export class RestaurantMenuComponent implements OnInit {
             width: "100%",
             data: this.restaurantDetail,
             panelClass: "app-full-bleed-dialog",
-            closeOnNavigation: false
-
+            closeOnNavigation: false,
         });
 
         dialogRef.afterClosed().subscribe((result) => {
@@ -651,6 +681,9 @@ export class RestaurantMenuComponent implements OnInit {
                     const initalValue = res;
                     initalValue.push(storeData);
                     this.restaurantService.setCartItem(initalValue);
+                    this.restaurantService.setRestaurantUrl(
+                        this.activeRestaurantUrl
+                    );
                 });
         }
     }

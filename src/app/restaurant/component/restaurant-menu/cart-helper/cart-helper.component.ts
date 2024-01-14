@@ -91,7 +91,6 @@ export class CartHelperComponent implements OnInit {
         this.checkLogin();
 
         this.getCartState();
-        console.log(this.restaurantData);
 
         this.customerService
             .isDineInAvailable(this.restaurantData._id)
@@ -288,8 +287,6 @@ export class CartHelperComponent implements OnInit {
         this.generateAmountToBePaid();
     }
     generateAmountToBePaid() {
-        console.log(this.discountAmount);
-
         if (this.restaurantData?.isPricingInclusiveOfGST) {
             const divideNumber =
                 this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
@@ -413,6 +410,8 @@ export class CartHelperComponent implements OnInit {
             discountAmount: this.discountAmount,
             deliveryAmount: this.deliveryAmount,
         };
+        console.log(bodyData);
+        return
         this.orderService.placeOrder(bodyData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {
@@ -420,8 +419,6 @@ export class CartHelperComponent implements OnInit {
                     this.dialog.closeAll();
                     if (this.userPreference.preference === "Dine In") {
                         this.router.navigateByUrl("/orders");
-                    } else {
-                        console.log(res.data.orderId);
 
                         this.router.navigate([
                             "/order-tracking",
@@ -429,9 +426,8 @@ export class CartHelperComponent implements OnInit {
                         ]);
                     }
                     this.restaurantService.setCartItem([]);
-
+                    this.restaurantService.setRestaurantUrl(null);
                 }
-
             },
         });
     }

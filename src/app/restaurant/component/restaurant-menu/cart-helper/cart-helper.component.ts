@@ -381,6 +381,7 @@ export class CartHelperComponent implements OnInit {
         for (const data of this.cartItems) {
             for (const item of data.cartItems) {
                 const obj = {};
+
                 obj["dishChoicesSelected"] = item.dishChoicesSelected;
                 obj["extraSelected"] = item.extraSelected;
                 obj["itemSizeSelected"] = item.itemSizeSelected;
@@ -390,6 +391,7 @@ export class CartHelperComponent implements OnInit {
                 obj["dishType"] = item.dishDetail.dishType;
                 obj["dishName"] = item.dishDetail.dishName;
                 obj["dishId"] = item.dishDetail._id;
+                obj["dishPrice"] = item.dishDetail.dishPrice;
                 result.push(obj);
             }
         }
@@ -411,7 +413,7 @@ export class CartHelperComponent implements OnInit {
             discountAmount: this.discountAmount,
             deliveryAmount: this.deliveryAmount,
         };
-       
+
         this.orderService.placeOrder(bodyData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {

@@ -281,7 +281,7 @@ export class AddItemComponent implements OnInit {
         data["extraSelected"] = this.extraSelected;
         data["dishChoicesSelected"] = this.dishChoicesSelected;
         data["dishDetail"] = this.dish;
-        data["dishId"]=this.dish._id
+        
         const storeData = {
             dishId: this.dish._id,
             cartItems: [data],

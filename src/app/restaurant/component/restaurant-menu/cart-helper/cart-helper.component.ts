@@ -411,8 +411,7 @@ export class CartHelperComponent implements OnInit {
             discountAmount: this.discountAmount,
             deliveryAmount: this.deliveryAmount,
         };
-        console.log(bodyData);
-        return
+       
         this.orderService.placeOrder(bodyData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {

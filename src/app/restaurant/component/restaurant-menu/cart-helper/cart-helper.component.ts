@@ -389,6 +389,7 @@ export class CartHelperComponent implements OnInit {
                 obj["totalPrice"] = item.totalPrice;
                 obj["dishType"] = item.dishDetail.dishType;
                 obj["dishName"] = item.dishDetail.dishName;
+                obj["dishId"] = item.dishDetail._id;
                 result.push(obj);
             }
         }

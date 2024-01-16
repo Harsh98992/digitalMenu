@@ -59,10 +59,8 @@ export class AddItemComponent implements OnInit {
                     this.pickedSize(element);
                 }
             });
-        }
-        else{
-
-            this.getSizeAddOn()
+        } else {
+            this.getSizeAddOn();
         }
     }
     getRestaurantData() {
@@ -151,7 +149,7 @@ export class AddItemComponent implements OnInit {
         this.getSizeAddOn();
 
         this.changePrice();
-        this.myStepper.next();
+        this.myStepper?.next();
     }
     pickedChoices(item: any, choicesGroup: any, event: any) {
         const elementIdx = this.dishChoicesSelected.findIndex((data) => {
@@ -196,7 +194,6 @@ export class AddItemComponent implements OnInit {
                 this.dishChoicesSelected.splice(elementIdx, 1);
             }
         }
-
     }
     pickIngredents(item: any, addOnGroup: any, event: any) {
         const elementIdx = this.extraSelected.findIndex((data) => {
@@ -284,7 +281,7 @@ export class AddItemComponent implements OnInit {
         data["extraSelected"] = this.extraSelected;
         data["dishChoicesSelected"] = this.dishChoicesSelected;
         data["dishDetail"] = this.dish;
-
+        
         const storeData = {
             dishId: this.dish._id,
             cartItems: [data],
@@ -307,6 +304,9 @@ export class AddItemComponent implements OnInit {
                 }
 
                 this.restaurantService.setCartItem(initalValue);
+                this.restaurantService.setRestaurantUrl(
+                    this.restaurantDetail?.restaurantUrl
+                );
                 this.dialogRef.close();
             });
     }

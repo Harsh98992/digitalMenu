@@ -21,12 +21,33 @@ export class RestaurantService {
         return this.cartItem.asObservable();
     }
     setCartItem(data: any) {
+        sessionStorage.setItem("cartItem", JSON.stringify(data));
         this.cartItem.next(data);
+    }
+    setRestaurantUrl(url){
+         sessionStorage.setItem("activeRestaurantUrl",url)
+    }
+    getRestaurantUrl(){
+        return sessionStorage.getItem("activeRestaurantUrl")
+    }
+    getCartSessionData() {
+        const data = sessionStorage.getItem("cartItem");
+        if (data) {
+            return JSON.parse(data);
+        }
     }
     getCartState() {
         return this.cartState.asObservable();
     }
+    getCartStateSessionData() {
+        const data = sessionStorage.getItem("cartState");
+        if (data) {
+            return JSON.parse(data);
+        }
+    }
+
     setCartSate(data: any) {
+        sessionStorage.setItem("cartState",JSON.stringify(data))
         this.cartState.next(data);
     }
     getRestaurantReview(placeId) {

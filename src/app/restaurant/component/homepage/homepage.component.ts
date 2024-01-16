@@ -38,8 +38,8 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit(): void {
         this.checkLogin();
-        this.restaurantService.setCartItem([]);
-        this.restaurantService.setCartSate(null);
+        //this.restaurantService.setCartItem([]);
+        // this.restaurantService.setCartSate(null);
         this.initSearch();
         // Subscribe to the search query subject with debounceTime and distinctUntilChanged
         this.searchQuerySubject
@@ -118,54 +118,16 @@ export class HomepageComponent implements OnInit {
             next: (res: any) => {
                 if (res && res.data) {
                     this.restaurantData = res.data.restaurantData;
-                    console.log(this.restaurantData);
                 }
             },
         });
     }
 
     initSearch() {
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(
-        //         (position) => {
-        //             console.log("Geolocation position:", position);
-
-        //             this.customerService
-        //                 .getNearbyRestaurants(
-        //                     position.coords.latitude,
-        //                     position.coords.longitude
-        //                 )
-        //                 .subscribe({
-        //                     next: (res: any) => {
-        //                         console.log("Nearby restaurants:", res);
-        //                         if (res && res.data) {
-        //                             this.searchResults =
-        //                                 res.data.restaurants;
-
-        //                             console.log(
-        //                                 "Search results:",
-        //                                 this.searchResults
-        //                             );
-
-        //                             // run onSearchInputChanged to filter the search results
-        //                             this.onSearchInputChanged(this.searchQuery);
-        //                         }
-        //                     },
-        //                 });
-        //         },
-        //         (error) => {
-        //             console.log("Geolocation error:", error);
-        //         }
-        //     );
-        // }
-
         this.customerService.getAllRestaurants().subscribe({
             next: (res: any) => {
-                console.log("All restaurants:", res);
                 if (res && res.data) {
                     this.searchResults = res.data.restaurants;
-
-                    console.log("Search results:", this.searchResults);
 
                     // run onSearchInputChanged to filter the search results
                     this.onSearchInputChanged(this.searchQuery);
@@ -176,17 +138,6 @@ export class HomepageComponent implements OnInit {
 
     onSearchIconClick() {
         this.navigateToRestaurant(this.searchResults[0]);
-
-        // console.log("Search icon clicked");
-
-        // console.log("Search query:", this.searchQuery);
-
-        // this.onSearchInputChanged(this.searchQuery);
-
-        // // this.router.navigate(["/search"], {
-        // console.log("Search results:", this.searchResults);
-
-        // console.log("Autocomplete results:", this.autocompleteResults);
     }
 
     selectSearchResult(result) {
@@ -194,9 +145,6 @@ export class HomepageComponent implements OnInit {
     }
 
     navigateToRestaurant(data) {
-        console.log(data);
-        debugger;
-
         this.router.navigate(["/restaurant"], {
             queryParams: { detail: data.restaurantUrl },
         });

@@ -91,7 +91,6 @@ export class CartHelperComponent implements OnInit {
         this.checkLogin();
 
         this.getCartState();
-        console.log(this.restaurantData);
 
         this.customerService
             .isDineInAvailable(this.restaurantData._id)
@@ -288,8 +287,6 @@ export class CartHelperComponent implements OnInit {
         this.generateAmountToBePaid();
     }
     generateAmountToBePaid() {
-        console.log(this.discountAmount);
-
         if (this.restaurantData?.isPricingInclusiveOfGST) {
             const divideNumber =
                 this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
@@ -384,6 +381,7 @@ export class CartHelperComponent implements OnInit {
         for (const data of this.cartItems) {
             for (const item of data.cartItems) {
                 const obj = {};
+
                 obj["dishChoicesSelected"] = item.dishChoicesSelected;
                 obj["extraSelected"] = item.extraSelected;
                 obj["itemSizeSelected"] = item.itemSizeSelected;
@@ -392,6 +390,8 @@ export class CartHelperComponent implements OnInit {
                 obj["totalPrice"] = item.totalPrice;
                 obj["dishType"] = item.dishDetail.dishType;
                 obj["dishName"] = item.dishDetail.dishName;
+                obj["dishId"] = item.dishDetail._id;
+                obj["dishPrice"] = item.dishDetail.dishPrice;
                 result.push(obj);
             }
         }
@@ -413,6 +413,7 @@ export class CartHelperComponent implements OnInit {
             discountAmount: this.discountAmount,
             deliveryAmount: this.deliveryAmount,
         };
+
         this.orderService.placeOrder(bodyData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {
@@ -420,8 +421,6 @@ export class CartHelperComponent implements OnInit {
                     this.dialog.closeAll();
                     if (this.userPreference.preference === "Dine In") {
                         this.router.navigateByUrl("/orders");
-                    } else {
-                        console.log(res.data.orderId);
 
                         this.router.navigate([
                             "/order-tracking",
@@ -429,9 +428,8 @@ export class CartHelperComponent implements OnInit {
                         ]);
                     }
                     this.restaurantService.setCartItem([]);
-
+                    this.restaurantService.setRestaurantUrl(null);
                 }
-
             },
         });
     }

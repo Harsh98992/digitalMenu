@@ -39,13 +39,31 @@ export class CustomersComponent implements OnInit {
                 this.rows = res.data.customers;
                 this.customerData = res.data.customers;
 
-
+                // "blockedRestaurants": [
+                //     {
+                //       "$oid": "6589ac2f70163caea44378d5"
+                //     }
+                //   ]
                 // set the initial value to the loyal and blocked status
                 this.rows.forEach((row) => {
                    // loyalRestaurants is an array of restaurant IDs that the customer is loyal to
-                    row.loyal = row.loyalRestaurants.includes(this.restaurantId);
-                    row.blocked = row.blockedRestaurants.includes(this.restaurantId);
-                }
+                    for (const restaurant of row.loyalRestaurants) {
+                        if (restaurant.$oid === this.restaurantId) {
+                            row.loyal = true;
+                            break;
+                        }
+                    }
+
+                    // blockedRestaurants is an array of restaurant IDs that the customer is blocked from
+
+                    for (const restaurant of row.blockedRestaurants) {
+                        if (restaurant.$oid === this.restaurantId) {
+                            row.blocked = true;
+                            break;
+                        }
+                    }
+
+                }   
                 );
             },
         });
@@ -64,7 +82,7 @@ export class CustomersComponent implements OnInit {
 
     // Add the new methods for toggling loyal and blocked status
     toggleLoyalStatus(row: any): void {
-        const customerId = row.id; // Replace with the actual property holding customer ID
+        const customerId = row._id; // Replace with the actual property holding customer ID
 
         const isLoyal = !row.loyal;
 
@@ -72,7 +90,7 @@ export class CustomersComponent implements OnInit {
 
         // Call the API to toggle loyal status
         this.restaurantService
-            .toggleLoyalStatus(customerId, isLoyal)
+            .toggleLoyalOrBlockStatus("loyal",customerId, isLoyal)
             .subscribe({
                 next: (res: any) => {
                     row.loyal = isLoyal;
@@ -81,13 +99,12 @@ export class CustomersComponent implements OnInit {
     }
 
     toggleBlockedStatus(row: any): void {
-        const customerId = row.id; // Replace with the actual property holding customer ID
-        const restaurantId = "your_restaurant_id"; // Replace with the actual property holding restaurant ID
+        const customerId = row._id; // Replace with the actual property holding customer ID
         const isBlocked = !row.blocked;
 
         // Call the API to toggle blocked status
         this.restaurantService
-            .toggleBlockedStatus(customerId, isBlocked)
+            .toggleLoyalOrBlockStatus("block",customerId, isBlocked)
             .subscribe({
                 next: (res: any) => {
                     // Update the local data after API success

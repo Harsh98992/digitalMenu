@@ -68,12 +68,13 @@ export class CustomersComponent implements OnInit {
 
         const isLoyal = !row.loyal;
 
+
+
         // Call the API to toggle loyal status
         this.restaurantService
             .toggleLoyalStatus(customerId, isLoyal)
             .subscribe({
                 next: (res: any) => {
-                    // Update the local data after API success
                     row.loyal = isLoyal;
                 },
             });

@@ -15,10 +15,22 @@ export class CustomersComponent implements OnInit {
     searchTerm = "";
     filteredData: any;
     customerData: any;
+    restaurantId : any;
+
+
     constructor(private restaurantService: RestaurantPanelService) {}
 
     ngOnInit(): void {
         this.getCustomers();
+
+        this.restaurantService.getRestaurnatDetail().subscribe({
+            next: (res: any) => {
+                if (res && res.data && res.data.restaurantDetail) {
+                    this.restaurantId = res.data.restaurantDetail._id;
+                }
+
+            },
+        });
     }
 
     getCustomers() {
@@ -30,9 +42,11 @@ export class CustomersComponent implements OnInit {
 
                 // set the initial value to the loyal and blocked status
                 this.rows.forEach((row) => {
-                    row.loyal = row.loyal === 1 ? true : false;
-                    row.blocked = row.blocked === 1 ? true : false;
-                });
+                   // loyalRestaurants is an array of restaurant IDs that the customer is loyal to
+                    row.loyal = row.loyalRestaurants.includes(this.restaurantId);
+                    row.blocked = row.blockedRestaurants.includes(this.restaurantId);
+                }
+                );
             },
         });
     }
@@ -51,7 +65,7 @@ export class CustomersComponent implements OnInit {
     // Add the new methods for toggling loyal and blocked status
     toggleLoyalStatus(row: any): void {
         const customerId = row.id; // Replace with the actual property holding customer ID
-        const restaurantId = "your_restaurant_id"; // Replace with the actual property holding restaurant ID
+
         const isLoyal = !row.loyal;
 
         // Call the API to toggle loyal status

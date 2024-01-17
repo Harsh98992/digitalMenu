@@ -109,7 +109,7 @@ export class RestaurantMenuComponent implements OnInit {
                     successBtnText: "YES, START AFRESH",
                 };
                 this.dialog
-                    .open(ConfirmDialogComponent, { data: dialogData })
+                    .open(ConfirmDialogComponent, { data: dialogData,disableClose:true })
                     .afterClosed()
                     .subscribe({
                         next: (res: any) => {

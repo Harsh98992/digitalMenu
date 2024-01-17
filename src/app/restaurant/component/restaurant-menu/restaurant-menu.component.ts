@@ -91,36 +91,45 @@ export class RestaurantMenuComponent implements OnInit {
         const cartData = this.restaurantService.getCartSessionData();
         const cartState = this.restaurantService.getCartSessionData();
         const restaurantActiveUrl = this.restaurantService.getRestaurantUrl();
+        if(!cartData){
+            this.restaurantService.setCartItem([]);
+            this.restaurantService.setCartSate([]);
+            this.restaurantService.setRestaurantUrl(null); 
+            return  
+        }
+       
 
-        if (
-            cartData?.length &&
-            restaurantActiveUrl &&
-            restaurantActiveUrl !== this.activeRestaurantUrl
-        ) {
-            const dialogData = {
-                title: "Confirm",
-                message:
-                    "Your cart contains items from other restaurant. Would you like to reset your cart for adding items from this restaurant?",
-                cancelBtnText: "NO",
-                successBtnText: "YES, START AFRESH",
-            };
-            this.dialog
-                .open(ConfirmDialogComponent, { data: dialogData })
-                .afterClosed()
-                .subscribe({
-                    next: (res: any) => {
-                        if (res && res.okFlag) {
-                            this.restaurantService.setCartItem([]);
-                            this.restaurantService.setCartSate([]);
-                            this.restaurantService.setRestaurantUrl(null);
-                        } else {
-                            this.restaurantService.setCartItem(cartData);
+        if (cartData?.length && restaurantActiveUrl) {
+            if (restaurantActiveUrl !== this.activeRestaurantUrl) {
+                const dialogData = {
+                    title: "Confirm",
+                    message:
+                        "Your cart contains items from other restaurant. Would you like to reset your cart for adding items from this restaurant?",
+                    cancelBtnText: "NO",
+                    successBtnText: "YES, START AFRESH",
+                };
+                this.dialog
+                    .open(ConfirmDialogComponent, { data: dialogData })
+                    .afterClosed()
+                    .subscribe({
+                        next: (res: any) => {
+                            if (res && res.okFlag) {
+                                this.restaurantService.setCartItem([]);
+                                this.restaurantService.setCartSate([]);
+                                this.restaurantService.setRestaurantUrl(null);
+                            } else {
+                                this.restaurantService.setCartItem(cartData);
 
-                            this.restaurantService.setCartSate(cartState);
-                            this.router.navigateByUrl("/");
-                        }
-                    },
-                });
+                                this.restaurantService.setCartSate(cartState);
+                                this.router.navigateByUrl("/");
+                            }
+                        },
+                    });
+            } else {
+                this.restaurantService.setCartItem(cartData);
+
+                this.restaurantService.setCartSate(cartState);
+            }
         }
     }
     getCartState() {

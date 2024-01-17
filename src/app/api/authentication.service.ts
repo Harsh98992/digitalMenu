@@ -81,5 +81,6 @@ export class AuthenticationService {
     }
     removeToken() {
         sessionStorage.clear();
+        localStorage.clear()
     }
 }

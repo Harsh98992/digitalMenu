@@ -11,6 +11,24 @@
                         (keyup)="applyFilter()" />
                 </div>
 
+                <div class="form-group col-lg-2 col-md-12">
+                    <label for="loyalFilter">Loyal Customers:</label>
+                    <select class="form-control" id="loyalFilter" [(ngModel)]="loyalFilter" (change)="applyFilter()">
+                        <option value="">All</option>
+                        <option value="true">Loyal</option>
+                        <option value="false">Not Loyal</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-2 col-md-12">
+                    <label for="blockedFilter">Blocked Customers:</label>
+                    <select class="form-control" id="blockedFilter" [(ngModel)]="blockedFilter"
+                        (change)="applyFilter()">
+                        <option value="">All</option>
+                        <option value="true">Blocked</option>
+                        <option value="false">Not Blocked</option>
+                    </select>
+                </div>
 
                 <div class="col-lg-2 col-md-12">
                     <button type="reset" class="btn btn-danger">
@@ -19,6 +37,7 @@
                     </button>
                 </div>
             </div>
+
             <ngx-datatable #myTable class="bootstrap" [rows]="this.filteredData || rows" [columns]="[
                 { prop: 'name', name: 'Name' },
                 { prop: 'email', name: 'Email' },

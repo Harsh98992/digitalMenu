@@ -15,7 +15,32 @@ export class CustomersComponent implements OnInit {
     searchTerm = "";
     filteredData: any;
     customerData: any;
-    restaurantId : any;
+    restaurantId: any;
+
+    // Add new properties for filter options
+    loyalFilter: string = "";
+    blockedFilter: string = "";
+
+    // Modify applyFilter method to consider loyal and blocked filters
+    applyFilter(): void {
+        const filterValue = this.searchTerm.toLowerCase();
+        this.filteredData = this.customerData.filter((row) => {
+            const loyalCondition =
+                this.loyalFilter === "" || (row.loyal && row.loyal.toString() === this.loyalFilter);
+            const blockedCondition =
+                this.blockedFilter === "" || (row.blocked && row.blocked.toString() === this.blockedFilter);
+            const searchCondition = Object.keys(row).some((key) =>
+                String(row[key]).toLowerCase().includes(filterValue)
+            );
+
+            // Modify conditions to filter customers who are not loyal or not blocked
+            const notLoyalCondition = this.loyalFilter === "" || (row.loyal !== undefined && !row.loyal);
+            const notBlockedCondition = this.blockedFilter === "" || (row.blocked !== undefined && !row.blocked);
+
+            return loyalCondition && blockedCondition && searchCondition && notLoyalCondition && notBlockedCondition;
+        });
+        this.table.offset = 0; // Reset pagination to the first page
+    }
 
 
     constructor(private restaurantService: RestaurantPanelService) {}
@@ -28,7 +53,6 @@ export class CustomersComponent implements OnInit {
                 if (res && res.data && res.data.restaurantDetail) {
                     this.restaurantId = res.data.restaurantDetail._id;
                 }
-
             },
         });
     }
@@ -46,7 +70,7 @@ export class CustomersComponent implements OnInit {
                 //   ]
                 // set the initial value to the loyal and blocked status
                 this.rows.forEach((row) => {
-                   // loyalRestaurants is an array of restaurant IDs that the customer is loyal to
+                    // loyalRestaurants is an array of restaurant IDs that the customer is loyal to
                     for (const restaurant of row.loyalRestaurants) {
                         if (restaurant.$oid === this.restaurantId) {
                             row.loyal = true;
@@ -62,22 +86,9 @@ export class CustomersComponent implements OnInit {
                             break;
                         }
                     }
-
-                }   
-                );
+                });
             },
         });
-    }
-    applyFilter(): void {
-        const filterValue = this.searchTerm.toLowerCase();
-        console.log(filterValue);
-
-        this.filteredData = this.customerData.filter((row) => {
-            return Object.keys(row).some((key) =>
-                String(row[key]).toLowerCase().includes(filterValue)
-            );
-        });
-        this.table.offset = 0; // Reset pagination to the first page
     }
 
     // Add the new methods for toggling loyal and blocked status
@@ -86,11 +97,9 @@ export class CustomersComponent implements OnInit {
 
         const isLoyal = !row.loyal;
 
-
-
         // Call the API to toggle loyal status
         this.restaurantService
-            .toggleLoyalOrBlockStatus("loyal",customerId, isLoyal)
+            .toggleLoyalOrBlockStatus("loyal", customerId, isLoyal)
             .subscribe({
                 next: (res: any) => {
                     row.loyal = isLoyal;
@@ -104,7 +113,7 @@ export class CustomersComponent implements OnInit {
 
         // Call the API to toggle blocked status
         this.restaurantService
-            .toggleLoyalOrBlockStatus("block",customerId, isBlocked)
+            .toggleLoyalOrBlockStatus("block", customerId, isBlocked)
             .subscribe({
                 next: (res: any) => {
                     // Update the local data after API success

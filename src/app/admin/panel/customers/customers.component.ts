@@ -21,27 +21,27 @@ export class CustomersComponent implements OnInit {
     loyalFilter: string = "";
     blockedFilter: string = "";
 
-    // Modify applyFilter method to consider loyal and blocked filters
     applyFilter(): void {
         const filterValue = this.searchTerm.toLowerCase();
         this.filteredData = this.customerData.filter((row) => {
             const loyalCondition =
-                this.loyalFilter === "" || (row.loyal && row.loyal.toString() === this.loyalFilter);
+                this.loyalFilter === "" ||
+                (this.loyalFilter === "true" && row.loyal) ||
+                (this.loyalFilter === "false" && !row.loyal);
+
             const blockedCondition =
-                this.blockedFilter === "" || (row.blocked && row.blocked.toString() === this.blockedFilter);
+                this.blockedFilter === "" ||
+                (this.blockedFilter === "true" && row.blocked) ||
+                (this.blockedFilter === "false" && !row.blocked);
+
             const searchCondition = Object.keys(row).some((key) =>
                 String(row[key]).toLowerCase().includes(filterValue)
             );
 
-            // Modify conditions to filter customers who are not loyal or not blocked
-            const notLoyalCondition = this.loyalFilter === "" || (row.loyal !== undefined && !row.loyal);
-            const notBlockedCondition = this.blockedFilter === "" || (row.blocked !== undefined && !row.blocked);
-
-            return loyalCondition && blockedCondition && searchCondition && notLoyalCondition && notBlockedCondition;
+            return loyalCondition && blockedCondition && searchCondition;
         });
         this.table.offset = 0; // Reset pagination to the first page
     }
-
 
     constructor(private restaurantService: RestaurantPanelService) {}
 

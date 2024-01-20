@@ -160,12 +160,14 @@
                     <li>
                         <select class="food-type-select pointer" #foodSelect
                             (change)="changeDishType($event, searchbox.value)">
-                            <option value="all">
+                            <option value="veg" *ngIf="pureVegFlag">Pure Veg</option>
+                            <option value="all" *ngIf="!pureVegFlag">
                                 Veg/Non-Veg <i class="icon_chat_alt"></i>
                             </option>
-                            <option value="veg">Veg</option>
-                            <option value="nonVeg">Non Veg</option>
-                            <option value="spicy">Spicy</option>
+                            <option value="veg"  *ngIf="!pureVegFlag">Veg</option>
+                            <option value="nonVeg"  *ngIf="!pureVegFlag">Non Veg</option>
+                            <option value="spicy"  *ngIf="!pureVegFlag">Spicy</option>
+                            
                         </select>
                     </li>
                     <li [matMenuTriggerFor]="menu" class="pointer">

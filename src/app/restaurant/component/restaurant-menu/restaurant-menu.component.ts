@@ -66,6 +66,7 @@ export class RestaurantMenuComponent implements OnInit {
         "Saturday",
     ];
     activeRestaurantUrl: any;
+    pureVegFlag=true;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -91,13 +92,12 @@ export class RestaurantMenuComponent implements OnInit {
         const cartData = this.restaurantService.getCartSessionData();
         const cartState = this.restaurantService.getCartSessionData();
         const restaurantActiveUrl = this.restaurantService.getRestaurantUrl();
-        if(!cartData){
+        if (!cartData) {
             this.restaurantService.setCartItem([]);
             this.restaurantService.setCartSate([]);
-            this.restaurantService.setRestaurantUrl(null); 
-            return  
+            this.restaurantService.setRestaurantUrl(null);
+            return;
         }
-       
 
         if (cartData?.length && restaurantActiveUrl) {
             if (restaurantActiveUrl !== this.activeRestaurantUrl) {
@@ -109,7 +109,10 @@ export class RestaurantMenuComponent implements OnInit {
                     successBtnText: "YES, START AFRESH",
                 };
                 this.dialog
-                    .open(ConfirmDialogComponent, { data: dialogData,disableClose:true })
+                    .open(ConfirmDialogComponent, {
+                        data: dialogData,
+                        disableClose: true,
+                    })
                     .afterClosed()
                     .subscribe({
                         next: (res: any) => {
@@ -398,6 +401,7 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
+                    this.checkForPureVeg();
 
                     if (this.restaurantDetail.restaurantStatus === "offline") {
                         const dialogData = {
@@ -549,6 +553,17 @@ export class RestaurantMenuComponent implements OnInit {
                 },
             });
         });
+    }
+    checkForPureVeg() {
+        if (this.restaurantDetail?.cuisine?.length) {
+            for (const data of this.restaurantDetail.cuisine) {
+                for (const item of data?.items) {
+                    if (item?.dishType !== "veg") {
+                        this.pureVegFlag = false;
+                    }
+                }
+            }
+        }
     }
     storeRestaurantInfo(restaurantUrl: string) {
         this.customerAuthService.customerDetail.subscribe({

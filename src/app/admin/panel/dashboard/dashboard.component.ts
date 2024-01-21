@@ -52,6 +52,8 @@ export class DashboardComponent implements OnInit {
         this.setOrder(this.allOrders);
     }
 
+    restaurantDetail: any;
+
     ngOnInit(): void {
         this.getOrders();
         this.socket = io(this.socketUrl, {});
@@ -64,6 +66,7 @@ export class DashboardComponent implements OnInit {
                 next: (res: any) => {
                     if (res && res.data && res.data.restaurantDetail) {
                         this.restaurantId = res.data.restaurantDetail._id;
+                        this.restaurantDetail = res.data.restaurantDetail;
                     }
 
                     console.log("restaurantId", this.restaurantId);
@@ -150,14 +153,126 @@ export class DashboardComponent implements OnInit {
     printReceipt(orderDetail: any) {
         console.log("printReceipt", orderDetail);
 
-        const printContents = document.getElementById("print-section")
-            ?.innerHTML;
-        const originalContents = document.body.innerHTML;
+        // <h1>Order Details</h1>
+        // <p>Order Id: {{details.orderId}}</p>
+        // <!-- <p>Order Date: {{details.orderDate | date : "medium"}}</p>
+        // <p>Customer Name: {{details.customerName}}</p>
+        // <p>Customer Email: {{details.customerEmail}}</p>
+        // <p>Customer Phone Number: {{details.customerPhoneNumber}}</p>
+        // <p>Customer Preference: {{details.customerPreferences.preference}}</p>
+        // <p>Customer Preference Value: {{details.customerPreferences.value}}</p>
+        // <p>Order Status: {{details.orderStatus}}</p>
+        // <p>Payment Method: {{details.payment_method}}</p>
 
-        document.body.innerHTML = printContents;
+        // <h1>Order Summary</h1>
 
-        window.print();
+        // <table>
+        //     <thead>
+        //         <tr>
+        //             <th>Dish Name</th>
+        //             <th>Dish Quantity</th>
+        //             <th>Dish Price</th>
+        //             <th>Dish Type</th>
+        //         </tr>
+        //     </thead>
+        //     <tbody>
+        //         <tr *ngFor="let order of details.orderSummary">
+        //             <td>{{order.dishName}}</td>
+        //             <td>{{order.dishQuantity}}</td>
+        //             <td>{{order.totalPrice | currency : "INR" : "symbol" :
+        //                 "1.0-0"}}</td>
+        //             <td>{{order.dishType}}</td>
+        //         </tr>
+        //     </tbody>
+        // </table>
 
-        document.body.innerHTML = originalContents;
+        // <h1>Order Amount</h1>
+
+        // <p>Order Amount: {{details.orderAmount | currency :
+        //     "INR" : "symbol" : "1.0-0"}}</p>
+
+        // <p *ngIf="details.gstAmount">GST Amount:
+        //     {{details.gstAmount | currency : "INR" : "symbol" :
+        //     "1.0-0"}}</p>
+        // <p *ngIf="details.deliveryAmount">Delivery Amount:
+        //     {{details.deliveryAmount | currency : "INR" :
+        //     "symbol" : "1.0-0"}}</p>
+        // <p *ngIf="details.discountAmount">Discount Amount:
+        //     {{details.discountAmount | currency : "INR" :
+        //     "symbol" : "1.0-0"}}</p>
+
+        // <p>Prepration Time: {{details.preprationTime}}</p>
+        // <p>Cooking Instruction: {{details.cookingInstruction}}
+        // </p>
+        // <p>Order Place Date And Time:
+        //     {{details.orderPlaceDateAndTime | date : "medium"}}
+        // </p> -->
+
+        const printContent = `
+        <h1>${this.restaurantDetail.restaurantName}</h1>
+
+        <br>
+        <h2>
+        <b>Retail Invoice</b>
+        <br>
+        <p>Order Id: ${orderDetail.orderId}</p>
+        <p>Order Date: ${orderDetail.orderDate}</p>
+        <p>Customer Name: ${orderDetail.customerName}</p>
+        <p>Customer Phone Number: ${orderDetail.customerPhoneNumber}</p>
+        <br>
+        <p>payment_method: ${orderDetail.payment_method}</p>
+        <br>
+        `;
+
+        const printWindow = window.open("", "", "height=400,width=800");
+        printWindow.document.write("<html><head><title>bill</title>");
+        printWindow.document.write("</head><body font-size: 12px;>");
+        printWindow.document.write(printContent);
+        printWindow.document.write("<table>");
+        printWindow.document.write("<thead>");
+        printWindow.document.write("<tr>");
+        printWindow.document.write("<th>Dish Name</th>");
+        printWindow.document.write("<th>Dish Quantity</th>");
+        printWindow.document.write("<th>Dish Price</th>");
+        printWindow.document.write("<th>Dish Type</th>");
+        printWindow.document.write("</tr>");
+        printWindow.document.write("</thead>");
+        printWindow.document.write("<tbody>");
+        for (const order of orderDetail.orderDetails[0].orderSummary) {
+            printWindow.document.write("<tr>");
+            printWindow.document.write(`<td>${order.dishName}</td>`);
+            printWindow.document.write(`<td>${order.dishQuantity}</td>`);
+            printWindow.document.write(`<td>${order.totalPrice}</td>`);
+            printWindow.document.write("</tr>");
+        }
+        printWindow.document.write("</tbody>");
+        printWindow.document.write("</table>");
+        printWindow.document.write("<br>");
+
+        if (orderDetail.gstAmount) {
+            printWindow.document.write(
+                `<p>GST Amount:${orderDetail.orderDetails[0].gstAmount}</p>`
+            );
+        }
+        if (orderDetail.deliveryAmount) {
+            printWindow.document.write(
+                `<p>Delivery Amount:${orderDetail.orderDetails[0].deliveryAmount}</p>`
+            );
+        }
+        if (orderDetail.discountAmount) {
+            printWindow.document.write(
+                `<p>Discount Amount:${orderDetail.orderDetails[0].discountAmount}</p>`
+            );
+        }
+        printWindow.document.write("<br>");
+        printWindow.document.write(
+            `<p>Order Amount:${orderDetail.orderDetails[0].orderAmount}</p>`
+        );
+        printWindow.document.write("<br>");
+        printWindow.document.write("</body></html>");
+
+        printWindow.print();
+
+        printWindow.close();
     }
 }

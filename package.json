@@ -38,6 +38,7 @@
     "jquery": "^3.7.0",
     "loadash": "^1.0.0",
     "ngx-avatars": "^1.4.0",
+    "ngx-print": "^1.5.1",
     "ngx-scanner-qrcode": "^1.0.32",
     "ngx-spinner": "^14.0.0",
     "rxjs": "~7.5.0",

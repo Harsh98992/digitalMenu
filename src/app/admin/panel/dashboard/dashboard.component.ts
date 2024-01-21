@@ -77,7 +77,6 @@ export class DashboardComponent implements OnInit {
 
                 // this.handleOrderUpdate(updatedOrder);
                 this.getOrders();
-
             });
         });
     }
@@ -132,7 +131,7 @@ export class DashboardComponent implements OnInit {
                 this.pendingPayment.push(data);
             }
         }
-         this.checkForSoundPause();
+        this.checkForSoundPause();
     }
     checkForSoundPause() {
         if (this.pendingOrder && this.pendingOrder.length) {
@@ -144,5 +143,9 @@ export class DashboardComponent implements OnInit {
 
     ngOnDestroy() {
         this.socket.disconnect(); // Disconnect the socket when component is destroyed
+    }
+
+    printBill(details: any) {
+        console.log("details", details);
     }
 }

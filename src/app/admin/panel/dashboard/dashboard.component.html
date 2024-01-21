@@ -111,7 +111,7 @@
                                                             : "1.0-0"
                                                 }}
                                             </p>
-                                            <a class="print-reciept">
+                                            <a class="print-reciept" (click)="printReceipt(details)">
                                                 <i class="fas fa-print"></i>
                                                 Print bill</a
                                             >
@@ -206,7 +206,7 @@
                                             <span *ngIf="details.payment_method"
                                                 >Payment Status :-
                                                 {{
-                                                    "Paid via " + 
+                                                    "Paid via " +
                                                         details.payment_method
                                                         | titlecase
                                                 }}</span

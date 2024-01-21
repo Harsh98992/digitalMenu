@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { ColumnMode } from "@swimlane/ngx-datatable";
 import { OrderService } from "src/app/api/order.service";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 import { OrderAcceptDialogComponent } from "../../../angular-material/order-accept-dialog/order-accept-dialog.component";
@@ -10,6 +9,7 @@ import { environment } from "src/environments/environment";
 
 // Import the socket.io-client library
 import { io } from "socket.io-client"; // Import the socket.io-client library
+import { NgxPrintService } from "ngx-print";
 
 @Component({
     selector: "app-dashboard",
@@ -32,7 +32,8 @@ export class DashboardComponent implements OnInit {
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
         private modalService: NgbModal,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private printService: NgxPrintService
     ) {}
     handleOrderUpdate(updatedOrder: any) {
         const index = this.allOrders.findIndex(
@@ -143,9 +144,5 @@ export class DashboardComponent implements OnInit {
 
     ngOnDestroy() {
         this.socket.disconnect(); // Disconnect the socket when component is destroyed
-    }
-
-    printBill(details: any) {
-        console.log("details", details);
     }
 }

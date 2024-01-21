@@ -1,83 +1,111 @@
-
-
-
-
 .order-card {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .order-card .row {
+.order-card .row {
     border-bottom: 1px dotted #ccc;
     padding-bottom: 10px;
     margin-right: 0px;
-  }
+}
 
-  .order-card .col-md-4 {
+.order-card .col-md-4 {
     border-right: 1px dotted #ccc;
     padding-right: 20px;
-  }
+}
 
-  .order-card .col-md-4:last-child {
+.order-card .col-md-4:last-child {
     border-right: none;
     padding-right: 0;
-  }
+}
 
-  .order-card .order-items {
+.order-card .order-items {
     margin-bottom: 10px;
-  }
+}
 
-  .order-card .order-items a {
+.order-card .order-items a {
     display: block;
     margin-bottom: 5px;
-  }
+}
 
-  .order-card .order-items img {
+.order-card .order-items img {
     height: 20px;
     width: 20px;
     margin-right: 5px;
-  }
+}
 
-  .order-card .total-bill {
+.order-card .total-bill {
     margin-bottom: 10px;
-  }
+}
 
-  .order-card .delivery-address {
+.order-card .delivery-address {
     margin-bottom: 10px;
-  }
+}
 
-  .green-tick {
+.green-tick {
     margin-right: 5px;
-  }
+}
 
-  .logo {
+.logo {
     height: 20px;
     width: 20px;
-  }
+}
 
-  .total-bill {
+.total-bill {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+}
 
-  .total-bill p {
+.total-bill p {
     margin-right: 10px;
     margin-top: 10px;
-  }
+}
 
-  .total-bill.print-reciept {
+.total-bill.print-reciept {
     color: #007bff;
     cursor: pointer;
-  }
+}
 
-  .order-ready-div button {
+.order-ready-div button {
     margin-top: 10px;
     width: 100%;
-  }
-.dateText{
-  font-size: .9rem;
+}
+.dateText {
+    font-size: 0.9rem;
+}
+
+#print-section {
+    body {
+        display: none;
+        font-family: Arial, sans-serif;
+    }
+    h1,
+    h2,
+    p,
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    h2 {
+        font-size: 1.2em;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    p,
+    li {
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+    ul {
+        list-style-type: none;
+    }
 }

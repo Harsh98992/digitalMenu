@@ -20,6 +20,7 @@ import { PositiveNumberDirective } from "./api/positive-number.directive";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgxPrintModule } from "ngx-print";
 @NgModule({
     declarations: [
         AppComponent,
@@ -38,10 +39,11 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
         HttpClientModule,
         ReactiveFormsModule, // Add ReactiveFormsModule
         NgbTimepickerModule, // Add NgbTimepickerModule
+        NgxPrintModule,
 
         FormsModule,
         ReactiveFormsModule,
-       
+
         NgxSpinnerModule.forRoot({ type: "square-jelly-box" }),
         ServiceWorkerModule.register("ngsw-worker.js", {
             enabled: environment.production,

@@ -4,12 +4,11 @@ import { OrderService } from "src/app/api/order.service";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 import { OrderAcceptDialogComponent } from "../../../angular-material/order-accept-dialog/order-accept-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
-
+import { NgxPrintModule } from "ngx-print";
 import { environment } from "src/environments/environment";
 
 // Import the socket.io-client library
 import { io } from "socket.io-client"; // Import the socket.io-client library
-import { NgxPrintService } from "ngx-print";
 
 @Component({
     selector: "app-dashboard",
@@ -33,7 +32,7 @@ export class DashboardComponent implements OnInit {
         private orderService: OrderService,
         private modalService: NgbModal,
         public dialog: MatDialog,
-        private printService: NgxPrintService
+        private printService: NgxPrintModule
     ) {}
     handleOrderUpdate(updatedOrder: any) {
         const index = this.allOrders.findIndex(
@@ -144,5 +143,21 @@ export class DashboardComponent implements OnInit {
 
     ngOnDestroy() {
         this.socket.disconnect(); // Disconnect the socket when component is destroyed
+    }
+
+    // ngxPrint (click)="printReceipt(details)"
+
+    printReceipt(orderDetail: any) {
+        console.log("printReceipt", orderDetail);
+
+        const printContents = document.getElementById("print-section")
+            ?.innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
     }
 }

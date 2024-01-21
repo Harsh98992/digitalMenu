@@ -95,7 +95,7 @@
                                                 }}
                                             </p>
 
-                                            <a class="print-reciept" printSectionId="print-section" ngxPrint>
+                                            <a class="print-reciept" printSectionId="print-section" ngxPrint (click)="printReceipt(details)">
                                                 <i class="fas fa-print"></i>
                                                 Print billl</a>
 
@@ -334,7 +334,10 @@
                                                 : "1.0-0"
                                                 }}
                                             </p>
-                                            <a class="print-reciept" printSectionId="print-section" ngxPrint>
+                                            <!-- <a class="print-reciept" printSectionId="print-section" ngxPrint (click)="printReceipt(details)" > -->
+
+
+                                                <a class="print-reciept" printSectionId="print-section" ngxPrint (click)="printReceipt(details)" >
                                                 <i class="fas fa-print"></i>
                                                 Print bill</a>
                                         </div>
@@ -512,7 +515,7 @@
                                                 : "1.0-0"
                                                 }}
                                             </p>
-                                            <a class="print-reciept" printSectionId="print-section" ngxPrint>
+                                            <a class="print-reciept" printSectionId="print-section" ngxPrint (click)="printReceipt(details)">
                                                 <i class="fas fa-print"></i>
                                                 Print bill</a>
                                         </div>
@@ -659,7 +662,7 @@
                                                 : "1.0-0"
                                                 }}
                                             </p>
-                                            <a class="print-reciept" printSectionId="print-section" ngxPrint>
+                                            <a class="print-reciept" printSectionId="print-section" ngxPrint (click)="printReceipt(details)">
                                                 <i class="fas fa-print"></i>
                                                 Print bill</a>
                                         </div>

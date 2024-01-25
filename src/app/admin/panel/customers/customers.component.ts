@@ -63,12 +63,6 @@ export class CustomersComponent implements OnInit {
                 this.rows = res.data.customers;
                 this.customerData = res.data.customers;
 
-                // "blockedRestaurants": [
-                //     {
-                //       "$oid": "6589ac2f70163caea44378d5"
-                //     }
-                //   ]
-                // set the initial value to the loyal and blocked status
                 this.rows.forEach((row) => {
                     // loyalRestaurants is an array of restaurant IDs that the customer is loyal to
                     for (const restaurant of row.loyalRestaurants) {

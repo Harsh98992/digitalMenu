@@ -213,20 +213,74 @@ export class DashboardComponent implements OnInit {
 
         <br>
         <h2>
-        <b>Retail Invoice</b>
+        Retail Invoice
+        </h2>
         <br>
         <p>Order Id: ${orderDetail.orderId}</p>
-        <p>Order Date: ${orderDetail.orderDate}</p>
-        <p>Customer Name: ${orderDetail.customerName}</p>
-        <p>Customer Phone Number: ${orderDetail.customerPhoneNumber}</p>
+        <p>Date: ${orderDetail.orderDate.split("T")[0]}</p>
+        <p>Name: ${orderDetail.customerName}</p>
+        <p>Phone no: ${orderDetail.customerPhoneNumber}</p>
         <br>
-        <p>payment_method: ${orderDetail.payment_method}</p>
+        <p>payment method: ${orderDetail.payment_method}</p>
         <br>
         `;
 
         const printWindow = window.open("", "", "height=400,width=800");
         printWindow.document.write("<html><head><title>bill</title>");
-        printWindow.document.write("</head><body font-size: 12px;>");
+
+        // stylesheets
+        printWindow.document.write(
+            `<style>
+            body {
+                font-family: Arial, sans-serif;
+              }
+              h1, h2, p, ul, li {
+                margin: 0;
+                padding: 0;
+              }
+              h1 {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+                text-align: center;
+
+              }
+              h2 {
+                font-size: 1.2em;
+                margin-top: 10px;
+                margin-bottom: 5px;
+                text-align: center;
+              }
+              p, li {
+                font-size: 1em;
+                margin-bottom: 5px;
+              }
+              ul {
+                list-style-type: none;
+              }
+
+              // table
+
+              table {
+                border-collapse: collapse;
+                width: 100%;
+              }
+
+                th, td {
+                    text-align: left;
+                    padding: 8px;
+                }
+
+                tr:nth-child(even) {background-color: #f2f2f2;}
+
+                // table
+
+
+
+
+              </style>`
+        );
+        printWindow.document.write("</head><body>");
+
         printWindow.document.write(printContent);
         printWindow.document.write("<table>");
         printWindow.document.write("<thead>");
@@ -234,7 +288,6 @@ export class DashboardComponent implements OnInit {
         printWindow.document.write("<th>Dish Name</th>");
         printWindow.document.write("<th>Dish Quantity</th>");
         printWindow.document.write("<th>Dish Price</th>");
-        printWindow.document.write("<th>Dish Type</th>");
         printWindow.document.write("</tr>");
         printWindow.document.write("</thead>");
         printWindow.document.write("<tbody>");

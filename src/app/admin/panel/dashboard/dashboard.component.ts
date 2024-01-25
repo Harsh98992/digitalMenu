@@ -210,8 +210,6 @@ export class DashboardComponent implements OnInit {
 
         const printContent = `
         <h1>${this.restaurantDetail.restaurantName}</h1>
-
-        <br>
         <h2>
         Retail Invoice
         </h2>
@@ -220,8 +218,7 @@ export class DashboardComponent implements OnInit {
         <p>Date: ${orderDetail.orderDate.split("T")[0]}</p>
         <p>Name: ${orderDetail.customerName}</p>
         <p>Phone no: ${orderDetail.customerPhoneNumber}</p>
-        <br>
-        <p>payment method: ${orderDetail.payment_method}</p>
+        <p>Payment Method: ${orderDetail.payment_method === undefined ? "Not done Yet" : orderDetail.payment_method}</p>
         <br>
         `;
 
@@ -253,6 +250,8 @@ export class DashboardComponent implements OnInit {
               p, li {
                 font-size: 1em;
                 margin-bottom: 5px;
+                padding: 8px;
+
               }
               ul {
                 list-style-type: none;
@@ -266,7 +265,7 @@ export class DashboardComponent implements OnInit {
               }
 
                 th, td {
-                    text-align: left;
+                    text-align: center;
                     padding: 8px;
                 }
 
@@ -298,6 +297,16 @@ export class DashboardComponent implements OnInit {
             printWindow.document.write(`<td>${order.totalPrice}</td>`);
             printWindow.document.write("</tr>");
         }
+
+        // add total amount
+        printWindow.document.write("<tr>");
+        printWindow.document.write(`<td></td>`);
+        printWindow.document.write(`<td>Order Total</td>`);
+        printWindow.document.write(
+            `<td>${orderDetail.orderDetails[0].orderAmount}</td>`
+        );
+        printWindow.document.write("</tr>");
+
         printWindow.document.write("</tbody>");
         printWindow.document.write("</table>");
         printWindow.document.write("<br>");
@@ -319,7 +328,7 @@ export class DashboardComponent implements OnInit {
         }
         printWindow.document.write("<br>");
         printWindow.document.write(
-            `<p>Order Amount:${orderDetail.orderDetails[0].orderAmount}</p>`
+            `<p><b style="text-align: left" >Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</b></p>`
         );
         printWindow.document.write("<br>");
         printWindow.document.write("</body></html>");

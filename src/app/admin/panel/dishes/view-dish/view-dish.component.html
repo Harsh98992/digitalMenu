@@ -69,6 +69,16 @@
                   <i class="fa-solid fa-pen-to-square"></i> Edit
                 </button>
                 <div class="dropdown-divider"></div>
+                <button
+                class="pointer"
+                mat-menu-item
+                [disabled]="row?.dishOrderOption==='none'"
+                (click)="outOfStockDish(row)"
+             
+              >
+                <i class="fa-solid fa-pen-to-square"></i> Out of stock 
+              </button>
+              <div class="dropdown-divider"></div>
                 <button class="pointer" (click)="deleteDish(row)" mat-menu-item>
                   <i class="fa-solid fa-trash"></i> Delete
                 </button>

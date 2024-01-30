@@ -41,6 +41,21 @@ export class ViewDishComponent implements OnInit {
             { name: "Spicy", prop: "chilliFlag" },
         ];
     }
+    outOfStockDish(row) {
+        const reqBody = Object.assign({}, row);
+        reqBody["dishOrderOption"] = "none";
+        reqBody["availableFlag"] = false;
+        reqBody["dishId"] = row["_id"];
+        reqBody["previousDishCategory"] = row["categoryId"];
+        reqBody["dishCategory"] = row["categoryId"];
+        reqBody["spicy"] = row["chilliFlag"];
+        this.restaurantService.editDish(reqBody).subscribe({
+            next: (res) => {
+                this.restaurantService.setRestaurantData(res);
+                this.router.navigateByUrl("/admin/dishes/view-dish");
+            },
+        });
+    }
     getOrders() {
         this.restaurantService.restaurantData
             .pipe(takeUntil(this.destroy$))
@@ -71,36 +86,38 @@ export class ViewDishComponent implements OnInit {
             queryParams: { edit: true },
         });
     }
-// Inside your ViewDishComponent class in view-dish.component.ts
+    // Inside your ViewDishComponent class in view-dish.component.ts
 
-// ...
+    // ...
 
-getAllDishes(cuisine) {
-    const result = [];
+    getAllDishes(cuisine) {
+        const result = [];
 
-    // Create a mapping between categoryId and category value
-    const categoryMap = {};
-    if (cuisine) {
-        for (let dish of cuisine) {
-            categoryMap[dish["_id"]] = dish["categoryName"]; // Assuming categoryName is the property holding the category value
-            if (dish["items"] && dish["items"].length) {
-                console.log(dish["items"]);
-                const newArray = dish["items"].map((obj) => ({
-                    ...obj,
-                    categoryId: dish["_id"],
-                }));
-                result.push(...newArray);
+        // Create a mapping between categoryId and category value
+        const categoryMap = {};
+        if (cuisine) {
+            for (let dish of cuisine) {
+                categoryMap[dish["_id"]] = dish["categoryName"]; // Assuming categoryName is the property holding the category value
+                if (dish["items"] && dish["items"].length) {
+                    console.log(dish["items"]);
+                    const newArray = dish["items"].map((obj) => ({
+                        ...obj,
+                        categoryId: dish["_id"],
+                    }));
+                    result.push(...newArray);
+                }
             }
         }
+
+        // Sort the result array by category value
+        result.sort((a, b) =>
+            categoryMap[a.categoryId] > categoryMap[b.categoryId] ? 1 : -1
+        );
+
+        return result;
     }
 
-    // Sort the result array by category value
-    result.sort((a, b) => (categoryMap[a.categoryId] > categoryMap[b.categoryId] ? 1 : -1));
-
-    return result;
-}
-
-// ...
+    // ...
     deleteDish(row: any) {
         const dialogData = {
             title: "Confirm",

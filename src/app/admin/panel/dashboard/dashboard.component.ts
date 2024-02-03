@@ -167,61 +167,6 @@ export class DashboardComponent implements OnInit {
     printReceipt(orderDetail: any) {
         console.log("printReceipt", orderDetail);
 
-        // <h1>Order Details</h1>
-        // <p>Order Id: {{details.orderId}}</p>
-        // <!-- <p>Order Date: {{details.orderDate | date : "medium"}}</p>
-        // <p>Customer Name: {{details.customerName}}</p>
-        // <p>Customer Email: {{details.customerEmail}}</p>
-        // <p>Customer Phone Number: {{details.customerPhoneNumber}}</p>
-        // <p>Customer Preference: {{details.customerPreferences.preference}}</p>
-        // <p>Customer Preference Value: {{details.customerPreferences.value}}</p>
-        // <p>Order Status: {{details.orderStatus}}</p>
-        // <p>Payment Method: {{details.payment_method}}</p>
-
-        // <h1>Order Summary</h1>
-
-        // <table>
-        //     <thead>
-        //         <tr>
-        //             <th>Dish Name</th>
-        //             <th>Dish Quantity</th>
-        //             <th>Dish Price</th>
-        //             <th>Dish Type</th>
-        //         </tr>
-        //     </thead>
-        //     <tbody>
-        //         <tr *ngFor="let order of details.orderSummary">
-        //             <td>{{order.dishName}}</td>
-        //             <td>{{order.dishQuantity}}</td>
-        //             <td>{{order.totalPrice | currency : "INR" : "symbol" :
-        //                 "1.0-0"}}</td>
-        //             <td>{{order.dishType}}</td>
-        //         </tr>
-        //     </tbody>
-        // </table>
-
-        // <h1>Order Amount</h1>
-
-        // <p>Order Amount: {{details.orderAmount | currency :
-        //     "INR" : "symbol" : "1.0-0"}}</p>
-
-        // <p *ngIf="details.gstAmount">GST Amount:
-        //     {{details.gstAmount | currency : "INR" : "symbol" :
-        //     "1.0-0"}}</p>
-        // <p *ngIf="details.deliveryAmount">Delivery Amount:
-        //     {{details.deliveryAmount | currency : "INR" :
-        //     "symbol" : "1.0-0"}}</p>
-        // <p *ngIf="details.discountAmount">Discount Amount:
-        //     {{details.discountAmount | currency : "INR" :
-        //     "symbol" : "1.0-0"}}</p>
-
-        // <p>Prepration Time: {{details.preprationTime}}</p>
-        // <p>Cooking Instruction: {{details.cookingInstruction}}
-        // </p>
-        // <p>Order Place Date And Time:
-        //     {{details.orderPlaceDateAndTime | date : "medium"}}
-        // </p> -->
-
         const printContent = `
         <h1>${this.restaurantDetail.restaurantName}</h1>
         <h2>
@@ -344,15 +289,38 @@ export class DashboardComponent implements OnInit {
                 `<p>Discount Amount:${orderDetail.orderDetails[0].discountAmount}</p>`
             );
         }
-        printWindow.document.write("<br>");
         printWindow.document.write(
             `<p><b style="text-align: left" >Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</b></p>`
         );
         printWindow.document.write("<br>");
+
+        printWindow.document.write("<br>");
+
+        printWindow.document.write("<p style='text-align: center'>Thank You</p>");
+
+        printWindow.document.write("<br>");
+        printWindow.document.write("<br>");
+
         printWindow.document.write("</body></html>");
 
-        printWindow.print();
 
-        printWindow.close();
+
+        var ua = navigator.userAgent.toLowerCase();
+
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+
+        if (isAndroid) {
+            console.log("android");
+        } else {
+            console.log("not android");
+
+            printWindow.print();
+
+            printWindow.close();
+        }
+
+        // printWindow.print();
+
+        // printWindow.close();
     }
 }

@@ -62,11 +62,13 @@ export class CustomersComponent implements OnInit {
             next: (res: any) => {
                 this.rows = res.data.customers;
                 this.customerData = res.data.customers;
-
+                console.log(this.customerData);
+                
                 this.rows.forEach((row) => {
                     // loyalRestaurants is an array of restaurant IDs that the customer is loyal to
                     for (const restaurant of row.loyalRestaurants) {
-                        if (restaurant.$oid === this.restaurantId) {
+
+                        if (restaurant === this.restaurantId) {
                             row.loyal = true;
                             break;
                         }
@@ -75,7 +77,7 @@ export class CustomersComponent implements OnInit {
                     // blockedRestaurants is an array of restaurant IDs that the customer is blocked from
 
                     for (const restaurant of row.blockedRestaurants) {
-                        if (restaurant.$oid === this.restaurantId) {
+                        if (restaurant === this.restaurantId) {
                             row.blocked = true;
                             break;
                         }

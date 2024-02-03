@@ -6,12 +6,22 @@
             </div>
             <br />
             <div class="row mx-2 my-1">
-                <div class="form-group col-lg-4 col-md-12">
+                <div class="form-group col-lg-6 col-md-12">
                     
                     <input type="text" placeholder="Search" class="form-control" [(ngModel)]="searchTerm"
                         (keyup)="applyFilter()" />
                 </div>
 
+              
+
+                <div class="col-lg-2 col-md-12">
+                    <button type="reset" class="btn btn-danger">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                        Export
+                    </button>
+                </div>
+            </div>
+            <div class="row mx-2 my-1">
                 <div class="form-group col-lg-3 col-md-12">
                     <label for="loyalFilter">Loyal Customers:</label>
                     <select class="form-control" id="loyalFilter" [(ngModel)]="loyalFilter" (change)="applyFilter()">
@@ -30,15 +40,7 @@
                         <option value="false">Not Blocked</option>
                     </select>
                 </div>
-
-                <div class="col-lg-2 col-md-12">
-                    <button type="reset" class="btn btn-danger">
-                        <i class="fa-solid fa-cloud-arrow-down"></i>
-                        Export
-                    </button>
-                </div>
             </div>
-
             <ngx-datatable #myTable class="bootstrap" [rows]="this.filteredData || rows" [columns]="[
                 { prop: 'name', name: 'Name' },
                 { prop: 'email', name: 'Email' },

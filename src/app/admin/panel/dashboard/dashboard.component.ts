@@ -83,6 +83,20 @@ export class DashboardComponent implements OnInit {
             });
         });
     }
+    toggleLoyalStatus(row) {
+        const customerId = row.customerId; // Replace with the actual property holding customer ID
+
+        const isLoyal = !row?.loyalFlag;
+
+        // Call the API to toggle loyal status
+        this.restaurantService
+            .toggleLoyalOrBlockStatus("loyal", customerId, isLoyal)
+            .subscribe({
+                next: (res: any) => {
+                    this.ngOnInit();
+                },
+            });
+    }
     openDialog(orderDetail: any) {
         this.dialog
             .open(OrderAcceptDialogComponent, {
@@ -218,7 +232,11 @@ export class DashboardComponent implements OnInit {
         <p>Date: ${orderDetail.orderDate.split("T")[0]}</p>
         <p>Name: ${orderDetail.customerName}</p>
         <p>Phone no: ${orderDetail.customerPhoneNumber}</p>
-        <p>Payment Method: ${orderDetail.payment_method === undefined ? "Not done Yet" : orderDetail.payment_method}</p>
+        <p>Payment Method: ${
+            orderDetail.payment_method === undefined
+                ? "Not done Yet"
+                : orderDetail.payment_method
+        }</p>
         <br>
         `;
 

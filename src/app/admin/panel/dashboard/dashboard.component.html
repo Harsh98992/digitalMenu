@@ -239,6 +239,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12 mt-2">
+                                        <div class="support">
+                                            <button class="btn btn-info" (click)="toggleLoyalStatus(details)">
+                                                {{ details?.loyalFlag ?   'Remove Loyal' : 'Add Loyal' }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

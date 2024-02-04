@@ -52,10 +52,12 @@ npm run dev
 firebase use qrsay-testing
 firebase deploy
 
+
+
 ```
 
 
-for 
+for
 
 
 ## Usage

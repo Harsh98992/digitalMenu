@@ -164,93 +164,92 @@ export class DashboardComponent implements OnInit {
 
     // ngxPrint (click)="printReceipt(details)"
 
-
-
-// "Orderdetails": [
-//     {
-//         "orderAmount": 359,
-//         "gstAmount": 0,
-//         "deliveryAmount": 0,
-//         "discountAmount": 0,
-//         "cookingInstruction": "",
-//         "orderSummary": [
-//             {
-//                 "dishChoicesSelected": [],
-//                 "extraSelected": [
-//                     {
-//                         "elementId": "654648097fe0a384cc2fb6ab",
-//                         "addOnsSelected": [
-//                             {
-//                                 "addOnName": "small",
-//                                 "addOnPrice": 30,
-//                                 "category": "veg"
-//                             },
-//                             {
-//                                 "addOnName": "medium",
-//                                 "addOnPrice": 60,
-//                                 "category": "veg"
-//                             }
-//                         ],
-//                         "addOnDisplayName": "extra cheese"
-//                     },
-//                     {
-//                         "elementId": "654650d97fe0a384cc2fd1f9",
-//                         "addOnsSelected": [
-//                             {
-//                                 "addOnName": "Small",
-//                                 "addOnPrice": 30,
-//                                 "category": "veg"
-//                             },
-//                             {
-//                                 "addOnName": "Medium",
-//                                 "addOnPrice": 60,
-//                                 "category": "veg"
-//                             }
-//                         ],
-//                         "addOnDisplayName": "cheese burst"
-//                     },
-//                     {
-//                         "elementId": "654651197fe0a384cc2fd265",
-//                         "addOnsSelected": [
-//                             {
-//                                 "addOnName": "Small",
-//                                 "addOnPrice": 20,
-//                                 "category": "veg"
-//                             },
-//                             {
-//                                 "addOnName": "Medium",
-//                                 "addOnPrice": 40,
-//                                 "category": "veg"
-//                             },
-//                             {
-//                                 "addOnName": "Large",
-//                                 "addOnPrice": 50,
-//                                 "category": "veg"
-//                             }
-//                         ],
-//                         "addOnDisplayName": "extra toppings"
-//                     }
-//                 ],
-//                 "itemSizeSelected": null,
-//                 "dishQuantity": 1,
-//                 "priceOneItem": 359,
-//                 "totalPrice": 359,
-//                 "dishType": "veg",
-//                 "dishName": "Onion",
-//                 "dishId": "65798e148d584c8e8e77b8f7",
-//                 "dishPrice": 69
-//             }
-//         ],
-//         "_id": "65bf61112169ee4d3cc2dffb",
-//         "orderPlaceDateAndTime": "2024-02-04T10:04:01.540Z"
-//     }
-// ]
+    // "Orderdetails": [
+    //     {
+    //         "orderAmount": 359,
+    //         "gstAmount": 0,
+    //         "deliveryAmount": 0,
+    //         "discountAmount": 0,
+    //         "cookingInstruction": "",
+    //         "orderSummary": [
+    //             {
+    //                 "dishChoicesSelected": [],
+    //                 "extraSelected": [
+    //                     {
+    //                         "elementId": "654648097fe0a384cc2fb6ab",
+    //                         "addOnsSelected": [
+    //                             {
+    //                                 "addOnName": "small",
+    //                                 "addOnPrice": 30,
+    //                                 "category": "veg"
+    //                             },
+    //                             {
+    //                                 "addOnName": "medium",
+    //                                 "addOnPrice": 60,
+    //                                 "category": "veg"
+    //                             }
+    //                         ],
+    //                         "addOnDisplayName": "extra cheese"
+    //                     },
+    //                     {
+    //                         "elementId": "654650d97fe0a384cc2fd1f9",
+    //                         "addOnsSelected": [
+    //                             {
+    //                                 "addOnName": "Small",
+    //                                 "addOnPrice": 30,
+    //                                 "category": "veg"
+    //                             },
+    //                             {
+    //                                 "addOnName": "Medium",
+    //                                 "addOnPrice": 60,
+    //                                 "category": "veg"
+    //                             }
+    //                         ],
+    //                         "addOnDisplayName": "cheese burst"
+    //                     },
+    //                     {
+    //                         "elementId": "654651197fe0a384cc2fd265",
+    //                         "addOnsSelected": [
+    //                             {
+    //                                 "addOnName": "Small",
+    //                                 "addOnPrice": 20,
+    //                                 "category": "veg"
+    //                             },
+    //                             {
+    //                                 "addOnName": "Medium",
+    //                                 "addOnPrice": 40,
+    //                                 "category": "veg"
+    //                             },
+    //                             {
+    //                                 "addOnName": "Large",
+    //                                 "addOnPrice": 50,
+    //                                 "category": "veg"
+    //                             }
+    //                         ],
+    //                         "addOnDisplayName": "extra toppings"
+    //                     }
+    //                 ],
+    //                 "itemSizeSelected": null,
+    //                 "dishQuantity": 1,
+    //                 "priceOneItem": 359,
+    //                 "totalPrice": 359,
+    //                 "dishType": "veg",
+    //                 "dishName": "Onion",
+    //                 "dishId": "65798e148d584c8e8e77b8f7",
+    //                 "dishPrice": 69
+    //             }
+    //         ],
+    //         "_id": "65bf61112169ee4d3cc2dffb",
+    //         "orderPlaceDateAndTime": "2024-02-04T10:04:01.540Z"
+    //     }
+    // ]
 
     printReceipt(orderDetail: any) {
         console.log("printReceipt", orderDetail);
 
-
         const printContent = `
+
+        <div style="text-align: left">
         <h1>${this.restaurantDetail.restaurantName}</h1>
         <h2>
         Retail Invoice
@@ -266,6 +265,7 @@ export class DashboardComponent implements OnInit {
                 : orderDetail.payment_method
         }</p>
         <br>
+        </div>
         `;
 
         const printWindow = window.open("", "", "height=400,width=800");
@@ -276,6 +276,12 @@ export class DashboardComponent implements OnInit {
             `<style>
             body {
                 font-family: Arial, sans-serif;
+              }
+              div {
+                margin: 0 auto;
+
+                // width is 2 inch
+                width: 5.5cm;
               }
               h1, h2, p, ul, li {
                 margin: 0;
@@ -296,7 +302,7 @@ export class DashboardComponent implements OnInit {
               p, li {
                 font-size: 1em;
                 margin-bottom: 5px;
-                padding: 8px;
+                padding: 5px;
 
               }
               ul {
@@ -312,13 +318,8 @@ export class DashboardComponent implements OnInit {
 
                 th, td {
                     text-align: center;
-                    padding: 8px;
+                    padding: 5px;
                 }
-
-                tr:nth-child(even) {background-color: #f2f2f2;}
-
-                // table
-
 
 
 
@@ -330,35 +331,27 @@ export class DashboardComponent implements OnInit {
         printWindow.document.write("<table>");
         printWindow.document.write("<thead>");
         printWindow.document.write("<tr>");
-        printWindow.document.write("<th>Dish Name</th>");
-
-
-        // dish category
-        // printWindow.document.write("<th>Dish Category</th>");
-        printWindow.document.write("<th>Dish Quantity</th>");
-
-
-        printWindow.document.write("<th>Dish choice</th>");
-
-        printWindow.document.write("<th>Dish Price</th>");
+        printWindow.document.write("<th>Name</th>");
+        printWindow.document.write("<th>Choice</th>");
+        printWindow.document.write("<th>Quantity</th>");
+        printWindow.document.write("<th>Total</th>");
         printWindow.document.write("</tr>");
         printWindow.document.write("</thead>");
         printWindow.document.write("<tbody>");
         for (const order of orderDetail.orderDetails[0].orderSummary) {
-
-
             printWindow.document.write("<tr>");
             printWindow.document.write(`<td>${order.dishName}</td>`);
 
             if (order.dishChoicesSelected && order.dishChoicesSelected.length) {
-                printWindow.document.write(`<td>${order.dishChoicesSelected[0].category}</td>`);
+                printWindow.document.write(
+                    `<td>${order.dishChoicesSelected[0].category}</td>`
+                );
             } else {
-                printWindow.document.write(`<td>N.A.</td>`);
+                printWindow.document.write(`<td></td>`);
             }
 
-
-
             printWindow.document.write(`<td>${order.dishQuantity}</td>`);
+            // printWindow.document.write(`<td>${order.priceOneItem*order.dishQuantity}</td>`);
             printWindow.document.write(`<td>${order.totalPrice}</td>`);
             printWindow.document.write("</tr>");
 
@@ -366,11 +359,44 @@ export class DashboardComponent implements OnInit {
             if (order.extraSelected && order.extraSelected.length) {
                 for (const extra of order.extraSelected) {
                     printWindow.document.write("<tr>");
-                    printWindow.document.write(`<td>-> ${extra.addOnDisplayName}</td>`);
-                    printWindow.document.write(`<td>${extra.addOnsSelected[0].category}</td>`);
+                    printWindow.document.write(
+                        // `<td>${extra.addOnDisplayName}</td>`
 
-                    printWindow.document.write(`<td>${order.dishQuantity}</td>`);
-                    printWindow.document.write(`<td>${extra.addOnsSelected[0].addOnPrice}</td>`);
+                        // convert to title case
+                        `<td>${extra.addOnDisplayName
+                            .split(" ")
+                            .map(
+                                (s) =>
+                                    s.charAt(0).toUpperCase() + s.substring(1)
+                            )
+                            .join(" ")}</td>`
+                    );
+
+                    if (extra.addOnsSelected && extra.addOnsSelected.length) {
+                        printWindow.document.write(
+                            // `<td>${extra.addOnsSelected[0].addOnName}</td>`
+
+                            // convert to title case
+                            `<td>${extra.addOnsSelected[0].addOnName
+                                .split(" ")
+                                .map(
+                                    (s) =>
+                                        s.charAt(0).toUpperCase() +
+                                        s.substring(1)
+                                )
+                                .join(" ")}</td>`
+                        );
+                    } else {
+                        printWindow.document.write(`<td></td>`);
+                    }
+
+                    printWindow.document.write(
+                        `<td>${order.dishQuantity}</td>`
+                    );
+                    printWindow.document.write(
+                        // `<td>${extra.addOnsSelected[0].addOnPrice}</td>`
+                        `<td></td>`
+                    );
                     printWindow.document.write("</tr>");
                 }
             }
@@ -378,6 +404,7 @@ export class DashboardComponent implements OnInit {
 
         // add total amount
         printWindow.document.write("<tr>");
+        printWindow.document.write(`<td></td>`);
         printWindow.document.write(`<td></td>`);
         printWindow.document.write(`<td>Order Total</td>`);
         printWindow.document.write(
@@ -405,20 +432,20 @@ export class DashboardComponent implements OnInit {
             );
         }
         printWindow.document.write(
-            `<p><b style="text-align: left" >Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</b></p>`
+            `<p><b style="text-align: center" >Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</b></p>`
         );
         printWindow.document.write("<br>");
 
         printWindow.document.write("<br>");
 
-        printWindow.document.write("<p style='text-align: center'>Thank You</p>");
+        printWindow.document.write(
+            "<p style='text-align: center'>Thank You for your order</p>"
+        );
 
         printWindow.document.write("<br>");
         printWindow.document.write("<br>");
 
         printWindow.document.write("</body></html>");
-
-
 
         var ua = navigator.userAgent.toLowerCase();
 
@@ -426,6 +453,9 @@ export class DashboardComponent implements OnInit {
 
         if (isAndroid) {
             console.log("android");
+
+            // downlaod the file in android device with 2 inch breadth
+            // printWindow.print();
         } else {
             console.log("not android");
 

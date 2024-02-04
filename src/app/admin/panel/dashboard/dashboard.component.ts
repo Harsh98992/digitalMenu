@@ -334,21 +334,46 @@ export class DashboardComponent implements OnInit {
 
 
         // dish category
-        printWindow.document.write("<th>Dish Category</th>");
+        // printWindow.document.write("<th>Dish Category</th>");
         printWindow.document.write("<th>Dish Quantity</th>");
+
+
+        printWindow.document.write("<th>Dish choice</th>");
 
         printWindow.document.write("<th>Dish Price</th>");
         printWindow.document.write("</tr>");
         printWindow.document.write("</thead>");
         printWindow.document.write("<tbody>");
         for (const order of orderDetail.orderDetails[0].orderSummary) {
+
+
             printWindow.document.write("<tr>");
             printWindow.document.write(`<td>${order.dishName}</td>`);
-            printWindow.document.write(`<td>${order.dishType}</td>`);
+
+            if (order.dishChoicesSelected && order.dishChoicesSelected.length) {
+                printWindow.document.write(`<td>${order.dishChoicesSelected[0].category}</td>`);
+            } else {
+                printWindow.document.write(`<td>N.A.</td>`);
+            }
+
+
 
             printWindow.document.write(`<td>${order.dishQuantity}</td>`);
             printWindow.document.write(`<td>${order.totalPrice}</td>`);
             printWindow.document.write("</tr>");
+
+            // also add extra selected
+            if (order.extraSelected && order.extraSelected.length) {
+                for (const extra of order.extraSelected) {
+                    printWindow.document.write("<tr>");
+                    printWindow.document.write(`<td>-> ${extra.addOnDisplayName}</td>`);
+                    printWindow.document.write(`<td>${extra.addOnsSelected[0].category}</td>`);
+
+                    printWindow.document.write(`<td>${order.dishQuantity}</td>`);
+                    printWindow.document.write(`<td>${extra.addOnsSelected[0].addOnPrice}</td>`);
+                    printWindow.document.write("</tr>");
+                }
+            }
         }
 
         // add total amount

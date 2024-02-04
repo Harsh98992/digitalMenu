@@ -413,180 +413,466 @@ export class DashboardComponent implements OnInit {
         console.log("printReceipt", orderDetail);
 
 
-        const printContent = `
-        <p>${this.restaurantDetail.restaurantName}</p>
-        <p>Retail Invoice</p>
-        <p>Order Id: ${orderDetail.orderId}</p>
-        <p>Date: ${orderDetail.orderDate.split("T")[0]}</p>
-        <p>Name: ${orderDetail.customerName}</p>
-        <p>Phone no: ${orderDetail.customerPhoneNumber}</p>
-        <p>Payment Method: ${
-            orderDetail.payment_method === undefined
-                ? "Not done Yet"
-                : orderDetail.payment_method
-        }</p>
-        `;
+        // const printContent = `
+        // <p>${this.restaurantDetail.restaurantName}</p>
+        // <p>Retail Invoice</p>
+        // <p>Order Id: ${orderDetail.orderId}</p>
+        // <p>Date: ${orderDetail.orderDate.split("T")[0]}</p>
+        // <p>Name: ${orderDetail.customerName}</p>
+        // <p>Phone no: ${orderDetail.customerPhoneNumber}</p>
+        // <p>Payment Method: ${
+        //     orderDetail.payment_method === undefined
+        //         ? "Not done Yet"
+        //         : orderDetail.payment_method
+        // }</p>
+        // `;
+        // const printWindow = window.open("", "", "width=2in");
+        // printWindow.document.write("<html><head><title>bill</title>");
+
+        // // stylesheets
+        // printWindow.document.write(
+        //     `<style>
+
+        //       table , th, td , tr , tbody , thead ,body,h1, h2, p, ul, li  {
+        //         font-family: 'Courier New', monospace;
+        //         font-size: 12px;
+        //         padding: 0px;
+        //         margin: 0px;
+
+        //         }
+
+        //       ul {
+        //         list-style-type: none;
+        //       }
+
+        //       // table
+
+        //       table {
+        //         border-collapse: collapse;
+        //       }
+
+        //         th, td {
+        //             padding: 0px;
+        //         }
+
+
+
+        //       </style>`
+        // );
+        // printWindow.document.write("</head><body>");
+
+        // printWindow.document.write(printContent);
+        // printWindow.document.write("<table>");
+        // printWindow.document.write("<thead>");
+        // printWindow.document.write("<tr>");
+        // printWindow.document.write("<th>Item</th>");
+        // printWindow.document.write("<th>Price</th>");
+        // printWindow.document.write("<th>Qty</th>");
+        // printWindow.document.write("<th>Total</th>");
+        // printWindow.document.write("</tr>");
+        // printWindow.document.write("</thead>");
+        // printWindow.document.write("<tbody>");
+        // for (const order of orderDetail.orderDetails[0].orderSummary) {
+        //     printWindow.document.write("<tr>");
+        //     printWindow.document.write(`<td>${order.dishName}</td>`);
+
+        //     printWindow.document.write(`<td>${order.priceOneItem}</td>`);
+
+        //     printWindow.document.write(`<td>${order.dishQuantity}</td>`);
+        //     // printWindow.document.write(`<td>${order.priceOneItem*order.dishQuantity}</td>`);
+        //     printWindow.document.write(`<td>${order.totalPrice}</td>`);
+        //     printWindow.document.write("</tr>");
+
+        //     // also add extra selected
+        //     if (order.extraSelected && order.extraSelected.length) {
+
+        //         var  checkIfFirst = true;
+
+        //         for (const extra of order.extraSelected) {
+
+
+
+
+        //             printWindow.document.write("<tr>");
+
+
+        //             printWindow.document.write(
+        //                 // `<td>${extra.addOnDisplayName}</td>`
+
+        //                 // convert to title case
+        //                 `<td>`);
+
+
+        //             if (checkIfFirst) {
+        //                 printWindow.document.write("addon-");
+        //                 checkIfFirst = false;
+        //             }
+
+        //             printWindow.document.write(
+        //                 `${extra.addOnDisplayName
+        //                     .split(" ")
+        //                     .map(
+        //                         (s) =>
+        //                             s.charAt(0).toUpperCase() + s.substring(1)
+        //                     )
+        //                     .join(" ")}</td>`
+        //             );
+
+
+        //             if (extra.addOnsSelected && extra.addOnsSelected.length) {
+        //                 printWindow.document.write(
+        //                     // `<td>${extra.addOnsSelected[0].addOnName}</td>`
+
+        //                     // convert to title case
+        //                     `<td>${extra.addOnsSelected[0].addOnName
+        //                         .split(" ")
+        //                         .map(
+        //                             (s) =>
+        //                                 s.charAt(0).toUpperCase() +
+        //                                 s.substring(1)
+        //                         )
+        //                         .join(" ")}</td>`
+        //                 );
+        //             } else {
+        //                 printWindow.document.write(`<td></td>`);
+        //             }
+
+        //             printWindow.document.write(
+        //                 `<td>${order.dishQuantity}</td>`
+        //             );
+        //             printWindow.document.write(
+        //                 // `<td>${extra.addOnsSelected[0].addOnPrice}</td>`
+        //                 `<td></td>`
+        //             );
+        //             printWindow.document.write("</tr>");
+        //         }
+        //     }
+        // }
+
+
+
+
+        // // add total amount
+        // printWindow.document.write("<tr>");
+        // printWindow.document.write(`<td></td>`);
+        // printWindow.document.write(`<td></td>`);
+        // printWindow.document.write(`<td>Order Total</td>`);
+        // printWindow.document.write(
+        //     `<td>${orderDetail.orderDetails[0].orderAmount}</td>`
+        // );
+        // printWindow.document.write("</tr>");
+
+        // printWindow.document.write("</tbody>");
+        // printWindow.document.write("</table>");
+        // printWindow.document.write("<br>");
+
+        // if (orderDetail.gstAmount) {
+        //     printWindow.document.write(
+        //         `<p>GST Amount:${orderDetail.orderDetails[0].gstAmount}</p>`
+        //     );
+        // }
+        // if (orderDetail.deliveryAmount) {
+        //     printWindow.document.write(
+        //         `<p>Delivery Amount:${orderDetail.orderDetails[0].deliveryAmount}</p>`
+        //     );
+        // }
+        // if (orderDetail.discountAmount) {
+        //     printWindow.document.write(
+        //         `<p>Discount Amount:${orderDetail.orderDetails[0].discountAmount}</p>`
+        //     );
+        // }
+        // printWindow.document.write(
+        //     `<p>Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</p>`
+        // );
+
+//     <html>
+// <head>
+//   <style>
+//     /* Add your custom CSS styles here */
+//
+//   </style>
+// </head>
+// <body>
+//   <div class="receipt">
+//     <div class="header">
+//       <img src="logo.png" alt="Logo">
+//       <h1>THE LOCAL DINER</h1>
+//       <p>#2075, 4th Cross, 2nd Block,<br>
+//       HRBR Layout, Kalyan Nagar,<br>
+//       BANGALORE-560 043<br>
+//       PH: 080 41440087<br>
+//       TIN: 2908176093</p>
+//     </div>
+//     <p>CASH/BILL</p>
+//     <p>Bill No: A0615<br>
+//     Waiter: WAITER<br>
+//     TNo: D15<br>
+//     Date: 06/06/2015<br>
+//     Time: 20:54</p>
+//     <table class="item-table">
+//       <tr>
+//         <th>Items</th>
+//         <th>Price</th>
+//         <th>Qty</th>
+//         <th>Total Rs</th>
+//       </tr>
+//       <tr>
+//         <td>FLAVOURED MOJITO</td>
+//         <td>330.00</td>
+//         <td>1.000</td>
+//         <td>330.00</td>
+//       </tr>
+//       <tr>
+//         <td>CUCUMBER MINT</td>
+//         <td>170.00</td>
+//         <td>1.000</td>
+//         <td>170.00</td>
+//       </tr>
+//       <tr>
+//         <td>LONG ISLAND ICE TEA</td>
+//         <td>460.00</td>
+//         <td>1.000</td>
+//         <td>460.00</td>
+//       </tr>
+//       <tr>
+//         <td>CRUNCHY SALAD</td>
+//         <td>320.00</td>
+//         <td>1.000</td>
+//         <td>320.00</td>
+//       </tr>
+//       <tr>
+//         <td>ASSORTED SATAY</td>
+//         <td>260.00</td>
+//         <td>1.000</td>
+//         <td>260.00</td>
+//       </tr>
+//       <tr>
+//         <td>TEQUILA CHICKEN</td>
+//         <td>360.00</td>
+//         <td>1.000</td>
+//         <td>360.00</td>
+//       </tr>
+//       <tr>
+//         <td>FAJITAS CHICKEN</td>
+//         <td>300.00</td>
+//         <td>1.000</td>
+//         <td>300.00</td>
+//       </tr>
+//       <tr>
+//         <td>SURF N TURF</td>
+//         <td>380.00</td>
+//         <td>1.000</td>
+//         <td>380.00</td>
+//       </tr>
+//     </table>
+//     <p>Total Quantity: 9.000</p>
+//     <div class="footer">
+//       <p>Gross Total</p>
+//       <p>2560.00</p>
+//     </div>
+//     <div class="footer">
+//       <p>VAT 14.5%</p>
+//       <p>371.20</p>
+//     </div>
+//     <div class="footer">
+//       <p>Service Tax 5.8%</p>
+//       <p>148.48</p>
+//     </div>
+//     <div class="footer">
+//       <p>Net Amount</p>
+//       <p class="total">3079.68</p>
+//     </div>
+//     <div class="footer">
+//       <p>Service Charges 10.0%</p>
+//       <p>307.97</p>
+//     </div>
+//     <p>Get Back Joe Joe!</p>
+//   </div>
+// </body>
+// </html>
+
+// Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
+
         const printWindow = window.open("", "", "width=2in");
+
         printWindow.document.write("<html><head><title>bill</title>");
 
         // stylesheets
+
         printWindow.document.write(
             `<style>
 
-              table , th, td , tr , tbody , thead ,body,h1, h2, p, ul, li  {
-                font-family: 'Courier New', monospace;
-                font-size: 12px;
-                padding: 0px;
-                margin: 0px;
+              .receipt {
+                      width: 300px;
+                      margin: 0 auto;
+                      border: 1px solid black;
+                      padding: 5px;
+                      font-family: Arial, sans-serif;
+                      font-size: 12px;
+                    }
 
-                }
+                    .header {
+                      text-align: center;
+                    }
 
-              ul {
-                list-style-type: none;
-              }
+                    .header img {
+                      width: 80px;
+                      height: 80px;
+                    }
 
-              // table
+                    .header h1 {
+                      font-size: 20px;
+                      margin: 0;
+                    }
 
-              table {
-                border-collapse: collapse;
-              }
+                    .header p {
+                      margin: 2px 0;
+                    }
 
-                th, td {
-                    padding: 0px;
-                }
+                    .item-table {
+                      width: 100%;
+                      border-collapse: collapse;
+                      margin: 5px 0;
+                    }
 
+                    .item-table th, .item-table td {
+                      border: 1px solid black;
+                      padding: 2px;
+                    }
 
+                    .item-table th {
+                      text-align: left;
+                    }
 
-              </style>`
+                    .item-table td {
+                      text-align: right;
+                    }
+
+                    .footer {
+                      display: flex;
+                      justify-content: space-between;
+                      margin: 5px 0;
+                    }
+
+                    .footer p {
+                      margin: 0;
+                    }
+
+                    .total {
+                      font-weight: bold;
+                    }
+                </style>`
         );
         printWindow.document.write("</head><body>");
 
-        printWindow.document.write(printContent);
-        printWindow.document.write("<table>");
-        printWindow.document.write("<thead>");
-        printWindow.document.write("<tr>");
-        printWindow.document.write("<th>Item</th>");
-        printWindow.document.write("<th>Price</th>");
-        printWindow.document.write("<th>Qty</th>");
-        printWindow.document.write("<th>Total</th>");
-        printWindow.document.write("</tr>");
-        printWindow.document.write("</thead>");
-        printWindow.document.write("<tbody>");
+        printWindow.document.write(
+            `<div class="receipt">
+        <div class="header">
+            <img src="${this.apiUrl}/public/${this.restaurantDetail.restaurantLogo}" alt="Logo">
+            <h1>${this.restaurantDetail.restaurantName}</h1>
+            <p>${this.restaurantDetail.address}</p>
+        </div>
+        <p>CASH/BILL</p>
+        <p>Bill No: ${orderDetail.orderId}<br>
+        Waiter: ${orderDetail.waiterName}<br>
+        TNo: ${orderDetail.tableNumber}<br>
+        Date: ${orderDetail.orderDate.split("T")[0]}<br>
+        Time: ${orderDetail.orderDate.split("T")[1].split(".")[0]}</p>
+
+        <table class="item-table">
+            <tr>
+                <th>Items</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total Rs</th>
+            </tr>`
+
+        );
+
         for (const order of orderDetail.orderDetails[0].orderSummary) {
             printWindow.document.write("<tr>");
-            printWindow.document.write(`<td>${order.dishName}</td>`);
+            printWindow.document.write(`<td>${order.dishName}`);
 
-            printWindow.document.write(`<td>${order.priceOneItem}</td>`);
-
-            printWindow.document.write(`<td>${order.dishQuantity}</td>`);
-            // printWindow.document.write(`<td>${order.priceOneItem*order.dishQuantity}</td>`);
-            printWindow.document.write(`<td>${order.totalPrice}</td>`);
-            printWindow.document.write("</tr>");
-
+            var checkIfFirst = true;
             // also add extra selected
             if (order.extraSelected && order.extraSelected.length) {
-
-                var  checkIfFirst = true;
-
                 for (const extra of order.extraSelected) {
-
-
-
-
-                    printWindow.document.write("<tr>");
-
-
-                    printWindow.document.write(
-                        // `<td>${extra.addOnDisplayName}</td>`
-
-                        // convert to title case
-                        `<td>`);
-
-
                     if (checkIfFirst) {
-                        printWindow.document.write("addon-");
-                        checkIfFirst = false;
-                    }
-
-                    printWindow.document.write(
-                        `${extra.addOnDisplayName
-                            .split(" ")
-                            .map(
-                                (s) =>
-                                    s.charAt(0).toUpperCase() + s.substring(1)
-                            )
-                            .join(" ")}</td>`
-                    );
-
-
-                    if (extra.addOnsSelected && extra.addOnsSelected.length) {
                         printWindow.document.write(
-                            // `<td>${extra.addOnsSelected[0].addOnName}</td>`
-
-                            // convert to title case
-                            `<td>${extra.addOnsSelected[0].addOnName
-                                .split(" ")
-                                .map(
-                                    (s) =>
-                                        s.charAt(0).toUpperCase() +
-                                        s.substring(1)
-                                )
-                                .join(" ")}</td>`
+                            `with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
                         );
+                        checkIfFirst = false;
                     } else {
-                        printWindow.document.write(`<td></td>`);
+                        printWindow.document.write(
+                            ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
+                        );
                     }
 
-                    printWindow.document.write(
-                        `<td>${order.dishQuantity}</td>`
-                    );
-                    printWindow.document.write(
-                        // `<td>${extra.addOnsSelected[0].addOnPrice}</td>`
-                        `<td></td>`
-                    );
-                    printWindow.document.write("</tr>");
                 }
+            } else {
+                printWindow.document.write(`<td>${order.priceOneItem}</td>`);
+                printWindow.document.write(`<td>${order.dishQuantity}</td>`);
+                printWindow.document.write(`<td>${order.totalPrice}</td>`);
+                printWindow.document.write("</tr>");
             }
+
+
         }
 
-
-
-
-        // add total amount
-        printWindow.document.write("<tr>");
-        printWindow.document.write(`<td></td>`);
-        printWindow.document.write(`<td></td>`);
-        printWindow.document.write(`<td>Order Total</td>`);
-        printWindow.document.write(
-            `<td>${orderDetail.orderDetails[0].orderAmount}</td>`
-        );
-        printWindow.document.write("</tr>");
-
-        printWindow.document.write("</tbody>");
         printWindow.document.write("</table>");
         printWindow.document.write("<br>");
 
-        if (orderDetail.gstAmount) {
+        printWindow.document.write(
+            `<p>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</p>`
+        );
+
+        printWindow.document.write(
+            `<div class="footer">
+            <p>Gross Total</p>
+            <p>${orderDetail.orderDetails[0].orderAmount}</p>
+        </div>`
+        );
+
+        if (orderDetail.orderDetails[0].gstAmount) {
             printWindow.document.write(
-                `<p>GST Amount:${orderDetail.orderDetails[0].gstAmount}</p>`
+                `<div class="footer">
+                <p>GST Amount</p>
+                <p>${orderDetail.orderDetails[0].gstAmount}</p>
+            </div>`
             );
         }
-        if (orderDetail.deliveryAmount) {
+
+        if (orderDetail.orderDetails[0].deliveryAmount) {
             printWindow.document.write(
-                `<p>Delivery Amount:${orderDetail.orderDetails[0].deliveryAmount}</p>`
+                `<div class="footer">
+                <p>Delivery Amount</p>
+                <p>${orderDetail.orderDetails[0].deliveryAmount}</p>
+            </div>`
             );
         }
-        if (orderDetail.discountAmount) {
+
+        if (orderDetail.orderDetails[0].discountAmount) {
             printWindow.document.write(
-                `<p>Discount Amount:${orderDetail.orderDetails[0].discountAmount}</p>`
+                `<div class="footer">
+                <p>Discount Amount</p>
+                <p>${orderDetail.orderDetails[0].discountAmount}</p>
+            </div>`
             );
         }
+
         printWindow.document.write(
             `<p>Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</p>`
         );
 
-
+        printWindow.document.write("</div>");
         printWindow.document.write("</body></html>");
+
+        console.log("printWindow", printWindow);
+
+        // printWindow.document.write(printContent);
+
+
+        // printWindow.document.write("</body></html>");
 
         var ua = navigator.userAgent.toLowerCase();
 

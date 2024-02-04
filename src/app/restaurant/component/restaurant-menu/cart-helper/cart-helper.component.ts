@@ -392,6 +392,7 @@ export class CartHelperComponent implements OnInit {
                 obj["dishName"] = item.dishDetail.dishName;
                 obj["dishId"] = item.dishDetail._id;
                 obj["dishPrice"] = item.dishDetail.dishPrice;
+                // obj["dishCategory"] = item.dishDetail.dishCategory;
                 result.push(obj);
             }
         }

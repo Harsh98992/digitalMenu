@@ -164,8 +164,91 @@ export class DashboardComponent implements OnInit {
 
     // ngxPrint (click)="printReceipt(details)"
 
+
+
+// "Orderdetails": [
+//     {
+//         "orderAmount": 359,
+//         "gstAmount": 0,
+//         "deliveryAmount": 0,
+//         "discountAmount": 0,
+//         "cookingInstruction": "",
+//         "orderSummary": [
+//             {
+//                 "dishChoicesSelected": [],
+//                 "extraSelected": [
+//                     {
+//                         "elementId": "654648097fe0a384cc2fb6ab",
+//                         "addOnsSelected": [
+//                             {
+//                                 "addOnName": "small",
+//                                 "addOnPrice": 30,
+//                                 "category": "veg"
+//                             },
+//                             {
+//                                 "addOnName": "medium",
+//                                 "addOnPrice": 60,
+//                                 "category": "veg"
+//                             }
+//                         ],
+//                         "addOnDisplayName": "extra cheese"
+//                     },
+//                     {
+//                         "elementId": "654650d97fe0a384cc2fd1f9",
+//                         "addOnsSelected": [
+//                             {
+//                                 "addOnName": "Small",
+//                                 "addOnPrice": 30,
+//                                 "category": "veg"
+//                             },
+//                             {
+//                                 "addOnName": "Medium",
+//                                 "addOnPrice": 60,
+//                                 "category": "veg"
+//                             }
+//                         ],
+//                         "addOnDisplayName": "cheese burst"
+//                     },
+//                     {
+//                         "elementId": "654651197fe0a384cc2fd265",
+//                         "addOnsSelected": [
+//                             {
+//                                 "addOnName": "Small",
+//                                 "addOnPrice": 20,
+//                                 "category": "veg"
+//                             },
+//                             {
+//                                 "addOnName": "Medium",
+//                                 "addOnPrice": 40,
+//                                 "category": "veg"
+//                             },
+//                             {
+//                                 "addOnName": "Large",
+//                                 "addOnPrice": 50,
+//                                 "category": "veg"
+//                             }
+//                         ],
+//                         "addOnDisplayName": "extra toppings"
+//                     }
+//                 ],
+//                 "itemSizeSelected": null,
+//                 "dishQuantity": 1,
+//                 "priceOneItem": 359,
+//                 "totalPrice": 359,
+//                 "dishType": "veg",
+//                 "dishName": "Onion",
+//                 "dishId": "65798e148d584c8e8e77b8f7",
+//                 "dishPrice": 69
+//             }
+//         ],
+//         "_id": "65bf61112169ee4d3cc2dffb",
+//         "orderPlaceDateAndTime": "2024-02-04T10:04:01.540Z"
+//     }
+// ]
+
     printReceipt(orderDetail: any) {
         console.log("printReceipt", orderDetail);
+
 
         const printContent = `
         <h1>${this.restaurantDetail.restaurantName}</h1>
@@ -248,7 +331,12 @@ export class DashboardComponent implements OnInit {
         printWindow.document.write("<thead>");
         printWindow.document.write("<tr>");
         printWindow.document.write("<th>Dish Name</th>");
+
+
+        // dish category
+        printWindow.document.write("<th>Dish Category</th>");
         printWindow.document.write("<th>Dish Quantity</th>");
+
         printWindow.document.write("<th>Dish Price</th>");
         printWindow.document.write("</tr>");
         printWindow.document.write("</thead>");
@@ -256,6 +344,8 @@ export class DashboardComponent implements OnInit {
         for (const order of orderDetail.orderDetails[0].orderSummary) {
             printWindow.document.write("<tr>");
             printWindow.document.write(`<td>${order.dishName}</td>`);
+            printWindow.document.write(`<td>${order.dishType}</td>`);
+
             printWindow.document.write(`<td>${order.dishQuantity}</td>`);
             printWindow.document.write(`<td>${order.totalPrice}</td>`);
             printWindow.document.write("</tr>");

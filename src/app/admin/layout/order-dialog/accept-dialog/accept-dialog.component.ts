@@ -16,7 +16,7 @@ import { environment } from "src/environments/environment";
 export class AcceptDialogComponent implements OnInit, OnDestroy {
     //  time=['15 min','30 min','45 min','1 hour','1 hour 15 min','1 hour 30 min'],
     destroy$: Subject<boolean> = new Subject<boolean>();
-    cashOnDeliveryAvailable = false;
+    cashOnDeliveryAvailable = true;
     ctrl = new FormControl<NgbTimeStruct | null>(
         null,
         (control: FormControl<NgbTimeStruct | null>) => {
@@ -59,13 +59,16 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
         this.getRestaurantData();
     }
     getRestaurantData() {
-        this.cashOnDeliveryAvailable = this.orderData?.loyalFlag ?? false;
         this.restaurantService.restaurantData
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (res: any) => {
                     if (res?.paymentgatewayData?.gatewayData) {
                         this.paymentGatewayFlag = true;
+                        if (this.paymentGatewayFlag) {
+                            this.cashOnDeliveryAvailable =
+                                this.orderData?.loyalFlag ?? false;
+                        }
                     }
                 },
             });

@@ -244,17 +244,178 @@ export class DashboardComponent implements OnInit {
     //     }
     // ]
 
+//     <html>
+// <head>
+//   <style>
+//     /* Add your custom CSS styles here */
+//     .receipt {
+//       width: 300px;
+//       margin: 0 auto;
+//       border: 1px solid black;
+//       padding: 5px;
+//       font-family: Arial, sans-serif;
+//       font-size: 12px;
+//     }
+
+//     .header {
+//       text-align: center;
+//     }
+
+//     .header img {
+//       width: 80px;
+//       height: 80px;
+//     }
+
+//     .header h1 {
+//       font-size: 20px;
+//       margin: 0;
+//     }
+
+//     .header p {
+//       margin: 2px 0;
+//     }
+
+//     .item-table {
+//       width: 100%;
+//       border-collapse: collapse;
+//       margin: 5px 0;
+//     }
+
+//     .item-table th, .item-table td {
+//       border: 1px solid black;
+//       padding: 2px;
+//     }
+
+//     .item-table th {
+//       text-align: left;
+//     }
+
+//     .item-table td {
+//       text-align: right;
+//     }
+
+//     .footer {
+//       display: flex;
+//       justify-content: space-between;
+//       margin: 5px 0;
+//     }
+
+//     .footer p {
+//       margin: 0;
+//     }
+
+//     .total {
+//       font-weight: bold;
+//     }
+//   </style>
+// </head>
+// <body>
+//   <div class="receipt">
+//     <div class="header">
+//       <img src="logo.png" alt="Logo">
+//       <h1>THE LOCAL DINER</h1>
+//       <p>#2075, 4th Cross, 2nd Block,<br>
+//       HRBR Layout, Kalyan Nagar,<br>
+//       BANGALORE-560 043<br>
+//       PH: 080 41440087<br>
+//       TIN: 2908176093</p>
+//     </div>
+//     <p>CASH/BILL</p>
+//     <p>Bill No: A0615<br>
+//     Waiter: WAITER<br>
+//     TNo: D15<br>
+//     Date: 06/06/2015<br>
+//     Time: 20:54</p>
+//     <table class="item-table">
+//       <tr>
+//         <th>Items</th>
+//         <th>Price</th>
+//         <th>Qty</th>
+//         <th>Total Rs</th>
+//       </tr>
+//       <tr>
+//         <td>FLAVOURED MOJITO</td>
+//         <td>330.00</td>
+//         <td>1.000</td>
+//         <td>330.00</td>
+//       </tr>
+//       <tr>
+//         <td>CUCUMBER MINT</td>
+//         <td>170.00</td>
+//         <td>1.000</td>
+//         <td>170.00</td>
+//       </tr>
+//       <tr>
+//         <td>LONG ISLAND ICE TEA</td>
+//         <td>460.00</td>
+//         <td>1.000</td>
+//         <td>460.00</td>
+//       </tr>
+//       <tr>
+//         <td>CRUNCHY SALAD</td>
+//         <td>320.00</td>
+//         <td>1.000</td>
+//         <td>320.00</td>
+//       </tr>
+//       <tr>
+//         <td>ASSORTED SATAY</td>
+//         <td>260.00</td>
+//         <td>1.000</td>
+//         <td>260.00</td>
+//       </tr>
+//       <tr>
+//         <td>TEQUILA CHICKEN</td>
+//         <td>360.00</td>
+//         <td>1.000</td>
+//         <td>360.00</td>
+//       </tr>
+//       <tr>
+//         <td>FAJITAS CHICKEN</td>
+//         <td>300.00</td>
+//         <td>1.000</td>
+//         <td>300.00</td>
+//       </tr>
+//       <tr>
+//         <td>SURF N TURF</td>
+//         <td>380.00</td>
+//         <td>1.000</td>
+//         <td>380.00</td>
+//       </tr>
+//     </table>
+//     <p>Total Quantity: 9.000</p>
+//     <div class="footer">
+//       <p>Gross Total</p>
+//       <p>2560.00</p>
+//     </div>
+//     <div class="footer">
+//       <p>VAT 14.5%</p>
+//       <p>371.20</p>
+//     </div>
+//     <div class="footer">
+//       <p>Service Tax 5.8%</p>
+//       <p>148.48</p>
+//     </div>
+//     <div class="footer">
+//       <p>Net Amount</p>
+//       <p class="total">3079.68</p>
+//     </div>
+//     <div class="footer">
+//       <p>Service Charges 10.0%</p>
+//       <p>307.97</p>
+//     </div>
+//     <p>Get Back Joe Joe!</p>
+//   </div>
+// </body>
+// </html>
+
+
     printReceipt(orderDetail: any) {
         console.log("printReceipt", orderDetail);
 
-        const printContent = `
 
-        <div style="text-align: left">
-        <h1>${this.restaurantDetail.restaurantName}</h1>
-        <h2>
-        Retail Invoice
-        </h2>
-        <br>
+        const printContent = `
+        <p>${this.restaurantDetail.restaurantName}</p>
+        <p>Retail Invoice</p>
         <p>Order Id: ${orderDetail.orderId}</p>
         <p>Date: ${orderDetail.orderDate.split("T")[0]}</p>
         <p>Name: ${orderDetail.customerName}</p>
@@ -264,47 +425,22 @@ export class DashboardComponent implements OnInit {
                 ? "Not done Yet"
                 : orderDetail.payment_method
         }</p>
-        <br>
-        </div>
         `;
-
-        const printWindow = window.open("", "", "height=400,width=800");
+        const printWindow = window.open("", "", "width=2in");
         printWindow.document.write("<html><head><title>bill</title>");
 
         // stylesheets
         printWindow.document.write(
             `<style>
-            body {
-                font-family: Arial, sans-serif;
-              }
-              div {
-                margin: 0 auto;
 
-                // width is 2 inch
-                width: 5.5cm;
-              }
-              h1, h2, p, ul, li {
-                margin: 0;
-                padding: 0;
-              }
-              h1 {
-                font-size: 1.5em;
-                margin-bottom: 10px;
-                text-align: center;
+              table , th, td , tr , tbody , thead ,body,h1, h2, p, ul, li  {
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                padding: 0px;
+                margin: 0px;
 
-              }
-              h2 {
-                font-size: 1.2em;
-                margin-top: 10px;
-                margin-bottom: 5px;
-                text-align: center;
-              }
-              p, li {
-                font-size: 1em;
-                margin-bottom: 5px;
-                padding: 5px;
+                }
 
-              }
               ul {
                 list-style-type: none;
               }
@@ -313,12 +449,10 @@ export class DashboardComponent implements OnInit {
 
               table {
                 border-collapse: collapse;
-                width: 100%;
               }
 
                 th, td {
-                    text-align: center;
-                    padding: 5px;
+                    padding: 0px;
                 }
 
 
@@ -331,9 +465,9 @@ export class DashboardComponent implements OnInit {
         printWindow.document.write("<table>");
         printWindow.document.write("<thead>");
         printWindow.document.write("<tr>");
-        printWindow.document.write("<th>Name</th>");
-        printWindow.document.write("<th>Choice</th>");
-        printWindow.document.write("<th>Quantity</th>");
+        printWindow.document.write("<th>Item</th>");
+        printWindow.document.write("<th>Price</th>");
+        printWindow.document.write("<th>Qty</th>");
         printWindow.document.write("<th>Total</th>");
         printWindow.document.write("</tr>");
         printWindow.document.write("</thead>");
@@ -342,13 +476,7 @@ export class DashboardComponent implements OnInit {
             printWindow.document.write("<tr>");
             printWindow.document.write(`<td>${order.dishName}</td>`);
 
-            if (order.dishChoicesSelected && order.dishChoicesSelected.length) {
-                printWindow.document.write(
-                    `<td>${order.dishChoicesSelected[0].category}</td>`
-                );
-            } else {
-                printWindow.document.write(`<td></td>`);
-            }
+            printWindow.document.write(`<td>${order.priceOneItem}</td>`);
 
             printWindow.document.write(`<td>${order.dishQuantity}</td>`);
             // printWindow.document.write(`<td>${order.priceOneItem*order.dishQuantity}</td>`);
@@ -357,13 +485,31 @@ export class DashboardComponent implements OnInit {
 
             // also add extra selected
             if (order.extraSelected && order.extraSelected.length) {
+
+                var  checkIfFirst = true;
+
                 for (const extra of order.extraSelected) {
+
+
+
+
                     printWindow.document.write("<tr>");
+
+
                     printWindow.document.write(
                         // `<td>${extra.addOnDisplayName}</td>`
 
                         // convert to title case
-                        `<td>${extra.addOnDisplayName
+                        `<td>`);
+
+
+                    if (checkIfFirst) {
+                        printWindow.document.write("addon-");
+                        checkIfFirst = false;
+                    }
+
+                    printWindow.document.write(
+                        `${extra.addOnDisplayName
                             .split(" ")
                             .map(
                                 (s) =>
@@ -371,6 +517,7 @@ export class DashboardComponent implements OnInit {
                             )
                             .join(" ")}</td>`
                     );
+
 
                     if (extra.addOnsSelected && extra.addOnsSelected.length) {
                         printWindow.document.write(
@@ -402,6 +549,9 @@ export class DashboardComponent implements OnInit {
             }
         }
 
+
+
+
         // add total amount
         printWindow.document.write("<tr>");
         printWindow.document.write(`<td></td>`);
@@ -432,18 +582,9 @@ export class DashboardComponent implements OnInit {
             );
         }
         printWindow.document.write(
-            `<p><b style="text-align: center" >Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</b></p>`
-        );
-        printWindow.document.write("<br>");
-
-        printWindow.document.write("<br>");
-
-        printWindow.document.write(
-            "<p style='text-align: center'>Thank You for your order</p>"
+            `<p>Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</p>`
         );
 
-        printWindow.document.write("<br>");
-        printWindow.document.write("<br>");
 
         printWindow.document.write("</body></html>");
 

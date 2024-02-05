@@ -23,7 +23,8 @@
     </div>
 </mat-dialog-content> -->
 
-    <div>
+    <div class="mt-3">
+        <p class="text-danger" *ngIf="!this.orderData?.cashOnDeliveryAvailable"> *Cash on Delivery is not available for this order.</p>
         <!-- <div class="d-flex pt-3 pl-3">
             <div>
                 <img
@@ -66,7 +67,7 @@
                 </div>
             </mat-radio-button>
         </mat-radio-group>
-
+       
         <!-- <div class="py-2 px-3">
                     <div class="first pl-2 d-flex py-2">
                         <div class="form-check">

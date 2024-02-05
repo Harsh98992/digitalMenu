@@ -4,13 +4,24 @@
 </div>
 <div class="col-12">
     <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
-        <form class="needs-validation" novalidate="" accept-charset="utf-8" [formGroup]="cancelOrderForm"
-            (submit)="submitForm()">
+        <form
+            class="needs-validation"
+            novalidate=""
+            accept-charset="utf-8"
+            [formGroup]="cancelOrderForm"
+            (submit)="submitForm()"
+        >
             <div class="mb-8">
                 <label for="name" class="form-label">Reason</label>
-                <textarea class="form-control form-textarea mb-3" rows="3" formControlName="reason" [ngClass]="
+                <textarea
+                    class="form-control form-textarea mb-3"
+                    rows="3"
+                    formControlName="reason"
+                    [ngClass]="
                         checkForError('reason', 'required') ? 'is-invalid' : ''
-                    " placeholder="Reason"></textarea>
+                    "
+                    placeholder="Reason"
+                ></textarea>
             </div>
 
             <!-- add a back button -->
@@ -34,7 +45,11 @@
 
             <div class="row">
                 <div class="col-6">
-                    <button type="button" class="btn btn_1 gradient w-100" (click)="back()">
+                    <button
+                        type="button"
+                        class="btn btn_1 gradient w-100"
+                        (click)="back()"
+                    >
                         Back
                     </button>
                 </div>
@@ -44,7 +59,6 @@
                     </button>
                 </div>
             </div>
-
         </form>
     </div>
 </div>

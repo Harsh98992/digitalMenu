@@ -592,163 +592,200 @@ export class DashboardComponent implements OnInit {
         // printWindow.document.write(
         //     `<p>Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</p>`
         // );
-
         // <html>
+
         // <head>
-        //   <style>
-        //     /* Add your custom CSS styles here */
-        //     .receipt {
-        //       width: 300px;
-        //       margin: 0 auto;
-        //       border: 1px solid black;
-        //       padding: 5px;
-        //       font-family: Arial, sans-serif;
-        //       font-size: 12px;
-        //     }
+        //     <style>
+        //         /* Add your custom CSS styles here */
+        //         .receipt {
+        //             width: 300px;
+        //             margin: 0 auto;
+        //             border: 1px solid black;
+        //             padding: 5px;
+        //             font-family: Arial, sans-serif;
+        //             font-size: 12px;
+        //         }
 
-        //     .header {
-        //       text-align: center;
-        //     }
+        //         .header {
+        //             text-align: center;
+        //         }
 
-        //     .header img {
-        //       width: 80px;
-        //       height: 80px;
-        //     }
 
-        //     .header h1 {
-        //       font-size: 20px;
-        //       margin: 0;
-        //     }
 
-        //     .header p {
-        //       margin: 2px 0;
-        //     }
+        //         .header h1 {
+        //             font-size: 15px;
+        //             margin: 0;
+        //         }
 
-        //     .item-table {
-        //       width: 100%;
-        //       border-collapse: collapse;
-        //       margin: 5px 0;
-        //     }
+        //         .header p {
+        //             margin: 0;
+        //             line-height: 1;
+        //         }
 
-        //     .item-table th, .item-table td {
-        //       border: 1px solid black;
-        //       padding: 2px;
-        //     }
+        //         .item-table {
+        //             width: 100%;
+        //             border-collapse: collapse;
+        //             margin: 5px 0;
+        //         }
 
-        //     .item-table th {
-        //       text-align: left;
-        //     }
+        //         .item-table th,
+        //         .item-table td {
+        //             border: 1px solid black;
+        //             padding: 2px;
+        //         }
 
-        //     .item-table td {
-        //       text-align: right;
-        //     }
+        //         .item-table th {
+        //             text-align: left;
+        //         }
 
-        //     .footer {
-        //       display: flex;
-        //       justify-content: space-between;
-        //       margin: 5px 0;
-        //     }
+        //         .item-table td {
+        //             text-align: right;
+        //         }
 
-        //     .footer p {
-        //       margin: 0;
-        //     }
+        //         .footer {
+        //             display: flex;
+        //             justify-content: space-between;
+        //             margin: 5px 0;
+        //         }
 
-        //     .total {
-        //       font-weight: bold;
-        //     }
-        //   </style>
+        //         .footer p {
+        //             margin: 0;
+        //         }
+
+        //         .total {
+        //             font-weight: bold;
+        //         }
+
+        //         .top-table {
+        //             width: 100%;
+        //             border-collapse: collapse;
+        //             margin: 0;
+        //         }
+
+        //         .top-table td {
+        //             padding: 0;
+        //         }
+
+        //         .left {
+        //             text-align: left;
+        //         }
+
+        //         .right {
+        //             text-align: right;
+        //         }
+        //     </style>
         // </head>
+
         // <body>
-        //   <div class="receipt">
-        //     <div class="header">
-        //       <h1>THE LOCAL DINER</h1>
-        //       <p>#2075, 4th Cross, 2nd Block,<br>
-        //       HRBR Layout, Kalyan Nagar,<br>
-        //       BANGALORE-560 043<br>
-        //       PH: 080 41440087<br>
-        //       TIN: 2908176093</p>
-        //     </div>
-        //     <p>CASH/BILL</p>
-        //     <p>Bill No: A0615<br>
-        //     Waiter: WAITER<br>
-        //     TNo: D15<br>
-        //     Date: 06/06/2015<br>
-        //     Time: 20:54</p>
-        //     <table class="item-table">
-        //       <tr>
-        //         <th>Items</th>
-        //         <th>Price</th>
-        //         <th>Qty</th>
-        //         <th>Total Rs</th>
-        //       </tr>
-        //       <tr>
-        //         <td>FLAVOURED MOJITO</td>
-        //         <td>330.00</td>
-        //         <td>1.000</td>
-        //         <td>330.00</td>
-        //       </tr>
-        //       <tr>
-        //         <td>CUCUMBER MINTCUCUMBER MINTCUCUMBER MINTCUCUMBER MINTCUCUMBER MINT</td>
-        //         <td>170.00</td>
-        //         <td>1.000</td>
-        //         <td>170.00</td>
-        //       </tr>
-        //       <tr>
-        //         <td>LONG ISLAND ICE TEA</td>
-        //         <td>460.00</td>
-        //         <td>1.000</td>
-        //         <td>460.00</td>
-        //       </tr>
-        //       <tr>
-        //         <td>CRUNCHY SALAD</td>
-        //         <td>320.00</td>
-        //         <td>1.000</td>
-        //         <td>320.00</td>
-        //       </tr>
-        //       <tr>
-        //         <td>ASSORTED SATAY</td>
-        //         <td>260.00</td>
-        //         <td>1.000</td>
-        //         <td>260.00</td>
-        //       </tr>
-        //       <tr>
-        //         <td>TEQUILA CHICKEN</td>
-        //         <td>360.00</td>
-        //         <td>1.000</td>
-        //         <td>360.00</td>
-        //       </tr>
-        //       <tr>
-        //         <td>FAJITAS CHICKEN</td>
-        //         <td>300.00</td>
-        //         <td>1.000</td>
-        //         <td>300.00</td>
-        //       </tr>
-        //       <tr>
-        //         <td>SURF N TURF</td>
-        //         <td>380.00</td>
-        //         <td>1.000</td>
-        //         <td>380.00</td>
-        //       </tr>
-        //     </table>
-        //     <p>Total Quantity: 9.000</p>
-        //     <div class="footer">
-        //       <p>Gross Total</p>
-        //       <p>2560.00</p>
-        //     </div>
-        //     <div class="footer">
-        //       <p>GST 18%</p>
-        //       <p>371.20</p>
-        //     </div>
+        //     <div class="receipt">
+        //         <div class="header">
+        //             <h1>THE LOCAL DINER</h1>
+        //             <p>#2075, 4th Cross, 2nd Block,<br>
+        //                 HRBR Layout, Kalyan Nagar,<br>
+        //                 BANGALORE-560 043<br>
+        //                 PH: 080 41440087<br>
+        //                 TIN: 2908176093</p>
+        //         </div>
+        //         <table class="top-table" border="1">
+        //             <tr>
+        //                 <th>CASH/BILL</th>
+        //                 <th>Bill No:</th>
+        //                 <th>Waiter:</th>
+        //                 <th>TNo:</th>
 
-        //     <div class="footer">
-        //       <p>Net Amount</p>
-        //       <p class="total">3079.68</p>
-        //     </div>
+        //             </tr>
+        //             <tr>
+        //                 <td>CASH/BILL</td>
+        //                 <td>A0615</td>
+        //                 <td>WAITER</td>
+        //                 <td>D15</td>
 
-        //   </div>
+        //             </tr>
+        //             <tr>
+        //                 <th>Date:</th>
+        //                 <th>Time:</th>
+        //             </tr>
+        //             <tr>
+        //                 <td>06/06/2015</td>
+        //                 <td>20:54</td>
+        //         </table>
+
+
+        //         <table class="item-table">
+        //             <tr>
+        //                 <th>Items</th>
+        //                 <th>Price</th>
+        //                 <th>Qty</th>
+        //                 <th>Total Rs</th>
+        //             </tr>
+        //             <tr>
+        //                 <td>FLAVOURED MOJITO</td>
+        //                 <td>330.00</td>
+        //                 <td>1.000</td>
+        //                 <td>330.00</td>
+        //             </tr>
+        //             <tr>
+        //                 <td>CUCUMBER MINTCUCUMBER MINTCUCUMBER MINTCUCUMBER MINTCUCUMBER MINT</td>
+        //                 <td>170.00</td>
+        //                 <td>1.000</td>
+        //                 <td>170.00</td>
+        //             </tr>
+        //             <tr>
+        //                 <td>LONG ISLAND ICE TEA</td>
+        //                 <td>460.00</td>
+        //                 <td>1.000</td>
+        //                 <td>460.00</td>
+        //             </tr>
+        //             <tr>
+        //                 <td>CRUNCHY SALAD</td>
+        //                 <td>320.00</td>
+        //                 <td>1.000</td>
+        //                 <td>320.00</td>
+        //             </tr>
+        //             <tr>
+        //                 <td>ASSORTED SATAY</td>
+        //                 <td>260.00</td>
+        //                 <td>1.000</td>
+        //                 <td>260.00</td>
+        //             </tr>
+        //             <tr>
+        //                 <td>TEQUILA CHICKEN</td>
+        //                 <td>360.00</td>
+        //                 <td>1.000</td>
+        //                 <td>360.00</td>
+        //             </tr>
+        //             <tr>
+        //                 <td>FAJITAS CHICKEN</td>
+        //                 <td>300.00</td>
+        //                 <td>1.000</td>
+        //                 <td>300.00</td>
+        //             </tr>
+        //             <tr>
+        //                 <td>SURF N TURF</td>
+        //                 <td>380.00</td>
+        //                 <td>1.000</td>
+        //                 <td>380.00</td>
+        //             </tr>
+        //         </table>
+        //         <p>Total Quantity: 9.000</p>
+        //         <div class="footer">
+        //             <p>Gross Total</p>
+        //             <p>2560.00</p>
+        //         </div>
+        //         <div class="footer">
+        //             <p>GST 18%</p>
+        //             <p>371.20</p>
+        //         </div>
+
+        //         <div class="footer">
+        //             <p>Net Amount</p>
+        //             <p class="total">3079.68</p>
+        //         </div>
+
+        //     </div>
         // </body>
-        // </html>
 
+        // </html>
 
 // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
 

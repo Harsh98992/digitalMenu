@@ -871,9 +871,6 @@ export class DashboardComponent implements OnInit {
 
         // printWindow.document.write(printContent);
 
-
-        // printWindow.document.write("</body></html>");
-
         var ua = navigator.userAgent.toLowerCase();
 
         var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
@@ -882,7 +879,7 @@ export class DashboardComponent implements OnInit {
             console.log("android");
 
             // downlaod the file in android device with 2 inch breadth
-            // printWindow.print();
+            
         } else {
             console.log("not android");
 

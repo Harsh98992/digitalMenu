@@ -14,38 +14,11 @@
                 >
             </li>
             <li
-                routerLink="/admin/restaurent-contact-details/view"
                 *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+                routerLink="/admin/dishes/view-dish"
             >
                 <a class="dropdown-toggle no-caret-down"
-                    ><i class="fas fa-home"></i> Contact Details</a
-                >
-            </li>
-
-            <li
-                routerLink="/admin/promocode/view"
-                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
-            >
-                <a class="dropdown-toggle no-caret-down"
-                    ><i class="fa-solid fa-tags"></i> . View Promo Code
-                </a>
-            </li>
-
-            <li
-                routerLink="/admin/promocode/add"
-                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
-            >
-                <a class="dropdown-toggle no-caret-down"
-                    ><i class="fa-solid fa-tags"></i> . Add Promo Code
-                </a>
-            </li>
-
-            <li
-                routerLink="/admin/restaurant-orders"
-                *ngIf="verifiedAccountFlag"
-            >
-                <a class="dropdown-toggle no-caret-down"
-                    ><i class="fa-solid fa fa-book"></i> Orders</a
+                    ><i class="fa-solid fa fa-utensils"></i> View Dish</a
                 >
             </li>
             <li
@@ -56,20 +29,15 @@
                     ><i class="fa-solid fa fa-users"></i> Customers</a
                 >
             </li>
+            <li
+                routerLink="/admin/restaurant-orders"
+                *ngIf="verifiedAccountFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-book"></i> Orders</a
+                >
+            </li>
 
-            <!-- <li *ngIf="verifiedAccountFlag">
-                <a data-target="#demo" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
-                        class="fa-solid fa fa-bullhorn"></i> Marketing
-                    <i class="fas fa-angle-right" aria-hidden="true"></i>
-                </a>
-
-                <ul #collapse class="collapse out" id="demo">
-                    <li routerLink="/admin/marketing/coupon">
-                        <a><i class="fas fa-angle-right"></i> Add Restaurant
-                            Request</a>
-                    </li>
-                </ul>
-            </li> -->
             <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
                 <a
                     data-target="#dishes"
@@ -81,29 +49,122 @@
 
                 <ul #collapse class="collapse out" id="dishes">
                     <li routerLink="/admin/dishes/view-category">
-                        <a><i class="fas fa-angle-right"></i> Categories</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Categories</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/extras">
-                        <a><i class="fas fa-angle-right"></i> Extras</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Extras</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/choices">
-                        <a><i class="fas fa-angle-right"></i>Dish Choices</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i>Dish Choices</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/add-dish">
-                        <a><i class="fas fa-angle-right"></i> Add Dish</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Add Dish</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/view-dish">
-                        <a><i class="fas fa-angle-right"></i> View Dish</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> View Dish</a
+                        >
                     </li>
                 </ul>
             </li>
 
-            <li *ngIf="!adminRouteFlag && !this.staffRoleFlag">
+            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+                <a
+                    data-target="#promocodes"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Promocode
+                    <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </a>
+
+                <ul #collapse class="collapse out" id="promocodes">
+                    <li routerLink="/admin/promocode/view">
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> View
+                        </a>
+                    </li>
+                    <li routerLink="/admin/promocode/add">
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Create
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a
+                    data-target="#restaurantprofile"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Restaurant Profile
+                    <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </a>
+
+                <ul #collapse class="collapse out" id="restaurantprofile">
+                    <li
+                        *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+                        routerLink="/admin/restaurent-contact-details/view"
+                    >
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Contact Details
+                        </a>
+                    </li>
+                    <li
+                        *ngIf="!adminRouteFlag && !this.staffRoleFlag"
+                        routerLink="/admin/restaurant-profile"
+                    >
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Details
+                        </a>
+                    </li>
+                    <li
+                        *ngIf="
+                            !adminRouteFlag &&
+                            verifiedAccountFlag &&
+                            !this.staffRoleFlag
+                        "
+                        routerLink="/admin/restaurant-tables/view"
+                    >
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Tables</a
+                        >
+                    </li>
+                    <li
+                        routerLink="/admin/restaurant-images"
+                        *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+                    >
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Images</a
+                        >
+                    </li>
+                    <li
+                        *ngIf="verifiedAccountFlag"
+                        routerLink="/admin/restaurantQrCode"
+                    >
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            QrCode</a
+                        >
+                    </li>
+                </ul>
+            </li>
+
+            <!-- <li *ngIf="!adminRouteFlag && !this.staffRoleFlag">
                 <a routerLink="/admin/restaurant-profile"
                     ><i class="fas fa-table"></i> Restaurant Details</a
                 >
-            </li>
-            <li
+            </li> -->
+            <!-- <li
                 *ngIf="
                     !adminRouteFlag &&
                     verifiedAccountFlag &&
@@ -113,35 +174,60 @@
                 <a routerLink="/admin/restaurant-tables/view"
                     ><i class="fas fa-table"></i> Restaurant Tables</a
                 >
-            </li>
+            </li> -->
 
-            <li
+            <!-- <li
                 routerLink="/admin/restaurant-images"
                 *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
             >
                 <a class="dropdown-toggle no-caret-down"
                     ><i class="fa icon_images"></i> Restaurant Images</a
                 >
-            </li>
+            </li> -->
 
             <!-- add user profile -->
+            <li *ngIf="verifiedAccountFlag">
+                <a
+                    data-target="#profile"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Profile
+                    <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </a>
 
-            <li *ngIf="verifiedAccountFlag" routerLink="/admin/user-profile">
+                <ul #collapse class="collapse out" id="profile">
+                    <li routerLink="/admin/user-profile">
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> My Profile</a
+                        >
+                    </li>
+                    <li
+                        *ngIf="verifiedAccountFlag"
+                        routerLink="/admin/profile/resetPassword"
+                    >
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Change
+                            Password</a
+                        >
+                    </li>
+                </ul>
+            </li>
+            <!-- <li *ngIf="verifiedAccountFlag" routerLink="/admin/user-profile">
                 <a class="dropdown-toggle no-caret-down"
                     ><i class="fa-solid fa fa-user"></i> My Profile</a
                 >
-            </li>
+            </li> -->
 
             <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
                 <a routerLink="/admin/user-managment/view"
                     ><i class="fa-solid fa fa-user"></i> User Managment</a
                 >
             </li>
-            <li *ngIf="verifiedAccountFlag">
+            <!-- <li *ngIf="verifiedAccountFlag">
                 <a routerLink="/admin/restaurantQrCode"
                     ><i class="fa-solid fa fa-user"></i> Restaurant QrCode</a
                 >
-            </li>
+            </li> -->
             <li *ngIf="adminRouteFlag">
                 <a routerLink="/admin/unVerifyRequest"
                     ><i class="fa-solid fa fa-user"></i>Un-Verify Account</a
@@ -153,11 +239,11 @@
                     ><i class="fa-solid fa fa-user"></i> Review</a
                 >
             </li> -->
-            <li *ngIf="verifiedAccountFlag">
+            <!-- <li *ngIf="verifiedAccountFlag">
                 <a routerLink="/admin/profile/resetPassword"
                     ><i class="fa-solid fa fa-user"></i> Change Password</a
                 >
-            </li>
+            </li> -->
             <li *ngIf="verifiedAccountFlag">
                 <a
                     href="https://tawk.to/chat/64de485494cf5d49dc6afe68/1h824l3a8"
@@ -328,9 +414,12 @@
             </div>
         </nav>
 
-        <div class="content" [ngClass]="!showSideBarFlag ? 'content-max' : ''" >
+        <div class="content" [ngClass]="!showSideBarFlag ? 'content-max' : ''">
             <div class="container">
-                <div [ngClass]="!showSideBarFlag ? 'image-overlay' : ''" (click)="hideSideBar()"></div>
+                <div
+                    [ngClass]="!showSideBarFlag ? 'image-overlay' : ''"
+                    (click)="hideSideBar()"
+                ></div>
                 <router-outlet></router-outlet>
             </div>
         </div>

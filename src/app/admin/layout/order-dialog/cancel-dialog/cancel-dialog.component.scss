@@ -22,3 +22,10 @@
   #forgot:hover{
     color: #f3723b;
   }
+
+  @media only screen and (min-width: 768px) {
+    /* Your desktop styles go here */
+    .form-textarea{
+      min-width: 300px !important;
+    }
+  }

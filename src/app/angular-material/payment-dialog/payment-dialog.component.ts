@@ -69,6 +69,7 @@ export class PaymentDialogComponent implements OnInit {
     }
     checkForCashOnDelivery() {
         if (!this.orderData?.cashOnDeliveryAvailable) {
+            
             this.paymentOption.pop();
         }
     }

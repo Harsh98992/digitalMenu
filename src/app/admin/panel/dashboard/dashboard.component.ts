@@ -9,6 +9,7 @@ import { environment } from "src/environments/environment";
 
 // Import the socket.io-client library
 import { io } from "socket.io-client"; // Import the socket.io-client library
+import { finalize } from "rxjs";
 
 @Component({
     selector: "app-dashboard",
@@ -27,6 +28,8 @@ export class DashboardComponent implements OnInit {
     restaurantId: any;
 
     allOrders = [];
+    activeTab="tab1";
+    apiCalledFlag: boolean;
     constructor(
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
@@ -83,6 +86,9 @@ export class DashboardComponent implements OnInit {
             });
         });
     }
+    selectTab(tab:string){
+        this.activeTab=tab;
+    }
     toggleLoyalStatus(row) {
         const customerId = row.customerId; // Replace with the actual property holding customer ID
 
@@ -116,7 +122,9 @@ export class DashboardComponent implements OnInit {
         const reqData = {
             orderStatus: ["pending", "processing", "pendingPayment"],
         };
-        this.orderService.getRestaurantOrdersByStatus(reqData).subscribe({
+        this.orderService.getRestaurantOrdersByStatus(reqData).pipe(finalize(()=>{
+            this.apiCalledFlag=true;
+        })).subscribe({
             next: (res: any) => {
                 if (res && res?.data && res.data && res.data?.orderData) {
                     this.setOrder(res.data.orderData);

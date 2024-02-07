@@ -853,7 +853,6 @@ export class DashboardComponent implements OnInit {
             printWindow.document.write(`<td>${order.dishName}`);
 
             var checkIfFirst = true;
-            // also add extra selected
             if (order.extraSelected && order.extraSelected.length) {
                 for (const extra of order.extraSelected) {
                     if (checkIfFirst) {

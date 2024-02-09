@@ -422,7 +422,7 @@ export class CartHelperComponent implements OnInit {
                     this.dialog.closeAll();
                     if (this.userPreference.preference === "Dine In") {
                         this.router.navigateByUrl("/orders");
-
+                    } else {
                         this.router.navigate([
                             "/order-tracking",
                             res["data"]["savedData"]["orderId"],

@@ -1276,10 +1276,45 @@
                                                     .preference
                                             }}
                                         </h5>
-                                        <p>
+                                        <p
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'Dine In'
+                                            "
+                                        >
+                                            Table Name:-
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value
+                                            }}
+                                        </p>
+                                        <p
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Take Away' ||
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Scheduled Dining'
+                                            "
+                                        >
                                             {{
                                                 details.customerPreferences
                                                     .value
+                                            }}
+                                        </p>
+                                        <p
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'delivery'
+                                            "
+                                        >
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value.address
+                                            }},{{
+                                                details.customerPreferences
+                                                    ?.value.pincode
                                             }}
                                         </p>
                                         <a class="copy button"

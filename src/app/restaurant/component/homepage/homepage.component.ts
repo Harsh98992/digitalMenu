@@ -136,7 +136,11 @@ export class HomepageComponent implements OnInit {
         });
     }
 
-    onSearchIconClick() {
+    onSearchIconClick(el) {
+        if (!el?.value) {
+            return;
+        }
+
         this.navigateToRestaurant(this.searchResults[0]);
     }
 

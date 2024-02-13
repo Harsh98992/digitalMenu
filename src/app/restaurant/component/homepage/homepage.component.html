@@ -11,11 +11,11 @@
                             <div class="col-lg-12">
                                 <div class="form-group search-bar">
                                     <div class="input-group"> <!-- Add an input-group for styling -->
-                                        <input type="text" id="restaurantSearch" class="form-control no_border_r"
+                                        <input type="text" id="restaurantSearch" #searchText class="form-control no_border_r"
                                             placeholder="Search for restaurant...." [matAutocomplete]="auto"
                                             (input)="onSearchInput($event.target.value)" [value]="searchQuery" />
                                         <i class="fas fa-search search-icon"
-                                            (click)="onSearchIconClick()"></i>
+                                            (click)="onSearchIconClick(searchText)"></i>
                                         <!-- Search icon with click event -->
                                     </div>
                                 </div>

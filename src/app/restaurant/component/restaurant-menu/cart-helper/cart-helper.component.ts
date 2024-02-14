@@ -47,6 +47,7 @@ export class CartHelperComponent implements OnInit {
     deliveryAmount: any;
 
     defaultOrderOption = null;
+    deliveryRadioText: string;
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -260,7 +261,7 @@ export class CartHelperComponent implements OnInit {
         this.itemTotal = 0;
         let totalAmount = 0;
         this.deliveryAmount = 0;
-        this.getDeliveryRadiobuttonText();
+
         for (const item of this.cartItems) {
             for (const dish of item.cartItems) {
                 totalAmount += dish.totalPrice;
@@ -285,6 +286,7 @@ export class CartHelperComponent implements OnInit {
         this.itemTotal = totalAmount;
 
         this.generateAmountToBePaid();
+        this.getDeliveryRadiobuttonText();
     }
     generateAmountToBePaid() {
         if (this.restaurantData?.isPricingInclusiveOfGST) {
@@ -440,12 +442,26 @@ export class CartHelperComponent implements OnInit {
     getDeliveryRadiobuttonText() {
         if (this.itemTotal < this.restaurantData.minOrderValueForDelivery) {
             this.deliveryDisabled = true;
-            return `Delivery (Not Available Below Rs. ${this.restaurantData.minOrderValueForDelivery})`;
+            console.log(this.userPreference)
+            console.log(this.orderOption);
+            
+            this.deliveryRadioText = `Delivery (Not Available Below Rs. ${this.restaurantData.minOrderValueForDelivery})`;
+            if (this.orderOption === "delivery") {
+                this.userPreference = {};
+                this.orderOption = null;
+                this.orderOptionFlag = false;
+                this.setCartStateHelper();
+            }
+            return;
         }
         if (this.itemTotal < this.restaurantData.minOrderValueForFreeDelivery) {
             // show rs symbol
-            return `Delivery (Rs. ${this.restaurantData.deliveryFeeBelowMinValue})`;
+            this.deliveryDisabled = false;
+            this.deliveryRadioText = `Delivery (Rs. ${this.restaurantData.deliveryFeeBelowMinValue})`;
+            return;
         }
-        return "Delivery (Free)";
+        this.deliveryDisabled = false;
+        this.deliveryRadioText = "Delivery (Free)";
+        return;
     }
 }

@@ -88,24 +88,24 @@
         <div class="row my-3">
             <mat-radio-group aria-label="Select an option" [(ngModel)]="orderOption">
                 <span class="col-4 d-block" *ngIf="isDineInAvailable">
-                    <mat-radio-button value="dineIn" (click)="changeOption($event, 'dineIn')">Dine In
+                    <mat-radio-button value="dineIn" (change)="changeOption($event, 'dineIn')">Dine In
                         <span class="icon_info_alt" triggers="click:blur"
                             ngbTooltip="Place an order, choose the table, and we will serve"></span></mat-radio-button></span>
                 <span class="col-4 d-block">
                     <mat-radio-button *ngIf="restaurantData.provideDelivery" value="delivery"
                         [disabled]="deliveryDisabled"
-                        (click)="changeOption($event, 'delivery')">{{getDeliveryRadiobuttonText()}}
+                        (change)="changeOption($event, 'delivery')">{{deliveryRadioText}}
                         <span class="icon_info_alt" triggers="click:blur"
                             ngbTooltip="Place an order, set the address and time, and we deliver"></span></mat-radio-button>
                 </span>
                 <span class="col-4 d-block">
-                    <mat-radio-button value="takeAway" (click)="changeOption($event, 'takeAway')">Take away
+                    <mat-radio-button value="takeAway" (change)="changeOption($event, 'takeAway')">Take away
                         <span class="icon_info_alt" triggers="click:blur"
                             ngbTooltip="Order the food, set the time, we will keep your order packed"></span></mat-radio-button>
                 </span>
                 <span class="col-4 d-block">
                     <mat-radio-button value="scheduledDining"
-                        (click)="changeOption($event, 'scheduledDining')">Scheduled dining
+                        (change)="changeOption($event, 'scheduledDining')">Scheduled dining
                         <span class="icon_info_alt" triggers="click:blur"
                             ngbTooltip="Order the food, set the time, we will keep your order ready"></span></mat-radio-button>
                 </span>

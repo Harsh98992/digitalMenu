@@ -890,6 +890,9 @@ export class DashboardComponent implements OnInit {
                 border-top: 2px dashed grey;
                 border-bottom: 2px dashed grey;
             }
+            .margin-custom{
+                margin-right: 1.3rem !important;
+            }
         </style>`
         );
         printWindow.document.write("</head><body>");
@@ -976,19 +979,22 @@ export class DashboardComponent implements OnInit {
         printWindow.document.write(
             `<div class="footer">
             <p>Net Amt.</p>
-            <p>${orderDetail.orderDetails[0].orderAmount}</p>
+            <p class="margin-custom">${orderDetail.orderDetails[0].orderAmount}</p>
         </div>`
         );
         printWindow.document.write(
             `<div class="footer">
-            <p>Tax</p>
-            <p>${orderDetail.orderDetails[0].orderAmount}</p>
+            <p>Tax (${this.restaurantDetail.customGSTPercentage}%)</p>
+            <p class="margin-custom">${orderDetail.orderDetails[0].gstAmount}</p>
         </div>`
         );
         printWindow.document.write(
             `<div class="footer">
             <p>Total Amt.</p>
-            <p>${orderDetail.orderDetails[0].orderAmount}</p>
+            <p class="margin-custom">${
+                orderDetail.orderDetails[0].orderAmount +
+                orderDetail.orderDetails[0].gstAmount
+            }</p>
         </div>`
         );
         printWindow.document.write(
@@ -997,19 +1003,27 @@ export class DashboardComponent implements OnInit {
             <table class="item-table">
                 <tbody>
                     <tr class="border-main-none">
-                        <th class="border-main-none">Tax %</th>
+                        <th class="border-main-none">Tax (${this.restaurantDetail.customGSTPercentage}%)</th>
                         <th class="border-main-none center">Basic Amt</th>
                         <th class="border-main-none center">Tax Amt</th>
                     </tr>
                     <tr class="border-none">
-                        <td class="border-none">CGST</td>
-                        <td class="border-none center">11</td>
-                        <td class="border-none center">11</td>
+                        <td class="border-none">CGST (${this.restaurantDetail.customGSTPercentage/2}%)</td>
+                        <td class="border-none center">${
+                            orderDetail.orderDetails[0].orderAmount
+                        }</td>
+                        <td class="border-none center">${
+                            orderDetail.orderDetails[0].gstAmount / 2
+                        }</td>
                     </tr>
                     <tr class="border-none">
-                        <td class="border-none">SGST</td>
-                        <td class="border-none center">180</td>
-                        <td class="border-none center">180</td>
+                        <td class="border-none">SGST (${this.restaurantDetail.customGSTPercentage/2}%)</td>
+                        <td class="border-none center">${
+                            orderDetail.orderDetails[0].orderAmount
+                        }</td>
+                        <td class="border-none center">${
+                            orderDetail.orderDetails[0].gstAmount / 2
+                        }</td>
                     </tr>
                 </tbody>
             </table>`
@@ -1044,7 +1058,10 @@ export class DashboardComponent implements OnInit {
         }
 
         printWindow.document.write(
-            `<h1 class="center font-bold" style="margin-bottom:0px">Payable Amt.: ${orderDetail.orderDetails[0].orderAmount}</h1>`
+            `<h1 class="center font-bold" style="margin-bottom:0px">Payable Amt.: ${
+                orderDetail.orderDetails[0].orderAmount +
+                orderDetail.orderDetails[0].gstAmount
+            }</h1>`
         );
         printWindow.document.write(
             `<p class="center">Thanks for your visit !!! <br> Have a good day</p>`

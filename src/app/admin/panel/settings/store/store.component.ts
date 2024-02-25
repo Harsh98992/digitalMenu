@@ -40,13 +40,13 @@ export class StoreComponent implements OnInit {
         // both are either true or false and not empty
         this.gstForm = this.formBuilder.group({
             isPricingInclusiveOfGST: [true],
-            customGSTPercentage: [0],
+            customGSTPercentage: [5],
+            isGstApplicable: [false],
         });
 
         this.getGSTFormDetails();
 
-        this.gstForm.get("customGSTPercentage").disable();
-        this.gstForm.get("isPricingInclusiveOfGST").disable();
+        this.gstForm.disable();
 
         // Google Review Setting Form
         this.googleReviewForm = this.formBuilder.group({
@@ -127,14 +127,15 @@ export class StoreComponent implements OnInit {
                     res["data"]["restaurantDetail"]["isPricingInclusiveOfGST"],
                 customGSTPercentage:
                     res["data"]["restaurantDetail"]["customGSTPercentage"],
+                isGstApplicable:
+                    res["data"]["restaurantDetail"]["isGstApplicable"],
             });
         });
     }
 
     toggleEditMode() {
         if (!this.isEditing) {
-            this.gstForm.get("isPricingInclusiveOfGST").enable();
-            this.gstForm.get("customGSTPercentage").enable();
+            this.gstForm.enable();
             this.isEditing = !this.isEditing;
         } else {
             this.updateRestaurantData();
@@ -142,14 +143,18 @@ export class StoreComponent implements OnInit {
     }
 
     updateRestaurantData() {
+        const reqData = Object.assign({}, this.gstForm.value);
+        if (!reqData.isGstApplicable) {
+            reqData.isPricingInclusiveOfGST = false;
+            reqData.customGSTPercentage = 5;
+        }
         this.restaurantPanelService
-            .updateStoreSettings(this.gstForm.value)
+            .updateStoreSettings(reqData)
             .subscribe((res) => {
                 console.log(res);
 
                 this.getGSTFormDetails();
-                this.gstForm.get("isPricingInclusiveOfGST").disable();
-                this.gstForm.get("customGSTPercentage").disable();
+                this.gstForm.disable();
 
                 this.utilService.openSnackBar(
                     "GST Details updated successfully"

@@ -438,7 +438,7 @@ export class DashboardComponent implements OnInit {
         printWindow.document.write(
             ` <style>
                 .receipt {
-                    width: 300px;
+                    width: 250px;
                     margin: 0 auto;
                     padding: 5px;
                     font-family: Arial, sans-serif;

@@ -793,7 +793,6 @@ export class DashboardComponent implements OnInit {
             .receipt {
                 width: 300px;
                 margin: 0 auto;
-                border: 1px solid black;
                 padding: 5px;
                 font-family: Arial, sans-serif;
                 font-size: 12px;
@@ -976,18 +975,21 @@ export class DashboardComponent implements OnInit {
             `<span>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</span>
             `
         );
-        printWindow.document.write(
-            `<div class="footer">
+        if (this.restaurantDetail.isPricingInclusiveOfGST) {
+            printWindow.document.write(
+                `<div class="footer">
             <p>Net Amt.</p>
             <p class="margin-custom">${orderDetail.orderDetails[0].orderAmount}</p>
         </div>`
-        );
-        printWindow.document.write(
-            `<div class="footer">
+            );
+            printWindow.document.write(
+                `<div class="footer">
             <p>Tax (${this.restaurantDetail.customGSTPercentage}%)</p>
             <p class="margin-custom">${orderDetail.orderDetails[0].gstAmount}</p>
         </div>`
-        );
+            );
+        }
+
         printWindow.document.write(
             `<div class="footer">
             <p>Total Amt.</p>
@@ -997,18 +999,23 @@ export class DashboardComponent implements OnInit {
             }</p>
         </div>`
         );
-        printWindow.document.write(
-            ` <div class="dash-line"></div>
+        if (this.restaurantDetail.isPricingInclusiveOfGST) {
+            printWindow.document.write(
+                ` <div class="dash-line"></div>
             <span class="font-bold">Tax Summary</span>
             <table class="item-table">
                 <tbody>
                     <tr class="border-main-none">
-                        <th class="border-main-none">Tax (${this.restaurantDetail.customGSTPercentage}%)</th>
+                        <th class="border-main-none">Tax (${
+                            this.restaurantDetail.customGSTPercentage
+                        }%)</th>
                         <th class="border-main-none center">Basic Amt</th>
                         <th class="border-main-none center">Tax Amt</th>
                     </tr>
                     <tr class="border-none">
-                        <td class="border-none">CGST (${this.restaurantDetail.customGSTPercentage/2}%)</td>
+                        <td class="border-none">CGST (${
+                            this.restaurantDetail.customGSTPercentage / 2
+                        }%)</td>
                         <td class="border-none center">${
                             orderDetail.orderDetails[0].orderAmount
                         }</td>
@@ -1017,7 +1024,9 @@ export class DashboardComponent implements OnInit {
                         }</td>
                     </tr>
                     <tr class="border-none">
-                        <td class="border-none">SGST (${this.restaurantDetail.customGSTPercentage/2}%)</td>
+                        <td class="border-none">SGST (${
+                            this.restaurantDetail.customGSTPercentage / 2
+                        }%)</td>
                         <td class="border-none center">${
                             orderDetail.orderDetails[0].orderAmount
                         }</td>
@@ -1027,7 +1036,8 @@ export class DashboardComponent implements OnInit {
                     </tr>
                 </tbody>
             </table>`
-        );
+            );
+        }
         printWindow.document.write("<div class='dash-line'></div>");
 
         // if (orderDetail.orderDetails[0].gstAmount) {

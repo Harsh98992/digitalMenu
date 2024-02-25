@@ -109,7 +109,8 @@ export class MyOrderComponent implements OnInit {
                 this.completedOrder.push(data);
             } else if (
                 data.orderStatus === "processing" ||
-                data.orderStatus === "pending"
+                data.orderStatus === "pending" ||
+                data.orderStatus === "pendingPayment"
             ) {
                 this.processingOrder.push(data);
             } else {

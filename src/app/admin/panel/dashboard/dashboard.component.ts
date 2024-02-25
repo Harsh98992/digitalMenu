@@ -422,363 +422,242 @@ export class DashboardComponent implements OnInit {
     //   </div>
     // </body>
     // </html>
-
-    printReceipt(orderDetail: any) {
+    printKTO(orderDetail) {
         console.log("printReceipt", orderDetail);
 
         console.log(this.restaurantDetail);
 
-        // const printContent = `
-        // <p>${this.restaurantDetail.restaurantName}</p>
-        // <p>Retail Invoice</p>
-        // <p>Order Id: ${orderDetail.orderId}</p>
-        // <p>Date: ${orderDetail.orderDate.split("T")[0]}</p>
-        // <p>Name: ${orderDetail.customerName}</p>
-        // <p>Phone no: ${orderDetail.customerPhoneNumber}</p>
-        // <p>Payment Method: ${
-        //     orderDetail.payment_method === undefined
-        //         ? "Not done Yet"
-        //         : orderDetail.payment_method
-        // }</p>
-        // `;
-        // const printWindow = window.open("", "", "width=2in");
-        // printWindow.document.write("<html><head><title>bill</title>");
+        // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
 
-        // // stylesheets
-        // printWindow.document.write(
-        //     `<style>
+        const printWindow = window.open("", "", "width=2in");
 
-        //       table , th, td , tr , tbody , thead ,body,h1, h2, p, ul, li  {
-        //         font-family: 'Courier New', monospace;
-        //         font-size: 12px;
-        //         padding: 0px;
-        //         margin: 0px;
+        printWindow.document.write("<html><head><title>bill</title>");
 
-        //         }
+        // stylesheets
 
-        //       ul {
-        //         list-style-type: none;
-        //       }
+        printWindow.document.write(
+            ` <style>
+                .receipt {
+                    width: 300px;
+                    margin: 0 auto;
+                    padding: 5px;
+                    font-family: Arial, sans-serif;
+                    font-size: 12px;
+                }
+    
+                .header {
+                    text-align: center;
+                }
+    
+                .header img {
+                    width: 80px;
+                    height: 80px;
+                }
+    
+                .header h1 {
+                    font-size: 20px;
+                    margin: 0;
+                }
+    
+                .header p {
+                    margin: 2px 0;
+                }
+    
+                .item-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 5px 0;
+                }
+    
+                .item-table th,
+                .item-table td {
+                    border: 1px solid black;
+                    padding: 2px;
+                }
+    
+                .item-table th {
+                    text-align: left;
+                }
+    
+                .item-table td {
+                    text-align: left;
+                }
+    
+                .footer {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 0px 0;
+                }
+    
+                .footer p {
+                    margin: 0;
+                }
+    
+                .total {
+                    font-weight: bold;
+                }
+                .captalize {
+                    text-transform: capitalize;
+                }
+                .font-bold {
+                    font-weight: bold;
+                }
+                .right {
+                    text-align: right;
+                }
+                .center {
+                    text-align: center !important;
+                }
+                .space-between {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                .border-none {
+                    font-size: 12px;
+                    border-left: 0 !important;
+                    border-right: 0 !important;
+                    border-bottom: 0 !important;
+                    border-top: 0 !important;
+                }
+                .dash-line {
+                    border-top: 2px dashed grey;
+                    width: 100%;
+                    margin-top: 0px;
+                    margin-bottom: 0.1px;
+                }
+                span{
+                    font-size: 12px;
+                }
+    
+                .border-main-none {
+                    font-size: 12px;
+                    border-left: 0 !important;
+                    border-right: 0 !important;
+                    border-top: 2px dashed grey;
+                    border-bottom: 2px dashed grey;
+                }
+                .margin-custom{
+                    margin-right: 1.3rem !important;
+                }
+            </style>`
+        );
+        printWindow.document.write("</head><body>");
 
-        //       // table
+        printWindow.document.write(
+            `<div class="receipt">
+            <div class="header">
+               
+                <h1>${this.restaurantDetail.restaurantName.toUpperCase()}</h1>
+                
+            </div>
+            <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
+                orderDetail.customerPreferences.preference
+            }</p>
+            <div  style="text-align:center">${
+                orderDetail.customerPreferences.preference === "delivery"
+                    ? "( " +
+                      orderDetail.customerPreferences?.value.address +
+                      " )"
+                    : ""
+            }</div>
+            <p>
+            <span class="space-between">
+            ${this.datePipe.transform(orderDetail.orderDate)}
+         <span>   ${orderDetail.orderDate.split("T")[1].split(".")[0]}</span>
+            </span>
+          
+            Bill No: ${orderDetail.orderId}<br>
+           
+            ${orderDetail.customerName}<br>
+            ${orderDetail.customerPhoneNumber} - ${
+                orderDetail.customerEmail
+            }<br>
+           </p>
+    
+            <table class="item-table ">
+                <tr  class="border-main-none">
+                    <th  class="border-main-none">Items</th>
+                    
+                    <th  class="border-main-none center">Qty</th>
+                </tr>`
+        );
 
-        //       table {
-        //         border-collapse: collapse;
-        //       }
+        for (const order of orderDetail.orderDetails[0].orderSummary) {
+            printWindow.document.write("<tr  class='border-none'>");
+            printWindow.document.write(
+                `<td class='border-none'>${order.dishName}`
+            );
 
-        //         th, td {
-        //             padding: 0px;
-        //         }
+            var checkIfFirst = true;
+            if (order.extraSelected && order.extraSelected.length) {
+                for (const extra of order.extraSelected) {
+                    if (checkIfFirst) {
+                        printWindow.document.write(
+                            `with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
+                        );
+                        checkIfFirst = false;
+                    } else {
+                        printWindow.document.write(
+                            ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
+                        );
+                    }
+                }
+            } else {
+                printWindow.document.write(
+                    `<td class='border-none center'>${order.dishQuantity}</td>`
+                );
+                printWindow.document.write("</tr>");
+            }
+        }
 
-        //       </style>`
-        // );
-        // printWindow.document.write("</head><body>");
+        printWindow.document.write("</table>");
+        printWindow.document.write("<div class='dash-line'></div>");
+
+        printWindow.document.write(
+            `<span>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</span>
+                `
+        );
+
+        // if (orderDetail.orderDetails[0].gstAmount) {
+        //     printWindow.document.write(
+        //         `<div class="footer">
+        //         <p>GST Amount</p>
+        //         <p>${orderDetail.orderDetails[0].gstAmount}</p>
+        //     </div>`
+        //     );
+        // }
+
+        printWindow.document.write("</div>");
+        printWindow.document.write("</body></html>");
+
+        console.log("printWindow", printWindow.document);
 
         // printWindow.document.write(printContent);
-        // printWindow.document.write("<table>");
-        // printWindow.document.write("<thead>");
-        // printWindow.document.write("<tr>");
-        // printWindow.document.write("<th>Item</th>");
-        // printWindow.document.write("<th>Price</th>");
-        // printWindow.document.write("<th>Qty</th>");
-        // printWindow.document.write("<th>Total</th>");
-        // printWindow.document.write("</tr>");
-        // printWindow.document.write("</thead>");
-        // printWindow.document.write("<tbody>");
-        // for (const order of orderDetail.orderDetails[0].orderSummary) {
-        //     printWindow.document.write("<tr>");
-        //     printWindow.document.write(`<td>${order.dishName}</td>`);
 
-        //     printWindow.document.write(`<td>${order.priceOneItem}</td>`);
+        var ua = navigator.userAgent.toLowerCase();
 
-        //     printWindow.document.write(`<td>${order.dishQuantity}</td>`);
-        //     // printWindow.document.write(`<td>${order.priceOneItem*order.dishQuantity}</td>`);
-        //     printWindow.document.write(`<td>${order.totalPrice}</td>`);
-        //     printWindow.document.write("</tr>");
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
 
-        //     // also add extra selected
-        //     if (order.extraSelected && order.extraSelected.length) {
+        if (isAndroid) {
+            console.log("android");
 
-        //         var  checkIfFirst = true;
+            // downlaod the file in android device with 2 inch breadth
+        } else {
+            console.log("not android");
 
-        //         for (const extra of order.extraSelected) {
+            printWindow.print();
 
-        //             printWindow.document.write("<tr>");
+            printWindow.close();
+        }
 
-        //             printWindow.document.write(
-        //                 // `<td>${extra.addOnDisplayName}</td>`
+        // printWindow.print();
 
-        //                 // convert to title case
-        //                 `<td>`);
+        // printWindow.close();
+    }
+    printReceipt(orderDetail: any) {
+        console.log("printReceipt", orderDetail);
 
-        //             if (checkIfFirst) {
-        //                 printWindow.document.write("addon-");
-        //                 checkIfFirst = false;
-        //             }
-
-        //             printWindow.document.write(
-        //                 `${extra.addOnDisplayName
-        //                     .split(" ")
-        //                     .map(
-        //                         (s) =>
-        //                             s.charAt(0).toUpperCase() + s.substring(1)
-        //                     )
-        //                     .join(" ")}</td>`
-        //             );
-
-        //             if (extra.addOnsSelected && extra.addOnsSelected.length) {
-        //                 printWindow.document.write(
-        //                     // `<td>${extra.addOnsSelected[0].addOnName}</td>`
-
-        //                     // convert to title case
-        //                     `<td>${extra.addOnsSelected[0].addOnName
-        //                         .split(" ")
-        //                         .map(
-        //                             (s) =>
-        //                                 s.charAt(0).toUpperCase() +
-        //                                 s.substring(1)
-        //                         )
-        //                         .join(" ")}</td>`
-        //                 );
-        //             } else {
-        //                 printWindow.document.write(`<td></td>`);
-        //             }
-
-        //             printWindow.document.write(
-        //                 `<td>${order.dishQuantity}</td>`
-        //             );
-        //             printWindow.document.write(
-        //                 // `<td>${extra.addOnsSelected[0].addOnPrice}</td>`
-        //                 `<td></td>`
-        //             );
-        //             printWindow.document.write("</tr>");
-        //         }
-        //     }
-        // }
-
-        // // add total amount
-        // printWindow.document.write("<tr>");
-        // printWindow.document.write(`<td></td>`);
-        // printWindow.document.write(`<td></td>`);
-        // printWindow.document.write(`<td>Order Total</td>`);
-        // printWindow.document.write(
-        //     `<td>${orderDetail.orderDetails[0].orderAmount}</td>`
-        // );
-        // printWindow.document.write("</tr>");
-
-        // printWindow.document.write("</tbody>");
-        // printWindow.document.write("</table>");
-        // printWindow.document.write("<br>");
-
-        // if (orderDetail.gstAmount) {
-        //     printWindow.document.write(
-        //         `<p>GST Amount:${orderDetail.orderDetails[0].gstAmount}</p>`
-        //     );
-        // }
-        // if (orderDetail.deliveryAmount) {
-        //     printWindow.document.write(
-        //         `<p>Delivery Amount:${orderDetail.orderDetails[0].deliveryAmount}</p>`
-        //     );
-        // }
-        // if (orderDetail.discountAmount) {
-        //     printWindow.document.write(
-        //         `<p>Discount Amount:${orderDetail.orderDetails[0].discountAmount}</p>`
-        //     );
-        // }
-        // printWindow.document.write(
-        //     `<p>Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</p>`
-        // );
-        // <html>
-
-        // <head>
-        //     <style>
-        //         /* Add your custom CSS styles here */
-        //         .receipt {
-        //             width: 300px;
-        //             margin: 0 auto;
-        //             border: 1px solid black;
-        //             padding: 5px;
-        //             font-family: Arial, sans-serif;
-        //             font-size: 12px;
-        //         }
-
-        //         .header {
-        //             text-align: center;
-        //         }
-
-        //         .header h1 {
-        //             font-size: 15px;
-        //             margin: 0;
-        //         }
-
-        //         .header p {
-        //             margin: 0;
-        //             line-height: 1;
-        //         }
-
-        //         .item-table {
-        //             width: 100%;
-        //             border-collapse: collapse;
-        //             margin: 5px 0;
-        //         }
-
-        //         .item-table th,
-        //         .item-table td {
-        //             border: 1px solid black;
-        //             padding: 2px;
-        //         }
-
-        //         .item-table th {
-        //             text-align: left;
-        //         }
-
-        //         .item-table td {
-        //             text-align: right;
-        //         }
-
-        //         .footer {
-        //             display: flex;
-        //             justify-content: space-between;
-        //             margin: 5px 0;
-        //         }
-
-        //         .footer p {
-        //             margin: 0;
-        //         }
-
-        //         .total {
-        //             font-weight: bold;
-        //         }
-
-        //         .top-table {
-        //             width: 100%;
-        //             border-collapse: collapse;
-        //             margin: 0;
-        //         }
-
-        //         .top-table td {
-        //             padding: 0;
-        //         }
-
-        //         .left {
-        //             text-align: left;
-        //         }
-
-        //         .right {
-        //             text-align: right;
-        //         }
-        //     </style>
-        // </head>
-
-        // <body>
-        //     <div class="receipt">
-        //         <div class="header">
-        //             <h1>THE LOCAL DINER</h1>
-        //             <p>#2075, 4th Cross, 2nd Block,<br>
-        //                 HRBR Layout, Kalyan Nagar,<br>
-        //                 BANGALORE-560 043<br>
-        //                 PH: 080 41440087<br>
-        //                 TIN: 2908176093</p>
-        //         </div>
-        //         <table class="top-table" border="1">
-        //             <tr>
-        //                 <th>CASH/BILL</th>
-        //                 <th>Bill No:</th>
-        //                 <th>Waiter:</th>
-        //                 <th>TNo:</th>
-
-        //             </tr>
-        //             <tr>
-        //                 <td>CASH/BILL</td>
-        //                 <td>A0615</td>
-        //                 <td>WAITER</td>
-        //                 <td>D15</td>
-
-        //             </tr>
-        //             <tr>
-        //                 <th>Date:</th>
-        //                 <th>Time:</th>
-        //             </tr>
-        //             <tr>
-        //                 <td>06/06/2015</td>
-        //                 <td>20:54</td>
-        //         </table>
-
-        //         <table class="item-table">
-        //             <tr>
-        //                 <th>Items</th>
-        //                 <th>Price</th>
-        //                 <th>Qty</th>
-        //                 <th>Total Rs</th>
-        //             </tr>
-        //             <tr>
-        //                 <td>FLAVOURED MOJITO</td>
-        //                 <td>330.00</td>
-        //                 <td>1.000</td>
-        //                 <td>330.00</td>
-        //             </tr>
-        //             <tr>
-        //                 <td>CUCUMBER MINTCUCUMBER MINTCUCUMBER MINTCUCUMBER MINTCUCUMBER MINT</td>
-        //                 <td>170.00</td>
-        //                 <td>1.000</td>
-        //                 <td>170.00</td>
-        //             </tr>
-        //             <tr>
-        //                 <td>LONG ISLAND ICE TEA</td>
-        //                 <td>460.00</td>
-        //                 <td>1.000</td>
-        //                 <td>460.00</td>
-        //             </tr>
-        //             <tr>
-        //                 <td>CRUNCHY SALAD</td>
-        //                 <td>320.00</td>
-        //                 <td>1.000</td>
-        //                 <td>320.00</td>
-        //             </tr>
-        //             <tr>
-        //                 <td>ASSORTED SATAY</td>
-        //                 <td>260.00</td>
-        //                 <td>1.000</td>
-        //                 <td>260.00</td>
-        //             </tr>
-        //             <tr>
-        //                 <td>TEQUILA CHICKEN</td>
-        //                 <td>360.00</td>
-        //                 <td>1.000</td>
-        //                 <td>360.00</td>
-        //             </tr>
-        //             <tr>
-        //                 <td>FAJITAS CHICKEN</td>
-        //                 <td>300.00</td>
-        //                 <td>1.000</td>
-        //                 <td>300.00</td>
-        //             </tr>
-        //             <tr>
-        //                 <td>SURF N TURF</td>
-        //                 <td>380.00</td>
-        //                 <td>1.000</td>
-        //                 <td>380.00</td>
-        //             </tr>
-        //         </table>
-        //         <p>Total Quantity: 9.000</p>
-        //         <div class="footer">
-        //             <p>Gross Total</p>
-        //             <p>2560.00</p>
-        //         </div>
-        //         <div class="footer">
-        //             <p>GST 18%</p>
-        //             <p>371.20</p>
-        //         </div>
-
-        //         <div class="footer">
-        //             <p>Net Amount</p>
-        //             <p class="total">3079.68</p>
-        //         </div>
-
-        //     </div>
-        // </body>
-
-        // </html>
+        console.log(this.restaurantDetail);
 
         // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
 

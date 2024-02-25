@@ -10,6 +10,7 @@ import { environment } from "src/environments/environment";
 // Import the socket.io-client library
 import { io } from "socket.io-client"; // Import the socket.io-client library
 import { finalize } from "rxjs";
+import { DatePipe } from "@angular/common";
 
 @Component({
     selector: "app-dashboard",
@@ -28,13 +29,14 @@ export class DashboardComponent implements OnInit {
     restaurantId: any;
 
     allOrders = [];
-    activeTab="tab1";
+    activeTab = "tab1";
     apiCalledFlag: boolean;
     constructor(
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
         private modalService: NgbModal,
         public dialog: MatDialog,
+        private datePipe: DatePipe,
         private printService: NgxPrintModule
     ) {}
     handleOrderUpdate(updatedOrder: any) {
@@ -86,8 +88,8 @@ export class DashboardComponent implements OnInit {
             });
         });
     }
-    selectTab(tab:string){
-        this.activeTab=tab;
+    selectTab(tab: string) {
+        this.activeTab = tab;
     }
     toggleLoyalStatus(row) {
         const customerId = row.customerId; // Replace with the actual property holding customer ID
@@ -122,17 +124,22 @@ export class DashboardComponent implements OnInit {
         const reqData = {
             orderStatus: ["pending", "processing", "pendingPayment"],
         };
-        this.orderService.getRestaurantOrdersByStatus(reqData).pipe(finalize(()=>{
-            this.apiCalledFlag=true;
-        })).subscribe({
-            next: (res: any) => {
-                if (res && res?.data && res.data && res.data?.orderData) {
-                    this.setOrder(res.data.orderData);
+        this.orderService
+            .getRestaurantOrdersByStatus(reqData)
+            .pipe(
+                finalize(() => {
+                    this.apiCalledFlag = true;
+                })
+            )
+            .subscribe({
+                next: (res: any) => {
+                    if (res && res?.data && res.data && res.data?.orderData) {
+                        this.setOrder(res.data.orderData);
 
-                    this.allOrders = res.data.orderData;
-                }
-            },
-        });
+                        this.allOrders = res.data.orderData;
+                    }
+                },
+            });
     }
     setOrder(orderData: any) {
         this.pendingOrder = [];
@@ -252,174 +259,174 @@ export class DashboardComponent implements OnInit {
     //     }
     // ]
 
-//     <html>
-// <head>
-//   <style>
-//     /* Add your custom CSS styles here */
-//     .receipt {
-//       width: 300px;
-//       margin: 0 auto;
-//       border: 1px solid black;
-//       padding: 5px;
-//       font-family: Arial, sans-serif;
-//       font-size: 12px;
-//     }
+    //     <html>
+    // <head>
+    //   <style>
+    //     /* Add your custom CSS styles here */
+    //     .receipt {
+    //       width: 300px;
+    //       margin: 0 auto;
+    //       border: 1px solid black;
+    //       padding: 5px;
+    //       font-family: Arial, sans-serif;
+    //       font-size: 12px;
+    //     }
 
-//     .header {
-//       text-align: center;
-//     }
+    //     .header {
+    //       text-align: center;
+    //     }
 
-//     .header img {
-//       width: 80px;
-//       height: 80px;
-//     }
+    //     .header img {
+    //       width: 80px;
+    //       height: 80px;
+    //     }
 
-//     .header h1 {
-//       font-size: 20px;
-//       margin: 0;
-//     }
+    //     .header h1 {
+    //       font-size: 20px;
+    //       margin: 0;
+    //     }
 
-//     .header p {
-//       margin: 2px 0;
-//     }
+    //     .header p {
+    //       margin: 2px 0;
+    //     }
 
-//     .item-table {
-//       width: 100%;
-//       border-collapse: collapse;
-//       margin: 5px 0;
-//     }
+    //     .item-table {
+    //       width: 100%;
+    //       border-collapse: collapse;
+    //       margin: 5px 0;
+    //     }
 
-//     .item-table th, .item-table td {
-//       border: 1px solid black;
-//       padding: 2px;
-//     }
+    //     .item-table th, .item-table td {
+    //       border: 1px solid black;
+    //       padding: 2px;
+    //     }
 
-//     .item-table th {
-//       text-align: left;
-//     }
+    //     .item-table th {
+    //       text-align: left;
+    //     }
 
-//     .item-table td {
-//       text-align: right;
-//     }
+    //     .item-table td {
+    //       text-align: right;
+    //     }
 
-//     .footer {
-//       display: flex;
-//       justify-content: space-between;
-//       margin: 5px 0;
-//     }
+    //     .footer {
+    //       display: flex;
+    //       justify-content: space-between;
+    //       margin: 5px 0;
+    //     }
 
-//     .footer p {
-//       margin: 0;
-//     }
+    //     .footer p {
+    //       margin: 0;
+    //     }
 
-//     .total {
-//       font-weight: bold;
-//     }
-//   </style>
-// </head>
-// <body>
-//   <div class="receipt">
-//     <div class="header">
-//       <img src="logo.png" alt="Logo">
-//       <h1>THE LOCAL DINER</h1>
-//       <p>#2075, 4th Cross, 2nd Block,<br>
-//       HRBR Layout, Kalyan Nagar,<br>
-//       BANGALORE-560 043<br>
-//       PH: 080 41440087<br>
-//       TIN: 2908176093</p>
-//     </div>
-//     <p>CASH/BILL</p>
-//     <p>Bill No: A0615<br>
-//     Waiter: WAITER<br>
-//     TNo: D15<br>
-//     Date: 06/06/2015<br>
-//     Time: 20:54</p>
-//     <table class="item-table">
-//       <tr>
-//         <th>Items</th>
-//         <th>Price</th>
-//         <th>Qty</th>
-//         <th>Total Rs</th>
-//       </tr>
-//       <tr>
-//         <td>FLAVOURED MOJITO</td>
-//         <td>330.00</td>
-//         <td>1.000</td>
-//         <td>330.00</td>
-//       </tr>
-//       <tr>
-//         <td>CUCUMBER MINT</td>
-//         <td>170.00</td>
-//         <td>1.000</td>
-//         <td>170.00</td>
-//       </tr>
-//       <tr>
-//         <td>LONG ISLAND ICE TEA</td>
-//         <td>460.00</td>
-//         <td>1.000</td>
-//         <td>460.00</td>
-//       </tr>
-//       <tr>
-//         <td>CRUNCHY SALAD</td>
-//         <td>320.00</td>
-//         <td>1.000</td>
-//         <td>320.00</td>
-//       </tr>
-//       <tr>
-//         <td>ASSORTED SATAY</td>
-//         <td>260.00</td>
-//         <td>1.000</td>
-//         <td>260.00</td>
-//       </tr>
-//       <tr>
-//         <td>TEQUILA CHICKEN</td>
-//         <td>360.00</td>
-//         <td>1.000</td>
-//         <td>360.00</td>
-//       </tr>
-//       <tr>
-//         <td>FAJITAS CHICKEN</td>
-//         <td>300.00</td>
-//         <td>1.000</td>
-//         <td>300.00</td>
-//       </tr>
-//       <tr>
-//         <td>SURF N TURF</td>
-//         <td>380.00</td>
-//         <td>1.000</td>
-//         <td>380.00</td>
-//       </tr>
-//     </table>
-//     <p>Total Quantity: 9.000</p>
-//     <div class="footer">
-//       <p>Gross Total</p>
-//       <p>2560.00</p>
-//     </div>
-//     <div class="footer">
-//       <p>VAT 14.5%</p>
-//       <p>371.20</p>
-//     </div>
-//     <div class="footer">
-//       <p>Service Tax 5.8%</p>
-//       <p>148.48</p>
-//     </div>
-//     <div class="footer">
-//       <p>Net Amount</p>
-//       <p class="total">3079.68</p>
-//     </div>
-//     <div class="footer">
-//       <p>Service Charges 10.0%</p>
-//       <p>307.97</p>
-//     </div>
-//     <p>Get Back Joe Joe!</p>
-//   </div>
-// </body>
-// </html>
-
+    //     .total {
+    //       font-weight: bold;
+    //     }
+    //   </style>
+    // </head>
+    // <body>
+    //   <div class="receipt">
+    //     <div class="header">
+    //       <img src="logo.png" alt="Logo">
+    //       <h1>THE LOCAL DINER</h1>
+    //       <p>#2075, 4th Cross, 2nd Block,<br>
+    //       HRBR Layout, Kalyan Nagar,<br>
+    //       BANGALORE-560 043<br>
+    //       PH: 080 41440087<br>
+    //       TIN: 2908176093</p>
+    //     </div>
+    //     <p>CASH/BILL</p>
+    //     <p>Bill No: A0615<br>
+    //     Waiter: WAITER<br>
+    //     TNo: D15<br>
+    //     Date: 06/06/2015<br>
+    //     Time: 20:54</p>
+    //     <table class="item-table">
+    //       <tr>
+    //         <th>Items</th>
+    //         <th>Price</th>
+    //         <th>Qty</th>
+    //         <th>Total Rs</th>
+    //       </tr>
+    //       <tr>
+    //         <td>FLAVOURED MOJITO</td>
+    //         <td>330.00</td>
+    //         <td>1.000</td>
+    //         <td>330.00</td>
+    //       </tr>
+    //       <tr>
+    //         <td>CUCUMBER MINT</td>
+    //         <td>170.00</td>
+    //         <td>1.000</td>
+    //         <td>170.00</td>
+    //       </tr>
+    //       <tr>
+    //         <td>LONG ISLAND ICE TEA</td>
+    //         <td>460.00</td>
+    //         <td>1.000</td>
+    //         <td>460.00</td>
+    //       </tr>
+    //       <tr>
+    //         <td>CRUNCHY SALAD</td>
+    //         <td>320.00</td>
+    //         <td>1.000</td>
+    //         <td>320.00</td>
+    //       </tr>
+    //       <tr>
+    //         <td>ASSORTED SATAY</td>
+    //         <td>260.00</td>
+    //         <td>1.000</td>
+    //         <td>260.00</td>
+    //       </tr>
+    //       <tr>
+    //         <td>TEQUILA CHICKEN</td>
+    //         <td>360.00</td>
+    //         <td>1.000</td>
+    //         <td>360.00</td>
+    //       </tr>
+    //       <tr>
+    //         <td>FAJITAS CHICKEN</td>
+    //         <td>300.00</td>
+    //         <td>1.000</td>
+    //         <td>300.00</td>
+    //       </tr>
+    //       <tr>
+    //         <td>SURF N TURF</td>
+    //         <td>380.00</td>
+    //         <td>1.000</td>
+    //         <td>380.00</td>
+    //       </tr>
+    //     </table>
+    //     <p>Total Quantity: 9.000</p>
+    //     <div class="footer">
+    //       <p>Gross Total</p>
+    //       <p>2560.00</p>
+    //     </div>
+    //     <div class="footer">
+    //       <p>VAT 14.5%</p>
+    //       <p>371.20</p>
+    //     </div>
+    //     <div class="footer">
+    //       <p>Service Tax 5.8%</p>
+    //       <p>148.48</p>
+    //     </div>
+    //     <div class="footer">
+    //       <p>Net Amount</p>
+    //       <p class="total">3079.68</p>
+    //     </div>
+    //     <div class="footer">
+    //       <p>Service Charges 10.0%</p>
+    //       <p>307.97</p>
+    //     </div>
+    //     <p>Get Back Joe Joe!</p>
+    //   </div>
+    // </body>
+    // </html>
 
     printReceipt(orderDetail: any) {
         console.log("printReceipt", orderDetail);
 
+        console.log(this.restaurantDetail);
 
         // const printContent = `
         // <p>${this.restaurantDetail.restaurantName}</p>
@@ -463,8 +470,6 @@ export class DashboardComponent implements OnInit {
         //             padding: 0px;
         //         }
 
-
-
         //       </style>`
         // );
         // printWindow.document.write("</head><body>");
@@ -498,18 +503,13 @@ export class DashboardComponent implements OnInit {
 
         //         for (const extra of order.extraSelected) {
 
-
-
-
         //             printWindow.document.write("<tr>");
-
 
         //             printWindow.document.write(
         //                 // `<td>${extra.addOnDisplayName}</td>`
 
         //                 // convert to title case
         //                 `<td>`);
-
 
         //             if (checkIfFirst) {
         //                 printWindow.document.write("addon-");
@@ -525,7 +525,6 @@ export class DashboardComponent implements OnInit {
         //                     )
         //                     .join(" ")}</td>`
         //             );
-
 
         //             if (extra.addOnsSelected && extra.addOnsSelected.length) {
         //                 printWindow.document.write(
@@ -556,9 +555,6 @@ export class DashboardComponent implements OnInit {
         //         }
         //     }
         // }
-
-
-
 
         // // add total amount
         // printWindow.document.write("<tr>");
@@ -609,8 +605,6 @@ export class DashboardComponent implements OnInit {
         //         .header {
         //             text-align: center;
         //         }
-
-
 
         //         .header h1 {
         //             font-size: 15px;
@@ -710,7 +704,6 @@ export class DashboardComponent implements OnInit {
         //                 <td>20:54</td>
         //         </table>
 
-
         //         <table class="item-table">
         //             <tr>
         //                 <th>Items</th>
@@ -787,7 +780,7 @@ export class DashboardComponent implements OnInit {
 
         // </html>
 
-// Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
+        // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
 
         const printWindow = window.open("", "", "width=2in");
 
@@ -796,98 +789,154 @@ export class DashboardComponent implements OnInit {
         // stylesheets
 
         printWindow.document.write(
-            `<style>
+            ` <style>
+            .receipt {
+                width: 300px;
+                margin: 0 auto;
+                border: 1px solid black;
+                padding: 5px;
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+            }
 
-              .receipt {
-                      width: 300px;
-                      margin: 0 auto;
-                      border: 1px solid black;
-                      padding: 5px;
-                      font-family: Arial, sans-serif;
-                      font-size: 12px;
-                    }
+            .header {
+                text-align: center;
+            }
 
-                    .header {
-                      text-align: center;
-                    }
+            .header img {
+                width: 80px;
+                height: 80px;
+            }
 
-                    .header img {
-                      width: 80px;
-                      height: 80px;
-                    }
+            .header h1 {
+                font-size: 20px;
+                margin: 0;
+            }
 
-                    .header h1 {
-                      font-size: 20px;
-                      margin: 0;
-                    }
+            .header p {
+                margin: 2px 0;
+            }
 
-                    .header p {
-                      margin: 2px 0;
-                    }
+            .item-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 5px 0;
+            }
 
-                    .item-table {
-                      width: 100%;
-                      border-collapse: collapse;
-                      margin: 5px 0;
-                    }
+            .item-table th,
+            .item-table td {
+                border: 1px solid black;
+                padding: 2px;
+            }
 
-                    .item-table th, .item-table td {
-                      border: 1px solid black;
-                      padding: 2px;
-                    }
+            .item-table th {
+                text-align: left;
+            }
 
-                    .item-table th {
-                      text-align: left;
-                    }
+            .item-table td {
+                text-align: left;
+            }
 
-                    .item-table td {
-                      text-align: right;
-                    }
+            .footer {
+                display: flex;
+                justify-content: space-between;
+                margin: 0px 0;
+            }
 
-                    .footer {
-                      display: flex;
-                      justify-content: space-between;
-                      margin: 5px 0;
-                    }
+            .footer p {
+                margin: 0;
+            }
 
-                    .footer p {
-                      margin: 0;
-                    }
+            .total {
+                font-weight: bold;
+            }
+            .captalize {
+                text-transform: capitalize;
+            }
+            .font-bold {
+                font-weight: bold;
+            }
+            .right {
+                text-align: right;
+            }
+            .center {
+                text-align: center !important;
+            }
+            .space-between {
+                display: flex;
+                justify-content: space-between;
+            }
+            .border-none {
+                font-size: 12px;
+                border-left: 0 !important;
+                border-right: 0 !important;
+                border-bottom: 0 !important;
+                border-top: 0 !important;
+            }
+            .dash-line {
+                border-top: 2px dashed grey;
+                width: 100%;
+                margin-top: 0px;
+                margin-bottom: 0.1px;
+            }
+            span{
+                font-size: 12px;
+            }
 
-                    .total {
-                      font-weight: bold;
-                    }
-                </style>`
+            .border-main-none {
+                font-size: 12px;
+                border-left: 0 !important;
+                border-right: 0 !important;
+                border-top: 2px dashed grey;
+                border-bottom: 2px dashed grey;
+            }
+        </style>`
         );
         printWindow.document.write("</head><body>");
 
         printWindow.document.write(
             `<div class="receipt">
         <div class="header">
-            <img src="${this.apiUrl}/public/${this.restaurantDetail.restaurantLogo}" alt="Logo">
-            <h1>${this.restaurantDetail.restaurantName}</h1>
-            <p>${this.restaurantDetail.address}</p>
+           
+            <h1>${this.restaurantDetail.restaurantName.toUpperCase()}</h1>
+            <p>${this.restaurantDetail.address.street.toUpperCase()} ,${this.restaurantDetail.address.city.toUpperCase()},${this.restaurantDetail.address.state.toUpperCase()},${
+                this.restaurantDetail.address.pinCode
+            }</p>
         </div>
-        <p>CASH/BILL</p>
-        <p>Bill No: ${orderDetail.orderId}<br>
-        Waiter: ${orderDetail.waiterName}<br>
-        TNo: ${orderDetail.tableNumber}<br>
-        Date: ${orderDetail.orderDate.split("T")[0]}<br>
-        Time: ${orderDetail.orderDate.split("T")[1].split(".")[0]}</p>
+        <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
+            orderDetail.customerPreferences.preference
+        }</p>
+        <div  style="text-align:center">${
+            orderDetail.customerPreferences.preference === "delivery"
+                ? "( " + orderDetail.customerPreferences?.value.address + " )"
+                : ""
+        }</div>
+        <p>
+        <span class="space-between">
+        ${this.datePipe.transform(orderDetail.orderDate)}
+     <span>   ${orderDetail.orderDate.split("T")[1].split(".")[0]}</span>
+        </span>
+      
+        Bill No: ${orderDetail.orderId}<br>
+        Payment Status: : ${"Paid via " + orderDetail.payment_method}<br>
+        ${orderDetail.customerName}<br>
+        ${orderDetail.customerPhoneNumber} - ${orderDetail.customerEmail}<br>
+       </p>
 
-        <table class="item-table">
-            <tr>
-                <th>Items</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Total Rs</th>
+        <table class="item-table ">
+            <tr  class="border-main-none">
+                <th  class="border-main-none">Items</th>
+                <th  class="border-main-none center">Price</th>
+                <th  class="border-main-none center">Qty</th>
+                <th  class="border-main-none center">Amount</th>
             </tr>`
-
         );
 
         for (const order of orderDetail.orderDetails[0].orderSummary) {
-            printWindow.document.write("<tr>");
-            printWindow.document.write(`<td>${order.dishName}`);
+            printWindow.document.write("<tr  class='border-none'>");
+            printWindow.document.write(
+                `<td class='border-none'>${order.dishName}`
+            );
 
             var checkIfFirst = true;
             if (order.extraSelected && order.extraSelected.length) {
@@ -902,40 +951,79 @@ export class DashboardComponent implements OnInit {
                             ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
                         );
                     }
-
                 }
             } else {
-                printWindow.document.write(`<td>${order.priceOneItem}</td>`);
-                printWindow.document.write(`<td>${order.dishQuantity}</td>`);
-                printWindow.document.write(`<td>${order.totalPrice}</td>`);
+                printWindow.document.write(
+                    `<td class='border-none center'>${order.priceOneItem}</td>`
+                );
+                printWindow.document.write(
+                    `<td class='border-none center'>${order.dishQuantity}</td>`
+                );
+                printWindow.document.write(
+                    `<td class='border-none center'>${order.totalPrice}</td>`
+                );
                 printWindow.document.write("</tr>");
             }
-
-
         }
 
         printWindow.document.write("</table>");
-        printWindow.document.write("<br>");
+        printWindow.document.write("<div class='dash-line'></div>");
 
         printWindow.document.write(
-            `<p>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</p>`
+            `<span>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</span>
+            `
         );
-
         printWindow.document.write(
             `<div class="footer">
-            <p>Gross Total</p>
+            <p>Net Amt.</p>
             <p>${orderDetail.orderDetails[0].orderAmount}</p>
         </div>`
         );
+        printWindow.document.write(
+            `<div class="footer">
+            <p>Tax</p>
+            <p>${orderDetail.orderDetails[0].orderAmount}</p>
+        </div>`
+        );
+        printWindow.document.write(
+            `<div class="footer">
+            <p>Total Amt.</p>
+            <p>${orderDetail.orderDetails[0].orderAmount}</p>
+        </div>`
+        );
+        printWindow.document.write(
+            ` <div class="dash-line"></div>
+            <span class="font-bold">Tax Summary</span>
+            <table class="item-table">
+                <tbody>
+                    <tr class="border-main-none">
+                        <th class="border-main-none">Tax %</th>
+                        <th class="border-main-none center">Basic Amt</th>
+                        <th class="border-main-none center">Tax Amt</th>
+                    </tr>
+                    <tr class="border-none">
+                        <td class="border-none">CGST</td>
+                        <td class="border-none center">11</td>
+                        <td class="border-none center">11</td>
+                    </tr>
+                    <tr class="border-none">
+                        <td class="border-none">SGST</td>
+                        <td class="border-none center">180</td>
+                        <td class="border-none center">180</td>
+                    </tr>
+                </tbody>
+            </table>`
+        );
+        printWindow.document.write("<div class='dash-line'></div>");
 
-        if (orderDetail.orderDetails[0].gstAmount) {
-            printWindow.document.write(
-                `<div class="footer">
-                <p>GST Amount</p>
-                <p>${orderDetail.orderDetails[0].gstAmount}</p>
-            </div>`
-            );
-        }
+        // if (orderDetail.orderDetails[0].gstAmount) {
+        //     printWindow.document.write(
+        //         `<div class="footer">
+        //         <p>GST Amount</p>
+        //         <p>${orderDetail.orderDetails[0].gstAmount}</p>
+        //     </div>`
+        //     );
+        // }
 
         if (orderDetail.orderDetails[0].deliveryAmount) {
             printWindow.document.write(
@@ -956,13 +1044,15 @@ export class DashboardComponent implements OnInit {
         }
 
         printWindow.document.write(
-            `<p>Total Amount Paid: ${orderDetail.orderDetails[0].orderAmount}</p>`
+            `<h1 class="center font-bold" style="margin-bottom:0px">Payable Amt.: ${orderDetail.orderDetails[0].orderAmount}</h1>`
         );
-
+        printWindow.document.write(
+            `<p class="center">Thanks for your visit !!! <br> Have a good day</p>`
+        );
         printWindow.document.write("</div>");
         printWindow.document.write("</body></html>");
 
-        console.log("printWindow", printWindow);
+        console.log("printWindow", printWindow.document);
 
         // printWindow.document.write(printContent);
 
@@ -974,7 +1064,6 @@ export class DashboardComponent implements OnInit {
             console.log("android");
 
             // downlaod the file in android device with 2 inch breadth
-
         } else {
             console.log("not android");
 

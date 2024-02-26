@@ -602,12 +602,11 @@ export class DashboardComponent implements OnInit {
                         );
                     }
                 }
-            } else {
-                printWindow.document.write(
-                    `<td class='border-none center'>${order.dishQuantity}</td>`
-                );
-                printWindow.document.write("</tr>");
             }
+            printWindow.document.write(
+                `<td class='border-none center'>${order.dishQuantity}</td>`
+            );
+            printWindow.document.write("</tr>");
         }
 
         printWindow.document.write("</table>");
@@ -799,7 +798,11 @@ export class DashboardComponent implements OnInit {
         </span>
       
         Bill No: ${orderDetail.orderId}<br>
-        Payment Status: : ${"Paid via " + orderDetail.payment_method}<br>
+        Payment Status: : ${
+            orderDetail.payment_method
+                ? "Paid via " + orderDetail.payment_method
+                : "Pending"
+        }<br>
         ${orderDetail.customerName}<br>
         ${orderDetail.customerPhoneNumber} - ${orderDetail.customerEmail}<br>
        </p>
@@ -824,7 +827,7 @@ export class DashboardComponent implements OnInit {
                 for (const extra of order.extraSelected) {
                     if (checkIfFirst) {
                         printWindow.document.write(
-                            `with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
+                            ` with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
                         );
                         checkIfFirst = false;
                     } else {
@@ -833,18 +836,17 @@ export class DashboardComponent implements OnInit {
                         );
                     }
                 }
-            } else {
-                printWindow.document.write(
-                    `<td class='border-none center'>${order.priceOneItem}</td>`
-                );
-                printWindow.document.write(
-                    `<td class='border-none center'>${order.dishQuantity}</td>`
-                );
-                printWindow.document.write(
-                    `<td class='border-none center'>${order.totalPrice}</td>`
-                );
-                printWindow.document.write("</tr>");
             }
+            printWindow.document.write(
+                `<td class='border-none center'>${order.priceOneItem}</td>`
+            );
+            printWindow.document.write(
+                `<td class='border-none center'>${order.dishQuantity}</td>`
+            );
+            printWindow.document.write(
+                `<td class='border-none center'>${order.totalPrice}</td>`
+            );
+            printWindow.document.write("</tr>");
         }
 
         printWindow.document.write("</table>");

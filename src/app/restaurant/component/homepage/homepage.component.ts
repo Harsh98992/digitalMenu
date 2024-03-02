@@ -138,6 +138,8 @@ export class HomepageComponent implements OnInit {
 
     onSearchIconClick(el) {
         if (!el?.value) {
+            document.getElementById("restaurantSearch").focus();
+            
             return;
         }
 

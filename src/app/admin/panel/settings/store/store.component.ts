@@ -122,11 +122,15 @@ export class StoreComponent implements OnInit {
 
     getGSTFormDetails() {
         this.restaurantPanelService.getRestaurnatDetail().subscribe((res) => {
+            console.log(res["data"]["restaurantDetail"]["customGSTPercentage"]);
+
             this.gstForm.patchValue({
                 isPricingInclusiveOfGST:
                     res["data"]["restaurantDetail"]["isPricingInclusiveOfGST"],
                 customGSTPercentage:
-                    res["data"]["restaurantDetail"]["customGSTPercentage"],
+                    res["data"]["restaurantDetail"]["customGSTPercentage"] === 0
+                        ? 5
+                        : res["data"]["restaurantDetail"]["customGSTPercentage"],
                 isGstApplicable:
                     res["data"]["restaurantDetail"]["isGstApplicable"],
             });
@@ -146,7 +150,10 @@ export class StoreComponent implements OnInit {
         const reqData = Object.assign({}, this.gstForm.value);
         if (!reqData.isGstApplicable) {
             reqData.isPricingInclusiveOfGST = false;
-            reqData.customGSTPercentage = 5;
+            reqData.customGSTPercentage = 0;
+        }
+        if (!reqData.isPricingInclusiveOfGST) {
+            reqData.customGSTPercentage = 0;
         }
         this.restaurantPanelService
             .updateStoreSettings(reqData)

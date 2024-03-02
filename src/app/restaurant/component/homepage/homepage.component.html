@@ -22,7 +22,7 @@
                                 <mat-autocomplete #auto="matAutocomplete">
                                     <mat-option *ngFor="let result of autocompleteResults"
                                         (click)="selectSearchResult(result)">
-                                        {{ result.restaurantName }}
+                                        {{ result.restaurantName | titlecase }}
                                     </mat-option>
                                 </mat-autocomplete>
                             </div>

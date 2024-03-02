@@ -56,11 +56,11 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
     socketApiUrl = environment.socketApiUrl;
 
     ngOnInit(): void {
-        console.log(this.orderData);
+        console.log(this.orderData?.customerPreferences?.preference?.toLowerCase());
         this.setDefaultTime();
         this.getRestaurantData();
-        document.getElementsByClassName('ngb-tp-hour')[0].remove();
-        document.getElementsByClassName('ngb-tp-spacer')[0].remove();
+        document.getElementsByClassName('ngb-tp-hour')[0]?.remove();
+        document.getElementsByClassName('ngb-tp-spacer')[0]?.remove();
     }
     getRestaurantData() {
         this.restaurantService.restaurantData

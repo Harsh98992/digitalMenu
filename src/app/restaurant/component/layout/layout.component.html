@@ -10,17 +10,22 @@
     <span routerLink="/">QrSay</span>
     <span class="example-spacer"></span>
     <button
-    *ngIf="userLoginFlag"
+        *ngIf="userLoginFlag"
         mat-icon-button
         class="example-icon favorite-icon mr-2"
         aria-label="Example icon-button with heart icon"
         routerLink="/orders"
     >
-        <mat-icon class="icon-display"  routerLink="/orders">shopping_cart</mat-icon>
+        <mat-icon
+            class="icon-display"
+            [matBadge]="orderCount"
+            matBadgeColor="warn"
+            routerLink="/orders"
+            >shopping_cart</mat-icon
+        >
     </button>
     <button
         mat-icon-button
-       
         class="example-icon favorite-icon mr-2"
         aria-label="Example icon-button with heart icon"
         routerLinkActive="active"

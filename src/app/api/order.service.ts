@@ -20,6 +20,9 @@ export class OrderService {
     placeOrder(data: any) {
         return this.http.post(`${this.apiUrl}/v1/orders/placeOrder`, data);
     }
+    getCustomerActiveOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/getCustomerActiveOrder`);
+    }
     getRestaurantOrdersByStatus(data) {
         return this.http.put(
             `${this.apiUrl}/v1/orders/getRestaurantOrdersByStatus`,

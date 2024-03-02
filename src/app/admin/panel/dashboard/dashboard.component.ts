@@ -6,7 +6,7 @@ import { OrderAcceptDialogComponent } from "../../../angular-material/order-acce
 import { MatDialog } from "@angular/material/dialog";
 import { NgxPrintModule } from "ngx-print";
 import { environment } from "src/environments/environment";
-
+const _ = require("lodash");
 // Import the socket.io-client library
 import { io } from "socket.io-client"; // Import the socket.io-client library
 import { finalize } from "rxjs";
@@ -179,256 +179,37 @@ export class DashboardComponent implements OnInit {
         this.socket.disconnect(); // Disconnect the socket when component is destroyed
     }
 
-    // ngxPrint (click)="printReceipt(details)"
-
-    // "Orderdetails": [
-    //     {
-    //         "orderAmount": 359,
-    //         "gstAmount": 0,
-    //         "deliveryAmount": 0,
-    //         "discountAmount": 0,
-    //         "cookingInstruction": "",
-    //         "orderSummary": [
-    //             {
-    //                 "dishChoicesSelected": [],
-    //                 "extraSelected": [
-    //                     {
-    //                         "elementId": "654648097fe0a384cc2fb6ab",
-    //                         "addOnsSelected": [
-    //                             {
-    //                                 "addOnName": "small",
-    //                                 "addOnPrice": 30,
-    //                                 "category": "veg"
-    //                             },
-    //                             {
-    //                                 "addOnName": "medium",
-    //                                 "addOnPrice": 60,
-    //                                 "category": "veg"
-    //                             }
-    //                         ],
-    //                         "addOnDisplayName": "extra cheese"
-    //                     },
-    //                     {
-    //                         "elementId": "654650d97fe0a384cc2fd1f9",
-    //                         "addOnsSelected": [
-    //                             {
-    //                                 "addOnName": "Small",
-    //                                 "addOnPrice": 30,
-    //                                 "category": "veg"
-    //                             },
-    //                             {
-    //                                 "addOnName": "Medium",
-    //                                 "addOnPrice": 60,
-    //                                 "category": "veg"
-    //                             }
-    //                         ],
-    //                         "addOnDisplayName": "cheese burst"
-    //                     },
-    //                     {
-    //                         "elementId": "654651197fe0a384cc2fd265",
-    //                         "addOnsSelected": [
-    //                             {
-    //                                 "addOnName": "Small",
-    //                                 "addOnPrice": 20,
-    //                                 "category": "veg"
-    //                             },
-    //                             {
-    //                                 "addOnName": "Medium",
-    //                                 "addOnPrice": 40,
-    //                                 "category": "veg"
-    //                             },
-    //                             {
-    //                                 "addOnName": "Large",
-    //                                 "addOnPrice": 50,
-    //                                 "category": "veg"
-    //                             }
-    //                         ],
-    //                         "addOnDisplayName": "extra toppings"
-    //                     }
-    //                 ],
-    //                 "itemSizeSelected": null,
-    //                 "dishQuantity": 1,
-    //                 "priceOneItem": 359,
-    //                 "totalPrice": 359,
-    //                 "dishType": "veg",
-    //                 "dishName": "Onion",
-    //                 "dishId": "65798e148d584c8e8e77b8f7",
-    //                 "dishPrice": 69
-    //             }
-    //         ],
-    //         "_id": "65bf61112169ee4d3cc2dffb",
-    //         "orderPlaceDateAndTime": "2024-02-04T10:04:01.540Z"
-    //     }
-    // ]
-
-    //     <html>
-    // <head>
-    //   <style>
-    //     /* Add your custom CSS styles here */
-    //     .receipt {
-    //       width: 300px;
-    //       margin: 0 auto;
-    //       border: 1px solid black;
-    //       padding: 5px;
-    //       font-family: Arial, sans-serif;
-    //       font-size: 12px;
-    //     }
-
-    //     .header {
-    //       text-align: center;
-    //     }
-
-    //     .header img {
-    //       width: 80px;
-    //       height: 80px;
-    //     }
-
-    //     .header h1 {
-    //       font-size: 20px;
-    //       margin: 0;
-    //     }
-
-    //     .header p {
-    //       margin: 2px 0;
-    //     }
-
-    //     .item-table {
-    //       width: 100%;
-    //       border-collapse: collapse;
-    //       margin: 5px 0;
-    //     }
-
-    //     .item-table th, .item-table td {
-    //       border: 1px solid black;
-    //       padding: 2px;
-    //     }
-
-    //     .item-table th {
-    //       text-align: left;
-    //     }
-
-    //     .item-table td {
-    //       text-align: right;
-    //     }
-
-    //     .footer {
-    //       display: flex;
-    //       justify-content: space-between;
-    //       margin: 5px 0;
-    //     }
-
-    //     .footer p {
-    //       margin: 0;
-    //     }
-
-    //     .total {
-    //       font-weight: bold;
-    //     }
-    //   </style>
-    // </head>
-    // <body>
-    //   <div class="receipt">
-    //     <div class="header">
-    //       <img src="logo.png" alt="Logo">
-    //       <h1>THE LOCAL DINER</h1>
-    //       <p>#2075, 4th Cross, 2nd Block,<br>
-    //       HRBR Layout, Kalyan Nagar,<br>
-    //       BANGALORE-560 043<br>
-    //       PH: 080 41440087<br>
-    //       TIN: 2908176093</p>
-    //     </div>
-    //     <p>CASH/BILL</p>
-    //     <p>Bill No: A0615<br>
-    //     Waiter: WAITER<br>
-    //     TNo: D15<br>
-    //     Date: 06/06/2015<br>
-    //     Time: 20:54</p>
-    //     <table class="item-table">
-    //       <tr>
-    //         <th>Items</th>
-    //         <th>Price</th>
-    //         <th>Qty</th>
-    //         <th>Total Rs</th>
-    //       </tr>
-    //       <tr>
-    //         <td>FLAVOURED MOJITO</td>
-    //         <td>330.00</td>
-    //         <td>1.000</td>
-    //         <td>330.00</td>
-    //       </tr>
-    //       <tr>
-    //         <td>CUCUMBER MINT</td>
-    //         <td>170.00</td>
-    //         <td>1.000</td>
-    //         <td>170.00</td>
-    //       </tr>
-    //       <tr>
-    //         <td>LONG ISLAND ICE TEA</td>
-    //         <td>460.00</td>
-    //         <td>1.000</td>
-    //         <td>460.00</td>
-    //       </tr>
-    //       <tr>
-    //         <td>CRUNCHY SALAD</td>
-    //         <td>320.00</td>
-    //         <td>1.000</td>
-    //         <td>320.00</td>
-    //       </tr>
-    //       <tr>
-    //         <td>ASSORTED SATAY</td>
-    //         <td>260.00</td>
-    //         <td>1.000</td>
-    //         <td>260.00</td>
-    //       </tr>
-    //       <tr>
-    //         <td>TEQUILA CHICKEN</td>
-    //         <td>360.00</td>
-    //         <td>1.000</td>
-    //         <td>360.00</td>
-    //       </tr>
-    //       <tr>
-    //         <td>FAJITAS CHICKEN</td>
-    //         <td>300.00</td>
-    //         <td>1.000</td>
-    //         <td>300.00</td>
-    //       </tr>
-    //       <tr>
-    //         <td>SURF N TURF</td>
-    //         <td>380.00</td>
-    //         <td>1.000</td>
-    //         <td>380.00</td>
-    //       </tr>
-    //     </table>
-    //     <p>Total Quantity: 9.000</p>
-    //     <div class="footer">
-    //       <p>Gross Total</p>
-    //       <p>2560.00</p>
-    //     </div>
-    //     <div class="footer">
-    //       <p>VAT 14.5%</p>
-    //       <p>371.20</p>
-    //     </div>
-    //     <div class="footer">
-    //       <p>Service Tax 5.8%</p>
-    //       <p>148.48</p>
-    //     </div>
-    //     <div class="footer">
-    //       <p>Net Amount</p>
-    //       <p class="total">3079.68</p>
-    //     </div>
-    //     <div class="footer">
-    //       <p>Service Charges 10.0%</p>
-    //       <p>307.97</p>
-    //     </div>
-    //     <p>Get Back Joe Joe!</p>
-    //   </div>
-    // </body>
-    // </html>
-    printKTO(orderDetail) {
-        console.log("printReceipt", orderDetail);
-
-        console.log(this.restaurantDetail);
-
+    getTotalDineIn(orderData) {
+        let amount = 0;
+        for (const order of orderData.orderDetails) {
+            amount += order.orderAmount;
+            amount += order.gstAmount;
+            amount -= order.discountAmount;
+        }
+        return amount;
+    }
+    printKTO(orderData) {
+        const orderDetail = _.cloneDeep(orderData);
+        if (
+            orderDetail?.customerPreferences?.preference?.toLowerCase() ===
+            "dine in"
+        ) {
+            for (const [index, order] of orderData.orderDetails.entries()) {
+                if (index > 0) {
+                    orderDetail.orderDetails[0]["orderSummary"].push(
+                        ...order["orderSummary"]
+                    );
+                    orderDetail.orderDetails[0]["orderAmount"] +=
+                        order["orderAmount"];
+                    orderDetail.orderDetails[0]["gstAmount"] +=
+                        order["gstAmount"];
+                    orderDetail.orderDetails[0]["deliveryAmount"] +=
+                        order["deliveryAmount"];
+                    orderDetail.orderDetails[0]["discountAmount"] +=
+                        order["discountAmount"];
+                }
+            }
+        }
         // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
 
         const printWindow = window.open("", "", "width=2in");

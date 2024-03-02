@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-
+const _ = require('lodash');
 @Injectable({
     providedIn: "root",
 })
@@ -35,9 +35,21 @@ export class UtilService {
         const distance = R * c; // Distance in km
         return distance;
     }
-    printReceipt(orderDetail, restaurantDetail) {
+    printReceipt(orderData, restaurantDetail) {
         // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
-
+        const orderDetail=_.cloneDeep( orderData);
+        if(orderDetail?.customerPreferences?.preference?.toLowerCase() === 'dine in'){
+           
+            for(const [index,order] of orderData.orderDetails.entries()){
+                if(index>0){
+                   orderDetail.orderDetails[0]['orderSummary'].push(...order['orderSummary']);
+                   orderDetail.orderDetails[0]['orderAmount']+=order['orderAmount'];
+                   orderDetail.orderDetails[0]['gstAmount']+=order['gstAmount'];
+                   orderDetail.orderDetails[0]['deliveryAmount']+=order['deliveryAmount'];
+                   orderDetail.orderDetails[0]['discountAmount']+=order['discountAmount'];
+                }
+            }
+        }
         const printWindow = window.open("", "", "width=2in");
 
         printWindow.document.write("<html><head><title>bill</title>");

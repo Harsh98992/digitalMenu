@@ -1474,12 +1474,8 @@
                                         <p>
                                             Total Bill Paid:
                                             {{
-                                                details.orderDetails[0]
-                                                    .orderAmount +
-                                                    details.orderDetails[0]
-                                                        .gstAmount +
-                                                    details.orderDetails[0]
-                                                        .deliveryAmount
+                                                getTotalDineIn(details)
+                                               
                                                     | currency
                                                         : "INR"
                                                         : "symbol"

@@ -48,6 +48,8 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.unsubscribe();
+        
+    
     }
 
     socket: any;
@@ -57,6 +59,8 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
         console.log(this.orderData);
         this.setDefaultTime();
         this.getRestaurantData();
+        document.getElementsByClassName('ngb-tp-hour')[0].remove();
+        document.getElementsByClassName('ngb-tp-spacer')[0].remove();
     }
     getRestaurantData() {
         this.restaurantService.restaurantData

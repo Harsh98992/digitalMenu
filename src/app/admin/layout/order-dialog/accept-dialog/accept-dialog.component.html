@@ -27,8 +27,8 @@
             (submit)="submitForm()"
         >
             <div class="col-12 mt-3">
-                <label for="">Prepration Time</label>
-                <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
+                <label for="">Prepration Time (In minutes)</label>
+                <ngb-timepicker [formControl]="ctrl" [hourStep]="0" required></ngb-timepicker>
             </div>
         </form>
     </div>

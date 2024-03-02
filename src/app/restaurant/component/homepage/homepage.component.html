@@ -21,7 +21,6 @@
                                             class="form-control no_border_r"
                                             placeholder="Search for restaurant...."
                                             [matAutocomplete]="auto"
-                                           
                                             (input)="
                                                 onSearchInput(
                                                     $event.target.value
@@ -41,6 +40,14 @@
                                     </div>
                                 </div>
                                 <mat-autocomplete #auto="matAutocomplete">
+                                    <!-- <mat-option
+                                        *ngIf="
+                                            autocompleteResults &&
+                                            autocompleteResults.length === 0
+                                        "
+                                    >
+                                        No result found
+                                    </mat-option> -->
                                     <mat-option
                                         *ngFor="
                                             let result of autocompleteResults

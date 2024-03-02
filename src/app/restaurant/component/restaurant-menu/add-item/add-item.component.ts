@@ -42,7 +42,8 @@ export class AddItemComponent implements OnInit {
 
     ngOnInit(): void {
         this.getRestaurantData();
-
+        console.log(this.dish);
+        
         this.itemPrice = this.dish.dishPrice;
         this.totalPrice = this.itemPrice;
         this.priceOneItem = this.itemPrice;

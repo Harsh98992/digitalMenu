@@ -42,8 +42,7 @@ export class AddItemComponent implements OnInit {
 
     ngOnInit(): void {
         this.getRestaurantData();
-        console.log(this.dish);
-        
+
         this.itemPrice = this.dish.dishPrice;
         this.totalPrice = this.itemPrice;
         this.priceOneItem = this.itemPrice;
@@ -282,7 +281,7 @@ export class AddItemComponent implements OnInit {
         data["extraSelected"] = this.extraSelected;
         data["dishChoicesSelected"] = this.dishChoicesSelected;
         data["dishDetail"] = this.dish;
-        
+
         const storeData = {
             dishId: this.dish._id,
             cartItems: [data],

@@ -121,6 +121,7 @@ export class RestaurantMenuComponent implements OnInit {
                                 this.restaurantService.setCartItem([]);
                                 this.restaurantService.setCartSate([]);
                                 this.restaurantService.setRestaurantUrl(null);
+                                this.restaurantService.amountToBePaidSubject.next(null)
                             } else {
                                 this.restaurantService.setCartItem(cartData);
 

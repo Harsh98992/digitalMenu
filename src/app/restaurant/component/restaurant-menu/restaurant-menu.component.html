@@ -559,11 +559,15 @@
                 (click)="openDialog()"
             >
                 <a class="btn_1 gradient full-width"
-                    >View Basket (
-                    {{
-                        amountToBePaid | currency : "INR" : "symbol" : "1.0-0"
-                    }}
-                    )</a
+                    >View Basket
+                    <span *ngIf="amountToBePaid">
+                        (
+                        {{
+                            amountToBePaid
+                                | currency : "INR" : "symbol" : "1.0-0"
+                        }}
+                        )</span
+                    ></a
                 >
             </div>
         </div>

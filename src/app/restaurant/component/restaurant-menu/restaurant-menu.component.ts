@@ -66,7 +66,8 @@ export class RestaurantMenuComponent implements OnInit {
         "Saturday",
     ];
     activeRestaurantUrl: any;
-    pureVegFlag=true;
+    pureVegFlag = true;
+    amountToBePaid: any;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -282,6 +283,13 @@ export class RestaurantMenuComponent implements OnInit {
     }
     calculateItemTotal() {
         this.cartHelperComponent?.calculateItemTotal();
+        this.restaurantService.amountToBePaidSubject.subscribe({
+            next: (res) => {
+                if (res) {
+                    this.amountToBePaid = res;
+                }
+            },
+        });
     }
     changeQuantity(flag: string, item: any) {
         if (this.checkCustomizeable(item)) {
@@ -801,6 +809,8 @@ export class RestaurantMenuComponent implements OnInit {
         const { hour, minute, second } = timeObj;
         const formattedHour = hour % 12 || 12; // Convert 0 to 12
         const meridian = hour >= 12 ? "PM" : "AM";
-        return `${formattedHour}:${minute < 10 ? "0" + minute : minute} ${meridian}`;
+        return `${formattedHour}:${
+            minute < 10 ? "0" + minute : minute
+        } ${meridian}`;
     }
 }

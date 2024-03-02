@@ -311,6 +311,9 @@ export class CartHelperComponent implements OnInit {
                 this.gstAmount -
                 this.discountAmount +
                 this.deliveryAmount;
+            this.restaurantService.amountToBePaidSubject.next(
+                this.amountToBePaid
+            );
         }
     }
     changeQuantity(flag: string, cartItem: any) {
@@ -442,9 +445,9 @@ export class CartHelperComponent implements OnInit {
     getDeliveryRadiobuttonText() {
         if (this.itemTotal < this.restaurantData.minOrderValueForDelivery) {
             this.deliveryDisabled = true;
-            console.log(this.userPreference)
+            console.log(this.userPreference);
             console.log(this.orderOption);
-            
+
             this.deliveryRadioText = `Delivery (Not Available Below Rs. ${this.restaurantData.minOrderValueForDelivery})`;
             if (this.orderOption === "delivery") {
                 this.userPreference = {};

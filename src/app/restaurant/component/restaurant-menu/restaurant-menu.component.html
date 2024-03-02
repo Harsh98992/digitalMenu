@@ -125,7 +125,8 @@
                                     >Time -
                                     {{ formatTime(restaurantDetail.openTime) }}
 
-                                    - {{
+                                    -
+                                    {{
                                         formatTime(restaurantDetail.closeTime)
                                     }}</span
                                 >
@@ -557,7 +558,13 @@
                 class="btn_reserve_fixed"
                 (click)="openDialog()"
             >
-                <a class="btn_1 gradient full-width">View Basket</a>
+                <a class="btn_1 gradient full-width"
+                    >View Basket (
+                    {{
+                        amountToBePaid | currency : "INR" : "symbol" : "1.0-0"
+                    }}
+                    )</a
+                >
             </div>
         </div>
     </div>

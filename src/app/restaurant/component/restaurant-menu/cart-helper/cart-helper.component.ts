@@ -425,6 +425,9 @@ export class CartHelperComponent implements OnInit {
                 if (res["status"] == "success") {
                     this.socket.emit("orderPlaced", res["data"]["savedData"]);
                     this.dialog.closeAll();
+                    this.restaurantService.setCartItem([]);
+                    this.restaurantService.setRestaurantUrl(null);
+                    this.restaurantService.amountToBePaidSubject.next(null);
                     if (this.userPreference.preference === "Dine In") {
                         this.router.navigateByUrl("/orders");
                     } else {
@@ -433,8 +436,7 @@ export class CartHelperComponent implements OnInit {
                             res["data"]["savedData"]["orderId"],
                         ]);
                     }
-                    this.restaurantService.setCartItem([]);
-                    this.restaurantService.setRestaurantUrl(null);
+                 
                 }
             },
         });

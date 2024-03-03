@@ -97,6 +97,7 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.setCartItem([]);
             this.restaurantService.setCartSate([]);
             this.restaurantService.setRestaurantUrl(null);
+            this.restaurantService.amountToBePaidSubject.next(null);
             return;
         }
 
@@ -121,7 +122,9 @@ export class RestaurantMenuComponent implements OnInit {
                                 this.restaurantService.setCartItem([]);
                                 this.restaurantService.setCartSate([]);
                                 this.restaurantService.setRestaurantUrl(null);
-                                this.restaurantService.amountToBePaidSubject.next(null)
+                                this.restaurantService.amountToBePaidSubject.next(
+                                    null
+                                );
                             } else {
                                 this.restaurantService.setCartItem(cartData);
 
@@ -286,9 +289,7 @@ export class RestaurantMenuComponent implements OnInit {
         this.cartHelperComponent?.calculateItemTotal();
         this.restaurantService.amountToBePaidSubject.subscribe({
             next: (res) => {
-                if (res) {
-                    this.amountToBePaid = res;
-                }
+                this.amountToBePaid = res;
             },
         });
     }

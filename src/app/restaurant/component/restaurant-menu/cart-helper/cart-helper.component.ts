@@ -423,6 +423,7 @@ export class CartHelperComponent implements OnInit {
         this.orderService.placeOrder(bodyData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {
+                    this.restaurantService.bypassGaurd=true
                     this.socket.emit("orderPlaced", res["data"]["savedData"]);
                     this.dialog.closeAll();
                     this.restaurantService.setCartItem([]);

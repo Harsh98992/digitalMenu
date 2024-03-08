@@ -20,24 +20,28 @@
             />
         </div>
     </form> -->
-<div class="container mt-3">
-    <label id="example-radio-group-label">Please select a table</label>
+    <div class="container mt-3">
+        <label id="example-radio-group-label">Please select a table</label>
 
-    <mat-radio-group
-        aria-labelledby="example-radio-group-label"
-        class="example-radio-group"
-        [(ngModel)]="selectedTable"
-    >
-        <mat-radio-button
-            class="example-radio-button"
-            *ngFor="let option of tableData"
-            [disabled]="!option.isAvailable && customerDetailId!==option.customerId"
-            [value]="option.tableName"
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="selectedTable"
         >
-            {{ option.tableName }}
-        </mat-radio-button>
-    </mat-radio-group>
-</div>
+            <mat-radio-button
+                class="example-radio-button"
+                (change)="onSubmit()"
+                *ngFor="let option of tableData"
+                [disabled]="
+                    !option.isAvailable &&
+                    customerDetailId !== option.customerId
+                "
+                [value]="option.tableName"
+            >
+                {{ option.tableName }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <div class="footer">

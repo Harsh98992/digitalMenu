@@ -191,11 +191,12 @@ export class RestaurantMenuComponent implements OnInit {
         }
     }
     openSelectTableNumberDialog() {
+        const tableData = this.cartHelperComponent.tableData;
         this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
                 disableClose: true,
-                data: this.restaurantDetail,
+                data: { restaurantData: this.restaurantDetail, tableData },
             })
             .afterClosed()
             .subscribe((resp) => {

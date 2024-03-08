@@ -68,11 +68,13 @@ export class RestaurantCartComponent implements OnInit {
         });
     }
     openSelectTableNumberDialog() {
+        const tableData = this.cartHelperComponent.tableData;
+
         this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
                 disableClose: true,
-                data: this.restaurantData,
+                data: { restaurantData: this.restaurantData, tableData },
             })
             .afterClosed()
             .subscribe((resp) => {

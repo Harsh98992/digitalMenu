@@ -48,6 +48,7 @@ export class CartHelperComponent implements OnInit {
 
     defaultOrderOption = null;
     deliveryRadioText: string;
+    tableData = [];
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -98,6 +99,9 @@ export class CartHelperComponent implements OnInit {
             .subscribe({
                 next: (res: any) => {
                     this.isDineInAvailable = res.data.isDineInAvailable;
+                    this.tableData = res.data.tableDetails;
+                 
+                    
                 },
             });
     }
@@ -213,11 +217,14 @@ export class CartHelperComponent implements OnInit {
         }
     }
     openSelectTableNumberDialog() {
-        this.dialog
+                this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
                 disableClose: true,
-                data: this.restaurantData,
+                data: {
+                    restaurantData: this.restaurantData,
+                    tableData: this.tableData,
+                },
             })
             .afterClosed()
             .subscribe((resp) => {
@@ -423,7 +430,7 @@ export class CartHelperComponent implements OnInit {
         this.orderService.placeOrder(bodyData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {
-                    this.restaurantService.bypassGaurd=true
+                    this.restaurantService.bypassGaurd = true;
                     this.socket.emit("orderPlaced", res["data"]["savedData"]);
                     this.dialog.closeAll();
                     this.restaurantService.setCartItem([]);
@@ -437,7 +444,6 @@ export class CartHelperComponent implements OnInit {
                             res["data"]["savedData"]["orderId"],
                         ]);
                     }
-                 
                 }
             },
         });

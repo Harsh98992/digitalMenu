@@ -27,10 +27,11 @@
             aria-labelledby="example-radio-group-label"
             class="example-radio-group"
             [(ngModel)]="selectedTable"
+            (change)="onSubmit()"
         >
             <mat-radio-button
                 class="example-radio-button"
-                (change)="onSubmit()"
+              
                 *ngFor="let option of tableData"
                 [disabled]="
                     !option.isAvailable &&

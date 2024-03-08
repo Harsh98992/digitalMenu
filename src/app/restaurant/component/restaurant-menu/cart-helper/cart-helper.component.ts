@@ -15,6 +15,7 @@ import { UserPromoCodeDialogComponent } from "./user-promo-code-dialog/user-prom
 import { environment } from "src/environments/environment";
 import { io } from "socket.io-client";
 import { UtilService } from "src/app/api/util.service";
+import { UserLoginComponent } from "src/app/user-auth/user-login/user-login.component";
 
 @Component({
     selector: "app-cart-helper",
@@ -100,8 +101,6 @@ export class CartHelperComponent implements OnInit {
                 next: (res: any) => {
                     this.isDineInAvailable = res.data.isDineInAvailable;
                     this.tableData = res.data.tableDetails;
-                 
-                    
                 },
             });
     }
@@ -122,9 +121,20 @@ export class CartHelperComponent implements OnInit {
             },
         });
     }
+    openLoginDialog() {
+        this.dialog.open(UserLoginComponent, {
+            minWidth: "400px",
+
+            disableClose: true,
+        });
+    }
 
     async changeOption(e, value: string) {
-        if (this.orderOptionFlag) {
+        if (!this.userLoginFlag) {
+            e.preventDefault();
+            this.openLoginDialog();
+            return;
+        } else if (this.orderOptionFlag) {
             e.preventDefault();
 
             let confirm = await this.showConfirm();
@@ -160,9 +170,11 @@ export class CartHelperComponent implements OnInit {
                 true
             );
             this.orderOption = null;
+            return;
         } else {
             this.setCartStateHelper();
         }
+        this.openOrderOptionDialog();
     }
     setCartStateHelper() {
         this.restaurantService.setCartSate({
@@ -211,13 +223,14 @@ export class CartHelperComponent implements OnInit {
                                     : "Scheduled Dining",
                             value: resp.selectedTime,
                         };
+                        this.setCartStateHelper();
                     }
                 });
         } else {
         }
     }
     openSelectTableNumberDialog() {
-                this.dialog
+        this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
                 disableClose: true,
@@ -234,6 +247,7 @@ export class CartHelperComponent implements OnInit {
                         preference: "Dine In",
                         value: resp.selectedTableName,
                     };
+                    this.setCartStateHelper();
                 }
             });
     }
@@ -384,6 +398,7 @@ export class CartHelperComponent implements OnInit {
 
                         value: resp.selectedAddress,
                     };
+                    this.setCartStateHelper();
                 }
             }
         });

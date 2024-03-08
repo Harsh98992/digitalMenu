@@ -31,7 +31,7 @@
         <mat-radio-button
             class="example-radio-button"
             *ngFor="let option of tableData"
-            [disabled]="!option.isAvailable"
+            [disabled]="!option.isAvailable && customerDetailId!==option.customerId"
             [value]="option.tableName"
         >
             {{ option.tableName }}

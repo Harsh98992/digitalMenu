@@ -1,10 +1,19 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 <div mat-dialog-content>{{ data.message }}</div>
 <div mat-dialog-actions>
-  <a class="btn_1 gray delete" [mat-dialog-close]="true"> {{cancelBtnText}}</a>
+    <a class="btn_1 gray delete" [mat-dialog-close]="true">
+        {{ cancelBtnText }}</a
+    >
 
-  <a class="btn_1 gray approve ml-2" *ngIf="data?.yesButtonFlag!=false" (click)="okAction()"> {{successBtnText}}</a>
+    <a
+        class="btn_1 gray approve ml-2"
+        *ngIf="data?.yesButtonFlag != false"
+        (click)="okAction()"
+    >
+        {{ successBtnText }}</a
+    >
 
-  <!-- <button mat-button >Cancel</button>
+    <!-- <button mat-button >Cancel</button>
   <button mat-button  cdkFocusInitial>OK</button> -->
 </div>
+

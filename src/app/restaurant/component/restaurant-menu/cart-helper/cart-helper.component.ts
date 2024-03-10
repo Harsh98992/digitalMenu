@@ -142,6 +142,10 @@ export class CartHelperComponent implements OnInit {
     }
 
     async changeOption(e, value: string) {
+        if (value === "scheduledDining") {
+            e.preventDefault();
+            return;
+        }
         if (!this.userLoginFlag) {
             e.preventDefault();
             this.openLoginDialog();

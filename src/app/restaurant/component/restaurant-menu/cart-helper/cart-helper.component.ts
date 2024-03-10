@@ -50,6 +50,7 @@ export class CartHelperComponent implements OnInit {
     defaultOrderOption = null;
     deliveryRadioText: string;
     tableData = [];
+    promoCodes: any;
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -94,13 +95,24 @@ export class CartHelperComponent implements OnInit {
         this.checkLogin();
 
         this.getCartState();
-
+        this.getPromoCodesForRestaurantUrl();
         this.customerService
             .isDineInAvailable(this.restaurantData._id)
             .subscribe({
                 next: (res: any) => {
                     this.isDineInAvailable = res.data.isDineInAvailable;
                     this.tableData = res.data.tableDetails;
+                },
+            });
+    }
+    getPromoCodesForRestaurantUrl() {
+        this.customerService
+            .getPromoCodesForRestaurantUrl(this.restaurantData.restaurantUrl)
+            .subscribe({
+                next: (res: any) => {
+                    if (res?.data?.promoCodes?.length) {
+                        this.promoCodes = res.data.promoCodes;
+                    }
                 },
             });
     }

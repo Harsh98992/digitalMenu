@@ -40,6 +40,7 @@ import { OrderRecievedDialogComponent } from './order-recieved-dialog/order-reci
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 import { CustomerNameDialogComponent } from './customer-name-dialog/customer-name-dialog.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 
@@ -54,6 +55,7 @@ import { RedirectComponent } from './redirect/redirect.component';
         PaymentDialogComponent,
         CustomerNameDialogComponent,
         RedirectComponent,
+        ErrorDialogComponent,
     ],
     imports: [
         CommonModule,

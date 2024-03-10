@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ConfirmDialogComponent } from "../angular-material/confirm-dialog/confirm-dialog.component";
+import { ErrorDialogComponent } from "../angular-material/error-dialog/error-dialog.component";
 const _ = require("lodash");
 @Injectable({
     providedIn: "root",
@@ -21,9 +22,14 @@ export class UtilService {
                 yesButtonFlag: false,
                 cancelBtnText: "Ok",
             };
-            const dialog = this.dialog.open(ConfirmDialogComponent, {
+            this.dialog.open(ErrorDialogComponent, {
+                panelClass: "add-item-dialog",
+                disableClose: true,
                 data: dialogData,
             });
+            // const dialog = this.dialog.open(ConfirmDialogComponent, {
+            //     data: dialogData,
+            // });
             // setTimeout(() => {
             //     dialog?.close();
             // }, 5000);

@@ -10,13 +10,13 @@ import { UtilService } from "src/app/api/util.service";
     styleUrls: ["./time-selector-dialog.component.scss"],
 })
 export class TimeSelectorDialogComponent implements OnInit {
-    selectedValue="ASAP"
+    selectedValue = "ASAP";
     ctrl = new FormControl<NgbTimeStruct | null>(
         null,
         (control: FormControl<NgbTimeStruct | null>) => {
             const currentData = new Date();
             const hour = currentData.getHours();
-            const min = currentData.getMinutes()+15;
+            const min = currentData.getMinutes() + 15;
             const value = control.value;
 
             if (!value) {
@@ -47,8 +47,8 @@ export class TimeSelectorDialogComponent implements OnInit {
         this.setCurrentTime();
     }
     setCurrentTime() {
-        const date=new Date()
-        date.setMinutes ( date.getMinutes() + 15 );
+        const date = new Date();
+        date.setMinutes(date.getMinutes() + 15);
         this.ctrl.patchValue({
             hour: date.getHours(),
             minute: date.getMinutes(),
@@ -56,12 +56,11 @@ export class TimeSelectorDialogComponent implements OnInit {
         });
     }
     submitTime() {
-        if(this.selectedValue==="ASAP"){
+        if (this.selectedValue === "ASAP") {
             this.dialogRef.close({
                 selectedTime: `ASAP`,
             });
-        }
-        else if (!this.ctrl.valid) {
+        } else if (!this.ctrl.valid) {
             if (this.ctrl.hasError("earlyTime")) {
                 this.utilService.openSnackBar(
                     "Please choose a longer time.",
@@ -70,7 +69,11 @@ export class TimeSelectorDialogComponent implements OnInit {
             }
         } else {
             this.dialogRef.close({
-                selectedTime: `${this.ctrl.value.hour}:${this.ctrl.value.minute}`,
+                selectedTime: `${this.ctrl.value.hour
+                    .toString()
+                    .padStart(2, "0")}:${this.ctrl.value.minute
+                    .toString()
+                    .padStart(2, "0")}`,
             });
         }
     }

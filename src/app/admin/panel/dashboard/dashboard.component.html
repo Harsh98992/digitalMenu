@@ -2,680 +2,6 @@
     <div class="card">
         <div class="card-header">My Orders</div>
         <div class="card-body">
-            <!-- <mat-tab-group>
-                <mat-tab label="Pending ({{ this.pendingOrder.length }})">
-                    <div class="order-card mt-3" *ngFor="let details of this.pendingOrder">
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>{{ details.customerName }}</h3>
-
-                                        <p class="small">
-                                            {{ details.customerEmail }}
-                                        </p>
-                                        <p class="small">
-                                            {{ details.customerPhoneNumber }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>
-                                            <strong>ID: </strong>
-                                            {{ details.orderId }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="dateText">
-                                            <img class="green-tick logo" src="assets\img\green-tick.png"
-                                                alt="tick" />Placed at
-                                            {{
-                                            details.orderDate
-                                            | date : "medium"
-                                            }}
-                                        </p>
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="order-items" *ngFor="
-                                                let order of details
-                                                    .orderDetails[0]
-                                                    .orderSummary
-                                            ">
-                                            <p>
-                                                <img src="assets\img\non-veg food icon.png" alt="Non-Veg Item" *ngIf="
-                                                        order.dishType ===
-                                                        'nonVeg'
-                                                    " />
-                                                <img src="assets\img\veg food icon.png" alt="Veg Item" *ngIf="
-                                                        order.dishType === 'veg'
-                                                    " />{{ order.dishQuantity }} x
-                                                {{ order.dishName }} ({{
-                                                order.totalPrice
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }})
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="total-bill">
-                                            <p>
-                                                Total Bill Paid:
-                                                {{
-                                                details.orderDetails[0]
-                                                .orderAmount +
-                                                details.orderDetails[0]
-                                                .gstAmount +
-                                                details.orderDetails[0]
-                                                .deliveryAmount
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }}
-                                            </p>
-
-                                            <a class="print-reciept"  (click)="printReceipt(details)">
-                                                <i class="fas fa-print"></i>
-                                                Print billl</a>
-
-                                            <div id="print-section" style="display: none">
-
-                                                <h1>Order Details</h1>
-                                                <p>Order Id: {{details.orderId}}</p>
-                                               
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 order-ready-div">
-                                        <button class="btn btn-primary" (click)="openDialog(details)">
-                                            Take Action
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="delivery-address">
-                                            <h5>
-                                                {{
-                                                details.customerPreferences
-                                                .preference
-                                                }}
-                                            </h5>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                    'Dine In'
-                                                ">
-                                                Table Name:-
-                                                {{
-                                                details.customerPreferences
-                                                ?.value
-                                                }}
-                                            </p>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                        'Take Away' ||
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                        'Scheduled Dining'
-                                                ">
-                                                {{
-                                                details.customerPreferences
-                                                .value
-                                                }}
-                                            </p>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                    'delivery'
-                                                ">
-                                                {{
-                                                details.customerPreferences
-                                                ?.value.address
-                                                }},{{
-                                                details.customerPreferences
-                                                ?.value.pincode
-                                                }}
-                                            </p>
-                                            <a class="copy button"><i class="far fa-copy"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="support">
-                                            <img class="logo" src="assets\img\support icon.png" alt="Support" />
-                                            <span *ngIf="!details.payment_method">Payment Status :- Pending</span>
-                                            <span *ngIf="details.payment_method">Payment Status :-
-                                                {{
-                                                "Paid via " +
-                                                details.payment_method
-                                                | titlecase
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mt-2">
-                                        <div class="support">
-                                            <button class="btn btn-info" (click)="toggleLoyalStatus(details)">
-                                                {{ details?.loyalFlag ?   'Remove Loyal' : 'Add Loyal' }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Pending Payment ({{ this.pendingPayment.length }})">
-                    <div class="order-card mt-3" *ngFor="let details of this.pendingPayment">
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>{{ details.customerName }}</h3>
-
-                                        <p class="small">
-                                            {{ details.customerEmail }}
-                                        </p>
-                                        <p class="small">
-                                            {{ details.customerPhoneNumber }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>
-                                            <strong>ID: </strong>
-                                            {{ details.orderId }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="dateText">
-                                            <img class="green-tick logo" src="assets\img\green-tick.png"
-                                                alt="tick" />Placed at
-                                            {{
-                                            details.orderDate
-                                            | date : "medium"
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="order-items" *ngFor="
-                                                let order of details
-                                                    .orderDetails[0]
-                                                    .orderSummary
-                                            ">
-                                            <p>
-                                                <img src="assets\img\non-veg food icon.png" alt="Non-Veg Item" *ngIf="
-                                                        order.dishType ===
-                                                        'nonVeg'
-                                                    " />
-                                                <img src="assets\img\veg food icon.png" alt="Veg Item" *ngIf="
-                                                        order.dishType === 'veg'
-                                                    " />{{ order.dishQuantity }} x
-                                                {{ order.dishName }} ({{
-                                                order.totalPrice
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }})
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="total-bill">
-                                            <p>
-                                                Total Bill Paid:
-                                                {{
-                                                details.orderDetails[0]
-                                                .orderAmount +
-                                                details.orderDetails[0]
-                                                .gstAmount +
-                                                details.orderDetails[0]
-                                                .deliveryAmount
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }}
-                                            </p>
-                                         
-
-
-                                                <a class="print-reciept"  (click)="printReceipt(details)" >
-                                                <i class="fas fa-print"></i>
-                                                Print bill</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 order-ready-div">
-                                        <button class="btn btn-primary" (click)="openDialog(details)">
-                                            Take Action
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="delivery-address">
-                                            <h5>
-                                                {{
-                                                details.customerPreferences
-                                                .preference
-                                                }}
-                                            </h5>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                    'Dine In'
-                                                ">
-                                                Table Name:-
-                                                {{
-                                                details.customerPreferences
-                                                ?.value
-                                                }}
-                                            </p>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                        'Take Away' ||
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                        'Scheduled Dining'
-                                                ">
-                                                {{
-                                                details.customerPreferences
-                                                .value
-                                                }}
-                                            </p>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                    'Delivery'
-                                                ">
-                                                {{
-                                                details.customerPreferences
-                                                ?.value.address
-                                                }},{{
-                                                details.customerPreferences
-                                                ?.value.pincode
-                                                }}
-                                            </p>
-                                            <a class="copy button"><i class="far fa-copy"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="support">
-                                            <img class="logo" src="assets\img\support icon.png" alt="Support" />
-                                            <span *ngIf="!details.payment_method">Payment Status :- Pending</span>
-                                            <span *ngIf="details.payment_method">Payment Status :-
-                                                {{
-                                                "Paid via " +
-                                                details.payment_method
-                                                | titlecase
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Processing ({{ this.processingOrder.length }})">
-                    <div class="order-card mt-3" *ngFor="let details of this.processingOrder">
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>{{ details.customerName }}</h3>
-
-                                        <p class="small">
-                                            {{ details.customerEmail }}
-                                        </p>
-                                        <p class="small">
-                                            {{ details.customerPhoneNumber }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>
-                                            <strong>ID: </strong>
-                                            {{ details.orderId }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="dateText">
-                                            <img class="green-tick logo" src="assets\img\green-tick.png"
-                                                alt="tick" />Placed at
-                                            {{
-                                            details.orderDate
-                                            | date : "medium"
-                                            }}
-                                        </p>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="order-items" *ngFor="
-                                                let order of details
-                                                    .orderDetails[0]
-                                                    .orderSummary
-                                            ">
-                                            <p>
-                                                <img src="assets\img\non-veg food icon.png" alt="Non-Veg Item" *ngIf="
-                                                        order.dishType ===
-                                                        'nonVeg'
-                                                    " />
-                                                <img src="assets\img\veg food icon.png" alt="Veg Item" *ngIf="
-                                                        order.dishType === 'veg'
-                                                    " />{{ order.dishQuantity }} x
-                                                {{ order.dishName }} ({{
-                                                order.totalPrice
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }})
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="total-bill">
-                                            <p>
-                                                Total Bill Paid:
-                                                {{
-                                                details.orderDetails[0]
-                                                .orderAmount +
-                                                details.orderDetails[0]
-                                                .gstAmount +
-                                                details.orderDetails[0]
-                                                .deliveryAmount
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }}
-                                            </p>
-                                            <a class="print-reciept"  (click)="printReceipt(details)">
-                                                <i class="fas fa-print"></i>
-                                                Print bill</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 order-ready-div">
-                                        <button class="btn btn-primary" (click)="openDialog(details)">
-                                            Take Action
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="delivery-address">
-                                            <h5>
-                                                {{
-                                                details.customerPreferences
-                                                .preference
-                                                }}
-                                            </h5>
-                                            <p>
-                                                {{
-                                                details.customerPreferences
-                                                .value
-                                                }}
-                                            </p>
-                                            <a class="copy button"><i class="far fa-copy"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                             
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="support">
-                                            <img class="logo" src="assets\img\support icon.png" alt="Support" />
-                                            <span *ngIf="!details.payment_method">Payment Status :- Pending</span>
-                                            <span *ngIf="details.payment_method">Payment Status :-
-                                                {{
-                                                "Paid via " +
-                                                details.payment_method
-                                                | titlecase
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Active Dine In ({{ this.activeDine.length }})">
-                    <div class="order-card mt-3" *ngFor="let details of this.activeDine">
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>{{ details.customerName }}</h3>
-
-                                        <p class="small">
-                                            {{ details.customerEmail }}
-                                        </p>
-                                        <p class="small">
-                                            {{ details.customerPhoneNumber }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p>
-                                            <strong>ID: </strong>
-                                            {{ details.orderId }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="dateText">
-                                            <img class="green-tick logo" src="assets\img\green-tick.png"
-                                                alt="tick" />Placed at
-                                            {{
-                                            details.orderDate
-                                            | date : "medium"
-                                            }}
-                                        </p>
-                                
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="order-items" *ngFor="
-                                                let order of details
-                                                    .orderDetails[0]
-                                                    .orderSummary
-                                            ">
-                                            <p>
-                                                <img src="assets\img\non-veg food icon.png" alt="Non-Veg Item" *ngIf="
-                                                        order.dishType ===
-                                                        'nonVeg'
-                                                    " />
-                                                <img src="assets\img\veg food icon.png" alt="Veg Item" *ngIf="
-                                                        order.dishType === 'veg'
-                                                    " />{{ order.dishQuantity }} x
-                                                {{ order.dishName }} ({{
-                                                order.totalPrice
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }})
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="total-bill">
-                                            <p>
-                                                Total Bill Paid:
-                                                {{
-                                                details.orderDetails[0]
-                                                .orderAmount +
-                                                details.orderDetails[0]
-                                                .gstAmount +
-                                                details.orderDetails[0]
-                                                .deliveryAmount
-                                                | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                                }}
-                                            </p>
-                                            <a class="print-reciept"  (click)="printReceipt(details)">
-                                                <i class="fas fa-print"></i>
-                                                Print bill</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 order-ready-div">
-                                        <button class="btn btn-primary" (click)="openDialog(details)">
-                                            Take Action
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="delivery-address">
-                                            <h5>
-                                                {{
-                                                details.customerPreferences
-                                                .preference
-                                                }}
-                                            </h5>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                    'Dine In'
-                                                ">
-                                                Table Name:-
-                                                {{
-                                                details.customerPreferences
-                                                ?.value
-                                                }}
-                                            </p>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                        'Take Away' ||
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                        'Scheduled Dining'
-                                                ">
-                                                {{
-                                                details.customerPreferences
-                                                .value
-                                                }}
-                                            </p>
-                                            <p *ngIf="
-                                                    details.customerPreferences
-                                                        .preference ===
-                                                    'delivery'
-                                                ">
-                                                {{
-                                                details.customerPreferences
-                                                ?.value.address
-                                                }},{{
-                                                details.customerPreferences
-                                                ?.value.pincode
-                                                }}
-                                            </p>
-                                            <a class="copy button"><i class="far fa-copy"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                               
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="support">
-                                            <img class="logo" src="assets\img\support icon.png" alt="Support" />
-                                            <span *ngIf="!details.payment_method">Payment Status :- Pending</span>
-                                            <span *ngIf="details.payment_method">Payment Status :-
-                                                {{
-                                                "Paid via " +
-                                                details.payment_method
-                                                | titlecase
-                                                }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </mat-tab>
-            </mat-tab-group> -->
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item" (click)="selectTab('tab1')">
                     <a
@@ -716,14 +42,55 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>{{ details.customerName }}</h3>
-
-                                    <p class="small">
-                                        {{ details.customerEmail }}
-                                    </p>
-                                    <p class="small">
-                                        {{ details.customerPhoneNumber }}
-                                    </p>
+                                    <div class="delivery-address">
+                                        <h4>
+                                            {{
+                                                details.customerPreferences
+                                                    .preference
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'Dine In'
+                                            "
+                                        >
+                                            Table Name:-
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Take Away' ||
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Scheduled Dining'
+                                            "
+                                        >
+                                            {{
+                                                details.customerPreferences
+                                                    .value
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'delivery'
+                                            "
+                                        >
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value.address
+                                            }},{{
+                                                details.customerPreferences
+                                                    ?.value.pincode
+                                            }}
+                                        </h4>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -749,6 +116,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
@@ -803,7 +171,6 @@
                                             }}
                                         </p>
 
-                                     
                                         <div
                                             id="print-section"
                                             style="display: none"
@@ -831,61 +198,16 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="delivery-address">
-                                        <h5>
-                                            {{
-                                                details.customerPreferences
-                                                    .preference
-                                            }}
-                                        </h5>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'Dine In'
-                                            "
-                                        >
-                                            Table Name:-
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value
-                                            }}
-                                        </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Take Away' ||
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Scheduled Dining'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    .value
-                                            }}
-                                        </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'delivery'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value.address
-                                            }},{{
-                                                details.customerPreferences
-                                                    ?.value.pincode
-                                            }}
-                                        </p>
-                                        <a class="copy button"
-                                            ><i class="far fa-copy"></i>
-                                        </a>
-                                    </div>
+                                    <h3>{{ details.customerName }}</h3>
+
+                                    <p class="small">
+                                        {{ details.customerEmail }}
+                                    </p>
+                                    <p class="small">
+                                        {{ details.customerPhoneNumber }}
+                                    </p>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="support">
@@ -907,7 +229,7 @@
                                         >
                                         <div class="my-3">
                                             <a
-                                                class="print-reciept pointer "
+                                                class="print-reciept pointer"
                                                 (click)="printReceipt(details)"
                                             >
                                                 <i class="fas fa-print"></i>
@@ -916,7 +238,7 @@
                                         </div>
                                         <div>
                                             <a
-                                                class="print-reciept pointer "
+                                                class="print-reciept pointer"
                                                 (click)="printKTO(details)"
                                             >
                                                 <i class="fas fa-print"></i>
@@ -961,14 +283,55 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>{{ details.customerName }}</h3>
-
-                                    <p class="small">
-                                        {{ details.customerEmail }}
-                                    </p>
-                                    <p class="small">
-                                        {{ details.customerPhoneNumber }}
-                                    </p>
+                                    <div class="delivery-address">
+                                        <h4>
+                                            {{
+                                                details.customerPreferences
+                                                    .preference
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'Dine In'
+                                            "
+                                        >
+                                            Table Name:-
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Take Away' ||
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Scheduled Dining'
+                                            "
+                                        >
+                                            {{
+                                                details.customerPreferences
+                                                    .value
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'delivery'
+                                            "
+                                        >
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value.address
+                                            }},{{
+                                                details.customerPreferences
+                                                    ?.value.pincode
+                                            }}
+                                        </h4>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -994,6 +357,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
@@ -1048,7 +412,15 @@
                                             }}
                                         </p>
 
-                                        
+                                        <div
+                                            id="print-section"
+                                            style="display: none"
+                                        >
+                                            <h1>Order Details</h1>
+                                            <p>
+                                                Order Id: {{ details.orderId }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1067,61 +439,16 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="delivery-address">
-                                        <h5>
-                                            {{
-                                                details.customerPreferences
-                                                    .preference
-                                            }}
-                                        </h5>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'Dine In'
-                                            "
-                                        >
-                                            Table Name:-
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value
-                                            }}
-                                        </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Take Away' ||
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Scheduled Dining'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    .value
-                                            }}
-                                        </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'Delivery'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value.address
-                                            }},{{
-                                                details.customerPreferences
-                                                    ?.value.pincode
-                                            }}
-                                        </p>
-                                        <a class="copy button"
-                                            ><i class="far fa-copy"></i>
-                                        </a>
-                                    </div>
+                                    <h3>{{ details.customerName }}</h3>
+
+                                    <p class="small">
+                                        {{ details.customerEmail }}
+                                    </p>
+                                    <p class="small">
+                                        {{ details.customerPhoneNumber }}
+                                    </p>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="support">
@@ -1143,7 +470,7 @@
                                         >
                                         <div class="my-3">
                                             <a
-                                                class="print-reciept pointer "
+                                                class="print-reciept pointer"
                                                 (click)="printReceipt(details)"
                                             >
                                                 <i class="fas fa-print"></i>
@@ -1152,13 +479,29 @@
                                         </div>
                                         <div>
                                             <a
-                                                class="print-reciept pointer "
+                                                class="print-reciept pointer"
                                                 (click)="printKTO(details)"
                                             >
                                                 <i class="fas fa-print"></i>
                                                 Print KTO</a
                                             >
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <div class="support">
+                                        <button
+                                            class="btn btn-info"
+                                            (click)="toggleLoyalStatus(details)"
+                                        >
+                                            {{
+                                                details?.loyalFlag
+                                                    ? "Remove Loyal"
+                                                    : "Add Loyal"
+                                            }}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1174,215 +517,238 @@
                     There are currently no processing orders.
                 </h4>
                 <div
-                    class="order-card mt-3"
-                    *ngFor="let details of this.processingOrder"
-                >
-                    <div class="row mt-3">
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3>{{ details.customerName }}</h3>
-
-                                    <p class="small">
-                                        {{ details.customerEmail }}
-                                    </p>
-                                    <p class="small">
-                                        {{ details.customerPhoneNumber }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>
-                                        <strong>ID: </strong>
-                                        {{ details.orderId }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p class="dateText">
-                                        <img
-                                            class="green-tick logo"
-                                            src="assets\img\green-tick.png"
-                                            alt="tick"
-                                        />Placed at
+                class="order-card mt-3"
+                *ngFor="let details of this.processingOrder"
+            >
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="delivery-address">
+                                    <h4>
                                         {{
-                                            details.orderDate | date : "medium"
+                                            details.customerPreferences
+                                                .preference
                                         }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div
-                                        class="order-items"
-                                        *ngFor="
-                                            let order of details.orderDetails[0]
-                                                .orderSummary
+                                    </h4>
+                                    <h4
+                                        *ngIf="
+                                            details.customerPreferences
+                                                .preference === 'Dine In'
                                         "
                                     >
-                                        <p>
-                                            <img
-                                                src="assets\img\non-veg food icon.png"
-                                                alt="Non-Veg Item"
-                                                *ngIf="
-                                                    order.dishType === 'nonVeg'
-                                                "
-                                            />
-                                            <img
-                                                src="assets\img\veg food icon.png"
-                                                alt="Veg Item"
-                                                *ngIf="order.dishType === 'veg'"
-                                            />{{ order.dishQuantity }} x
-                                            {{ order.dishName }} ({{
-                                                order.totalPrice
-                                                    | currency
-                                                        : "INR"
-                                                        : "symbol"
-                                                        : "1.0-0"
-                                            }})
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="total-bill">
-                                        <p>
-                                            Total Bill Paid:
-                                            {{
-                                                details.orderDetails[0]
-                                                    .orderAmount +
-                                                    details.orderDetails[0]
-                                                        .gstAmount +
-                                                    details.orderDetails[0]
-                                                        .deliveryAmount
-                                                    | currency
-                                                        : "INR"
-                                                        : "symbol"
-                                                        : "1.0-0"
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 order-ready-div">
-                                    <button
-                                        class="btn btn-primary"
-                                        (click)="openDialog(details)"
+                                        Table Name:-
+                                        {{
+                                            details.customerPreferences
+                                                ?.value
+                                        }}
+                                    </h4>
+                                    <h4
+                                        *ngIf="
+                                            details.customerPreferences
+                                                .preference ===
+                                                'Take Away' ||
+                                            details.customerPreferences
+                                                .preference ===
+                                                'Scheduled Dining'
+                                        "
                                     >
-                                        Take Action
-                                    </button>
+                                        {{
+                                            details.customerPreferences
+                                                .value
+                                        }}
+                                    </h4>
+                                    <h4
+                                        *ngIf="
+                                            details.customerPreferences
+                                                .preference === 'delivery'
+                                        "
+                                    >
+                                        {{
+                                            details.customerPreferences
+                                                ?.value.address
+                                        }},{{
+                                            details.customerPreferences
+                                                ?.value.pincode
+                                        }}
+                                    </h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="delivery-address">
-                                        <h5>
-                                            {{
-                                                details.customerPreferences
-                                                    .preference
-                                            }}
-                                        </h5>
-                                        <p
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    <strong>ID: </strong>
+                                    {{ details.orderId }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="dateText">
+                                    <img
+                                        class="green-tick logo"
+                                        src="assets\img\green-tick.png"
+                                        alt="tick"
+                                    />Placed at
+                                    {{
+                                        details.orderDate | date : "medium"
+                                    }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div
+                                    class="order-items"
+                                    *ngFor="
+                                        let order of details.orderDetails[0]
+                                            .orderSummary
+                                    "
+                                >
+                                    <p>
+                                        <img
+                                            src="assets\img\non-veg food icon.png"
+                                            alt="Non-Veg Item"
                                             *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'Dine In'
+                                                order.dishType === 'nonVeg'
                                             "
-                                        >
-                                            Table Name:-
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value
-                                            }}
+                                        />
+                                        <img
+                                            src="assets\img\veg food icon.png"
+                                            alt="Veg Item"
+                                            *ngIf="order.dishType === 'veg'"
+                                        />{{ order.dishQuantity }} x
+                                        {{ order.dishName }} ({{
+                                            order.totalPrice
+                                                | currency
+                                                    : "INR"
+                                                    : "symbol"
+                                                    : "1.0-0"
+                                        }})
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="total-bill">
+                                    <p>
+                                        Total Bill Paid:
+                                        {{
+                                            details.orderDetails[0]
+                                                .orderAmount +
+                                                details.orderDetails[0]
+                                                    .gstAmount +
+                                                details.orderDetails[0]
+                                                    .deliveryAmount
+                                                | currency
+                                                    : "INR"
+                                                    : "symbol"
+                                                    : "1.0-0"
+                                        }}
+                                    </p>
+
+                                    <div
+                                        id="print-section"
+                                        style="display: none"
+                                    >
+                                        <h1>Order Details</h1>
+                                        <p>
+                                            Order Id: {{ details.orderId }}
                                         </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Take Away' ||
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Scheduled Dining'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    .value
-                                            }}
-                                        </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'delivery'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value.address
-                                            }},{{
-                                                details.customerPreferences
-                                                    ?.value.pincode
-                                            }}
-                                        </p>
-                                        <a class="copy button"
-                                            ><i class="far fa-copy"></i>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="support">
-                                        <img
-                                            class="logo"
-                                            src="assets\img\support icon.png"
-                                            alt="Support"
-                                        />
-                                        <span *ngIf="!details.payment_method"
-                                            >Payment Status :- Pending</span
+                        <div class="row">
+                            <div class="col-md-12 order-ready-div">
+                                <button
+                                    class="btn btn-primary"
+                                    (click)="openDialog(details)"
+                                >
+                                    Take Action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>{{ details.customerName }}</h3>
+
+                                <p class="small">
+                                    {{ details.customerEmail }}
+                                </p>
+                                <p class="small">
+                                    {{ details.customerPhoneNumber }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="support">
+                                    <img
+                                        class="logo"
+                                        src="assets\img\support icon.png"
+                                        alt="Support"
+                                    />
+                                    <span *ngIf="!details.payment_method"
+                                        >Payment Status :- Pending</span
+                                    >
+                                    <span *ngIf="details.payment_method"
+                                        >Payment Status :-
+                                        {{
+                                            "Paid via " +
+                                                details.payment_method
+                                                | titlecase
+                                        }}</span
+                                    >
+                                    <div class="my-3">
+                                        <a
+                                            class="print-reciept pointer"
+                                            (click)="printReceipt(details)"
                                         >
-                                        <span *ngIf="details.payment_method"
-                                            >Payment Status :-
-                                            {{
-                                                "Paid via " +
-                                                    details.payment_method
-                                                    | titlecase
-                                            }}</span
+                                            <i class="fas fa-print"></i>
+                                            Print bill</a
                                         >
-                                        <div class="my-3">
-                                            <a
-                                                class="print-reciept pointer "
-                                                (click)="printReceipt(details)"
-                                            >
-                                                <i class="fas fa-print"></i>
-                                                Print bill</a
-                                            >
-                                        </div>
-                                        <div>
-                                            <a
-                                                class="print-reciept pointer "
-                                                (click)="printKTO(details)"
-                                            >
-                                                <i class="fas fa-print"></i>
-                                                Print KTO</a
-                                            >
-                                        </div>
                                     </div>
+                                    <div>
+                                        <a
+                                            class="print-reciept pointer"
+                                            (click)="printKTO(details)"
+                                        >
+                                            <i class="fas fa-print"></i>
+                                            Print KTO</a
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mt-2">
+                                <div class="support">
+                                    <button
+                                        class="btn btn-info"
+                                        (click)="toggleLoyalStatus(details)"
+                                    >
+                                        {{
+                                            details?.loyalFlag
+                                                ? "Remove Loyal"
+                                                : "Add Loyal"
+                                        }}
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </ng-container>
 
             <ng-container *ngIf="activeTab === 'tab4'">
@@ -1400,14 +766,55 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3>{{ details.customerName }}</h3>
-
-                                    <p class="small">
-                                        {{ details.customerEmail }}
-                                    </p>
-                                    <p class="small">
-                                        {{ details.customerPhoneNumber }}
-                                    </p>
+                                    <div class="delivery-address">
+                                        <h4>
+                                            {{
+                                                details.customerPreferences
+                                                    .preference
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'Dine In'
+                                            "
+                                        >
+                                            Table Name:-
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Take Away' ||
+                                                details.customerPreferences
+                                                    .preference ===
+                                                    'Scheduled Dining'
+                                            "
+                                        >
+                                            {{
+                                                details.customerPreferences
+                                                    .value
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference === 'delivery'
+                                            "
+                                        >
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value.address
+                                            }},{{
+                                                details.customerPreferences
+                                                    ?.value.pincode
+                                            }}
+                                        </h4>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -1433,6 +840,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
@@ -1474,15 +882,28 @@
                                         <p>
                                             Total Bill Paid:
                                             {{
-                                                getTotalDineIn(details)
-                                               
+                                                details.orderDetails[0]
+                                                    .orderAmount +
+                                                    details.orderDetails[0]
+                                                        .gstAmount +
+                                                    details.orderDetails[0]
+                                                        .deliveryAmount
                                                     | currency
                                                         : "INR"
                                                         : "symbol"
                                                         : "1.0-0"
                                             }}
                                         </p>
-                                        
+
+                                        <div
+                                            id="print-section"
+                                            style="display: none"
+                                        >
+                                            <h1>Order Details</h1>
+                                            <p>
+                                                Order Id: {{ details.orderId }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1501,61 +922,16 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="delivery-address">
-                                        <h5>
-                                            {{
-                                                details.customerPreferences
-                                                    .preference
-                                            }}
-                                        </h5>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'Dine In'
-                                            "
-                                        >
-                                            Table Name:-
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value
-                                            }}
-                                        </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Take Away' ||
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Scheduled Dining'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    .value
-                                            }}
-                                        </p>
-                                        <p
-                                            *ngIf="
-                                                details.customerPreferences
-                                                    .preference === 'delivery'
-                                            "
-                                        >
-                                            {{
-                                                details.customerPreferences
-                                                    ?.value.address
-                                            }},{{
-                                                details.customerPreferences
-                                                    ?.value.pincode
-                                            }}
-                                        </p>
-                                        <a class="copy button"
-                                            ><i class="far fa-copy"></i>
-                                        </a>
-                                    </div>
+                                    <h3>{{ details.customerName }}</h3>
+
+                                    <p class="small">
+                                        {{ details.customerEmail }}
+                                    </p>
+                                    <p class="small">
+                                        {{ details.customerPhoneNumber }}
+                                    </p>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="support">
@@ -1577,7 +953,7 @@
                                         >
                                         <div class="my-3">
                                             <a
-                                                class="print-reciept pointer "
+                                                class="print-reciept pointer"
                                                 (click)="printReceipt(details)"
                                             >
                                                 <i class="fas fa-print"></i>
@@ -1586,13 +962,29 @@
                                         </div>
                                         <div>
                                             <a
-                                                class="print-reciept pointer "
+                                                class="print-reciept pointer"
                                                 (click)="printKTO(details)"
                                             >
                                                 <i class="fas fa-print"></i>
                                                 Print KTO</a
                                             >
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <div class="support">
+                                        <button
+                                            class="btn btn-info"
+                                            (click)="toggleLoyalStatus(details)"
+                                        >
+                                            {{
+                                                details?.loyalFlag
+                                                    ? "Remove Loyal"
+                                                    : "Add Loyal"
+                                            }}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

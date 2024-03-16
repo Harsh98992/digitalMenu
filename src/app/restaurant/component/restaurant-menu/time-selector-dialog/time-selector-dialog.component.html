@@ -3,15 +3,20 @@
     <a mat-dialog-close class="close_panel_mobile"><span class="icon_close_alt"></span></a>
 </div>
 <mat-dialog-content>
-    <div class="row d-flex justify-content-center">
+    <div class="row pl-3">
         <div class="my-3">
             <div class="row">
                 <div class="col-12">
-                    <label class="form-label required"> Desired Time</label>
+                    <!-- <label class="form-label required"> Desired Time</label>
                     <select class="custom-select" [(ngModel)]="selectedValue">
                         <option value="ASAP">ASAP</option>
                         <option value="Custom">Later</option>
-                    </select>
+                    </select> -->
+                    <label id="example-radio-group-label">Select Desired Time</label>
+                    <mat-radio-group aria-label="Select an option"   class="example-radio-group" [(ngModel)]="selectedValue">
+                        <mat-radio-button class="example-radio-button" value="ASAP">ASAP</mat-radio-button>
+                        <mat-radio-button class="example-radio-button" style="margin-left: 3rem;" value="Custom">Later</mat-radio-button>
+                      </mat-radio-group>
                 </div>
             </div>
             <div class="align-center mt-2">

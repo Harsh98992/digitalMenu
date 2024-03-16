@@ -6,10 +6,16 @@
 </div>
 
 <mat-dialog-content>
-    <h5 class=" mt-3">
-    {{ data.message }}
-</h5>
-   
+    <div class="my-3">
+        <h5>
+            {{ data.message }}
+        </h5>
+        <div>
+            <button type="button" class="btn btn-warning">
+                Contact Restaurant
+            </button>
+        </div>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
     <a class="btn_1 gray delete" [mat-dialog-close]="true">

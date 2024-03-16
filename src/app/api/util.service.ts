@@ -22,7 +22,7 @@ export class UtilService {
                 yesButtonFlag: false,
                 cancelBtnText: "Ok",
             };
-            this.dialog.open(ErrorDialogComponent, {
+            this.dialog.open(ConfirmDialogComponent, {
                 panelClass: "add-item-dialog",
                 disableClose: true,
                 data: dialogData,

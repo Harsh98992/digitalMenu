@@ -188,12 +188,12 @@ export class RestaurantCartComponent implements OnInit {
     }
 
     customerData: any;
-    placeOrder() {
+    placeOrder(btnAction=false) {
         this.customerData = this.customerAuthService.getUserDetail();
 
         console.log("Customer Data: ", this.customerData);
 
-        this.cartHelperComponent.placeOrder();
+        this.cartHelperComponent.placeOrder(btnAction);
     }
     createPaytmForm(data) {
         const paytm = data.params;

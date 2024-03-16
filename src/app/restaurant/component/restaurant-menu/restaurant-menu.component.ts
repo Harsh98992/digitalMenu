@@ -221,10 +221,10 @@ export class RestaurantMenuComponent implements OnInit {
         });
     }
 
-    placeOrder() {
+    placeOrder(btnAction=false) {
         this.customerData = this.customerAuthService.getUserDetail();
 
-        this.cartHelperComponent.placeOrder();
+        this.cartHelperComponent.placeOrder(btnAction);
     }
     customerData: any;
     getOrderOptionText() {

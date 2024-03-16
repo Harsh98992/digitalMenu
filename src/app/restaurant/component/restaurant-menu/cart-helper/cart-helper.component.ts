@@ -241,7 +241,7 @@ export class CartHelperComponent implements OnInit {
                             value: resp.selectedTime,
                         };
                         this.setCartStateHelper();
-                        this.placeOrder()
+                        this.placeOrder();
                     }
                 });
         } else {
@@ -266,7 +266,7 @@ export class CartHelperComponent implements OnInit {
                         value: resp.selectedTableName,
                     };
                     this.setCartStateHelper();
-                    this.placeOrder()
+                    this.placeOrder();
                 }
             });
     }
@@ -418,7 +418,7 @@ export class CartHelperComponent implements OnInit {
                         value: resp.selectedAddress,
                     };
                     this.setCartStateHelper();
-                    this.placeOrder()
+                    this.placeOrder();
                 }
             }
         });
@@ -447,10 +447,10 @@ export class CartHelperComponent implements OnInit {
     }
 
     socket: any;
-    placeOrder() {
+    placeOrder(btnAction = false) {
         const orderData = this.getOrderItems();
         this.socket = io(this.socketUrl, {});
-        
+
         const bodyData = [
             {
                 orderSummary: orderData,
@@ -469,8 +469,11 @@ export class CartHelperComponent implements OnInit {
             cashOnDeliveryAvailable: true,
             restaurantId: this.restaurantData._id,
         };
-        if(this.userPreference?.preference==='Dine In'){
-            // this.placeOrderHelper(bodyData, {});
+        if (this.userPreference?.preference === "Dine In") {
+            if (btnAction) {
+                this.placeOrderHelper(bodyData, {});
+            }
+
             return;
         }
         this.dialog
@@ -499,7 +502,7 @@ export class CartHelperComponent implements OnInit {
                 razorpay_payment_id: event.detail["razorpay_payment_id"],
                 razorpay_signature: event.detail["razorpay_signature"],
             };
-        } else if(paymentData.method === "cashOnDelivery") {
+        } else if (paymentData.method === "cashOnDelivery") {
             reqData = {
                 ...reqData,
                 paymentMethod: "cashOnDelivery",

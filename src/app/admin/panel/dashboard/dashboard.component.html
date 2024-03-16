@@ -8,7 +8,7 @@
                         class="nav-link"
                         [class.active]="activeTab === 'tab1'"
                         aria-current="page"
-                        >Pending ({{ this.pendingOrder.length }})</a
+                        >Order Recieved ({{ this.pendingOrder.length }})</a
                     >
                 </li>
                 <!-- <li class="nav-item" (click)="selectTab('tab2')">
@@ -18,7 +18,7 @@
                 </li> -->
                 <li class="nav-item" (click)="selectTab('tab3')">
                     <a class="nav-link" [class.active]="activeTab === 'tab3'"
-                        >Processing ({{ this.processingOrder.length }})</a
+                        >Order In Process ({{ this.processingOrder.length }})</a
                     >
                 </li>
                 <li class="nav-item" (click)="selectTab('tab4')">
@@ -32,7 +32,7 @@
                     class="text-center"
                     *ngIf="this.apiCalledFlag && !this.pendingOrder?.length"
                 >
-                    There are currently no processing orders.
+                    There are currently no order recieved .
                 </h4>
                 <div
                     class="order-card mt-3"
@@ -208,7 +208,7 @@
                                 <div class="col-md-12">
                                     <div class="total-bill">
                                         <p>
-                                            Total Bill Paid:
+                                            Total:
                                             {{
                                                 details.orderDetails[0]
                                                     .orderAmount +
@@ -488,7 +488,7 @@
                                 <div class="col-md-12">
                                     <div class="total-bill">
                                         <p>
-                                            Total Bill Paid:
+                                            Total:
                                             {{
                                                 details.orderDetails[0]
                                                     .orderAmount +
@@ -605,7 +605,7 @@
                     class="text-center"
                     *ngIf="this.apiCalledFlag && !this.processingOrder?.length"
                 >
-                    There are currently no processing orders.
+                    There are currently no order in process .
                 </h4>
                 <div
                     class="order-card mt-3"
@@ -781,7 +781,7 @@
                                 <div class="col-md-12">
                                     <div class="total-bill">
                                         <p>
-                                            Total Bill Paid:
+                                            Total:
                                             {{
                                                 details.orderDetails[0]
                                                     .orderAmount +
@@ -938,7 +938,7 @@
                     class="text-center"
                     *ngIf="this.apiCalledFlag && !this.activeDine?.length"
                 >
-                    There are currently no processing orders.
+                    There are currently no active dine in orders.
                 </h4>
                 <div
                     class="order-card mt-3"
@@ -1114,7 +1114,7 @@
                                 <div class="col-md-12">
                                     <div class="total-bill">
                                         <p>
-                                            Total Bill Paid:
+                                            Total:
                                             {{
                                                 this.totalBillForDineIn(details)
                                                     | currency

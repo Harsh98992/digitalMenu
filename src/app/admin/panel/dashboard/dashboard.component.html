@@ -1116,16 +1116,12 @@
                                         <p>
                                             Total Bill Paid:
                                             {{
-                                                details.orderDetails[0]
-                                                    .orderAmount +
-                                                    details.orderDetails[0]
-                                                        .gstAmount +
-                                                    details.orderDetails[0]
-                                                        .deliveryAmount
+                                                this.totalBillForDineIn(details)
                                                     | currency
                                                         : "INR"
                                                         : "symbol"
                                                         : "1.0-0"
+                                               
                                             }}
                                         </p>
 

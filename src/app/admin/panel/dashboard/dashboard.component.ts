@@ -64,6 +64,13 @@ export class DashboardComponent implements OnInit {
 
     restaurantDetail: any;
 
+    totalBillForDineIn(details) {
+        let total = 0;
+        for (const order of details.orderDetails) {
+            total += order.orderAmount + order.gstAmount + order.deliveryAmount;
+        }
+        return total;
+    }
     ngOnInit(): void {
         this.getOrders();
         this.socket = io(this.socketUrl, {});
@@ -152,7 +159,7 @@ export class DashboardComponent implements OnInit {
                 if (res && res.successFlag) {
                     this.restaurantService.playDashboardActionSound();
                     this.getOrders();
-                    if(res?.printKOT){
+                    if (res?.printKOT) {
                         this.printKTO(orderDetail);
                     }
                 }

@@ -3,10 +3,10 @@
     <a mat-dialog-close class="close_panel_mobile"><span class="icon_close_alt"></span></a>
 </h2>
 <mat-dialog-content class="mat-typography">
-    <div class="list_general order">
+    <!-- <div class="list_general order">
         <ul>
             <li>
-                <!-- <figure><img src="assets/img/item_1.jpg" alt="" /></figure> -->
+                
                 <h4>
                     {{ this.orderData.customerName }}
                     <i class="pending">{{
@@ -67,8 +67,7 @@
                                 .pincode
                                 }}</span>
 
-                            <!-- show phoneNumber if available -->
-
+                          
                             <span *ngIf="
                                         this.orderData.customerPreferences
                                             .value.phoneNumber
@@ -128,19 +127,11 @@
                         {{ this.orderData.reason | titlecase }}
                     </li>
                 </ul>
-                <!-- <p>
-                  <a
-                    href="#0"
-                    class="btn_1"
-                    data-toggle="modal"
-                    data-target="#client_detail_modal"
-                    ><i class="fa fa-fw fa-pencil"></i> Edit order detail</a
-                  >
-                </p> -->
+               
             </li>
         </ul>
     </div>
-    <hr />
+    <hr /> -->
     <strong>Order Details:-</strong>
     <ng-container *ngFor="let orderDetail of orderData.orderDetails">
         <ul class="booking_list">

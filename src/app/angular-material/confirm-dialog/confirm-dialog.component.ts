@@ -21,6 +21,7 @@ export class ConfirmDialogComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        console.log(this.data);
         this.message = this.data.message;
         this.title = this.data.title;
         if (this.data.cancelBtnText) {

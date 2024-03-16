@@ -85,6 +85,7 @@ export class RestaurantCartComponent implements OnInit {
                         value: resp.selectedTableName,
                     };
                     this.setCartStateData();
+                    this.placeOrder();
                 }
             });
     }
@@ -117,6 +118,7 @@ export class RestaurantCartComponent implements OnInit {
                             value: resp.selectedTime,
                         };
                         this.setCartStateData();
+                        this.placeOrder();
                     }
                 });
         } else {
@@ -191,8 +193,6 @@ export class RestaurantCartComponent implements OnInit {
 
         console.log("Customer Data: ", this.customerData);
 
-      
-
         this.cartHelperComponent.placeOrder();
     }
     createPaytmForm(data) {
@@ -238,6 +238,7 @@ export class RestaurantCartComponent implements OnInit {
                         value: resp.selectedAddress,
                     };
                     this.setCartStateData();
+                    this.placeOrder();
                 }
             }
         });

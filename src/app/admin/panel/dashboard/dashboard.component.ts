@@ -12,6 +12,9 @@ import { io } from "socket.io-client"; // Import the socket.io-client library
 import { finalize } from "rxjs";
 import { DatePipe } from "@angular/common";
 import { UtilService } from "src/app/api/util.service";
+import { CancelDialogComponent } from "../../layout/order-dialog/cancel-dialog/cancel-dialog.component";
+import { AcceptDialogComponent } from "../../layout/order-dialog/accept-dialog/accept-dialog.component";
+import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: "app-dashboard",
@@ -122,6 +125,65 @@ export class DashboardComponent implements OnInit {
                 }
             });
     }
+    openCancelOrderDialog(orderDetail) {
+        let dialogRef = this.dialog
+            .open(CancelDialogComponent, {
+                disableClose: true,
+                panelClass: "app-full-bleed-dialog",
+                data: orderDetail,
+            })
+            .afterClosed()
+            .subscribe((res) => {
+                if (res && res.successFlag) {
+                    this.restaurantService.playDashboardActionSound();
+                    this.getOrders();
+                }
+            });
+    }
+    openAcceptDialog(orderDetail) {
+        let dialogRef = this.dialog
+            .open(AcceptDialogComponent, {
+                disableClose: true,
+                panelClass: "add-item-dialog",
+                data: orderDetail,
+            })
+            .afterClosed()
+            .subscribe((res) => {
+                if (res && res.successFlag) {
+                    this.restaurantService.playDashboardActionSound();
+                    this.getOrders();
+                }
+            });
+    }
+    completeOrder(orderDetail) {
+        const dialogData = {
+            title: "Confirm",
+            message:
+                "Please confirm if you wish to proceed and complete this order.",
+        };
+        this.dialog
+            .open(ConfirmDialogComponent, { data: dialogData })
+            .afterClosed()
+            .subscribe({
+                next: (res: any) => {
+                    console.log(res);
+
+                    if (res && res.okFlag) {
+                        this.orderService
+                            .changeOrderStatus({
+                                orderStatus: "completed",
+                                orderId: orderDetail._id,
+                            })
+                            .subscribe({
+                                next: () => {
+                                    this.restaurantService.playDashboardActionSound();
+                                    this.getOrders();
+                                },
+                            });
+                    }
+                },
+            });
+    }
     getOrders() {
         const reqData = {
             orderStatus: ["pending", "processing", "pendingPayment"],
@@ -151,11 +213,13 @@ export class DashboardComponent implements OnInit {
         for (const data of orderData) {
             if (data.orderStatus === "pending") {
                 this.pendingOrder.push(data);
+                console.log("pendingOrder", this.pendingOrder);
             } else if (
                 data.orderStatus === "processing" &&
                 data.customerPreferences.preference !== "Dine In"
             ) {
                 this.processingOrder.push(data);
+                console.log("processingOrder", this.processingOrder);
             } else if (
                 data.orderStatus === "processing" &&
                 data.customerPreferences.preference === "Dine In"

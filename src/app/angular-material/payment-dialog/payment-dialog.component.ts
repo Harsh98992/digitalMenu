@@ -69,7 +69,6 @@ export class PaymentDialogComponent implements OnInit {
     }
     checkForCashOnDelivery() {
         if (!this.orderData?.cashOnDeliveryAvailable) {
-            
             this.paymentOption.pop();
         }
     }
@@ -110,22 +109,23 @@ export class PaymentDialogComponent implements OnInit {
         console.log(event);
 
         if (event.detail) {
-            this.orderService
-                .changeOrderStatusByUser({
-                    orderId: this.orderData._id,
-                    restaurantId: this.orderData.restaurantId,
-                    orderStatus: "processing",
-                    razorpay_order_id: event.detail["razorpay_order_id"],
-                    razorpay_payment_id: event.detail["razorpay_payment_id"],
-                    razorpay_signature: event.detail["razorpay_signature"],
-                })
-                .subscribe({
-                    next: (res) => {
-                        this.socketOrderPlaced(this.orderData);
-                        this.router.navigateByUrl("/orders");
-                        this.dialogRef.close();
-                    },
-                });
+            this.dialogRef.close({ method: "payOnline", event });
+            // this.orderService
+            //     .changeOrderStatusByUser({
+            //         orderId: this.orderData._id,
+            //         restaurantId: this.orderData.restaurantId,
+            //         orderStatus: "processing",
+            //         razorpay_order_id: event.detail["razorpay_order_id"],
+            //         razorpay_payment_id: event.detail["razorpay_payment_id"],
+            //         razorpay_signature: event.detail["razorpay_signature"],
+            //     })
+            //     .subscribe({
+            //         next: (res) => {
+            //             this.socketOrderPlaced(this.orderData);
+            //             this.router.navigateByUrl("/orders");
+            //             this.dialogRef.close();
+            //         },
+            //     });
         }
     }
 
@@ -136,20 +136,21 @@ export class PaymentDialogComponent implements OnInit {
         }
 
         if (this.paymentMethod === "cashOnDelivery") {
-            this.orderService
-                .changeOrderStatusByUserForCashOnDelivery({
-                    orderId: this.orderData._id,
-                    restaurantId: this.orderData.restaurantId,
-                    orderStatus: "processing",
-                })
-                .subscribe({
-                    next: (res) => {
-                        this.socketOrderPlaced(this.orderData);
+            this.dialogRef.close({ method: "cashOnDelivery", event });
+            // this.orderService
+            //     .changeOrderStatusByUserForCashOnDelivery({
+            //         orderId: this.orderData._id,
+            //         restaurantId: this.orderData.restaurantId,
+            //         orderStatus: "processing",
+            //     })
+            //     .subscribe({
+            //         next: (res) => {
+            //             this.socketOrderPlaced(this.orderData);
 
-                        this.router.navigateByUrl("/orders");
-                        this.dialogRef.close();
-                    },
-                });
+            //             this.router.navigateByUrl("/orders");
+            //             this.dialogRef.close();
+            //         },
+            //     });
         } else {
             this.buyRazorPay();
         }

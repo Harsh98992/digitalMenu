@@ -16,6 +16,7 @@ import { environment } from "src/environments/environment";
 import { io } from "socket.io-client";
 import { UtilService } from "src/app/api/util.service";
 import { UserLoginComponent } from "src/app/user-auth/user-login/user-login.component";
+import { PaymentDialogComponent } from "src/app/angular-material/payment-dialog/payment-dialog.component";
 
 @Component({
     selector: "app-cart-helper",
@@ -240,6 +241,7 @@ export class CartHelperComponent implements OnInit {
                             value: resp.selectedTime,
                         };
                         this.setCartStateHelper();
+                        this.placeOrder()
                     }
                 });
         } else {
@@ -264,6 +266,7 @@ export class CartHelperComponent implements OnInit {
                         value: resp.selectedTableName,
                     };
                     this.setCartStateHelper();
+                    this.placeOrder()
                 }
             });
     }
@@ -415,6 +418,7 @@ export class CartHelperComponent implements OnInit {
                         value: resp.selectedAddress,
                     };
                     this.setCartStateHelper();
+                    this.placeOrder()
                 }
             }
         });
@@ -446,19 +450,62 @@ export class CartHelperComponent implements OnInit {
     placeOrder() {
         const orderData = this.getOrderItems();
         this.socket = io(this.socketUrl, {});
-
-        const bodyData = {
-            orderSummary: orderData,
-            customerPreferences: this.userPreference,
-            cookingInstruction: this.cookingInstruction,
-            orderAmount: this.itemTotalAmountShowed,
+        
+        const bodyData = [
+            {
+                orderSummary: orderData,
+                customerPreferences: this.userPreference,
+                cookingInstruction: this.cookingInstruction,
+                orderAmount: this.itemTotalAmountShowed,
+                restaurantId: this.restaurantData._id,
+                gstAmount: this.gstAmount,
+                discountAmount: this.discountAmount,
+                deliveryAmount: this.deliveryAmount,
+            },
+        ];
+        const paymentData = {
+            orderDetails: bodyData,
+            paymentOnlineAvailable: true,
+            cashOnDeliveryAvailable: true,
             restaurantId: this.restaurantData._id,
-            gstAmount: this.gstAmount,
-            discountAmount: this.discountAmount,
-            deliveryAmount: this.deliveryAmount,
         };
-
-        this.orderService.placeOrder(bodyData).subscribe({
+        if(this.userPreference?.preference==='Dine In'){
+            // this.placeOrderHelper(bodyData, {});
+            return;
+        }
+        this.dialog
+            .open(PaymentDialogComponent, {
+                panelClass: "add-item-dialog",
+                data: paymentData,
+                disableClose: true,
+            })
+            .afterClosed()
+            .subscribe((paymentData) => {
+                if (paymentData?.method) {
+                    if (paymentData.method) {
+                        this.placeOrderHelper(bodyData, paymentData);
+                    }
+                }
+            });
+    }
+    placeOrderHelper(bodyData, paymentData) {
+        let reqData = bodyData[0];
+        const event = paymentData?.event;
+        if (paymentData.method === "payOnline") {
+            reqData = {
+                ...reqData,
+                paymentMethod: "payOnline",
+                razorpay_order_id: event.detail["razorpay_order_id"],
+                razorpay_payment_id: event.detail["razorpay_payment_id"],
+                razorpay_signature: event.detail["razorpay_signature"],
+            };
+        } else if(paymentData.method === "cashOnDelivery") {
+            reqData = {
+                ...reqData,
+                paymentMethod: "cashOnDelivery",
+            };
+        }
+        this.orderService.placeOrder(reqData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {
                     this.restaurantService.bypassGaurd = true;
@@ -467,14 +514,7 @@ export class CartHelperComponent implements OnInit {
                     this.restaurantService.setCartItem([]);
                     this.restaurantService.setRestaurantUrl(null);
                     this.restaurantService.amountToBePaidSubject.next(null);
-                    if (this.userPreference.preference === "Dine In") {
-                        this.router.navigateByUrl("/orders");
-                    } else {
-                        this.router.navigate([
-                            "/order-tracking",
-                            res["data"]["savedData"]["orderId"],
-                        ]);
-                    }
+                    this.router.navigateByUrl("/orders");
                 }
             },
         });

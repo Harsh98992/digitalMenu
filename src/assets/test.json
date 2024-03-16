@@ -1,0 +1,59 @@
+{
+    "status": "success",
+    "data": {
+        "orderData": {
+            "_id": "65f543f5210b6e97e6e4380c",
+            "customerId": "650eafd8038d7e4c64a83a0a",
+            "restaurantId": "6589ac2f70163caea44378d5",
+            "orderId": "202403160001",
+            "customerName": "Himanshu Sharma",
+            "orderDetails": [
+                {
+                    "orderAmount": 180,
+                    "gstAmount": 0,
+                    "deliveryAmount": 0,
+                    "discountAmount": 0,
+                    "cookingInstruction": "",
+                    "orderSummary": [
+                        {
+                            "dishChoicesSelected": [],
+                            "extraSelected": [],
+                            "itemSizeSelected": {
+                                "size": "Full",
+                                "price": 180,
+                                "sizeDescription": "",
+                                "defaultSize": false,
+                                "_id": "658acda12e4544168523fe22"
+                            },
+                            "dishQuantity": 1,
+                            "priceOneItem": 180,
+                            "totalPrice": 180,
+                            "dishType": "veg",
+                            "dishName": "Afgani Chaap",
+                            "dishId": "658acda12e4544168523fe20",
+                            "dishPrice": 120
+                        }
+                    ],
+                    "_id": "65f543f5210b6e97e6e4380d",
+                    "orderPlaceDateAndTime": "2024-03-16T07:02:13.875Z",
+                    "preprationTime": "0:20"
+                }
+            ],
+            "customerEmail": "himanshu9911392@gmail.com",
+            "customerPreferences": {
+                "preference": "Take Away",
+                "value": "ASAP"
+            },
+            "orderStatus": "pendingPayment",
+            "customerPhoneNumber": "9910072742",
+            "reason": "",
+            "payment_order_id": "",
+            "payment_id": "",
+            "cashOnDeliveryAvailable": true,
+            "paymentOnlineAvailable": true,
+            "payment_signature": "",
+            "orderDate": "2024-03-16T07:02:13.876Z",
+            "__v": 0
+        }
+    }
+}

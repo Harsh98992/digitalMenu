@@ -185,6 +185,7 @@ export class RestaurantMenuComponent implements OnInit {
                             value: resp.selectedTime,
                         };
                         this.setCartStateData();
+                        this.placeOrder();
                     }
                 });
         } else {
@@ -207,6 +208,7 @@ export class RestaurantMenuComponent implements OnInit {
                         value: resp.selectedTableName,
                     };
                     this.setCartStateData();
+                    this.placeOrder()
                 }
             });
     }
@@ -256,6 +258,7 @@ export class RestaurantMenuComponent implements OnInit {
                         value: resp.selectedAddress,
                     };
                     this.setCartStateData();
+                    this.placeOrder()
                 }
             }
         });

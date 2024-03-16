@@ -152,6 +152,9 @@ export class DashboardComponent implements OnInit {
                 if (res && res.successFlag) {
                     this.restaurantService.playDashboardActionSound();
                     this.getOrders();
+                    if(res?.printKOT){
+                        this.printKTO(orderDetail);
+                    }
                 }
             });
     }

@@ -81,7 +81,7 @@ export class OrderAcceptDialogComponent implements OnInit {
             .subscribe((res) => {
                 if (res && res.successFlag) {
                     this.restaurantPanelService.playDashboardActionSound()
-                    this.dialogRef.close({ successFlag: true });
+                    this.dialogRef.close({ successFlag: true,printKOT:res?.printKOT });
                 }
             });
     }

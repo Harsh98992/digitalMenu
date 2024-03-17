@@ -132,7 +132,7 @@
         </ul>
     </div>
     <hr /> -->
-    <strong>Order Details:-</strong>
+    <!-- <strong>Order Details:-</strong> -->
     <ng-container *ngFor="let orderDetail of orderData.orderDetails">
         <ul class="booking_list">
             <li *ngIf="orderDetail.preprationTime">
@@ -162,16 +162,7 @@
                         <th scope="col">Total Price</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <th scope="col">Dish Name</th>
-                    <th scope="col">Dish Type</th>
-                    <th scope="col">Size</th>
-                    <th scope="col">Extra Selected</th>
-                    <th scope="col">Choices Selected</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price One Item</th>
-                    <th scope="col">Total Price</th>
-                </tfoot>
+              
                 <tbody>
                     <tr *ngFor="let order of orderDetail.orderSummary">
                         <td class="ms-table-f-w">{{ order.dishName }}</td>

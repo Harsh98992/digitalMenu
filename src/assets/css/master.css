@@ -562,7 +562,7 @@ ul.booking_list li {
   margin-bottom: 5px;
 }
 ul.booking_list li strong {
-  width: 180px;
+  width: 250px;
   display: inline-block;
 }
 @media (max-width: 767px) {

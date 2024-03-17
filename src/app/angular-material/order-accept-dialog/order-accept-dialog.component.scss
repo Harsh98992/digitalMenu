@@ -1,7 +1,10 @@
-
-.close_panel_mobile{
+.close_panel_mobile {
     all: unset;
     float: right;
     color: grey;
     font-size: 1.7rem;
+}
+.table td {
+    padding: 0;
+    padding-left: 0.75rem;
 }

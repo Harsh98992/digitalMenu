@@ -16,6 +16,7 @@ import { CancelDialogComponent } from "../../layout/order-dialog/cancel-dialog/c
 import { AcceptDialogComponent } from "../../layout/order-dialog/accept-dialog/accept-dialog.component";
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 import { PaymentDetailDialogComponent } from "src/app/angular-material/payment-detail-dialog/payment-detail-dialog.component";
+import { PrintSpecificKotDialogComponent } from "src/app/angular-material/print-specific-kot-dialog/print-specific-kot-dialog.component";
 
 @Component({
     selector: "app-dashboard",
@@ -133,6 +134,21 @@ export class DashboardComponent implements OnInit {
                 }
             });
     }
+    openKOTPrintDialg(detail) {
+        this.dialog
+            .open(PrintSpecificKotDialogComponent, {
+                panelClass: "add-item-dialog",
+                disableClose: true,
+                data: detail,
+            })
+            .afterClosed()
+            .subscribe((resp) => {
+                if (resp) {
+                    console.log(resp);
+                    this.printKTO(resp);
+                }
+            });
+    }
     openCancelOrderDialog(orderDetail) {
         let dialogRef = this.dialog
             .open(CancelDialogComponent, {
@@ -178,7 +194,7 @@ export class DashboardComponent implements OnInit {
             title: "Confirm",
             message:
                 "Please confirm if you wish to proceed and complete this order.",
-                printBill:true
+            printBill: true,
         };
         this.dialog
             .open(ConfirmDialogComponent, { data: dialogData })
@@ -188,7 +204,6 @@ export class DashboardComponent implements OnInit {
                     console.log(res);
 
                     if (res && res.okFlag) {
-                       
                         this.orderService
                             .changeOrderStatus({
                                 orderStatus: "completed",

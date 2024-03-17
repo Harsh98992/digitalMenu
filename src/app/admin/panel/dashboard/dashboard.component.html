@@ -290,6 +290,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
+                                    <span  class="badge badge-info">Info</span>
 
                                     <p class="small">
                                         {{ details.customerEmail }}
@@ -297,6 +298,7 @@
                                     <p class="small">
                                         {{ details.customerPhoneNumber }}
                                     </p>
+                                    <span  class="badge badge-warning">  {{ details.loyalFlag ? 'Loyal' : 'Un Loyal' }}</span>
                                 </div>
                             </div>
                             <div class="row">
@@ -870,6 +872,7 @@
                                     <p class="small">
                                         {{ details.customerPhoneNumber }}
                                     </p>
+                                    <span  class="badge badge-warning">  {{ details.loyalFlag ? 'Loyal' : 'Un Loyal' }}</span>
                                 </div>
                             </div>
                             <div class="row">
@@ -1192,13 +1195,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
-
+                                   
                                     <p class="small">
                                         {{ details.customerEmail }}
                                     </p>
                                     <p class="small">
                                         {{ details.customerPhoneNumber }}
                                     </p>
+                                    <span  class="badge badge-warning">  {{ details.loyalFlag ? 'Loyal' : 'Un Loyal' }}</span>
                                 </div>
                             </div>
                             <div class="row">

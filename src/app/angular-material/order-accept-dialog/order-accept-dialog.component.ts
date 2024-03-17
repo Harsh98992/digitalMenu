@@ -24,16 +24,20 @@ export class OrderAcceptDialogComponent implements OnInit {
     deliveryAmount = 0;
     gstAmount = 0;
     discountAmount = 0;
+    completeScreen = false;
     constructor(
         private dialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) public orderData: any,
         private dialogRef: MatDialogRef<OrderAcceptDialogComponent>,
         private orderService: OrderService,
-        private restaurantPanelService:RestaurantPanelService
+        private restaurantPanelService: RestaurantPanelService
     ) {}
 
     ngOnInit(): void {
-        console.log(this.orderData);
+        
+        if (this.orderData?.completeScreen) {
+            this.completeScreen = this.orderData.completeScreen;
+        }
         this.getOrderTotal();
     }
     getChoicesList(choicesData) {
@@ -63,9 +67,8 @@ export class OrderAcceptDialogComponent implements OnInit {
             })
             .afterClosed()
             .subscribe((res) => {
-                
                 if (res && res.successFlag) {
-                    this.restaurantPanelService.playDashboardActionSound()
+                    this.restaurantPanelService.playDashboardActionSound();
                     this.dialogRef.close({ successFlag: true });
                 }
             });
@@ -80,8 +83,11 @@ export class OrderAcceptDialogComponent implements OnInit {
             .afterClosed()
             .subscribe((res) => {
                 if (res && res.successFlag) {
-                    this.restaurantPanelService.playDashboardActionSound()
-                    this.dialogRef.close({ successFlag: true,printKOT:res?.printKOT });
+                    this.restaurantPanelService.playDashboardActionSound();
+                    this.dialogRef.close({
+                        successFlag: true,
+                        printKOT: res?.printKOT,
+                    });
                 }
             });
     }
@@ -106,7 +112,7 @@ export class OrderAcceptDialogComponent implements OnInit {
                             })
                             .subscribe({
                                 next: () => {
-                                    this.restaurantPanelService.playDashboardActionSound()
+                                    this.restaurantPanelService.playDashboardActionSound();
                                     this.dialogRef.close({ successFlag: true });
                                 },
                             });

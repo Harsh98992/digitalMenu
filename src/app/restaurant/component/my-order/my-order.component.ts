@@ -19,7 +19,6 @@ export class MyOrderComponent implements OnInit {
     bannerImg = "../assets/img/detail_1.jpg";
     selectedTab = "";
     tabs = [
-      
         {
             key: "progress",
             value: "On Progress",
@@ -142,7 +141,9 @@ export class MyOrderComponent implements OnInit {
         const dialogData = {
             ...orderSummary,
             customerMode: true,
+            completeScreen: true,
         };
+
         this.dialog.open(OrderAcceptDialogComponent, {
             minWidth: "90vw",
             data: dialogData,

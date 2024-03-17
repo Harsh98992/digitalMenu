@@ -64,6 +64,7 @@ export class RestaurantOrderComponent implements OnInit {
         }
     }
     viewOrder(row) {
+        row['completeScreen'] = true;
         this.dialog
             .open(OrderAcceptDialogComponent, {
                 minWidth: "90vw",

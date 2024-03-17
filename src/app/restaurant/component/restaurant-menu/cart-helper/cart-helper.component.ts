@@ -465,7 +465,10 @@ export class CartHelperComponent implements OnInit {
         ];
         const paymentData = {
             orderDetails: bodyData,
-            paymentOnlineAvailable: true,
+            paymentOnlineAvailable: this.restaurantData?.paymentgatewayData
+                ?.gatewayData
+                ? true
+                : false,
             cashOnDeliveryAvailable: true,
             restaurantId: this.restaurantData._id,
         };

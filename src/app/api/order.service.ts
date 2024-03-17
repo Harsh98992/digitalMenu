@@ -90,15 +90,15 @@ export class OrderService {
         return new Blob(byteArrays, { type: mimeType });
       }
     checkForOrderWithPendingPayment() {
-        this.getCustomerPaymentPendingOrder().subscribe({
-            next: (res: any) => {
-                if (res && res.data && res.data?.orderData?._id)
-                    this.dialog.open(PaymentDialogComponent, {
-                        panelClass: "add-item-dialog",
-                        data: res.data.orderData,
-                        disableClose: true,
-                    });
-            },
-        });
+        // this.getCustomerPaymentPendingOrder().subscribe({
+        //     next: (res: any) => {
+        //         if (res && res.data && res.data?.orderData?._id)
+        //             this.dialog.open(PaymentDialogComponent, {
+        //                 panelClass: "add-item-dialog",
+        //                 data: res.data.orderData,
+        //                 disableClose: true,
+        //             });
+        //     },
+        // });
     }
 }

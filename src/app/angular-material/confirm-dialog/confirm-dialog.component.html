@@ -12,8 +12,14 @@
     >
         {{ successBtnText }}</a
     >
+    <a
+        class="btn_1 gray approve ml-2"
+        *ngIf="printBill != false"
+        (click)="okActionWithPriniting()"
+    >
+        Yes, Print KOT</a
+    >
 
     <!-- <button mat-button >Cancel</button>
   <button mat-button  cdkFocusInitial>OK</button> -->
 </div>
-

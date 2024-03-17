@@ -170,6 +170,7 @@ export class DashboardComponent implements OnInit {
             title: "Confirm",
             message:
                 "Please confirm if you wish to proceed and complete this order.",
+                printBill:true
         };
         this.dialog
             .open(ConfirmDialogComponent, { data: dialogData })
@@ -179,6 +180,7 @@ export class DashboardComponent implements OnInit {
                     console.log(res);
 
                     if (res && res.okFlag) {
+                       
                         this.orderService
                             .changeOrderStatus({
                                 orderStatus: "completed",
@@ -188,6 +190,9 @@ export class DashboardComponent implements OnInit {
                                 next: () => {
                                     this.restaurantService.playDashboardActionSound();
                                     this.getOrders();
+                                    if (res?.printBill) {
+                                        this.printReceipt(orderDetail);
+                                    }
                                 },
                             });
                     }

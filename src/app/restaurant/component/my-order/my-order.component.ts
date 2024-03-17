@@ -19,17 +19,18 @@ export class MyOrderComponent implements OnInit {
     bannerImg = "../assets/img/detail_1.jpg";
     selectedTab = "";
     tabs = [
-        {
-            key: "completed",
-            value: "Completed",
-        },
+      
         {
             key: "progress",
             value: "On Progress",
         },
         {
+            key: "completed",
+            value: "Completed",
+        },
+        {
             key: "canceled",
-            value: "Canceled",
+            value: "Rejected",
         },
     ];
     private refreshInterval$ = new Observable<number>();

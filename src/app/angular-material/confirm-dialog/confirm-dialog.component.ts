@@ -39,6 +39,6 @@ export class ConfirmDialogComponent implements OnInit {
         this.dialogRef.close({ okFlag: true });
     }
     okActionWithPriniting() {
-        this.dialogRef.close({ okFlag: true, printKOT: true });
+        this.dialogRef.close({ okFlag: true, printBill: true });
     }
 }

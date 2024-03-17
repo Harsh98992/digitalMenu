@@ -1,0 +1,55 @@
+<div class="small-dialog-header">
+    <h3>Payment Information</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <div class="my-3">
+        <p
+            class="dateText"
+            *ngIf="
+                details.payment_method.toLowerCase() !==
+                'Cash On Delivery'.toLowerCase()
+            "
+        >
+            Payment Method :- Paid via
+            {{ details.payment_method }}
+        </p>
+        <p
+            class="dateText"
+            *ngIf="
+                details.payment_method.toLowerCase() ===
+                'Cash On Delivery'.toLowerCase()
+            "
+        >
+            Payment Method :- Cash
+        </p>
+        <p class="dateText" *ngIf="details.payment_amount">
+            Payment Amount :-
+
+            {{ details.payment_amount | currency : "INR" : "symbol" : "1.0-0" }}
+        </p>
+        <p class="dateText" *ngIf="details.payment_id">
+            Payment Id :-
+
+            {{ details.payment_id }}
+        </p>
+
+        <p class="dateText" *ngIf="details.payment_order_id">
+            Payment Order Id :-
+
+            {{ details.payment_order_id }}
+        </p>
+        <p class="dateText" *ngIf="details.payment_time">
+            Payment Time :-
+
+            {{ details.payment_time * 1000 | date : "medium" }}
+        </p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button type="button" class="btn btn_1 gradient w-100" mat-dialog-close>
+        Close
+    </button>
+</mat-dialog-actions>

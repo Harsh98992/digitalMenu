@@ -15,6 +15,7 @@ import { UtilService } from "src/app/api/util.service";
 import { CancelDialogComponent } from "../../layout/order-dialog/cancel-dialog/cancel-dialog.component";
 import { AcceptDialogComponent } from "../../layout/order-dialog/accept-dialog/accept-dialog.component";
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
+import { PaymentDetailDialogComponent } from "src/app/angular-material/payment-detail-dialog/payment-detail-dialog.component";
 
 @Component({
     selector: "app-dashboard",
@@ -164,6 +165,13 @@ export class DashboardComponent implements OnInit {
                     }
                 }
             });
+    }
+    openPaymentDetailDialog(orderDetail) {
+        let dialogRef = this.dialog.open(PaymentDetailDialogComponent, {
+            disableClose: true,
+            panelClass: "add-item-dialog",
+            data: orderDetail,
+        });
     }
     completeOrder(orderDetail) {
         const dialogData = {

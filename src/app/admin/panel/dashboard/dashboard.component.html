@@ -119,37 +119,22 @@
                                 <div class="col-md-12">
                                     <p
                                         class="dateText"
-                                        *ngIf="details.payment_method"
+                                        *ngIf="
+                                            details.payment_method.toLowerCase() !==
+                                            'Cash On Delivery'.toLowerCase()
+                                        "
                                     >
-                                        Payment Status :- Paid via
+                                        Payment Method :- Paid via
                                         {{ details.payment_method }}
                                     </p>
                                     <p
                                         class="dateText"
-                                        *ngIf="details.payment_id"
+                                        *ngIf="
+                                            details.payment_method.toLowerCase() ===
+                                            'Cash On Delivery'.toLowerCase()
+                                        "
                                     >
-                                        Payment Id :-
-
-                                        {{ details.payment_id }}
-                                    </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="details.payment_order_id"
-                                    >
-                                        Payment Order Id :-
-
-                                        {{ details.payment_order_id }}
-                                    </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="details.payment_time"
-                                    >
-                                        Payment Time :-
-
-                                        {{
-                                            details.payment_time * 1000
-                                                | date : "medium"
-                                        }}
+                                        Payment Method :- Cash
                                     </p>
                                     <p
                                         class="dateText"
@@ -165,6 +150,14 @@
                                                     : "1.0-0"
                                         }}
                                     </p>
+                                    <button
+                                        class="btn btn-secondary"
+                                        (click)="
+                                            openPaymentDetailDialog(details)
+                                        "
+                                    >
+                                        View Payment Details
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +283,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
-                                    <span  class="badge badge-info">Info</span>
+                                    <span class="badge badge-info">Info</span>
 
                                     <p class="small">
                                         {{ details.customerEmail }}
@@ -298,7 +291,13 @@
                                     <p class="small">
                                         {{ details.customerPhoneNumber }}
                                     </p>
-                                    <span  class="badge badge-warning">  {{ details.loyalFlag ? 'Loyal' : 'Un Loyal' }}</span>
+                                    <span class="badge badge-warning">
+                                        {{
+                                            details.loyalFlag
+                                                ? "Loyal"
+                                                : "Un Loyal"
+                                        }}</span
+                                    >
                                 </div>
                             </div>
                             <div class="row">
@@ -310,15 +309,27 @@
                                             alt="Support"
                                         />
                                         <span *ngIf="!details.payment_method"
-                                            >Payment Status :- Pending</span
+                                            >Payment Method :- Pending</span
                                         >
-                                        <span *ngIf="details.payment_method"
-                                            >Payment Status :-
+                                        <span
+                                            *ngIf="
+                                                details?.payment_method.toLowerCase() !==
+                                                'Cash On Delivery'.toLowerCase()
+                                            "
+                                            >Payment Method :-
                                             {{
                                                 "Paid via " +
                                                     details.payment_method
                                                     | titlecase
                                             }}</span
+                                        >
+                                        <span
+                                            *ngIf="
+                                                details?.payment_method.toLowerCase() ===
+                                                'Cash On Delivery'.toLowerCase()
+                                            "
+                                        >
+                                            Payment Method :- Cash</span
                                         >
                                         <div class="my-3">
                                             <a
@@ -551,10 +562,10 @@
                                             alt="Support"
                                         />
                                         <span *ngIf="!details.payment_method"
-                                            >Payment Status :- Pending</span
+                                            >Payment Method :- Pending</span
                                         >
                                         <span *ngIf="details.payment_method"
-                                            >Payment Status :-
+                                            >Payment Method :-
                                             {{
                                                 "Paid via " +
                                                     details.payment_method
@@ -694,38 +705,24 @@
                                 <div class="col-md-12">
                                     <p
                                         class="dateText"
-                                        *ngIf="details.payment_method"
+                                        *ngIf="
+                                            details.payment_method.toLowerCase() !==
+                                            'Cash On Delivery'.toLowerCase()
+                                        "
                                     >
-                                        Payment Status :- Paid via
+                                        Payment Method :- Paid via
                                         {{ details.payment_method }}
                                     </p>
                                     <p
                                         class="dateText"
-                                        *ngIf="details.payment_id"
+                                        *ngIf="
+                                            details.payment_method.toLowerCase() ===
+                                            'Cash On Delivery'.toLowerCase()
+                                        "
                                     >
-                                        Payment Id :-
-
-                                        {{ details.payment_id }}
+                                        Payment Method :- Cash
                                     </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="details.payment_order_id"
-                                    >
-                                        Payment Order Id :-
 
-                                        {{ details.payment_order_id }}
-                                    </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="details.payment_time"
-                                    >
-                                        Payment Time :-
-
-                                        {{
-                                            details.payment_time * 1000
-                                                | date : "medium"
-                                        }}
-                                    </p>
                                     <p
                                         class="dateText"
                                         *ngIf="details.payment_amount"
@@ -740,6 +737,14 @@
                                                     : "1.0-0"
                                         }}
                                     </p>
+                                    <button
+                                        class="btn btn-secondary"
+                                        (click)="
+                                            openPaymentDetailDialog(details)
+                                        "
+                                    >
+                                        View Payment Details
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -872,7 +877,13 @@
                                     <p class="small">
                                         {{ details.customerPhoneNumber }}
                                     </p>
-                                    <span  class="badge badge-warning">  {{ details.loyalFlag ? 'Loyal' : 'Un Loyal' }}</span>
+                                    <span class="badge badge-warning">
+                                        {{
+                                            details.loyalFlag
+                                                ? "Loyal"
+                                                : "Un Loyal"
+                                        }}</span
+                                    >
                                 </div>
                             </div>
                             <div class="row">
@@ -884,15 +895,27 @@
                                             alt="Support"
                                         />
                                         <span *ngIf="!details.payment_method"
-                                            >Payment Status :- Pending</span
+                                            >Payment Method :- Pending</span
                                         >
-                                        <span *ngIf="details.payment_method"
-                                            >Payment Status :-
+                                        <span
+                                            *ngIf="
+                                                details?.payment_method.toLowerCase() !==
+                                                'Cash On Delivery'.toLowerCase()
+                                            "
+                                            >Payment Method :-
                                             {{
                                                 "Paid via " +
                                                     details.payment_method
                                                     | titlecase
                                             }}</span
+                                        >
+                                        <span
+                                            *ngIf="
+                                                details?.payment_method.toLowerCase() ===
+                                                'Cash On Delivery'.toLowerCase()
+                                            "
+                                        >
+                                            Payment Method :- Cash</span
                                         >
                                         <div class="my-3">
                                             <a
@@ -1028,38 +1051,24 @@
                                 <div class="col-md-12">
                                     <p
                                         class="dateText"
-                                        *ngIf="details.payment_method"
+                                        *ngIf="
+                                            details.payment_method.toLowerCase() !==
+                                            'Cash On Delivery'.toLowerCase()
+                                        "
                                     >
-                                        Payment Status :- Paid via
+                                        Payment Method :- Paid via
                                         {{ details.payment_method }}
                                     </p>
                                     <p
                                         class="dateText"
-                                        *ngIf="details.payment_id"
+                                        *ngIf="
+                                            details.payment_method.toLowerCase() ===
+                                            'Cash On Delivery'.toLowerCase()
+                                        "
                                     >
-                                        Payment Id :-
-
-                                        {{ details.payment_id }}
+                                        Payment Method :- Cash
                                     </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="details.payment_order_id"
-                                    >
-                                        Payment Order Id :-
 
-                                        {{ details.payment_order_id }}
-                                    </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="details.payment_time"
-                                    >
-                                        Payment Time :-
-
-                                        {{
-                                            details.payment_time * 1000
-                                                | date : "medium"
-                                        }}
-                                    </p>
                                     <p
                                         class="dateText"
                                         *ngIf="details.payment_amount"
@@ -1074,6 +1083,14 @@
                                                     : "1.0-0"
                                         }}
                                     </p>
+                                    <button
+                                        class="btn btn-secondary"
+                                        (click)="
+                                            openPaymentDetailDialog(details)
+                                        "
+                                    >
+                                        View Payment Details
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1124,7 +1141,6 @@
                                                         : "INR"
                                                         : "symbol"
                                                         : "1.0-0"
-                                               
                                             }}
                                         </p>
 
@@ -1195,14 +1211,20 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
-                                   
+
                                     <p class="small">
                                         {{ details.customerEmail }}
                                     </p>
                                     <p class="small">
                                         {{ details.customerPhoneNumber }}
                                     </p>
-                                    <span  class="badge badge-warning">  {{ details.loyalFlag ? 'Loyal' : 'Un Loyal' }}</span>
+                                    <span class="badge badge-warning">
+                                        {{
+                                            details.loyalFlag
+                                                ? "Loyal"
+                                                : "Un Loyal"
+                                        }}</span
+                                    >
                                 </div>
                             </div>
                             <div class="row">
@@ -1214,15 +1236,27 @@
                                             alt="Support"
                                         />
                                         <span *ngIf="!details.payment_method"
-                                            >Payment Status :- Pending</span
+                                            >Payment Method :- Pending</span
                                         >
-                                        <span *ngIf="details.payment_method"
-                                            >Payment Status :-
+                                        <span
+                                            *ngIf="
+                                                details?.payment_method.toLowerCase() !==
+                                                'Cash On Delivery'.toLowerCase()
+                                            "
+                                            >Payment Method :-
                                             {{
                                                 "Paid via " +
                                                     details.payment_method
                                                     | titlecase
                                             }}</span
+                                        >
+                                        <span
+                                            *ngIf="
+                                                details?.payment_method.toLowerCase() ===
+                                                'Cash On Delivery'.toLowerCase()
+                                            "
+                                        >
+                                            Payment Method :- Cash</span
                                         >
                                         <div class="my-3">
                                             <a

@@ -470,7 +470,7 @@ export class CartHelperComponent implements OnInit {
             restaurantId: this.restaurantData._id,
         };
         if (this.userPreference?.preference === "Dine In") {
-            if (btnAction) {
+            if (true) {
                 this.placeOrderHelper(bodyData, {});
             }
 

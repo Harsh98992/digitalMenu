@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 import { CustomerService } from "src/app/api/customer.service";
 import { UtilService } from "src/app/api/util.service";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
@@ -23,7 +24,8 @@ export class TableNumberDialogComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public dialogData: any,
         public dialogRef: MatDialogRef<TableNumberDialogComponent>,
         private utilityService: UtilService,
-        private customerAuthService: CustomerAuthService
+        private customerAuthService: CustomerAuthService,
+        private dialog: MatDialog,  
     ) {}
 
     ngOnInit(): void {
@@ -55,9 +57,20 @@ export class TableNumberDialogComponent implements OnInit {
         };
         this.restaurnatService.checkDineInTableAvailability(reqData).subscribe({
             next: (res) => {
-                this.dialogRef.close({
-                    selectedTableName: this.selectedTable,
+                const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+                    data: {
+                        title: "Place Order",
+                        message: `Place Your Order Now for Table Number ${this.selectedTable}!`,
+                    },
                 });
+                confirmDialog.afterClosed().subscribe((result) => {
+                    if (result?.okFlag) {
+                        this.dialogRef.close({
+                            selectedTableName: this.selectedTable,
+                        });
+                    }
+                });
+               
             },
         });
     }

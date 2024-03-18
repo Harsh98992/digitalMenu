@@ -5,6 +5,9 @@ import { OrderService } from "src/app/api/order.service";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 import { OrderAcceptDialogComponent } from "../../../angular-material/order-accept-dialog/order-accept-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
+import { io } from "socket.io-client";
+import { environment } from "src/environments/environment";
+import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
 
 @Component({
     selector: "app-restaurant-order",
@@ -22,20 +25,47 @@ export class RestaurantOrderComponent implements OnInit {
     extraIngredents = [];
     searchTerm = "";
     filteredData: any;
+    socket: any;
+    socketApiUrl = environment.socketApiUrl;
+
     constructor(
         private restaurantService: RestaurantPanelService,
         private router: Router,
         private orderService: OrderService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private customerAuthService: CustomerAuthService
     ) {}
 
     ngOnInit(): void {
+        this.changeStatus();
+
         // run the change status function every 10 seconds
-        setInterval(() => {
-            this.changeStatus();
-        }, 5000);
-        // this.getOrders();
+        // setInterval(() => {
+        //     this.changeStatus();
+        // }, 5000);
         this.applyColumn();
+
+        this.socket = io(this.socketApiUrl);
+
+        // add on orderAcceptedOrRejected event listener
+        this.socket.on("orderAcceptedOrRejected", (data: any) => {
+            console.log("orderAcceptedOrRejected", data);
+            // go though the rows and update the status
+            this.rows = this.rows.map((row) => {
+                if (row.orderId === data.orderId) {
+                    row.orderStatus = data.orderStatus;
+                }
+                return row;
+            });
+        });
+
+        // join the socket room
+        this.socket.on("connect", () => {
+            this.socket.emit(
+                "joinCustomerRoom",
+                this.customerAuthService.getUserDetail()?._id
+            );
+        });
     }
 
     applyColumn() {
@@ -68,7 +98,7 @@ export class RestaurantOrderComponent implements OnInit {
         }
     }
     viewOrder(row) {
-        row['completeScreen'] = true;
+        row["completeScreen"] = true;
         this.dialog
             .open(OrderAcceptDialogComponent, {
                 minWidth: "90vw",

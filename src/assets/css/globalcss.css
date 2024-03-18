@@ -2624,7 +2624,7 @@ ul#top_menu li a.login {
 @media (max-width: 767px) {
     .hero_in.detail_page .wrapper .main_info h1 {
         font-size: 32px;
-        font-size: 2rem;
+        font-size: 1.3rem;
     }
 }
 .hero_in.detail_page .wrapper .main_info h3 {

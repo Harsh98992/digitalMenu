@@ -6,7 +6,13 @@
 </div>
 <mat-dialog-content>
     <div class="mt-3">
-        <div class="row">
+        <!-- <div
+            class="row"
+            *ngIf="
+                orderData?.customerPreferences?.preference?.toLowerCase() !==
+                'dine in'
+            "
+        >
             <div class="col-12">
                 <label>Cash On Delivery Available</label>
                 <ng-select
@@ -15,10 +21,26 @@
                     class="mr-3"
                     [clearable]="false"
                 >
-                    <ng-option *ngIf="paymentGatewayFlag" [value]="false">No</ng-option>
+                    <ng-option *ngIf="paymentGatewayFlag" [value]="false"
+                        >No</ng-option
+                    >
                     <ng-option [value]="true">Yes</ng-option>
                 </ng-select>
             </div>
+        </div> -->
+        <div class="col-12">
+            <label>Print KOT</label>
+            <ng-select
+                [(ngModel)]="printKOT"
+                style="min-width: 130px"
+                class="mr-3"
+                [clearable]="false"
+            >
+                <ng-option *ngIf="paymentGatewayFlag" [value]="false"
+                    >No</ng-option
+                >
+                <ng-option [value]="true">Yes</ng-option>
+            </ng-select>
         </div>
         <form
             class="needs-validation"
@@ -27,8 +49,12 @@
             (submit)="submitForm()"
         >
             <div class="col-12 mt-3">
-                <label for="">Prepration Time</label>
-                <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
+                <label for="">Prepration Time (In minutes)</label>
+                <ngb-timepicker
+                    [formControl]="ctrl"
+                    [hourStep]="0"
+                    required
+                ></ngb-timepicker>
             </div>
         </form>
     </div>
@@ -39,6 +65,12 @@
         class="btn btn_1 gradient w-100"
         (click)="submitForm()"
     >
-        Proceed to payment
+        <!-- {{
+            orderData?.customerPreferences?.preference?.toLowerCase() !==
+            "dine in"
+                ? " Proceed to payment"
+                : "Accept Order"
+        }} -->
+        Accept Order
     </button>
 </mat-dialog-actions>

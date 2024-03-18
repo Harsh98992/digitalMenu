@@ -17,6 +17,7 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
     //  time=['15 min','30 min','45 min','1 hour','1 hour 15 min','1 hour 30 min'],
     destroy$: Subject<boolean> = new Subject<boolean>();
     cashOnDeliveryAvailable = true;
+    printKOT = false;
     ctrl = new FormControl<NgbTimeStruct | null>(
         null,
         (control: FormControl<NgbTimeStruct | null>) => {
@@ -54,9 +55,13 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
     socketApiUrl = environment.socketApiUrl;
 
     ngOnInit(): void {
-        console.log(this.orderData);
+        console.log(
+            this.orderData?.customerPreferences?.preference?.toLowerCase()
+        );
         this.setDefaultTime();
         this.getRestaurantData();
+        document.getElementsByClassName("ngb-tp-hour")[0]?.remove();
+        document.getElementsByClassName("ngb-tp-spacer")[0]?.remove();
     }
     getRestaurantData() {
         this.restaurantService.restaurantData
@@ -66,8 +71,8 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
                     if (res?.paymentgatewayData?.gatewayData) {
                         this.paymentGatewayFlag = true;
                         if (this.paymentGatewayFlag) {
-                            this.cashOnDeliveryAvailable =
-                                this.orderData?.loyalFlag ?? false;
+                            // this.cashOnDeliveryAvailable =
+                            //     this.orderData?.loyalFlag ?? false;
                         }
                     }
                 },
@@ -96,7 +101,10 @@ export class AcceptDialogComponent implements OnInit, OnDestroy {
                 next: (res) => {
                     this.socket.emit("orderAcceptedOrRejected", this.orderData);
 
-                    this.dialogRef.close({ successFlag: true });
+                    this.dialogRef.close({
+                        successFlag: true,
+                        printKOT: this.printKOT,
+                    });
                 },
             });
         }

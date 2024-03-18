@@ -68,11 +68,13 @@ export class RestaurantCartComponent implements OnInit {
         });
     }
     openSelectTableNumberDialog() {
+        const tableData = this.cartHelperComponent.tableData;
+
         this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
                 disableClose: true,
-                data: this.restaurantData,
+                data: { restaurantData: this.restaurantData, tableData },
             })
             .afterClosed()
             .subscribe((resp) => {
@@ -83,6 +85,7 @@ export class RestaurantCartComponent implements OnInit {
                         value: resp.selectedTableName,
                     };
                     this.setCartStateData();
+                    this.placeOrder();
                 }
             });
     }
@@ -115,6 +118,7 @@ export class RestaurantCartComponent implements OnInit {
                             value: resp.selectedTime,
                         };
                         this.setCartStateData();
+                        this.placeOrder();
                     }
                 });
         } else {
@@ -184,131 +188,12 @@ export class RestaurantCartComponent implements OnInit {
     }
 
     customerData: any;
-    placeOrder() {
+    placeOrder(btnAction=false) {
         this.customerData = this.customerAuthService.getUserDetail();
 
         console.log("Customer Data: ", this.customerData);
 
-        // // check if the customer data is complete or not by checking the name, email and phone number
-        // if (
-        //     !this.customerData.name ||
-        //     !this.customerData.email ||
-        //     !this.customerData.phoneNumber
-        // ) {
-        //     let AddMissingInfoDialogComponentRef = this.dialog.open(
-        //         AddMissingInfoDialogComponent,
-
-        //         {
-        //             disableClose: true,
-        //             panelClass: "app-full-bleed-dialog",
-        //             data: this.customerData,
-        //         }
-        //     );
-        //     AddMissingInfoDialogComponentRef.afterClosed().subscribe(
-        //         (response) => {
-        //             if (response.customerData) {
-        //                 if (!this.customerData.phoneNumber) {
-        //                     // open the dialog to have the phone number otp verification
-
-        //                     console.log(
-        //                         "Customer Form: ",
-        //                         response.customerData
-        //                     );
-
-        //                     const phoneNumber =
-        //                         response.customerData.phoneNumber;
-        //                     const reqData = {
-        //                         phoneNumber: phoneNumber,
-        //                         socialLogin: "sms",
-        //                         verificationType: "update",
-        //                     };
-        //                     this.customerAuthService
-        //                         .sendWhatsappVerificationCode(reqData)
-        //                         .subscribe({
-        //                             next: (res) => {
-        //                                 let PhoneOtpComponentDialogRef =
-        //                                     this.dialog.open(
-        //                                         PhoneOtpComponent,
-        //                                         {
-        //                                             disableClose: true,
-        //                                             data: reqData,
-        //                                             panelClass:
-        //                                                 "app-full-bleed-dialog",
-        //                                         }
-        //                                     );
-
-        //                                 PhoneOtpComponentDialogRef.afterClosed().subscribe(
-        //                                     (res) => {
-        //                                         this.customerData.phoneNumber =
-        //                                             response.customerData.phoneNumber;
-
-        //                                         if (!this.customerData.name) {
-        //                                             this.customerData.name =
-        //                                                 response.customerData.name;
-        //                                         }
-
-        //                                         if (!this.customerData.email) {
-        //                                             this.customerData.email =
-        //                                                 response.customerData.email;
-        //                                         }
-
-        //                                         // update the customer data
-        //                                         this.customerService
-        //                                             .updateCustomerData(
-        //                                                 this.customerData
-        //                                             )
-        //                                             .subscribe({
-        //                                                 next: (res) => {
-        //                                                     console.log(
-        //                                                         "Customer data updated successfully"
-        //                                                     );
-        //                                                     this.customerAuthService.setUserDetail(
-        //                                                         this
-        //                                                             .customerData
-        //                                                     );
-
-        //                                                     this.cartHelperComponent.placeOrder();
-        //                                                 },
-        //                                             });
-        //                                     }
-        //                                 );
-        //                             },
-        //                         });
-        //                 } else {
-        //                     if (!this.customerData.name) {
-        //                         this.customerData.name =
-        //                             response.customerData.name;
-        //                     }
-
-        //                     if (!this.customerData.email) {
-        //                         this.customerData.email =
-        //                             response.customerData.email;
-        //                     }
-
-        //                     // update the customer data
-        //                     this.customerService
-        //                         .updateCustomerData(response.customerData)
-        //                         .subscribe({
-        //                             next: (res) => {
-        //                                 console.log(
-        //                                     "Customer data updated successfully"
-        //                                 );
-        //                                 this.customerAuthService.setUserDetail(
-        //                                     this.customerData
-        //                                 );
-
-        //                                 this.cartHelperComponent.placeOrder();
-        //                             },
-        //                         });
-        //                 }
-        //             }
-        //         }
-        //     );
-
-        //     return;
-        // }
-
-        this.cartHelperComponent.placeOrder();
+        this.cartHelperComponent.placeOrder(btnAction);
     }
     createPaytmForm(data) {
         const paytm = data.params;
@@ -353,6 +238,7 @@ export class RestaurantCartComponent implements OnInit {
                         value: resp.selectedAddress,
                     };
                     this.setCartStateData();
+                    this.placeOrder();
                 }
             }
         });

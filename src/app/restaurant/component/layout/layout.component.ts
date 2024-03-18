@@ -25,6 +25,7 @@ export class LayoutComponent implements OnInit {
     fixedHeaderFlag = true;
     userLoginFlag = false;
     userDetail = null;
+    orderCount: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -43,7 +44,10 @@ export class LayoutComponent implements OnInit {
 
         // join the socket room
         this.socket.on("connect", () => {
-            this.socket.emit("joinCustomerRoom", this.customerAuthService.getUserDetail()?._id);
+            this.socket.emit(
+                "joinCustomerRoom",
+                this.customerAuthService.getUserDetail()?._id
+            );
         });
     }
 
@@ -70,9 +74,19 @@ export class LayoutComponent implements OnInit {
                 if (res) {
                     this.userLoginFlag = true;
                     this.userDetail = res;
+                    this.getCustomerActiveOrder();
                 } else {
                     this.userDetail = res;
                     this.userLoginFlag = false;
+                }
+            },
+        });
+    }
+    getCustomerActiveOrder() {
+        this.orderService.getCustomerActiveOrder().subscribe({
+            next: (res: any) => {
+                if (res && res?.data?.orderData) {
+                    this.orderCount = res?.data?.orderData?.length;
                 }
             },
         });

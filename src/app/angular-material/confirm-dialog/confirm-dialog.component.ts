@@ -15,12 +15,14 @@ export class ConfirmDialogComponent implements OnInit {
     title = "";
     cancelBtnText = "Cancel";
     successBtnText = "Yes";
+    printBill = false;
     constructor(
         private dialogRef: MatDialogRef<any>,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
 
     ngOnInit(): void {
+        console.log(this.data);
         this.message = this.data.message;
         this.title = this.data.title;
         if (this.data.cancelBtnText) {
@@ -29,8 +31,14 @@ export class ConfirmDialogComponent implements OnInit {
         if (this.data.successBtnText) {
             this.successBtnText = this.data.successBtnText;
         }
+        if (this.data.printBill) {
+            this.printBill = this.data.printBill;
+        }
     }
     okAction() {
         this.dialogRef.close({ okFlag: true });
+    }
+    okActionWithPriniting() {
+        this.dialogRef.close({ okFlag: true, printBill: true });
     }
 }

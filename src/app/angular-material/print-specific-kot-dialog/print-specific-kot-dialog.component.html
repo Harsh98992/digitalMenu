@@ -1,0 +1,44 @@
+<div class="small-dialog-header">
+    <h3>Please select a KOT to print</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <div class="container mt-3">
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+           
+            [(ngModel)]="kotSelected"
+        >
+            <mat-radio-button class="example-radio-button" [value]="'all'">
+                Full KOT
+            </mat-radio-button>
+            <mat-radio-button
+                class="example-radio-button"
+                *ngFor="let option of kotData.orderDetails"
+                [value]="option"
+            >
+                Order id:- {{ option._id }} ({{
+                    option.orderPlaceDateAndTime | date : "medium"
+                }})
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions >
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button
+                    type="reset"
+                    class="btn_1 full-width"
+                    (click)="onSubmit()"
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-actions>

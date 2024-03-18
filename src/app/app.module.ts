@@ -21,6 +21,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxPrintModule } from "ngx-print";
+import { DatePipe } from "@angular/common";
 @NgModule({
     declarations: [
         AppComponent,
@@ -54,7 +55,7 @@ import { NgxPrintModule } from "ngx-print";
     ],
     providers: [
         RestaurantAuthGuard,
-
+        DatePipe,
         // {
         //     provide: "SocialAuthServiceConfig",
         //     useValue: {

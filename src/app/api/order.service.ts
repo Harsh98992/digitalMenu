@@ -20,6 +20,9 @@ export class OrderService {
     placeOrder(data: any) {
         return this.http.post(`${this.apiUrl}/v1/orders/placeOrder`, data);
     }
+    getCustomerActiveOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/getCustomerActiveOrder`);
+    }
     getRestaurantOrdersByStatus(data) {
         return this.http.put(
             `${this.apiUrl}/v1/orders/getRestaurantOrdersByStatus`,
@@ -87,15 +90,15 @@ export class OrderService {
         return new Blob(byteArrays, { type: mimeType });
       }
     checkForOrderWithPendingPayment() {
-        this.getCustomerPaymentPendingOrder().subscribe({
-            next: (res: any) => {
-                if (res && res.data && res.data?.orderData?._id)
-                    this.dialog.open(PaymentDialogComponent, {
-                        panelClass: "add-item-dialog",
-                        data: res.data.orderData,
-                        disableClose: true,
-                    });
-            },
-        });
+        // this.getCustomerPaymentPendingOrder().subscribe({
+        //     next: (res: any) => {
+        //         if (res && res.data && res.data?.orderData?._id)
+        //             this.dialog.open(PaymentDialogComponent, {
+        //                 panelClass: "add-item-dialog",
+        //                 data: res.data.orderData,
+        //                 disableClose: true,
+        //             });
+        //     },
+        // });
     }
 }

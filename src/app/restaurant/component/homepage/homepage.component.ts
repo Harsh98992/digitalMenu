@@ -117,7 +117,11 @@ export class HomepageComponent implements OnInit {
         this.restaurantService.getPastRestaurantData(reqData).subscribe({
             next: (res: any) => {
                 if (res && res.data) {
-                    this.restaurantData = res.data.restaurantData;
+                    this.restaurantData = res.data.restaurantData.filter(
+                        (dat) => {
+                            return dat?.restaurantVerified;
+                        }
+                    );
                 }
             },
         });
@@ -127,7 +131,9 @@ export class HomepageComponent implements OnInit {
         this.customerService.getAllRestaurants().subscribe({
             next: (res: any) => {
                 if (res && res.data) {
-                    this.searchResults = res.data.restaurants;
+                    this.searchResults = res.data.restaurants.filter((dat) => {
+                        return dat?.restaurantVerified;
+                    });
 
                     // run onSearchInputChanged to filter the search results
                     this.onSearchInputChanged(this.searchQuery);
@@ -136,7 +142,13 @@ export class HomepageComponent implements OnInit {
         });
     }
 
-    onSearchIconClick() {
+    onSearchIconClick(el) {
+        if (!el?.value) {
+            document.getElementById("restaurantSearch").focus();
+
+            return;
+        }
+
         this.navigateToRestaurant(this.searchResults[0]);
     }
 

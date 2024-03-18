@@ -10,7 +10,8 @@ export class RestaurantService {
     apiUrl = environment.apiUrl;
     cartItem = new BehaviorSubject([]);
     cartState = new BehaviorSubject({});
-
+    amountToBePaidSubject = new BehaviorSubject(null);
+    bypassGaurd=false
     constructor(private http: HttpClient) {}
     getRestaurantData(url: string) {
         return this.http.get(

@@ -12,6 +12,7 @@ export class UnverifyAccountComponent implements OnInit {
     rows = [];
     columns = [];
     ColumnMode = ColumnMode;
+    selectedOption = false;
     constructor(private adminService: AdminPanelService) {}
 
     ngOnInit(): void {
@@ -24,10 +25,12 @@ export class UnverifyAccountComponent implements OnInit {
 
     getUnVerifiedAccount() {
         // use the getRestaurantsByStatus() method from the AdminPanelService
-        this.adminService.getRestaurantsByStatus(false).subscribe({
-            next: (res: any) => {
-                this.rows = res.data.restaurantDetail;
-            },
-        });
+        this.adminService
+            .getRestaurantsByStatus(this.selectedOption)
+            .subscribe({
+                next: (res: any) => {
+                    this.rows = res.data.restaurantDetail;
+                },
+            });
     }
 }

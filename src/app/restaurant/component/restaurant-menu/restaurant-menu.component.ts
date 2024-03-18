@@ -66,7 +66,8 @@ export class RestaurantMenuComponent implements OnInit {
         "Saturday",
     ];
     activeRestaurantUrl: any;
-    pureVegFlag=true;
+    pureVegFlag = true;
+    amountToBePaid: any;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -96,6 +97,7 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.setCartItem([]);
             this.restaurantService.setCartSate([]);
             this.restaurantService.setRestaurantUrl(null);
+            this.restaurantService.amountToBePaidSubject.next(null);
             return;
         }
 
@@ -120,6 +122,9 @@ export class RestaurantMenuComponent implements OnInit {
                                 this.restaurantService.setCartItem([]);
                                 this.restaurantService.setCartSate([]);
                                 this.restaurantService.setRestaurantUrl(null);
+                                this.restaurantService.amountToBePaidSubject.next(
+                                    null
+                                );
                             } else {
                                 this.restaurantService.setCartItem(cartData);
 
@@ -180,17 +185,19 @@ export class RestaurantMenuComponent implements OnInit {
                             value: resp.selectedTime,
                         };
                         this.setCartStateData();
+                        this.placeOrder();
                     }
                 });
         } else {
         }
     }
     openSelectTableNumberDialog() {
+        const tableData = this.cartHelperComponent.tableData;
         this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
                 disableClose: true,
-                data: this.restaurantDetail,
+                data: { restaurantData: this.restaurantDetail, tableData },
             })
             .afterClosed()
             .subscribe((resp) => {
@@ -201,6 +208,7 @@ export class RestaurantMenuComponent implements OnInit {
                         value: resp.selectedTableName,
                     };
                     this.setCartStateData();
+                    this.placeOrder()
                 }
             });
     }
@@ -213,10 +221,10 @@ export class RestaurantMenuComponent implements OnInit {
         });
     }
 
-    placeOrder() {
+    placeOrder(btnAction=false) {
         this.customerData = this.customerAuthService.getUserDetail();
 
-        this.cartHelperComponent.placeOrder();
+        this.cartHelperComponent.placeOrder(btnAction);
     }
     customerData: any;
     getOrderOptionText() {
@@ -250,6 +258,7 @@ export class RestaurantMenuComponent implements OnInit {
                         value: resp.selectedAddress,
                     };
                     this.setCartStateData();
+                    this.placeOrder()
                 }
             }
         });
@@ -282,6 +291,11 @@ export class RestaurantMenuComponent implements OnInit {
     }
     calculateItemTotal() {
         this.cartHelperComponent?.calculateItemTotal();
+        this.restaurantService.amountToBePaidSubject.subscribe({
+            next: (res) => {
+                this.amountToBePaid = res;
+            },
+        });
     }
     changeQuantity(flag: string, item: any) {
         if (this.checkCustomizeable(item)) {
@@ -801,8 +815,8 @@ export class RestaurantMenuComponent implements OnInit {
         const { hour, minute, second } = timeObj;
         const formattedHour = hour % 12 || 12; // Convert 0 to 12
         const meridian = hour >= 12 ? "PM" : "AM";
-        return `${formattedHour}:${minute < 10 ? "0" + minute : minute}:${
-            second < 10 ? "0" + second : second
+        return `${formattedHour}:${
+            minute < 10 ? "0" + minute : minute
         } ${meridian}`;
     }
 }

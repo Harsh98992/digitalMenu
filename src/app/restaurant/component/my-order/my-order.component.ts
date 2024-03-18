@@ -3,8 +3,9 @@ import { MatDialog } from "@angular/material/dialog";
 import { OrderAcceptDialogComponent } from "src/app/angular-material/order-accept-dialog/order-accept-dialog.component";
 import { OrderService } from "src/app/api/order.service";
 import { RestaurantContactPopupComponent } from "../restaurant-menu/restaurant-contact-popup/restaurant-contact-popup.component";
-import { Observable, interval } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+import { Observable, interval } from "rxjs";
+import { startWith, switchMap } from "rxjs/operators";
+import { UtilService } from "src/app/api/util.service";
 
 @Component({
     selector: "app-my-order",
@@ -19,28 +20,28 @@ export class MyOrderComponent implements OnInit {
     selectedTab = "";
     tabs = [
         {
-            key: "completed",
-            value: "Completed",
-        },
-        {
             key: "progress",
             value: "On Progress",
         },
         {
+            key: "completed",
+            value: "Completed",
+        },
+        {
             key: "canceled",
-            value: "Canceled",
+            value: "Rejected",
         },
     ];
     private refreshInterval$ = new Observable<number>();
 
     constructor(
         private orderService: OrderService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private utilService: UtilService
     ) {
         // Set up the auto-refresh interval (every 30 seconds)
         this.refreshInterval$ = interval(30000);
     }
-
 
     ngOnInit(): void {
         // Combine auto-refresh with the existing order retrieval logic
@@ -53,8 +54,8 @@ export class MyOrderComponent implements OnInit {
                 next: (res: any) => {
                     if (res && res?.data && res.data && res.data?.orderData) {
                         const orderData = res.data.orderData.sort((a, b) => {
-                            const date1 = new Date(a['orderDate']) as any;
-                            const date2 = new Date(b['orderDate']) as any;
+                            const date1 = new Date(a["orderDate"]) as any;
+                            const date2 = new Date(b["orderDate"]) as any;
                             return date2 - date1;
                         });
 
@@ -81,16 +82,20 @@ export class MyOrderComponent implements OnInit {
             },
         });
     }
-    generateBill(id: string, orderId: string) {
-        this.orderService.generateBill(id).subscribe({
-            next: (res: any) => {
-                if (res && res.data?.invoiceData?.pdf)
-                    this.orderService.downloadBill(
-                        res.data?.invoiceData?.pdf,
-                        orderId
-                    );
-            },
-        });
+    generateBill(orderDetails: any) {
+        this.utilService.printReceipt(
+            orderDetails,
+            orderDetails?.restaurantData[0]
+        );
+        // this.orderService.generateBill(id).subscribe({
+        //     next: (res: any) => {
+        //         if (res && res.data?.invoiceData?.pdf)
+        //             this.orderService.downloadBill(
+        //                 res.data?.invoiceData?.pdf,
+        //                 orderId
+        //             );
+        //     },
+        // });
     }
 
     openContactPopUp(restaurantData) {
@@ -109,7 +114,8 @@ export class MyOrderComponent implements OnInit {
                 this.completedOrder.push(data);
             } else if (
                 data.orderStatus === "processing" ||
-                data.orderStatus === "pending"
+                data.orderStatus === "pending" ||
+                data.orderStatus === "pendingPayment"
             ) {
                 this.processingOrder.push(data);
             } else {
@@ -135,7 +141,9 @@ export class MyOrderComponent implements OnInit {
         const dialogData = {
             ...orderSummary,
             customerMode: true,
+            completeScreen: true,
         };
+
         this.dialog.open(OrderAcceptDialogComponent, {
             minWidth: "90vw",
             data: dialogData,

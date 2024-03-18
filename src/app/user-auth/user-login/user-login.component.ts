@@ -61,6 +61,15 @@ export class UserLoginComponent implements OnInit {
     signOut(): void {
         // this.authService.signOut();
     }
+    onPhoneNumberChange(event: any) {
+        const inputValue = event.target.value;
+        if (inputValue.length > 10) {
+          // Truncate the input value to 10 characters
+          this.phoneNumberForm.patchValue({
+            phoneNumber: inputValue.slice(0, 10)
+          });
+        }
+      }
     closeDialog() {
         this.dialogRef.close();
     }

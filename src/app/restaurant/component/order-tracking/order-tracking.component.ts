@@ -39,10 +39,10 @@ export class OrderTrackingComponent implements OnInit {
         }, 1000);
     }
     openDialg() {
-        this.dialog.open(PaymentDialogComponent, {
-            panelClass: "add-item-dialog",
-            data: {},
-            disableClose: true,
-        });
+        // this.dialog.open(PaymentDialogComponent, {
+        //     panelClass: "add-item-dialog",
+        //     data: {},
+        //     disableClose: true,
+        // });
     }
 }

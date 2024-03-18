@@ -65,14 +65,19 @@
                             >
                                 <div class="p-3 rounded shadow-sm bg-white">
                                     <div class="d-flex border-bottom pb-3">
-                                        <div class="text-muted mr-3">
+                                        <!-- <div class="text-muted mr-3">
                                             <img
                                                 alt="#"
                                                 [src]="bannerImg"
                                                 class="img-fluid order_img rounded"
                                             />
-                                        </div>
+                                        </div> -->
                                         <div>
+                                            <p
+                                                class="bg-success text-white py-1 px-2 rounded small mb-1"
+                                            >
+                                                Completed
+                                            </p>
                                             <p class="mb-0 font-weight-bold">
                                                 <a
                                                     *ngIf="
@@ -102,6 +107,14 @@
                                                 ORDERID:-
                                                 {{ orderData.orderId }}
                                             </p>
+                                            <button
+                                                class="btn btn-primary btn-sm"
+                                                (click)="
+                                                    generateBill(orderData)
+                                                "
+                                            >
+                                                Print Bill
+                                            </button>
                                             <!-- <p class="mb-0 small">
                                                 <a
                                                     (click)="
@@ -114,11 +127,6 @@
                                             </p> -->
                                         </div>
                                         <div class="ml-auto">
-                                            <p
-                                                class="bg-success text-white py-1 px-2 rounded small mb-1"
-                                            >
-                                                Completed
-                                            </p>
                                             <p
                                                 class="small font-weight-bold text-center"
                                             >
@@ -195,14 +203,41 @@
                             >
                                 <div class="p-3 rounded shadow-sm bg-white">
                                     <div class="d-flex border-bottom pb-3">
-                                        <div class="text-muted mr-3">
+                                        <!-- <div class="text-muted mr-3">
                                             <img
                                                 alt="#"
                                                 [src]="getImage(orderData)"
                                                 class="img-fluid order_img rounded"
                                             />
-                                        </div>
+                                        </div> -->
+                                        <div></div>
                                         <div>
+                                            <span
+                                                *ngIf="
+                                                    orderData.orderStatus ===
+                                                    'processing'
+                                                "
+                                            >
+                                                <p
+                                                    class="bg-success text-white py-1 px-2 rounded small mb-1"
+                                                >
+                                                    Order Accepted, Getting
+                                                    Ready
+                                                </p>
+                                            </span>
+                                            <span
+                                                *ngIf="
+                                                    orderData.orderStatus ===
+                                                    'pending'
+                                                "
+                                            >
+                                                <p
+                                                    class="bg-warning text-white py-1 px-2 rounded small mb-1"
+                                                >
+                                                    Awaiting confirmation from
+                                                    the restaurant.
+                                                </p>
+                                            </span>
                                             <p class="mb-0 font-weight-bold">
                                                 <a
                                                     *ngIf="
@@ -232,7 +267,7 @@
                                                 ORDER ID:-
                                                 {{ orderData.orderId }}
                                             </p>
-                                            <button class="btn btn-primary btn-sm" (click)="generateBill(orderData._id, orderData.orderId)">Print Bill</button>
+
                                             <!-- <p class="mb-0 small">
                                                 <a
                                                     (click)="
@@ -247,32 +282,7 @@
                                         </div>
                                         <div class="ml-auto">
                                             <!-- if the data.orderStatus === "processing" the show the below code -->
-                                            <div
-                                                *ngIf="
-                                                    orderData.orderStatus ===
-                                                    'processing'
-                                                "
-                                            >
-                                                <p
-                                                    class="bg-success text-white py-1 px-2 rounded small mb-1"
-                                                >
-                                                    Order Accepted, Getting
-                                                    Ready
-                                                </p>
-                                            </div>
-                                            <div
-                                                *ngIf="
-                                                    orderData.orderStatus ===
-                                                    'pending'
-                                                "
-                                            >
-                                                <p
-                                                    class="bg-warning text-white py-1 px-2 rounded small mb-1"
-                                                >
-                                                    Awaiting confirmation from
-                                                    the restaurant.
-                                                </p>
-                                            </div>
+
                                             <p
                                                 class="small font-weight-bold text-center"
                                             >
@@ -287,7 +297,6 @@
                                         </div>
                                     </div>
                                     <div class="d-flex pt-3">
-
                                         <div class="text-right">
                                             <a
                                                 class="btn btn-primary px-3"
@@ -338,14 +347,19 @@
                             >
                                 <div class="p-3 rounded shadow-sm bg-white">
                                     <div class="d-flex border-bottom pb-3">
-                                        <div class="text-muted mr-3">
+                                        <!-- <div class="text-muted mr-3">
                                             <img
                                                 alt="#"
                                                 [src]="bannerImg"
                                                 class="img-fluid order_img rounded"
                                             />
-                                        </div>
+                                        </div> -->
                                         <div>
+                                            <p
+                                                class="bg-danger text-white py-1 px-2 rounded small mb-1"
+                                            >
+                                                Rejected
+                                            </p>
                                             <p class="mb-0 font-weight-bold">
                                                 <a
                                                     *ngIf="
@@ -387,11 +401,6 @@
                                             </p> -->
                                         </div>
                                         <div class="ml-auto">
-                                            <p
-                                                class="bg-danger text-white py-1 px-2 rounded small mb-1"
-                                            >
-                                                Canceled
-                                            </p>
                                             <p
                                                 class="small font-weight-bold text-center"
                                             >

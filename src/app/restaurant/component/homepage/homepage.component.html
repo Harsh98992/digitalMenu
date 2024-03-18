@@ -2,7 +2,9 @@
     <div class="hero_single version_2 kenburns_slider">
         <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
             <div class="container">
-                <div class="row justify-content-lg-start justify-content-md-center">
+                <div
+                    class="row justify-content-lg-start justify-content-md-center"
+                >
                     <div class="col-xl-7 col-lg-8">
                         <h1>Direct to Restaurant</h1>
                         <p>Restaurant at there original menus card price</p>
@@ -10,19 +12,49 @@
                         <div class="row g-0">
                             <div class="col-lg-12">
                                 <div class="form-group search-bar">
-                                    <div class="input-group"> <!-- Add an input-group for styling -->
-                                        <input type="text" id="restaurantSearch" class="form-control no_border_r"
-                                            placeholder="Search for restaurant...." [matAutocomplete]="auto"
-                                            (input)="onSearchInput($event.target.value)" [value]="searchQuery" />
-                                        <i class="fas fa-search search-icon"
-                                            (click)="onSearchIconClick()"></i>
+                                    <div class="input-group">
+                                        <!-- Add an input-group for styling -->
+                                        <input
+                                            type="text"
+                                            id="restaurantSearch"
+                                            #searchText
+                                            class="form-control no_border_r"
+                                            placeholder="Search for restaurant...."
+                                            [matAutocomplete]="auto"
+                                            (input)="
+                                                onSearchInput(
+                                                    $event.target.value
+                                                )
+                                            "
+                                            [value]="searchQuery"
+                                        />
+                                        <i
+                                            class="fas fa-search search-icon"
+                                            id="searchIcon"
+                                            style="cursor: pointer"
+                                            (click)="
+                                                onSearchIconClick(searchText)
+                                            "
+                                        ></i>
                                         <!-- Search icon with click event -->
                                     </div>
                                 </div>
                                 <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let result of autocompleteResults"
-                                        (click)="selectSearchResult(result)">
-                                        {{ result.restaurantName }}
+                                    <!-- <mat-option
+                                        *ngIf="
+                                            autocompleteResults &&
+                                            autocompleteResults.length === 0
+                                        "
+                                    >
+                                        No result found
+                                    </mat-option> -->
+                                    <mat-option
+                                        *ngFor="
+                                            let result of autocompleteResults
+                                        "
+                                        (click)="selectSearchResult(result)"
+                                    >
+                                        {{ result.restaurantName | titlecase }}
                                     </mat-option>
                                 </mat-autocomplete>
                             </div>
@@ -45,19 +77,37 @@
                         </div> -->
 
                         <div class="scanLogin">
-                            <button class="scanner" style="width: 200px" routerLink="/scanner">
-                                <i class="fa-solid fa-qrcode fa-xl" style="color: #ffffff"></i>
+                            <button
+                                class="scanner"
+                                style="width: 200px"
+                                routerLink="/scanner"
+                            >
+                                <i
+                                    class="fa-solid fa-qrcode fa-xl"
+                                    style="color: #ffffff"
+                                ></i>
                                 Scan QR
                             </button>
-                            <button style="
+                            <button
+                                style="
                                     width: 200px;
                                     margin: 20px;
                                     padding: 15px;
                                     font-weight: bold;
-                                    background-image: linear-gradient(to right, #65d585, #1e8e00);
-                                " class="btn_1 btn-success full-width" (click)="openLoginDialog()"
-                                *ngIf="!userLoginFlag">
-                                <i class="fa-solid fa-right-to-bracket fa-xl" style="color: #ffffff"></i>
+                                    background-image: linear-gradient(
+                                        to right,
+                                        #65d585,
+                                        #1e8e00
+                                    );
+                                "
+                                class="btn_1 btn-success full-width"
+                                (click)="openLoginDialog()"
+                                *ngIf="!userLoginFlag"
+                            >
+                                <i
+                                    class="fa-solid fa-right-to-bracket fa-xl"
+                                    style="color: #ffffff"
+                                ></i>
                                 Login
                             </button>
                         </div>
@@ -71,10 +121,15 @@
     <div class="container margin_30_60">
         <div class="main_title center">
             <span><em></em></span>
-            <h2>Previous Restaurents</h2>
+            <h2>Previous Restaurants</h2>
             <p>Restaurant you have visited previously</p>
         </div>
-        <button type="button" *ngIf="!userLoginFlag" (click)="openLoginDialog()" class="custom-button colorPast">
+        <button
+            type="button"
+            *ngIf="!userLoginFlag"
+            (click)="openLoginDialog()"
+            class="custom-button colorPast"
+        >
             Please log in to see your past restaurant data.
         </button>
         <div class="row add_bottom_25" *ngIf="userLoginFlag">
@@ -82,29 +137,45 @@
                 <div class="list_home">
                     <ul>
                         <li>
-                            <a routerLink="/restaurant" [queryParams]="{ detail: data.restaurantUrl }">
+                            <a
+                                routerLink="/restaurant"
+                                [queryParams]="{ detail: data.restaurantUrl }"
+                            >
                                 <figure>
-                                    <img [src]="
+                                    <img
+                                        [src]="
                                             data.restaurantBackgoundImage
                                                 ? data.restaurantBackgoundImage
                                                 : '../assets/img/detail_1.jpg'
-                                        " alt="" class="lazy loaded" width="350" height="100%"
-                                        data-was-processed="true" />
+                                        "
+                                        alt=""
+                                        class="lazy loaded"
+                                        width="350"
+                                        height="100%"
+                                        data-was-processed="true"
+                                    />
                                 </figure>
                                 <!-- <div class="score"><strong>9.5</strong></div> -->
                                 <em>{{ data.restaurantType.join(",") }}</em>
                                 <h3>{{ data.restaurantName }}</h3>
                                 <small>
                                     {{ data.address.street }} ,{{
-                                    data.address.city
+                                        data.address.city
                                     }},{{ data.address.state }}
                                     (Pin Code:-
-                                    {{ data.address.pincode }})</small>
-                                <button class="button-87" (click)="openContactPopUp(data,$event)">
-                                    <i class="fa-solid fa-phone" style="
+                                    {{ data.address.pincode }})</small
+                                >
+                                <button
+                                    class="button-87"
+                                    (click)="openContactPopUp(data, $event)"
+                                >
+                                    <i
+                                        class="fa-solid fa-phone"
+                                        style="
                                             color: #ffffff;
                                             margin-right: 3px;
-                                        "></i>
+                                        "
+                                    ></i>
 
                                     Contact
                                 </button>

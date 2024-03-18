@@ -135,3 +135,16 @@ ng-select.ng-invalid .ng-select-container {
 .mat-step-text-label {
     white-space: pre-line;
 }
+.mat-radio-label-content {
+    max-width: 100%;
+}
+
+.ngb-tp {
+    justify-content: center;
+}
+
+.map-container {
+    max-height: 380px !important;
+    width: 100% !important;
+    margin-bottom: 1rem;
+}

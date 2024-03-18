@@ -30,7 +30,11 @@ export class RestaurantOrderComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.changeStatus();
+        // run the change status function every 10 seconds
+        setInterval(() => {
+            this.changeStatus();
+        }, 10000);
+        // this.getOrders();
         this.applyColumn();
     }
 

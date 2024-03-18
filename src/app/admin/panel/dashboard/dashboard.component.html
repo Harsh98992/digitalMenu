@@ -190,7 +190,47 @@
                                                 alt="Veg Item"
                                                 *ngIf="order.dishType === 'veg'"
                                             />{{ order.dishQuantity }} x
-                                            {{ order.dishName }} ({{
+                                            {{ order.dishName }}
+                                            <ng-container
+                                                *ngIf="order.itemSizeSelected"
+                                            >
+                                                <span>
+                                                    [Size:-{{
+                                                        order.itemSizeSelected
+                                                            .size
+                                                    }}]
+                                                </span>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    order.extraSelected &&
+                                                    order.extraSelected.length
+                                                "
+                                            >
+                                                [ Extras:-
+                                                {{
+                                                    getExtrasList(
+                                                        order.extraSelected
+                                                    )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    order.dishChoicesSelected &&
+                                                    order.dishChoicesSelected
+                                                        .length
+                                                "
+                                            >
+                                                [Choices:-
+                                                {{
+                                                    getChoicesList(
+                                                        order.dishChoicesSelected
+                                                    )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            ({{
                                                 order.totalPrice
                                                     | currency
                                                         : "INR"
@@ -773,7 +813,48 @@
                                                 alt="Veg Item"
                                                 *ngIf="order.dishType === 'veg'"
                                             />{{ order.dishQuantity }} x
-                                            {{ order.dishName }} ({{
+                                            {{ order.dishName }}
+                                            <ng-container
+                                                *ngIf="order.itemSizeSelected"
+                                            >
+                                                <span>
+                                                    [Size:-
+                                                    {{
+                                                        order.itemSizeSelected
+                                                            .size
+                                                    }}]
+                                                </span>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    order.extraSelected &&
+                                                    order.extraSelected.length
+                                                "
+                                            >
+                                                [ Extras:-
+                                                {{
+                                                    getExtrasList(
+                                                        order.extraSelected
+                                                    )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    order.dishChoicesSelected &&
+                                                    order.dishChoicesSelected
+                                                        .length
+                                                "
+                                            >
+                                                [Choices:-
+                                                {{
+                                                    getChoicesList(
+                                                        order.dishChoicesSelected
+                                                    )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            ({{
                                                 order.totalPrice
                                                     | currency
                                                         : "INR"
@@ -1120,7 +1201,47 @@
                                                 alt="Veg Item"
                                                 *ngIf="order.dishType === 'veg'"
                                             />{{ order.dishQuantity }} x
-                                            {{ order.dishName }} ({{
+                                            {{ order.dishName }}
+                                            <ng-container
+                                                *ngIf="order.itemSizeSelected"
+                                            >
+                                                <span>
+                                                    [Size:-{{
+                                                        order.itemSizeSelected
+                                                            .size
+                                                    }}]
+                                                </span>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    order.extraSelected &&
+                                                    order.extraSelected.length
+                                                "
+                                            >
+                                                [ Extras:-
+                                                {{
+                                                    getExtrasList(
+                                                        order.extraSelected
+                                                    )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="
+                                                    order.dishChoicesSelected &&
+                                                    order.dishChoicesSelected
+                                                        .length
+                                                "
+                                            >
+                                                [Choices:-
+                                                {{
+                                                    getChoicesList(
+                                                        order.dishChoicesSelected
+                                                    )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            ({{
                                                 order.totalPrice
                                                     | currency
                                                         : "INR"

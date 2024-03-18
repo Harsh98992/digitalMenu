@@ -134,6 +134,24 @@ export class DashboardComponent implements OnInit {
                 }
             });
     }
+    getChoicesList(choicesData) {
+        let str = "";
+        for (const data of choicesData) {
+            for (const choice of data.choicesSelected) {
+                str += `${choice.choiceName} ,`;
+            }
+        }
+        return str.slice(0, -1);
+    }
+    getExtrasList(extraData) {
+        let str = "";
+        for (const data of extraData) {
+            for (const addon of data.addOnsSelected) {
+                str += `${addon.addOnName} ,`;
+            }
+        }
+        return str.slice(0, -1);
+    }
     openKOTPrintDialg(detail) {
         this.dialog
             .open(PrintSpecificKotDialogComponent, {

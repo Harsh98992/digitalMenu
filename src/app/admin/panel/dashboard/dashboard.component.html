@@ -1181,10 +1181,11 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <ng-container *ngFor="let dineInOrderData of details.orderDetails">
                                     <div
                                         class="order-items"
                                         *ngFor="
-                                            let order of details.orderDetails[0]
+                                            let order of dineInOrderData
                                                 .orderSummary
                                         "
                                     >
@@ -1250,6 +1251,7 @@
                                             }})
                                         </p>
                                     </div>
+                                    </ng-container>
                                 </div>
                             </div>
 

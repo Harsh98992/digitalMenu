@@ -281,6 +281,8 @@ export class DashboardComponent implements OnInit {
                 data.customerPreferences.preference === "Dine In"
             ) {
                 this.activeDine.push(data);
+                console.log(this.activeDine);
+                
             } else if (data.orderStatus === "pendingPayment") {
                 this.pendingPayment.push(data);
             }

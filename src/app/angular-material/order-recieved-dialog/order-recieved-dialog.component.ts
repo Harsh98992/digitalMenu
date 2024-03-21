@@ -18,7 +18,9 @@ export class OrderRecievedDialogComponent implements OnInit {
         // this.router.navigateByUrl("/admin");
 
         //  go to /admin but reload the page
-        window.location.href = "/admin";
+        if (this.router.url !== "/admin") {
+            window.location.href = "/admin";
+        }
 
         // close the dialog
 

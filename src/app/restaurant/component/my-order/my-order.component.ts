@@ -43,6 +43,9 @@ export class MyOrderComponent implements OnInit {
         this.refreshInterval$ = interval(30000);
     }
 
+    /**
+     * Initializes the component and combines auto-refresh with the existing order retrieval logic.
+     */
     ngOnInit(): void {
         // Combine auto-refresh with the existing order retrieval logic
         this.refreshInterval$

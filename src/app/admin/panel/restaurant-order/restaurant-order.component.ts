@@ -45,27 +45,7 @@ export class RestaurantOrderComponent implements OnInit {
         // }, 5000);
         this.applyColumn();
 
-        this.socket = io(this.socketApiUrl);
-
-        // add on orderAcceptedOrRejected event listener
-        this.socket.on("orderAcceptedOrRejected", (data: any) => {
-            console.log("orderAcceptedOrRejected", data);
-            // go though the rows and update the status
-            this.rows = this.rows.map((row) => {
-                if (row.orderId === data.orderId) {
-                    row.orderStatus = data.orderStatus;
-                }
-                return row;
-            });
-        });
-
-        // join the socket room
-        this.socket.on("connect", () => {
-            this.socket.emit(
-                "joinCustomerRoom",
-                this.customerAuthService.getUserDetail()?._id
-            );
-        });
+       
     }
 
     applyColumn() {

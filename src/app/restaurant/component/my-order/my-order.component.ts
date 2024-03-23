@@ -40,9 +40,12 @@ export class MyOrderComponent implements OnInit {
         private utilService: UtilService
     ) {
         // Set up the auto-refresh interval (every 30 seconds)
-        this.refreshInterval$ = interval(30000);
+        this.refreshInterval$ = interval(10000);
     }
 
+    /**
+     * Initializes the component and combines auto-refresh with the existing order retrieval logic.
+     */
     ngOnInit(): void {
         // Combine auto-refresh with the existing order retrieval logic
         this.refreshInterval$
@@ -87,15 +90,7 @@ export class MyOrderComponent implements OnInit {
             orderDetails,
             orderDetails?.restaurantData[0]
         );
-        // this.orderService.generateBill(id).subscribe({
-        //     next: (res: any) => {
-        //         if (res && res.data?.invoiceData?.pdf)
-        //             this.orderService.downloadBill(
-        //                 res.data?.invoiceData?.pdf,
-        //                 orderId
-        //             );
-        //     },
-        // });
+
     }
 
     openContactPopUp(restaurantData) {

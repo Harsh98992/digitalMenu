@@ -40,6 +40,7 @@ export class LayoutComponent implements OnInit {
         this.socket.on("orderAcceptedOrRejected", (data: any) => {
             console.log("orderAcceptedOrRejected", data);
             this.orderService.checkForOrderWithPendingPayment();
+            this.getCustomerActiveOrder();
         });
 
         // join the socket room

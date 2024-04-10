@@ -20,7 +20,7 @@ import { PositiveNumberDirective } from "./api/positive-number.directive";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
-import { NgxPrintModule } from "ngx-print";
+
 import { DatePipe } from "@angular/common";
 @NgModule({
     declarations: [
@@ -40,7 +40,7 @@ import { DatePipe } from "@angular/common";
         HttpClientModule,
         ReactiveFormsModule, // Add ReactiveFormsModule
         NgbTimepickerModule, // Add NgbTimepickerModule
-        NgxPrintModule,
+    
 
         FormsModule,
         ReactiveFormsModule,

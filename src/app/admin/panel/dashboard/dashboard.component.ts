@@ -4,7 +4,7 @@ import { OrderService } from "src/app/api/order.service";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 import { OrderAcceptDialogComponent } from "../../../angular-material/order-accept-dialog/order-accept-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
-import { NgxPrintModule } from "ngx-print";
+
 import { environment } from "src/environments/environment";
 const _ = require("lodash");
 // Import the socket.io-client library
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
         private modalService: NgbModal,
         public dialog: MatDialog,
         private datePipe: DatePipe,
-        private printService: NgxPrintModule,
+       
         private utilityService: UtilService
     ) {}
     handleOrderUpdate(updatedOrder: any) {

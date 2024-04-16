@@ -449,7 +449,7 @@ export class AddDishComponent implements OnInit {
             this.restaurantService.addDish(data).subscribe({
                 next: (res) => {
                     this.restaurantService.setRestaurantData(res);
-                  //  this.router.navigateByUrl("/admin/dishes/view-dish");
+                    this.router.navigateByUrl("/admin/dishes/view-dish");
                 },
             });
         } else {
@@ -460,7 +460,7 @@ export class AddDishComponent implements OnInit {
             this.restaurantService.editDish(data).subscribe({
                 next: (res) => {
                     this.restaurantService.setRestaurantData(res);
-              //      this.router.navigateByUrl("/admin/dishes/view-dish");
+                    this.router.navigateByUrl("/admin/dishes/view-dish");
                 },
             });
         }

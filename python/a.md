@@ -96,3 +96,6 @@ The application communicates with external systems for payment processing and ma
 ## 4.6 Conclusion
 
 The "QRSAY" project aims to deliver a comprehensive and innovative solution for online food ordering, addressing current industry challenges and aligning with the evolving needs of both customers and restaurants. The outlined requirements provide a detailed roadmap for the successful development and deployment of the application, ensuring a seamless and enriching culinary experience for all users.
+
+
+

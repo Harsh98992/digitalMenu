@@ -8,6 +8,6 @@ export const environment = {
     apiUrl: "https://qrsaybackend-ksaw.onrender.com/api",
     socketApiUrl: "https://qrsaybackend-ksaw.onrender.com/",
 
-    // apiUrl: "http://localhost:8080/api",
+    // apiUrl  : "http://localhost:8080/api",
     // socketApiUrl: "http://localhost:8080/",
 };

@@ -85,7 +85,7 @@ export class AddCategoryDialogComponent implements OnInit {
             });
         } else {
             const reqBody = {
-                categoryName: this.category.toLowerCase(),
+                category: this.category.toLowerCase(),
                 categoryPriority: this.categoryPriority,
                 categoryAvailable: this.categoryAvailable, // Include the new field
                 startTime: this.startTime,

@@ -55,6 +55,9 @@ export class LayoutComponent implements OnInit {
     socket: any;
     socketApiUrl = environment.socketApiUrl;
 
+    checkIfhomepage = true;
+    currentUrl = "";
+
     socketOrderPlacedEvent = "orderPlaced";
 
     socketOrderPlaced(data: any) {
@@ -62,6 +65,14 @@ export class LayoutComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        
+        // get current url
+        this.currentUrl = this.router.url;
+
+        // chceck if current url is homepage http://localhost:4200/restaurant?detail=PAG
+        if (this.currentUrl.includes("restaurant")) {
+            this.checkIfhomepage = false;
+        }
         this.getCurrentRoute();
         this.checkLogin();
     }

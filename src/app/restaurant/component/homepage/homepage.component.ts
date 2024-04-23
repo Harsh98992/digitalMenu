@@ -22,6 +22,11 @@ export class HomepageComponent implements OnInit {
     searchResults = [];
     searchQuery = "";
     autocompleteResults: any[] = []; // Initialize an array to store autocomplete results
+    checkIfhomepage = true;
+    currentUrl = "";
+
+
+
 
     constructor(
         private dialog: MatDialog,
@@ -36,7 +41,12 @@ export class HomepageComponent implements OnInit {
     // Create a subject to handle search query debouncing
     private searchQuerySubject = new Subject<string>();
 
+
+
     ngOnInit(): void {
+
+
+
         this.checkLogin();
         //this.restaurantService.setCartItem([]);
         // this.restaurantService.setCartSate(null);

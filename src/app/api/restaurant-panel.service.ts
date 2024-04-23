@@ -254,14 +254,10 @@ export class RestaurantPanelService {
             data
         );
     }
-    addCategory(categoryName, categoryPriority, categoryAvailable) {
+    addCategory(reqBody) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
-            {
-                category: categoryName,
-                categoryPriority: categoryPriority,
-                categoryAvailable: categoryAvailable,
-            }
+          reqBody
         );
     }
     updateCategory(reqData: any) {

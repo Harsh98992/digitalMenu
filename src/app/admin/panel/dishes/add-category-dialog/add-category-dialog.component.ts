@@ -12,7 +12,9 @@ export class AddCategoryDialogComponent implements OnInit {
     category = "";
     categoryPriority: number;
     categoryAvailable: boolean = false; // New boolean field
-
+    timeAvailability = false;
+    startTime: any;
+    endTime: any;
     constructor(
         private restaurantService: RestaurantPanelService,
         public dialogRef: MatDialogRef<any>,
@@ -41,12 +43,23 @@ export class AddCategoryDialogComponent implements OnInit {
             this.categoryErrorFlag = true;
             return;
         }
+        if (!this.timeAvailability) {
+            this.startTime = null;
+            this.endTime = null;
+        } else if (this.timeAvailability && !this.startTime) {
+            return;
+        } else if (this.timeAvailability && !this.endTime) {
+            return;
+        }
         if (this.data) {
             const reqBody = {
                 categoryId: this.data._id,
                 categoryName: this.category.toLowerCase(),
                 categoryPriority: this.categoryPriority,
                 categoryAvailable: this.categoryAvailable, // Include the new field
+                startTime: this.startTime,
+                endTime: this.endTime,
+                timeAvailable: this.timeAvailability,
             };
             this.restaurantService.updateCategory(reqBody).subscribe({
                 next: (res) => {
@@ -54,17 +67,19 @@ export class AddCategoryDialogComponent implements OnInit {
                 },
             });
         } else {
-            this.restaurantService
-                .addCategory(
-                    this.category.toLowerCase(),
-                    this.categoryPriority,
-                    this.categoryAvailable // Include the new field
-                )
-                .subscribe({
-                    next: (res) => {
-                        this.dialogRef.close({ apiCallFlag: true });
-                    },
-                });
+            const reqBody = {
+                categoryName: this.category.toLowerCase(),
+                categoryPriority: this.categoryPriority,
+                categoryAvailable: this.categoryAvailable, // Include the new field
+                startTime: this.startTime,
+                endTime: this.endTime,
+                timeAvailable: this.timeAvailability,
+            };
+            this.restaurantService.addCategory(reqBody).subscribe({
+                next: (res) => {
+                    this.dialogRef.close({ apiCallFlag: true });
+                },
+            });
         }
     }
 }

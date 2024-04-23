@@ -208,7 +208,7 @@ export class RestaurantMenuComponent implements OnInit {
                         value: resp.selectedTableName,
                     };
                     this.setCartStateData();
-                    this.placeOrder()
+                    this.placeOrder();
                 }
             });
     }
@@ -221,7 +221,7 @@ export class RestaurantMenuComponent implements OnInit {
         });
     }
 
-    placeOrder(btnAction=false) {
+    placeOrder(btnAction = false) {
         this.customerData = this.customerAuthService.getUserDetail();
 
         this.cartHelperComponent.placeOrder(btnAction);
@@ -258,7 +258,7 @@ export class RestaurantMenuComponent implements OnInit {
                         value: resp.selectedAddress,
                     };
                     this.setCartStateData();
-                    this.placeOrder()
+                    this.placeOrder();
                 }
             }
         });
@@ -464,11 +464,13 @@ export class RestaurantMenuComponent implements OnInit {
                         this.restaurantDetail.cuisine.filter((data) => {
                             if (data.categoryAvailable === false) {
                                 return false;
-                            } else if (data.categoryAvailable === true) {
-                                return true;
-                            } else {
-                                return true;
+                            } else if (
+                                data?.timeAvailable &&
+                                this.applyTimeValidation(data)
+                            ) {
+                                return false;
                             }
+                            return true;
                         });
 
                     // sort the restaurant data cuisine such that offers are shown first
@@ -567,6 +569,25 @@ export class RestaurantMenuComponent implements OnInit {
                 },
             });
         });
+    }
+    applyTimeValidation(data: any) {
+        if (data && data?.startTime && data?.endTime) {
+            const currDate = new Date();
+            const startHours = data?.startTime.split(":");
+            const endHours = data?.endTime.split(":");
+            const tempDate = new Date();
+            tempDate.setHours(startHours[0]); // Set hours
+            tempDate.setMinutes(startHours[1]); // Set minutes
+            const tempDate2 = new Date();
+            tempDate2.setHours(endHours[0]); // Set hours
+            tempDate2.setMinutes(endHours[1]); // Set minutes
+            if (currDate < tempDate) {
+                return true;
+            } else if (currDate > tempDate2) {
+                return true;
+            }
+        }
+        return false;
     }
     checkForPureVeg() {
         if (this.restaurantDetail?.cuisine?.length) {

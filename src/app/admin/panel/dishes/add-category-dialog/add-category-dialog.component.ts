@@ -20,12 +20,17 @@ export class AddCategoryDialogComponent implements OnInit {
         private restaurantService: RestaurantPanelService,
         public dialogRef: MatDialogRef<any>,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private utilService:UtilService
+        private utilService: UtilService
     ) {}
 
     ngOnInit(): void {
         if (this.data && this.data.categoryName) {
             this.category = this.toTitleCase(this.data.categoryName);
+            this.startTime = this.data.startTime;
+            this.endTime = this.data.endTime;
+            this.categoryAvailable = this.data.categoryAvailable;
+            this.categoryPriority = this.data.categoryPriority;
+            this.timeAvailability=this.data.timeAvailable ? this.data.timeAvailable:false;
         }
     }
 
@@ -49,10 +54,18 @@ export class AddCategoryDialogComponent implements OnInit {
             this.startTime = null;
             this.endTime = null;
         } else if (this.timeAvailability && !this.startTime) {
-            this.utilService.openSnackBar("Please provide start time!",true,5000)
+            this.utilService.openSnackBar(
+                "Please provide start time!",
+                true,
+                5000
+            );
             return;
         } else if (this.timeAvailability && !this.endTime) {
-            this.utilService.openSnackBar("Please provide end time!",true,5000)
+            this.utilService.openSnackBar(
+                "Please provide end time!",
+                true,
+                5000
+            );
             return;
         }
         if (this.data) {

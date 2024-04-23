@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
+import { UtilService } from "src/app/api/util.service";
 
 @Component({
     selector: "app-add-category-dialog",
@@ -18,7 +19,8 @@ export class AddCategoryDialogComponent implements OnInit {
     constructor(
         private restaurantService: RestaurantPanelService,
         public dialogRef: MatDialogRef<any>,
-        @Inject(MAT_DIALOG_DATA) public data: any
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private utilService:UtilService
     ) {}
 
     ngOnInit(): void {
@@ -47,8 +49,10 @@ export class AddCategoryDialogComponent implements OnInit {
             this.startTime = null;
             this.endTime = null;
         } else if (this.timeAvailability && !this.startTime) {
+            this.utilService.openSnackBar("Please provide start time!",true,5000)
             return;
         } else if (this.timeAvailability && !this.endTime) {
+            this.utilService.openSnackBar("Please provide end time!",true,5000)
             return;
         }
         if (this.data) {

@@ -28,7 +28,9 @@ export class AddCategoryDialogComponent implements OnInit {
             this.category = this.toTitleCase(this.data.categoryName);
             this.startTime = this.data.startTime;
             this.endTime = this.data.endTime;
-            this.categoryAvailable = this.data.categoryAvailable;
+            console.log(this.data.categoryAvailable);
+            
+            this.categoryAvailable = !this.data?.categoryAvailable;
             this.categoryPriority = this.data.categoryPriority;
             this.timeAvailability=this.data.timeAvailable ? this.data.timeAvailable:false;
         }
@@ -73,7 +75,7 @@ export class AddCategoryDialogComponent implements OnInit {
                 categoryId: this.data._id,
                 categoryName: this.category.toLowerCase(),
                 categoryPriority: this.categoryPriority,
-                categoryAvailable: this.categoryAvailable, // Include the new field
+                categoryAvailable: !this.categoryAvailable, // Include the new field
                 startTime: this.startTime,
                 endTime: this.endTime,
                 timeAvailable: this.timeAvailability,
@@ -87,7 +89,7 @@ export class AddCategoryDialogComponent implements OnInit {
             const reqBody = {
                 category: this.category.toLowerCase(),
                 categoryPriority: this.categoryPriority,
-                categoryAvailable: this.categoryAvailable, // Include the new field
+                categoryAvailable: !this.categoryAvailable, // Include the new field
                 startTime: this.startTime,
                 endTime: this.endTime,
                 timeAvailable: this.timeAvailability,

@@ -571,24 +571,59 @@ export class RestaurantMenuComponent implements OnInit {
         });
     }
     applyTimeValidation(data: any) {
-        if (data && data?.startTime && data?.endTime) {
-            const currDate = new Date();
-            const startHours = data?.startTime.split(":");
-            const endHours = data?.endTime.split(":");
-            const tempDate = new Date();
-            tempDate.setHours(startHours[0]); // Set hours
-            tempDate.setMinutes(startHours[1]); // Set minutes
-            const tempDate2 = new Date();
-            tempDate2.setHours(endHours[0]); // Set hours
-            tempDate2.setMinutes(endHours[1]); // Set minutes
-            if (currDate < tempDate) {
+        // here time  be in 24 hours format and in hh:mm format
+
+        // get the current time
+
+        const currDate = new Date();
+
+        const currHours = currDate.getHours();
+
+        const currMinutes = currDate.getMinutes();
+
+        // get the start time and end time
+
+        const startTime = data.startTime.split(":");
+        const endTime = data.endTime.split(":");
+        const startHours = parseInt(startTime[0]);
+        const startMinutes = parseInt(startTime[1]);
+        const endHours = parseInt(endTime[0]);
+        const endMinutes = parseInt(endTime[1]);
+
+        // check if the current time is between the start time and end time
+
+        // start time can be less than end time or greater than end time
+
+        // if start time is less than end time
+
+        if (startHours < endHours) {
+            if (currHours > startHours && currHours < endHours) {
                 return true;
-            } else if (currDate > tempDate2) {
+            } else if (
+                currHours === startHours &&
+                currMinutes >= startMinutes
+            ) {
+                return true;
+            } else if (currHours === endHours && currMinutes <= endMinutes) {
+                return true;
+            }
+        } else if (startHours > endHours) {
+            // if start time is greater than end time
+
+            if (currHours > startHours || currHours < endHours) {
+                return true;
+            } else if (
+                currHours === startHours &&
+                currMinutes >= startMinutes
+            ) {
+                return true;
+            } else if (currHours === endHours && currMinutes <= endMinutes) {
                 return true;
             }
         }
         return false;
     }
+
     checkForPureVeg() {
         if (this.restaurantDetail?.cuisine?.length) {
             for (const data of this.restaurantDetail.cuisine) {

@@ -582,6 +582,9 @@ export class RestaurantMenuComponent implements OnInit {
                 const tempDate2 = new Date();
                 tempDate2.setHours(endHours[0]); // Set hours
                 tempDate2.setMinutes(endHours[1]); // Set minutes
+                if(tempDate>tempDate2){
+                    tempDate2.setDate(tempDate2.getDate()+1);
+                }
                 if (currDate < tempDate) {
                     return true;
                 } else if (currDate > tempDate2) {

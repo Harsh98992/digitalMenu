@@ -13,10 +13,12 @@ This is a website like a digital menu for a restaurant.
 or paste the following command in your terminal
 
 ```bash
+
 git clone
 cd DigitalMenu
 npm install
 ng serve
+
 ```
 
 

@@ -51,6 +51,7 @@ for staging
 
 ```bash
 
+
 npm run dev
 firebase use qrsay-testing
 firebase deploy

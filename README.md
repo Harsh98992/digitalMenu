@@ -35,10 +35,11 @@ ng serve
 7. run `firebase deploy` to deploy the project
 
 or paste the following command in your terminal
+ng build --configuration production
+
 
 ```bash
-ng run prod
-ng build --configuration production
+npm run prod
 firebase use qrsay-c617e
 firebase deploy
 

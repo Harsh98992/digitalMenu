@@ -38,6 +38,7 @@ or paste the following command in your terminal
 
 ```bash
 ng run prod
+ng build --configuration production
 firebase use qrsay-c617e
 firebase deploy
 

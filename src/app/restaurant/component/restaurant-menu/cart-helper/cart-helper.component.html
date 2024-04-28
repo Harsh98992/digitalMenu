@@ -181,6 +181,19 @@
                         ></span
                     ></mat-radio-button>
                 </span>
+                <span class="col-4 d-block" *ngIf="rooms && rooms.length">
+                    <mat-radio-button
+                        value="roomService"
+                        
+                        (click)="changeOption($event, 'roomService')"
+                        >Room Service
+                        <span
+                            class="icon_info_alt"
+                            triggers="click:blur"
+                            ngbTooltip="Order the food, and we will deliver to your room"
+                        ></span
+                    ></mat-radio-button>
+                </span>
             </mat-radio-group>
         </div>
 

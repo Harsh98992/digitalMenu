@@ -17,6 +17,7 @@ import { io } from "socket.io-client";
 import { UtilService } from "src/app/api/util.service";
 import { UserLoginComponent } from "src/app/user-auth/user-login/user-login.component";
 import { PaymentDialogComponent } from "src/app/angular-material/payment-dialog/payment-dialog.component";
+import { RoomNoDialogComponent } from "../room-no-dialog/room-no-dialog.component";
 
 @Component({
     selector: "app-cart-helper",
@@ -52,6 +53,7 @@ export class CartHelperComponent implements OnInit {
     deliveryRadioText: string;
     tableData = [];
     promoCodes: any;
+    rooms: any;
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -92,6 +94,7 @@ export class CartHelperComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getRestaurantRoom();
         this.getCartItem();
         this.checkLogin();
 
@@ -147,7 +150,7 @@ export class CartHelperComponent implements OnInit {
             e.preventDefault();
             return;
         }
-        if (!this.userLoginFlag) {
+        if (!this.userLoginFlag && value != "roomService") {
             e.preventDefault();
             this.openLoginDialog();
             return;
@@ -221,7 +224,11 @@ export class CartHelperComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
-        } else if (text === "delivery") {
+        }
+        else if(text==="roomService"){
+            this.openSelectRoomNoDialog();
+        }
+        else if (text === "delivery") {
             this.openAddressSelectionDialog();
         } else if (text === "takeAway" || text === "scheduledDining") {
             this.dialog
@@ -246,6 +253,29 @@ export class CartHelperComponent implements OnInit {
                 });
         } else {
         }
+    }
+    openSelectRoomNoDialog() {
+        this.dialog
+        .open(RoomNoDialogComponent, {
+            panelClass: "add-item-dialog",
+            disableClose: true,
+            data: {
+                restaurantData: this.restaurantData,
+                roomData: this.rooms,
+            },
+        })
+        .afterClosed()
+        .subscribe((resp) => {
+            // if (resp && resp.selectedTableName) {
+            //     this.orderOptionFlag = true;
+            //     this.userPreference = {
+            //         preference: "Dine In",
+            //         value: resp.selectedTableName,
+            //     };
+            //     this.setCartStateHelper();
+            //     this.placeOrder();
+            // }
+        });
     }
     openSelectTableNumberDialog() {
         this.dialog
@@ -552,5 +582,17 @@ export class CartHelperComponent implements OnInit {
         this.deliveryDisabled = false;
         this.deliveryRadioText = "Delivery (Free)";
         return;
+    }
+    getRestaurantRoom() {
+        const reqBody = {
+            restaurantKey: this.restaurantData._id,
+        };
+        this.restaurantService.getAllRoomsRestaurant(reqBody).subscribe({
+            next: (res: any) => {
+                if (res && res.data) {
+                    this.rooms = res.data?.rooms?.room;
+                }
+            },
+        });
     }
 }

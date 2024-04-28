@@ -11,7 +11,7 @@ export class RestaurantService {
     cartItem = new BehaviorSubject([]);
     cartState = new BehaviorSubject({});
     amountToBePaidSubject = new BehaviorSubject(null);
-    bypassGaurd=false
+    bypassGaurd = false;
     constructor(private http: HttpClient) {}
     getRestaurantData(url: string) {
         return this.http.get(
@@ -25,11 +25,17 @@ export class RestaurantService {
         localStorage.setItem("cartItem", JSON.stringify(data));
         this.cartItem.next(data);
     }
-    setRestaurantUrl(url){
-         localStorage.setItem("activeRestaurantUrl",url)
+    setRestaurantUrl(url) {
+        localStorage.setItem("activeRestaurantUrl", url);
     }
-    getRestaurantUrl(){
-        return localStorage.getItem("activeRestaurantUrl")
+    getRestaurantUrl() {
+        return localStorage.getItem("activeRestaurantUrl");
+    }
+    getAllRoomsRestaurant(reqBody) {
+        return this.http.post(
+            `${this.apiUrl}/v1/customer/getAllRoomRestaurant`,
+            reqBody
+        );
     }
     getCartSessionData() {
         const data = localStorage.getItem("cartItem");
@@ -48,7 +54,7 @@ export class RestaurantService {
     }
 
     setCartSate(data: any) {
-        localStorage.setItem("cartState",JSON.stringify(data))
+        localStorage.setItem("cartState", JSON.stringify(data));
         this.cartState.next(data);
     }
     getRestaurantReview(placeId) {

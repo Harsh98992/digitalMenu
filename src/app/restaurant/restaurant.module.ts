@@ -38,6 +38,7 @@ import { ShoppingDeliveryPolicyComponent } from "./component/policy/shopping-del
 import { OrderTrackingComponent } from "./component/order-tracking/order-tracking.component";
 import { PromoCodeDetailsDialogComponent } from "./component/restaurant-menu/cart-helper/promo-code-details-dialog/promo-code-details-dialog.component";
 import { AddMissingInfoDialogComponent } from './component/restaurant-menu/add-missing-info-dialog/add-missing-info-dialog.component';
+import { RoomNoDialogComponent } from './component/restaurant-menu/room-no-dialog/room-no-dialog.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +72,7 @@ import { AddMissingInfoDialogComponent } from './component/restaurant-menu/add-m
         OrderTrackingComponent,
         PromoCodeDetailsDialogComponent,
         AddMissingInfoDialogComponent,
+        RoomNoDialogComponent,
     ],
     imports: [
         CommonModule,

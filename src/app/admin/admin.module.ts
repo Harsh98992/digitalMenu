@@ -53,6 +53,8 @@ import { PromocodeComponent } from "./panel/promocode/promocode.component";
 import { PromoCodeListComponent } from './panel/promo-code-list/promo-code-list.component';
 import { AddPaymentComponent } from './panel/settings/add-payment/add-payment.component';
 import { verifiedComponent } from './panel/unverify-account/verified/verified.component';
+import { RestaurantRoomComponent } from './panel/restaurant-room/restaurant-room.component';
+import { AddRoomComponent } from './panel/restaurant-room/add-room/add-room.component';
 
 @NgModule({
     declarations: [
@@ -102,6 +104,8 @@ import { verifiedComponent } from './panel/unverify-account/verified/verified.co
         PromoCodeListComponent,
         AddPaymentComponent,
         verifiedComponent,
+        RestaurantRoomComponent,
+        AddRoomComponent,
     ],
     imports: [
         CommonModule,

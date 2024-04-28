@@ -34,6 +34,7 @@ import { RestaurantTablesComponent } from "./panel/restaurant-tables/restaurant-
 import { PromoCodeListComponent } from "./panel/promo-code-list/promo-code-list.component";
 import { RestaurntOwnerGuard } from "../api/guard/restaurnt-owner.guard";
 import { verifiedComponent } from "./panel/unverify-account/verified/verified.component";
+import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room.component";
 const routes: Routes = [
     {
         path: "",
@@ -83,6 +84,19 @@ const routes: Routes = [
                     {
                         path: "edit/:id",
                         component: EditUserComponent,
+                    },
+                ],
+            },
+            {
+                path: "restaurant-room",
+                canActivateChild: [
+                    VerifiedAccountChildGuard,
+                    RestaurntOwnerGuard,
+                ],
+                children: [
+                    {
+                        path: "view",
+                        component: RestaurantRoomComponent,
                     },
                 ],
             },

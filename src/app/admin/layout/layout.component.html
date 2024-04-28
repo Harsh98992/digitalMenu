@@ -139,6 +139,19 @@
                         >
                     </li>
                     <li
+                    *ngIf="
+                        !adminRouteFlag &&
+                        verifiedAccountFlag &&
+                        !this.staffRoleFlag
+                    "
+                    routerLink="/admin/restaurant-room/view"
+                >
+                    <a class="custom-center"
+                        ><i class="fas fa-angle-right"></i> Restaurant
+                        Rooms</a
+                    >
+                </li>
+                    <li
                         routerLink="/admin/restaurant-images"
                         *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
                     >

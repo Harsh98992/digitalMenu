@@ -1,0 +1,30 @@
+<div mat-dialog-title class="head">
+    <h3>Table Details</h3>
+    <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+<div class="col-12">
+    <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+        <form [formGroup]="roomForm" (ngSubmit)="submitForm()">
+            <div class="mb-3">
+                <label for="roomName" class="form-label" class="required"
+                    >Room Name</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="roomName"
+                    formControlName="roomName"
+                    name="roomName"
+                    maxlength="15"
+                    [ngClass]="
+                        checkForError('roomName', 'required')
+                            ? 'is-invalid'
+                            : ''
+                    "
+                />
+            </div>
+
+            <button type="submit" class="btn btn_1 gradient w-100">Save</button>
+        </form>
+    </div>
+</div>

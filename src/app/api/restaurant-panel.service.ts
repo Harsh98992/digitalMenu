@@ -184,6 +184,12 @@ export class RestaurantPanelService {
             data
         );
     }
+    createRoomEntry(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/createRoomEntry`,
+            data
+        );
+    }
     updateTable(data) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/editTableById`,
@@ -192,6 +198,9 @@ export class RestaurantPanelService {
     }
     getAllTables() {
         return this.http.get(`${this.apiUrl}/v1/restaurant/getAllTables`);
+    }
+    getAllRooms() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getAllRooms`);
     }
 
     updateRestaurantImage(imageData: { image: any }) {
@@ -257,7 +266,7 @@ export class RestaurantPanelService {
     addCategory(reqBody) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
-          reqBody
+            reqBody
         );
     }
     updateCategory(reqData: any) {

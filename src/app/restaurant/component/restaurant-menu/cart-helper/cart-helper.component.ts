@@ -224,11 +224,9 @@ export class CartHelperComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
-        }
-        else if(text==="roomService"){
+        } else if (text === "roomService") {
             this.openSelectRoomNoDialog();
-        }
-        else if (text === "delivery") {
+        } else if (text === "delivery") {
             this.openAddressSelectionDialog();
         } else if (text === "takeAway" || text === "scheduledDining") {
             this.dialog
@@ -256,26 +254,26 @@ export class CartHelperComponent implements OnInit {
     }
     openSelectRoomNoDialog() {
         this.dialog
-        .open(RoomNoDialogComponent, {
-            panelClass: "add-item-dialog",
-            disableClose: true,
-            data: {
-                restaurantData: this.restaurantData,
-                roomData: this.rooms,
-            },
-        })
-        .afterClosed()
-        .subscribe((resp) => {
-            // if (resp && resp.selectedTableName) {
-            //     this.orderOptionFlag = true;
-            //     this.userPreference = {
-            //         preference: "Dine In",
-            //         value: resp.selectedTableName,
-            //     };
-            //     this.setCartStateHelper();
-            //     this.placeOrder();
-            // }
-        });
+            .open(RoomNoDialogComponent, {
+                panelClass: "add-item-dialog",
+                disableClose: true,
+                data: {
+                    restaurantData: this.restaurantData,
+                    roomData: this.rooms,
+                },
+            })
+            .afterClosed()
+            .subscribe((resp) => {
+                if (resp && resp.selectedRoom) {
+                    this.orderOptionFlag = true;
+                    this.userPreference = {
+                        preference: "room service",
+                        value: resp.selectedRoom.roomName,
+                    };
+                    this.setCartStateHelper();
+                    this.placeOrder();
+                }
+            });
     }
     openSelectTableNumberDialog() {
         this.dialog

@@ -1,59 +1,39 @@
 <div class="small-dialog-header">
-    <h3>Select Table Name</h3>
+    <h3>Please select a room</h3>
     <a mat-dialog-close class="close_panel_mobile"
         ><span class="icon_close_alt"></span
     ></a>
 </div>
-<mat-dialog-content>
-    <!-- <form [formGroup]="form" class="container mt-4">
-        <div class="form-group">
-            <label for="tableName" class="required">Table Name</label>
-            <input
-                type="text"
-                [ngClass]="
-                    checkForError('tableName', 'required') ? 'is-invalid' : ''
-                "
-                id="tableName"
-                class="form-control"
-                maxlength="5"
-                formControlName="tableName"
-            />
-        </div>
-    </form> -->
-    <div class="container mt-3">
-        <label id="example-radio-group-label">Please select a room</label>
-
+<mat-dialog-content class="no-scroll">
+    <div class="mt-3">
         <mat-radio-group
-            aria-labelledby="example-radio-group-label"
+            aria-labelledby="example-radio-group-label "
             class="example-radio-group"
-            [(ngModel)]="selectedTable"
+            [(ngModel)]="selectedRoom"
             (change)="onSubmit()"
         >
             <mat-radio-button
-                class="example-radio-button"
-              
+                class="example-radio-button d-block"
+                
+                name="selectedRoom"
                 *ngFor="let option of roomData"
-               
-                [value]="option._id"
+                [value]="option"
             >
-            
-              Room  {{ option.roomName }}
+                <div class="py-2 px-3">
+                    <div class="first pl-2 d-flex py-2">
+                        <div class="border-left pl-2">
+                            <span class="head">
+                                Room {{ option.roomName | titlecase }}</span
+                            >
+                        </div>
+                    </div>
+                </div>
             </mat-radio-button>
         </mat-radio-group>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <div class="footer">
-        <div class="row">
-            <div class="col-md-12">
-                <button
-                    type="reset"
-                    class="btn_1 full-width"
-                    (click)="onSubmit()"
-                >
-                    Submit
-                </button>
-            </div>
-        </div>
-    </div>
+    <button type="button" class="btn btn_1 gradient w-100" (click)="onSubmit()">
+        Proceed to payment
+    </button>
 </mat-dialog-actions>

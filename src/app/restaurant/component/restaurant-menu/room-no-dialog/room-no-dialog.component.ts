@@ -5,6 +5,7 @@ import {
     MatDialog,
     MatDialogRef,
 } from "@angular/material/dialog";
+import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 import { UtilService } from "src/app/api/util.service";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
 import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
@@ -18,7 +19,7 @@ export class RoomNoDialogComponent implements OnInit {
     form: FormGroup;
     restaurantData: any;
     tableData: any;
-    selectedTable: any;
+    selectedRoom: any;
     customerDetailId: any;
     roomData: any;
     constructor(
@@ -32,7 +33,24 @@ export class RoomNoDialogComponent implements OnInit {
     ) {}
     ngOnInit(): void {
         this.roomData = this.dialogData.roomData;
-        console.log(this.roomData);
     }
-    onSubmit() {}
+    onSubmit() {
+        if (!this.selectedRoom) {
+            this.utilityService.openSnackBar("Please select a room", true);
+            return;
+        }
+        const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+            data: {
+                title: "Place Order",
+                message: `Place Your Order Now for Room Number ${this.selectedRoom.roomName}!`,
+            },
+        });
+        confirmDialog.afterClosed().subscribe((result) => {
+            if (result?.okFlag) {
+                this.dialogRef.close({
+                    selectedRoom: this.selectedRoom,
+                });
+            }
+        });
+    }
 }

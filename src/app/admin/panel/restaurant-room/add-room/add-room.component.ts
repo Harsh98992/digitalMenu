@@ -43,7 +43,7 @@ export class AddRoomComponent implements OnInit {
                     roomId: this.data._id,
                     roomName: this.roomForm.get("roomName").value,
                 };
-                this.restaurantPanelService.updateTable(reqData).subscribe({
+                this.restaurantPanelService.updateRoom(reqData).subscribe({
                     next: (res) => {
                         this.dialogRef.close({ apiCallFlag: true });
                     },

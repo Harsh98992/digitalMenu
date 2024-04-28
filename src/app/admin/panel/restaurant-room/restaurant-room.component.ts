@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ColumnMode, DatatableComponent } from "@swimlane/ngx-datatable";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
 import { AddRoomComponent } from "./add-room/add-room.component";
+import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: "app-restaurant-room",
@@ -65,4 +66,26 @@ export class RestaurantRoomComponent implements OnInit {
           }
       });
   }
+  deleteRoomDialog(row) {
+    const dialogData = {
+        title: "Confirm",
+        message: "Are you sure you want to delete this item?",
+    };
+    this.dialog
+        .open(ConfirmDialogComponent, { data: dialogData })
+        .afterClosed()
+        .subscribe({
+            next: (res: any) => {
+                if (res && res.okFlag) {
+                    this.restaurantService
+                        .deleteRoomById(row._id)
+                        .subscribe({
+                            next: (res) => {
+                                this.getRoomData();
+                            },
+                        });
+                }
+            },
+        });
+}
 }

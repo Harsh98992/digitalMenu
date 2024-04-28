@@ -162,6 +162,11 @@ export class RestaurantPanelService {
             `${this.apiUrl}/v1/restaurant/deleteTableById/${id}`
         );
     }
+    deleteRoomById(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/deleteRoomById/${id}`
+        );
+    }
     deleteContactDetail(id: string) {
         return this.http.delete(
             `${this.apiUrl}/v1/restaurant/deleteContactDetail/${id}`
@@ -193,6 +198,12 @@ export class RestaurantPanelService {
     updateTable(data) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/editTableById`,
+            data
+        );
+    }
+    updateRoom(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/editRoomById`,
             data
         );
     }

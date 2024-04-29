@@ -340,7 +340,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
-                                    <span class="badge badge-warning">
+                                    <span class="badge badge-warning" *ngIf="details.customerName">
                                         {{
                                             details.loyalFlag ? "Loyal" : "New"
                                         }}</span
@@ -408,6 +408,7 @@
                                     <div class="support">
                                         <button
                                             class="btn btn-info"
+                                            *ngIf="details.customerName"
                                             (click)="toggleLoyalStatus(details)"
                                         >
                                             {{
@@ -976,7 +977,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
-                                    <span class="badge badge-warning">
+                                    <span class="badge badge-warning" *ngIf="details.customerName">
                                         {{
                                             details.loyalFlag ? "Loyal" : "New"
                                         }}</span
@@ -1044,6 +1045,7 @@
                                     <div class="support">
                                         <button
                                             class="btn btn-info"
+                                            *ngIf="details.customerName"
                                             (click)="toggleLoyalStatus(details)"
                                         >
                                             {{
@@ -1372,7 +1374,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
-                                    <span class="badge badge-warning">
+                                    <span class="badge badge-warning" *ngIf="details.customerName">
                                         {{
                                             details.loyalFlag ? "Loyal" : "New"
                                         }}</span
@@ -1442,6 +1444,7 @@
                                     <div class="support">
                                         <button
                                             class="btn btn-info"
+                                            *ngIf="details.customerName"
                                             (click)="toggleLoyalStatus(details)"
                                         >
                                             {{

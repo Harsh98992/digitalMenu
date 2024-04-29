@@ -46,7 +46,7 @@
                                         <h4>
                                             {{
                                                 details.customerPreferences
-                                                    .preference
+                                                    .preference | titlecase
                                             }}
                                         </h4>
                                         <h4
@@ -56,6 +56,18 @@
                                             "
                                         >
                                             Table Name:-
+                                            {{
+                                                details.customerPreferences
+                                                    ?.value
+                                            }}
+                                        </h4>
+                                        <h4
+                                            *ngIf="
+                                                details.customerPreferences
+                                                    .preference.toLowerCase()=== 'room service'
+                                            "
+                                        >
+                                             Room Number:-
                                             {{
                                                 details.customerPreferences
                                                     ?.value
@@ -683,6 +695,18 @@
                                             }}
                                         </h4>
                                         <h4
+                                        *ngIf="
+                                            details.customerPreferences
+                                                .preference.toLowerCase()=== 'room service'
+                                        "
+                                    >
+                                         Room Number:-
+                                        {{
+                                            details.customerPreferences
+                                                ?.value
+                                        }}
+                                    </h4>
+                                        <h4
                                             *ngIf="
                                                 details.customerPreferences
                                                     .preference ===
@@ -1070,6 +1094,18 @@
                                                     ?.value
                                             }}
                                         </h4>
+                                        <h4
+                                        *ngIf="
+                                            details.customerPreferences
+                                                .preference.toLowerCase()=== 'room service'
+                                        "
+                                    >
+                                         Room Number:-
+                                        {{
+                                            details.customerPreferences
+                                                ?.value
+                                        }}
+                                    </h4>
                                         <h4
                                             *ngIf="
                                                 details.customerPreferences

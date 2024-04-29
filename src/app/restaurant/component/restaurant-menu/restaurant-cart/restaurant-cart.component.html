@@ -13,13 +13,13 @@
     <a
         class="btn_1 btn-success full-width"
         (click)="openLoginDialog()"
-        *ngIf="!userLoginFlag"
+        *ngIf="!userLoginFlag && orderOption !== 'roomService'"
         >Log in and place an order</a
     >
     <a
         class="btn_1 gradient full-width"
         (click)="openOrderOptionDialog()"
-        *ngIf="userLoginFlag && !orderOptionFlag"
+        *ngIf="((userLoginFlag || orderOption === 'roomService') && !orderOptionFlag)"
         >{{ getOrderOptionText() }}</a
     >
 
@@ -29,7 +29,7 @@
     <a
         class="btn_1 gradient full-width"
         (click)="placeOrder(true)"
-        *ngIf="userLoginFlag && orderOptionFlag"
+        *ngIf="(userLoginFlag || orderOption === 'roomService') && orderOptionFlag"
         >Proceed to payment</a
     >
 </div>

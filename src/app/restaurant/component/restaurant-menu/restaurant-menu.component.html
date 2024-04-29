@@ -535,20 +535,20 @@
                     <a
                         class="btn btn-success btn-block btn-lg"
                         (click)="openLoginDialog()"
-                        *ngIf="!userLoginFlag"
+                        *ngIf="!userLoginFlag && orderOption !== 'roomService'"
                         >Log in and place an order
                     </a>
                     <a
                         class="btn btn-success btn-block btn-lg"
                         (click)="openOrderOptionDialog()"
-                        *ngIf="userLoginFlag && !orderOptionFlag"
+                        *ngIf="((userLoginFlag || orderOption === 'roomService') && !orderOptionFlag)"
                         >{{ getOrderOptionText() }}</a
                     >
 
                     <a
                         class="btn btn-success btn-block btn-lg"
                         (click)="placeOrder(true)"
-                        *ngIf="userLoginFlag && orderOptionFlag"
+                        *ngIf="(userLoginFlag || orderOption === 'roomService') && orderOptionFlag"
                         >Proceed to payment</a
                     >
                 </div>

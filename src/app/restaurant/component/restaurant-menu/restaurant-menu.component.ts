@@ -21,6 +21,7 @@ import { PhoneOtpComponent } from "src/app/angular-material/phone-otp/phone-otp.
 import { AddMissingInfoDialogComponent } from "./add-missing-info-dialog/add-missing-info-dialog.component";
 import { CustomerService } from "src/app/api/customer.service";
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
+import { RoomNoDialogComponent } from "./room-no-dialog/room-no-dialog.component";
 
 @Component({
     selector: "app-restaurant-menu",
@@ -162,10 +163,34 @@ export class RestaurantMenuComponent implements OnInit {
             },
         });
     }
+    openSelectRoomNoDialog() {
+        this.dialog
+            .open(RoomNoDialogComponent, {
+                panelClass: "add-item-dialog",
+                disableClose: true,
+                data: {
+                    restaurantData: this.restaurantDetail,
+                },
+            })
+            .afterClosed()
+            .subscribe((resp) => {
+                if (resp && resp.selectedRoom) {
+                    this.orderOptionFlag = true;
+                    this.userPreference = {
+                        preference: "room service",
+                        value: resp.selectedRoom.roomName,
+                    };
+                    this.setCartStateData();
+                    this.placeOrder();
+                }
+            });
+    }
     openOrderOptionDialog() {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
+        }else if (text === "roomService") {
+            this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
         } else if (text === "takeAway" || text === "scheduledDining") {
@@ -232,6 +257,8 @@ export class RestaurantMenuComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             return "Proceed to choose  table number.";
+        } else if (text === "roomService") {
+            return "Proceed to choose  room number.";
         } else if (text === "delivery") {
             return "Proceed to choose address.";
         } else if (text === "takeAway" || text === "scheduledDining") {
@@ -417,7 +444,7 @@ export class RestaurantMenuComponent implements OnInit {
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
                     this.checkForPureVeg();
-                  
+
                     if (this.restaurantDetail.restaurantStatus === "offline") {
                         const dialogData = {
                             title: "Restaurant Closed",
@@ -571,7 +598,7 @@ export class RestaurantMenuComponent implements OnInit {
             });
         });
     }
-   
+
     applyTimeValidation(data: any) {
         // here time  be in 24 hours format and in hh:mm format
         if (data && data?.startTime && data?.endTime) {

@@ -280,7 +280,7 @@
         <hr />
         <h6
             class="font-weight-bold mb-0"
-            *ngIf="userLoginFlag && orderOptionFlag"
+            *ngIf="orderOptionFlag"
         >
             {{ this.userPreference?.preference | titlecase }}
             <span class="float-right">
@@ -313,6 +313,15 @@
                 {{ this.userPreference?.value.address }},{{
                     this.userPreference?.value.pincode
                 }}
+            </h6>
+            <h6
+                *ngIf="
+                    this.userPreference.preference.toLowerCase() ===
+                    'room service'
+                "
+            >
+                Room Number:-
+                {{ this.userPreference.value | titlecase }}
             </h6>
         </h6>
     </div>

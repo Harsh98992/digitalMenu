@@ -24,6 +24,7 @@ import { PhoneOtpComponent } from "src/app/angular-material/phone-otp/phone-otp.
 import { CustomerService } from "src/app/api/customer.service";
 import { AddMissingInfoDialogComponent } from "../add-missing-info-dialog/add-missing-info-dialog.component";
 import { TableNumberDialogComponent } from "../table-number-dialog/table-number-dialog.component";
+import { RoomNoDialogComponent } from "../room-no-dialog/room-no-dialog.component";
 
 @Component({
     selector: "app-restaurant-cart",
@@ -89,11 +90,36 @@ export class RestaurantCartComponent implements OnInit {
                 }
             });
     }
+    openSelectRoomNoDialog() {
+        this.dialog
+            .open(RoomNoDialogComponent, {
+                panelClass: "add-item-dialog",
+                disableClose: true,
+                data: {
+                    restaurantData: this.restaurantData,
+                    
+                },
+            })
+            .afterClosed()
+            .subscribe((resp) => {
+                if (resp && resp.selectedRoom) {
+                    this.orderOptionFlag = true;
+                    this.userPreference = {
+                        preference: "room service",
+                        value: resp.selectedRoom.roomName,
+                    };
+                    this.setCartStateData();
+                    this.placeOrder();
+                }
+            });
+    }
     //This one
     openOrderOptionDialog() {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
+        }else if (text === "roomService") {
+            this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
         } else if (text === "takeAway" || text === "scheduledDining") {
@@ -141,6 +167,8 @@ export class RestaurantCartComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             return "Proceed to choose  table number.";
+        } else if (text === "roomService") {
+            return "Proceed to choose  room number.";
         } else if (text === "delivery") {
             return "Proceed to choose address.";
         } else if (text === "takeAway" || text === "scheduledDining") {

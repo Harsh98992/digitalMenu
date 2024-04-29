@@ -24,15 +24,28 @@ export class RoomNoDialogComponent implements OnInit {
     roomData: any;
     constructor(
         private fb: FormBuilder,
-        private restaurnatService: RestaurantService,
         @Inject(MAT_DIALOG_DATA) public dialogData: any,
         public dialogRef: MatDialogRef<RoomNoDialogComponent>,
         private utilityService: UtilService,
         private customerAuthService: CustomerAuthService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private restaurantService: RestaurantService
     ) {}
     ngOnInit(): void {
-        this.roomData = this.dialogData.roomData;
+        this.restaurantData = this.dialogData.restaurantData;
+        this.getRestaurantRoom();
+    }
+    getRestaurantRoom() {
+        const reqBody = {
+            restaurantKey: this.restaurantData._id,
+        };
+        this.restaurantService.getAllRoomsRestaurant(reqBody).subscribe({
+            next: (res: any) => {
+                if (res && res.data) {
+                    this.roomData = res.data?.rooms?.room;
+                }
+            },
+        });
     }
     onSubmit() {
         if (!this.selectedRoom) {

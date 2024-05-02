@@ -90,6 +90,11 @@ export class RestaurantCartComponent implements OnInit {
                 }
             });
     }
+
+
+    customerName: string;
+    customerPhoneNumber: string;
+
     openSelectRoomNoDialog() {
         this.dialog
             .open(RoomNoDialogComponent, {
@@ -97,7 +102,7 @@ export class RestaurantCartComponent implements OnInit {
                 disableClose: true,
                 data: {
                     restaurantData: this.restaurantData,
-                    
+
                 },
             })
             .afterClosed()

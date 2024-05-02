@@ -489,6 +489,7 @@ export class CartHelperComponent implements OnInit {
                 gstAmount: this.gstAmount,
                 discountAmount: this.discountAmount,
                 deliveryAmount: this.deliveryAmount,
+            
             },
         ];
         const paymentData = {

@@ -9,6 +9,7 @@ import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/
 import { UtilService } from "src/app/api/util.service";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
 import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
+import { NamePhonenumberForRoomServiceComponent } from "../name-phonenumber-for-room-service/name-phonenumber-for-room-service.component";
 
 @Component({
     selector: "app-room-no-dialog",
@@ -59,11 +60,30 @@ export class RoomNoDialogComponent implements OnInit {
             },
         });
         confirmDialog.afterClosed().subscribe((result) => {
-            if (result?.okFlag) {
-                this.dialogRef.close({
-                    selectedRoom: this.selectedRoom,
-                });
-            }
+            // now open the dialog for customer details form name and phone numberThis dialogue takes the name and the phone number. Name is mandatory, but the phone number is not mandatory. There should be a star in the name label
+            const dial = this.dialog.open(
+                NamePhonenumberForRoomServiceComponent,
+                {
+                    data: {
+                        name: "",
+                        phoneNumber: "",
+                    },
+                }
+            );
+
+
+
+
+            dial.afterClosed().subscribe((re) => {
+                if (result?.okFlag) {
+                    this.dialogRef.close({
+                        selectedRoom: this.selectedRoom,
+                        name: re?.name,
+                        phoneNumber: re?.phoneNumber,
+                    });
+                }
+            });
+            
         });
     }
 }

@@ -51,6 +51,8 @@ export class RestaurantMenuComponent implements OnInit {
     cookingInstruction = "";
     bannerImage = "";
     reviews = [];
+    customerName = "";
+    customerPhoneNumber = "";
 
     googleMapUrl = "";
     placeId = "";

@@ -17,8 +17,6 @@ import { TimeSelectorDialogComponent } from "./time-selector-dialog/time-selecto
 import { CartHelperComponent } from "./cart-helper/cart-helper.component";
 import { AddressSelectionComponent } from "./address/address-selection/address-selection.component";
 import { TableNumberDialogComponent } from "./table-number-dialog/table-number-dialog.component";
-import { PhoneOtpComponent } from "src/app/angular-material/phone-otp/phone-otp.component";
-import { AddMissingInfoDialogComponent } from "./add-missing-info-dialog/add-missing-info-dialog.component";
 import { CustomerService } from "src/app/api/customer.service";
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 import { RoomNoDialogComponent } from "./room-no-dialog/room-no-dialog.component";

@@ -473,6 +473,8 @@ export class CartHelperComponent implements OnInit {
         }
         return result;
     }
+    customerName: string;
+    customerPhoneNumber: string;
 
     socket: any;
     placeOrder(btnAction = false) {
@@ -489,7 +491,8 @@ export class CartHelperComponent implements OnInit {
                 gstAmount: this.gstAmount,
                 discountAmount: this.discountAmount,
                 deliveryAmount: this.deliveryAmount,
-            
+                
+
             },
         ];
         const paymentData = {

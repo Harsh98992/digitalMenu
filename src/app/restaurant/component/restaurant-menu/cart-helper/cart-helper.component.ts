@@ -18,6 +18,7 @@ import { UtilService } from "src/app/api/util.service";
 import { UserLoginComponent } from "src/app/user-auth/user-login/user-login.component";
 import { PaymentDialogComponent } from "src/app/angular-material/payment-dialog/payment-dialog.component";
 import { RoomNoDialogComponent } from "../room-no-dialog/room-no-dialog.component";
+import { CustomerDetailsService } from "src/app/api/customer-details.service";
 
 @Component({
     selector: "app-cart-helper",
@@ -48,7 +49,8 @@ export class CartHelperComponent implements OnInit {
     razorPayData: any;
     discountAmount: any = 0;
     deliveryAmount: any;
-
+    customerName: string;
+    customerPhoneNumber: string;
     defaultOrderOption = null;
     deliveryRadioText: string;
     tableData = [];
@@ -59,6 +61,7 @@ export class CartHelperComponent implements OnInit {
         private customerAuthService: CustomerAuthService,
         private dialog: MatDialog,
         private orderService: OrderService,
+        private customerDetailsService: CustomerDetailsService,
         private router: Router,
         private customerService: CustomerService,
         private utilityService: UtilService
@@ -473,15 +476,13 @@ export class CartHelperComponent implements OnInit {
         }
         return result;
     }
-    customerName: string;
-    customerPhoneNumber: string;
 
     socket: any;
     placeOrder(btnAction = false) {
         const orderData = this.getOrderItems();
         this.socket = io(this.socketUrl, {});
 
-        const bodyData = [
+        let bodyData: any = [
             {
                 orderSummary: orderData,
                 customerPreferences: this.userPreference,
@@ -491,10 +492,16 @@ export class CartHelperComponent implements OnInit {
                 gstAmount: this.gstAmount,
                 discountAmount: this.discountAmount,
                 deliveryAmount: this.deliveryAmount,
-                
-
             },
         ];
+
+        if (this.userPreference?.preference === "room service") {
+            this.userPreference.value = this.userPreference.value.roomName;
+            const customerDetails = this.customerDetailsService.getCustomerDetails();
+            bodyData[0].customerName = customerDetails.name;
+            bodyData[0].customerPhoneNumber = customerDetails.phoneNumber;
+        }
+
         const paymentData = {
             orderDetails: bodyData,
             paymentOnlineAvailable: this.restaurantData?.paymentgatewayData

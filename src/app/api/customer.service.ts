@@ -11,6 +11,7 @@ export class CustomerService {
     @Input("restaurantData") restaurantData;
 
     apiUrl = environment.apiUrl;
+    customerDetails: any;
     // return this.http.post(`${this.apiUrl}/v1/customer/login`, data);
 
     constructor(private http: HttpClient) {}

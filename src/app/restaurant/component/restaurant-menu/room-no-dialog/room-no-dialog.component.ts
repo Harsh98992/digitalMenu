@@ -10,6 +10,7 @@ import { UtilService } from "src/app/api/util.service";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
 import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
 import { NamePhonenumberForRoomServiceComponent } from "../name-phonenumber-for-room-service/name-phonenumber-for-room-service.component";
+import { CustomerDetailsService } from "src/app/api/customer-details.service";
 
 @Component({
     selector: "app-room-no-dialog",
@@ -28,7 +29,7 @@ export class RoomNoDialogComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public dialogData: any,
         public dialogRef: MatDialogRef<RoomNoDialogComponent>,
         private utilityService: UtilService,
-        private customerAuthService: CustomerAuthService,
+        private customerDetailsService: CustomerDetailsService,
         private dialog: MatDialog,
         private restaurantService: RestaurantService
     ) {}
@@ -60,7 +61,6 @@ export class RoomNoDialogComponent implements OnInit {
             },
         });
         confirmDialog.afterClosed().subscribe((result) => {
-            // now open the dialog for customer details form name and phone numberThis dialogue takes the name and the phone number. Name is mandatory, but the phone number is not mandatory. There should be a star in the name label
             const dial = this.dialog.open(
                 NamePhonenumberForRoomServiceComponent,
                 {
@@ -71,11 +71,14 @@ export class RoomNoDialogComponent implements OnInit {
                 }
             );
 
-
-
-
             dial.afterClosed().subscribe((re) => {
                 if (result?.okFlag) {
+                    // Store customer details using the service
+                    this.customerDetailsService.storeCustomerDetails(
+                        re?.name,
+                        re?.phoneNumber
+                    );
+                    // Close dialog and pass selectedRoom, name, and phoneNumber to the parent component
                     this.dialogRef.close({
                         selectedRoom: this.selectedRoom,
                         name: re?.name,
@@ -83,7 +86,6 @@ export class RoomNoDialogComponent implements OnInit {
                     });
                 }
             });
-            
         });
     }
 }

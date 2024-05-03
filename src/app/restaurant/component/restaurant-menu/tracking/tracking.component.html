@@ -2,25 +2,25 @@
     <h2>Order Tracking Dashboard</h2>
     <p>Here are two ways to track the order:</p>
     <div class="option-container">
-      <div>
-        <h3>Option 1: Search by Restaurant, Customer, and Room</h3>
-        <form [formGroup]="option1Form" (ngSubmit)="submitOption1()">
-          <label for="restaurantName">Restaurant Name:</label>
-          <input type="text" id="restaurantName" formControlName="restaurantName">
-          <label for="customerName">Customer Name:</label>
-          <input type="text" id="customerName" formControlName="customerName">
-          <label for="roomName">Room Name:</label>
-          <input type="text" id="roomName" formControlName="roomName">
-          <button type="submit">Track Order</button>
-        </form>
-      </div>
-      <div>
-        <h3>Option 2: Search by Tracking ID</h3>
-        <form [formGroup]="option2Form" (ngSubmit)="submitOption2()">
-          <label for="trackingId">Tracking ID:</label>
-          <input type="text" id="trackingId" formControlName="trackingId">
-          <button type="submit">Track Order</button>
-        </form>
-      </div>
+        <div>
+            <h3>Option 1: Search by Restaurant, Customer, and Room</h3>
+            <form>
+                <label for="restaurantName">Restaurant Name:</label>
+                <input type="text" id="restaurantName" name="restaurantName" required>
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" name="customerName" required>
+                <label for="roomName">Room Name:</label>
+                <input type="text" id="roomName" name="roomName" required>
+                <button type="submit">Track Order</button>
+            </form>
+        </div>
+        <div>
+            <h3>Option 2: Search by Tracking ID</h3>
+            <form>
+                <label for="trackingId">Tracking ID:</label>
+                <input type="text" id="trackingId" name="trackingId" required>
+                <button type="submit">Track Order</button>
+            </form>
+        </div>
     </div>
-  </div>
+</div>

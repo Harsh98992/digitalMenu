@@ -91,7 +91,6 @@ export class RestaurantCartComponent implements OnInit {
             });
     }
 
-
     customerName: string;
     customerPhoneNumber: string;
 
@@ -102,16 +101,20 @@ export class RestaurantCartComponent implements OnInit {
                 disableClose: true,
                 data: {
                     restaurantData: this.restaurantData,
-
                 },
             })
             .afterClosed()
             .subscribe((resp) => {
                 if (resp && resp.selectedRoom) {
+                    console.log("resp", resp);
                     this.orderOptionFlag = true;
                     this.userPreference = {
                         preference: "room service",
                         value: resp.selectedRoom.roomName,
+                        userDetail: {
+                            name: resp.name,
+                            phoneNumber: resp.phoneNumber,
+                        },
                     };
                     this.setCartStateData();
                     this.placeOrder();
@@ -123,7 +126,7 @@ export class RestaurantCartComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
-        }else if (text === "roomService") {
+        } else if (text === "roomService") {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
@@ -221,7 +224,7 @@ export class RestaurantCartComponent implements OnInit {
     }
 
     customerData: any;
-    placeOrder(btnAction=false) {
+    placeOrder(btnAction = false) {
         this.customerData = this.customerAuthService.getUserDetail();
 
         console.log("Customer Data: ", this.customerData);

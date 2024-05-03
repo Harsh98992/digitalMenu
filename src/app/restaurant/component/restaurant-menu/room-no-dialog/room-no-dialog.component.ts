@@ -64,20 +64,12 @@ export class RoomNoDialogComponent implements OnInit {
             const dial = this.dialog.open(
                 NamePhonenumberForRoomServiceComponent,
                 {
-                    data: {
-                        name: "",
-                        phoneNumber: "",
-                    },
+                    panelClass: "add-item-dialog",
                 }
             );
 
             dial.afterClosed().subscribe((re) => {
-                if (result?.okFlag) {
-                    // Store customer details using the service
-                    this.customerDetailsService.storeCustomerDetails(
-                        re?.name,
-                        re?.phoneNumber
-                    );
+                if (re?.okFlag) {
                     // Close dialog and pass selectedRoom, name, and phoneNumber to the parent component
                     this.dialogRef.close({
                         selectedRoom: this.selectedRoom,

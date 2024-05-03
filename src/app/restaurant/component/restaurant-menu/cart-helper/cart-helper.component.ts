@@ -268,10 +268,16 @@ export class CartHelperComponent implements OnInit {
             .afterClosed()
             .subscribe((resp) => {
                 if (resp && resp.selectedRoom) {
+                    console.log("resp", resp);
                     this.orderOptionFlag = true;
+
                     this.userPreference = {
                         preference: "room service",
                         value: resp.selectedRoom.roomName,
+                        userDetail:{
+                            name:resp.name,
+                            phoneNumber:resp.phoneNumber
+                        }
                     };
                     this.setCartStateHelper();
                     this.placeOrder();
@@ -495,12 +501,7 @@ export class CartHelperComponent implements OnInit {
             },
         ];
 
-        if (this.userPreference?.preference === "room service") {
-            this.userPreference.value = this.userPreference.value.roomName;
-            const customerDetails = this.customerDetailsService.getCustomerDetails();
-            bodyData[0].customerName = customerDetails.name;
-            bodyData[0].customerPhoneNumber = customerDetails.phoneNumber;
-        }
+    
 
         const paymentData = {
             orderDetails: bodyData,

@@ -1,19 +1,43 @@
 <div class="small-dialog-header">
-  <h3>Name and Phone Number for Room Service</h3>
-  <a mat-dialog-close class="close_panel_mobile"
-      ><span class="icon_close_alt"></span
-  ></a>
-</div><div mat-dialog-content>
-  <div class="form-group">
-    <label for="name" class="mat-body-strong">Name<span>*</span>:</label>
-    <input matInput type="text" id="name" name="name" [(ngModel)]="name" required>
-  </div>
-  <div class="form-group">
-    <label for="phone" class="mat-body-strong">Phone Number:</label>
-    <input matInput type="text" id="phone" name="phone" [(ngModel)]="phoneNumber">
-  </div>
+    <h3>Name and Phone Number for Room Service</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()" class="mat-button-cancel">Cancel</button>
-  <button mat-button color="primary" (click)="saveData()" class="mat-button-save">Save</button>
-</div>
+<mat-dialog-content class="no-scroll">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name " class="required">Name</label>
+            <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                placeholder="Enter name"
+                required
+            />
+            <small *ngIf="checkForError('name', 'required')" class="text-danger"
+                >Please provide name
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input
+                type="tel"
+                class="form-control"
+                id="phoneNumber"
+                formControlName="phoneNumber"
+                placeholder="Enter phone number"
+            />
+            <small *ngIf="checkForError('name', 'pattern')" class="text-danger"
+                >Please provide valid phone number
+            </small>
+        </div>
+    </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button type="button" class="btn btn_1 gradient w-100" (click)="onSubmit()">
+          Proceed to payment
+      </button>
+  </mat-dialog-actions>
+

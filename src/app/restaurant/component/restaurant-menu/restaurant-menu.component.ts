@@ -174,11 +174,17 @@ export class RestaurantMenuComponent implements OnInit {
             })
             .afterClosed()
             .subscribe((resp) => {
+                console.log("resp", resp);
+                
                 if (resp && resp.selectedRoom) {
                     this.orderOptionFlag = true;
                     this.userPreference = {
                         preference: "room service",
                         value: resp.selectedRoom.roomName,
+                        userDetail:{
+                            name:resp.name,
+                            phoneNumber:resp.phoneNumber
+                        }
                     };
                     this.setCartStateData();
                     this.placeOrder();

@@ -40,6 +40,7 @@ import { PromoCodeDetailsDialogComponent } from "./component/restaurant-menu/car
 import { AddMissingInfoDialogComponent } from './component/restaurant-menu/add-missing-info-dialog/add-missing-info-dialog.component';
 import { RoomNoDialogComponent } from './component/restaurant-menu/room-no-dialog/room-no-dialog.component';
 import { NamePhonenumberForRoomServiceComponent } from './component/restaurant-menu/name-phonenumber-for-room-service/name-phonenumber-for-room-service.component';
+import { TrackingComponent } from './component/restaurant-menu/tracking/tracking.component';
 
 @NgModule({
     declarations: [
@@ -75,6 +76,7 @@ import { NamePhonenumberForRoomServiceComponent } from './component/restaurant-m
         AddMissingInfoDialogComponent,
         RoomNoDialogComponent,
         NamePhonenumberForRoomServiceComponent,
+        TrackingComponent,
     ],
     imports: [
         CommonModule,

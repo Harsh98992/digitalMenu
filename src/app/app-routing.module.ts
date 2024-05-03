@@ -7,6 +7,7 @@ import { RegisterComponent } from "./auth/register/register.component";
 import { RestaurantAuthGuard } from "./api/guard/restaurant-auth.guard";
 import { NotFoundComponent } from "./angular-material/not-found/not-found.component";
 import { RedirectComponent } from "./angular-material/redirect/redirect.component";
+import { TrackingComponent } from "./restaurant/component/restaurant-menu/tracking/tracking.component";
 
 const routes: Routes = [
     {
@@ -39,14 +40,19 @@ const routes: Routes = [
             import("./admin/admin.module").then((m) => m.AdminModule),
     },
     {
+        path: "tracking",
+        component: TrackingComponent,
+    },
+    {
         path: "notFound",
         component: NotFoundComponent,
     },
+
     {
-      path: "Qr/:ru",
-      component: RedirectComponent,
-      pathMatch: "full",
-  },
+        path: "Qr/:ru",
+        component: RedirectComponent,
+        pathMatch: "full",
+    },
     {
         path: "**",
         component: NotFoundComponent,

@@ -20,7 +20,6 @@ export class OrderTrackingComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.startCountdown();
         this.getOrderId();
     }
     getOrderId() {
@@ -28,16 +27,16 @@ export class OrderTrackingComponent implements OnInit {
             this.orderId = params["orderId"]; // 'id' should match the parameter defined in the route
         });
     }
-
-    startCountdown(): void {
-        this.interval = setInterval(() => {
-            if (this.seconds > 0) {
-                this.seconds--;
-            } else {
-                clearInterval(this.interval);
-            }
-        }, 1000);
+    copyText() {
+        var copyText = document.createElement("textarea");
+        copyText.value = this.orderId;
+        document.body.appendChild(copyText);
+        copyText.select();
+        document.execCommand("copy");
+        document.body.removeChild(copyText);
+        alert("order id has been copied!");
     }
+
     openDialg() {
         // this.dialog.open(PaymentDialogComponent, {
         //     panelClass: "add-item-dialog",

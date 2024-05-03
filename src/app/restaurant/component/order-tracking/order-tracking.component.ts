@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { PaymentDialogComponent } from "src/app/angular-material/payment-dialog/payment-dialog.component";
 import { RestaurantService } from "../../api/restaurant.service";
 import { RestaurantContactPopupComponent } from "../restaurant-menu/restaurant-contact-popup/restaurant-contact-popup.component";
@@ -19,7 +19,8 @@ export class OrderTrackingComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         private route: ActivatedRoute,
-        private restauraantService: RestaurantService
+        private restauraantService: RestaurantService,
+        private router: Router
     ) {
         window.scrollTo({
             top: 0,
@@ -61,6 +62,10 @@ export class OrderTrackingComponent implements OnInit {
         document.execCommand("copy");
         document.body.removeChild(copyText);
         alert("order id has been copied!");
+    }
+    redirectTotrackingPage() {
+        // Redirect to a specific URL using navigateByUrl
+        this.router.navigateByUrl("/tracking");
     }
 
     openDialg() {

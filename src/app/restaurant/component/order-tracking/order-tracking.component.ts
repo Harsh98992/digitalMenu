@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { PaymentDialogComponent } from "src/app/angular-material/payment-dialog/payment-dialog.component";
+import { RestaurantService } from "../../api/restaurant.service";
+import { RestaurantContactPopupComponent } from "../restaurant-menu/restaurant-contact-popup/restaurant-contact-popup.component";
 
 @Component({
     selector: "app-order-tracking",
@@ -12,7 +14,13 @@ export class OrderTrackingComponent implements OnInit {
     seconds: number = 60; // Initial countdown value
     interval: any;
     orderId = "";
-    constructor(private dialog: MatDialog, private route: ActivatedRoute) {
+    restaurantId: any;
+    restaurantData: any;
+    constructor(
+        private dialog: MatDialog,
+        private route: ActivatedRoute,
+        private restauraantService: RestaurantService
+    ) {
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -25,6 +33,24 @@ export class OrderTrackingComponent implements OnInit {
     getOrderId() {
         this.route.params.subscribe((params) => {
             this.orderId = params["orderId"]; // 'id' should match the parameter defined in the route
+            this.restaurantId = params["restaurantId"];
+        });
+        this.getRestaurantDetails();
+    }
+    getRestaurantDetails() {
+        this.restauraantService.getRestaurantById(this.restaurantId).subscribe({
+            next: (res: any) => {
+                if (res?.data?.restaurant) {
+                    this.restaurantData = res.data.restaurant;
+                }
+            },
+        });
+    }
+    openContactDialog() {
+        this.dialog.open(RestaurantContactPopupComponent, {
+            panelClass: "add-item-dialog",
+            disableClose: true,
+            data: this.restaurantData,
         });
     }
     copyText() {

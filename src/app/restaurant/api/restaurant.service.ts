@@ -37,6 +37,9 @@ export class RestaurantService {
             reqBody
         );
     }
+    getRestaurantById(restaurantId){
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getRestaurantById/${restaurantId}`)
+    }
     getCartSessionData() {
         const data = localStorage.getItem("cartItem");
         if (data) {

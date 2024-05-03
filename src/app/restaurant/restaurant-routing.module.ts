@@ -46,7 +46,7 @@ const routes: Routes = [
                 component: ShoppingDeliveryPolicyComponent,
             },
             {
-                path: "order-tracking/:orderId",
+                path: "order-tracking/:orderId/:restaurantId",
                 component: OrderTrackingComponent,
             },
             {

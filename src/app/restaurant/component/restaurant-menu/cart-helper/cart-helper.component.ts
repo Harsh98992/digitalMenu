@@ -274,10 +274,10 @@ export class CartHelperComponent implements OnInit {
                     this.userPreference = {
                         preference: "room service",
                         value: resp.selectedRoom.roomName,
-                        userDetail:{
-                            name:resp.name,
-                            phoneNumber:resp.phoneNumber
-                        }
+                        userDetail: {
+                            name: resp.name,
+                            phoneNumber: resp.phoneNumber,
+                        },
                     };
                     this.setCartStateHelper();
                     this.placeOrder();
@@ -501,8 +501,6 @@ export class CartHelperComponent implements OnInit {
             },
         ];
 
-    
-
         const paymentData = {
             orderDetails: bodyData,
             paymentOnlineAvailable: this.restaurantData?.paymentgatewayData
@@ -554,13 +552,24 @@ export class CartHelperComponent implements OnInit {
         this.orderService.placeOrder(reqData).subscribe({
             next: (res: any) => {
                 if (res["status"] == "success") {
+                    const orderData = res["data"]["savedData"];
                     this.restaurantService.bypassGaurd = true;
                     this.socket.emit("orderPlaced", res["data"]["savedData"]);
                     this.dialog.closeAll();
                     this.restaurantService.setCartItem([]);
                     this.restaurantService.setRestaurantUrl(null);
                     this.restaurantService.amountToBePaidSubject.next(null);
-                    this.router.navigateByUrl("/orders");
+                    if (
+                        orderData &&
+                        orderData?.customerPreferences?.preference ===
+                            "room service"
+                    ) {
+                        this.router.navigateByUrl(
+                            `/order-tracking/${orderData.orderId}/${orderData.restaurantId}`
+                        );
+                    } else {
+                        this.router.navigateByUrl("/orders");
+                    }
                 }
             },
         });

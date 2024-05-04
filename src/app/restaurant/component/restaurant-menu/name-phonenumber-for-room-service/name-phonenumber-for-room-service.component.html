@@ -1,5 +1,8 @@
 <div class="small-dialog-header">
-    <h3>Contact Details for room service at room - {{this.roomData?.selectedRoom?.roomName}}</h3>
+    <h3>
+        Contact Details for room service at room -
+        {{ this.roomData?.selectedRoom?.roomName }}
+    </h3>
     <a mat-dialog-close class="close_panel_mobile"
         ><span class="icon_close_alt"></span
     ></a>
@@ -34,10 +37,11 @@
             </small>
         </div>
     </form>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button type="button" class="btn btn_1 gradient w-100" (click)="onSubmit()">
-          Proceed to payment
-      </button>
-  </mat-dialog-actions>
-
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button type="button" class="btn btn_1 gradient w-100" (click)="onSubmit()">
+        Proceed to payment (
+        {{ amountToBePaid | currency : "INR" : "symbol" : "1.0-0" }}
+        )
+    </button>
+</mat-dialog-actions>

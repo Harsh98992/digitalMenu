@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
 
 @Component({
     selector: "app-name-phonenumber-for-room-service",
@@ -9,10 +10,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 })
 export class NamePhonenumberForRoomServiceComponent implements OnInit {
     userForm: FormGroup;
+    amountToBePaid: any;
     constructor(
         private dialogRef: MatDialogRef<NamePhonenumberForRoomServiceComponent>,
         private fb: FormBuilder,
-        @Inject(MAT_DIALOG_DATA) public roomData: any
+        @Inject(MAT_DIALOG_DATA) public roomData: any,
+        private restaurantService: RestaurantService,
     ) {}
 
     ngOnInit(): void {
@@ -24,6 +27,11 @@ export class NamePhonenumberForRoomServiceComponent implements OnInit {
                 "",
                 [Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
             ], // Indian phone number pattern
+        });
+        this.restaurantService.amountToBePaidSubject.subscribe({
+            next: (res) => {
+                this.amountToBePaid = res;
+            },
         });
     }
 

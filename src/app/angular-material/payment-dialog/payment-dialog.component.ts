@@ -58,14 +58,22 @@ export class PaymentDialogComponent implements OnInit {
 
     ngOnInit(): void {
         console.log(this.orderData);
+
+        this.getOrderTotal();
+        this.checkForCashOnDelivery();
         if (this.orderData?.paymentOnlineAvailable) {
             this.paymentOption.unshift({
                 key: "payOnline",
                 value: "Pay Online",
             });
+            if (
+                this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
+                "room service"
+            ) {
+                this.paymentMethod = "payOnline";
+                this.buyRazorPay();
+            }
         }
-        this.getOrderTotal();
-        this.checkForCashOnDelivery();
     }
     checkForCashOnDelivery() {
         if (!this.orderData?.cashOnDeliveryAvailable) {

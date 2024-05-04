@@ -54,30 +54,31 @@ export class RoomNoDialogComponent implements OnInit {
             this.utilityService.openSnackBar("Please select a room", true);
             return;
         }
-        const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+        const dial = this.dialog.open(NamePhonenumberForRoomServiceComponent, {
+            panelClass: "add-item-dialog",
             data: {
-                title: "Place Order",
-                message: `Place Your Order Now for Room Number ${this.selectedRoom.roomName}!`,
+                selectedRoom: this.selectedRoom,
             },
         });
-        confirmDialog.afterClosed().subscribe((result) => {
-            const dial = this.dialog.open(
-                NamePhonenumberForRoomServiceComponent,
-                {
-                    panelClass: "add-item-dialog",
-                }
-            );
 
-            dial.afterClosed().subscribe((re) => {
-                if (re?.okFlag) {
-                    // Close dialog and pass selectedRoom, name, and phoneNumber to the parent component
-                    this.dialogRef.close({
-                        selectedRoom: this.selectedRoom,
-                        name: re?.name,
-                        phoneNumber: re?.phoneNumber,
-                    });
-                }
-            });
+        dial.afterClosed().subscribe((re) => {
+            if (re?.okFlag) {
+                // Close dialog and pass selectedRoom, name, and phoneNumber to the parent component
+                this.dialogRef.close({
+                    selectedRoom: this.selectedRoom,
+                    name: re?.name,
+                    phoneNumber: re?.phoneNumber,
+                });
+            }
         });
+        // const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+        //     data: {
+        //         title: "Place Order",
+        //         message: `Place Your Order Now for Room Number ${this.selectedRoom.roomName}!`,
+        //     },
+        // });
+        // confirmDialog.afterClosed().subscribe((result) => {
+
+        // });
     }
 }

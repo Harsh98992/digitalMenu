@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
     selector: "app-name-phonenumber-for-room-service",
@@ -11,10 +11,13 @@ export class NamePhonenumberForRoomServiceComponent implements OnInit {
     userForm: FormGroup;
     constructor(
         private dialogRef: MatDialogRef<NamePhonenumberForRoomServiceComponent>,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        @Inject(MAT_DIALOG_DATA) public roomData: any
     ) {}
 
     ngOnInit(): void {
+        console.log(this.roomData);
+        
         this.userForm = this.fb.group({
             name: ["", [Validators.required, Validators.minLength(3)]],
             phoneNumber: [

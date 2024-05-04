@@ -1,119 +1,143 @@
-body{
-	background-color: #ffffff;
+// body{
+// 	background-color: #ffffff;
 
-}
-.container{
-	width: 600px;
-	background-color: #fff;
-	padding-top: 100px;
-    padding-bottom: 100px;
-	position: relative;
-	top: -70px; /* Adjust this value to move the container upwards */
+// }
+// .container{
+// 	width: 600px;
+// 	background-color: #fff;
+// 	padding-top: 100px;
+//     padding-bottom: 100px;
+// 	position: relative;
+// 	top: -70px; /* Adjust this value to move the container upwards */
 
-}
-.card{
-	background-color: #fff;
-	width: 300px;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+// }
+// .card{
+// 	background-color: #fff;
+// 	width: 300px;
+// 	border-radius: 10px;
+// 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	
-}
-.name{
-	font-size: 15px;
-	color: #403f3f;
-	font-weight: bold;
-}
-.cross{
-	font-size: 11px;
-	color: #b0aeb7;
-}
-.pin{
-	font-size: 14px;
-	color: #b0aeb7;
-}
-.first{
-	border-radius: 8px;
-	border: 1.5px solid #78b9ff;
-	color: #000;
-	background-color: #eaf4ff;
-}
-.second{
-	border-radius: 8px;
-	border: 1px solid #acacb0;
-	color: #000;
-	background-color: #fff;
-}
-.dot{
+// }
+// .name{
+// 	font-size: 15px;
+// 	color: #403f3f;
+// 	font-weight: bold;
+// }
+// .cross{
+// 	font-size: 11px;
+// 	color: #b0aeb7;
+// }
+// .pin{
+// 	font-size: 14px;
+// 	color: #b0aeb7;
+// }
+// .first{
+// 	border-radius: 8px;
+// 	border: 1.5px solid #78b9ff;
+// 	color: #000;
+// 	background-color: #eaf4ff;
+// }
+// .second{
+// 	border-radius: 8px;
+// 	border: 1px solid #acacb0;
+// 	color: #000;
+// 	background-color: #fff;
+// }
+// .dot{
 
-}
-.head{
-	color: #137ff3;
-	font-size: 12px;
-	min-width: 13rem;
-	display: block;
-}
-.dollar{
-	font-size: 18px;
-	color: #097bf7;
-}
-.amount{
-	color: #007bff;
-	font-weight: bold;
-	font-size: 18px;
+// }
+// .head{
+// 	color: #137ff3;
+// 	font-size: 12px;
+// 	min-width: 13rem;
+// 	display: block;
+// }
+// .dollar{
+// 	font-size: 18px;
+// 	color: #097bf7;
+// }
+// .amount{
+// 	color: #007bff;
+// 	font-weight: bold;
+// 	font-size: 18px;
 
-}
-.form-control{
-	font-size: 18px;
-	font-weight: bold;
-	width: 60px;
-	height: 28px;
+// }
+// .form-control{
+// 	font-size: 18px;
+// 	font-weight: bold;
+// 	width: 60px;
+// 	height: 28px;
 
-}
-.back{
-	color: #aba4a4;
-	font-size: 15px;
-	line-height: 73px;
-	font-weight: 400;
-}
-.button{
-	width: 150px;
-	height: 60px;
-	border-radius: 8px;
-	font-size: 17px;		
-}
-.custom-button {
-    font-size: 17px; 
-    padding: 5px 40px;
-    background-color: #4caf50; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+// }
+// .back{
+// 	color: #aba4a4;
+// 	font-size: 15px;
+// 	line-height: 73px;
+// 	font-weight: 400;
+// }
+// .button{
+// 	width: 150px;
+// 	height: 60px;
+// 	border-radius: 8px;
+// 	font-size: 17px;		
+// }
+// .custom-button {
+//     font-size: 17px; 
+//     padding: 5px 40px;
+//     background-color: #4caf50; 
+//     color: white;
+//     border: none;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     transition: background-color 0.3s ease;
+//   }
   
-  .custom-button:hover {
-    background-color: #45a049;
-  }
-  .no-scroll {
-	overflow: hidden; /* Hide the scrollbars */
-  }
-  .shift{
-	float:right;
-  }
+//   .custom-button:hover {
+//     background-color: #45a049;
+//   }
+//   .no-scroll {
+// 	overflow: hidden; /* Hide the scrollbars */
+//   }
+//   .shift{
+// 	float:right;
+//   }
 
-  .text-button {
-    display: inline-block;
-    padding: 10px 50px;
-    background-color: #007bff; /* Blue color, you can change this to your desired color */
-    color: #fff; /* Text color */
-    text-decoration: none;
-    border: none;
+//   .text-button {
+//     display: inline-block;
+//     padding: 10px 50px;
+//     background-color: #007bff; /* Blue color, you can change this to your desired color */
+//     color: #fff; /* Text color */
+//     text-decoration: none;
+//     border: none;
+//     cursor: pointer;
+//     border-radius: 5px; /* Rounded corners */
+//   }
+
+//   /* Style for the text button on hover */
+//   .text-button:hover {
+//     background-color: #0056b3; /* Darker blue on hover */
+//   }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px; /* You can adjust the width as needed */
+  }
+  .square {
+    width: 90px; /* Adjust size as needed */
+    height: 90px; /* Adjust size as needed */
+    background-color: lightblue;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background-image: url("../../../../../assets/img/room.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     cursor: pointer;
-    border-radius: 5px; /* Rounded corners */
   }
-
-  /* Style for the text button on hover */
-  .text-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+  .square:hover {
+    background-color: orange; /* Change color to orange on hover */
   }

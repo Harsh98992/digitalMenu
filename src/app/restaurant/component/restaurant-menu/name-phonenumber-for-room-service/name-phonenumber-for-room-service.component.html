@@ -1,7 +1,7 @@
 <div class="small-dialog-header">
     <h3>
         Contact Details for room service at room -
-        {{ this.roomData?.selectedRoom?.roomName }}
+        {{ this.roomData?.selectedRoom?.roomName | titlecase }}
     </h3>
     <a mat-dialog-close class="close_panel_mobile"
         ><span class="icon_close_alt"></span

@@ -37,8 +37,15 @@ export class RestaurantService {
             reqBody
         );
     }
-    getRestaurantById(restaurantId){
-        return this.http.get(`${this.apiUrl}/v1/restaurant/getRestaurantById/${restaurantId}`)
+    getOrderwithOrderId(orderId) {
+        return this.http.get(
+            `${this.apiUrl}/v1/orders/getOrderwithOrderId/${orderId}`
+        );
+    }
+    getRestaurantById(restaurantId) {
+        return this.http.get(
+            `${this.apiUrl}/v1/restaurant/getRestaurantById/${restaurantId}`
+        );
     }
     getCartSessionData() {
         const data = localStorage.getItem("cartItem");

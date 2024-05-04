@@ -25,6 +25,7 @@ export class OrderAcceptDialogComponent implements OnInit {
     gstAmount = 0;
     discountAmount = 0;
     completeScreen = false;
+    roomScreenFlag=false
     constructor(
         private dialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) public orderData: any,
@@ -37,6 +38,7 @@ export class OrderAcceptDialogComponent implements OnInit {
         
         if (this.orderData?.completeScreen) {
             this.completeScreen = this.orderData.completeScreen;
+            this.roomScreenFlag = this.orderData.roomScreenFlag;
         }
         this.getOrderTotal();
     }

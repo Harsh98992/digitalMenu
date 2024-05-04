@@ -52,7 +52,9 @@
                                     this.orderData.customerPreferences
                                         .preference === 'Take Away' ||
                                     this.orderData.customerPreferences
-                                        .preference === 'Scheduled Dining'
+                                        .preference === 'Scheduled Dining' ||
+                                    this.orderData.customerPreferences
+                                        .preference === 'room service'
                                 "
                             >
                                 {{
@@ -110,15 +112,26 @@
                             <strong>Payment Status</strong>
                             {{ "Paid via " + this.orderData.payment_method }}
                         </li>
-                        <li *ngIf="this.orderData.payment_id">
+                        <li
+                            *ngIf="this.orderData.payment_id && !roomScreenFlag"
+                        >
                             <strong>Payment Id</strong>
                             {{ this.orderData.payment_id }}
                         </li>
-                        <li *ngIf="this.orderData.payment_order_id">
+                        <li
+                            *ngIf="
+                                this.orderData.payment_order_id &&
+                                !roomScreenFlag
+                            "
+                        >
                             <strong>Payment Order Id</strong>
                             {{ this.orderData.payment_order_id }}
                         </li>
-                        <li *ngIf="this.orderData.payment_time">
+                        <li
+                            *ngIf="
+                                this.orderData.payment_time && !roomScreenFlag
+                            "
+                        >
                             <strong>Payment Time</strong>
                             {{
                                 this.orderData.payment_time * 1000

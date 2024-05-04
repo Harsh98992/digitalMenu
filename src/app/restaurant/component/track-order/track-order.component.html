@@ -1,0 +1,52 @@
+<div class="container mb-3">
+<div class="form-modal">
+    <div class="form-toggle">
+        <button id="login-toggle" (click)="toggleLogin()">
+            Track by order id
+        </button>
+        <button id="signup-toggle" (click)="toggleSignup()">
+            Track by order detail
+        </button>
+    </div>
+
+    <div id="login-form">
+        <form>
+            <input type="text" placeholder="Enter tracking id" />
+            <button type="button" class="btn signup">Search Order</button>
+            <hr />
+            <p>
+                <a href="javascript:void(0)" (click)="toggleSignup()"
+                    >Search by order detail</a
+                >
+            </p>
+           
+        </form>
+    </div>
+
+    <div id="signup-form">
+        <form>
+            <select class="form-select" aria-label="Default select example">
+                <option selected disabled>Select Restaurant Name</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <select class="form-select" aria-label="Default select example">
+                <option selected disabled>Select Room Number</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <input type="text" placeholder="Enter Name" />
+            <button type="button" class="btn signup">Search Order</button>
+            <hr />
+            <p>
+                <a href="javascript:void(0)" (click)="toggleLogin()"
+                    >Search by order id</a
+                >
+            </p>
+            
+        </form>
+    </div>
+</div>
+</div>

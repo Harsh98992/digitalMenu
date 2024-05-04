@@ -41,6 +41,7 @@ import { AddMissingInfoDialogComponent } from './component/restaurant-menu/add-m
 import { RoomNoDialogComponent } from './component/restaurant-menu/room-no-dialog/room-no-dialog.component';
 import { NamePhonenumberForRoomServiceComponent } from './component/restaurant-menu/name-phonenumber-for-room-service/name-phonenumber-for-room-service.component';
 import { TrackingComponent } from './component/restaurant-menu/tracking/tracking.component';
+import { TrackOrderComponent } from './component/track-order/track-order.component';
 
 @NgModule({
     declarations: [
@@ -77,6 +78,7 @@ import { TrackingComponent } from './component/restaurant-menu/tracking/tracking
         RoomNoDialogComponent,
         NamePhonenumberForRoomServiceComponent,
         TrackingComponent,
+        TrackOrderComponent,
     ],
     imports: [
         CommonModule,

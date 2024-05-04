@@ -16,6 +16,7 @@ import { CancellationPolicyComponent } from "./component/policy/cancellation-pol
 import { ShoppingDeliveryPolicyComponent } from "./component/policy/shopping-delivery-policy/shopping-delivery-policy.component";
 import { OrderTrackingComponent } from "./component/order-tracking/order-tracking.component";
 import { RestaurantMenuGuard } from "./api/restaurant-menu.guard";
+import { TrackOrderComponent } from "./component/track-order/track-order.component";
 
 const routes: Routes = [
     {
@@ -52,6 +53,10 @@ const routes: Routes = [
             {
                 path: "addresses",
                 component: AddressesComponent,
+            },
+            {
+                path: "trackOrder",
+                component: TrackOrderComponent,
             },
 
             {

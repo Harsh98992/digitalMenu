@@ -33,21 +33,66 @@
         </div>
 
         <div id="signup-form">
-            <form>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected disabled>Select Restaurant Name</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+            <form [formGroup]="userForm">
+                <select
+                    class="form-select"
+                    formControlName="restaurantName"
+                    aria-label="Default select example"
+                    (change)="changeRoomNo()"
+                >
+                    <option selected disabled value="">
+                        Select Restaurant Name
+                    </option>
+                    <option
+                        *ngFor="let data of restaurantData"
+                        [ngValue]="data"
+                    >
+                        {{data?.['restaurantId']['restaurantName']}}
+                    </option>
                 </select>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected disabled>Select Room Number</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <small
+                    *ngIf="checkForUserFormError('restaurantName', 'required')"
+                    class="text-danger"
+                    >Please provide restaurant name
+                </small>
+                <select
+                    class="form-select"
+                    formControlName="roomNumber"
+                    aria-label="Default select example"
+                >
+                    <option selected disabled value="">
+                        Select Room Number
+                    </option>
+                    <option
+                        [value]="data['roomName']"
+                        *ngFor="let data of currentRoomData"
+                    >
+                        {{ data.roomName | titlecase }}
+                    </option>
                 </select>
-                <input type="text" placeholder="Enter Name" />
-                <button type="button" class="btn signup">Search Order</button>
+                <small
+                    *ngIf="checkForUserFormError('roomNumber', 'required')"
+                    class="text-danger"
+                    >Please provide room name
+                </small>
+                <input
+                    type="text"
+                    maxlength="50"
+                    formControlName="customerName"
+                    placeholder="Enter Name"
+                />
+                <small
+                    *ngIf="checkForUserFormError('customerName', 'required')"
+                    class="text-danger"
+                    >Please provide customer name
+                </small>
+                <button
+                    type="button"
+                    (click)="searchByName()"
+                    class="btn signup"
+                >
+                    Search Order
+                </button>
                 <hr />
                 <p>
                     <a href="javascript:void(0)" (click)="toggleLogin()"

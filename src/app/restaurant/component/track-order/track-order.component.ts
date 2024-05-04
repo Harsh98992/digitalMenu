@@ -11,6 +11,9 @@ import { MatDialog } from "@angular/material/dialog";
 })
 export class TrackOrderComponent implements OnInit {
     trackingForm: FormGroup;
+    userForm: FormGroup;
+    restaurantData = [];
+    currentRoomData = [];
     constructor(
         private fb: FormBuilder,
         private restaurantService: RestaurantService,
@@ -21,6 +24,29 @@ export class TrackOrderComponent implements OnInit {
         this.trackingForm = this.fb.group({
             trackingId: ["", Validators.required],
         });
+        this.userForm = this.fb.group({
+            restaurantName: ["", Validators.required],
+            roomNumber: ["", Validators.required],
+            customerName: ["", Validators.required],
+        });
+        this.getRestaurantWithRoom();
+    }
+    getRestaurantWithRoom() {
+        this.restaurantService.getRestaurantWithRoomService().subscribe({
+            next: (res) => {
+                if (res["data"] && res["data"]["restaurantData"]) {
+                    this.restaurantData = res["data"]["restaurantData"];
+                }
+            },
+        });
+    }
+    changeRoomNo() {
+        const val = this.userForm.get("restaurantName").value;
+        if (val) {
+            this.currentRoomData = val?.room ?? [];
+        } else {
+            this.currentRoomData = [];
+        }
     }
     toggleSignup() {
         document.getElementById("login-toggle").style.backgroundColor = "#fff";
@@ -58,6 +84,29 @@ export class TrackOrderComponent implements OnInit {
             });
         }
     }
+    searchByName() {
+        this.userForm.markAllAsTouched();
+        if (this.userForm.valid) {
+            const reqData = {
+                restaurnatId:
+                    this.userForm.get("restaurantName").value?.restaurantId
+                        ?._id,
+                roomName: this.userForm.get("roomNumber").value,
+                customerName: this.userForm.get("customerName").value,
+            };
+            this.restaurantService
+                .getOrderwithRestaurantNameCustomerNameRoomName(reqData)
+                .subscribe({
+                    next: (res) => {
+                        if (res && res["data"]?.["orderData"]?._id) {
+                            const orderSummary = res["data"]["orderData"];
+                            this.showOrderDetails(orderSummary);
+                        } else {
+                        }
+                    },
+                });
+        }
+    }
     showOrderDetails(orderSummary: any) {
         const dialogData = {
             ...orderSummary,
@@ -77,6 +126,14 @@ export class TrackOrderComponent implements OnInit {
             this.trackingForm.get(fieldName).errors[errorString] &&
             (this.trackingForm.get(fieldName).dirty ||
                 this.trackingForm.get(fieldName).touched)
+        );
+    }
+    checkForUserFormError(fieldName: string, errorString: string) {
+        return (
+            this.userForm.get(fieldName).errors &&
+            this.userForm.get(fieldName).errors[errorString] &&
+            (this.userForm.get(fieldName).dirty ||
+                this.userForm.get(fieldName).touched)
         );
     }
 }

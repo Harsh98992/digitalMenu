@@ -42,6 +42,17 @@ export class RestaurantService {
             `${this.apiUrl}/v1/orders/getOrderwithOrderId/${orderId}`
         );
     }
+    getRestaurantWithRoomService() {
+        return this.http.get(
+            `${this.apiUrl}/v1/orders/getRestaurantWithRoomService`
+        );
+    }
+    getOrderwithRestaurantNameCustomerNameRoomName(reqData) {
+        return this.http.post(
+            `${this.apiUrl}/v1/orders/getOrderwithRestaurantNameCustomerNameRoomName`,
+            reqData
+        );
+    }
     getRestaurantById(restaurantId) {
         return this.http.get(
             `${this.apiUrl}/v1/restaurant/getRestaurantById/${restaurantId}`

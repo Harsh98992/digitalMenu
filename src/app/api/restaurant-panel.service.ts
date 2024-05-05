@@ -183,6 +183,13 @@ export class RestaurantPanelService {
             imageData
         );
     }
+    updateRestaurantBannerImageForMobile(imageData: { image: any }) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForMobile`,
+            imageData
+        );
+    }
+
     createTableEntry(data: any) {
         return this.http.post(
             `${this.apiUrl}/v1/restaurant/createTableEntry`,

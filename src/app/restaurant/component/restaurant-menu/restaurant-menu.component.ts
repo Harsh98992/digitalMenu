@@ -175,7 +175,7 @@ export class RestaurantMenuComponent implements OnInit {
             .afterClosed()
             .subscribe((resp) => {
                 console.log("resp", resp);
-                
+
                 if (resp && resp.selectedRoom) {
                     this.orderOptionFlag = true;
                     this.userPreference = {
@@ -484,9 +484,28 @@ export class RestaurantMenuComponent implements OnInit {
                         this.showNotFound = true;
                         return;
                     }
-                    if (this.restaurantDetail.restaurantBackgroundImage) {
-                        this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImage}')`;
+                    // }
+                    // if (this.restaurantDetail.restaurantBackgroundImage) {
+                    //     this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImage}')`;
+                    // }
+                    // check if device is mobile or desktop
+                    if (window.innerWidth < 768) {
+                        if (this.restaurantDetail.restaurantBackgroundImageForMobile) {
+                            this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImageForMobile}')`;
+                        }
+                        
                     }
+                    else
+                    {
+                        if (this.restaurantDetail.restaurantBackgroundImage) {
+                            this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImage}')`;
+                        }
+                    }
+
+
+
+
+
                     this.storeRestaurantInfo(restaurnatUrl);
                     this.restaurantPanelService.restaurantData.next(
                         this.restaurantDetail

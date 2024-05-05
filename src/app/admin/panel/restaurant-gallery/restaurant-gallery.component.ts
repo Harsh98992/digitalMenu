@@ -12,6 +12,7 @@ import { Subject, takeUntil } from "rxjs";
 })
 export class RestaurantGalleryComponent implements OnInit {
     bannerImg = "";
+    mobileBannerImg = "";
     restaurantImages = [];
     destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -31,9 +32,20 @@ export class RestaurantGalleryComponent implements OnInit {
                 next: (res: any) => {
                     if (res && res.restaurantBackgroundImage) {
                         this.bannerImg = res.restaurantBackgroundImage;
+
                         this.restaurantImages = res.restaurantImages;
                     } else {
                         this.bannerImg = "../assets/img/detail_1.jpg";
+                        this.restaurantImages = res.restaurantImages;
+                    }
+                    if (res && res.restaurantBackgroundImageForMobile) {
+                        this.mobileBannerImg = res.restaurantBackgroundImageForMobile;
+
+                        this.restaurantImages = res.restaurantImages;
+
+                    }
+                    else {
+                        this.mobileBannerImg = "../assets/img/detail_1.jpg";
                         this.restaurantImages = res.restaurantImages;
                     }
                 },
@@ -46,7 +58,25 @@ export class RestaurantGalleryComponent implements OnInit {
             },
         });
     }
-    openImageUploadPopUp(bannerFlag: boolean) {
+    openImageUploadPopUp(bannerFlag: string) {
+        const data = { bannerFlag };
+        let dialogRef = this.dialog
+            .open(ImageUploadComponent, {
+                disableClose: true,
+                data: data,
+                panelClass: "app-full-bleed-dialog",
+            })
+            .afterClosed()
+            .subscribe({
+                next: (res) => {
+                    if (res && res.successFlag) {
+                        this.restaurantService.setRestaurantData();
+                    }
+                },
+            });
+    }
+
+    openImageUploadPopUpForMobile(bannerFlag: string) {
         const data = { bannerFlag };
         let dialogRef = this.dialog
             .open(ImageUploadComponent, {

@@ -46,7 +46,7 @@ export class ImageUploadComponent implements OnInit {
   uploadFile() {
     if (this.base64) {
       this.showErrorFlag = false;
-      if (this.data.bannerFlag) {
+      if (this.data.bannerFlag === 'desktop') {
         this.restaurantService
           .updateRestaurantBackgoundImage({ image: this.base64 })
           .subscribe({
@@ -55,10 +55,25 @@ export class ImageUploadComponent implements OnInit {
               this.dialogRef.close({
                 successFlag: true
               });
-             
+
             },
           });
-      } else {
+      }
+      else if (this.data.bannerFlag === 'mobile') {
+        this.restaurantService
+          .updateRestaurantBannerImageForMobile({ image: this.base64 })
+          .subscribe({
+            next: (res: any) => {
+              this.restaurantService.setRestaurantData(res);
+              this.dialogRef.close({
+                successFlag: true
+              });
+
+            },
+          });
+      }
+      
+       else {
         this.restaurantService
           .updateRestaurantImage({ image: this.base64 })
           .subscribe({
@@ -67,7 +82,7 @@ export class ImageUploadComponent implements OnInit {
               this.dialogRef.close({
                 successFlag: true
               });
-             
+
             },
           });
       }

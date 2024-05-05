@@ -1,4 +1,5 @@
 <div class="row">
+  <!-- Existing Restaurant Background Image Section -->
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header bg-dark text-light">
@@ -6,45 +7,51 @@
       </div>
       <div class="image-area">
         <img [src]="bannerImg" alt="Preview" />
-        <a
-          class="remove-image main-image"
-          (click)="openImageUploadPopUp(true)"
-          style="display: inline"
-          ><span class="icon_pencil"></span
-        ></a>
+        <a class="remove-image main-image" (click)="openImageUploadPopUp('desktop')" style="display: inline">
+          <span class="icon_pencil"></span>
+        </a>
       </div>
     </div>
   </div>
 </div>
+
+<!-- New Section for Mobile Background Image -->
+<div class="row mt-3">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header bg-dark text-light">
+        Restaurant Background Image for Mobile
+      </div>
+      <div class="image-area">
+        <img [src]="mobileBannerImg" alt="Mobile Preview" />
+        <a class="remove-image main-image" (click)="openImageUploadPopUpForMobile('mobile')" style="display: inline">
+          <span class="icon_pencil"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header bg-dark text-light">
         Restaurant Images
-        <button
-          type="button"
-          class="btn btn-danger btn-circle btn-lg"
-          (click)="openImageUploadPopUp(false)"
-        >
+        <button type="button" class="btn btn-danger btn-circle btn-lg" (click)="openImageUploadPopUp('desktop')">
           <i class="icon_plus"></i>
         </button>
       </div>
 
       <br />
       <div class="row gallery mx-1">
-        <div class="mx-auto" *ngIf="restaurantImages && restaurantImages.length===0"> <h3 >No Data Found!</h3></div>
-       
-        <div
-          class="col-lg-3 col-md-4 col-xs-6 thumb"
-          *ngFor="let img of restaurantImages"
-        >
+        <div class="mx-auto" *ngIf="restaurantImages && restaurantImages.length===0">
+          <h3>No Data Found!</h3>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb" *ngFor="let img of restaurantImages">
           <a>
             <figure>
-              <img
-                class="img-fluid img-thumbnail"
-                [src]="img"
-                alt="Random Image"
-              />
+              <img class="img-fluid img-thumbnail" [src]="img" alt="Random Image" />
               <a class="remove-image" (click)="deleteImage(img)" style="display: inline">&#215;</a>
             </figure>
           </a>

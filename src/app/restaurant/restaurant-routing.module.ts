@@ -26,6 +26,11 @@ const routes: Routes = [
             { path: "", component: HomepageComponent },
             { path: "restaurant", component: RestaurantMenuComponent,canDeactivate:[RestaurantMenuGuard] },
             {
+                path: "order",
+                component: MyOrderComponent,
+                canActivate: [CustomerAuthGuard],
+            },
+            {
                 path: "orders",
                 component: MyOrderComponent,
                 canActivate: [CustomerAuthGuard],

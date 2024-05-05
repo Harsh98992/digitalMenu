@@ -24,6 +24,7 @@ export class RoomNoDialogComponent implements OnInit {
     selectedRoom: any;
     customerDetailId: any;
     roomData: any;
+    storeRoomData: any;
     constructor(
         private fb: FormBuilder,
         @Inject(MAT_DIALOG_DATA) public dialogData: any,
@@ -44,12 +45,25 @@ export class RoomNoDialogComponent implements OnInit {
         this.restaurantService.getAllRoomsRestaurant(reqBody).subscribe({
             next: (res: any) => {
                 if (res && res.data) {
+                    this.storeRoomData = res.data?.rooms?.room;
                     this.roomData = res.data?.rooms?.room;
                 }
             },
         });
     }
-    onSubmit() {
+    filterRooms(event: any) {
+        if (event.target.value) {
+            this.roomData = this.roomData.filter((room: any) =>
+                room.roomName
+                    .toLowerCase()
+                    .includes(event.target.value.toLowerCase())
+            );
+        } else {
+            this.roomData = this.storeRoomData;
+        }
+    }
+    onSubmit(option: any = "") {
+        this.selectedRoom = option;
         if (!this.selectedRoom) {
             this.utilityService.openSnackBar("Please select a room", true);
             return;

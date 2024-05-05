@@ -6,7 +6,7 @@
 </div>
 <mat-dialog-content class="no-scroll">
     <div class="mt-3">
-        <mat-radio-group
+        <!-- <mat-radio-group
             aria-labelledby="example-radio-group-label "
             class="example-radio-group"
             [(ngModel)]="selectedRoom"
@@ -29,7 +29,33 @@
                     </div>
                 </div>
             </mat-radio-button>
-        </mat-radio-group>
+        </mat-radio-group> -->
+
+        <div class="container">
+            <div class="input-group mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    (keyup)="filterRooms($event)"
+                    placeholder="Search for room"
+                />
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"
+                        ><i class="fa-solid fa-magnifying-glass"></i
+                    ></span>
+                </div>
+            </div>
+            <div *ngIf="roomData.length === 0" class="text-center" style="width: 100%;">
+               <span> No available room matches the provided search criteria.</span>
+            </div>
+            <div
+                class="square"
+                (click)="onSubmit(option)"
+                *ngFor="let option of roomData"
+            >
+                <span> {{ option.roomName | titlecase }}</span>
+            </div>
+        </div>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

@@ -48,24 +48,31 @@ export class MyOrderComponent implements OnInit {
      */
     ngOnInit(): void {
         // Combine auto-refresh with the existing order retrieval logic
-        this.refreshInterval$
-            .pipe(
-                startWith(0), // To trigger the first fetch immediately
-                switchMap(() => this.orderService.getCustomerOrder())
-            )
-            .subscribe({
-                next: (res: any) => {
-                    if (res && res?.data && res.data && res.data?.orderData) {
-                        const orderData = res.data.orderData.sort((a, b) => {
-                            const date1 = new Date(a["orderDate"]) as any;
-                            const date2 = new Date(b["orderDate"]) as any;
-                            return date2 - date1;
-                        });
+        // this.refreshInterval$
+        //     .pipe(
+        //         startWith(0), // To trigger the first fetch immediately
+        //         switchMap(() => this.orderService.getCustomerOrder())
+        //     )
+        //     .subscribe({
+        //         next: (res: any) => {
+        //             if (res && res?.data && res.data && res.data?.orderData) {
+        //                 const orderData = res.data.orderData.sort((a, b) => {
+        //                     const date1 = new Date(a["orderDate"]) as any;
+        //                     const date2 = new Date(b["orderDate"]) as any;
+        //                     return date2 - date1;
+        //                 });
 
-                        this.setOrder(orderData);
-                    }
-                },
-            });
+        //                 this.setOrder(orderData);
+        //             }
+        //         },
+        //     });
+
+        //don't use auto refresh for now
+        this.getCustomerOrders();
+
+        // Set the selected tab to the first tab
+        this.selectedTab = this.tabs[0].key;
+        
     }
     changeStatus(tab) {
         this.selectedTab = tab.key;

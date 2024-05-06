@@ -56,6 +56,24 @@ export class ViewDishComponent implements OnInit {
             },
         });
     }
+    // Inside ViewDishComponent class in view-dish.component.ts
+
+    inStockDish(row) {
+        const reqBody = Object.assign({}, row);
+        reqBody["dishOrderOption"] = "default"; // Set dish order option as default or any other appropriate value
+        reqBody["availableFlag"] = true; // Set availableFlag to true
+        reqBody["dishId"] = row["_id"];
+        reqBody["previousDishCategory"] = row["categoryId"];
+        reqBody["dishCategory"] = row["categoryId"];
+        reqBody["spicy"] = row["chilliFlag"];
+        this.restaurantService.editDish(reqBody).subscribe({
+            next: (res) => {
+                this.restaurantService.setRestaurantData(res);
+                this.router.navigateByUrl("/admin/dishes/view-dish");
+            },
+        });
+    }
+
     getOrders() {
         this.restaurantService.restaurantData
             .pipe(takeUntil(this.destroy$))

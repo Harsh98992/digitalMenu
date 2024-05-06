@@ -63,8 +63,42 @@ export class UtilService {
         return distance;
     }
     printReceipt(orderData, restaurantDetail) {
+        let orderTypeStr = "";
+
         // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
         const orderDetail = _.cloneDeep(orderData);
+        if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "room service"
+        ) {
+            orderTypeStr =
+                "Room Number :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "delivery"
+        ) {
+            orderTypeStr =
+                "Address :- " + orderDetail.customerPreferences.value.address;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "dine in"
+        ) {
+            orderTypeStr =
+                "Dine In :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "take away"
+        ) {
+            orderTypeStr =
+                "Take Away :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "schedule dining"
+        ) {
+            orderTypeStr =
+                "Schedule Dining :- " + orderDetail.customerPreferences.value;
+        }
+
         if (
             orderDetail?.customerPreferences?.preference?.toLowerCase() ===
             "dine in"
@@ -211,15 +245,15 @@ export class UtilService {
         <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
             orderDetail.customerPreferences.preference
         }</p>
-        <div  style="text-align:center">${
-            orderDetail.customerPreferences.preference === "delivery"
-                ? "( " + orderDetail.customerPreferences?.value.address + " )"
-                : ""
-        }</div>
+        <div  style="text-align:center">${orderTypeStr}
+       
+       
+        
+        </div>
         <p>
         <span class="space-between">
         ${this.datePipe.transform(orderDetail.orderDate)}
-     <span>   ${orderDetail.orderDate.split("T")[1].split(".")[0]}</span>
+     <span>   ${new Date(orderDetail.orderDate).toLocaleTimeString()}</span>
         </span>
       
         Bill No: ${orderDetail.orderId}<br>

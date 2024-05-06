@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
         private modalService: NgbModal,
         public dialog: MatDialog,
         private datePipe: DatePipe,
-       
+
         private utilityService: UtilService
     ) {}
     handleOrderUpdate(updatedOrder: any) {
@@ -282,7 +282,6 @@ export class DashboardComponent implements OnInit {
             ) {
                 this.activeDine.push(data);
                 console.log(this.activeDine);
-                
             } else if (data.orderStatus === "pendingPayment") {
                 this.pendingPayment.push(data);
             }
@@ -311,7 +310,7 @@ export class DashboardComponent implements OnInit {
         return amount;
     }
     printKTO(orderData) {
-        let orderTypeStr= "";
+        let orderTypeStr = "";
         const orderDetail = _.cloneDeep(orderData);
         if (
             orderDetail.customerPreferences.preference.toLowerCase() ===
@@ -490,9 +489,7 @@ export class DashboardComponent implements OnInit {
             <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
                 orderDetail.customerPreferences.preference
             }</p>
-            <div  style="text-align:center">${
-                orderTypeStr
-            }</div>
+            <div  style="text-align:center">${orderTypeStr}</div>
             <p>
             <span class="space-between">
             ${this.datePipe.transform(orderDetail.orderDate)}
@@ -505,6 +502,11 @@ export class DashboardComponent implements OnInit {
             ${orderDetail.customerPhoneNumber} - ${
                 orderDetail.customerEmail
             }<br>
+            <span style="word-break:break-all">
+            Cooking Instructions: ${
+                orderDetail?.orderDetails?.[0].cookingInstruction ?? ""
+            }<br>
+            </span>
            </p>
     
             <table class="item-table ">

@@ -241,6 +241,11 @@ export class UtilService {
             <p>${restaurantDetail.address.street?.toUpperCase()} ,${restaurantDetail.address.city?.toUpperCase()},${restaurantDetail.address.state.toUpperCase()},${
                 restaurantDetail.address.pinCode
             }</p>
+            <p>${
+                restaurantDetail.gstNumber
+                    ? "GST Number:- " + restaurantDetail.gstNumber
+                    : ""
+            }</p>
         </div>
         <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
             orderDetail.customerPreferences.preference

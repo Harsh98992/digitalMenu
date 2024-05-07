@@ -23,8 +23,8 @@ export class RoomNoDialogComponent implements OnInit {
     tableData: any;
     selectedRoom: any;
     customerDetailId: any;
-    roomData: any;
-    storeRoomData: any;
+    roomData=[];
+    storeRoomData=[];
     constructor(
         private fb: FormBuilder,
         @Inject(MAT_DIALOG_DATA) public dialogData: any,

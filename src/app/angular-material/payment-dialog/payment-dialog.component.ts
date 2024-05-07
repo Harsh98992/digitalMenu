@@ -142,25 +142,51 @@ export class PaymentDialogComponent implements OnInit {
             this.utilService.openSnackBar("Please choose payment method", true);
             return;
         }
+        let bodyData: any = [
+            {
+                orderSummary:
+                    this.orderData?.["orderDetails"][0]?.["orderSummary"] ?? "",
+                customerPreferences:
+                    this.orderData?.["orderDetails"][0]?.[
+                        "customerPreferences"
+                    ] ?? "",
 
-        if (this.paymentMethod === "cashOnDelivery") {
-            this.dialogRef.close({ method: "cashOnDelivery", event });
-            // this.orderService
-            //     .changeOrderStatusByUserForCashOnDelivery({
-            //         orderId: this.orderData._id,
-            //         restaurantId: this.orderData.restaurantId,
-            //         orderStatus: "processing",
-            //     })
-            //     .subscribe({
-            //         next: (res) => {
-            //             this.socketOrderPlaced(this.orderData);
+                orderAmount:
+                    this.orderData?.["orderDetails"][0]?.["orderAmount"] ?? "",
+                restaurantId: this.orderData?.["restaurantId"] ?? "",
+                gstAmount:
+                    this.orderData?.["orderDetails"][0]?.["gstAmount"] ?? "",
+                discountAmount:
+                    this.orderData?.["orderDetails"][0]?.["discountAmount"] ??
+                    "",
+                deliveryAmount:
+                    this.orderData?.["orderDetails"][0]?.["deliveryAmount"] ??
+                    "",
+            },
+        ];
 
-            //             this.router.navigateByUrl("/orders");
-            //             this.dialogRef.close();
-            //         },
-            //     });
-        } else {
-            this.buyRazorPay();
-        }
+        this.restaurantService
+            .validationBeforeOrder(bodyData[0])
+            .subscribe((res) => {
+                if (this.paymentMethod === "cashOnDelivery") {
+                    this.dialogRef.close({ method: "cashOnDelivery", event });
+                    // this.orderService
+                    //     .changeOrderStatusByUserForCashOnDelivery({
+                    //         orderId: this.orderData._id,
+                    //         restaurantId: this.orderData.restaurantId,
+                    //         orderStatus: "processing",
+                    //     })
+                    //     .subscribe({
+                    //         next: (res) => {
+                    //             this.socketOrderPlaced(this.orderData);
+
+                    //             this.router.navigateByUrl("/orders");
+                    //             this.dialogRef.close();
+                    //         },
+                    //     });
+                } else {
+                    this.buyRazorPay();
+                }
+            });
     }
 }

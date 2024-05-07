@@ -71,7 +71,7 @@ export class PaymentDialogComponent implements OnInit {
                 "room service"
             ) {
                 this.paymentMethod = "payOnline";
-                this.buyRazorPay();
+                this.completePayment();
             }
         }
     }

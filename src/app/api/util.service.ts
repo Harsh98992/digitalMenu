@@ -236,7 +236,7 @@ export class UtilService {
         printWindow.document.write(
             `<div class="receipt">
         <div class="header">
-           
+
             <h1>${restaurantDetail.restaurantName?.toUpperCase()}</h1>
             <p>${restaurantDetail.address.street?.toUpperCase()} ,${restaurantDetail.address.city?.toUpperCase()},${restaurantDetail.address.state.toUpperCase()},${
                 restaurantDetail.address.pinCode
@@ -251,17 +251,17 @@ export class UtilService {
             orderDetail.customerPreferences.preference
         }</p>
         <div  style="text-align:center">${orderTypeStr}
-       
-       
-        
+
+
+
         </div>
         <p>
         <span class="space-between">
         ${this.datePipe.transform(orderDetail.orderDate)}
      <span>   ${new Date(orderDetail.orderDate).toLocaleTimeString()}</span>
         </span>
-      
-        Bill No: ${orderDetail.orderId}<br>
+
+        Order ID: ${orderDetail.orderId}<br>
         Payment Status: : ${
             orderDetail.payment_method
                 ? "Paid via " + orderDetail.payment_method

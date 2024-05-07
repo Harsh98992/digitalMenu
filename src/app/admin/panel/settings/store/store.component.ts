@@ -152,9 +152,7 @@ export class StoreComponent implements OnInit {
             reqData.isPricingInclusiveOfGST = false;
             reqData.customGSTPercentage = 0;
         }
-        if (!reqData.isPricingInclusiveOfGST) {
-            reqData.customGSTPercentage = 0;
-        }
+       
         this.restaurantPanelService
             .updateStoreSettings(reqData)
             .subscribe((res) => {

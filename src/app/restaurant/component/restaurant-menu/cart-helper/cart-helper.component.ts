@@ -366,17 +366,32 @@ export class CartHelperComponent implements OnInit {
         this.getDeliveryRadiobuttonText();
     }
     generateAmountToBePaid() {
-        if (this.restaurantData?.isPricingInclusiveOfGST) {
-            const divideNumber =
-                this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
-            this.itemTotalAmountShowed = Math.round(
-                this.itemTotal / divideNumber
-            );
-            this.gstAmount = Math.round(
-                this.itemTotal - this.itemTotalAmountShowed
-            );
-            this.amountToBePaid =
-                this.itemTotal - this.discountAmount + this.deliveryAmount;
+        if (this.restaurantData.isGstApplicable) {
+            if (this.restaurantData?.isPricingInclusiveOfGST) {
+                const divideNumber =
+                    this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
+                this.itemTotalAmountShowed = Math.round(
+                    this.itemTotal / divideNumber
+                );
+                this.gstAmount = Math.round(
+                    this.itemTotal - this.itemTotalAmountShowed
+                );
+                this.amountToBePaid =
+                    this.itemTotal - this.discountAmount + this.deliveryAmount;
+            } else {
+                const divideNumber =
+                    this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
+
+                this.itemTotalAmountShowed = this.itemTotal;
+                this.gstAmount = Math.round(
+                    this.itemTotal * divideNumber - this.itemTotal
+                );
+                this.amountToBePaid =
+                    this.itemTotal -
+                    this.discountAmount +
+                    this.deliveryAmount +
+                    this.gstAmount;
+            }
         } else {
             this.gstAmount = Math.round(
                 (this.itemTotal / 100) * this.restaurantData.customGSTPercentage
@@ -388,10 +403,8 @@ export class CartHelperComponent implements OnInit {
                 this.gstAmount -
                 this.discountAmount +
                 this.deliveryAmount;
-            this.restaurantService.amountToBePaidSubject.next(
-                this.amountToBePaid
-            );
         }
+        this.restaurantService.amountToBePaidSubject.next(this.amountToBePaid);
     }
     changeQuantity(flag: string, cartItem: any) {
         if (

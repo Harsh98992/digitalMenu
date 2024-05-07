@@ -320,7 +320,7 @@ export class UtilService {
             `<span>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</span>
             `
         );
-        if (restaurantDetail.isPricingInclusiveOfGST) {
+        if (restaurantDetail.isGstApplicable) {
             printWindow.document.write(
                 `<div class="footer">
             <p>Net Amt.</p>
@@ -344,7 +344,7 @@ export class UtilService {
             }</p>
         </div>`
         );
-        if (restaurantDetail.isPricingInclusiveOfGST) {
+        if (restaurantDetail.isGstApplicable) {
             printWindow.document.write(
                 ` <div class="dash-line"></div>
             <span class="font-bold">Tax Summary</span>

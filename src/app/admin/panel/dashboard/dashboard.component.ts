@@ -499,7 +499,7 @@ export class DashboardComponent implements OnInit {
             Order ID: ${orderDetail.orderId}<br>
 
             ${orderDetail.customerName}<br>
-            ${orderDetail.customerPhoneNumber} - ${
+            ${
                 orderDetail.customerEmail
             }<br>
             <span style="word-break:break-all">

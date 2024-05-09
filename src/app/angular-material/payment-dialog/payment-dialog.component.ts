@@ -71,6 +71,7 @@ export class PaymentDialogComponent implements OnInit {
                 "room service"
             ) {
                 this.paymentMethod = "payOnline";
+                this.paymentOption.pop();
                 this.completePayment();
             }
         }

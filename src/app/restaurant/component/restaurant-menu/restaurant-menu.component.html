@@ -26,7 +26,7 @@
 
                             <!-- amn -->
 
-                            <div class="restaurent-info">
+                            <div class="restaurent-info" *ngIf="!greenPalmFlag">
                                 <h1 class="restaurant-title">
                                     {{ restaurantDetail.restaurantName }}
                                 </h1>
@@ -120,7 +120,7 @@
                                 <p>Closing Time: {{ formatTime(restaurantDetail.closeTime) }}</p>
                             </div> -->
 
-                            <div class="gst-number">
+                            <div class="gst-number"  *ngIf="!greenPalmFlag">
                                 <span
                                     >Time -
                                     {{ formatTime(restaurantDetail.openTime) }}

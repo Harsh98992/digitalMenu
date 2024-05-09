@@ -145,6 +145,12 @@ export class RestaurantPanelService {
             gstData
         );
     }
+    updateRestaurantCashOnDelivery(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantCashOnDelivery`,
+            data
+        );
+    }
     updateContactDetail(data: any) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/updateContactDetail`,

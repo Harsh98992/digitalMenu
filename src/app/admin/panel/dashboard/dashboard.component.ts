@@ -380,55 +380,55 @@ export class DashboardComponent implements OnInit {
                     font-family: Arial, sans-serif;
                     font-size: 12px;
                 }
-    
+
                 .header {
                     text-align: center;
                 }
-    
+
                 .header img {
                     width: 80px;
                     height: 80px;
                 }
-    
+
                 .header h1 {
                     font-size: 20px;
                     margin: 0;
                 }
-    
+
                 .header p {
                     margin: 2px 0;
                 }
-    
+
                 .item-table {
                     width: 100%;
                     border-collapse: collapse;
                     margin: 5px 0;
                 }
-    
+
                 .item-table th,
                 .item-table td {
                     border: 1px solid black;
                     padding: 2px;
                 }
-    
+
                 .item-table th {
                     text-align: left;
                 }
-    
+
                 .item-table td {
                     text-align: left;
                 }
-    
+
                 .footer {
                     display: flex;
                     justify-content: space-between;
                     margin: 0px 0;
                 }
-    
+
                 .footer p {
                     margin: 0;
                 }
-    
+
                 .total {
                     font-weight: bold;
                 }
@@ -464,7 +464,7 @@ export class DashboardComponent implements OnInit {
                 span{
                     font-size: 12px;
                 }
-    
+
                 .border-main-none {
                     font-size: 12px;
                     border-left: 0 !important;
@@ -482,9 +482,9 @@ export class DashboardComponent implements OnInit {
         printWindow.document.write(
             `<div class="receipt">
             <div class="header">
-               
+
                 <h1>${this.restaurantDetail.restaurantName.toUpperCase()}</h1>
-                
+
             </div>
             <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
                 orderDetail.customerPreferences.preference
@@ -495,11 +495,11 @@ export class DashboardComponent implements OnInit {
             ${this.datePipe.transform(orderDetail.orderDate)}
          <span>   ${new Date(orderDetail.orderDate).toLocaleTimeString()}</span>
             </span>
-          
-            Bill No: ${orderDetail.orderId}<br>
-           
+
+            Order ID: ${orderDetail.orderId}<br>
+
             ${orderDetail.customerName}<br>
-            ${orderDetail.customerPhoneNumber} - ${
+            ${
                 orderDetail.customerEmail
             }<br>
             <span style="word-break:break-all">
@@ -508,11 +508,11 @@ export class DashboardComponent implements OnInit {
             }<br>
             </span>
            </p>
-    
+
             <table class="item-table ">
                 <tr  class="border-main-none">
                     <th  class="border-main-none">Items</th>
-                    
+
                     <th  class="border-main-none center">Qty</th>
                 </tr>`
         );

@@ -40,7 +40,6 @@ export class RestaurantProfileComponent implements OnInit, OnDestroy {
     ];
     constructor(
         private authService: AuthenticationService,
-        private utilService: UtilService,
         public dialog: MatDialog,
         private restaurantService: RestaurantPanelService,
         private fb: FormBuilder,
@@ -61,7 +60,6 @@ export class RestaurantProfileComponent implements OnInit, OnDestroy {
             ],
             gstNumber: [""],
             fssaiLicenseNumber: ["", [Validators.required]],
-
             restaurantEmail: ["", [Validators.required, Validators.email]], // Updated form control name
             address: this.fb.group({
                 street: ["", [Validators.required]],
@@ -87,6 +85,7 @@ export class RestaurantProfileComponent implements OnInit, OnDestroy {
                 },
             });
     }
+    
     submitForm() {
         const data = this.restaurantForm.value;
         this.restaurantService.updateRestaurantDetail(data).subscribe({

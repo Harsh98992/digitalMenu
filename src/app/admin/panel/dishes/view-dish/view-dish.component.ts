@@ -60,7 +60,7 @@ export class ViewDishComponent implements OnInit {
 
     inStockDish(row) {
         const reqBody = Object.assign({}, row);
-        reqBody["dishOrderOption"] = "default"; // Set dish order option as default or any other appropriate value
+        reqBody["dishOrderOption"] = "both"; // Set dish order option as default or any other appropriate value
         reqBody["availableFlag"] = true; // Set availableFlag to true
         reqBody["dishId"] = row["_id"];
         reqBody["previousDishCategory"] = row["categoryId"];

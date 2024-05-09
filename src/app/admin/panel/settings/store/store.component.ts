@@ -10,6 +10,7 @@ import { UtilService } from "src/app/api/util.service";
 })
 export class StoreComponent implements OnInit {
     gstForm: FormGroup;
+    bypassForm: FormGroup;
     isEditing: boolean = false;
     isEditingCashOnDelivery = false;
     googleReviewForm: FormGroup;
@@ -24,6 +25,7 @@ export class StoreComponent implements OnInit {
 
     availabilityForm: FormGroup;
     isEditingAvailability: boolean = false;
+    isEditingByPassAuth: any;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -47,10 +49,14 @@ export class StoreComponent implements OnInit {
         this.cashOnDeliveryForm = this.formBuilder.group({
             cashOnDelivery: [true],
         });
+        this.bypassForm = this.formBuilder.group({
+            byPassAuth: [false],
+        });
 
         this.getGSTFormDetails();
 
         this.gstForm.disable();
+        this.bypassForm.disable();
         this.cashOnDeliveryForm.disable();
 
         // Google Review Setting Form
@@ -127,9 +133,15 @@ export class StoreComponent implements OnInit {
 
     getGSTFormDetails() {
         this.restaurantPanelService.getRestaurnatDetail().subscribe((res) => {
+            console.log(res["data"]["restaurantDetail"]);
+            
             this.cashOnDeliveryForm.patchValue({
                 cashOnDelivery:
                     res["data"]["restaurantDetail"]["provideCashOnDelivery"],
+            });
+            this.bypassForm.patchValue({
+                byPassAuth:
+                    res["data"]["restaurantDetail"]["byPassAuth"],
             });
 
             this.gstForm.patchValue({
@@ -154,6 +166,24 @@ export class StoreComponent implements OnInit {
         } else {
             this.updateRestaurantData();
         }
+    }
+    toggleAuthorization() {
+        if (!this.isEditingByPassAuth) {
+            this.bypassForm.enable();
+            this.isEditingByPassAuth = !this.isEditingByPassAuth;
+        } else {
+            this.updateBypassAuth();
+        }
+    }
+    updateBypassAuth() {
+        const reqData = {
+            byPassAuth: this.bypassForm.value.byPassAuth ?? false,
+        };
+        this.restaurantPanelService
+            .updateRestaurantByPassAuth(reqData)
+            .subscribe({
+                next: (res) => {},
+            });
     }
     toggleCashOnDeliveryEditMode() {
         if (!this.isEditingCashOnDelivery) {

@@ -151,6 +151,12 @@ export class RestaurantPanelService {
             data
         );
     }
+    updateRestaurantByPassAuth(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantByPassAuth`,
+            data
+        );
+    }
     updateContactDetail(data: any) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/updateContactDetail`,

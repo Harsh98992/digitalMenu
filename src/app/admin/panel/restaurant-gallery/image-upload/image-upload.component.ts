@@ -72,7 +72,20 @@ export class ImageUploadComponent implements OnInit {
             },
           });
       }
-      
+      else if (this.data.bannerFlag === 'small') {
+        this.restaurantService
+          .updateRestaurantBannerImageForSmall({ image: this.base64 })
+          .subscribe({
+            next: (res: any) => {
+              this.restaurantService.setRestaurantData(res);
+              this.dialogRef.close({
+                successFlag: true
+              });
+
+            },
+          });
+      }
+
        else {
         this.restaurantService
           .updateRestaurantImage({ image: this.base64 })

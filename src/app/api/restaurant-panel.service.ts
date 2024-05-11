@@ -189,6 +189,12 @@ export class RestaurantPanelService {
             imageData
         );
     }
+    updateRestaurantBannerImageForSmall(imageData: { image: any }) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForSmall`,
+            imageData
+        );
+    }
 
     createTableEntry(data: any) {
         return this.http.post(

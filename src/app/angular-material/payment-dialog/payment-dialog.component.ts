@@ -71,7 +71,7 @@ export class PaymentDialogComponent implements OnInit {
                 "room service"
             ) {
                 this.paymentMethod = "payOnline";
-                this.paymentOption.pop();
+                this.paymentOption = this.paymentOption.filter((x) => x.key === "payOnline");
                 this.completePayment();
             }
         }

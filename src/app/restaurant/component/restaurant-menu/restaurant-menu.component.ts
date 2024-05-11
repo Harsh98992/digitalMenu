@@ -640,6 +640,7 @@ export class RestaurantMenuComponent implements OnInit {
             tempDate2.setMinutes(endHours[1]); // Set minutes
             if (tempDate > tempDate2) {
                 tempDate2.setDate(tempDate2.getDate() + 1);
+                return false
             }
             if (currDate < tempDate) {
                 return true;

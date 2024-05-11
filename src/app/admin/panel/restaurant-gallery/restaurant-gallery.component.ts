@@ -49,6 +49,8 @@ export class RestaurantGalleryComponent implements OnInit {
                         this.mobileBannerImg = "../assets/img/detail_1.jpg";
                         this.restaurantImages = res.restaurantImages;
                     }
+
+                    // console.log(res);
                     if (res && res.restaurantBackgroundImageForSmall) {
                         this.smallImg = res.restaurantBackgroundImageForSmall;
 

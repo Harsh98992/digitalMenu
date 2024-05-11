@@ -70,6 +70,7 @@ export class RestaurantMenuComponent implements OnInit {
     pureVegFlag = true;
     amountToBePaid: any;
     rooms: any;
+    greenPalmFlag: any;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -449,6 +450,7 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
+                    this.greenPalmFlag=this.restaurantDetail?.restaurantName?.toLowerCase().includes("green palm") ?? false;
                     this.checkForPureVeg();
 
                     if (this.restaurantDetail.restaurantStatus === "offline") {

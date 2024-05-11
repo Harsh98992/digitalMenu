@@ -13,6 +13,7 @@ import { Subject, takeUntil } from "rxjs";
 export class RestaurantGalleryComponent implements OnInit {
     bannerImg = "";
     mobileBannerImg = "";
+    smallImg= "";
     restaurantImages = [];
     destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -46,6 +47,16 @@ export class RestaurantGalleryComponent implements OnInit {
                     }
                     else {
                         this.mobileBannerImg = "../assets/img/detail_1.jpg";
+                        this.restaurantImages = res.restaurantImages;
+                    }
+                    if (res && res.restaurantBackgroundImageForSmall) {
+                        this.smallImg = res.restaurantBackgroundImageForSmall;
+
+                        this.restaurantImages = res.restaurantImages;
+
+                    }
+                    else {
+                        this.smallImg = "../assets/img/detail_1.jpg";
                         this.restaurantImages = res.restaurantImages;
                     }
                 },
@@ -94,6 +105,23 @@ export class RestaurantGalleryComponent implements OnInit {
             });
     }
 
+    openImageUploadPopUpForSmall(bannerFlag: string) {
+        const data = { bannerFlag };
+        let dialogRef = this.dialog
+            .open(ImageUploadComponent, {
+                disableClose: true,
+                data: data,
+                panelClass: "app-full-bleed-dialog",
+            })
+            .afterClosed()
+            .subscribe({
+                next: (res) => {
+                    if (res && res.successFlag) {
+                        this.restaurantService.setRestaurantData();
+                    }
+                },
+            });
+    }
     ngOnDestroy() {
         this.destroy$.next(true);
         this.destroy$.unsubscribe();

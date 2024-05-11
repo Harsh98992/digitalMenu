@@ -10,9 +10,11 @@ import { UtilService } from "src/app/api/util.service";
 })
 export class StoreComponent implements OnInit {
     gstForm: FormGroup;
+    bypassForm: FormGroup;
     isEditing: boolean = false;
-
+    isEditingCashOnDelivery = false;
     googleReviewForm: FormGroup;
+    cashOnDeliveryForm: FormGroup;
     isEditingGoogleReview: boolean = false;
 
     deliveryForm: FormGroup;
@@ -23,6 +25,7 @@ export class StoreComponent implements OnInit {
 
     availabilityForm: FormGroup;
     isEditingAvailability: boolean = false;
+    isEditingByPassAuth: any;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -43,10 +46,18 @@ export class StoreComponent implements OnInit {
             customGSTPercentage: [5],
             isGstApplicable: [false],
         });
+        this.cashOnDeliveryForm = this.formBuilder.group({
+            cashOnDelivery: [true],
+        });
+        this.bypassForm = this.formBuilder.group({
+            byPassAuth: [false],
+        });
 
         this.getGSTFormDetails();
 
         this.gstForm.disable();
+        this.bypassForm.disable();
+        this.cashOnDeliveryForm.disable();
 
         // Google Review Setting Form
         this.googleReviewForm = this.formBuilder.group({
@@ -122,7 +133,16 @@ export class StoreComponent implements OnInit {
 
     getGSTFormDetails() {
         this.restaurantPanelService.getRestaurnatDetail().subscribe((res) => {
-            console.log(res["data"]["restaurantDetail"]["customGSTPercentage"]);
+            console.log(res["data"]["restaurantDetail"]);
+            
+            this.cashOnDeliveryForm.patchValue({
+                cashOnDelivery:
+                    res["data"]["restaurantDetail"]["provideCashOnDelivery"],
+            });
+            this.bypassForm.patchValue({
+                byPassAuth:
+                    res["data"]["restaurantDetail"]["byPassAuth"],
+            });
 
             this.gstForm.patchValue({
                 isPricingInclusiveOfGST:
@@ -130,7 +150,9 @@ export class StoreComponent implements OnInit {
                 customGSTPercentage:
                     res["data"]["restaurantDetail"]["customGSTPercentage"] === 0
                         ? 5
-                        : res["data"]["restaurantDetail"]["customGSTPercentage"],
+                        : res["data"]["restaurantDetail"][
+                              "customGSTPercentage"
+                          ],
                 isGstApplicable:
                     res["data"]["restaurantDetail"]["isGstApplicable"],
             });
@@ -145,6 +167,43 @@ export class StoreComponent implements OnInit {
             this.updateRestaurantData();
         }
     }
+    toggleAuthorization() {
+        if (!this.isEditingByPassAuth) {
+            this.bypassForm.enable();
+            this.isEditingByPassAuth = !this.isEditingByPassAuth;
+        } else {
+            this.updateBypassAuth();
+        }
+    }
+    updateBypassAuth() {
+        const reqData = {
+            byPassAuth: this.bypassForm.value.byPassAuth ?? false,
+        };
+        this.restaurantPanelService
+            .updateRestaurantByPassAuth(reqData)
+            .subscribe({
+                next: (res) => {},
+            });
+    }
+    toggleCashOnDeliveryEditMode() {
+        if (!this.isEditingCashOnDelivery) {
+            this.cashOnDeliveryForm.enable();
+            this.isEditingCashOnDelivery = !this.isEditingCashOnDelivery;
+        } else {
+            this.updateCashOnDelivery();
+        }
+    }
+    updateCashOnDelivery() {
+        const reqData = {
+            cashOnDelivery:
+                this.cashOnDeliveryForm.value.cashOnDelivery ?? false,
+        };
+        this.restaurantPanelService
+            .updateRestaurantCashOnDelivery(reqData)
+            .subscribe({
+                next: (res) => {},
+            });
+    }
 
     updateRestaurantData() {
         const reqData = Object.assign({}, this.gstForm.value);
@@ -152,7 +211,7 @@ export class StoreComponent implements OnInit {
             reqData.isPricingInclusiveOfGST = false;
             reqData.customGSTPercentage = 0;
         }
-       
+
         this.restaurantPanelService
             .updateStoreSettings(reqData)
             .subscribe((res) => {

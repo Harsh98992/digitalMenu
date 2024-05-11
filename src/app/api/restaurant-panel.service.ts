@@ -145,6 +145,18 @@ export class RestaurantPanelService {
             gstData
         );
     }
+    updateRestaurantCashOnDelivery(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantCashOnDelivery`,
+            data
+        );
+    }
+    updateRestaurantByPassAuth(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantByPassAuth`,
+            data
+        );
+    }
     updateContactDetail(data: any) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/updateContactDetail`,
@@ -186,6 +198,12 @@ export class RestaurantPanelService {
     updateRestaurantBannerImageForMobile(imageData: { image: any }) {
         return this.http.put(
             `${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForMobile`,
+            imageData
+        );
+    }
+    updateRestaurantBannerImageForSmall(imageData: { image: any }) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForSmall`,
             imageData
         );
     }

@@ -182,10 +182,10 @@ export class RestaurantMenuComponent implements OnInit {
                     this.userPreference = {
                         preference: "room service",
                         value: resp.selectedRoom.roomName,
-                        userDetail:{
-                            name:resp.name,
-                            phoneNumber:resp.phoneNumber
-                        }
+                        userDetail: {
+                            name: resp.name,
+                            phoneNumber: resp.phoneNumber,
+                        },
                     };
                     this.setCartStateData();
                     this.placeOrder();
@@ -196,7 +196,7 @@ export class RestaurantMenuComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
-        }else if (text === "roomService") {
+        } else if (text === "roomService") {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
@@ -450,7 +450,10 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
-                    this.greenPalmFlag=this.restaurantDetail?.restaurantName?.toLowerCase().includes("green palm") ?? false;
+                    this.greenPalmFlag =
+                        this.restaurantDetail?.restaurantName
+                            ?.toLowerCase()
+                            .includes("green palm") ?? false;
                     this.checkForPureVeg();
 
                     if (this.restaurantDetail.restaurantStatus === "offline") {
@@ -492,21 +495,25 @@ export class RestaurantMenuComponent implements OnInit {
                     // }
                     // check if device is mobile or desktop
                     if (window.innerWidth < 768) {
-                        if (this.restaurantDetail.restaurantBackgroundImageForMobile) {
-                            this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImageForMobile}')`;
+                        if (
+                            this.restaurantDetail
+                                .restaurantBackgroundImageForMobile
+                        ) {
+                            if (this.greenPalmFlag) {
+                                this.bannerImage = `url('${this.restaurantDetail.restaurantBackgroundImageForMobile}')`;
+                            } else {
+                                this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImageForMobile}')`;
+                            }
                         }
-                        
-                    }
-                    else
-                    {
+                    } else {
                         if (this.restaurantDetail.restaurantBackgroundImage) {
-                            this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImage}')`;
+                            if (this.greenPalmFlag) {
+                                this.bannerImage = `url('${this.restaurantDetail.restaurantBackgroundImage}')`;
+                            } else {
+                                this.bannerImage = `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${this.restaurantDetail.restaurantBackgroundImage}')`;
+                            }
                         }
                     }
-
-
-
-
 
                     this.storeRestaurantInfo(restaurnatUrl);
                     this.restaurantPanelService.restaurantData.next(
@@ -640,7 +647,7 @@ export class RestaurantMenuComponent implements OnInit {
             tempDate2.setMinutes(endHours[1]); // Set minutes
             if (tempDate > tempDate2) {
                 tempDate2.setDate(tempDate2.getDate() + 1);
-                return false
+                return false;
             }
             if (currDate < tempDate) {
                 return true;

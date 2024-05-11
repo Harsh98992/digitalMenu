@@ -520,7 +520,10 @@ export class CartHelperComponent implements OnInit {
                 ?.gatewayData
                 ? true
                 : false,
-            cashOnDeliveryAvailable: true,
+            cashOnDeliveryAvailable:
+                this.restaurantData?.provideCashOnDelivery === false
+                    ? false
+                    : true,
             restaurantId: this.restaurantData._id,
         };
         if (this.userPreference?.preference === "Dine In") {

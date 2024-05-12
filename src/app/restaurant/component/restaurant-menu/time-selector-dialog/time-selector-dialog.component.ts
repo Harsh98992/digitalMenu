@@ -73,9 +73,17 @@ export class TimeSelectorDialogComponent implements OnInit {
                 return;
             }
         }
+        const selectedTime =
+            this.selectedValue === "ASAP"
+                ? "ASAP"
+                : `${this.ctrl.value.hour
+                      .toString()
+                      .padStart(2, "0")}:${this.ctrl.value.minute
+                      .toString()
+                      .padStart(2, "0")}`;
         const dial = this.dialog.open(NamePhonenumberForRoomServiceComponent, {
             panelClass: "add-item-dialog",
-            data: {},
+            data: { selectedTime, takeAway: true },
         });
         dial.afterClosed().subscribe((re) => {
             if (re?.okFlag) {

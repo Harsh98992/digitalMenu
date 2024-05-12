@@ -11,16 +11,16 @@ import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
 export class NamePhonenumberForRoomServiceComponent implements OnInit {
     userForm: FormGroup;
     amountToBePaid: any;
+    headingStr = "";
     constructor(
         private dialogRef: MatDialogRef<NamePhonenumberForRoomServiceComponent>,
         private fb: FormBuilder,
         @Inject(MAT_DIALOG_DATA) public roomData: any,
-        private restaurantService: RestaurantService,
+        private restaurantService: RestaurantService
     ) {}
 
     ngOnInit(): void {
-        console.log(this.roomData);
-        
+        this.setHeadingString();
         this.userForm = this.fb.group({
             name: ["", [Validators.required, Validators.minLength(3)]],
             phoneNumber: [
@@ -33,6 +33,13 @@ export class NamePhonenumberForRoomServiceComponent implements OnInit {
                 this.amountToBePaid = res;
             },
         });
+    }
+    setHeadingString() {
+        if (this.roomData?.takeAway) {
+            this.headingStr = ` Contact Details for take away :-  ${this.roomData?.selectedTime}`;
+        } else {
+            this.headingStr = ` Contact Details for room service at ${this.roomData?.selectedRoom?.roomName}`;
+        }
     }
 
     closeDialog(): void {
@@ -49,11 +56,11 @@ export class NamePhonenumberForRoomServiceComponent implements OnInit {
     onSubmit() {
         this.userForm.markAllAsTouched();
         if (this.userForm.valid) {
-          const outputData={
-            name:this.userForm.get('name').value,
-            phoneNumber:this.userForm.get('phoneNumber').value,
-            okFlag:true
-          }
+            const outputData = {
+                name: this.userForm.get("name").value,
+                phoneNumber: this.userForm.get("phoneNumber").value,
+                okFlag: true,
+            };
             this.dialogRef.close(outputData);
         }
     }

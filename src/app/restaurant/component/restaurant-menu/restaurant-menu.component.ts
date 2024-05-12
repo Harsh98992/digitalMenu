@@ -201,11 +201,15 @@ export class RestaurantMenuComponent implements OnInit {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
-        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
+        } else if (
+            text === "takeAway" ||
+            text === "scheduledDining" ||
+            text === "grabAndGo"
+        ) {
             this.dialog
                 .open(TimeSelectorDialogComponent, {
                     panelClass: "add-item-dialog",
-                    data: { takeAwayFlag:text === "takeAway"},
+                    data: { takeAwayFlag: text === "takeAway" },
                     disableClose: true,
                 })
                 .afterClosed()
@@ -274,7 +278,11 @@ export class RestaurantMenuComponent implements OnInit {
             return "Proceed to choose  room number.";
         } else if (text === "delivery") {
             return "Proceed to choose address.";
-        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
+        } else if (
+            text === "takeAway" ||
+            text === "scheduledDining" ||
+            text === "grabAndGo"
+        ) {
             return "Proceed to choose time.";
         } else {
             return "Please choose an order option.";
@@ -456,8 +464,8 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
-                    this.isByPassAuthFlag=this.restaurantDetail?.byPassAuth
-                    debugger
+                    this.isByPassAuthFlag = this.restaurantDetail?.byPassAuth;
+
                     this.greenPalmFlag =
                         this.restaurantDetail?.restaurantName
                             ?.toLowerCase()

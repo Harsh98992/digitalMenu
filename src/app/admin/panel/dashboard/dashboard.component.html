@@ -201,7 +201,7 @@
                                             />{{ order.dishQuantity }} x
                                             {{ order.dishName }}
                                             <ng-container
-                                                *ngIf="order.itemSizeSelected"
+                                                *ngIf="order.itemSizeSelected?.size"
                                             >
                                                 <span>
                                                     [Size:-{{
@@ -843,7 +843,7 @@
                                             />{{ order.dishQuantity }} x
                                             {{ order.dishName }}
                                             <ng-container
-                                                *ngIf="order.itemSizeSelected"
+                                                *ngIf="order.itemSizeSelected?.size"
                                             >
                                                 <span>
                                                     [Size:-
@@ -1258,7 +1258,7 @@
                                                 {{ order.dishName }}
                                                 <ng-container
                                                     *ngIf="
-                                                        order.itemSizeSelected
+                                                        order.itemSizeSelected?.size
                                                     "
                                                 >
                                                     <span>

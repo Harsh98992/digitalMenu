@@ -1,8 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogRef,
+} from "@angular/material/dialog";
 import { NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
 import { UtilService } from "src/app/api/util.service";
+import { NamePhonenumberForRoomServiceComponent } from "../name-phonenumber-for-room-service/name-phonenumber-for-room-service.component";
 
 @Component({
     selector: "app-time-selector-dialog",
@@ -11,6 +16,7 @@ import { UtilService } from "src/app/api/util.service";
 })
 export class TimeSelectorDialogComponent implements OnInit {
     selectedValue = "ASAP";
+
     ctrl = new FormControl<NgbTimeStruct | null>(
         null,
         (control: FormControl<NgbTimeStruct | null>) => {
@@ -40,7 +46,9 @@ export class TimeSelectorDialogComponent implements OnInit {
     );
     constructor(
         private utilService: UtilService,
-        public dialogRef: MatDialogRef<TimeSelectorDialogComponent>
+        public dialogRef: MatDialogRef<TimeSelectorDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit(): void {
@@ -56,25 +64,47 @@ export class TimeSelectorDialogComponent implements OnInit {
         });
     }
     submitTime() {
-        if (this.selectedValue === "ASAP") {
-            this.dialogRef.close({
-                selectedTime: `ASAP`,
-            });
-        } else if (!this.ctrl.valid) {
+        if (!this.ctrl.valid && this.selectedValue !== "ASAP") {
             if (this.ctrl.hasError("earlyTime")) {
                 this.utilService.openSnackBar(
                     "Please choose a longer time.",
                     true
                 );
+                return;
             }
-        } else {
-            this.dialogRef.close({
-                selectedTime: `${this.ctrl.value.hour
-                    .toString()
-                    .padStart(2, "0")}:${this.ctrl.value.minute
-                    .toString()
-                    .padStart(2, "0")}`,
-            });
         }
+        const dial = this.dialog.open(NamePhonenumberForRoomServiceComponent, {
+            panelClass: "add-item-dialog",
+            data: {},
+        });
+        dial.afterClosed().subscribe((re) => {
+            if (re?.okFlag) {
+                if (this.selectedValue === "ASAP") {
+                    this.dialogRef.close({
+                        selectedTime: `ASAP`,
+                        name: re?.name,
+                        phoneNumber: re?.phoneNumber,
+                    });
+                } else if (!this.ctrl.valid) {
+                    if (this.ctrl.hasError("earlyTime")) {
+                        this.utilService.openSnackBar(
+                            "Please choose a longer time.",
+                            true
+                        );
+                    }
+                } else {
+                    this.dialogRef.close({
+                        selectedTime: `${this.ctrl.value.hour
+                            .toString()
+                            .padStart(2, "0")}:${this.ctrl.value.minute
+                            .toString()
+                            .padStart(2, "0")}`,
+                        name: re?.name,
+                        phoneNumber: re?.phoneNumber,
+                    });
+                }
+                // Close dialog and pass selectedRoom, name, and phoneNumber to the parent component
+            }
+        });
     }
 }

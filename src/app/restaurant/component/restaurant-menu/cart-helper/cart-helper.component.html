@@ -35,7 +35,7 @@
                 class="gold-members d-flex align-items-center justify-content-between border-bottom cartItem"
                 *ngFor="let cartItem of item.cartItems; index as i"
             >
-                <div class="media align-items-center" >
+                <div class="media align-items-center">
                     <img
                         *ngIf="cartItem['dishDetail']['dishType'] === 'veg'"
                         src="assets/img/vegGreenIcon.png"
@@ -156,11 +156,23 @@
                         ></span
                     ></mat-radio-button>
                 </span>
-                <span class="col-4 d-block">
+                <span class="col-4 d-block" *ngIf="!isByPassAuthFlag">
                     <mat-radio-button
                         value="takeAway"
                         (click)="changeOption($event, 'takeAway')"
                         >Take away
+                        <span
+                            class="icon_info_alt"
+                            triggers="click:blur"
+                            ngbTooltip="Order the food, set the time, we will keep your order packed"
+                        ></span
+                    ></mat-radio-button>
+                </span>
+                <span class="col-4 d-block" *ngIf="isByPassAuthFlag">
+                    <mat-radio-button
+                        value="grabAndGo"
+                        (click)="changeOption($event, 'grabAndGo')"
+                        >Grab and Go
                         <span
                             class="icon_info_alt"
                             triggers="click:blur"
@@ -186,7 +198,6 @@
                 <span class="col-4 d-block" *ngIf="rooms && rooms.length">
                     <mat-radio-button
                         value="roomService"
-
                         (click)="changeOption($event, 'roomService')"
                         >Room Service
                         <span
@@ -280,10 +291,7 @@
             }}</span>
         </h6>
         <hr />
-        <h6
-            class="font-weight-bold mb-0"
-            *ngIf="orderOptionFlag"
-        >
+        <h6 class="font-weight-bold mb-0" *ngIf="orderOptionFlag">
             {{ this.userPreference?.preference | titlecase }}
             <span class="float-right">
                 <button

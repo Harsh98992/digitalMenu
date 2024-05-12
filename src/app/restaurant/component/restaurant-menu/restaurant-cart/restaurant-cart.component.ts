@@ -130,14 +130,11 @@ export class RestaurantCartComponent implements OnInit {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
-        } else if (text === "takeAway" || text === "scheduledDining") {
-            // const modalRef = this.modalService.open(ChooseTimeDialogComponent,{
-            //     backdrop:false,
-            //     centered:true,
-            // });
+        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
             this.dialog
                 .open(TimeSelectorDialogComponent, {
                     panelClass: "add-item-dialog",
+                    data: { takeAwayFlag:text === "takeAway"},
                     disableClose: true,
                 })
                 .afterClosed()
@@ -148,8 +145,12 @@ export class RestaurantCartComponent implements OnInit {
                             preference:
                                 text === "takeAway"
                                     ? "Take Away"
-                                    : "Scheduled Dining",
+                                    : "Grab and go",
                             value: resp.selectedTime,
+                            userDetail: {
+                                name: resp.name,
+                                phoneNumber: resp.phoneNumber,
+                            },
                         };
                         this.setCartStateData();
                         this.placeOrder();
@@ -179,7 +180,7 @@ export class RestaurantCartComponent implements OnInit {
             return "Proceed to choose  room number.";
         } else if (text === "delivery") {
             return "Proceed to choose address.";
-        } else if (text === "takeAway" || text === "scheduledDining") {
+        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
             return "Proceed to choose time.";
         } else {
             return "Please choose an order option.";

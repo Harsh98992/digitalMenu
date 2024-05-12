@@ -56,6 +56,7 @@ export class CartHelperComponent implements OnInit {
     tableData = [];
     promoCodes: any;
     rooms: any;
+    isByPassAuthFlag: any;
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -97,6 +98,8 @@ export class CartHelperComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isByPassAuthFlag=this.restaurantData?.byPassAuth
+  
         this.getRestaurantRoom();
         this.getCartItem();
         this.checkLogin();
@@ -153,7 +156,7 @@ export class CartHelperComponent implements OnInit {
             e.preventDefault();
             return;
         }
-        if (!this.userLoginFlag && value != "roomService") {
+        if (!this.userLoginFlag && !this.isByPassAuthFlag) {
             e.preventDefault();
             this.openLoginDialog();
             return;
@@ -231,10 +234,11 @@ export class CartHelperComponent implements OnInit {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
-        } else if (text === "takeAway" || text === "scheduledDining") {
+        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
             this.dialog
                 .open(TimeSelectorDialogComponent, {
                     panelClass: "add-item-dialog",
+                    data: { takeAwayFlag:text === "takeAway"},
                     disableClose: true,
                 })
                 .afterClosed()
@@ -245,8 +249,12 @@ export class CartHelperComponent implements OnInit {
                             preference:
                                 text === "takeAway"
                                     ? "Take Away"
-                                    : "Scheduled Dining",
+                                    : "Grab and go",
                             value: resp.selectedTime,
+                            userDetail: {
+                                name: resp.name,
+                                phoneNumber: resp.phoneNumber,
+                            },
                         };
                         this.setCartStateHelper();
                         this.placeOrder();

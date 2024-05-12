@@ -68,7 +68,10 @@ export class PaymentDialogComponent implements OnInit {
             });
             if (
                 this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
-                "room service"
+                "room service" 
+                ||
+                this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
+                "grab and go"
             ) {
                 this.paymentMethod = "payOnline";
                 this.paymentOption = this.paymentOption.filter(

@@ -409,9 +409,11 @@
                                         <button
                                             class="btn btn-info"
                                             *ngIf="
-                                                details.customerName &&
+                                               details.customerName &&
                                                 details.customerPreferences.preference.toLowerCase() !==
-                                                    'room service'
+                                                    'room service' && 
+                                                    details.customerPreferences.preference.toLowerCase() !==
+                                                    'grab and go'
                                             "
                                             (click)="toggleLoyalStatus(details)"
                                         >
@@ -1052,7 +1054,9 @@
                                             *ngIf="
                                                 details.customerName &&
                                                 details.customerPreferences.preference.toLowerCase() !==
-                                                    'room service'
+                                                    'room service' && 
+                                                    details.customerPreferences.preference.toLowerCase() !==
+                                                    'grab and go'
                                             "
                                             (click)="toggleLoyalStatus(details)"
                                         >
@@ -1464,9 +1468,11 @@
                                         <button
                                             class="btn btn-info"
                                             *ngIf="
-                                                details.customerName &&
+                                               details.customerName &&
                                                 details.customerPreferences.preference.toLowerCase() !==
-                                                    'room service'
+                                                    'room service' && 
+                                                    details.customerPreferences.preference.toLowerCase() !==
+                                                    'grab and go'
                                             "
                                             (click)="toggleLoyalStatus(details)"
                                         >

@@ -75,12 +75,9 @@
                                         </h4>
                                         <h4
                                             *ngIf="
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Take Away' ||
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Scheduled Dining'
+                                                takeAwayOptions.includes(
+                                                    details.customerPreferences.preference.toLowerCase()
+                                                )
                                             "
                                         >
                                             {{
@@ -716,12 +713,9 @@
                                         </h4>
                                         <h4
                                             *ngIf="
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Take Away' ||
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Scheduled Dining'
+                                                takeAwayOptions.includes(
+                                                    details.customerPreferences.preference.toLowerCase()
+                                                )
                                             "
                                         >
                                             {{
@@ -1124,12 +1118,9 @@
                                         </h4>
                                         <h4
                                             *ngIf="
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Take Away' ||
-                                                details.customerPreferences
-                                                    .preference ===
-                                                    'Scheduled Dining'
+                                                takeAwayOptions.includes(
+                                                    details.customerPreferences.preference.toLowerCase()
+                                                )
                                             "
                                         >
                                             {{

@@ -542,14 +542,14 @@
                     <a
                         class="btn btn-success btn-block btn-lg"
                         (click)="openLoginDialog()"
-                        *ngIf="!userLoginFlag && orderOption !== 'roomService'"
+                        *ngIf="!userLoginFlag && !isByPassAuthFlag"
                         >Log in and place an order
                     </a>
                     <a
                         class="btn btn-success btn-block btn-lg"
                         (click)="openOrderOptionDialog()"
                         *ngIf="
-                            (userLoginFlag || orderOption === 'roomService') &&
+                            (userLoginFlag || isByPassAuthFlag) &&
                             !orderOptionFlag
                         "
                         >{{ getOrderOptionText() }}</a
@@ -559,7 +559,7 @@
                         class="btn btn-success btn-block btn-lg"
                         (click)="placeOrder(true)"
                         *ngIf="
-                            (userLoginFlag || orderOption === 'roomService') &&
+                            (userLoginFlag || isByPassAuthFlag) &&
                             orderOptionFlag
                         "
                         >Proceed to payment</a

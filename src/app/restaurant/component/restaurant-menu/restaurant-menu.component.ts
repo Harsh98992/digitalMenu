@@ -71,6 +71,7 @@ export class RestaurantMenuComponent implements OnInit {
     amountToBePaid: any;
     rooms: any;
     greenPalmFlag: any;
+    isByPassAuthFlag: any;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -455,6 +456,8 @@ export class RestaurantMenuComponent implements OnInit {
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
                     this.restaurantDetail = res.data;
+                    this.isByPassAuthFlag=this.restaurantDetail?.byPassAuth
+                    debugger
                     this.greenPalmFlag =
                         this.restaurantDetail?.restaurantName
                             ?.toLowerCase()

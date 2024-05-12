@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
     allOrders = [];
     activeTab = "tab1";
     apiCalledFlag: boolean;
+    takeAwayOptions = ["take away", "grab and go", "schedule dining"];
     constructor(
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
@@ -499,9 +500,7 @@ export class DashboardComponent implements OnInit {
             Order ID: ${orderDetail.orderId}<br>
 
             ${orderDetail.customerName}<br>
-            ${
-                orderDetail.customerEmail
-            }<br>
+            ${orderDetail.customerEmail}<br>
             <span style="word-break:break-all">
             Cooking Instructions: ${
                 orderDetail?.orderDetails?.[0].cookingInstruction ?? ""

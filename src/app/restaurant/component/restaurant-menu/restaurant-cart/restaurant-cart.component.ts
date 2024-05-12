@@ -41,6 +41,7 @@ export class RestaurantCartComponent implements OnInit {
     orderOptionFlag = false;
     userPreference = {};
     cookingInstruction = "";
+    isByPassAuthFlag: any;
 
     constructor(
         private restaurantService: RestaurantService,
@@ -54,6 +55,7 @@ export class RestaurantCartComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.isByPassAuthFlag = this.restaurantData?.byPassAuth;
         this.getCartItem();
         this.checkLogin();
 
@@ -130,11 +132,15 @@ export class RestaurantCartComponent implements OnInit {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
-        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
+        } else if (
+            text === "takeAway" ||
+            text === "scheduledDining" ||
+            text === "grabAndGo"
+        ) {
             this.dialog
                 .open(TimeSelectorDialogComponent, {
                     panelClass: "add-item-dialog",
-                    data: { takeAwayFlag:text === "takeAway"},
+                    data: { takeAwayFlag: text === "takeAway" },
                     disableClose: true,
                 })
                 .afterClosed()
@@ -180,7 +186,11 @@ export class RestaurantCartComponent implements OnInit {
             return "Proceed to choose  room number.";
         } else if (text === "delivery") {
             return "Proceed to choose address.";
-        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
+        } else if (
+            text === "takeAway" ||
+            text === "scheduledDining" ||
+            text === "grabAndGo"
+        ) {
             return "Proceed to choose time.";
         } else {
             return "Please choose an order option.";

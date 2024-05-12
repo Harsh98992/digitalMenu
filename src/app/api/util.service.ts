@@ -93,6 +93,12 @@ export class UtilService {
                 "Take Away :- " + orderDetail.customerPreferences.value;
         } else if (
             orderDetail.customerPreferences.preference.toLowerCase() ===
+            "grab and go"
+        ) {
+            orderTypeStr =
+                "Grab and go :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
             "schedule dining"
         ) {
             orderTypeStr =

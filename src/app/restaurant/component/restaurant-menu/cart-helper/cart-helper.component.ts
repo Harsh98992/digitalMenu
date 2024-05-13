@@ -98,8 +98,8 @@ export class CartHelperComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.isByPassAuthFlag=this.restaurantData?.byPassAuth
-  
+        this.isByPassAuthFlag = this.restaurantData?.byPassAuth;
+
         this.getRestaurantRoom();
         this.getCartItem();
         this.checkLogin();
@@ -234,11 +234,15 @@ export class CartHelperComponent implements OnInit {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
             this.openAddressSelectionDialog();
-        } else if (text === "takeAway" || text === "scheduledDining" || text==="grabAndGo") {
+        } else if (
+            text === "takeAway" ||
+            text === "scheduledDining" ||
+            text === "grabAndGo"
+        ) {
             this.dialog
                 .open(TimeSelectorDialogComponent, {
                     panelClass: "add-item-dialog",
-                    data: { takeAwayFlag:text === "takeAway"},
+                    data: { takeAwayFlag: text === "takeAway" },
                     disableClose: true,
                 })
                 .afterClosed()
@@ -583,11 +587,7 @@ export class CartHelperComponent implements OnInit {
                     this.restaurantService.setCartItem([]);
                     this.restaurantService.setRestaurantUrl(null);
                     this.restaurantService.amountToBePaidSubject.next(null);
-                    if (
-                        orderData &&
-                        orderData?.customerPreferences?.preference ===
-                            "room service"
-                    ) {
+                    if (orderData && this.isByPassAuthFlag) {
                         this.router.navigateByUrl(
                             `/order-tracking/${orderData.orderId}/${orderData.restaurantId}`
                         );

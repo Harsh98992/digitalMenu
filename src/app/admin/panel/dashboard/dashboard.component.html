@@ -45,8 +45,13 @@
                                     <div class="delivery-address">
                                         <h4>
                                             {{
-                                                details.customerPreferences
-                                                    .preference | titlecase
+                                                details.customerPreferences.preference.toLowerCase() ===
+                                                "grab and go"
+                                                    ? "Take away"
+                                                    : (details
+                                                          .customerPreferences
+                                                          .preference
+                                                      | titlecase)
                                             }}
                                         </h4>
                                         <h4
@@ -201,7 +206,9 @@
                                             />{{ order.dishQuantity }} x
                                             {{ order.dishName }}
                                             <ng-container
-                                                *ngIf="order.itemSizeSelected?.size"
+                                                *ngIf="
+                                                    order.itemSizeSelected?.size
+                                                "
                                             >
                                                 <span>
                                                     [Size:-{{
@@ -409,10 +416,10 @@
                                         <button
                                             class="btn btn-info"
                                             *ngIf="
-                                               details.customerName &&
+                                                details.customerName &&
                                                 details.customerPreferences.preference.toLowerCase() !==
-                                                    'room service' && 
-                                                    details.customerPreferences.preference.toLowerCase() !==
+                                                    'room service' &&
+                                                details.customerPreferences.preference.toLowerCase() !==
                                                     'grab and go'
                                             "
                                             (click)="toggleLoyalStatus(details)"
@@ -685,8 +692,13 @@
                                     <div class="delivery-address">
                                         <h4>
                                             {{
-                                                details.customerPreferences
-                                                    .preference
+                                                details.customerPreferences.preference.toLowerCase() ===
+                                                "grab and go"
+                                                    ? "Take away"
+                                                    : (details
+                                                          .customerPreferences
+                                                          .preference
+                                                      | titlecase)
                                             }}
                                         </h4>
                                         <h4
@@ -843,7 +855,9 @@
                                             />{{ order.dishQuantity }} x
                                             {{ order.dishName }}
                                             <ng-container
-                                                *ngIf="order.itemSizeSelected?.size"
+                                                *ngIf="
+                                                    order.itemSizeSelected?.size
+                                                "
                                             >
                                                 <span>
                                                     [Size:-
@@ -1054,8 +1068,8 @@
                                             *ngIf="
                                                 details.customerName &&
                                                 details.customerPreferences.preference.toLowerCase() !==
-                                                    'room service' && 
-                                                    details.customerPreferences.preference.toLowerCase() !==
+                                                    'room service' &&
+                                                details.customerPreferences.preference.toLowerCase() !==
                                                     'grab and go'
                                             "
                                             (click)="toggleLoyalStatus(details)"
@@ -1092,8 +1106,13 @@
                                     <div class="delivery-address">
                                         <h4>
                                             {{
-                                                details.customerPreferences
-                                                    .preference
+                                                details.customerPreferences.preference.toLowerCase() ===
+                                                "grab and go"
+                                                    ? "Take away"
+                                                    : (details
+                                                          .customerPreferences
+                                                          .preference
+                                                      | titlecase)
                                             }}
                                         </h4>
                                         <h4
@@ -1258,7 +1277,8 @@
                                                 {{ order.dishName }}
                                                 <ng-container
                                                     *ngIf="
-                                                        order.itemSizeSelected?.size
+                                                        order.itemSizeSelected
+                                                            ?.size
                                                     "
                                                 >
                                                     <span>
@@ -1468,10 +1488,10 @@
                                         <button
                                             class="btn btn-info"
                                             *ngIf="
-                                               details.customerName &&
+                                                details.customerName &&
                                                 details.customerPreferences.preference.toLowerCase() !==
-                                                    'room service' && 
-                                                    details.customerPreferences.preference.toLowerCase() !==
+                                                    'room service' &&
+                                                details.customerPreferences.preference.toLowerCase() !==
                                                     'grab and go'
                                             "
                                             (click)="toggleLoyalStatus(details)"

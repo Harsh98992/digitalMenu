@@ -129,6 +129,15 @@
                         </li>
                         <li
                             *ngIf="
+                                this.orderData.payment_transfer_id &&
+                                !roomScreenFlag
+                            "
+                        >
+                            <strong>Payment Tranfer Id</strong>
+                            {{ this.orderData.payment_transfer_id }}
+                        </li>
+                        <li
+                            *ngIf="
                                 this.orderData.payment_time && !roomScreenFlag
                             "
                         >

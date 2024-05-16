@@ -570,6 +570,7 @@ export class CartHelperComponent implements OnInit {
                 razorpay_order_id: event.detail["razorpay_order_id"],
                 razorpay_payment_id: event.detail["razorpay_payment_id"],
                 razorpay_signature: event.detail["razorpay_signature"],
+                razorpay_tranferData: paymentData.transferDetails,
             };
         } else if (paymentData.method === "cashOnDelivery") {
             reqData = {

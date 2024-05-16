@@ -22,6 +22,7 @@ export class PaymentDialogComponent implements OnInit {
     socketApiUrl = environment.socketApiUrl;
 
     socketOrderPlacedEvent = "orderPlaced";
+    transferDetails: any;
 
     socketOrderPlaced(data: any) {
         this.socket.emit(this.socketOrderPlacedEvent, data);
@@ -68,10 +69,9 @@ export class PaymentDialogComponent implements OnInit {
             });
             if (
                 this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
-                "room service" 
-                ||
+                    "room service" ||
                 this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
-                "grab and go"
+                    "grab and go"
             ) {
                 this.paymentMethod = "payOnline";
                 this.paymentOption = this.paymentOption.filter(
@@ -105,6 +105,11 @@ export class PaymentDialogComponent implements OnInit {
             this.razorPayOptions.amount = res["value"]["amount"];
             this.razorPayOptions.name = this.razorPayData["name"];
             this.razorPayOptions.order_id = res["value"]["id"];
+            this.transferDetails = res["value"]["transfers"]?.length
+                ? res["value"]["transfers"][0]
+                : "";
+            // this.razorPayOptions.transfer_id = res["value"]["transfers"]?.length ? res["value"]["transfers"][0]?['id'] : ''
+
             this.razorPayOptions.handler = this.razorPayResponseHandler;
             var rzp1 = new Razorpay(this.razorPayOptions);
             rzp1.open();
@@ -123,7 +128,11 @@ export class PaymentDialogComponent implements OnInit {
         console.log(event);
 
         if (event.detail) {
-            this.dialogRef.close({ method: "payOnline", event });
+            this.dialogRef.close({
+                method: "payOnline",
+                event,
+                transferDetails: this.transferDetails,
+            });
             // this.orderService
             //     .changeOrderStatusByUser({
             //         orderId: this.orderData._id,

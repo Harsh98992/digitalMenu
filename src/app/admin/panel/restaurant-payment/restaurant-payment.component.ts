@@ -95,11 +95,17 @@ export class RestaurantPaymentComponent implements OnInit {
         if (event && event?.getTime()) {
             if (str == "startDate") {
                 this.filteredData = this.filteredData.filter((row) => {
-                    return new Date(row.created_at * 1000).setHours(0,0,0,0) >= new Date(event).setHours(0,0,0,0) ;
+                    return (
+                        new Date(row.created_at * 1000).setHours(0, 0, 0, 0) >=
+                        new Date(event).setHours(0, 0, 0, 0)
+                    );
                 });
             } else {
                 this.filteredData = this.filteredData.filter((row) => {
-                    return new Date(row.created_at * 1000).setHours(0,0,0,0)  <= new Date(event).setHours(0,0,0,0) ;
+                    return (
+                        new Date(row.created_at * 1000).setHours(0, 0, 0, 0) <=
+                        new Date(event).setHours(0, 0, 0, 0)
+                    );
                 });
             }
         }

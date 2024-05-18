@@ -23961,7 +23961,7 @@ header
 .owl-carousel .owl-dots .owl-dot {
   display: inline-block;
   zoom: 1;
-  *display: inline;
+
 }
 .owl-carousel .owl-dots .owl-dot span {
   width: 10px;

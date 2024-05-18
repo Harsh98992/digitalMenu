@@ -40,6 +40,12 @@ const routes: Routes = [
             import("./admin/admin.module").then((m) => m.AdminModule),
     },
     {
+        path: "landing",
+        // canLoad:[RestaurantAuthGuard],
+        loadChildren: () =>
+            import("./landing/landing.module").then((m) => m.LandingModule),
+    },
+    {
         path: "tracking",
         component: TrackingComponent,
     },

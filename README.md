@@ -42,7 +42,7 @@ ng build --configuration production
 
 ```bash
 
-
+npm run prod
 firebase use qrsay-c617e
 firebase deploy
 

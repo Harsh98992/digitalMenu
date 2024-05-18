@@ -21,6 +21,8 @@ export class RestaurantPaymentComponent implements OnInit {
     extraIngredents = [];
     searchTerm = "";
     filteredData: any;
+    startDate;
+    endDate;
     constructor(
         private adminService: AdminPanelService,
         private dialog: MatDialog
@@ -81,7 +83,7 @@ export class RestaurantPaymentComponent implements OnInit {
             data,
         });
     }
-    applyFilter(): void {
+    applyFilter(event: Date = null, str = ""): void {
         const filterValue = this.searchTerm.toLowerCase();
 
         this.filteredData = this.rows.filter((row) => {
@@ -90,5 +92,22 @@ export class RestaurantPaymentComponent implements OnInit {
             );
         });
         this.table.offset = 0; // Reset pagination to the first page
+        if (event && event?.getTime()) {
+            if (str == "startDate") {
+                this.filteredData = this.filteredData.filter((row) => {
+                    return new Date(row.created_at * 1000) >= new Date(event);
+                });
+            } else {
+                this.filteredData = this.filteredData.filter((row) => {
+                    return new Date(row.created_at * 1000) <= new Date(event);
+                });
+            }
+        }
+    }
+    reset() {
+        this.searchTerm = "";
+        this.startDate = null;
+        this.endDate = null;
+        this.applyFilter();
     }
 }

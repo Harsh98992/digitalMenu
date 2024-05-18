@@ -4,7 +4,7 @@
             <div class="card-header bg-dark text-light">Restaurant Orders</div>
             <br />
             <div class="row mx-2 my-1">
-                <div class="form-group col-lg-2 col-md-12">
+                <div class="form-group col-lg-6 col-md-12">
                     <input
                         type="text"
                         [(ngModel)]="searchTerm"
@@ -13,13 +13,56 @@
                         class="form-control"
                     />
                 </div>
+                <div class="col-1">
+                    <button class="btn btn-danger" (click)="reset()">Reset</button>
+                </div>
+                <!-- <div class="col-1">
+                    <button class="btn btn-success">Search</button>
+                </div> -->
 
-                <div class="col-lg-2 col-md-12">
+                <div class="col-lg-4 col-md-12" style="text-align: end">
                     <button type="reset" class="btn btn-danger">
                         <i class="fa-solid fa-cloud-arrow-down"></i>
                         Export
                     </button>
                 </div>
+            </div>
+            <div class="row mx-2 my-1">
+                <div class="mb-3 col-md-3">
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [matDatepicker]="picker"
+                            placeholder="Choose a start date"
+                            (ngModelChange)="applyFilter($event, 'startDate')"
+                            [(ngModel)]="startDate"
+                            disabled
+                        />
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #picker  disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="mb-3 col-md-3">
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [matDatepicker]="endDatePicker"
+                            (ngModelChange)="applyFilter($event,'endDate')"
+                            placeholder="Choose a end date"
+                            [(ngModel)]="endDate"
+                            disabled
+                        />
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="endDatePicker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+               
             </div>
             <ngx-datatable
                 #myTable
@@ -63,7 +106,8 @@
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="order_id"> </ngx-datatable-column>
-                <ngx-datatable-column prop="id"   name="Payment Id"> </ngx-datatable-column>
+                <ngx-datatable-column prop="id" name="Payment Id">
+                </ngx-datatable-column>
                 <ngx-datatable-column prop="amount">
                     <ng-template
                         let-value="value"
@@ -84,7 +128,7 @@
                         let-row="row"
                         ngx-datatable-cell-template
                     >
-                        <span>{{ value * 1000  | date : "medium" }}</span>
+                        <span>{{ value * 1000 | date : "medium" }}</span>
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

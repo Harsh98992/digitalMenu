@@ -13,6 +13,12 @@ export class AdminPanelService {
             `${this.apiUrl}/v1/admin/getRestaurantsByStatus/${restaurantVerified}`
         );
     }
+    getRestaurantPayment() {
+        return this.http.get(`${this.apiUrl}/v1/payment/getAccountPaymentDetails`);
+    }
+    getAccountTransferDetails(orderId) {
+        return this.http.get(`${this.apiUrl}/v1/payment/getAccountTransferDetails/${orderId}`);
+    }
     getAdminRestaurantData(id: string) {
         return this.http.get(
             `${this.apiUrl}/v1/admin/getRestaurantDetail/${id}`
@@ -39,7 +45,6 @@ export class AdminPanelService {
     }
 
     sendEmailToRestaurant(data: any) {
-
         return this.http.post(
             `${this.apiUrl}/v1/admin/sendEmailToRestaurant`,
             data

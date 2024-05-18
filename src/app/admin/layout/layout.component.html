@@ -30,6 +30,14 @@
                 >
             </li>
             <li
+                routerLink="/admin/payment"
+                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-users"></i> Payments</a
+                >
+            </li>
+            <li
                 routerLink="/admin/restaurant-orders"
                 *ngIf="verifiedAccountFlag"
             >
@@ -139,18 +147,18 @@
                         >
                     </li>
                     <li
-                    *ngIf="
-                        !adminRouteFlag &&
-                        verifiedAccountFlag &&
-                        !this.staffRoleFlag
-                    "
-                    routerLink="/admin/restaurant-room/view"
-                >
-                    <a class="custom-center"
-                        ><i class="fas fa-angle-right"></i> Restaurant
-                        Rooms</a
+                        *ngIf="
+                            !adminRouteFlag &&
+                            verifiedAccountFlag &&
+                            !this.staffRoleFlag
+                        "
+                        routerLink="/admin/restaurant-room/view"
                     >
-                </li>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Rooms</a
+                        >
+                    </li>
                     <li
                         routerLink="/admin/restaurant-images"
                         *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
@@ -265,9 +273,7 @@
                 >
             </li> -->
             <li *ngIf="verifiedAccountFlag">
-                <a
-                href="https://wa.me/9310415024"
-                    target="blank"
+                <a href="https://wa.me/9310415024" target="blank"
                     ><i class="fas fa-cog"></i>Support</a
                 >
             </li>

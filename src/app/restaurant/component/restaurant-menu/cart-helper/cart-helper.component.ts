@@ -537,6 +537,7 @@ export class CartHelperComponent implements OnInit {
                     ? false
                     : true,
             restaurantId: this.restaurantData._id,
+            restaurantName: this.restaurantData?.restaurantName ?? '',
         };
         if (this.userPreference?.preference === "Dine In") {
             if (true) {

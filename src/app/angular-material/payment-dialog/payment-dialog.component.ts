@@ -34,7 +34,7 @@ export class PaymentDialogComponent implements OnInit {
         currency: "INR",
         name: "",
 
-        description: "Skartz Payment",
+        description: "",
         order_id: "",
         handler: function (response) {
             // Control comes here only in case of success. In case of failure,  razorpay form shows "Retry button"
@@ -103,7 +103,10 @@ export class PaymentDialogComponent implements OnInit {
         this.restaurantService.razorPay(this.razorPayData).subscribe((res) => {
             this.razorPayOptions.key = res["key"];
             this.razorPayOptions.amount = res["value"]["amount"];
+
             this.razorPayOptions.name = this.razorPayData["name"];
+            this.razorPayOptions.description =
+                this.orderData["restaurantName"] ?? "";
             this.razorPayOptions.order_id = res["value"]["id"];
             this.transferDetails = res["value"]["transfers"]?.length
                 ? res["value"]["transfers"][0]

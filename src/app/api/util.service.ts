@@ -132,13 +132,15 @@ export class UtilService {
         // stylesheets
 
         printWindow.document.write(
-            ` <style>
+            `   <style>
             .receipt {
                 width: 300px;
                 margin: 0 auto;
+                height: 30px;
+                font-weight: 600;
                 padding: 5px;
                 font-family: Arial, sans-serif;
-                font-size: 12px;
+                font-size: 15px;
             }
 
             .header {
@@ -209,7 +211,8 @@ export class UtilService {
                 justify-content: space-between;
             }
             .border-none {
-                font-size: 12px;
+                font-size: 14px;
+                font-weight: 600;
                 border-left: 0 !important;
                 border-right: 0 !important;
                 border-bottom: 0 !important;
@@ -221,18 +224,18 @@ export class UtilService {
                 margin-top: 0px;
                 margin-bottom: 0.1px;
             }
-            span{
-                font-size: 12px;
+            span {
+                font-size: 14px;
             }
 
             .border-main-none {
-                font-size: 12px;
+                font-size: 14px;
                 border-left: 0 !important;
                 border-right: 0 !important;
                 border-top: 2px dashed grey;
                 border-bottom: 2px dashed grey;
             }
-            .margin-custom{
+            .margin-custom {
                 margin-right: 1.3rem !important;
             }
         </style>`

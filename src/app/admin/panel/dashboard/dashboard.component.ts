@@ -373,110 +373,113 @@ export class DashboardComponent implements OnInit {
         // stylesheets
 
         printWindow.document.write(
-            ` <style>
-                .receipt {
-                    width: 250px;
-                    margin: 0 auto;
-                    padding: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 12px;
-                }
+            `   <style>
+            .receipt {
+                width: 300px;
+                margin: 0 auto;
+                height: 30px;
+                font-weight: 600;
+                padding: 5px;
+                font-family: Arial, sans-serif;
+                font-size: 15px;
+            }
 
-                .header {
-                    text-align: center;
-                }
+            .header {
+                text-align: center;
+            }
 
-                .header img {
-                    width: 80px;
-                    height: 80px;
-                }
+            .header img {
+                width: 80px;
+                height: 80px;
+            }
 
-                .header h1 {
-                    font-size: 20px;
-                    margin: 0;
-                }
+            .header h1 {
+                font-size: 20px;
+                margin: 0;
+            }
 
-                .header p {
-                    margin: 2px 0;
-                }
+            .header p {
+                margin: 2px 0;
+            }
 
-                .item-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin: 5px 0;
-                }
+            .item-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 5px 0;
+            }
 
-                .item-table th,
-                .item-table td {
-                    border: 1px solid black;
-                    padding: 2px;
-                }
+            .item-table th,
+            .item-table td {
+                border: 1px solid black;
+                padding: 2px;
+            }
 
-                .item-table th {
-                    text-align: left;
-                }
+            .item-table th {
+                text-align: left;
+            }
 
-                .item-table td {
-                    text-align: left;
-                }
+            .item-table td {
+                text-align: left;
+            }
 
-                .footer {
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 0px 0;
-                }
+            .footer {
+                display: flex;
+                justify-content: space-between;
+                margin: 0px 0;
+            }
 
-                .footer p {
-                    margin: 0;
-                }
+            .footer p {
+                margin: 0;
+            }
 
-                .total {
-                    font-weight: bold;
-                }
-                .captalize {
-                    text-transform: capitalize;
-                }
-                .font-bold {
-                    font-weight: bold;
-                }
-                .right {
-                    text-align: right;
-                }
-                .center {
-                    text-align: center !important;
-                }
-                .space-between {
-                    display: flex;
-                    justify-content: space-between;
-                }
-                .border-none {
-                    font-size: 12px;
-                    border-left: 0 !important;
-                    border-right: 0 !important;
-                    border-bottom: 0 !important;
-                    border-top: 0 !important;
-                }
-                .dash-line {
-                    border-top: 2px dashed grey;
-                    width: 100%;
-                    margin-top: 0px;
-                    margin-bottom: 0.1px;
-                }
-                span{
-                    font-size: 12px;
-                }
+            .total {
+                font-weight: bold;
+            }
+            .captalize {
+                text-transform: capitalize;
+            }
+            .font-bold {
+                font-weight: bold;
+            }
+            .right {
+                text-align: right;
+            }
+            .center {
+                text-align: center !important;
+            }
+            .space-between {
+                display: flex;
+                justify-content: space-between;
+            }
+            .border-none {
+                font-size: 14px;
+                font-weight: 600;
+                border-left: 0 !important;
+                border-right: 0 !important;
+                border-bottom: 0 !important;
+                border-top: 0 !important;
+            }
+            .dash-line {
+                border-top: 2px dashed grey;
+                width: 100%;
+                margin-top: 0px;
+                margin-bottom: 0.1px;
+            }
+            span {
+                font-size: 14px;
+            }
 
-                .border-main-none {
-                    font-size: 12px;
-                    border-left: 0 !important;
-                    border-right: 0 !important;
-                    border-top: 2px dashed grey;
-                    border-bottom: 2px dashed grey;
-                }
-                .margin-custom{
-                    margin-right: 1.3rem !important;
-                }
-            </style>`
+            .border-main-none {
+                font-size: 14px;
+                border-left: 0 !important;
+                border-right: 0 !important;
+                border-top: 2px dashed grey;
+                border-bottom: 2px dashed grey;
+            }
+            .margin-custom {
+                margin-right: 1.3rem !important;
+            }
+        </style>`
         );
         printWindow.document.write("</head><body>");
 

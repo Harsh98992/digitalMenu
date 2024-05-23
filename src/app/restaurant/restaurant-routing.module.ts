@@ -60,7 +60,7 @@ const routes: Routes = [
                 component: AddressesComponent,
             },
             {
-                path: "trackOrder",
+                path: "trackOrder/:orderId",
                 component: TrackOrderComponent,
             },
 

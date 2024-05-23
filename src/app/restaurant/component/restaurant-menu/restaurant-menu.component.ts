@@ -553,7 +553,7 @@ export class RestaurantMenuComponent implements OnInit {
 
                     // sort the restaurant data cuisine such that offers are shown first
                     this.restaurantDetail.cuisine.sort((a, b) => {
-                        if (a.categoryName.toLowerCase() === "offers") {
+                        if (a?.specialCategory) {
                             return -1;
                         } else {
                             return 1;

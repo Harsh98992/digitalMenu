@@ -310,9 +310,9 @@
                                     'scroll-first': i === 0,
                                     'scroll-default': i !== 0,
                                     'offer-section':
-                                        menu.categoryName === 'offers',
+                                        menu.specialCategory,
                                     'general-section':
-                                        menu.categoryName !== 'offers'
+                                        !menu.specialCategory
                                 }"
                                 [id]="menu._id"
                             >

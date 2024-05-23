@@ -930,6 +930,7 @@ export class RestaurantMenuComponent implements OnInit {
             const temp: any = {};
 
             temp["categoryName"] = cuisine.categoryName;
+            temp["specialCategory"] = cuisine.specialCategory;
             temp["_id"] = cuisine._id;
             temp["items"] = [];
 

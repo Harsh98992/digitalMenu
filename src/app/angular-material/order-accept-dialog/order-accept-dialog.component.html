@@ -41,7 +41,10 @@
                             <span
                                 *ngIf="
                                     this.orderData.customerPreferences
-                                        .preference === 'Dine In'
+                                        .preference === 'Dine In'  ||
+                                        this.orderData.customerPreferences
+                                        .preference?.toLowerCase() ===
+                                        'dining'
                                 "
                             >
                                 Table Name:-
@@ -54,7 +57,7 @@
                                     this.orderData.customerPreferences
                                         .preference === 'Scheduled Dining' ||
                                     this.orderData.customerPreferences
-                                        .preference === 'room service'
+                                        .preference === 'room service' 
                                 "
                             >
                                 {{

@@ -131,11 +131,22 @@
                 aria-label="Select an option"
                 [(ngModel)]="orderOption"
             >
-                <span class="col-4 d-block" *ngIf="isDineInAvailable">
+                <span class="col-4 d-block" *ngIf="isDineInAvailable && !isByPassAuthFlag">
                     <mat-radio-button
                         value="dineIn"
                         (click)="changeOption($event, 'dineIn')"
                         >Dine In
+                        <span
+                            class="icon_info_alt"
+                            triggers="click:blur"
+                            ngbTooltip="Place an order, choose the table, and we will serve"
+                        ></span></mat-radio-button
+                ></span>
+                <span class="col-4 d-block" *ngIf="isDineInAvailable && isByPassAuthFlag">
+                    <mat-radio-button
+                        value="dining"
+                        (click)="changeOption($event, 'dining')"
+                        >Dining
                         <span
                             class="icon_info_alt"
                             triggers="click:blur"

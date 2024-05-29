@@ -230,6 +230,8 @@ export class CartHelperComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
+        } else if (text === "dining") {
+            this.openSelectTableNumberDialog(true);
         } else if (text === "roomService") {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
@@ -296,7 +298,8 @@ export class CartHelperComponent implements OnInit {
                 }
             });
     }
-    openSelectTableNumberDialog() {
+    openSelectTableNumberDialog(dining = false) {
+        console.log(this.tableData, "tableData");
         this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
@@ -310,10 +313,22 @@ export class CartHelperComponent implements OnInit {
             .subscribe((resp) => {
                 if (resp && resp.selectedTableName) {
                     this.orderOptionFlag = true;
-                    this.userPreference = {
-                        preference: "Dine In",
-                        value: resp.selectedTableName,
-                    };
+                    this.orderOptionFlag = true;
+                    if (dining) {
+                        this.userPreference = {
+                            preference: "Dining",
+                            value: resp.selectedTableName,
+                            userDetail: {
+                                name: resp.name,
+                                phoneNumber: resp.phoneNumber,
+                            },
+                        };
+                    } else {
+                        this.userPreference = {
+                            preference: "Dine In",
+                            value: resp.selectedTableName,
+                        };
+                    }
                     this.setCartStateHelper();
                     this.placeOrder();
                 }
@@ -537,7 +552,7 @@ export class CartHelperComponent implements OnInit {
                     ? false
                     : true,
             restaurantId: this.restaurantData._id,
-            restaurantName: this.restaurantData?.restaurantName ?? '',
+            restaurantName: this.restaurantData?.restaurantName ?? "",
         };
         if (this.userPreference?.preference === "Dine In") {
             if (true) {

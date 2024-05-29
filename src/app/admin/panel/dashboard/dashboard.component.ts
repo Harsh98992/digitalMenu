@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
     activeTab = "tab1";
     apiCalledFlag: boolean;
     takeAwayOptions = ["take away", "grab and go", "schedule dining"];
+    bypassOptions = ["room service", "grab and go","dining"];   
     constructor(
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
@@ -330,7 +331,14 @@ export class DashboardComponent implements OnInit {
             "dine in"
         ) {
             orderTypeStr =
-                "Dine In :- " + orderDetail.customerPreferences.value;
+                "Table Number :- " + orderDetail.customerPreferences.value;
+        }
+        else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "dining"
+        ) {
+            orderTypeStr =
+                "Table Number :- " + orderDetail.customerPreferences.value;
         } else if (
             orderDetail.customerPreferences.preference.toLowerCase() ===
             "take away"

@@ -84,7 +84,12 @@ export class UtilService {
             "dine in"
         ) {
             orderTypeStr =
-                "Dine In :- " + orderDetail.customerPreferences.value;
+                "Table Number :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "dining"
+        ) {
+            orderTypeStr = "Table Number :- " + orderDetail.customerPreferences.value;
         } else if (
             orderDetail.customerPreferences.preference.toLowerCase() ===
             "take away"
@@ -257,7 +262,8 @@ export class UtilService {
             }</p>
         </div>
         <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
-            orderDetail.customerPreferences.preference.toLowerCase() === "grab and go"
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "grab and go"
                 ? "Take away"
                 : orderDetail.customerPreferences.preference
         }</p>

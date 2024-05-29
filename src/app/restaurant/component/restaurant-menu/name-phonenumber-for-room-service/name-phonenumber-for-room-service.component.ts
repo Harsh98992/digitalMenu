@@ -37,6 +37,8 @@ export class NamePhonenumberForRoomServiceComponent implements OnInit {
     setHeadingString() {
         if (this.roomData?.takeAway) {
             this.headingStr = ` Contact Details for take away :-  ${this.roomData?.selectedTime}`;
+        } else if (this.roomData?.selectedTableName) {
+            this.headingStr = ` Contact Details for table service at ${this.roomData?.selectedTableName}`;
         } else {
             this.headingStr = ` Contact Details for room service at ${this.roomData?.selectedRoom?.roomName}`;
         }

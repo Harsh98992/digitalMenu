@@ -400,10 +400,25 @@ export class CartHelperComponent implements OnInit {
         this.getDeliveryRadiobuttonText();
     }
     generateAmountToBePaid() {
-        if (this.restaurantData.isGstApplicable) {
-            if (this.restaurantData?.isPricingInclusiveOfGST) {
-                const divideNumber =
-                    this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
+        let isGstApplicable = null;
+        let isPricingInclusiveOfGST = null;
+        let customGSTPercentage = null;
+        if (this.dineInMenuFlag) {
+            isGstApplicable =
+                this.restaurantData?.isDineInGstApplicable ?? false;
+            isPricingInclusiveOfGST =
+                this.restaurantData?.isDineInPricingInclusiveOfGST ?? false;
+            customGSTPercentage =
+                this.restaurantData?.customDineInGSTPercentage ?? 0;
+        } else {
+            isGstApplicable = this.restaurantData?.isGstApplicable ?? false;
+            isPricingInclusiveOfGST =
+                this.restaurantData?.isPricingInclusiveOfGST ?? false;
+            customGSTPercentage = this.restaurantData?.customGSTPercentage ?? 0;
+        }
+        if (isGstApplicable) {
+            if (isPricingInclusiveOfGST) {
+                const divideNumber = customGSTPercentage === 5 ? 1.05 : 1.12;
                 this.itemTotalAmountShowed = Math.round(
                     this.itemTotal / divideNumber
                 );
@@ -413,8 +428,7 @@ export class CartHelperComponent implements OnInit {
                 this.amountToBePaid =
                     this.itemTotal - this.discountAmount + this.deliveryAmount;
             } else {
-                const divideNumber =
-                    this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
+                const divideNumber = customGSTPercentage === 5 ? 1.05 : 1.12;
 
                 this.itemTotalAmountShowed = this.itemTotal;
                 this.gstAmount = Math.round(
@@ -428,7 +442,7 @@ export class CartHelperComponent implements OnInit {
             }
         } else {
             this.gstAmount = Math.round(
-                (this.itemTotal / 100) * this.restaurantData.customGSTPercentage
+                (this.itemTotal / 100) * customGSTPercentage
             );
 
             this.itemTotalAmountShowed = this.itemTotal;

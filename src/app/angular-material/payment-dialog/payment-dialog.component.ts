@@ -71,7 +71,9 @@ export class PaymentDialogComponent implements OnInit {
                 this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
                     "room service" ||
                 this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
-                    "grab and go"
+                    "grab and go" || 
+                    this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
+                    "dining"
             ) {
                 this.paymentMethod = "payOnline";
                 this.paymentOption = this.paymentOption.filter(

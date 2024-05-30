@@ -157,6 +157,12 @@ export class RestaurantPanelService {
             data
         );
     }
+    updateRestaurantDineInGstSetting(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantDineInGstSetting`,
+            data
+        );
+    }
     updateContactDetail(data: any) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/updateContactDetail`,

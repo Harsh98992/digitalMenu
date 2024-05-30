@@ -131,7 +131,14 @@
                 aria-label="Select an option"
                 [(ngModel)]="orderOption"
             >
-                <span class="col-4 d-block" *ngIf="isDineInAvailable && !isByPassAuthFlag">
+                <span
+                    class="col-4 d-block"
+                    *ngIf="
+                        isDineInAvailable &&
+                        !isByPassAuthFlag &&
+                        !dineInMenuFlag
+                    "
+                >
                     <mat-radio-button
                         value="dineIn"
                         (click)="changeOption($event, 'dineIn')"
@@ -142,7 +149,12 @@
                             ngbTooltip="Place an order, choose the table, and we will serve"
                         ></span></mat-radio-button
                 ></span>
-                <span class="col-4 d-block" *ngIf="isDineInAvailable && isByPassAuthFlag">
+                <span
+                    class="col-4 d-block"
+                    *ngIf="
+                        isDineInAvailable && isByPassAuthFlag && dineInMenuFlag
+                    "
+                >
                     <mat-radio-button
                         value="dining"
                         (click)="changeOption($event, 'dining')"
@@ -155,7 +167,9 @@
                 ></span>
                 <span class="col-4 d-block">
                     <mat-radio-button
-                        *ngIf="restaurantData.provideDelivery"
+                        *ngIf="
+                            restaurantData.provideDelivery && !dineInMenuFlag
+                        "
                         value="delivery"
                         [disabled]="deliveryDisabled"
                         (click)="changeOption($event, 'delivery')"
@@ -167,7 +181,10 @@
                         ></span
                     ></mat-radio-button>
                 </span>
-                <span class="col-4 d-block" *ngIf="!isByPassAuthFlag">
+                <span
+                    class="col-4 d-block"
+                    *ngIf="!isByPassAuthFlag && !dineInMenuFlag"
+                >
                     <mat-radio-button
                         value="takeAway"
                         (click)="changeOption($event, 'takeAway')"
@@ -179,7 +196,10 @@
                         ></span
                     ></mat-radio-button>
                 </span>
-                <span class="col-4 d-block" *ngIf="isByPassAuthFlag">
+                <span
+                    class="col-4 d-block"
+                    *ngIf="isByPassAuthFlag && !dineInMenuFlag"
+                >
                     <mat-radio-button
                         value="grabAndGo"
                         (click)="changeOption($event, 'grabAndGo')"
@@ -206,7 +226,10 @@
 
                 <!-- </mat-radio-button>
                 </span> -->
-                <span class="col-4 d-block" *ngIf="rooms && rooms.length">
+                <span
+                    class="col-4 d-block"
+                    *ngIf="rooms && rooms.length && !dineInMenuFlag"
+                >
                     <mat-radio-button
                         value="roomService"
                         (click)="changeOption($event, 'roomService')"
@@ -319,7 +342,12 @@
                 </button>
             </span>
 
-            <h6 *ngIf="this.userPreference.preference === 'Dine In'">
+            <h6
+                *ngIf="
+                    this.userPreference.preference === 'Dine In' ||
+                    this.userPreference.preference === 'Dining'
+                "
+            >
                 Table Name:- {{ this.userPreference?.value }}
             </h6>
             <h6

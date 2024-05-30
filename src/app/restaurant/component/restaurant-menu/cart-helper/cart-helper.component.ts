@@ -7,7 +7,7 @@ import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.servic
 import { CustomerService } from "src/app/api/customer.service";
 import { OrderService } from "src/app/api/order.service";
 import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ShowOptionDialogComponent } from "../restaurant-cart/show-option-dialog/show-option-dialog.component";
 import { TableNumberDialogComponent } from "../table-number-dialog/table-number-dialog.component";
 import { TimeSelectorDialogComponent } from "../time-selector-dialog/time-selector-dialog.component";
@@ -57,6 +57,7 @@ export class CartHelperComponent implements OnInit {
     promoCodes: any;
     rooms: any;
     isByPassAuthFlag: any;
+    dineInMenuFlag: any;
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -65,7 +66,8 @@ export class CartHelperComponent implements OnInit {
         private customerDetailsService: CustomerDetailsService,
         private router: Router,
         private customerService: CustomerService,
-        private utilityService: UtilService
+        private utilityService: UtilService,
+        private route: ActivatedRoute
     ) {}
 
     applyPromoCode() {
@@ -99,7 +101,7 @@ export class CartHelperComponent implements OnInit {
 
     ngOnInit(): void {
         this.isByPassAuthFlag = this.restaurantData?.byPassAuth;
-
+        this.checkForActiveRoute();
         this.getRestaurantRoom();
         this.getCartItem();
         this.checkLogin();
@@ -114,6 +116,11 @@ export class CartHelperComponent implements OnInit {
                     this.tableData = res.data.tableDetails;
                 },
             });
+    }
+    checkForActiveRoute() {
+        this.route.queryParams.subscribe((params) => {
+            this.dineInMenuFlag = params?.["dining"];
+        });
     }
     getPromoCodesForRestaurantUrl() {
         this.customerService

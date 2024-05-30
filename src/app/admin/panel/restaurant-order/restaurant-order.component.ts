@@ -72,16 +72,18 @@ export class RestaurantOrderComponent implements OnInit {
         this.columns = [
             { name: "Actions", prop: "action" },
             { name: "Order Id", prop: "orderId" },
+            { name: "Order Amount", prop: "orderTotal" },
+            { name: "Transfer Amount", prop: "transferAmount" },
             { name: "Payment Transfer Id", prop: "payment_transfer_id" },
             { name: "Payment Order Id", prop: "payment_order_id" },
-
+          
             { name: "Order Status", prop: "orderStatus" },
             { name: "Customer Name", prop: "customerName" },
             { name: "Customer Email", prop: "customerEmail" },
             { name: "Customer Phone Number", prop: "customerPhoneNumber" },
             { name: "Customer Preferences", prop: "customerPreferences" },
             { name: "Order Date", prop: "orderDate" },
-            { name: "Order Total", prop: "orderTotal" },
+           
         ];
     }
     changeStatus() {

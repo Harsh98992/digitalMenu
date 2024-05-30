@@ -148,6 +148,7 @@ export class AddDishComponent implements OnInit {
             dishType: ["", [Validators.required]],
             dishDescription: [""],
             dishOrderOption: ["", [Validators.required]],
+            dishOrderAvailability: ["all", [Validators.required]],
             spicy: ["", [Validators.required]],
             days: [""],
             dishPriority: [""],

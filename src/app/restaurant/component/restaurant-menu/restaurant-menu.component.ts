@@ -72,6 +72,7 @@ export class RestaurantMenuComponent implements OnInit {
     rooms: any;
     greenPalmFlag: any;
     isByPassAuthFlag: any;
+    dineInMenuFlag: any;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -460,6 +461,8 @@ export class RestaurantMenuComponent implements OnInit {
         this.route.queryParams.subscribe((params) => {
             const restaurnatUrl = params["detail"];
             this.activeRestaurantUrl = params["detail"];
+            this.dineInMenuFlag = params?.["dining"];
+
             this.checkForCartActiveData(restaurnatUrl);
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
@@ -550,6 +553,27 @@ export class RestaurantMenuComponent implements OnInit {
                             }
                             return true;
                         });
+
+                   
+                    for (const cuisine of this.restaurantDetail.cuisine) {
+                        cuisine.items = cuisine.items.filter((data) => {
+                            if (
+                                this.dineInMenuFlag &&
+                                (data.dishOrderAvailability === "all" ||
+                                    data.dishOrderAvailability === "dineIn")
+                            ) {
+                                return true;
+                            } else if (
+                                !this.dineInMenuFlag &&
+                                (data.dishOrderAvailability === "all" ||
+                                    data.dishOrderAvailability ===
+                                        "otherthandinein")
+                            ) {
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
 
                     // sort the restaurant data cuisine such that offers are shown first
                     this.restaurantDetail.cuisine.sort((a, b) => {

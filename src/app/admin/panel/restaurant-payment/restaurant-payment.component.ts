@@ -52,6 +52,9 @@ export class RestaurantPaymentComponent implements OnInit {
             }
         });
     }
+    exportExcel(){
+        this.adminService.exportJsonToExcel(this.rows, "restaurant-payment");
+    }
     viewTransferDetails(row) {
         if (row) {
             this.adminService

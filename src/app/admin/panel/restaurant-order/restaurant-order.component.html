@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="col-lg-2 col-md-12">
-                    <button type="reset" class="btn btn-danger">
+                    <button type="reset" class="btn btn-danger" (click)="exportExcel()">
                         <i class="fa-solid fa-cloud-arrow-down"></i>
                         Export
                     </button>
@@ -112,6 +112,31 @@
                         }}</span>
                     </ng-template>
                 </ngx-datatable-column>
+              
+                <ngx-datatable-column prop="orderAmount">
+                    <ng-template
+                        let-value="value"
+                        let-row="row"
+                        ngx-datatable-cell-template
+                    >
+                        <span>{{
+                            row['order_Total_Amount']
+                                | currency : "INR" : "symbol" : "1.0-0"
+                        }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="gstAmount">
+                    <ng-template
+                        let-value="value"
+                        let-row="row"
+                        ngx-datatable-cell-template
+                    >
+                        <span>{{
+                           row['order_Total_GST_Amount']
+                                | currency : "INR" : "symbol" : "1.0-0"
+                        }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
                 <ngx-datatable-column prop="transferAmount">
                     <ng-template
                         let-value="value"
@@ -120,7 +145,7 @@
                     >
                         <span>{{
                             row.transfer_amount
-                            | currency : "INR" : "symbol" : "1.0-0"
+                                | currency : "INR" : "symbol" : "1.0-0"
                         }}</span>
                     </ng-template>
                 </ngx-datatable-column>

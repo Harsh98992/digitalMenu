@@ -72,19 +72,41 @@ export class RestaurantOrderComponent implements OnInit {
         this.columns = [
             { name: "Actions", prop: "action" },
             { name: "Order Id", prop: "orderId" },
-            { name: "Order Amount", prop: "orderTotal" },
+            { name: "Order Total", prop: "orderTotal" },
+            { name: "Order Amount", prop: "orderAmount" },
+            { name: "GST Amount", prop: "gstAmount" },
             { name: "Transfer Amount", prop: "transferAmount" },
+
             { name: "Payment Transfer Id", prop: "payment_transfer_id" },
             { name: "Payment Order Id", prop: "payment_order_id" },
-          
+
             { name: "Order Status", prop: "orderStatus" },
             { name: "Customer Name", prop: "customerName" },
             { name: "Customer Email", prop: "customerEmail" },
             { name: "Customer Phone Number", prop: "customerPhoneNumber" },
             { name: "Customer Preferences", prop: "customerPreferences" },
             { name: "Order Date", prop: "orderDate" },
-           
         ];
+    }
+    getOrderAmount(row) {
+        let orderTotal = 0;
+        orderTotal = row.orderDetails.reduce((acc, item) => {
+            let temp = item?.orderAmount ?? 0;
+            return acc + temp;
+        }, 0);
+        return orderTotal;
+    }
+    getGstAmount(row) {
+        let orderTotal = 0;
+
+        orderTotal = row.orderDetails.reduce((acc, item) => {
+            let temp = item?.gstAmount ?? 0;
+            return acc + temp;
+        }, 0);
+        return orderTotal;
+    }
+    exportExcel(){
+
     }
     changeStatus() {
         console.log(this.selectedOption);
@@ -124,6 +146,12 @@ export class RestaurantOrderComponent implements OnInit {
                 String(row[key]).toLowerCase().includes(filterValue)
             );
         });
+        for(const filter of this.filteredData){
+            filter['order_Total_Amount']=this.getOrderAmount(filter);
+            filter['order_Total_GST_Amount']=this.getGstAmount(filter);
+        }
+        console.log(this.filteredData);
+        
         this.table.offset = 0; // Reset pagination to the first page
     }
     getOrders(status = ["completed"]) {

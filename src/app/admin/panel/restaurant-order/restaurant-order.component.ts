@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { io } from "socket.io-client";
 import { environment } from "src/environments/environment";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
+import { AdminPanelService } from "src/app/api/admin-panel.service";
 
 @Component({
     selector: "app-restaurant-order",
@@ -33,7 +34,8 @@ export class RestaurantOrderComponent implements OnInit {
         private router: Router,
         private orderService: OrderService,
         private dialog: MatDialog,
-        private customerAuthService: CustomerAuthService
+        private customerAuthService: CustomerAuthService,
+        private adminPanelService: AdminPanelService   
     ) {}
 
     ngOnInit(): void {
@@ -105,8 +107,24 @@ export class RestaurantOrderComponent implements OnInit {
         }, 0);
         return orderTotal;
     }
-    exportExcel(){
+    exportExcel() {
+        const excelData = [];
+        for (const data of this.filteredData) {
+            excelData.push({
+                "Order Id": data.orderId,
+                "Order Total": data.payment_amount,
+                "Order Amount": data.order_Total_Amount,
+                "GST Amount": data.order_Total_GST_Amount,
+                "Transfer Amount": data.transfer_amount,
+                "Payment Transfer Id": data.payment_transfer_id,
+                "Payment Order Id": data.payment_order_id,
+                "Order Status": data.orderStatus,
+                "Customer Name": data.customerName,
 
+                "Order Date": data.orderDate,
+            });
+        }
+        this.adminPanelService.exportJsonToExcel(excelData, "orders");
     }
     changeStatus() {
         console.log(this.selectedOption);
@@ -146,12 +164,12 @@ export class RestaurantOrderComponent implements OnInit {
                 String(row[key]).toLowerCase().includes(filterValue)
             );
         });
-        for(const filter of this.filteredData){
-            filter['order_Total_Amount']=this.getOrderAmount(filter);
-            filter['order_Total_GST_Amount']=this.getGstAmount(filter);
+        for (const filter of this.filteredData) {
+            filter["order_Total_Amount"] = this.getOrderAmount(filter);
+            filter["order_Total_GST_Amount"] = this.getGstAmount(filter);
         }
         console.log(this.filteredData);
-        
+
         this.table.offset = 0; // Reset pagination to the first page
     }
     getOrders(status = ["completed"]) {

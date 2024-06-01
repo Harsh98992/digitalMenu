@@ -49,8 +49,20 @@ export class TableNumberDialogComponent implements OnInit {
         });
         this.tableData = this.dialogData.tableData;
     }
+    filterTables(event: any) {
+        if (event.target.value) {
+            this.tableData = this.tableData.filter((table: any) =>
+                table.tableName
+                    .toLowerCase()
+                    .includes(event.target.value.toLowerCase())
+            );
+        } else {
+            this.tableData = this.dialogData.tableData;
+        }
+    }
 
-    onSubmit() {
+    onSubmit(option=null) {
+        this.selectedTable=option?.tableName;
         if (!this.selectedTable) {
             this.utilityService.openSnackBar("Please select a table", true);
             return;

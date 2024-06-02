@@ -89,7 +89,8 @@ export class UtilService {
             orderDetail.customerPreferences.preference.toLowerCase() ===
             "dining"
         ) {
-            orderTypeStr = "Table Number :- " + orderDetail.customerPreferences.value;
+            orderTypeStr =
+                "Table Number :- " + orderDetail.customerPreferences.value;
         } else if (
             orderDetail.customerPreferences.preference.toLowerCase() ===
             "take away"
@@ -346,8 +347,15 @@ export class UtilService {
             );
             printWindow.document.write(
                 `<div class="footer">
-            <p>Tax (${restaurantDetail.customGSTPercentage}%)</p>
-            <p class="margin-custom">${orderDetail.orderDetails[0].gstAmount}</p>
+            <p>Tax (${
+                orderDetail.customerPreferences.preference.toLowerCase() ===
+                "dining"
+                    ? restaurantDetail.customDineInGSTPercentage
+                    : restaurantDetail.customGSTPercentage
+            }%)</p>
+            <p class="margin-custom">${
+                orderDetail.orderDetails[0].gstAmount
+            }</p>
         </div>`
             );
         }
@@ -369,14 +377,20 @@ export class UtilService {
                 <tbody>
                     <tr class="border-main-none">
                         <th class="border-main-none">Tax (${
-                            restaurantDetail.customGSTPercentage
+                            orderDetail.customerPreferences.preference.toLowerCase() ===
+                            "dining"
+                                ? restaurantDetail.customDineInGSTPercentage
+                                : restaurantDetail.customGSTPercentage
                         }%)</th>
                         <th class="border-main-none center">Basic Amt</th>
                         <th class="border-main-none center">Tax Amt</th>
                     </tr>
                     <tr class="border-none">
                         <td class="border-none">CGST (${
-                            restaurantDetail.customGSTPercentage / 2
+                            orderDetail.customerPreferences.preference.toLowerCase() ===
+                            "dining"
+                                ? restaurantDetail.customDineInGSTPercentage / 2
+                                : restaurantDetail.customGSTPercentage / 2
                         }%)</td>
                         <td class="border-none center">${
                             orderDetail.orderDetails[0].orderAmount
@@ -387,7 +401,10 @@ export class UtilService {
                     </tr>
                     <tr class="border-none">
                         <td class="border-none">SGST (${
-                            restaurantDetail.customGSTPercentage / 2
+                            orderDetail.customerPreferences.preference.toLowerCase() ===
+                            "dining"
+                                ? restaurantDetail.customDineInGSTPercentage / 2
+                                : restaurantDetail.customGSTPercentage / 2
                         }%)</td>
                         <td class="border-none center">${
                             orderDetail.orderDetails[0].orderAmount

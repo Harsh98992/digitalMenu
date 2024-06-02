@@ -13,7 +13,7 @@ import { Subject } from "rxjs";
 export class AppComponent {
     title = "QrSay";
     private idleTimer: any;
-    private readonly idleDuration = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+    private readonly idleDuration =1800 * 1000; // 4 hours in milliseconds
     public userActivity: Subject<void> = new Subject<void>();
     constructor(
         private authService: AuthenticationService,

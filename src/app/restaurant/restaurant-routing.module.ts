@@ -63,7 +63,10 @@ const routes: Routes = [
                 path: "trackOrder/:orderId",
                 component: TrackOrderComponent,
             },
-
+            {
+                path: "trackOrder",
+                component: TrackOrderComponent,
+            },
             {
                 path: "customer-profile",
                 component: CustomerProfileComponent,

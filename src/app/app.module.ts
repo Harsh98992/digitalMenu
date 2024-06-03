@@ -22,6 +22,7 @@ import { environment } from "../environments/environment";
 import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { DatePipe } from "@angular/common";
+import { BnNgIdleService } from "bn-ng-idle";
 @NgModule({
     declarations: [
         AppComponent,
@@ -80,6 +81,7 @@ import { DatePipe } from "@angular/common";
             useClass: LoadingInterceptor,
             multi: true,
         },
+        BnNgIdleService
     ],
     bootstrap: [AppComponent],
 })

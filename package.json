@@ -31,6 +31,7 @@
     "@popperjs/core": "^2.10.2",
     "@swimlane/ngx-datatable": "^20.1.0",
     "angularx-qrcode": "^14.0.0",
+    "bn-ng-idle": "^2.0.5",
     "bootstrap": "^4.5.3",
     "file-saver": "^2.0.5",
     "firebase": "^10.3.0",

@@ -312,6 +312,20 @@ export class DashboardComponent implements OnInit {
         return amount;
     }
     printKTO(orderData) {
+        const reqData = {
+            orderDetail: orderData,
+            restaurantDetail: this.restaurantDetail,
+            kotFlag: true,
+        };
+        this.restaurantService.generateBill(reqData).subscribe({
+            next: (res: any) => {
+                if (res && res?.data?.state?.toLowerCase() == "fail") {
+                    this.printKTOHelper(orderData);
+                }
+            },
+        });
+    }
+    printKTOHelper(orderData) {
         let orderTypeStr = "";
         const orderDetail = _.cloneDeep(orderData);
         if (
@@ -601,6 +615,7 @@ export class DashboardComponent implements OnInit {
         const reqData = {
             orderDetail,
             restaurantDetail: this.restaurantDetail,
+            kotFlag: false,
         };
         this.restaurantService.generateBill(reqData).subscribe({
             next: (res: any) => {

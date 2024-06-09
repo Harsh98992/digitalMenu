@@ -599,6 +599,12 @@ export class DashboardComponent implements OnInit {
         // printWindow.close();
     }
     printReceipt(orderDetail: any) {
-        this.utilityService.printReceipt(orderDetail, this.restaurantDetail);
+        this.restaurantService.generateBill().subscribe({
+            next:(res)=>{
+                console.log(res);
+                
+            }
+        })
+       // this.utilityService.printReceipt(orderDetail, this.restaurantDetail);
     }
 }

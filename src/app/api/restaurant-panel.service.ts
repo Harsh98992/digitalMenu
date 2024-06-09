@@ -66,8 +66,11 @@ export class RestaurantPanelService {
         this.audio.pause();
         this.audio.currentTime = 0;
     }
-    generateBill(){
-        return this.http.post(`${this.apiUrl}/v1/restaurant/generateBill`,{});
+    generateBill(reqData:any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/generateBill`,
+            reqData
+        );
     }
 
     showOrderPopUp() {

@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     activeTab = "tab1";
     apiCalledFlag: boolean;
     takeAwayOptions = ["take away", "grab and go", "schedule dining"];
-    bypassOptions = ["room service", "grab and go","dining"];   
+    bypassOptions = ["room service", "grab and go", "dining"];
     constructor(
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
@@ -332,8 +332,7 @@ export class DashboardComponent implements OnInit {
         ) {
             orderTypeStr =
                 "Table Number :- " + orderDetail.customerPreferences.value;
-        }
-        else if (
+        } else if (
             orderDetail.customerPreferences.preference.toLowerCase() ===
             "dining"
         ) {
@@ -599,12 +598,19 @@ export class DashboardComponent implements OnInit {
         // printWindow.close();
     }
     printReceipt(orderDetail: any) {
-        this.restaurantService.generateBill().subscribe({
-            next:(res)=>{
-                console.log(res);
-                
-            }
-        })
-       // this.utilityService.printReceipt(orderDetail, this.restaurantDetail);
+        const reqData = {
+            orderDetail,
+            restaurantDetail: this.restaurantDetail,
+        };
+        this.restaurantService.generateBill(reqData).subscribe({
+            next: (res: any) => {
+                if (res && res?.data?.state?.toLowerCase() == "fail") {
+                    this.utilityService.printReceipt(
+                        orderDetail,
+                        this.restaurantDetail
+                    );
+                }
+            },
+        });
     }
 }

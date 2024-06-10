@@ -23,6 +23,7 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { DatePipe } from "@angular/common";
 import { BnNgIdleService } from "bn-ng-idle";
+import { ThermalPrintModule } from "ng-thermal-print";
 @NgModule({
     declarations: [
         AppComponent,
@@ -41,7 +42,7 @@ import { BnNgIdleService } from "bn-ng-idle";
         HttpClientModule,
         ReactiveFormsModule, // Add ReactiveFormsModule
         NgbTimepickerModule, // Add NgbTimepickerModule
-    
+        ThermalPrintModule ,
 
         FormsModule,
         ReactiveFormsModule,

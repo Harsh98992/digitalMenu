@@ -17,6 +17,7 @@ import { AcceptDialogComponent } from "../../layout/order-dialog/accept-dialog/a
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 import { PaymentDetailDialogComponent } from "src/app/angular-material/payment-detail-dialog/payment-detail-dialog.component";
 import { PrintSpecificKotDialogComponent } from "src/app/angular-material/print-specific-kot-dialog/print-specific-kot-dialog.component";
+import { PrintService, UsbDriver, WebPrintDriver } from "ng-thermal-print";
 
 @Component({
     selector: "app-dashboard",
@@ -25,6 +26,10 @@ import { PrintSpecificKotDialogComponent } from "src/app/angular-material/print-
     encapsulation: ViewEncapsulation.None,
 })
 export class DashboardComponent implements OnInit {
+    status: boolean = false;
+    usbPrintDriver: UsbDriver;
+    webPrintDriver: WebPrintDriver;
+    ip: string = "";
     pendingOrder = [];
     processingOrder = [];
     activeDine = [];
@@ -46,8 +51,21 @@ export class DashboardComponent implements OnInit {
         public dialog: MatDialog,
         private datePipe: DatePipe,
 
-        private utilityService: UtilService
-    ) {}
+        private utilityService: UtilService,
+        private printService: PrintService
+    ) {
+        this.usbPrintDriver = new UsbDriver();
+        this.printService.isConnected.subscribe((result) => {
+            this.status = result;
+            if (result) {
+                console.log("Connected to printer!!!");
+            } else {
+                this.usbPrintDriver.requestUsb().subscribe((result) => {
+                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+                });
+            }
+        });
+    }
     handleOrderUpdate(updatedOrder: any) {
         const index = this.allOrders.findIndex(
             (order) => order._id === updatedOrder._id
@@ -312,18 +330,25 @@ export class DashboardComponent implements OnInit {
         return amount;
     }
     printKTO(orderData) {
-        const reqData = {
-            orderDetail: orderData,
-            restaurantDetail: this.restaurantDetail,
-            kotFlag: true,
-        };
-        this.restaurantService.generateBill(reqData).subscribe({
-            next: (res: any) => {
-                if (res && res?.data?.state?.toLowerCase() == "fail") {
-                    this.printKTOHelper(orderData);
-                }
-            },
-        });
+        this.printService.init()
+        .setBold(true)
+        .writeLine('Hello World!')
+        .setBold(false)
+        .feed(4)
+        .cut('full')
+        .flush();
+        // const reqData = {
+        //     orderDetail: orderData,
+        //     restaurantDetail: this.restaurantDetail,
+        //     kotFlag: true,
+        // };
+        // this.restaurantService.generateBill(reqData).subscribe({
+        //     next: (res: any) => {
+        //         if (res && res?.data?.state?.toLowerCase() == "fail") {
+        //             this.printKTOHelper(orderData);
+        //         }
+        //     },
+        // });
     }
     printKTOHelper(orderData) {
         let orderTypeStr = "";

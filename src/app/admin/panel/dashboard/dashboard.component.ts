@@ -54,17 +54,7 @@ export class DashboardComponent implements OnInit {
         private utilityService: UtilService,
         private printService: PrintService
     ) {
-        this.usbPrintDriver = new UsbDriver();
-        this.printService.isConnected.subscribe((result) => {
-            this.status = result;
-            if (result) {
-                console.log("Connected to printer!!!");
-            } else {
-                this.usbPrintDriver.requestUsb().subscribe((result) => {
-                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
-                });
-            }
-        });
+       
     }
     handleOrderUpdate(updatedOrder: any) {
         const index = this.allOrders.findIndex(
@@ -330,13 +320,7 @@ export class DashboardComponent implements OnInit {
         return amount;
     }
     printKTO(orderData) {
-        this.printService.init()
-        .setBold(true)
-        .writeLine('Hello World!')
-        .setBold(false)
-        .feed(4)
-        .cut('full')
-        .flush();
+        this.printKTOHelper(orderData);
         // const reqData = {
         //     orderDetail: orderData,
         //     restaurantDetail: this.restaurantDetail,
@@ -637,20 +621,21 @@ export class DashboardComponent implements OnInit {
         // printWindow.close();
     }
     printReceipt(orderDetail: any) {
-        const reqData = {
+        this.utilityService.printReceipt(
             orderDetail,
-            restaurantDetail: this.restaurantDetail,
-            kotFlag: false,
-        };
-        this.restaurantService.generateBill(reqData).subscribe({
-            next: (res: any) => {
-                if (res && res?.data?.state?.toLowerCase() == "fail") {
-                    this.utilityService.printReceipt(
-                        orderDetail,
-                        this.restaurantDetail
-                    );
-                }
-            },
-        });
+            this.restaurantDetail
+        );
+        // const reqData = {
+        //     orderDetail,
+        //     restaurantDetail: this.restaurantDetail,
+        //     kotFlag: false,
+        // };
+        // this.restaurantService.generateBill(reqData).subscribe({
+        //     next: (res: any) => {
+        //         if (res && res?.data?.state?.toLowerCase() == "fail") {
+                   
+        //         }
+        //     },
+        // });
     }
 }

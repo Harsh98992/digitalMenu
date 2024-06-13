@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "prod": "ng build --configuration production",
+    
+    "prod": "ng build --configuration production --aot --output-hashing=all",
     "dev": "ng build --configuration staging",
     "test": "ng test"
   },

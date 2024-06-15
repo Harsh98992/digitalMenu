@@ -54,7 +54,15 @@ export class DashboardComponent implements OnInit {
         private utilityService: UtilService,
         private printService: PrintService
     ) {
-       
+        this.usbPrintDriver = new UsbDriver();
+        this.printService.isConnected.subscribe((result) => {
+            this.status = result;
+            if (result) {
+                console.log("Connected to printer!!!");
+            } else {
+                console.log("Not connected to printer.");
+            }
+        });
     }
     handleOrderUpdate(updatedOrder: any) {
         const index = this.allOrders.findIndex(
@@ -320,7 +328,25 @@ export class DashboardComponent implements OnInit {
         return amount;
     }
     printKTO(orderData) {
-        this.printKTOHelper(orderData);
+        // if (!this.status) {
+        //     this.usbPrintDriver.requestUsb().subscribe((result) => {
+        //         this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+        //         setTimeout(() => {
+        //             this.utilityService.printEPOSReciept(
+        //                 orderData,
+        //                 this.restaurantDetail,
+        //                 true
+        //             );
+        //         }, 2000);
+        //     });
+        // } else {
+        //     this.utilityService.printEPOSReciept(
+        //         orderData,
+        //         this.restaurantDetail,
+        //         true
+        //     );
+        // }
+       this.printKTOHelper(orderData);
         // const reqData = {
         //     orderDetail: orderData,
         //     restaurantDetail: this.restaurantDetail,
@@ -621,10 +647,27 @@ export class DashboardComponent implements OnInit {
         // printWindow.close();
     }
     printReceipt(orderDetail: any) {
-        this.utilityService.printReceipt(
-            orderDetail,
-            this.restaurantDetail
-        );
+        if (!this.status) {
+            this.usbPrintDriver.requestUsb().subscribe((result) => {
+                this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+                setTimeout(() => {
+                    this.utilityService.printEPOSReciept(
+                        orderDetail,
+                        this.restaurantDetail
+                    );
+                }, 2000);
+            });
+        } else {
+            this.utilityService.printEPOSReciept(
+                orderDetail,
+                this.restaurantDetail
+            );
+        }
+
+        // this.utilityService.printReceipt(
+        //     orderDetail,
+        //     this.restaurantDetail
+        // );
         // const reqData = {
         //     orderDetail,
         //     restaurantDetail: this.restaurantDetail,
@@ -633,7 +676,7 @@ export class DashboardComponent implements OnInit {
         // this.restaurantService.generateBill(reqData).subscribe({
         //     next: (res: any) => {
         //         if (res && res?.data?.state?.toLowerCase() == "fail") {
-                   
+
         //         }
         //     },
         // });

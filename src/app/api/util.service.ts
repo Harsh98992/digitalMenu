@@ -4,6 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ConfirmDialogComponent } from "../angular-material/confirm-dialog/confirm-dialog.component";
 import { ErrorDialogComponent } from "../angular-material/error-dialog/error-dialog.component";
+import { PrintService } from "ng-thermal-print";
 const _ = require("lodash");
 @Injectable({
     providedIn: "root",
@@ -12,7 +13,8 @@ export class UtilService {
     constructor(
         private _snackBar: MatSnackBar,
         private datePipe: DatePipe,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private printService: PrintService
     ) {}
     openSnackBar(message: string, errorFlag = false, duration = 5000) {
         if (errorFlag) {
@@ -61,6 +63,370 @@ export class UtilService {
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         const distance = R * c; // Distance in km
         return distance;
+    }
+    formatTable(data: string[][], colWidths: number[]): string[] {
+        let formattedTable: string[] = [];
+
+        // Wrap and format each row
+        data.forEach((row) => {
+            let wrappedCells = row.map((cell, colIndex) =>
+                this.wrapText(cell, colWidths[colIndex])
+            );
+            let maxLines = Math.max(
+                ...wrappedCells.map((cellLines) => cellLines.length)
+            );
+
+            // Merge cells for each line
+            for (let i = 0; i < maxLines; i++) {
+                let line = wrappedCells
+                    .map((cellLines, colIndex) =>
+                        (cellLines[i] || "").padEnd(colWidths[colIndex])
+                    )
+                    .join("  ");
+                formattedTable.push(line);
+            }
+        });
+
+        return formattedTable;
+    }
+
+    wrapText(text: string, width: number): string[] {
+        let wrappedText: string[] = [];
+        let start = 0;
+
+        while (start < text.length) {
+            let end = start + width;
+            let line = text.slice(start, end);
+            wrappedText.push(line);
+            start = end;
+        }
+
+        return wrappedText;
+    }
+    printEPOSReciept(orderData, restaurantDetail, kotFlag = false) {
+        let orderTypeStr = "";
+        const dishTableHeader = [["Items", "Price", "Qty", "Amount"]];
+
+        const maxColWidths = [20, 5, 5, 10]; // Maximum column widths for each
+        // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
+        const orderDetail = _.cloneDeep(orderData);
+        if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "room service"
+        ) {
+            orderTypeStr =
+                "Room Number :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "delivery"
+        ) {
+            orderTypeStr =
+                "Address :- " + orderDetail.customerPreferences.value.address;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "dine in"
+        ) {
+            orderTypeStr =
+                "Table Number :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "dining"
+        ) {
+            orderTypeStr =
+                "Table Number :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "take away"
+        ) {
+            orderTypeStr =
+                "Take Away :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "grab and go"
+        ) {
+            orderTypeStr =
+                "Take Away :- " + orderDetail.customerPreferences.value;
+        } else if (
+            orderDetail.customerPreferences.preference.toLowerCase() ===
+            "schedule dining"
+        ) {
+            orderTypeStr =
+                "Schedule Dining :- " + orderDetail.customerPreferences.value;
+        }
+
+        if (
+            orderDetail?.customerPreferences?.preference?.toLowerCase() ===
+            "dine in"
+        ) {
+            for (const [index, order] of orderData.orderDetails.entries()) {
+                if (index > 0) {
+                    orderDetail.orderDetails[0]["orderSummary"].push(
+                        ...order["orderSummary"]
+                    );
+                    orderDetail.orderDetails[0]["orderAmount"] +=
+                        order["orderAmount"];
+                    orderDetail.orderDetails[0]["gstAmount"] +=
+                        order["gstAmount"];
+                    orderDetail.orderDetails[0]["deliveryAmount"] +=
+                        order["deliveryAmount"];
+                    orderDetail.orderDetails[0]["discountAmount"] +=
+                        order["discountAmount"];
+                }
+            }
+        }
+        const spaces = " ".repeat(20);
+        this.printService
+            .init()
+            .setBold(true)
+
+            .setJustification("center")
+            .writeLine(`${restaurantDetail.restaurantName?.toUpperCase()}`);
+        if (!kotFlag) {
+            this.printService
+                .writeLine(
+                    `${restaurantDetail.address.street?.toUpperCase()} ,${restaurantDetail.address.city?.toUpperCase()},${restaurantDetail.address.state.toUpperCase()},${
+                        restaurantDetail.address.pinCode
+                    }`
+                )
+                .writeLine(
+                    `${
+                        restaurantDetail.gstNumber
+                            ? "GST Number:- " + restaurantDetail.gstNumber
+                            : ""
+                    }`
+                );
+        }
+        this.printService
+            .feed(1)
+
+            .writeLine(
+                `${
+                    orderDetail.customerPreferences.preference.toLowerCase() ===
+                    "grab and go"
+                        ? "Take away"
+                        : orderDetail.customerPreferences.preference
+                }`
+            )
+            .writeLine(`${orderTypeStr}`)
+            .feed(1)
+            .setJustification("left")
+            .writeLine(
+                `${this.datePipe.transform(
+                    orderDetail.orderDate
+                )} ${spaces} ${new Date(
+                    orderDetail.orderDate
+                ).toLocaleTimeString()}`
+            )
+            .writeLine(`Order ID: ${orderDetail.orderId}`);
+        if (!kotFlag) {
+            this.printService.writeLine(
+                `Payment Status: : ${
+                    orderDetail.payment_method
+                        ? "Paid via " + orderDetail.payment_method
+                        : "Pending"
+                }`
+            );
+        }
+        this.printService.writeLine(`${orderDetail.customerName}`);
+        if (!kotFlag) {
+            this.printService.writeLine(
+                `${orderDetail.customerPhoneNumber} - ${orderDetail.customerEmail}`
+            );
+        }
+        if (kotFlag) {
+            this.printService.writeLine(
+                `Cooking Instructions: ${
+                    orderDetail?.orderDetails?.[0].cookingInstruction ?? ""
+                }`
+            );
+        }
+        this.printService.writeLine(
+            "------------------------------------------------"
+        );
+        if (!kotFlag) {
+            const formattedTable = this.formatTable(
+                dishTableHeader,
+                maxColWidths
+            );
+            formattedTable.forEach((line) => {
+                this.printService.writeLine(line);
+            });
+            this.printService.writeLine(
+                "------------------------------------------------"
+            );
+            let dishArr = [];
+            for (const order of orderDetail.orderDetails[0].orderSummary) {
+                let temp = [];
+                let orderStr = `${order.dishName}`;
+
+                var checkIfFirst = true;
+                if (order.extraSelected && order.extraSelected.length) {
+                    for (const extra of order.extraSelected) {
+                        if (checkIfFirst) {
+                            orderStr += ` with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`;
+                            checkIfFirst = false;
+                        } else {
+                            orderStr += ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`;
+                        }
+                    }
+                }
+                temp.push(orderStr);
+                temp.push(`${order.priceOneItem}`);
+                temp.push(`${order.dishQuantity}`);
+                temp.push(`${order.totalPrice}`);
+                dishArr.push(temp);
+            }
+
+            const formattedTableDish = this.formatTable(dishArr, maxColWidths);
+            formattedTableDish.forEach((line) => {
+                this.printService.writeLine(line);
+            });
+            this.printService.writeLine(
+                "------------------------------------------------"
+            );
+        } else {
+            const kotHeader = [["Items", "Qty"]];
+            const kotCol=[20,20]
+            const formattedTableKot = this.formatTable(kotHeader, kotCol);
+            formattedTableKot.forEach((line) => {
+                this.printService.writeLine(line);
+            });
+            this.printService.writeLine(
+                "------------------------------------------------"
+            );
+            let dishArr = [];
+            for (const order of orderDetail.orderDetails[0].orderSummary) {
+                let temp = [];
+                let orderStr = `${order.dishName}`;
+
+                var checkIfFirst = true;
+                if (order.extraSelected && order.extraSelected.length) {
+                    for (const extra of order.extraSelected) {
+                        if (checkIfFirst) {
+                            orderStr += ` with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`;
+                            checkIfFirst = false;
+                        } else {
+                            orderStr += ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`;
+                        }
+                    }
+                }
+                temp.push(orderStr);
+
+                temp.push(`${order.dishQuantity}`);
+
+                dishArr.push(temp);
+            }
+            const formattedTableDish = this.formatTable(dishArr, kotCol);
+            formattedTableDish.forEach((line) => {
+                this.printService.writeLine(line);
+            });
+            this.printService.writeLine(
+                "------------------------------------------------"
+            );
+        }
+        this.printService.writeLine(
+            `Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}`
+        );
+        if (!kotFlag) {
+            if (restaurantDetail.isGstApplicable) {
+                this.printService
+                    .writeLine(
+                        `Net Amt. ${spaces}  ${orderDetail.orderDetails[0].orderAmount}`
+                    )
+                    .writeLine(
+                        `Tax (${
+                            orderDetail.customerPreferences.preference.toLowerCase() ===
+                            "dining"
+                                ? restaurantDetail.customDineInGSTPercentage
+                                : restaurantDetail.customGSTPercentage
+                        }%) ${spaces}  ${orderDetail.orderDetails[0].gstAmount}`
+                    );
+            }
+            this.printService.writeLine(
+                `Total Amt. ${spaces}${
+                    orderDetail.orderDetails[0].orderAmount +
+                    orderDetail.orderDetails[0].gstAmount
+                }`
+            );
+            this.printService.writeLine(
+                "------------------------------------------------"
+            );
+            if (restaurantDetail.isGstApplicable) {
+                const maxColWidthsForTax = [15, 15, 10];
+                const taxHeader = [
+                    [
+                        `Tax (${
+                            orderDetail.customerPreferences.preference.toLowerCase() ===
+                            "dining"
+                                ? restaurantDetail.customDineInGSTPercentage
+                                : restaurantDetail.customGSTPercentage
+                        }%)`,
+                        "Basic Amt",
+                        "Tax Amt",
+                    ],
+                ];
+                this.printService.writeLine("Tax Summary");
+                this.printService.writeLine(
+                    "------------------------------------------------"
+                );
+                const formattedTableHeadertax = this.formatTable(
+                    taxHeader,
+                    maxColWidthsForTax
+                );
+                formattedTableHeadertax.forEach((line) => {
+                    this.printService.writeLine(line);
+                });
+
+                this.printService.writeLine(
+                    "------------------------------------------------"
+                );
+                const taxArr = [
+                    [
+                        `CGST (${
+                            orderDetail.customerPreferences.preference.toLowerCase() ===
+                            "dining"
+                                ? restaurantDetail.customDineInGSTPercentage / 2
+                                : restaurantDetail.customGSTPercentage / 2
+                        }%)`,
+                        `${orderDetail.orderDetails[0].orderAmount}`,
+                        `${orderDetail.orderDetails[0].gstAmount / 2}`,
+                    ],
+                    [
+                        `SGST (${
+                            orderDetail.customerPreferences.preference.toLowerCase() ===
+                            "dining"
+                                ? restaurantDetail.customDineInGSTPercentage / 2
+                                : restaurantDetail.customGSTPercentage / 2
+                        }%)`,
+                        `${orderDetail.orderDetails[0].orderAmount}`,
+                        `${orderDetail.orderDetails[0].gstAmount / 2}`,
+                    ],
+                ];
+                const formattedTableHeadertaxDetail = this.formatTable(
+                    taxArr,
+                    maxColWidthsForTax
+                );
+                formattedTableHeadertaxDetail.forEach((line) => {
+                    this.printService.writeLine(line);
+                });
+                this.printService.writeLine(
+                    "------------------------------------------------"
+                );
+            }
+            this.printService
+                .setJustification("center")
+                .writeLine(
+                    `Payable Amt.: ${
+                        orderDetail.orderDetails[0].orderAmount +
+                        orderDetail.orderDetails[0].gstAmount
+                    }`
+                )
+                .writeLine("Thanks for your visit !!! <br> Have a good day");
+        }
+        this.printService.feed(4);
+
+        this.printService.cut();
+        this.printService.flush();
     }
     printReceipt(orderData, restaurantDetail) {
         let orderTypeStr = "";

@@ -164,6 +164,7 @@ export class DashboardComponent implements OnInit {
     getExtrasList(extraData) {
         let str = "";
         for (const data of extraData) {
+            str+=`${data.addOnDisplayName} `;
             for (const addon of data.addOnsSelected) {
                 str += `${addon.addOnName} ,`;
             }

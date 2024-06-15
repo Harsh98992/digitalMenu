@@ -164,7 +164,7 @@ export class DashboardComponent implements OnInit {
     getExtrasList(extraData) {
         let str = "";
         for (const data of extraData) {
-            str+=`${data.addOnDisplayName} `;
+            str += `${data.addOnDisplayName} `;
             for (const addon of data.addOnsSelected) {
                 str += `${addon.addOnName} ,`;
             }
@@ -332,14 +332,17 @@ export class DashboardComponent implements OnInit {
         if (!this.status) {
             this.usbPrintDriver.requestUsb().subscribe(
                 (result) => {
-                  
                     this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
                     setTimeout(() => {
-                        this.printEPOSRecieptHelper(
-                            orderData,
-                            this.restaurantDetail,
-                            true
-                        );
+                        if (this.status) {
+                            this.printEPOSRecieptHelper(
+                                orderData,
+                                this.restaurantDetail,
+                                true
+                            );
+                        } else {
+                            this.printKTOHelper(orderData);
+                        }
                     }, 2000);
                 },
                 (err) => {
@@ -650,24 +653,31 @@ export class DashboardComponent implements OnInit {
         // printWindow.close();
     }
     printEPOSRecieptHelper(orderDetail, restaurantDetail, flag = false) {
-       
         this.utilityService.printEPOSReciept(
             orderDetail,
             restaurantDetail,
             flag
         );
-    
     }
     printReceipt(orderDetail: any) {
         if (!this.status) {
             this.usbPrintDriver.requestUsb().subscribe(
                 (result) => {
-                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS")
+                    
+                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+
                     setTimeout(() => {
-                        this.printEPOSRecieptHelper(
-                            orderDetail,
-                            this.restaurantDetail
-                        );
+                        if (this.status) {
+                            this.printEPOSRecieptHelper(
+                                orderDetail,
+                                this.restaurantDetail
+                            );
+                        } else {
+                            this.utilityService.printReceipt(
+                                orderDetail,
+                                this.restaurantDetail
+                            );
+                        }
                     }, 1000);
                 },
                 (err) => {

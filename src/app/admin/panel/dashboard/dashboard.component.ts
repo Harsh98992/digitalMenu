@@ -328,25 +328,27 @@ export class DashboardComponent implements OnInit {
         return amount;
     }
     printKTO(orderData) {
-        // if (!this.status) {
-        //     this.usbPrintDriver.requestUsb().subscribe((result) => {
-        //         this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
-        //         setTimeout(() => {
-        //             this.utilityService.printEPOSReciept(
-        //                 orderData,
-        //                 this.restaurantDetail,
-        //                 true
-        //             );
-        //         }, 2000);
-        //     });
-        // } else {
-        //     this.utilityService.printEPOSReciept(
-        //         orderData,
-        //         this.restaurantDetail,
-        //         true
-        //     );
-        // }
-       this.printKTOHelper(orderData);
+        if (!this.status) {
+            this.usbPrintDriver.requestUsb().subscribe(
+                (result) => {
+                  
+                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+                    setTimeout(() => {
+                        this.printEPOSRecieptHelper(
+                            orderData,
+                            this.restaurantDetail,
+                            true
+                        );
+                    }, 2000);
+                },
+                (err) => {
+                    this.printKTOHelper(orderData);
+                }
+            );
+        } else {
+            this.printEPOSRecieptHelper(orderData, this.restaurantDetail, true);
+        }
+        // this.printKTOHelper(orderData);
         // const reqData = {
         //     orderDetail: orderData,
         //     restaurantDetail: this.restaurantDetail,
@@ -646,22 +648,36 @@ export class DashboardComponent implements OnInit {
 
         // printWindow.close();
     }
+    printEPOSRecieptHelper(orderDetail, restaurantDetail, flag = false) {
+       
+        this.utilityService.printEPOSReciept(
+            orderDetail,
+            restaurantDetail,
+            flag
+        );
+    
+    }
     printReceipt(orderDetail: any) {
         if (!this.status) {
-            this.usbPrintDriver.requestUsb().subscribe((result) => {
-                this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
-                setTimeout(() => {
-                    this.utilityService.printEPOSReciept(
+            this.usbPrintDriver.requestUsb().subscribe(
+                (result) => {
+                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS")
+                    setTimeout(() => {
+                        this.printEPOSRecieptHelper(
+                            orderDetail,
+                            this.restaurantDetail
+                        );
+                    }, 1000);
+                },
+                (err) => {
+                    this.utilityService.printReceipt(
                         orderDetail,
                         this.restaurantDetail
                     );
-                }, 2000);
-            });
-        } else {
-            this.utilityService.printEPOSReciept(
-                orderDetail,
-                this.restaurantDetail
+                }
             );
+        } else {
+            this.printEPOSRecieptHelper(orderDetail, this.restaurantDetail);
         }
 
         // this.utilityService.printReceipt(

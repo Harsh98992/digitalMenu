@@ -258,7 +258,7 @@ export class UtilService {
             for (const order of orderDetail.orderDetails[0].orderSummary) {
                 let temp = [];
                 let orderStr = `${order.dishName}`;
-
+                let orderDishStr = this.dishNameWithExtra(order);
                 var checkIfFirst = true;
                 if (order.extraSelected && order.extraSelected.length) {
                     for (const extra of order.extraSelected) {
@@ -270,7 +270,7 @@ export class UtilService {
                         }
                     }
                 }
-                temp.push(orderStr);
+                temp.push(`${orderStr} ${orderDishStr}`);
                 temp.push(`${order.priceOneItem}`);
                 temp.push(`${order.dishQuantity}`);
                 temp.push(`${order.totalPrice}`);
@@ -286,7 +286,7 @@ export class UtilService {
             );
         } else {
             const kotHeader = [["Items", "Qty"]];
-            const kotCol=[20,20]
+            const kotCol = [20, 20];
             const formattedTableKot = this.formatTable(kotHeader, kotCol);
             formattedTableKot.forEach((line) => {
                 this.printService.writeLine(line);
@@ -299,18 +299,8 @@ export class UtilService {
                 let temp = [];
                 let orderStr = `${order.dishName}`;
 
-                var checkIfFirst = true;
-                if (order.extraSelected && order.extraSelected.length) {
-                    for (const extra of order.extraSelected) {
-                        if (checkIfFirst) {
-                            orderStr += ` with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`;
-                            checkIfFirst = false;
-                        } else {
-                            orderStr += ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`;
-                        }
-                    }
-                }
-                temp.push(orderStr);
+                let orderDishStr = this.dishNameWithExtra(order);
+                temp.push(`${orderStr} ${orderDishStr}`);
 
                 temp.push(`${order.dishQuantity}`);
 
@@ -669,22 +659,9 @@ export class UtilService {
             printWindow.document.write(
                 `<td class='border-none'>${order.dishName}`
             );
-
-            var checkIfFirst = true;
-            if (order.extraSelected && order.extraSelected.length) {
-                for (const extra of order.extraSelected) {
-                    if (checkIfFirst) {
-                        printWindow.document.write(
-                            ` with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
-                        );
-                        checkIfFirst = false;
-                    } else {
-                        printWindow.document.write(
-                            ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
-                        );
-                    }
-                }
-            }
+            let orderStr = this.dishNameWithExtra(order);
+            
+            printWindow.document.write(orderStr);
             printWindow.document.write(
                 `<td class='border-none center'>${order.priceOneItem}</td>`
             );
@@ -847,5 +824,34 @@ export class UtilService {
         // printWindow.print();
 
         // printWindow.close();
+    }
+    dishNameWithExtra(order) {
+        let orderStr = "";
+        if (order?.itemSizeSelected?.size) {
+            orderStr += ` [ Size:-${order.itemSizeSelected.size} ] ` ;
+        }
+        if (order.dishChoicesSelected && order.dishChoicesSelected?.length) {
+            let str = "";
+            for (const data of order.dishChoicesSelected) {
+                for (const choice of data.choicesSelected) {
+                    str += `${choice.choiceName} ,`;
+                }
+            }
+           const res= str.slice(0, -1);
+            orderStr += `[ Choices:- ${res}] `;
+        }
+
+      
+        if (order.extraSelected && order.extraSelected?.length) {
+            let str = "";
+            for (const data of order.extraSelected) {
+                for (const addon of data.addOnsSelected) {
+                    str += `${addon.addOnName} ,`;
+                }
+            }
+            const res= str.slice(0, -1);
+            orderStr += `[ Extras:- ${res}] `;
+        }
+        return orderStr;
     }
 }

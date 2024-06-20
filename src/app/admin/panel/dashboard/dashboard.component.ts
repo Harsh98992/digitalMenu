@@ -587,21 +587,8 @@ export class DashboardComponent implements OnInit {
                 `<td class='border-none'>${order.dishName}`
             );
 
-            var checkIfFirst = true;
-            if (order.extraSelected && order.extraSelected.length) {
-                for (const extra of order.extraSelected) {
-                    if (checkIfFirst) {
-                        printWindow.document.write(
-                            `with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
-                        );
-                        checkIfFirst = false;
-                    } else {
-                        printWindow.document.write(
-                            ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
-                        );
-                    }
-                }
-            }
+            let orderStr = this.utilityService.dishNameWithExtra(order);
+            printWindow.document.write(orderStr);
             printWindow.document.write(
                 `<td class='border-none center'>${order.dishQuantity}</td>`
             );

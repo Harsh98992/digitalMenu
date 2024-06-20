@@ -103,6 +103,13 @@ export class UtilService {
 
         return wrappedText;
     }
+    setPrinterDriver(result){
+        localStorage.setItem('printer-device', JSON.stringify({ vendorId: result.vendorId, productId: result.productId }));
+    }
+    getPrinterDriver(){
+        const device = JSON.parse(localStorage.getItem('eos-printer-device'));
+        return device
+    }
     printEPOSReciept(orderData, restaurantDetail, kotFlag = false) {
         let orderTypeStr = "";
         const dishTableHeader = [["Items", "Price", "Qty", "Amount"]];

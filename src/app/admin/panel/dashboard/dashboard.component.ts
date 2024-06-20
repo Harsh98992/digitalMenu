@@ -44,6 +44,8 @@ export class DashboardComponent implements OnInit {
     apiCalledFlag: boolean;
     takeAwayOptions = ["take away", "grab and go", "schedule dining"];
     bypassOptions = ["room service", "grab and go", "dining"];
+    private vendorId =1208 ; // Replace with your printer's vendor ID
+    private productId = 3623; // Replace with your printer's product ID
     constructor(
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
@@ -54,7 +56,8 @@ export class DashboardComponent implements OnInit {
         private utilityService: UtilService,
         private printService: PrintService
     ) {
-        this.usbPrintDriver = new UsbDriver();
+        this.usbPrintDriver = new UsbDriver(this.vendorId, this.productId);
+        this.printService.setDriver(this.usbPrintDriver,"ESC/POS");
         this.printService.isConnected.subscribe((result) => {
             this.status = result;
             if (result) {
@@ -640,11 +643,11 @@ export class DashboardComponent implements OnInit {
         // printWindow.close();
     }
     printEPOSRecieptHelper(orderDetail, restaurantDetail, flag = false) {
-        this.utilityService.printEPOSReciept(
-            orderDetail,
-            restaurantDetail,
-            flag
-        );
+        // this.utilityService.printEPOSReciept(
+        //     orderDetail,
+        //     restaurantDetail,
+        //     flag
+        // );
     }
     printReceipt(orderDetail: any) {
         if (!this.status) {

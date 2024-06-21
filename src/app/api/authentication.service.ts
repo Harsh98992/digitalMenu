@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
 import { CustomerAuthService } from "../restaurant/api/customer-auth.service";
+import { UtilService } from "./util.service";
 
 @Injectable({
     providedIn: "root",
@@ -10,7 +11,11 @@ import { CustomerAuthService } from "../restaurant/api/customer-auth.service";
 export class AuthenticationService {
     apiUrl = environment.apiUrl;
     userDetail = new BehaviorSubject(null);
-    constructor(private http: HttpClient,private customerAuth:CustomerAuthService) {}
+    constructor(
+        private http: HttpClient,
+        private customerAuth: CustomerAuthService,
+        private utilService: UtilService
+    ) {}
 
     changePassword(requestData) {
         return this.http.patch(
@@ -32,7 +37,7 @@ export class AuthenticationService {
         return this.http.post(`${this.apiUrl}/v1/user/signup`, userData);
     }
     login(userData: { email: string; password: string }) {
-        this.customerAuth.removeToken()
+        this.customerAuth.removeToken();
         return this.http.post(`${this.apiUrl}/v1/user/login`, userData);
     }
     forgotPassword(email: string) {
@@ -55,7 +60,11 @@ export class AuthenticationService {
     }
     setUserToken(token: string) {
         sessionStorage.clear();
-        localStorage.clear()
+        const driver = this.utilService.getPrinterDriver();
+        localStorage.clear();
+        if (driver) {
+            localStorage.setItem("printerDriver", JSON.stringify(driver));
+        }
         sessionStorage.setItem("authToken", token);
     }
     setUserDetail(data) {
@@ -81,6 +90,11 @@ export class AuthenticationService {
     }
     removeToken() {
         sessionStorage.clear();
-        localStorage.clear()
+        const driver = this.utilService.getPrinterDriver();
+        localStorage.clear();
+        if (driver) {
+            localStorage.setItem("printerDriver", JSON.stringify(driver));
+        }
+   
     }
 }

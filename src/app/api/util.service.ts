@@ -107,7 +107,7 @@ export class UtilService {
         localStorage.setItem('printer-device', JSON.stringify({ vendorId: result.vendorId, productId: result.productId }));
     }
     getPrinterDriver(){
-        const device = JSON.parse(localStorage.getItem('eos-printer-device'));
+        const device = JSON.parse(localStorage.getItem('printer-device'));
         return device
     }
     printEPOSReciept(orderData, restaurantDetail, kotFlag = false) {

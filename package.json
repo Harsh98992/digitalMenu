@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     
     "prod": "ng build --configuration production --aot --output-hashing=all",
-    "dev": "ng build --configuration staging",
+    "dev": "ng build --configuration staging --aot --output-hashing=all",
     "test": "ng test"
   },
   "private": true,

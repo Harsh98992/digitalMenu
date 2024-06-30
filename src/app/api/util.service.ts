@@ -410,7 +410,7 @@ export class UtilService {
                     "------------------------------------------------"
                 );
             }
-            const deliveryAmount=orderDetail.orderDetails[0].deliveryAmount ?? 0
+            const deliveryAmount=orderDetail.orderDetails[0]?.deliveryAmount ?? 0
             this.printService.writeLine(`Delivery Amount ${spaces} deliveryAmount`)
             this.printService.writeLine(
                 "------------------------------------------------"
@@ -800,7 +800,7 @@ export class UtilService {
             </div>`
             );
         }
-        const deliveryAmount=orderDetail.orderDetails[0].deliveryAmount ?? 0
+        const deliveryAmount=orderDetail.orderDetails[0]?.deliveryAmount ?? 0
         printWindow.document.write(
             `<h1 class="center font-bold" style="margin-bottom:0px">Payable Amt.: ${
                 orderDetail.orderDetails[0].orderAmount +

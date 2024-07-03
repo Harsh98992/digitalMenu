@@ -209,6 +209,35 @@
                 </form>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header">
+                Auto Reject Order
+                <button class="btn btn-primary" (click)="toggleAutoReject()">
+                    {{ isEditingAutoReject ? "Save" : "Edit" }}
+                </button>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="autoRejectForm" accept-charset="utf-8">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label required"
+                                    >Auto Reject Order?</label
+                                >
+                                <ng-select
+                                    [clearable]="false"
+                                    formControlName="autoRejectFlag"
+                                    class="custom"
+                                >
+                                    <ng-option [value]="true">Yes</ng-option>
+                                    <ng-option [value]="false">No</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <!-- Google Review Setting Card -->
         <div class="card">
             <div class="card-header">

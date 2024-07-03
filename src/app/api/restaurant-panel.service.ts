@@ -163,6 +163,12 @@ export class RestaurantPanelService {
             data
         );
     }
+    updateRestaurantAutoReject(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantAutoReject`,
+            data
+        );
+    }
     updateRestaurantDineInGstSetting(data: any) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/updateRestaurantDineInGstSetting`,

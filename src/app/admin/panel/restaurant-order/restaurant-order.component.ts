@@ -9,6 +9,7 @@ import { io } from "socket.io-client";
 import { environment } from "src/environments/environment";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
 import { AdminPanelService } from "src/app/api/admin-panel.service";
+import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: "app-restaurant-order",
@@ -35,7 +36,7 @@ export class RestaurantOrderComponent implements OnInit {
         private orderService: OrderService,
         private dialog: MatDialog,
         private customerAuthService: CustomerAuthService,
-        private adminPanelService: AdminPanelService   
+        private adminPanelService: AdminPanelService
     ) {}
 
     ngOnInit(): void {
@@ -141,6 +142,32 @@ export class RestaurantOrderComponent implements OnInit {
                 this.getOrders([this.selectedOption]);
             }
         }
+    }
+    deleteOrder(order) {
+        const dialogData = {
+            title: "Confirm",
+            message: "Are you sure you want to delete this item?",
+        };
+        this.dialog
+            .open(ConfirmDialogComponent, { data: dialogData })
+            .afterClosed()
+            .subscribe({
+                next: (res: any) => {
+                    if (res && res.okFlag) {
+                        this.orderService.deleteOrderById(order._id).subscribe({
+                            next: (res) => {
+                                this.selectedOption = "all";
+                                this.getOrders([
+                                    "pending",
+                                    "completed",
+                                    "rejected",
+                                    "processing",
+                                ]);
+                            },
+                        });
+                    }
+                },
+            });
     }
     viewOrder(row) {
         row["completeScreen"] = true;

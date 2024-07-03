@@ -27,7 +27,9 @@ export class StoreComponent implements OnInit {
     availabilityForm: FormGroup;
     isEditingAvailability: boolean = false;
     isEditingByPassAuth: any;
+    isEditingAutoReject: any;
     isEditingDineIn;
+    autoRejectForm: FormGroup;
     constructor(
         private formBuilder: FormBuilder,
         private restaurantPanelService: RestaurantPanelService,
@@ -58,11 +60,16 @@ export class StoreComponent implements OnInit {
         this.bypassForm = this.formBuilder.group({
             byPassAuth: [false],
         });
+        this.autoRejectForm = this.formBuilder.group({
+            autoRejectFlag: [true],
+        });
+
 
         this.getGSTFormDetails();
 
         this.gstForm.disable();
         this.bypassForm.disable();
+        this.autoRejectForm.disable();
         this.cashOnDeliveryForm.disable();
         this.gstDineInForm.disable();
         // Google Review Setting Form
@@ -148,6 +155,9 @@ export class StoreComponent implements OnInit {
             this.bypassForm.patchValue({
                 byPassAuth: res["data"]["restaurantDetail"]["byPassAuth"],
             });
+            this.autoRejectForm.patchValue({
+                autoRejectFlag: res["data"]["restaurantDetail"]["autoRejectFlag"] ?? true,
+            });
 
             this.gstForm.patchValue({
                 isPricingInclusiveOfGST:
@@ -224,6 +234,24 @@ export class StoreComponent implements OnInit {
         } else {
             this.updateBypassAuth();
         }
+    }
+    toggleAutoReject() {
+        if (!this.isEditingAutoReject) {
+            this.autoRejectForm.enable();
+            this.isEditingAutoReject = !this.isEditingAutoReject;
+        } else {
+            this.updateAutoRejectValue();
+        }
+    }
+    updateAutoRejectValue() {
+        const reqData = {
+            autoRejectFlag: this.bypassForm.value.autoRejectFlag ?? false,
+        };
+        this.restaurantPanelService
+            .updateRestaurantAutoReject(reqData)
+            .subscribe({
+                next: (res) => {},
+            });
     }
     updateBypassAuth() {
         const reqData = {

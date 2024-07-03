@@ -14,6 +14,23 @@
                         <i class="pending">{{
                             this.orderData.orderStatus?.trim() | titlecase
                         }}</i>
+                        <span *ngIf="!customerMode">
+                            <a
+                                class="print-reciept pointer ml-2"
+                                (click)="printReceipt(orderData)"
+                            >
+                                <i class="fas fa-print"></i>
+                                Print bill</a
+                            >
+
+                            <a
+                                class="print-reciept pointer ml-3"
+                                (click)="printKTO(orderData)"
+                            >
+                                <i class="fas fa-print"></i>
+                                Print KOT</a
+                            ></span
+                        >
                     </h4>
                     <ul class="booking_list">
                         <li>
@@ -41,9 +58,8 @@
                             <span
                                 *ngIf="
                                     this.orderData.customerPreferences
-                                        .preference === 'Dine In'  ||
-                                        this.orderData.customerPreferences
-                                        .preference?.toLowerCase() ===
+                                        .preference === 'Dine In' ||
+                                    this.orderData.customerPreferences.preference?.toLowerCase() ===
                                         'dining'
                                 "
                             >
@@ -57,7 +73,7 @@
                                     this.orderData.customerPreferences
                                         .preference === 'Scheduled Dining' ||
                                     this.orderData.customerPreferences
-                                        .preference === 'room service' 
+                                        .preference === 'room service'
                                 "
                             >
                                 {{

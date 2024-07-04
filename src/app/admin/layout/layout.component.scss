@@ -16,7 +16,9 @@
 .content-max {
     max-width: 1120px;
 }
-
+.custom-on-off-button{
+    display: contents;
+}
 #body > .navbar {
     padding: 0 1.5rem;
     min-height: 54px;
@@ -30,6 +32,13 @@
         justify-content: flex-end;
         -ms-flex-preferred-size: auto;
         flex-basis: auto;
+    }
+    .custom-on-off-button{
+        display: inline-block;
+    }
+    .custom-space-end{
+        margin-top: .5rem;
+        margin-bottom: .5rem;
     }
 
     .nav-dropdown .nav-link-menu {

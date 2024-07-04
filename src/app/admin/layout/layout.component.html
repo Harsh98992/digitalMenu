@@ -295,6 +295,30 @@
                 <i class="fas fa-bars"></i><span></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div>
+                <ng-select
+                *ngIf="verifiedAccountFlag && !staffRoleFlag && isDineInAvailable"
+                [(ngModel)]="dineInStatus"
+                (change)="changeDineInStatus()"
+                style="min-width: 130px"
+                class="mr-3"
+                [clearable]="false"
+            >
+                <ng-option value="online"
+                    ><i
+                        class="fa-solid fa-circle mr-2"
+                        style="color: #3d9b17"
+                    ></i
+                    >Dine In Online</ng-option
+                >
+                <ng-option value="offline"
+                    ><i
+                        class="fa-solid fa-circle mr-2"
+                        style="color: red"
+                    ></i
+                    >Dine In Offline</ng-option
+                >
+            </ng-select>
                 <ng-select
                     *ngIf="verifiedAccountFlag && !staffRoleFlag"
                     [(ngModel)]="selectedStatus"
@@ -308,7 +332,7 @@
                             class="fa-solid fa-circle mr-2"
                             style="color: #3d9b17"
                         ></i
-                        >Online</ng-option
+                        >Restaurnat Online</ng-option
                     >
                     <ng-option value="offline"
                         ><i
@@ -325,7 +349,7 @@
                 >
                     FAQ
                 </button> -->
-
+            </div>
                 <!-- <div class="dropdown mx-1" matBadge="8">
                     <a class="btn purple-shade dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                         aria-expanded="false">

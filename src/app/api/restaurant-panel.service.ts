@@ -123,6 +123,12 @@ export class RestaurantPanelService {
             data
         );
     }
+    changeDineInStatus(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateDineInAvailablity`,
+            data
+        );
+    }
     setRestaurantStatus(data) {
         sessionStorage.setItem("restaurantVerified", data);
     }

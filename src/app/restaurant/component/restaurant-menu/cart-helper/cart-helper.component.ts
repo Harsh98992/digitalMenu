@@ -112,7 +112,9 @@ export class CartHelperComponent implements OnInit {
             .isDineInAvailable(this.restaurantData._id)
             .subscribe({
                 next: (res: any) => {
-                    this.isDineInAvailable = res.data.isDineInAvailable;
+                    this.isDineInAvailable =
+                        res.data.isDineInAvailable &&
+                        this.restaurantData.isDineInAvailableRestaurant;
                     this.tableData = res.data.tableDetails;
                 },
             });

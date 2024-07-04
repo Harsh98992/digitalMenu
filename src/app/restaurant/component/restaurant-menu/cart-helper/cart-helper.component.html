@@ -150,6 +150,14 @@
                         ></span></mat-radio-button
                 ></span>
                 <span
+                    class="text-danger"
+                    *ngIf="
+                        !isDineInAvailable && isByPassAuthFlag && dineInMenuFlag
+                    "
+                >
+                    Dining not available currently
+                </span>
+                <span
                     class="col-4 d-block"
                     *ngIf="
                         isDineInAvailable && isByPassAuthFlag && dineInMenuFlag

@@ -36,11 +36,16 @@ export class PaymentDialogComponent implements OnInit {
 
         description: "",
         order_id: "",
+        // redirect: true, 
+        // callback_url: 'https://qrsay.com/contact',
         handler: function (response) {
             // Control comes here only in case of success. In case of failure,  razorpay form shows "Retry button"
             console.log("Payment Success");
             // Your custom logic
         },
+        method:{
+            upi:false
+        }
     };
 
     razorPayData: any;
@@ -59,6 +64,7 @@ export class PaymentDialogComponent implements OnInit {
 
     ngOnInit(): void {
         console.log(this.orderData);
+       
 
         this.getOrderTotal();
         this.checkForCashOnDelivery();

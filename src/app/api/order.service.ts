@@ -20,6 +20,9 @@ export class OrderService {
     placeOrder(data: any) {
         return this.http.post(`${this.apiUrl}/v1/orders/placeOrder`, data);
     }
+    storeOrder(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/orders/storeOrder`, data);
+    }
     getCustomerActiveOrder() {
         return this.http.get(`${this.apiUrl}/v1/orders/getCustomerActiveOrder`);
     }
@@ -54,6 +57,9 @@ export class OrderService {
     }
     getCustomerOrder() {
         return this.http.get(`${this.apiUrl}/v1/orders/customerOrder`);
+    }
+    getOrderwithPaymentOrderId(orderId) {
+        return this.http.get(`${this.apiUrl}/v1/orders/getOrderwithPaymentOrderId/${orderId}`);
     }
     getCustomerPaymentPendingOrder() {
         return this.http.get(

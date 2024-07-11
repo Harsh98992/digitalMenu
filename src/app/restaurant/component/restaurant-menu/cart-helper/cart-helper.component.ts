@@ -617,12 +617,11 @@ export class CartHelperComponent implements OnInit {
                 paymentMethod: "cashOnDelivery",
             };
         }
-        this.orderService.placeOrder(reqData).subscribe({
-            next: (res: any) => {
-                if (res["status"] == "success") {
-                    const orderData = res["data"]["savedData"];
+        if (paymentData.method === "payOnlineWithStore") {
+            this.orderService.getOrderwithPaymentOrderId(event.detail["razorpay_order_id"]).subscribe({
+                next:(res)=>{
+                    const orderData = res["data"]["orderData"];
                     this.restaurantService.bypassGaurd = true;
-                    this.socket.emit("orderPlaced", res["data"]["savedData"]);
                     this.dialog.closeAll();
                     this.restaurantService.setCartItem([]);
                     this.restaurantService.setRestaurantUrl(null);
@@ -635,8 +634,32 @@ export class CartHelperComponent implements OnInit {
                         this.router.navigateByUrl("/orders");
                     }
                 }
-            },
-        });
+            })
+        } else {
+            this.orderService.placeOrder(reqData).subscribe({
+                next: (res: any) => {
+                    if (res["status"] == "success") {
+                        const orderData = res["data"]["savedData"];
+                        this.restaurantService.bypassGaurd = true;
+                        this.socket.emit(
+                            "orderPlaced",
+                            res["data"]["savedData"]
+                        );
+                        this.dialog.closeAll();
+                        this.restaurantService.setCartItem([]);
+                        this.restaurantService.setRestaurantUrl(null);
+                        this.restaurantService.amountToBePaidSubject.next(null);
+                        if (orderData && this.isByPassAuthFlag) {
+                            this.router.navigateByUrl(
+                                `/order-tracking/${orderData.orderId}/${orderData.restaurantId}`
+                            );
+                        } else {
+                            this.router.navigateByUrl("/orders");
+                        }
+                    }
+                },
+            });
+        }
     }
 
     deliveryDisabled = false;

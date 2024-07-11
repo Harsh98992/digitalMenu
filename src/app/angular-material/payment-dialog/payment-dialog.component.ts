@@ -23,6 +23,8 @@ export class PaymentDialogComponent implements OnInit {
 
     socketOrderPlacedEvent = "orderPlaced";
     transferDetails: any;
+    validatedData: any;
+    storeFlag: boolean;
 
     socketOrderPlaced(data: any) {
         this.socket.emit(this.socketOrderPlacedEvent, data);
@@ -36,16 +38,13 @@ export class PaymentDialogComponent implements OnInit {
 
         description: "",
         order_id: "",
-        // redirect: true, 
+        // redirect: true,
         // callback_url: 'https://qrsay.com/contact',
         handler: function (response) {
             // Control comes here only in case of success. In case of failure,  razorpay form shows "Retry button"
             console.log("Payment Success");
             // Your custom logic
         },
-        method:{
-            upi:false
-        }
     };
 
     razorPayData: any;
@@ -64,7 +63,6 @@ export class PaymentDialogComponent implements OnInit {
 
     ngOnInit(): void {
         console.log(this.orderData);
-       
 
         this.getOrderTotal();
         this.checkForCashOnDelivery();
@@ -77,8 +75,8 @@ export class PaymentDialogComponent implements OnInit {
                 this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
                     "room service" ||
                 this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
-                    "grab and go" || 
-                    this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
+                    "grab and go" ||
+                this.orderData?.orderDetails[0]?.customerPreferences?.preference?.toLowerCase() ===
                     "dining"
             ) {
                 this.paymentMethod = "payOnline";
@@ -122,10 +120,39 @@ export class PaymentDialogComponent implements OnInit {
             // this.razorPayOptions.transfer_id = res["value"]["transfers"]?.length ? res["value"]["transfers"][0]?['id'] : ''
 
             this.razorPayOptions.handler = this.razorPayResponseHandler;
-            var rzp1 = new Razorpay(this.razorPayOptions);
-            rzp1.open();
+
+            this.placeOrderTemp();
         });
     }
+    placeOrderTemp() {
+        let reqData = this.validatedData[0];
+
+        if (this.paymentMethod === "payOnline") {
+            reqData = {
+                ...reqData,
+                paymentMethod: "payOnline",
+                razorpay_order_id: this.razorPayOptions.order_id,
+
+                razorpay_tranferData: this.transferDetails,
+            };
+        } else if (this.paymentMethod === "cashOnDelivery") {
+            reqData = {
+                ...reqData,
+                paymentMethod: "cashOnDelivery",
+            };
+        }
+        reqData["storeFlag"] = true;
+        this.storeFlag = true;
+        this.orderService.placeOrder(reqData).subscribe({
+            next: (res: any) => {
+                if (res["status"] == "success") {
+                    var rzp1 = new Razorpay(this.razorPayOptions);
+                    rzp1.open();
+                }
+            },
+        });
+    }
+
     razorPayResponseHandler(response) {
         var event = new CustomEvent("payment.success", {
             detail: response,
@@ -139,11 +166,25 @@ export class PaymentDialogComponent implements OnInit {
         console.log(event);
 
         if (event.detail) {
-            this.dialogRef.close({
-                method: "payOnline",
-                event,
-                transferDetails: this.transferDetails,
-            });
+            // this.dialogRef.close({
+            //     method: "payOnline",
+            //     event,
+            //     transferDetails: this.transferDetails,
+            // });
+            if (this.storeFlag) {
+                this.dialogRef.close({
+                    method: "payOnlineWithStore",
+                    event,
+                    transferDetails: this.transferDetails,
+                });
+            } else {
+                this.dialogRef.close({
+                    method: "payOnline",
+                    event,
+                    transferDetails: this.transferDetails,
+                });
+            }
+
             // this.orderService
             //     .changeOrderStatusByUser({
             //         orderId: this.orderData._id,
@@ -190,29 +231,34 @@ export class PaymentDialogComponent implements OnInit {
                     "",
             },
         ];
-
-        this.restaurantService
-            .validationBeforeOrder(bodyData[0])
-            .subscribe((res) => {
-                if (this.paymentMethod === "cashOnDelivery") {
-                    this.dialogRef.close({ method: "cashOnDelivery", event });
-                    // this.orderService
-                    //     .changeOrderStatusByUserForCashOnDelivery({
-                    //         orderId: this.orderData._id,
-                    //         restaurantId: this.orderData.restaurantId,
-                    //         orderStatus: "processing",
-                    //     })
-                    //     .subscribe({
-                    //         next: (res) => {
-                    //             this.socketOrderPlaced(this.orderData);
-
-                    //             this.router.navigateByUrl("/orders");
-                    //             this.dialogRef.close();
-                    //         },
-                    //     });
-                } else {
-                    this.buyRazorPay();
-                }
-            });
+        this.validatedData = bodyData;
+        if (this.paymentMethod === "cashOnDelivery") {
+            this.restaurantService
+                .validationBeforeOrder(bodyData[0])
+                .subscribe((res) => {
+                    if (this.paymentMethod === "cashOnDelivery") {
+                        this.dialogRef.close({
+                            method: "cashOnDelivery",
+                            event,
+                        });
+                        // this.orderService
+                        //     .changeOrderStatusByUserForCashOnDelivery({
+                        //         orderId: this.orderData._id,
+                        //         restaurantId: this.orderData.restaurantId,
+                        //         orderStatus: "processing",
+                        //     })
+                        //     .subscribe({
+                        //         next: (res) => {
+                        //             this.socketOrderPlaced(this.orderData);
+                        //             this.router.navigateByUrl("/orders");
+                        //             this.dialogRef.close();
+                        //         },
+                        //     });
+                    } else {
+                    }
+                });
+        } else {
+            this.buyRazorPay();
+        }
     }
 }

@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit {
     totalBillForDineIn(details) {
         let total = 0;
         for (const order of details.orderDetails) {
-            total += order.orderAmount + order.gstAmount + order.deliveryAmount;
+            total += order.orderAmount + order.gstAmount + order.deliveryAmount-order.discountAmount;
         }
         return total;
     }

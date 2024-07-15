@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { io } from "socket.io-client";
@@ -14,6 +14,7 @@ import { environment } from "src/environments/environment";
     selector: "app-accept-order-whatsapp",
     templateUrl: "./accept-order-whatsapp.component.html",
     styleUrls: ["./accept-order-whatsapp.component.scss"],
+    encapsulation:ViewEncapsulation.None
 })
 export class AcceptOrderWhatsappComponent implements OnInit {
     printWindow: any;

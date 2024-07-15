@@ -1,143 +1,28 @@
-<!-- <html><head><title>bill</title>   <style>
-    .receipt {
-        width: 300px;
-        margin: 0 auto;
-        height: 30px;
-        font-weight: 600;
-        padding: 5px;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-    }
-
-    .header {
-        text-align: center;
-    }
-
-    .header img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .header h1 {
-        font-size: 20px;
-        margin: 0;
-    }
-
-    .header p {
-        margin: 2px 0;
-    }
-
-    .item-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 5px 0;
-    }
-
-    .item-table th,
-    .item-table td {
-        border: 1px solid black;
-        padding: 2px;
-    }
-
-    .item-table th {
-        text-align: left;
-    }
-
-    .item-table td {
-        text-align: left;
-    }
-
-    .footer {
-        display: flex;
-        justify-content: space-between;
-        margin: 0px 0;
-    }
-
-    .footer p {
-        margin: 0;
-    }
-
-    .total {
-        font-weight: bold;
-    }
-    .captalize {
-        text-transform: capitalize;
-    }
-    .font-bold {
-        font-weight: bold;
-    }
-    .right {
-        text-align: right;
-    }
-    .center {
-        text-align: center !important;
-    }
-    .space-between {
-        display: flex;
-        justify-content: space-between;
-    }
-    .border-none {
-        font-size: 14px;
-        font-weight: 600;
-        border-left: 0 !important;
-        border-right: 0 !important;
-        border-bottom: 0 !important;
-        border-top: 0 !important;
-    }
-    .dash-line {
-        border-top: 2px dashed grey;
-        width: 100%;
-        margin-top: 0px;
-        margin-bottom: 0.1px;
-    }
-    span {
-        font-size: 14px;
-    }
-
-    .border-main-none {
-        font-size: 14px;
-        border-left: 0 !important;
-        border-right: 0 !important;
-        border-top: 2px dashed grey;
-        border-bottom: 2px dashed grey;
-    }
-    .margin-custom {
-        margin-right: 1.3rem !important;
-    }
-</style></head><body><div class="receipt">
-<div class="header">
-
-    <h1>VEER JI MALAI CHAAP WALE</h1>
-    <p>C1-003 SIGNATURE HOMES OPPOSITE GOLDEN VIEW RESORT, RAJ NAGAR EXTENSION ,GHAZIABAD,UTTAR PRADESH,201017</p>
-    <p></p>
+<div style="height: 100%;" [innerHTML]="printWindow"></div>
+<div style="margin-top: 14rem;"> </div>
+<div style="margin-top: 3rem">.</div>
+<div class="fixed-bottom-buttons" *ngIf="printWindow">
+    <div class="">
+        <div class="row">
+            <div class="col-6" style="padding: 0">
+                <button
+                    class="btn btn-danger btn-block"
+                    [disabled]="buttonDisabled"
+                    (click)="openCancelOrderDialog()"
+                >
+                    Reject Order
+                </button>
+            </div>
+            <div class="col-6" style="padding: 0">
+                <button
+                    type="button"
+                    [disabled]="buttonDisabled"
+                    (click)="acceptOrder()"
+                    class="btn btn-success btn-block"
+                >
+                    {{ buttonText }}
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
-<p style="text-align:center;margin-bottom:0px" class="captalize font-bold">Take Away</p>
-<div style="text-align:center">Take Away :- 14:40
-
-
-
-</div>
-<p>
-<span class="space-between">
-Jul 15, 2024
-<span>   2:25:39 pm</span>
-</span>
-
-Order ID: 7514<br>
-Payment Status: : Paid via wallet<br>
-Himanshu Sharma<br>
-9910072742 - himanshu9911392@gmail.com<br>
-</p>
-
-<table class="item-table ">
-    <tbody><tr class="border-main-none">
-        <th class="border-main-none">Items</th>
-        <th class="border-main-none center">Price</th>
-        <th class="border-main-none center">Qty</th>
-        <th class="border-main-none center">Amount</th>
-    </tr><tr class="border-none"><td class="border-none">Malai Chaap [ Size:-Full ] </td><td class="border-none center">180</td><td class="border-none center">1</td><td class="border-none center">180</td></tr><tr class="border-none"><td class="border-none">Punjabi Spicy Chaap [ Size:-Full ] </td><td class="border-none center">180</td><td class="border-none center">1</td><td class="border-none center">180</td></tr><tr class="border-none"><td class="border-none">Pudina / Haryali Chaap [ Size:-Half ] </td><td class="border-none center">130</td><td class="border-none center">1</td><td class="border-none center">130</td></tr></tbody></table><div class="dash-line"></div><span>Total Quantity: 3</span>
-    <div class="footer">
-    <p>Total Amt.</p>
-    <p class="margin-custom">490</p>
-</div><div class="dash-line"></div><h1 class="center font-bold" style="margin-bottom:0px">Payable Amt.: 490</h1><p class="center">Thanks for your visit !!! <br> Have a good day</p></div></body></html> -->
-<div [innerHTML]="printWindow"></div>

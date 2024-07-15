@@ -40,6 +40,12 @@ const routes: Routes = [
             import("./admin/admin.module").then((m) => m.AdminModule),
     },
     {
+        path: "order",
+        // canLoad:[RestaurantAuthGuard],
+        loadChildren: () =>
+            import("./order/order.module").then((m) => m.OrderModule),
+    },
+    {
         path: "landing",
         // canLoad:[RestaurantAuthGuard],
         loadChildren: () =>

@@ -103,12 +103,18 @@ export class UtilService {
 
         return wrappedText;
     }
-    setPrinterDriver(result){
-        localStorage.setItem('printer-device', JSON.stringify({ vendorId: result.vendorId, productId: result.productId }));
+    setPrinterDriver(result) {
+        localStorage.setItem(
+            "printer-device",
+            JSON.stringify({
+                vendorId: result.vendorId,
+                productId: result.productId,
+            })
+        );
     }
-    getPrinterDriver(){
-        const device = JSON.parse(localStorage.getItem('printer-device'));
-        return device
+    getPrinterDriver() {
+        const device = JSON.parse(localStorage.getItem("printer-device"));
+        return device;
     }
     printEPOSReciept(orderData, restaurantDetail, kotFlag = false) {
         let orderTypeStr = "";
@@ -410,8 +416,11 @@ export class UtilService {
                     "------------------------------------------------"
                 );
             }
-            const deliveryAmount=orderDetail.orderDetails[0]?.deliveryAmount ?? 0
-            this.printService.writeLine(`Delivery Amount ${spaces} deliveryAmount`)
+            const deliveryAmount =
+                orderDetail.orderDetails[0]?.deliveryAmount ?? 0;
+            this.printService.writeLine(
+                `Delivery Amount ${spaces} deliveryAmount`
+            );
             this.printService.writeLine(
                 "------------------------------------------------"
             );
@@ -420,7 +429,8 @@ export class UtilService {
                 .writeLine(
                     `Payable Amt.: ${
                         orderDetail.orderDetails[0].orderAmount +
-                        orderDetail.orderDetails[0].gstAmount + deliveryAmount
+                        orderDetail.orderDetails[0].gstAmount +
+                        deliveryAmount
                     }`
                 )
                 .writeLine("Thanks for your visit !!! <br> Have a good day");
@@ -430,9 +440,9 @@ export class UtilService {
         this.printService.cut();
         this.printService.flush();
     }
-    printReceipt(orderData, restaurantDetail) {
+    printReceipt(orderData, restaurantDetail, showFlag = false) {
         let orderTypeStr = "";
-
+        let docStr = "";
         // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
         const orderDetail = _.cloneDeep(orderData);
         if (
@@ -499,14 +509,15 @@ export class UtilService {
                 }
             }
         }
-        const printWindow = window.open("", "", "width=2in");
-
-        printWindow.document.write("<html><head><title>bill</title>");
+        let printWindow;
+        if (!showFlag) {
+            printWindow = window.open("", "", "width=2in");
+        }
+        docStr += "<html><head><title>bill</title>";
 
         // stylesheets
 
-        printWindow.document.write(
-            `   <style>
+        docStr += `   <style>
             .receipt {
                 width: 300px;
                 margin: 0 auto;
@@ -612,18 +623,16 @@ export class UtilService {
             .margin-custom {
                 margin-right: 1.3rem !important;
             }
-        </style>`
-        );
-        printWindow.document.write("</head><body>");
+        </style>`;
+        docStr += "</head><body>";
 
-        printWindow.document.write(
-            `<div class="receipt">
+        docStr += `<div class="receipt">
         <div class="header">
 
             <h1>${restaurantDetail.restaurantName?.toUpperCase()}</h1>
             <p>${restaurantDetail.address.street?.toUpperCase()} ,${restaurantDetail.address.city?.toUpperCase()},${restaurantDetail.address.state.toUpperCase()},${
-                restaurantDetail.address.pinCode
-            }</p>
+            restaurantDetail.address.pinCode
+        }</p>
             <p>${
                 restaurantDetail.gstNumber
                     ? "GST Number:- " + restaurantDetail.gstNumber
@@ -663,45 +672,31 @@ export class UtilService {
                 <th  class="border-main-none center">Price</th>
                 <th  class="border-main-none center">Qty</th>
                 <th  class="border-main-none center">Amount</th>
-            </tr>`
-        );
+            </tr>`;
 
         for (const order of orderDetail.orderDetails[0].orderSummary) {
-            printWindow.document.write("<tr  class='border-none'>");
-            printWindow.document.write(
-                `<td class='border-none'>${order.dishName}`
-            );
+            docStr += "<tr  class='border-none'>";
+            docStr += `<td class='border-none'>${order.dishName}`;
             let orderStr = this.dishNameWithExtra(order);
-            
-            printWindow.document.write(orderStr);
-            printWindow.document.write(
-                `<td class='border-none center'>${order.priceOneItem}</td>`
-            );
-            printWindow.document.write(
-                `<td class='border-none center'>${order.dishQuantity}</td>`
-            );
-            printWindow.document.write(
-                `<td class='border-none center'>${order.totalPrice}</td>`
-            );
-            printWindow.document.write("</tr>");
+
+            docStr += orderStr;
+            docStr += `<td class='border-none center'>${order.priceOneItem}</td>`;
+            docStr += `<td class='border-none center'>${order.dishQuantity}</td>`;
+            docStr += `<td class='border-none center'>${order.totalPrice}</td>`;
+            docStr += "</tr>";
         }
 
-        printWindow.document.write("</table>");
-        printWindow.document.write("<div class='dash-line'></div>");
+        docStr += "</table>";
+        docStr += "<div class='dash-line'></div>";
 
-        printWindow.document.write(
-            `<span>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</span>
-            `
-        );
+        docStr += `<span>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</span>
+            `;
         if (restaurantDetail.isGstApplicable) {
-            printWindow.document.write(
-                `<div class="footer">
+            docStr += `<div class="footer">
             <p>Net Amt.</p>
             <p class="margin-custom">${orderDetail.orderDetails[0].orderAmount}</p>
-        </div>`
-            );
-            printWindow.document.write(
-                `<div class="footer">
+        </div>`;
+            docStr += `<div class="footer">
             <p>Tax (${
                 orderDetail.customerPreferences.preference.toLowerCase() ===
                 "dining"
@@ -711,22 +706,18 @@ export class UtilService {
             <p class="margin-custom">${
                 orderDetail.orderDetails[0].gstAmount
             }</p>
-        </div>`
-            );
+        </div>`;
         }
 
-        printWindow.document.write(
-            `<div class="footer">
+        docStr += `<div class="footer">
             <p>Total Amt.</p>
             <p class="margin-custom">${
                 orderDetail.orderDetails[0].orderAmount +
                 orderDetail.orderDetails[0].gstAmount
             }</p>
-        </div>`
-        );
+        </div>`;
         if (restaurantDetail.isGstApplicable) {
-            printWindow.document.write(
-                ` <div class="dash-line"></div>
+            docStr += ` <div class="dash-line"></div>
             <span class="font-bold">Tax Summary</span>
             <table class="item-table">
                 <tbody>
@@ -769,13 +760,12 @@ export class UtilService {
                         }</td>
                     </tr>
                 </tbody>
-            </table>`
-            );
+            </table>`;
         }
-        printWindow.document.write("<div class='dash-line'></div>");
+        docStr += "<div class='dash-line'></div>";
 
         // if (orderDetail.orderDetails[0].gstAmount) {
-        //     printWindow.document.write(
+        //     docStr+=(
         //         `<div class="footer">
         //         <p>GST Amount</p>
         //         <p>${orderDetail.orderDetails[0].gstAmount}</p>
@@ -784,37 +774,33 @@ export class UtilService {
         // }
 
         if (orderDetail.orderDetails[0].deliveryAmount) {
-            printWindow.document.write(
-                `<div class="footer">
+            docStr += `<div class="footer">
                 <p>Delivery Amount</p>
                 <p>${orderDetail.orderDetails[0].deliveryAmount}</p>
-            </div>`
-            );
+            </div>`;
         }
 
         if (orderDetail.orderDetails[0].discountAmount) {
-            printWindow.document.write(
-                `<div class="footer">
+            docStr += `<div class="footer">
                 <p>Discount Amount</p>
                 <p>${orderDetail.orderDetails[0].discountAmount}</p>
-            </div>`
-            );
+            </div>`;
         }
-        const deliveryAmount=orderDetail.orderDetails[0]?.deliveryAmount ?? 0
-        printWindow.document.write(
-            `<h1 class="center font-bold" style="margin-bottom:0px">Payable Amt.: ${
-                orderDetail.orderDetails[0].orderAmount +
-                orderDetail.orderDetails[0].gstAmount + deliveryAmount
-            }</h1>`
-        );
-        printWindow.document.write(
-            `<p class="center">Thanks for your visit !!! <br> Have a good day</p>`
-        );
-        printWindow.document.write("</div>");
-        printWindow.document.write("</body></html>");
+        const deliveryAmount = orderDetail.orderDetails[0]?.deliveryAmount ?? 0;
+        docStr += `<h1 class="center font-bold" style="margin-bottom:0px">Payable Amt.: ${
+            orderDetail.orderDetails[0].orderAmount +
+            orderDetail.orderDetails[0].gstAmount +
+            deliveryAmount
+        }</h1>`;
+        docStr += `<p class="center">Thanks for your visit !!! <br> Have a good day</p>`;
+        docStr += "</div>";
+        docStr += "</body></html>";
 
-        console.log("printWindow", printWindow.document);
-
+   
+        if (showFlag) {
+            return docStr;
+        }
+        printWindow.document.write(docStr);
         // printWindow.document.write(printContent);
 
         var ua = navigator.userAgent.toLowerCase();
@@ -832,12 +818,13 @@ export class UtilService {
 
             printWindow.close();
         }
+        return "";
 
         // printWindow.print();
 
         // printWindow.close();
     }
-    printKTOHelper(orderData,restaurantDetail) {
+    printKTOHelper(orderData, restaurantDetail) {
         let orderTypeStr = "";
         const orderDetail = _.cloneDeep(orderData);
         if (
@@ -1113,7 +1100,7 @@ export class UtilService {
     dishNameWithExtra(order) {
         let orderStr = "";
         if (order?.itemSizeSelected?.size) {
-            orderStr += ` [ Size:-${order.itemSizeSelected.size} ] ` ;
+            orderStr += ` [ Size:-${order.itemSizeSelected.size} ] `;
         }
         if (order.dishChoicesSelected && order.dishChoicesSelected?.length) {
             let str = "";
@@ -1122,11 +1109,10 @@ export class UtilService {
                     str += `${choice.choiceName} ,`;
                 }
             }
-           const res= str.slice(0, -1);
+            const res = str.slice(0, -1);
             orderStr += `[ Choices:- ${res}] `;
         }
 
-      
         if (order.extraSelected && order.extraSelected?.length) {
             let str = "";
             for (const data of order.extraSelected) {
@@ -1134,7 +1120,7 @@ export class UtilService {
                     str += `${addon.addOnName} ,`;
                 }
             }
-            const res= str.slice(0, -1);
+            const res = str.slice(0, -1);
             orderStr += `[ Extras:- ${res}] `;
         }
         return orderStr;

@@ -24,6 +24,7 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 import { DatePipe } from "@angular/common";
 import { BnNgIdleService } from "bn-ng-idle";
 import { ThermalPrintModule } from "ng-thermal-print";
+import { AcceptOrderBypassAuthComponent } from './accept-order-bypass-auth/accept-order-bypass-auth.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,6 +34,7 @@ import { ThermalPrintModule } from "ng-thermal-print";
         ResetPasswordComponent,
         UserLoginComponent,
         PositiveNumberDirective,
+        AcceptOrderBypassAuthComponent,
     ],
     imports: [
         BrowserModule,

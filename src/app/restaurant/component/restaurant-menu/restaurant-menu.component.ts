@@ -554,7 +554,6 @@ export class RestaurantMenuComponent implements OnInit {
                             return true;
                         });
 
-                   
                     for (const cuisine of this.restaurantDetail.cuisine) {
                         cuisine.items = cuisine.items.filter((data) => {
                             if (
@@ -685,7 +684,15 @@ export class RestaurantMenuComponent implements OnInit {
             const tempDate2 = new Date();
             tempDate2.setHours(endHours[0]); // Set hours
             tempDate2.setMinutes(endHours[1]); // Set minutes
+          
+
             if (tempDate > tempDate2) {
+                if (currDate.getHours() >= 1 && currDate.getHours() <= 7) {
+                    currDate.setDate(currDate.getDate() + 1);
+                }
+                if (currDate < tempDate) {
+                    return true;
+                }
                 tempDate2.setDate(tempDate2.getDate() + 1);
                 return false;
             }

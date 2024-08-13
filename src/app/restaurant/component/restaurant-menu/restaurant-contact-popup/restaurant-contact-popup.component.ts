@@ -15,7 +15,7 @@ export class RestaurantContactPopupComponent implements OnInit {
     }
     initalizeContactDetail() {
         console.log("the restaurant data in contact popup is", this.restaurantData);
-
+        
         if (this.restaurantData && this.restaurantData.contact) {
             this.contactDetails = this.restaurantData.contact;
             console.log(this.contactDetails);

@@ -5,6 +5,14 @@
     ></a>
 </div>
 <div mat-dialog-content>
+    <p class="address-details mt-3">
+     Address:-      {{ restaurantData.address.street }}
+     ,{{ restaurantData.address.city }},{{
+         restaurantData.address.state
+     }}
+     (Pin Code:-
+     {{ restaurantData.address.pinCode }})
+    </p>
     <table class="table">
         <tbody>
             <tr *ngFor="let data of contactDetails">

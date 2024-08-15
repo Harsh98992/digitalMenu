@@ -32,6 +32,7 @@ export class ViewDishComponent implements OnInit {
             { name: "Actions", prop: "action" },
             { name: "Dish Image", prop: "imageUrl" },
             { name: "Dish Name", prop: "dishName" },
+            { name: "Category Name", prop: "categoryName" },
             { name: "Price", prop: "dishPrice" },
             { name: "Dish Type", prop: "dishType" },
             { name: "Availability", prop: "availableFlag" },
@@ -121,6 +122,7 @@ export class ViewDishComponent implements OnInit {
                     const newArray = dish["items"].map((obj) => ({
                         ...obj,
                         categoryId: dish["_id"],
+                        categoryName: dish["categoryName"],
                     }));
                     result.push(...newArray);
                 }

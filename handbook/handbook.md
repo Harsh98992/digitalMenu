@@ -134,7 +134,6 @@ This handbook is organized into sections that cover different aspects of the web
 
 ## 1.3. Website Overview
 
-
 ### 1.3.1. Vision and Mission of the Website
 
 The vision of the website is to provide a seamless and convenient online ordering experience for users, connecting them with their favorite restaurants and enabling them to order food with ease. The mission of the website is to offer a wide variety of food options, ensure timely delivery, and provide a user-friendly interface that makes ordering food a pleasant experience.
@@ -171,6 +170,20 @@ The target audience for the website includes:
 ## 1.4. Functional Flow
 
 ### 1.4.1. User Flows
+
+```mermaid
+graph TD
+    A[User visits homepage] --> B[User browses menu]
+    B --> C[User selects items]
+    C --> D[User adds items to cart]
+    D --> E[User reviews cart]
+    E --> F[User proceeds to checkout]
+    F --> G[User enters delivery details]
+    G --> H[User makes payment]
+    H --> I[Order confirmation]
+    I --> J[Order tracking]
+    J --> K[Order delivery]
+```
 
 ### 1.4.2. Visual Flow Diagrams for Each User Flow
 

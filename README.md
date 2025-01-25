@@ -21,7 +21,6 @@ ng serve
 
 ```
 
-
 ## firebase setup
 
 <!-- [5:31 PM, 12/11/2023] Himanshu Sharma Depaak Ka Bhai: npm run dev
@@ -38,7 +37,6 @@ ng serve
 
 or paste the following command in your terminal
 ng build --configuration production
-
 
 ```bash
 
@@ -62,9 +60,7 @@ firebase deploy
 
 ```
 
-
 for
-
 
 ## Usage
 

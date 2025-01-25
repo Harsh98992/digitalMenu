@@ -66,6 +66,12 @@ export class RestaurantPanelService {
         this.audio.pause();
         this.audio.currentTime = 0;
     }
+    generateBill(reqData:any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/generateBill`,
+            reqData
+        );
+    }
 
     showOrderPopUp() {
         this.dialog.open(OrderRecievedDialogComponent, {
@@ -117,6 +123,12 @@ export class RestaurantPanelService {
             data
         );
     }
+    changeDineInStatus(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateDineInAvailablity`,
+            data
+        );
+    }
     setRestaurantStatus(data) {
         sessionStorage.setItem("restaurantVerified", data);
     }
@@ -154,6 +166,18 @@ export class RestaurantPanelService {
     updateRestaurantByPassAuth(data: any) {
         return this.http.patch(
             `${this.apiUrl}/v1/restaurant/updateRestaurantByPassAuth`,
+            data
+        );
+    }
+    updateRestaurantAutoReject(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantAutoReject`,
+            data
+        );
+    }
+    updateRestaurantDineInGstSetting(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantDineInGstSetting`,
             data
         );
     }

@@ -17,6 +17,7 @@ import { AcceptDialogComponent } from "../../layout/order-dialog/accept-dialog/a
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 import { PaymentDetailDialogComponent } from "src/app/angular-material/payment-detail-dialog/payment-detail-dialog.component";
 import { PrintSpecificKotDialogComponent } from "src/app/angular-material/print-specific-kot-dialog/print-specific-kot-dialog.component";
+import { PrintService, UsbDriver, WebPrintDriver } from "ng-thermal-print";
 
 @Component({
     selector: "app-dashboard",
@@ -25,6 +26,10 @@ import { PrintSpecificKotDialogComponent } from "src/app/angular-material/print-
     encapsulation: ViewEncapsulation.None,
 })
 export class DashboardComponent implements OnInit {
+    status: boolean = false;
+    usbPrintDriver: UsbDriver;
+    webPrintDriver: WebPrintDriver;
+    ip: string = "";
     pendingOrder = [];
     processingOrder = [];
     activeDine = [];
@@ -38,6 +43,8 @@ export class DashboardComponent implements OnInit {
     activeTab = "tab1";
     apiCalledFlag: boolean;
     takeAwayOptions = ["take away", "grab and go", "schedule dining"];
+    bypassOptions = ["room service", "grab and go", "dining"];
+
     constructor(
         private restaurantService: RestaurantPanelService,
         private orderService: OrderService,
@@ -45,8 +52,28 @@ export class DashboardComponent implements OnInit {
         public dialog: MatDialog,
         private datePipe: DatePipe,
 
-        private utilityService: UtilService
-    ) {}
+        private utilityService: UtilService,
+        private printService: PrintService
+    ) {
+        const device = JSON.parse(localStorage.getItem("printer-device"));
+        if (device) {
+            this.usbPrintDriver = new UsbDriver(
+                device.vendorId,
+                device.productId
+            );
+        } else {
+            this.usbPrintDriver = new UsbDriver();
+        }
+        this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+        this.printService.isConnected.subscribe((result) => {
+            this.status = result;
+            if (result) {
+                console.log("Connected to printer!!!");
+            } else {
+                console.log("Not connected to printer.");
+            }
+        });
+    }
     handleOrderUpdate(updatedOrder: any) {
         const index = this.allOrders.findIndex(
             (order) => order._id === updatedOrder._id
@@ -70,7 +97,7 @@ export class DashboardComponent implements OnInit {
     totalBillForDineIn(details) {
         let total = 0;
         for (const order of details.orderDetails) {
-            total += order.orderAmount + order.gstAmount + order.deliveryAmount;
+            total += order.orderAmount + order.gstAmount + order.deliveryAmount-order.discountAmount;
         }
         return total;
     }
@@ -311,283 +338,98 @@ export class DashboardComponent implements OnInit {
         return amount;
     }
     printKTO(orderData) {
-        let orderTypeStr = "";
-        const orderDetail = _.cloneDeep(orderData);
-        if (
-            orderDetail.customerPreferences.preference.toLowerCase() ===
-            "room service"
-        ) {
-            orderTypeStr =
-                "Room Number :- " + orderDetail.customerPreferences.value;
-        } else if (
-            orderDetail.customerPreferences.preference.toLowerCase() ===
-            "delivery"
-        ) {
-            orderTypeStr =
-                "Address :- " + orderDetail.customerPreferences.value.address;
-        } else if (
-            orderDetail.customerPreferences.preference.toLowerCase() ===
-            "dine in"
-        ) {
-            orderTypeStr =
-                "Dine In :- " + orderDetail.customerPreferences.value;
-        } else if (
-            orderDetail.customerPreferences.preference.toLowerCase() ===
-            "take away"
-        ) {
-            orderTypeStr =
-                "Take Away :- " + orderDetail.customerPreferences.value;
-        } else if (
-            orderDetail.customerPreferences.preference.toLowerCase() ===
-            "schedule dining"
-        ) {
-            orderTypeStr =
-                "Schedule Dining :- " + orderDetail.customerPreferences.value;
-        }
-        if (
-            orderDetail?.customerPreferences?.preference?.toLowerCase() ===
-            "dine in"
-        ) {
-            for (const [index, order] of orderData.orderDetails.entries()) {
-                if (index > 0) {
-                    orderDetail.orderDetails[0]["orderSummary"].push(
-                        ...order["orderSummary"]
-                    );
-                    orderDetail.orderDetails[0]["orderAmount"] +=
-                        order["orderAmount"];
-                    orderDetail.orderDetails[0]["gstAmount"] +=
-                        order["gstAmount"];
-                    orderDetail.orderDetails[0]["deliveryAmount"] +=
-                        order["deliveryAmount"];
-                    orderDetail.orderDetails[0]["discountAmount"] +=
-                        order["discountAmount"];
+        if (!this.status) {
+            this.usbPrintDriver.requestUsb().subscribe(
+                (result) => {
+                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+                    setTimeout(() => {
+                        if (this.status) {
+                            this.printEPOSRecieptHelper(
+                                orderData,
+                                this.restaurantDetail,
+                                true
+                            );
+                        } else {
+                            this.utilityService.printKTOHelper(orderData,this.restaurantDetail);
+                        }
+                    }, 2000);
+                },
+                (err) => {
+                    this.utilityService.printKTOHelper(orderData,this.restaurantDetail);
                 }
-            }
-        }
-        // Please convert the above style of the bill code into the typescript code for making the print content of the bill on the print window
-
-        const printWindow = window.open("", "", "width=2in");
-
-        printWindow.document.write("<html><head><title>bill</title>");
-
-        // stylesheets
-
-        printWindow.document.write(
-            ` <style>
-                .receipt {
-                    width: 250px;
-                    margin: 0 auto;
-                    padding: 5px;
-                    font-family: Arial, sans-serif;
-                    font-size: 12px;
-                }
-
-                .header {
-                    text-align: center;
-                }
-
-                .header img {
-                    width: 80px;
-                    height: 80px;
-                }
-
-                .header h1 {
-                    font-size: 20px;
-                    margin: 0;
-                }
-
-                .header p {
-                    margin: 2px 0;
-                }
-
-                .item-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin: 5px 0;
-                }
-
-                .item-table th,
-                .item-table td {
-                    border: 1px solid black;
-                    padding: 2px;
-                }
-
-                .item-table th {
-                    text-align: left;
-                }
-
-                .item-table td {
-                    text-align: left;
-                }
-
-                .footer {
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 0px 0;
-                }
-
-                .footer p {
-                    margin: 0;
-                }
-
-                .total {
-                    font-weight: bold;
-                }
-                .captalize {
-                    text-transform: capitalize;
-                }
-                .font-bold {
-                    font-weight: bold;
-                }
-                .right {
-                    text-align: right;
-                }
-                .center {
-                    text-align: center !important;
-                }
-                .space-between {
-                    display: flex;
-                    justify-content: space-between;
-                }
-                .border-none {
-                    font-size: 12px;
-                    border-left: 0 !important;
-                    border-right: 0 !important;
-                    border-bottom: 0 !important;
-                    border-top: 0 !important;
-                }
-                .dash-line {
-                    border-top: 2px dashed grey;
-                    width: 100%;
-                    margin-top: 0px;
-                    margin-bottom: 0.1px;
-                }
-                span{
-                    font-size: 12px;
-                }
-
-                .border-main-none {
-                    font-size: 12px;
-                    border-left: 0 !important;
-                    border-right: 0 !important;
-                    border-top: 2px dashed grey;
-                    border-bottom: 2px dashed grey;
-                }
-                .margin-custom{
-                    margin-right: 1.3rem !important;
-                }
-            </style>`
-        );
-        printWindow.document.write("</head><body>");
-
-        printWindow.document.write(
-            `<div class="receipt">
-            <div class="header">
-
-                <h1>${this.restaurantDetail.restaurantName.toUpperCase()}</h1>
-
-            </div>
-            <p style="text-align:center;margin-bottom:0px" class="captalize font-bold">${
-                orderDetail.customerPreferences.preference
-            }</p>
-            <div  style="text-align:center">${orderTypeStr}</div>
-            <p>
-            <span class="space-between">
-            ${this.datePipe.transform(orderDetail.orderDate)}
-         <span>   ${new Date(orderDetail.orderDate).toLocaleTimeString()}</span>
-            </span>
-
-            Order ID: ${orderDetail.orderId}<br>
-
-            ${orderDetail.customerName}<br>
-            ${orderDetail.customerEmail}<br>
-            <span style="word-break:break-all">
-            Cooking Instructions: ${
-                orderDetail?.orderDetails?.[0].cookingInstruction ?? ""
-            }<br>
-            </span>
-           </p>
-
-            <table class="item-table ">
-                <tr  class="border-main-none">
-                    <th  class="border-main-none">Items</th>
-
-                    <th  class="border-main-none center">Qty</th>
-                </tr>`
-        );
-
-        for (const order of orderDetail.orderDetails[0].orderSummary) {
-            printWindow.document.write("<tr  class='border-none'>");
-            printWindow.document.write(
-                `<td class='border-none'>${order.dishName}`
             );
-
-            var checkIfFirst = true;
-            if (order.extraSelected && order.extraSelected.length) {
-                for (const extra of order.extraSelected) {
-                    if (checkIfFirst) {
-                        printWindow.document.write(
-                            `with ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
-                        );
-                        checkIfFirst = false;
-                    } else {
-                        printWindow.document.write(
-                            ` and ${extra.addOnDisplayName}(${extra.addOnsSelected[0].addOnName})`
-                        );
-                    }
-                }
-            }
-            printWindow.document.write(
-                `<td class='border-none center'>${order.dishQuantity}</td>`
-            );
-            printWindow.document.write("</tr>");
-        }
-
-        printWindow.document.write("</table>");
-        printWindow.document.write("<div class='dash-line'></div>");
-
-        printWindow.document.write(
-            `<span>Total Quantity: ${orderDetail.orderDetails[0].orderSummary.length}</span>
-                `
-        );
-
-        // if (orderDetail.orderDetails[0].gstAmount) {
-        //     printWindow.document.write(
-        //         `<div class="footer">
-        //         <p>GST Amount</p>
-        //         <p>${orderDetail.orderDetails[0].gstAmount}</p>
-        //     </div>`
-        //     );
-        // }
-
-        printWindow.document.write("</div>");
-        printWindow.document.write("</body></html>");
-
-        console.log("printWindow", printWindow.document);
-
-        // printWindow.document.write(printContent);
-
-        var ua = navigator.userAgent.toLowerCase();
-
-        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-
-        if (isAndroid) {
-            console.log("android");
-
-            // downlaod the file in android device with 2 inch breadth
         } else {
-            console.log("not android");
-
-            printWindow.print();
-
-            printWindow.close();
+            this.printEPOSRecieptHelper(orderData, this.restaurantDetail, true);
         }
-
-        // printWindow.print();
-
-        // printWindow.close();
+        // this.printKTOHelper(orderData);
+        // const reqData = {
+        //     orderDetail: orderData,
+        //     restaurantDetail: this.restaurantDetail,
+        //     kotFlag: true,
+        // };
+        // this.restaurantService.generateBill(reqData).subscribe({
+        //     next: (res: any) => {
+        //         if (res && res?.data?.state?.toLowerCase() == "fail") {
+        //             this.printKTOHelper(orderData);
+        //         }
+        //     },
+        // });
+    }
+   
+    printEPOSRecieptHelper(orderDetail, restaurantDetail, flag = false) {
+        this.utilityService.printEPOSReciept(
+            orderDetail,
+            restaurantDetail,
+            flag
+        );
     }
     printReceipt(orderDetail: any) {
-        this.utilityService.printReceipt(orderDetail, this.restaurantDetail);
+        if (!this.status) {
+            this.usbPrintDriver.requestUsb().subscribe(
+                (result) => {
+                    this.printService.setDriver(this.usbPrintDriver, "ESC/POS");
+
+                    setTimeout(() => {
+                        if (this.status) {
+                            this.utilityService.setPrinterDriver(result);
+                            this.printEPOSRecieptHelper(
+                                orderDetail,
+                                this.restaurantDetail
+                            );
+                        } else {
+                            this.utilityService.printReceipt(
+                                orderDetail,
+                                this.restaurantDetail
+                            );
+                        }
+                    }, 1000);
+                },
+                (err) => {
+                    this.utilityService.printReceipt(
+                        orderDetail,
+                        this.restaurantDetail
+                    );
+                }
+            );
+        } else {
+            this.printEPOSRecieptHelper(orderDetail, this.restaurantDetail);
+        }
+
+        // this.utilityService.printReceipt(
+        //     orderDetail,
+        //     this.restaurantDetail
+        // );
+        // const reqData = {
+        //     orderDetail,
+        //     restaurantDetail: this.restaurantDetail,
+        //     kotFlag: false,
+        // };
+        // this.restaurantService.generateBill(reqData).subscribe({
+        //     next: (res: any) => {
+        //         if (res && res?.data?.state?.toLowerCase() == "fail") {
+
+        //         }
+        //     },
+        // });
     }
 }

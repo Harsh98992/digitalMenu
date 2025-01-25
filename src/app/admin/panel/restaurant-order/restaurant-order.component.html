@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="col-lg-2 col-md-12">
-                    <button type="reset" class="btn btn-danger">
+                    <button type="reset" class="btn btn-danger" (click)="exportExcel()">
                         <i class="fa-solid fa-cloud-arrow-down"></i>
                         Export
                     </button>
@@ -71,20 +71,19 @@
                                     <i class="fa-solid fa-pen-to-square"></i>
                                     View
                                 </button>
-                                <div class="dropdown-divider"></div>
-                                <button
+                                <!-- <div class="dropdown-divider"></div> -->
+                                <!-- <button
                                     class="pointer"
-                                    (click)="deleteAddon(row)"
+                                    (click)="deleteOrder(row)"
                                     mat-menu-item
                                 >
                                     <i class="fa-solid fa-trash"></i> Delete
-                                </button>
+                                </button> -->
                             </mat-menu>
                         </div>
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column prop="orderId">
-                 </ngx-datatable-column>
+                <ngx-datatable-column prop="orderId"> </ngx-datatable-column>
                 <ngx-datatable-column prop="orderStatus">
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         {{ value | titlecase }}
@@ -100,6 +99,59 @@
                     </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="customerPhoneNumber">
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="orderTotal">
+                    <ng-template
+                        let-value="value"
+                        let-row="row"
+                        ngx-datatable-cell-template
+                    >
+                        <span>{{
+                            row.payment_amount
+                                | currency : "INR" : "symbol" : "1.0-0"
+                        }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+              
+                <ngx-datatable-column prop="orderAmount">
+                    <ng-template
+                        let-value="value"
+                        let-row="row"
+                        ngx-datatable-cell-template
+                    >
+                        <span>{{
+                            row['order_Total_Amount']
+                                | currency : "INR" : "symbol" : "1.0-0"
+                        }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="gstAmount">
+                    <ng-template
+                        let-value="value"
+                        let-row="row"
+                        ngx-datatable-cell-template
+                    >
+                        <span>{{
+                           row['order_Total_GST_Amount']
+                                | currency : "INR" : "symbol" : "1.0-0"
+                        }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="transferAmount">
+                    <ng-template
+                        let-value="value"
+                        let-row="row"
+                        ngx-datatable-cell-template
+                    >
+                        <span>{{
+                            row.transfer_amount
+                                | currency : "INR" : "symbol" :'1.2-2'
+                        }}</span>
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="payment_transfer_id">
+                </ngx-datatable-column>
+                <ngx-datatable-column prop="payment_order_id">
                 </ngx-datatable-column>
                 <ngx-datatable-column prop="customerPreferences">
                     <ng-template
@@ -117,18 +169,6 @@
                         ngx-datatable-cell-template
                     >
                         <span>{{ value | date : "medium" }}</span>
-                    </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column prop="orderTotal">
-                    <ng-template
-                        let-value="value"
-                        let-row="row"
-                        ngx-datatable-cell-template
-                    >
-                        <span>{{
-                            row.deliveryAmount + row.gstAmount + row.orderAmount
-                                | currency : "INR" : "symbol" : "1.0-0"
-                        }}</span>
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>

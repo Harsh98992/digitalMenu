@@ -43,6 +43,7 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { PaymentDetailDialogComponent } from './payment-detail-dialog/payment-detail-dialog.component';
 import { PrintSpecificKotDialogComponent } from './print-specific-kot-dialog/print-specific-kot-dialog.component';
+import { TansferDetailDialogComponent } from './tansfer-detail-dialog/tansfer-detail-dialog.component';
 
 
 
@@ -60,6 +61,7 @@ import { PrintSpecificKotDialogComponent } from './print-specific-kot-dialog/pri
         ErrorDialogComponent,
         PaymentDetailDialogComponent,
         PrintSpecificKotDialogComponent,
+        TansferDetailDialogComponent,
     ],
     imports: [
         CommonModule,

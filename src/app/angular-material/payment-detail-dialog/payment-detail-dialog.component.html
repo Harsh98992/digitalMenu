@@ -41,6 +41,11 @@
 
             {{ details.payment_order_id }}
         </p>
+        <p class="dateText" *ngIf="details.payment_transfer_id">
+            Payment Tranfer Id :-
+
+            {{ details.payment_transfer_id }}
+        </p>
         <p class="dateText" *ngIf="details.payment_time">
             Payment Time :-
 

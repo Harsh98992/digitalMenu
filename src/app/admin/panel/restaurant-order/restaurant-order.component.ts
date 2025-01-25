@@ -8,6 +8,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { io } from "socket.io-client";
 import { environment } from "src/environments/environment";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
+import { AdminPanelService } from "src/app/api/admin-panel.service";
+import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: "app-restaurant-order",
@@ -33,7 +35,8 @@ export class RestaurantOrderComponent implements OnInit {
         private router: Router,
         private orderService: OrderService,
         private dialog: MatDialog,
-        private customerAuthService: CustomerAuthService
+        private customerAuthService: CustomerAuthService,
+        private adminPanelService: AdminPanelService
     ) {}
 
     ngOnInit(): void {
@@ -72,14 +75,57 @@ export class RestaurantOrderComponent implements OnInit {
         this.columns = [
             { name: "Actions", prop: "action" },
             { name: "Order Id", prop: "orderId" },
+            { name: "Order Total", prop: "orderTotal" },
+            { name: "Order Amount", prop: "orderAmount" },
+            { name: "GST Amount", prop: "gstAmount" },
+            { name: "Transfer Amount", prop: "transferAmount" },
+
+            { name: "Payment Transfer Id", prop: "payment_transfer_id" },
+            { name: "Payment Order Id", prop: "payment_order_id" },
+
             { name: "Order Status", prop: "orderStatus" },
             { name: "Customer Name", prop: "customerName" },
             { name: "Customer Email", prop: "customerEmail" },
             { name: "Customer Phone Number", prop: "customerPhoneNumber" },
             { name: "Customer Preferences", prop: "customerPreferences" },
             { name: "Order Date", prop: "orderDate" },
-            { name: "Order Total", prop: "orderTotal" },
         ];
+    }
+    getOrderAmount(row) {
+        let orderTotal = 0;
+        orderTotal = row.orderDetails.reduce((acc, item) => {
+            let temp = item?.orderAmount ?? 0;
+            return acc + temp;
+        }, 0);
+        return orderTotal;
+    }
+    getGstAmount(row) {
+        let orderTotal = 0;
+
+        orderTotal = row.orderDetails.reduce((acc, item) => {
+            let temp = item?.gstAmount ?? 0;
+            return acc + temp;
+        }, 0);
+        return orderTotal;
+    }
+    exportExcel() {
+        const excelData = [];
+        for (const data of this.filteredData) {
+            excelData.push({
+                "Order Id": data.orderId,
+                "Order Total": data.payment_amount,
+                "Order Amount": data.order_Total_Amount,
+                "GST Amount": data.order_Total_GST_Amount,
+                "Transfer Amount": data.transfer_amount,
+                "Payment Transfer Id": data.payment_transfer_id,
+                "Payment Order Id": data.payment_order_id,
+                "Order Status": data.orderStatus,
+                "Customer Name": data.customerName,
+
+                "Order Date": data.orderDate,
+            });
+        }
+        this.adminPanelService.exportJsonToExcel(excelData, "orders");
     }
     changeStatus() {
         console.log(this.selectedOption);
@@ -96,6 +142,32 @@ export class RestaurantOrderComponent implements OnInit {
                 this.getOrders([this.selectedOption]);
             }
         }
+    }
+    deleteOrder(order) {
+        const dialogData = {
+            title: "Confirm",
+            message: "Are you sure you want to delete this item?",
+        };
+        this.dialog
+            .open(ConfirmDialogComponent, { data: dialogData })
+            .afterClosed()
+            .subscribe({
+                next: (res: any) => {
+                    if (res && res.okFlag) {
+                        this.orderService.deleteOrderById(order._id).subscribe({
+                            next: (res) => {
+                                this.selectedOption = "all";
+                                this.getOrders([
+                                    "pending",
+                                    "completed",
+                                    "rejected",
+                                    "processing",
+                                ]);
+                            },
+                        });
+                    }
+                },
+            });
     }
     viewOrder(row) {
         row["completeScreen"] = true;
@@ -119,6 +191,12 @@ export class RestaurantOrderComponent implements OnInit {
                 String(row[key]).toLowerCase().includes(filterValue)
             );
         });
+        for (const filter of this.filteredData) {
+            filter["order_Total_Amount"] = this.getOrderAmount(filter);
+            filter["order_Total_GST_Amount"] = this.getGstAmount(filter);
+        }
+        console.log(this.filteredData);
+
         this.table.offset = 0; // Reset pagination to the first page
     }
     getOrders(status = ["completed"]) {

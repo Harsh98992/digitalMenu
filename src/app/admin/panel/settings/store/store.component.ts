@@ -10,6 +10,7 @@ import { UtilService } from "src/app/api/util.service";
 })
 export class StoreComponent implements OnInit {
     gstForm: FormGroup;
+    gstDineInForm: FormGroup;
     bypassForm: FormGroup;
     isEditing: boolean = false;
     isEditingCashOnDelivery = false;
@@ -26,7 +27,9 @@ export class StoreComponent implements OnInit {
     availabilityForm: FormGroup;
     isEditingAvailability: boolean = false;
     isEditingByPassAuth: any;
-
+    isEditingAutoReject: any;
+    isEditingDineIn;
+    autoRejectForm: FormGroup;
     constructor(
         private formBuilder: FormBuilder,
         private restaurantPanelService: RestaurantPanelService,
@@ -46,19 +49,29 @@ export class StoreComponent implements OnInit {
             customGSTPercentage: [5],
             isGstApplicable: [false],
         });
+        this.gstDineInForm = this.formBuilder.group({
+            isDineInPricingInclusiveOfGST: [true],
+            customDineInGSTPercentage: [5],
+            isDineInGstApplicable: [false],
+        });
         this.cashOnDeliveryForm = this.formBuilder.group({
             cashOnDelivery: [true],
         });
         this.bypassForm = this.formBuilder.group({
             byPassAuth: [false],
         });
+        this.autoRejectForm = this.formBuilder.group({
+            autoRejectFlag: [true],
+        });
+
 
         this.getGSTFormDetails();
 
         this.gstForm.disable();
         this.bypassForm.disable();
+        this.autoRejectForm.disable();
         this.cashOnDeliveryForm.disable();
-
+        this.gstDineInForm.disable();
         // Google Review Setting Form
         this.googleReviewForm = this.formBuilder.group({
             showGoogleReview: [true],
@@ -134,14 +147,16 @@ export class StoreComponent implements OnInit {
     getGSTFormDetails() {
         this.restaurantPanelService.getRestaurnatDetail().subscribe((res) => {
             console.log(res["data"]["restaurantDetail"]);
-            
+
             this.cashOnDeliveryForm.patchValue({
                 cashOnDelivery:
                     res["data"]["restaurantDetail"]["provideCashOnDelivery"],
             });
             this.bypassForm.patchValue({
-                byPassAuth:
-                    res["data"]["restaurantDetail"]["byPassAuth"],
+                byPassAuth: res["data"]["restaurantDetail"]["byPassAuth"],
+            });
+            this.autoRejectForm.patchValue({
+                autoRejectFlag: res["data"]["restaurantDetail"]["autoRejectFlag"] ?? true,
             });
 
             this.gstForm.patchValue({
@@ -156,6 +171,22 @@ export class StoreComponent implements OnInit {
                 isGstApplicable:
                     res["data"]["restaurantDetail"]["isGstApplicable"],
             });
+            this.gstDineInForm.patchValue({
+                isDineInPricingInclusiveOfGST:
+                    res["data"]["restaurantDetail"][
+                        "isDineInPricingInclusiveOfGST"
+                    ],
+                customDineInGSTPercentage:
+                    res["data"]["restaurantDetail"][
+                        "customDineInGSTPercentage"
+                    ] === 0
+                        ? 5
+                        : res["data"]["restaurantDetail"][
+                              "customDineInGSTPercentage"
+                          ],
+                isDineInGstApplicable:
+                    res["data"]["restaurantDetail"]["isDineInGstApplicable"],
+            });
         });
     }
 
@@ -167,6 +198,35 @@ export class StoreComponent implements OnInit {
             this.updateRestaurantData();
         }
     }
+    toggleEditModeDineIn() {
+        if (!this.isEditingDineIn) {
+            this.gstDineInForm.enable();
+            this.isEditingDineIn = !this.isEditingDineIn;
+        } else {
+            this.updateDineInGst();
+        }
+    }
+    updateDineInGst() {
+        const reqData = Object.assign({}, this.gstDineInForm.value);
+        if (!reqData.isDineInGstApplicable) {
+            reqData.isDineInPricingInclusiveOfGST = false;
+            reqData.customDineInGSTPercentage = 0;
+        }
+
+        this.restaurantPanelService
+            .updateRestaurantDineInGstSetting(reqData)
+            .subscribe((res) => {
+                console.log(res);
+
+                this.getGSTFormDetails();
+                this.gstDineInForm.disable();
+
+                this.utilService.openSnackBar(
+                    "Dine In GST Details updated successfully"
+                );
+                this.isEditingDineIn = !this.isEditingDineIn;
+            });
+    }
     toggleAuthorization() {
         if (!this.isEditingByPassAuth) {
             this.bypassForm.enable();
@@ -174,6 +234,24 @@ export class StoreComponent implements OnInit {
         } else {
             this.updateBypassAuth();
         }
+    }
+    toggleAutoReject() {
+        if (!this.isEditingAutoReject) {
+            this.autoRejectForm.enable();
+            this.isEditingAutoReject = !this.isEditingAutoReject;
+        } else {
+            this.updateAutoRejectValue();
+        }
+    }
+    updateAutoRejectValue() {
+        const reqData = {
+            autoRejectFlag: this.bypassForm.value.autoRejectFlag ?? false,
+        };
+        this.restaurantPanelService
+            .updateRestaurantAutoReject(reqData)
+            .subscribe({
+                next: (res) => {},
+            });
     }
     updateBypassAuth() {
         const reqData = {

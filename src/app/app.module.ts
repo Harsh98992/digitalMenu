@@ -22,6 +22,9 @@ import { environment } from "../environments/environment";
 import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { DatePipe } from "@angular/common";
+import { BnNgIdleService } from "bn-ng-idle";
+import { ThermalPrintModule } from "ng-thermal-print";
+import { AcceptOrderBypassAuthComponent } from './accept-order-bypass-auth/accept-order-bypass-auth.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -31,6 +34,7 @@ import { DatePipe } from "@angular/common";
         ResetPasswordComponent,
         UserLoginComponent,
         PositiveNumberDirective,
+        AcceptOrderBypassAuthComponent,
     ],
     imports: [
         BrowserModule,
@@ -40,18 +44,18 @@ import { DatePipe } from "@angular/common";
         HttpClientModule,
         ReactiveFormsModule, // Add ReactiveFormsModule
         NgbTimepickerModule, // Add NgbTimepickerModule
-    
+        ThermalPrintModule ,
 
         FormsModule,
         ReactiveFormsModule,
 
         NgxSpinnerModule.forRoot({ type: "square-jelly-box" }),
-        ServiceWorkerModule.register("ngsw-worker.js", {
-            enabled: environment.production,
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: "registerWhenStable:30000",
-        }),
+        // ServiceWorkerModule.register("ngsw-worker.js", {
+        //     enabled: environment.production,
+        //     // Register the ServiceWorker as soon as the application is stable
+        //     // or after 30 seconds (whichever comes first).
+        //     registrationStrategy: "registerWhenStable:30000",
+        // }),
     ],
     providers: [
         RestaurantAuthGuard,
@@ -80,6 +84,7 @@ import { DatePipe } from "@angular/common";
             useClass: LoadingInterceptor,
             multi: true,
         },
+        BnNgIdleService
     ],
     bootstrap: [AppComponent],
 })

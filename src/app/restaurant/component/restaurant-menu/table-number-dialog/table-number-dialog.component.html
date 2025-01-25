@@ -20,7 +20,7 @@
             />
         </div>
     </form> -->
-    <div class="container mt-3">
+    <!-- <div class="container mt-3">
         <label id="example-radio-group-label">Please select a table</label>
 
         <mat-radio-group
@@ -42,6 +42,42 @@
               Table  {{ option.tableName }}
             </mat-radio-button>
         </mat-radio-group>
+    </div> -->
+    <div class="container mt-3">
+        <div class="input-group mb-3">
+            <input
+                type="text"
+                class="form-control"
+                (keyup)="filterTables($event)"
+                placeholder="Search for table"
+            />
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2"
+                    ><i class="fa-solid fa-magnifying-glass"></i
+                ></span>
+            </div>
+        </div>
+        <div
+            *ngIf="tableData.length === 0"
+            class="text-center"
+            style="width: 100%"
+        >
+            <span>
+                No available table matches the provided search criteria.</span
+            >
+        </div>
+        <ng-container *ngFor="let option of tableData">
+            <div
+                class="square"
+                (click)="onSubmit(option)"
+                *ngIf="
+                    !(!option.isAvailable &&
+                    customerDetailId !== option.customerId)
+                "
+            >
+                <span> Table {{ option.tableName | titlecase }}</span>
+            </div>
+        </ng-container>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

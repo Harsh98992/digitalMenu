@@ -22,3 +22,28 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-dark text-light">Restaurant Dining QR Code</div>
+            <br />
+            <div class="row mx-2 my-1" *ngIf="myAngularxQrCode">
+                <div class="container d-flex justify-content-center" >
+                    <qrcode
+                        (qrCodeURL)="onChangeURL($event)"
+                        [qrdata]="myAngularxDiningQrCode"
+                        [width]="400"
+                        [errorCorrectionLevel]="'M'"
+                    ></qrcode>
+                </div>
+                <a
+                    class="btn btn-primary btn-lg btn-block"
+                    (qrCodeURL)="onChangeDiningURL($event)"
+                    [href]="qrCodeDownloadLink"
+                    download="qrcode"
+                    >Download</a
+                >
+            </div>
+        </div>
+    </div>
+</div>

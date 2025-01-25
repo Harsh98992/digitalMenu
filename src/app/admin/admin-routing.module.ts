@@ -35,6 +35,7 @@ import { PromoCodeListComponent } from "./panel/promo-code-list/promo-code-list.
 import { RestaurntOwnerGuard } from "../api/guard/restaurnt-owner.guard";
 import { verifiedComponent } from "./panel/unverify-account/verified/verified.component";
 import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room.component";
+import { RestaurantPaymentComponent } from "./panel/restaurant-payment/restaurant-payment.component";
 const routes: Routes = [
     {
         path: "",
@@ -203,6 +204,14 @@ const routes: Routes = [
             {
                 path: "user-profile",
                 component: UserProfileComponent,
+            },
+            {
+                path: "payment",
+                component: RestaurantPaymentComponent,
+                canActivateChild: [
+                    VerifiedAccountChildGuard,
+                    RestaurntOwnerGuard,
+                ],
             },
             {
                 path: "user-managment",

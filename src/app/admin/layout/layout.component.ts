@@ -9,6 +9,7 @@ import { OrderService } from "src/app/api/order.service";
 import { OrderRecievedDialogComponent } from "src/app/angular-material/order-recieved-dialog/order-recieved-dialog.component";
 import { io } from "socket.io-client";
 import { environment } from "src/environments/environment";
+import { CustomerService } from "src/app/api/customer.service";
 
 @Component({
     selector: "app-layout",
@@ -19,18 +20,21 @@ export class LayoutComponent implements OnInit, OnDestroy {
     showSideBarFlag = true;
     verifiedAccountFlag = false;
     selectedStatus = "online";
+    dineInStatus = "online";
     adminRouteFlag = false;
     destroy$: Subject<boolean> = new Subject<boolean>();
     userDetail: any;
     body = document.body;
     staffRoleFlag: boolean = true;
+    isDineInAvailable: any;
 
     constructor(
         private authService: AuthenticationService,
         private router: Router,
         public dialog: MatDialog,
         private restaurantService: RestaurantPanelService,
-        private orderService: OrderService
+        private orderService: OrderService,
+        private customerService: CustomerService
     ) {
         this.socket = io(this.socketApiUrl);
     }
@@ -51,7 +55,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
                     if (res && res.data && res.data.restaurantDetail) {
                         this.restaurantId = res.data.restaurantDetail._id;
                     }
-
+                    this.checkDineIn();
                     console.log("restaurantId", this.restaurantId);
                     this.socket.emit("joinRestaurantRoom", this.restaurantId); // Join the restaurant's room
 
@@ -63,6 +67,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
                 this.restaurantService.callStatusApi();
             });
+        });
+    }
+    checkDineIn() {
+        this.customerService.isDineInAvailable(this.restaurantId).subscribe({
+            next: (res: any) => {
+                this.isDineInAvailable = res.data.isDineInAvailable;
+            },
         });
     }
 
@@ -79,6 +90,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
         }
         console.log(this.selectedStatus);
     }
+    changeDineInStatus() {
+        const reqData = {
+            isDineInAvailableRestaurant:
+                this.dineInStatus?.toLowerCase() === "online" ? true : false,
+        };
+        if (this.dineInStatus) {
+            this.restaurantService.changeDineInStatus(reqData).subscribe({
+                next: (res) => {
+                    this.restaurantService.setRestaurantData();
+                },
+            });
+        }
+    }
     restaurantId(arg0: string, restaurantId: any) {
         throw new Error("Method not implemented.");
     }
@@ -92,11 +116,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (res: any) => {
-                    console.log(this.userDetail.role);
-
                     if (res.restaurantStatus) {
                         this.selectedStatus = res.restaurantStatus;
                     }
+
+                    this.dineInStatus = res.isDineInAvailableRestaurant
+                        ? "online"
+                        : "offline";
+
                     if (res.restaurantVerified) {
                         this.restaurantService.callStatusApi();
                     }
@@ -119,8 +146,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     toggleSideBar() {
         this.showSideBarFlag = !this.showSideBarFlag;
     }
-    hideSideBar(){
-        this.showSideBarFlag=true
+    hideSideBar() {
+        this.showSideBarFlag = true;
     }
     openOrderDialog() {
         let dialogRef = this.dialog.open(OrderDialogComponent, {

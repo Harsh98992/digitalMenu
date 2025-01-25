@@ -55,6 +55,7 @@ import { AddPaymentComponent } from './panel/settings/add-payment/add-payment.co
 import { verifiedComponent } from './panel/unverify-account/verified/verified.component';
 import { RestaurantRoomComponent } from './panel/restaurant-room/restaurant-room.component';
 import { AddRoomComponent } from './panel/restaurant-room/add-room/add-room.component';
+import { RestaurantPaymentComponent } from './panel/restaurant-payment/restaurant-payment.component';
 
 @NgModule({
     declarations: [
@@ -106,6 +107,7 @@ import { AddRoomComponent } from './panel/restaurant-room/add-room/add-room.comp
         verifiedComponent,
         RestaurantRoomComponent,
         AddRoomComponent,
+        RestaurantPaymentComponent,
     ],
     imports: [
         CommonModule,

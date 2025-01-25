@@ -65,7 +65,7 @@ export class OrderTrackingComponent implements OnInit {
     }
     redirectTotrackingPage() {
         // Redirect to a specific URL using navigateByUrl
-        this.router.navigateByUrl("/trackOrder");
+        this.router.navigateByUrl("/trackOrder/" + this.orderId);
     }
 
     openDialg() {

@@ -148,6 +148,7 @@ export class AddDishComponent implements OnInit {
             dishType: ["", [Validators.required]],
             dishDescription: [""],
             dishOrderOption: ["", [Validators.required]],
+            dishOrderAvailability: ["all", [Validators.required]],
             spicy: ["", [Validators.required]],
             days: [""],
             dishPriority: [""],
@@ -449,7 +450,7 @@ export class AddDishComponent implements OnInit {
             this.restaurantService.addDish(data).subscribe({
                 next: (res) => {
                     this.restaurantService.setRestaurantData(res);
-                    this.router.navigateByUrl("/admin/dishes/view-dish");
+                   this.router.navigateByUrl("/admin/dishes/view-dish");
                 },
             });
         } else {

@@ -6,6 +6,7 @@
                 ? bannerImage
                 : 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(\'assets/img/hero_general.jpg\')'
         }"
+         [ngClass]="{ 'green-palm-banner': greenPalmFlag }"
     >
         <div
             class="wrapper opacity-mask"
@@ -31,15 +32,15 @@
                                     {{ restaurantDetail.restaurantName }}
                                 </h1>
                                 <div class="restaurentAdd">
-                                    <div>
+                                    <!-- <div>
                                         {{ restaurantDetail.address.street }}
                                         ,{{ restaurantDetail.address.city }},{{
                                             restaurantDetail.address.state
                                         }}
                                         (Pin Code:-
                                         {{ restaurantDetail.address.pinCode }})
-                                    </div>
-                                    <span
+                                    </div> -->
+                                    <!-- <span
                                         style="
                                             margin-left: 20px;
                                             background: -webkit-linear-gradient(
@@ -62,7 +63,7 @@
                                                     width: 20px;
                                                 "
                                             ></i></a
-                                    ></span>
+                                    ></span> -->
                                 </div>
                             </div>
 
@@ -309,9 +310,9 @@
                                     'scroll-first': i === 0,
                                     'scroll-default': i !== 0,
                                     'offer-section':
-                                        menu.categoryName === 'offers',
+                                        menu.specialCategory,
                                     'general-section':
-                                        menu.categoryName !== 'offers'
+                                        !menu.specialCategory
                                 }"
                                 [id]="menu._id"
                             >

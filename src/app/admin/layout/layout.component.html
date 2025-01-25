@@ -30,6 +30,14 @@
                 >
             </li>
             <li
+                routerLink="/admin/payment"
+                *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
+            >
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-money-bill"></i> Payments</a
+                >
+            </li>
+            <li
                 routerLink="/admin/restaurant-orders"
                 *ngIf="verifiedAccountFlag"
             >
@@ -139,18 +147,18 @@
                         >
                     </li>
                     <li
-                    *ngIf="
-                        !adminRouteFlag &&
-                        verifiedAccountFlag &&
-                        !this.staffRoleFlag
-                    "
-                    routerLink="/admin/restaurant-room/view"
-                >
-                    <a class="custom-center"
-                        ><i class="fas fa-angle-right"></i> Restaurant
-                        Rooms</a
+                        *ngIf="
+                            !adminRouteFlag &&
+                            verifiedAccountFlag &&
+                            !this.staffRoleFlag
+                        "
+                        routerLink="/admin/restaurant-room/view"
                     >
-                </li>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Rooms</a
+                        >
+                    </li>
                     <li
                         routerLink="/admin/restaurant-images"
                         *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
@@ -265,9 +273,7 @@
                 >
             </li> -->
             <li *ngIf="verifiedAccountFlag">
-                <a
-                href="https://wa.me/9310415024"
-                    target="blank"
+                <a href="https://wa.me/9310415024" target="blank"
                     ><i class="fas fa-cog"></i>Support</a
                 >
             </li>
@@ -289,6 +295,30 @@
                 <i class="fas fa-bars"></i><span></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="custom-on-off-button">
+                <ng-select
+                *ngIf="verifiedAccountFlag && !staffRoleFlag && isDineInAvailable"
+                [(ngModel)]="dineInStatus"
+                (change)="changeDineInStatus()"
+                style="min-width: 130px"
+                class="mr-3 custom-space-end"
+                [clearable]="false"
+            >
+                <ng-option value="online"
+                    ><i
+                        class="fa-solid fa-circle mr-2"
+                        style="color: #3d9b17"
+                    ></i
+                    >Dine In Online</ng-option
+                >
+                <ng-option value="offline"
+                    ><i
+                        class="fa-solid fa-circle mr-2"
+                        style="color: red"
+                    ></i
+                    >Dine In Offline</ng-option
+                >
+            </ng-select>
                 <ng-select
                     *ngIf="verifiedAccountFlag && !staffRoleFlag"
                     [(ngModel)]="selectedStatus"
@@ -302,7 +332,7 @@
                             class="fa-solid fa-circle mr-2"
                             style="color: #3d9b17"
                         ></i
-                        >Online</ng-option
+                        >Restaurnat Online</ng-option
                     >
                     <ng-option value="offline"
                         ><i
@@ -319,7 +349,7 @@
                 >
                     FAQ
                 </button> -->
-
+            </div>
                 <!-- <div class="dropdown mx-1" matBadge="8">
                     <a class="btn purple-shade dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                         aria-expanded="false">

@@ -1,0 +1,61 @@
+<div class="small-dialog-header">
+    <h3>Payment Transfer Information</h3>
+    <a mat-dialog-close class="close_panel_mobile"
+        ><span class="icon_close_alt"></span
+    ></a>
+</div>
+<mat-dialog-content>
+    <div class="my-3">
+        <p class="dateText" *ngIf="details.transferId">
+            Payment Transfer Id :-
+
+            {{ details.transferId }}
+        </p>
+        <p class="dateText" *ngIf="details.tansferProcessAt">
+            Payment Transfer Process At :-
+
+            {{ details.tansferProcessAt * 1000 | date : "medium" }}
+        </p>
+        <p class="dateText" *ngIf="details.tansferCreatedAt">
+            Payment Transfer Created Id :-
+
+            {{ details.tansferCreatedAt * 1000  | date : "medium"}}
+        </p>
+        <p class="dateText" *ngIf="details.status">
+            Payment Transfer Status :-
+
+            {{ details.status }}
+        </p>
+        <p class="dateText" *ngIf="details.recipient_settlement_id">
+            Payment Settlement Id :-
+
+            {{ details.recipient_settlement_id }}
+        </p>
+        <p class="dateText" *ngIf="details.transferId">
+            Payment Transfer Id :-
+
+            {{ details.transferId }}
+        </p>
+        <p class="dateText" *ngIf="details.settlement_status">
+            Settlement Status :-
+
+            {{ details.settlement_status }}
+        </p>
+
+        <p class="dateText" *ngIf="details.orderId">
+            Payment Order Id :-
+
+            {{ details.orderId }}
+        </p>
+        <p class="dateText" *ngIf="details.paymentId">
+            Payment Id :-
+
+            {{ details.paymentId }}
+        </p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button type="button" class="btn btn_1 gradient w-100" mat-dialog-close>
+        Close
+    </button>
+</mat-dialog-actions>

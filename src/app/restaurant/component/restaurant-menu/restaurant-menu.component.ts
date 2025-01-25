@@ -72,6 +72,7 @@ export class RestaurantMenuComponent implements OnInit {
     rooms: any;
     greenPalmFlag: any;
     isByPassAuthFlag: any;
+    dineInMenuFlag: any;
     constructor(
         public dialog: MatDialog,
         private restaurantService: RestaurantService,
@@ -460,6 +461,8 @@ export class RestaurantMenuComponent implements OnInit {
         this.route.queryParams.subscribe((params) => {
             const restaurnatUrl = params["detail"];
             this.activeRestaurantUrl = params["detail"];
+            this.dineInMenuFlag = params?.["dining"];
+
             this.checkForCartActiveData(restaurnatUrl);
             this.restaurantService.getRestaurantData(restaurnatUrl).subscribe({
                 next: (res: any) => {
@@ -551,9 +554,29 @@ export class RestaurantMenuComponent implements OnInit {
                             return true;
                         });
 
+                    for (const cuisine of this.restaurantDetail.cuisine) {
+                        cuisine.items = cuisine.items.filter((data) => {
+                            if (
+                                this.dineInMenuFlag &&
+                                (data.dishOrderAvailability === "all" ||
+                                    data.dishOrderAvailability === "dineIn")
+                            ) {
+                                return true;
+                            } else if (
+                                !this.dineInMenuFlag &&
+                                (data.dishOrderAvailability === "all" ||
+                                    data.dishOrderAvailability ===
+                                        "otherthandinein")
+                            ) {
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
+
                     // sort the restaurant data cuisine such that offers are shown first
                     this.restaurantDetail.cuisine.sort((a, b) => {
-                        if (a.categoryName.toLowerCase() === "offers") {
+                        if (a?.specialCategory) {
                             return -1;
                         } else {
                             return 1;
@@ -661,7 +684,15 @@ export class RestaurantMenuComponent implements OnInit {
             const tempDate2 = new Date();
             tempDate2.setHours(endHours[0]); // Set hours
             tempDate2.setMinutes(endHours[1]); // Set minutes
+          
+
             if (tempDate > tempDate2) {
+                if (currDate.getHours() >= 1 && currDate.getHours() <= 7) {
+                    currDate.setDate(currDate.getDate() + 1);
+                }
+                if (currDate < tempDate) {
+                    return true;
+                }
                 tempDate2.setDate(tempDate2.getDate() + 1);
                 return false;
             }
@@ -930,6 +961,7 @@ export class RestaurantMenuComponent implements OnInit {
             const temp: any = {};
 
             temp["categoryName"] = cuisine.categoryName;
+            temp["specialCategory"] = cuisine.specialCategory;
             temp["_id"] = cuisine._id;
             temp["items"] = [];
 

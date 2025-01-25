@@ -497,6 +497,10 @@ ul.tags li a:hover {
     .btn_reserve_fixed {
         display: none;
     }
+    .green-palm-banner{
+        background-size: contain;
+        background-color: white;
+    }
 }
 @media (max-width: 991px) {
     #sidebar_fixed {
@@ -944,8 +948,8 @@ ul.tags li a:hover {
     /* Styles for phones */
     /* Add your CSS rules here */
     .button-87{
-        display: block;
+        display: inline;
         min-width: 200px;
-        margin-top: 1rem;
+        margin-left: 1rem;
     }
   }

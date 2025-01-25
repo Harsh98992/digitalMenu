@@ -1,52 +1,44 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { RestaurantService } from "./restaurant/api/restaurant.service";
 import { AuthenticationService } from "./api/authentication.service";
 import { CustomerAuthService } from "./restaurant/api/customer-auth.service";
 import { OrderService } from "./api/order.service";
 import { Subject } from "rxjs";
+import { BnNgIdleService } from "bn-ng-idle";
 
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html",
     styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = "QrSay";
     private idleTimer: any;
-    private readonly idleDuration = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+    private readonly idleDuration = 1800 * 1000; // 4 hours in milliseconds
     public userActivity: Subject<void> = new Subject<void>();
     constructor(
         private authService: AuthenticationService,
         private customerAuthService: CustomerAuthService,
-        private orderService: OrderService
+        private orderService: OrderService,
+        private bnIdle: BnNgIdleService
     ) {
         this.checkLogin();
-        this.startIdleTimer();
     }
-    startIdleTimer(): void {
-        this.resetIdleTimer();
-        // Listen for mouse and touch events
-        document.addEventListener("mousemove", () => this.onUserActivity());
-        document.addEventListener("touchstart", () => this.onUserActivity());
-        document.addEventListener("keydown", () => this.onUserActivity());
-        document.addEventListener("scroll", () => this.onUserActivity());
-    }
-    resetIdleTimer(): void {
-        clearTimeout(this.idleTimer);
-        this.idleTimer = setTimeout(
-            () => this.refreshPage(),
-            this.idleDuration
-        );
+    ngOnInit(): void {
+        this.bnIdle
+            .startWatching(this.idleDuration)
+            .subscribe((isTimedOut: boolean) => {
+                if (isTimedOut) {
+                    console.log("session expired")
+                    this.refreshPage();
+                }
+            });
     }
 
     refreshPage(): void {
         window.location.reload();
     }
 
-    private onUserActivity(): void {
-        this.userActivity.next();
-        this.resetIdleTimer();
-    }
     checkLogin() {
         if (this.authService.getUserToken()) {
             this.authService.userDetail.next(this.authService.getUserDetail());

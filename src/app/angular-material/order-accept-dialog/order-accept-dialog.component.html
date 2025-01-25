@@ -14,6 +14,23 @@
                         <i class="pending">{{
                             this.orderData.orderStatus?.trim() | titlecase
                         }}</i>
+                        <span *ngIf="!customerMode">
+                            <a
+                                class="print-reciept pointer ml-2"
+                                (click)="printReceipt(orderData)"
+                            >
+                                <i class="fas fa-print"></i>
+                                Print bill</a
+                            >
+
+                            <a
+                                class="print-reciept pointer ml-3"
+                                (click)="printKTO(orderData)"
+                            >
+                                <i class="fas fa-print"></i>
+                                Print KOT</a
+                            ></span
+                        >
                     </h4>
                     <ul class="booking_list">
                         <li>
@@ -41,7 +58,9 @@
                             <span
                                 *ngIf="
                                     this.orderData.customerPreferences
-                                        .preference === 'Dine In'
+                                        .preference === 'Dine In' ||
+                                    this.orderData.customerPreferences.preference?.toLowerCase() ===
+                                        'dining'
                                 "
                             >
                                 Table Name:-
@@ -126,6 +145,15 @@
                         >
                             <strong>Payment Order Id</strong>
                             {{ this.orderData.payment_order_id }}
+                        </li>
+                        <li
+                            *ngIf="
+                                this.orderData.payment_transfer_id &&
+                                !roomScreenFlag
+                            "
+                        >
+                            <strong>Payment Tranfer Id</strong>
+                            {{ this.orderData.payment_transfer_id }}
                         </li>
                         <li
                             *ngIf="

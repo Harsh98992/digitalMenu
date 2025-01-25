@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RestaurantService } from "../../api/restaurant.service";
 import { OrderAcceptDialogComponent } from "src/app/angular-material/order-accept-dialog/order-accept-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "app-track-order",
@@ -17,7 +18,8 @@ export class TrackOrderComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private restaurantService: RestaurantService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
@@ -29,7 +31,17 @@ export class TrackOrderComponent implements OnInit {
             roomNumber: ["", Validators.required],
             customerName: ["", Validators.required],
         });
+        this.getParams();
         this.getRestaurantWithRoom();
+    }
+    getParams() {
+        this.route.params.subscribe((params) => {
+
+            const paramName = params["orderId"];
+            this.trackingForm.patchValue({
+                trackingId: paramName,
+            });
+        });
     }
     getRestaurantWithRoom() {
         this.restaurantService.getRestaurantWithRoomService().subscribe({

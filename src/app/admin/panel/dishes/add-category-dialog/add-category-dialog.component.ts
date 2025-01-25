@@ -14,6 +14,7 @@ export class AddCategoryDialogComponent implements OnInit {
     categoryPriority: number;
     categoryAvailable: boolean = false; // New boolean field
     timeAvailability = false;
+    specialCategory = false;
     startTime: any;
     endTime: any;
     constructor(
@@ -29,10 +30,13 @@ export class AddCategoryDialogComponent implements OnInit {
             this.startTime = this.data.startTime;
             this.endTime = this.data.endTime;
             console.log(this.data.categoryAvailable);
-            
+
             this.categoryAvailable = !this.data?.categoryAvailable;
             this.categoryPriority = this.data.categoryPriority;
-            this.timeAvailability=this.data.timeAvailable ? this.data.timeAvailable:false;
+            this.specialCategory = this.data.specialCategory ? true : false;
+            this.timeAvailability = this.data.timeAvailable
+                ? this.data.timeAvailable
+                : false;
         }
     }
 
@@ -79,6 +83,7 @@ export class AddCategoryDialogComponent implements OnInit {
                 startTime: this.startTime,
                 endTime: this.endTime,
                 timeAvailable: this.timeAvailability,
+                specialCategory: this.specialCategory ? true : false,
             };
             this.restaurantService.updateCategory(reqBody).subscribe({
                 next: (res) => {
@@ -93,6 +98,7 @@ export class AddCategoryDialogComponent implements OnInit {
                 startTime: this.startTime,
                 endTime: this.endTime,
                 timeAvailable: this.timeAvailability,
+                specialCategory: this.specialCategory ? true : false,
             };
             this.restaurantService.addCategory(reqBody).subscribe({
                 next: (res) => {

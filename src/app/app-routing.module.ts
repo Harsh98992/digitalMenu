@@ -8,6 +8,7 @@ import { RestaurantAuthGuard } from "./api/guard/restaurant-auth.guard";
 import { NotFoundComponent } from "./angular-material/not-found/not-found.component";
 import { RedirectComponent } from "./angular-material/redirect/redirect.component";
 import { TrackingComponent } from "./restaurant/component/restaurant-menu/tracking/tracking.component";
+import { AcceptOrderBypassAuthComponent } from "./accept-order-bypass-auth/accept-order-bypass-auth.component";
 
 const routes: Routes = [
     {
@@ -38,6 +39,23 @@ const routes: Routes = [
         // canLoad:[RestaurantAuthGuard],
         loadChildren: () =>
             import("./admin/admin.module").then((m) => m.AdminModule),
+    },
+    {
+        path: "accept-order-whatsapp/:orderId",
+        // canLoad:[RestaurantAuthGuard],
+        component: AcceptOrderBypassAuthComponent,
+    },
+    // {
+    //     path: "order",
+    //     // canLoad:[RestaurantAuthGuard],
+    //     loadChildren: () =>
+    //         import("./order/order.module").then((m) => m.OrderModule),
+    // },
+    {
+        path: "landing",
+        // canLoad:[RestaurantAuthGuard],
+        loadChildren: () =>
+            import("./landing/landing.module").then((m) => m.LandingModule),
     },
     {
         path: "tracking",

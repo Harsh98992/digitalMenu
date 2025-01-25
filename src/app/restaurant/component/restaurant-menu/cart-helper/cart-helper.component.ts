@@ -7,7 +7,7 @@ import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.servic
 import { CustomerService } from "src/app/api/customer.service";
 import { OrderService } from "src/app/api/order.service";
 import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ShowOptionDialogComponent } from "../restaurant-cart/show-option-dialog/show-option-dialog.component";
 import { TableNumberDialogComponent } from "../table-number-dialog/table-number-dialog.component";
 import { TimeSelectorDialogComponent } from "../time-selector-dialog/time-selector-dialog.component";
@@ -57,6 +57,7 @@ export class CartHelperComponent implements OnInit {
     promoCodes: any;
     rooms: any;
     isByPassAuthFlag: any;
+    dineInMenuFlag: any;
     constructor(
         private restaurantService: RestaurantService,
         private customerAuthService: CustomerAuthService,
@@ -65,7 +66,8 @@ export class CartHelperComponent implements OnInit {
         private customerDetailsService: CustomerDetailsService,
         private router: Router,
         private customerService: CustomerService,
-        private utilityService: UtilService
+        private utilityService: UtilService,
+        private route: ActivatedRoute
     ) {}
 
     applyPromoCode() {
@@ -99,7 +101,7 @@ export class CartHelperComponent implements OnInit {
 
     ngOnInit(): void {
         this.isByPassAuthFlag = this.restaurantData?.byPassAuth;
-
+        this.checkForActiveRoute();
         this.getRestaurantRoom();
         this.getCartItem();
         this.checkLogin();
@@ -110,10 +112,17 @@ export class CartHelperComponent implements OnInit {
             .isDineInAvailable(this.restaurantData._id)
             .subscribe({
                 next: (res: any) => {
-                    this.isDineInAvailable = res.data.isDineInAvailable;
+                    this.isDineInAvailable =
+                        res.data.isDineInAvailable &&
+                        this.restaurantData.isDineInAvailableRestaurant;
                     this.tableData = res.data.tableDetails;
                 },
             });
+    }
+    checkForActiveRoute() {
+        this.route.queryParams.subscribe((params) => {
+            this.dineInMenuFlag = params?.["dining"];
+        });
     }
     getPromoCodesForRestaurantUrl() {
         this.customerService
@@ -230,6 +239,8 @@ export class CartHelperComponent implements OnInit {
         const text = this.orderOption;
         if (text === "dineIn") {
             this.openSelectTableNumberDialog();
+        } else if (text === "dining") {
+            this.openSelectTableNumberDialog(true);
         } else if (text === "roomService") {
             this.openSelectRoomNoDialog();
         } else if (text === "delivery") {
@@ -296,7 +307,8 @@ export class CartHelperComponent implements OnInit {
                 }
             });
     }
-    openSelectTableNumberDialog() {
+    openSelectTableNumberDialog(dining = false) {
+        console.log(this.tableData, "tableData");
         this.dialog
             .open(TableNumberDialogComponent, {
                 panelClass: "add-item-dialog",
@@ -310,10 +322,22 @@ export class CartHelperComponent implements OnInit {
             .subscribe((resp) => {
                 if (resp && resp.selectedTableName) {
                     this.orderOptionFlag = true;
-                    this.userPreference = {
-                        preference: "Dine In",
-                        value: resp.selectedTableName,
-                    };
+                    this.orderOptionFlag = true;
+                    if (dining) {
+                        this.userPreference = {
+                            preference: "Dining",
+                            value: resp.selectedTableName,
+                            userDetail: {
+                                name: resp.name,
+                                phoneNumber: resp.phoneNumber,
+                            },
+                        };
+                    } else {
+                        this.userPreference = {
+                            preference: "Dine In",
+                            value: resp.selectedTableName,
+                        };
+                    }
                     this.setCartStateHelper();
                     this.placeOrder();
                 }
@@ -378,10 +402,25 @@ export class CartHelperComponent implements OnInit {
         this.getDeliveryRadiobuttonText();
     }
     generateAmountToBePaid() {
-        if (this.restaurantData.isGstApplicable) {
-            if (this.restaurantData?.isPricingInclusiveOfGST) {
-                const divideNumber =
-                    this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
+        let isGstApplicable = null;
+        let isPricingInclusiveOfGST = null;
+        let customGSTPercentage = null;
+        if (this.dineInMenuFlag) {
+            isGstApplicable =
+                this.restaurantData?.isDineInGstApplicable ?? false;
+            isPricingInclusiveOfGST =
+                this.restaurantData?.isDineInPricingInclusiveOfGST ?? false;
+            customGSTPercentage =
+                this.restaurantData?.customDineInGSTPercentage ?? 0;
+        } else {
+            isGstApplicable = this.restaurantData?.isGstApplicable ?? false;
+            isPricingInclusiveOfGST =
+                this.restaurantData?.isPricingInclusiveOfGST ?? false;
+            customGSTPercentage = this.restaurantData?.customGSTPercentage ?? 0;
+        }
+        if (isGstApplicable) {
+            if (isPricingInclusiveOfGST) {
+                const divideNumber = customGSTPercentage === 5 ? 1.05 : 1.12;
                 this.itemTotalAmountShowed = Math.round(
                     this.itemTotal / divideNumber
                 );
@@ -391,8 +430,7 @@ export class CartHelperComponent implements OnInit {
                 this.amountToBePaid =
                     this.itemTotal - this.discountAmount + this.deliveryAmount;
             } else {
-                const divideNumber =
-                    this.restaurantData.customGSTPercentage === 5 ? 1.05 : 1.12;
+                const divideNumber = customGSTPercentage === 5 ? 1.05 : 1.12;
 
                 this.itemTotalAmountShowed = this.itemTotal;
                 this.gstAmount = Math.round(
@@ -406,7 +444,7 @@ export class CartHelperComponent implements OnInit {
             }
         } else {
             this.gstAmount = Math.round(
-                (this.itemTotal / 100) * this.restaurantData.customGSTPercentage
+                (this.itemTotal / 100) * customGSTPercentage
             );
 
             this.itemTotalAmountShowed = this.itemTotal;
@@ -537,6 +575,7 @@ export class CartHelperComponent implements OnInit {
                     ? false
                     : true,
             restaurantId: this.restaurantData._id,
+            restaurantName: this.restaurantData?.restaurantName ?? "",
         };
         if (this.userPreference?.preference === "Dine In") {
             if (true) {
@@ -570,6 +609,7 @@ export class CartHelperComponent implements OnInit {
                 razorpay_order_id: event.detail["razorpay_order_id"],
                 razorpay_payment_id: event.detail["razorpay_payment_id"],
                 razorpay_signature: event.detail["razorpay_signature"],
+                razorpay_tranferData: paymentData.transferDetails,
             };
         } else if (paymentData.method === "cashOnDelivery") {
             reqData = {
@@ -577,12 +617,11 @@ export class CartHelperComponent implements OnInit {
                 paymentMethod: "cashOnDelivery",
             };
         }
-        this.orderService.placeOrder(reqData).subscribe({
-            next: (res: any) => {
-                if (res["status"] == "success") {
-                    const orderData = res["data"]["savedData"];
+        if (paymentData.method === "payOnlineWithStore") {
+            this.orderService.getOrderwithPaymentOrderId(event.detail["razorpay_order_id"]).subscribe({
+                next:(res)=>{
+                    const orderData = res["data"]["orderData"];
                     this.restaurantService.bypassGaurd = true;
-                    this.socket.emit("orderPlaced", res["data"]["savedData"]);
                     this.dialog.closeAll();
                     this.restaurantService.setCartItem([]);
                     this.restaurantService.setRestaurantUrl(null);
@@ -595,8 +634,32 @@ export class CartHelperComponent implements OnInit {
                         this.router.navigateByUrl("/orders");
                     }
                 }
-            },
-        });
+            })
+        } else {
+            this.orderService.placeOrder(reqData).subscribe({
+                next: (res: any) => {
+                    if (res["status"] == "success") {
+                        const orderData = res["data"]["savedData"];
+                        this.restaurantService.bypassGaurd = true;
+                        this.socket.emit(
+                            "orderPlaced",
+                            res["data"]["savedData"]
+                        );
+                        this.dialog.closeAll();
+                        this.restaurantService.setCartItem([]);
+                        this.restaurantService.setRestaurantUrl(null);
+                        this.restaurantService.amountToBePaidSubject.next(null);
+                        if (orderData && this.isByPassAuthFlag) {
+                            this.router.navigateByUrl(
+                                `/order-tracking/${orderData.orderId}/${orderData.restaurantId}`
+                            );
+                        } else {
+                            this.router.navigateByUrl("/orders");
+                        }
+                    }
+                },
+            });
+        }
     }
 
     deliveryDisabled = false;

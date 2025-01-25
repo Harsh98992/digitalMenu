@@ -3,7 +3,7 @@
   }
   @media screen and (min-width: 768px) {
     .btn_1 {
-      width: 28rem;
+      width: 100%;
     }
   }
   .example-radio-group {
@@ -16,4 +16,29 @@
   .example-radio-button {
     margin: 5px;
   }
-  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px; /* You can adjust the width as needed */
+  }
+  .square {
+    width: 90px; /* Adjust size as needed */
+    height: 90px; /* Adjust size as needed */
+    background-color: lightblue;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background-image: url("../../../../../assets/img/table.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+  .square:hover {
+    background-color: orange; /* Change color to orange on hover */
+  }
+  .footer{
+    width: 100%;
+  }

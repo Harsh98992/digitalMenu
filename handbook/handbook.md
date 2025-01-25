@@ -240,29 +240,12 @@ Web development is the process of building websites and web applications using a
 
 ### 1.6.3. Step-by-Step Guide to Setting Up the Project Locally
 
-1. Clone the repository from GitHub using the following command:
-
-```bash
-git clone https://github.com/Harsh98992/digitalMenu.git
-```
-
-2. Change directory to the project folder:
-
-```bash
-cd digitalMenu
-```
-
-3. Install the project dependencies using npm:
-
-```bash
-npm install
-```
-
-4. Run the project using Angular CLI:
-
-```bash
-ng serve
-```
+1. Clone the repository from GitHub using the `git clone https://github.com/Harsh98992/digitalMenu.git` command.
+2. Install Node.js from the official website.
+3. Install Angular CLI using the `npm install -g @angular/cli` command.
+4. Install MongoDB from the official website.
+5. Install Git from the official website.
+6. Install Postman from the official website.
 
 ### 1.6.4. Suggested Learning Path
 
@@ -293,7 +276,31 @@ Debugging is the process of finding and fixing errors in your code. Here are som
 
 ### 1.7.1. Overview of the Codebase
 
+The codebase is organized into the following directories:
+
+- `src` - Contains the source code for the Angular frontend application.
+- `src/app` - Contains the Angular components, services, and modules.
+- `src/assets` - Contains static assets like images, fonts, and stylesheets.
+- `src/api` - Contains API endpoints and services for interacting with the backend.
+
 ### 1.7.2. Code Execution Flow
+
+The code execution flow follows these steps:
+
+1. The user interacts with the frontend application by browsing menus, selecting items, and placing orders.
+2. The frontend application makes API calls to the backend to fetch data, submit orders, and track order status.
+3. The backend application processes API requests, interacts with the database, and sends responses back to the frontend.
+4. The database stores user data, restaurant data, order data, and other information needed by the application.
+5. The payment gateway processes payment transactions and sends payment status updates to the backend.
+6. The messaging service sends order updates and notifications to users via WhatsApp.
+7. The application logic handles user authentication, authorization, and business logic for order processing.
+8. The frontend application displays order status, menus, and other information to the user.
+9. The backend application handles API requests, database queries, and external service integrations.
+10. The database stores and retrieves data needed by the application.
+11. The payment gateway processes payment transactions and sends payment status updates.
+12. The messaging service sends order updates and notifications to users.
+13. The application logic handles user authentication, authorization, and business logic.
+14. The frontend application displays order status, menus, and other information.
 
 ### 1.7.3. Understanding Functions and Modules
 

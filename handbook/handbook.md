@@ -193,23 +193,101 @@ graph TD
 
 ### 1.5.1. Technology Stack Overview
 
+The website is built using the following technologies:
+
+- Frontend: Angular - angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you import into your apps.
+- Backend: Node.js - Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
+- Database: MongoDB - MongoDB is a general-purpose, document-based, distributed database built for modern application developers and for the cloud era.
+- Hosting: firebase.com - Firebase is a platform developed by Google for creating mobile and web applications. It was originally an independent company founded in 2011. In 2014, Google acquired the platform and it is now their flagship offering for app development.
+- Payment Gateway: razorpay - Razorpay is a payment gateway that allows businesses to accept, process, and disburse payments with its product suite.
+- Messaging Service: whatsapp - WhatsApp is a messaging service that allows users to send text messages, voice messages, images, and videos over the internet.
+- Other Tools: Git, Postman, VS Code - Git is a distributed version control system for tracking changes in source code during software development. Postman is a collaboration platform for API development that allows users to design, mock, document, monitor, and test APIs. VS Code is a source-code editor developed by Microsoft for Windows, Linux, and macOS.
+
 ### 1.5.2. High-Level Architecture Diagram
 
 ### 1.5.3. Deployment and Hosting Details
 
+The website is deployed on firebase.com and hosted on Google Cloud Platform. The deployment process involves building the Angular frontend and deploying it to firebase hosting. The backend is deployed as a Node.js application on firebase functions. The database is hosted on MongoDB Atlas.
+
 ### 1.5.4. Environment Setup
+
+1. create a firebase project
+2. enable firestore and storage
+3. create a web app
+4. copy the firebase config and paste it in the environment.ts file
+5. run `npm run dev` to run the project in development mode
+6. run `firebase use staging` to use the staging environment
+7. run `firebase deploy` to deploy the project
 
 ## 1.6. Beginner’s Guide to Programming
 
 ### 1.6.1. Introduction to Web Development Basics
 
+Web development is the process of building websites and web applications using a combination of HTML, CSS, and JavaScript. HTML is used to create the structure of a web page, CSS is used to style the page, and JavaScript is used to add interactivity and dynamic behavior to the page. Web development also involves working with backend technologies like Node.js and databases like MongoDB to create full-stack applications.
+
 ### 1.6.2. Overview of Tools and Software to Install
+
+1. Node.js - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. You can download Node.js from the official website and install it on your machine.
+2. Angular CLI - The Angular CLI is a command-line interface tool that you use to initialize, develop, scaffold, and maintain Angular applications directly from a command shell.
+3. MongoDB - MongoDB is a general-purpose, document-based, distributed database built for modern application developers and for the cloud era. You can download MongoDB from the official website and install it on your machine.
+4. Git - Git is a distributed version control system for tracking changes in source code during software development. You can download Git from the official website and install it on your machine.
+5. Postman - Postman is a collaboration platform for API development that allows users to design, mock, document, monitor, and test APIs. You can download Postman from the official website and install it on your machine.
+6. VS Code - Visual Studio Code is a source-code editor developed by Microsoft for Windows, Linux, and macOS. You can download VS Code from the official website and install it on your machine.
+7. Firebase CLI - The Firebase Command Line Interface (CLI) provides a variety of tools for managing, viewing, and deploying to Firebase projects. You can install the Firebase CLI using npm.
+8. Angular Material - Angular Material is a UI component library for Angular that provides a set of high-quality UI components built with Angular and TypeScript. You can install Angular Material using npm.
+9. Razorpay - Razorpay is a payment gateway that allows businesses to accept, process, and disburse payments with its product suite. You can sign up for a Razorpay account and get API keys to integrate with your application.
+10. WhatsApp Business API - The WhatsApp Business API allows businesses to communicate with customers over WhatsApp. You can sign up for a WhatsApp Business API account and get API credentials to send messages.
 
 ### 1.6.3. Step-by-Step Guide to Setting Up the Project Locally
 
+1. Clone the repository from GitHub using the following command:
+
+```bash
+git clone https://github.com/Harsh98992/digitalMenu.git
+```
+
+2. Change directory to the project folder:
+
+```bash
+cd digitalMenu
+```
+
+3. Install the project dependencies using npm:
+
+```bash
+npm install
+```
+
+4. Run the project using Angular CLI:
+
+```bash
+ng serve
+```
+
 ### 1.6.4. Suggested Learning Path
 
+If you are new to web development, here is a suggested learning path to get started:
+
+1. Learn HTML, CSS, and JavaScript basics.
+2. Learn Angular basics and build a simple application.
+3. Learn Node.js basics and build a simple backend application.
+4. Learn MongoDB basics and integrate it with your backend application.
+5. Learn how to deploy your application to firebase hosting.
+6. Learn how to integrate a payment gateway like Razorpay.
+7. Learn how to integrate a messaging service like WhatsApp.
+8. Learn how to test and debug your application.
+
 ### 1.6.5. Debugging Basics
+
+Debugging is the process of finding and fixing errors in your code. Here are some basic debugging techniques:
+
+1. Use console.log() statements to print values and debug information.
+2. Use the browser developer tools to inspect elements, view console logs, and debug JavaScript code.
+3. Use breakpoints in your code to pause execution and inspect variables.
+4. Use the Angular CLI to run the project in development mode and view error messages in the console.
+5. Use the Postman tool to test APIs and view response data.
+6. Use the VS Code debugger to step through your code and inspect variables.
+7. Use the Firebase CLI to view logs and debug cloud functions.
 
 ## 1.7. Codebase Structure and Flow
 

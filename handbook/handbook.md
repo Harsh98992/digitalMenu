@@ -18,6 +18,9 @@
   - [1.4. Functional Flow](#14-functional-flow)
     - [1.4.1. User Flows](#141-user-flows)
     - [1.4.2. Visual Flow Diagrams for Each User Flow](#142-visual-flow-diagrams-for-each-user-flow)
+      - [delivery order flow](#delivery-order-flow)
+      - [takeaway order flow](#takeaway-order-flow)
+      - [dine-in order flow](#dine-in-order-flow)
     - [1.4.3. Key Use Cases and Scenarios](#143-key-use-cases-and-scenarios)
   - [1.5. Technical Architecture](#15-technical-architecture)
     - [1.5.1. Technology Stack Overview](#151-technology-stack-overview)
@@ -187,6 +190,61 @@ graph TD
 
 ### 1.4.2. Visual Flow Diagrams for Each User Flow
 
+#### delivery order flow
+
+```mermaid
+sequenceDiagram
+    participant Customer
+    participant Restaurant
+    participant DeliveryPerson
+
+    Customer->>Restaurant: Place delivery order
+    Restaurant->>Customer: Confirm order
+    Customer->>Restaurant: Provide delivery address
+    Restaurant->>DeliveryPerson: Assign delivery person
+    DeliveryPerson->>Restaurant: Collect order
+    Restaurant->>DeliveryPerson: Hand over order
+    DeliveryPerson->>Customer: Deliver order
+    Customer->>DeliveryPerson: Pay bill
+    DeliveryPerson->>Customer: Thank customer
+```
+
+#### takeaway order flow
+
+```mermaid
+sequenceDiagram
+    participant Customer
+    participant Restaurant
+
+    Customer->>Restaurant: Place takeaway order
+    Restaurant->>Customer: Confirm order
+    Customer->>Restaurant: Arrive at restaurant
+    Restaurant->>Customer: Collect order
+    Customer->>Restaurant: Pay bill
+    Restaurant->>Customer: Thank customer
+```
+
+#### dine-in order flow
+
+```mermaid
+sequenceDiagram
+    participant Customer
+    participant Restaurant
+    participant Table
+
+    Customer->>Restaurant: Place dine-in order
+    Restaurant->>Customer: Confirm order
+    Customer->>Restaurant: Arrive at restaurant
+    Restaurant->>Customer: Seat customer
+    Customer->>Table: Choose table
+    Table->>Restaurant: Reserve table
+    Restaurant->>Customer: Table reserved
+    Customer->>Restaurant: Order food
+    Restaurant->>Customer: Serve food
+    Customer->>Restaurant: Pay bill
+    Restaurant->>Customer: Thank customer
+```
+
 ### 1.4.3. Key Use Cases and Scenarios
 
 ## 1.5. Technical Architecture
@@ -309,8 +367,6 @@ The code execution flow follows these steps:
 ### 1.7.5. Reading the Code
 
 ### 1.7.6. Code Standards and Best Practices
-
-
 
 ## 1.8. API Documentation
 

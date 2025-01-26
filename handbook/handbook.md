@@ -62,18 +62,18 @@
         - [1.8.2.1.4. Get Admin Restaurant Data](#18214-get-admin-restaurant-data)
         - [1.8.2.1.5. Change Restaurant Status](#18215-change-restaurant-status)
         - [1.8.2.1.6. Edit Restaurant Details](#18216-edit-restaurant-details)
-        - [View All Users of a Restaurant](#view-all-users-of-a-restaurant)
-        - [Send Email to Restaurant](#send-email-to-restaurant)
-        - [Export JSON to Excel](#export-json-to-excel)
-      - [Authentication Endpoints](#authentication-endpoints)
-        - [changePassword](#changepassword)
-        - [resetPassword](#resetpassword)
-        - [register](#register)
-        - [login](#login)
-        - [forgotPassword](#forgotpassword)
-        - [sendEmailVerificationOtp](#sendemailverificationotp)
-        - [verifyEmailOtp](#verifyemailotp)
-        - [Utility Methods](#utility-methods)
+        - [1.8.2.1.7. View All Users of a Restaurant](#18217-view-all-users-of-a-restaurant)
+        - [1.8.2.1.8. Send Email to Restaurant](#18218-send-email-to-restaurant)
+        - [1.8.2.1.9. Export JSON to Excel](#18219-export-json-to-excel)
+      - [1.8.2.2. Authentication Endpoints](#1822-authentication-endpoints)
+        - [1.8.2.2.1. changePassword](#18221-changepassword)
+        - [1.8.2.2.2. resetPassword](#18222-resetpassword)
+        - [1.8.2.2.3. register](#18223-register)
+        - [1.8.2.2.4. login](#18224-login)
+        - [1.8.2.2.5. forgotPassword](#18225-forgotpassword)
+        - [1.8.2.2.6. sendEmailVerificationOtp](#18226-sendemailverificationotp)
+        - [1.8.2.2.7. verifyEmailOtp](#18227-verifyemailotp)
+        - [1.8.2.2.8. Utility Methods](#18228-utility-methods)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
   - [1.9. Database Design](#19-database-design)
@@ -1190,7 +1190,7 @@ export class AdminPanelService {
     }
     ```
 
-##### View All Users of a Restaurant
+##### 1.8.2.1.7. View All Users of a Restaurant
 
 - **Endpoint**: `/api/v1/admin/viewAllUsersOfRestaurant/:id`
 - **Method**: GET
@@ -1233,7 +1233,7 @@ export class AdminPanelService {
     }
     ```
 
-##### Send Email to Restaurant
+##### 1.8.2.1.8. Send Email to Restaurant
 
 - **Endpoint**: `/api/v1/admin/sendEmailToRestaurant`
 - **Method**: POST
@@ -1262,7 +1262,7 @@ export class AdminPanelService {
     }
     ```
 
-##### Export JSON to Excel
+##### 1.8.2.1.9. Export JSON to Excel
 
 - **Description**: Converts JSON data to an Excel file and downloads it.
 - **Parameters**:
@@ -1294,7 +1294,7 @@ export class AdminPanelService {
         }
 ```
 
-#### Authentication Endpoints
+#### 1.8.2.2. Authentication Endpoints
 
 <!-- import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -1397,7 +1397,7 @@ export class AuthenticationService {
     }
 } -->
 
-##### changePassword
+##### 1.8.2.2.1. changePassword
 
 - **Endpoint**: `/api/v1/user/updatePassword`
 - **Method**: PATCH
@@ -1427,7 +1427,7 @@ export class AuthenticationService {
     }
     ```
 
-##### resetPassword
+##### 1.8.2.2.2. resetPassword
 
 - **Endpoint**: `/api/v1/user/resetPassword/:token`
 - **Method**: PATCH
@@ -1456,7 +1456,7 @@ export class AuthenticationService {
     }
     ```
 
-##### register
+##### 1.8.2.2.3. register
 
 - **Endpoint**: `/api/v1/user/signup`
 - **Method**: POST
@@ -1484,7 +1484,7 @@ export class AuthenticationService {
     }
     ```
 
-##### login
+##### 1.8.2.2.4. login
 
 - **Endpoint**: `/api/v1/user/login`
 - **Method**: POST
@@ -1511,7 +1511,7 @@ export class AuthenticationService {
     }
     ```
 
-##### forgotPassword
+##### 1.8.2.2.5. forgotPassword
 
 - **Endpoint**: `/api/v1/user/forgotPassword`
 - **Method**: POST
@@ -1536,7 +1536,7 @@ export class AuthenticationService {
     }
     ```
 
-##### sendEmailVerificationOtp
+##### 1.8.2.2.6. sendEmailVerificationOtp
 
 - **Endpoint**: `/api/v1/user/emailVerification`
 - **Method**: POST
@@ -1562,7 +1562,7 @@ export class AuthenticationService {
     }
     ```
 
-##### verifyEmailOtp
+##### 1.8.2.2.7. verifyEmailOtp
 
 - **Endpoint**: `/api/v1/user/verifyEmailOtp`
 - **Method**: PUT
@@ -1591,7 +1591,7 @@ export class AuthenticationService {
     }
     ```
 
-##### Utility Methods
+##### 1.8.2.2.8. Utility Methods
 
 - **setUserToken**: Saves the user's authentication token to `sessionStorage`.
 

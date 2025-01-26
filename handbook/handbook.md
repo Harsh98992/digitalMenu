@@ -644,7 +644,7 @@ If you are new to web development, here is a suggested learning path to get star
    - Learn how to test and debug your application using tools like [Jest](https://jestjs.io/) for unit testing and [Postman](https://www.postman.com/) for API testing.
    - Implement end-to-end testing to ensure the stability of your application.
 
-Feel free to reach out if you need any more detailed guidance on any of these steps. Happy coding! 💻🚀
+
 
 ### 1.6.5. Debugging Basics
 
@@ -673,22 +673,38 @@ The codebase is organized into the following directories:
 
 ### 1.7.2. Code Execution Flow
 
-The code execution flow follows these steps:
+```mermaid
+graph TD
+    A[main.ts] -->|Bootstrap| B[AppModule]
+    B -->|Initializes| C[AppComponent]
 
-1. The user interacts with the frontend application by browsing menus, selecting items, and placing orders.
-2. The frontend application makes API calls to the backend to fetch data, submit orders, and track order status.
-3. The backend application processes API requests, interacts with the database, and sends responses back to the frontend.
-4. The database stores user data, restaurant data, order data, and other information needed by the application.
-5. The payment gateway processes payment transactions and sends payment status updates to the backend.
-6. The messaging service sends order updates and notifications to users via WhatsApp.
-7. The application logic handles user authentication, authorization, and business logic for order processing.
-8. The frontend application displays order status, menus, and other information to the user.
-9. The backend application handles API requests, database queries, and external service integrations.
-10. The database stores and retrieves data needed by the application.
-11. The payment gateway processes payment transactions and sends payment status updates.
-12. The messaging service sends order updates and notifications to users.
-13. The application logic handles user authentication, authorization, and business logic.
-14. The frontend application displays order status, menus, and other information.
+    C -->|Core Services| D[Service Initialization]
+    D -->|Auth Service| E[AuthenticationService]
+    D -->|Customer Service| F[CustomerAuthService]
+    D -->|Order Service| G[OrderService]
+
+    C -->|Router| H[AppRoutingModule]
+
+    H -->|Feature Modules| I[Restaurant Module]
+    H -->|Feature Modules| J[Landing Module]
+    H -->|Feature Modules| K[User Auth Module]
+
+    I -->|Components| L[Layout Component]
+    L -->|Child Routes| M[Homepage Component]
+    M -->|Navigation| N[Restaurant Menu Component]
+
+    subgraph Restaurant Flow
+        L
+        M
+        N
+    end
+
+    subgraph Core Services
+        E
+        F
+        G
+    end
+```
 
 ### 1.7.3. Understanding Functions and Modules
 

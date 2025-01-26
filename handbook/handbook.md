@@ -61,7 +61,19 @@
         - [1.8.2.1.3. Get Account Transfer Details](#18213-get-account-transfer-details)
         - [1.8.2.1.4. Get Admin Restaurant Data](#18214-get-admin-restaurant-data)
         - [1.8.2.1.5. Change Restaurant Status](#18215-change-restaurant-status)
-        - [1.8.2.1.6. Export JSON to Excel](#18216-export-json-to-excel)
+        - [1.8.2.1.6. Edit Restaurant Details](#18216-edit-restaurant-details)
+        - [View All Users of a Restaurant](#view-all-users-of-a-restaurant)
+        - [Send Email to Restaurant](#send-email-to-restaurant)
+        - [Export JSON to Excel](#export-json-to-excel)
+      - [Authentication Endpoints](#authentication-endpoints)
+        - [changePassword](#changepassword)
+        - [resetPassword](#resetpassword)
+        - [register](#register)
+        - [login](#login)
+        - [forgotPassword](#forgotpassword)
+        - [sendEmailVerificationOtp](#sendemailverificationotp)
+        - [verifyEmailOtp](#verifyemailotp)
+        - [Utility Methods](#utility-methods)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
   - [1.9. Database Design](#19-database-design)
@@ -503,37 +515,45 @@ graph TB
 ### 1.4.4. Key Use Cases and Scenarios
 
 1. **User Registration and Login**
-   - Users can create an account using their phonenumber.
-   - Users can log in to their account to access personalized features.
+
+    - Users can create an account using their phonenumber.
+    - Users can log in to their account to access personalized features.
 
 2. **Browsing Restaurant Listings**
-   - Users can browse a list of available restaurants based on their location.
-   - Users can view restaurant details, including menus, reviews, and ratings.
+
+    - Users can browse a list of available restaurants based on their location.
+    - Users can view restaurant details, including menus, reviews, and ratings.
 
 3. **Placing an Order**
-   - Users can select items from a restaurant's menu and add them to their cart.
-   - Users can customize their order with special instructions or preferences.
-   - Users can choose between delivery, pickup, or dine-in options.
+
+    - Users can select items from a restaurant's menu and add them to their cart.
+    - Users can customize their order with special instructions or preferences.
+    - Users can choose between delivery, pickup, or dine-in options.
 
 4. **Order Tracking**
-   - Users can track the status of their order in real-time.
-   - Users receive notifications about order updates, including preparation, delivery, and completion.
+
+    - Users can track the status of their order in real-time.
+    - Users receive notifications about order updates, including preparation, delivery, and completion.
 
 5. **Payment Processing**
-   - Users can pay for their order using various payment methods, including credit/debit cards, digital wallets, and UPI.
-   - Users receive a confirmation of their payment and order details.
+
+    - Users can pay for their order using various payment methods, including credit/debit cards, digital wallets, and UPI.
+    - Users receive a confirmation of their payment and order details.
 
 6. **User Reviews and Ratings**
-   - Users can leave reviews and ratings for restaurants they have ordered from.
-   - Users can read reviews and ratings from other customers to make informed decisions.
+
+    - Users can leave reviews and ratings for restaurants they have ordered from.
+    - Users can read reviews and ratings from other customers to make informed decisions.
 
 7. **Customer Support**
-   - Users can contact customer support for assistance with their orders.
-   - Users can report issues or provide feedback about their experience.
+
+    - Users can contact customer support for assistance with their orders.
+    - Users can report issues or provide feedback about their experience.
 
 8. **Promotions and Discounts**
-   - Users can apply promotional codes or discounts to their orders.
-   - Users receive notifications about special offers and promotions.
+
+    - Users can apply promotional codes or discounts to their orders.
+    - Users receive notifications about special offers and promotions.
 
 9. **Account Management**
     - Users can update their account information, including contact details and payment methods.
@@ -570,27 +590,27 @@ The website is deployed on firebase.com and hosted on Google Cloud Platform. The
 7. run `firebase deploy` to deploy the project -->
 
 1. Go to `https://firebase.google.com/` and click on `Go to console`.
-![firebase homepage]( https://i.imgur.com/Qn5lZ2k.png "firebase")
+   ![firebase homepage](https://i.imgur.com/Qn5lZ2k.png "firebase")
 2. Click on `Get started with a Firebase project`.
-![firebase console]( https://i.imgur.com/Y9YFFJZ.png "firebase console")
+   ![firebase console](https://i.imgur.com/Y9YFFJZ.png "firebase console")
 3. Enter the project name and click on `Continue`.
-![project name](https://i.imgur.com/p8wzeI3.png "project name")
+   ![project name](https://i.imgur.com/p8wzeI3.png "project name")
 4. Click on `Create project`.
-![create project](https://i.imgur.com/QEzwl6P.png "create project")
+   ![create project](https://i.imgur.com/QEzwl6P.png "create project")
 5. Click on `Continue`.
-![continue](https://i.imgur.com/BhSP494.png "continue")
+   ![continue](https://i.imgur.com/BhSP494.png "continue")
 6. Click on "hosting".
-![hosting](https://i.imgur.com/G4rjM8y.png "hosting")
+   ![hosting](https://i.imgur.com/G4rjM8y.png "hosting")
 7. Click on `Get started`.
-![get started](https://i.imgur.com/uUtGiuC.png "get started")
+   ![get started](https://i.imgur.com/uUtGiuC.png "get started")
 8. Install firebase tools using `npm install -g firebase-tools`.
-![install firebase](https://i.imgur.com/Ix7bYy2.png "install firebase")
+   ![install firebase](https://i.imgur.com/Ix7bYy2.png "install firebase")
 9. Login to firebase using `firebase login`.
-![login](https://i.imgur.com/E0jXBGn.png "login")
+   ![login](https://i.imgur.com/E0jXBGn.png "login")
 10. Initialize firebase using `firebase init`.
-![init](https://i.imgur.com/E0jXBGn.png "init")
+    ![init](https://i.imgur.com/E0jXBGn.png "init")
 11. Deploy to Firebase Hosting using `firebase deploy`.
-![deploy](https://i.imgur.com/Fe3OCQ1.png "deploy")
+    ![deploy](https://i.imgur.com/Fe3OCQ1.png "deploy")
 
 ## 1.6. Beginner’s Guide to Programming
 
@@ -621,12 +641,12 @@ Web development is the process of building websites and web applications using a
 6. Install Postman from the official website. -->
 
 1. open command prompt by pressing `windows + r` and typing `cmd` and press enter.
-![cmd](https://i.imgur.com/rKqtXCL.png "cmd")
-![cmd](https://i.imgur.com/QnGDNtv.png "cmd")
+   ![cmd](https://i.imgur.com/rKqtXCL.png "cmd")
+   ![cmd](https://i.imgur.com/QnGDNtv.png "cmd")
 2. Clone the repository from GitHub using the `git clone https://github.com/Harsh98992/digitalMenu.git` command.
-![clone](https://i.imgur.com/sYp8FzW.png "clone")
+   ![clone](https://i.imgur.com/sYp8FzW.png "clone")
 3. Install Node.js from the official website `https://nodejs.org/en/`.
-![node](https://i.imgur.com/IOYDAbX.png "node")
+   ![node](https://i.imgur.com/IOYDAbX.png "node")
 4. Install Angular CLI using the `npm install -g @angular/cli` command.
 5. Install MongoDB from the official website `https://www.mongodb.com/try/download/community`.
 6. Install Git from the official website `https://git-scm.com/`.
@@ -648,51 +668,57 @@ If you are new to web development, here is a suggested learning path to get star
 8. Learn how to test and debug your application. -->
 
 1. **HTML, CSS, and JavaScript Basics**
-   - Learn the fundamentals of HTML from the `https://www.w3schools.com/html/` website.
-   - Learn the basics of CSS from the `https://www.w3schools.com/css/` website.
-   - Learn JavaScript basics from the `https://www.w3schools.com/js/` website.
-   - Practice building simple web pages using HTML, CSS, and JavaScript.
+
+    - Learn the fundamentals of HTML from the `https://www.w3schools.com/html/` website.
+    - Learn the basics of CSS from the `https://www.w3schools.com/css/` website.
+    - Learn JavaScript basics from the `https://www.w3schools.com/js/` website.
+    - Practice building simple web pages using HTML, CSS, and JavaScript.
 
 2. **Angular Basics**
 
-   - Learn the basics of Angular from the `https://angular.io/docs` website.
-   - Build a simple Angular application using components, services, and modules.
-   - Learn how to use Angular CLI to scaffold and generate code.
+    - Learn the basics of Angular from the `https://angular.io/docs` website.
+    - Build a simple Angular application using components, services, and modules.
+    - Learn how to use Angular CLI to scaffold and generate code.
 
 3. **Node.js Basics**
-   - Dive into Node.js basics from the [Node.js documentation](https://nodejs.org/en/docs/).
-   - Build a simple backend application using Express.js.
-   - Explore how to handle routing, middleware, and RESTful API endpoints.
+
+    - Dive into Node.js basics from the [Node.js documentation](https://nodejs.org/en/docs/).
+    - Build a simple backend application using Express.js.
+    - Explore how to handle routing, middleware, and RESTful API endpoints.
 
 4. **MongoDB Basics**
-   - Learn MongoDB basics from the [MongoDB documentation](https://docs.mongodb.com/).
-   - Set up a MongoDB database and connect it with your Node.js backend application.
-   - Practice performing CRUD operations (Create, Read, Update, Delete).
+
+    - Learn MongoDB basics from the [MongoDB documentation](https://docs.mongodb.com/).
+    - Set up a MongoDB database and connect it with your Node.js backend application.
+    - Practice performing CRUD operations (Create, Read, Update, Delete).
 
 5. **Deployment to Firebase Hosting**
-   - Learn how to deploy your application using [Firebase Hosting](https://firebase.google.com/docs/hosting).
-   - Set up Firebase CLI and configure your project for deployment.
+
+    - Learn how to deploy your application using [Firebase Hosting](https://firebase.google.com/docs/hosting).
+    - Set up Firebase CLI and configure your project for deployment.
 
 6. **Payment Gateway Integration**
-   - Integrate a payment gateway like Razorpay. Check out the [Razorpay Documentation](https://razorpay.com/docs/).
-   - Implement the necessary steps to handle transactions and payments in your application.
+
+    - Integrate a payment gateway like Razorpay. Check out the [Razorpay Documentation](https://razorpay.com/docs/).
+    - Implement the necessary steps to handle transactions and payments in your application.
 
 7. **Messaging Service Integration**
-   - Learn how to integrate a messaging service like WhatsApp using the [WhatsApp Business API](https://developers.facebook.com/docs/whatsapp).
-   - Set up the API and configure messaging functionalities.
+
+    - Learn how to integrate a messaging service like WhatsApp using the [WhatsApp Business API](https://developers.facebook.com/docs/whatsapp).
+    - Set up the API and configure messaging functionalities.
 
 8. **Testing and Debugging**
-   - Learn how to test and debug your application using tools like [Jest](https://jestjs.io/) for unit testing and [Postman](https://www.postman.com/) for API testing.
-   - Implement end-to-end testing to ensure the stability of your application.
+    - Learn how to test and debug your application using tools like [Jest](https://jestjs.io/) for unit testing and [Postman](https://www.postman.com/) for API testing.
+    - Implement end-to-end testing to ensure the stability of your application.
 
 ### 1.6.5. Debugging Basics
 
 Debugging is the process of finding and fixing errors in your code. Here are some basic debugging techniques:
 
 1. Use console.log() statements to print values and debug information.
-![console](https://i.imgur.com/U3maQ4C.png "console")
+   ![console](https://i.imgur.com/U3maQ4C.png "console")
 2. Use the browser developer tools to inspect elements, view console logs, and debug JavaScript code.
-![devtools](https://i.imgur.com/vsMZqpc.png "devtools")
+   ![devtools](https://i.imgur.com/vsMZqpc.png "devtools")
 3. Use breakpoints in your code to pause execution and inspect variables.
 4. Use the Angular CLI to run the project in development mode and view error messages in the console.
 5. Use the Postman tool to test APIs and view response data.
@@ -756,50 +782,59 @@ graph TD
 Adhering to code standards and best practices is crucial for maintaining a high-quality codebase. Below are some guidelines to follow:
 
 1. **Consistent Naming Conventions**:
-   - Use camelCase for variables and functions.
-   - Use PascalCase for classes and components.
-   - Use UPPER_SNAKE_CASE for constants.
+
+    - Use camelCase for variables and functions.
+    - Use PascalCase for classes and components.
+    - Use UPPER_SNAKE_CASE for constants.
 
 2. **Code Formatting**:
-   - Use a eslint to enforce consistent code formatting.
-   - ![eslint](https://i.imgur.com/FV6lhCl.png "eslint")
-   - Indent code blocks with 2 spaces.
-   - Limit lines to 80 characters.
+
+    - Use a eslint to enforce consistent code formatting.
+    - ![eslint](https://i.imgur.com/FV6lhCl.png "eslint")
+    - Indent code blocks with 2 spaces.
+    - Limit lines to 80 characters.
 
 3. **Commenting and Documentation**:
-   - Write clear and concise comments for complex logic.
-   - Use JSDoc or similar tools for documenting functions and classes.
-   - Update documentation regularly to reflect code changes.
+
+    - Write clear and concise comments for complex logic.
+    - Use JSDoc or similar tools for documenting functions and classes.
+    - Update documentation regularly to reflect code changes.
 
 4. **Error Handling**:
-   - Use try-catch blocks to handle exceptions.
-   - Log errors for debugging purposes.
-   - Provide meaningful error messages to users.
+
+    - Use try-catch blocks to handle exceptions.
+    - Log errors for debugging purposes.
+    - Provide meaningful error messages to users.
 
 5. **Code Reviews**:
-   - Conduct regular code reviews to ensure code quality.
-   - Provide constructive feedback during code reviews.
-   - Address code review comments promptly.
+
+    - Conduct regular code reviews to ensure code quality.
+    - Provide constructive feedback during code reviews.
+    - Address code review comments promptly.
 
 6. **Testing**:
-   - Write unit tests for all functions and components.
-   - Use test-driven development (TDD) where applicable.
-   - Ensure tests cover edge cases and potential failure points.
+
+    - Write unit tests for all functions and components.
+    - Use test-driven development (TDD) where applicable.
+    - Ensure tests cover edge cases and potential failure points.
 
 7. **Version Control**:
-   - Use meaningful commit messages.
-   - Commit code frequently with small, incremental changes.
-   - Use branches for new features and bug fixes.
+
+    - Use meaningful commit messages.
+    - Commit code frequently with small, incremental changes.
+    - Use branches for new features and bug fixes.
 
 8. **Performance Optimization**:
-   - Optimize code for performance where necessary.
-   - Avoid premature optimization; focus on readability and maintainability first.
-   - Profile and benchmark code to identify performance bottlenecks.
+
+    - Optimize code for performance where necessary.
+    - Avoid premature optimization; focus on readability and maintainability first.
+    - Profile and benchmark code to identify performance bottlenecks.
 
 9. **Security**:
-   - Follow best practices for securing code and data.
-   - Validate and sanitize user inputs.
-   - Use secure coding practices to prevent vulnerabilities.
+
+    - Follow best practices for securing code and data.
+    - Validate and sanitize user inputs.
+    - Use secure coding practices to prevent vulnerabilities.
 
 10. **Continuous Integration and Deployment (CI/CD)**:
     - Use CI/CD pipelines to automate testing and deployment.
@@ -813,28 +848,112 @@ Adhering to code standards and best practices is crucial for maintaining a high-
 The digital menu system's API infrastructure serves as the backbone of communication between the frontend application and backend services. Our APIs are built using RESTful principles and are primarily used for:
 
 1. **Menu Management**
-   - Retrieving restaurant menus and item details
-   - Managing menu items, categories, and pricing
-   - Handling menu availability and special offers
+
+    - Retrieving restaurant menus and item details
+    - Managing menu items, categories, and pricing
+    - Handling menu availability and special offers
 
 2. **Order Processing**
-   - Creating and managing customer orders
-   - Tracking order status and updates
-   - Managing delivery/pickup preferences
+
+    - Creating and managing customer orders
+    - Tracking order status and updates
+    - Managing delivery/pickup preferences
 
 3. **User Management**
-   - Customer authentication and authorization
-   - Profile management and preferences
-   - Order history and favorites
+
+    - Customer authentication and authorization
+    - Profile management and preferences
+    - Order history and favorites
 
 4. **Restaurant Operations**
-   - Staff authentication and role-based access
-   - Order queue management
-   - Real-time kitchen notifications
+    - Staff authentication and role-based access
+    - Order queue management
+    - Real-time kitchen notifications
 
 All APIs use JSON for data exchange and require proper authentication using JWT tokens. The base URL for all API endpoints is `/api/v1`, and requests are secured using HTTPS protocol.
 
 ### 1.8.2. API Endpoint List
+
+<!-- import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+@Injectable({
+    providedIn: "root",
+})
+export class AdminPanelService {
+    apiUrl = environment.apiUrl;
+    EXCEL_TYPE =
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+    EXCEL_EXTENSION = ".xlsx";
+    constructor(private http: HttpClient) {}
+    getRestaurantsByStatus(restaurantVerified) {
+        return this.http.get(
+            `${this.apiUrl}/v1/admin/getRestaurantsByStatus/${restaurantVerified}`
+        );
+    }
+    getRestaurantPayment() {
+        return this.http.get(
+            `${this.apiUrl}/v1/payment/getAccountPaymentDetails`
+        );
+    }
+    getAccountTransferDetails(orderId) {
+        return this.http.get(
+            `${this.apiUrl}/v1/payment/getAccountTransferDetails/${orderId}`
+        );
+    }
+    getAdminRestaurantData(id: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/admin/getRestaurantDetail/${id}`
+        );
+    }
+    changeRestaurantStatus(id: string, data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/admin/changeRestaurantStatus/${id}`,
+            data
+        );
+    }
+
+    editRestaurant(id: string, data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/admin/editRestaurant/${id}`,
+            data
+        );
+    }
+
+    viewAllUsersOfRestaurant(id: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/admin/viewAllUsersOfRestaurant/${id}`
+        );
+    }
+
+    sendEmailToRestaurant(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/admin/sendEmailToRestaurant`,
+            data
+        );
+    }
+    public exportJsonToExcel(jsonData: any[], fileName: string): void {
+        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
+        const workbook: XLSX.WorkBook = {
+            Sheets: { data: worksheet },
+            SheetNames: ["data"],
+        };
+        const excelBuffer: any = XLSX.write(workbook, {
+            bookType: "xlsx",
+            type: "array",
+        });
+        this.saveAsExcelFile(excelBuffer, fileName);
+    }
+    private saveAsExcelFile(buffer: any, fileName: string): void {
+        const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
+        saveAs(
+            data,
+            fileName + "_export_" + new Date().getTime() + this.EXCEL_EXTENSION
+        );
+    }
+} -->
 
 #### 1.8.2.1. Admin Panel endpoints
 
@@ -844,39 +963,40 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 - **Method**: GET
 - **Description**: Retrieves a list of restaurants based on their verification status.
 - **Parameters**:
+
   - `restaurantVerified` (boolean): Indicates whether the restaurant is verified or not.
   - Example: `/api/v1/admin/getRestaurantsByStatus/true`
   - Example Response:
 
-    ```json
-    {
-      "restaurants": [
+```json
+{
+    "restaurants": [
         {
-          "id": "123",
-          "name": "Restaurant A",
-          "verified": true
+            "id": "123",
+            "name": "Restaurant A",
+            "verified": true
         },
         {
-          "id": "456",
-          "name": "Restaurant B",
-          "verified": true
+            "id": "456",
+            "name": "Restaurant B",
+            "verified": true
         }
-      ]
-    }
-    ```
+    ]
+}
+```
 
 - **Response**: Returns an array of restaurant objects with their details.
 - **Authorization**: Admin role required.
 - **Error Handling**: Returns an error message if the request fails.
 - **Sample Code**:
 
-  ```typescript
-  getRestaurantsByStatus(restaurantVerified: boolean) {
-      return this.http.get(
-          `${this.apiUrl}/v1/admin/getRestaurantsByStatus/${restaurantVerified}`
-      );
-  }
-  ```
+    ```typescript
+    getRestaurantsByStatus(restaurantVerified: boolean) {
+        return this.http.get(
+            `${this.apiUrl}/v1/admin/getRestaurantsByStatus/${restaurantVerified}`
+        );
+    }
+    ```
 
 ##### 1.8.2.1.2. Get Restaurant Payment Details
 
@@ -886,39 +1006,39 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 - **Parameters**: None.
 - **Example Response**:
 
-  ```json
-  {
-    "payments": [
-      {
-        "restaurantId": "123",
-        "restaurantName": "Restaurant A",
-        "totalEarnings": 15000,
-        "pendingAmount": 5000,
-        "lastPaymentDate": "2025-01-10"
-      },
-      {
-        "restaurantId": "456",
-        "restaurantName": "Restaurant B",
-        "totalEarnings": 20000,
-        "pendingAmount": 3000,
-        "lastPaymentDate": "2025-01-12"
-      }
-    ]
-  }
-  ```
+    ```json
+    {
+        "payments": [
+            {
+                "restaurantId": "123",
+                "restaurantName": "Restaurant A",
+                "totalEarnings": 15000,
+                "pendingAmount": 5000,
+                "lastPaymentDate": "2025-01-10"
+            },
+            {
+                "restaurantId": "456",
+                "restaurantName": "Restaurant B",
+                "totalEarnings": 20000,
+                "pendingAmount": 3000,
+                "lastPaymentDate": "2025-01-12"
+            }
+        ]
+    }
+    ```
 
 - **Response**: Returns an array of objects containing payment information for each restaurant.
 - **Authorization**: Admin role required.
 - **Error Handling**: Returns an error message if the request fails.
 - **Sample Code**:
 
-  ```typescript
-  getRestaurantPayment() {
-      return this.http.get(
-          `${this.apiUrl}/v1/payment/getAccountPaymentDetails`
-      );
-  }
-  ```
+    ```typescript
+    getRestaurantPayment() {
+        return this.http.get(
+            `${this.apiUrl}/v1/payment/getAccountPaymentDetails`
+        );
+    }
+    ```
 
 ##### 1.8.2.1.3. Get Account Transfer Details
 
@@ -930,28 +1050,28 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 - **Example**: `/api/v1/payment/getAccountTransferDetails/ORD12345`
 - **Example Response**:
 
-  ```json
-  {
-    "orderId": "ORD12345",
-    "restaurantId": "123",
-    "transferAmount": 2000,
-    "transferDate": "2025-01-15",
-    "status": "Completed"
-  }
-  ```
+    ```json
+    {
+        "orderId": "ORD12345",
+        "restaurantId": "123",
+        "transferAmount": 2000,
+        "transferDate": "2025-01-15",
+        "status": "Completed"
+    }
+    ```
 
 - **Response**: Returns an object with the details of the account transfer related to the order.
 - **Authorization**: Admin role required.
 - **Error Handling**: Returns an error message if the order ID is invalid or the request fails.
 - **Sample Code**:
 
-  ```typescript
-  getAccountTransferDetails(orderId: string) {
-      return this.http.get(
-          `${this.apiUrl}/v1/payment/getAccountTransferDetails/${orderId}`
-      );
-  }
-  ```
+    ```typescript
+    getAccountTransferDetails(orderId: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/payment/getAccountTransferDetails/${orderId}`
+        );
+    }
+    ```
 
 ##### 1.8.2.1.4. Get Admin Restaurant Data
 
@@ -963,31 +1083,31 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 - **Example**: `/api/v1/admin/getRestaurantDetail/123`
 - **Example Response**:
 
-  ```json
-  {
-    "id": "123",
-    "name": "Restaurant A",
-    "verified": true,
-    "owner": "John Doe",
-    "contact": "123-456-7890",
-    "address": "123 Main St, City, State",
-    "cuisine": ["Italian", "Mexican"],
-    "ratings": 4.5
-  }
-  ```
+    ```json
+    {
+        "id": "123",
+        "name": "Restaurant A",
+        "verified": true,
+        "owner": "John Doe",
+        "contact": "123-456-7890",
+        "address": "123 Main St, City, State",
+        "cuisine": ["Italian", "Mexican"],
+        "ratings": 4.5
+    }
+    ```
 
 - **Response**: Returns detailed information about the restaurant, including owner details, address, and ratings.
 - **Authorization**: Admin role required.
 - **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
 - **Sample Code**:
 
-  ```typescript
-  getAdminRestaurantData(id: string) {
-      return this.http.get(
-          `${this.apiUrl}/v1/admin/getRestaurantDetail/${id}`
-      );
-  }
-  ```
+    ```typescript
+    getAdminRestaurantData(id: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/admin/getRestaurantDetail/${id}`
+        );
+    }
+    ```
 
 ##### 1.8.2.1.5. Change Restaurant Status
 
@@ -995,69 +1115,518 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 - **Method**: PATCH
 - **Description**: Updates the verification status of a restaurant.
 - **Parameters**:
+
   - `id` (string): The unique identifier for the restaurant.
   - Request Body:
 
-    ```json
-    {
-      "verified": true
-    }
-    ```
+```json
+{
+    "verified": true
+}
+```
 
 - **Example**: `/api/v1/admin/changeRestaurantStatus/123`
 - **Example Response**:
 
-  ```json
-  {
-    "message": "Restaurant status updated successfully."
-  }
-  ```
+    ```json
+    {
+        "message": "Restaurant status updated successfully."
+    }
+    ```
 
 - **Response**: Returns a success message upon updating the restaurant's status.
 - **Authorization**: Admin role required.
 - **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
 - **Sample Code**:
 
-  ```typescript
-  changeRestaurantStatus(id: string, data: any) {
-      return this.http.patch(
-          `${this.apiUrl}/v1/admin/changeRestaurantStatus/${id}`,
-          data
-      );
-  }
-  ```
+    ```typescript
+    changeRestaurantStatus(id: string, data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/admin/changeRestaurantStatus/${id}`,
+            data
+        );
+    }
+    ```
 
-##### 1.8.2.1.6. Export JSON to Excel
+##### 1.8.2.1.6. Edit Restaurant Details
 
-- **Functionality**: Exports data from JSON format into an Excel file.
-- **Usage**: Used to export restaurant or payment details for reporting purposes.
+- **Endpoint**: `/api/v1/admin/editRestaurant/:id`
+- **Method**: PATCH
+- **Description**: Updates the details of a restaurant.
 - **Parameters**:
-  - `jsonData` (Array): The JSON data to be exported.
-  - `fileName` (string): Name of the Excel file to be saved.
+
+  - `id` (string): The unique identifier for the restaurant.
+  - Request Body:
+
+```json
+{
+    "name": "New Restaurant Name",
+    "contact": "987-654-3210",
+    "address": "456 Main St, City, State",
+    "cuisine": ["Indian", "Chinese"]
+}
+```
+
+- **Example**: `/api/v1/admin/editRestaurant/123`
+- **Example Response**:
+
+    ```json
+    {
+        "message": "Restaurant details updated successfully."
+    }
+    ```
+
+- **Response**: Returns a success message upon updating the restaurant's details.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
 - **Sample Code**:
 
-  ```typescript
-  public exportJsonToExcel(jsonData: any[], fileName: string): void {
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
-      const workbook: XLSX.WorkBook = {
-          Sheets: { data: worksheet },
-          SheetNames: ["data"],
-      };
-      const excelBuffer: any = XLSX.write(workbook, {
-          bookType: "xlsx",
-          type: "array",
-      });
-      this.saveAsExcelFile(excelBuffer, fileName);
-  }
+    ```typescript
+    editRestaurant(id: string, data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/admin/editRestaurant/${id}`,
+            data
+        );
+    }
+    ```
 
-  private saveAsExcelFile(buffer: any, fileName: string): void {
-      const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
-      saveAs(
-          data,
-          fileName + "_export_" + new Date().getTime() + this.EXCEL_EXTENSION
-      );
-  }
-  ```
+##### View All Users of a Restaurant
+
+- **Endpoint**: `/api/v1/admin/viewAllUsersOfRestaurant/:id`
+- **Method**: GET
+- **Description**: Retrieves a list of all users associated with a specific restaurant.
+- **Parameters**:
+
+  - `id` (string): The unique identifier for the restaurant.
+  - Example: `/api/v1/admin/viewAllUsersOfRestaurant/123`
+  - Example Response:
+
+```json
+{
+    "users": [
+        {
+            "id": "456",
+            "name": "User A",
+            "email": "abc#example.com",
+            "role": "Customer"
+        },
+        {
+            "id": "789",
+            "name": "User B",
+            "email": "xyz#example.com",
+            "role": "Staff"
+        }
+    ]
+}
+```
+
+- **Response**: Returns an array of user objects with their details.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    viewAllUsersOfRestaurant(id: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/admin/viewAllUsersOfRestaurant/${id}`
+        );
+    }
+    ```
+
+##### Send Email to Restaurant
+
+- **Endpoint**: `/api/v1/admin/sendEmailToRestaurant`
+- **Method**: POST
+- **Description**: Sends an email notification to a restaurant.
+- **Request Body**:
+
+    ```json
+    {
+        "restaurantId": "123",
+        "subject": "Order Notification",
+        "message": "You have a new order pending."
+    }
+    ```
+
+- **Response**: Returns a success message upon sending the email.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    sendEmailToRestaurant(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/admin/sendEmailToRestaurant`,
+            data
+        );
+    }
+    ```
+
+##### Export JSON to Excel
+
+- **Description**: Converts JSON data to an Excel file and downloads it.
+- **Parameters**:
+
+  - `jsonData` (array): The JSON data to export.
+  - `fileName` (string): The name of the Excel file.
+  - **Sample Code**:
+
+```typescript
+        exportJsonToExcel(jsonData: any[], fileName: string): void {
+            const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
+            const workbook: XLSX.WorkBook = {
+                Sheets: { data: worksheet },
+                SheetNames: ["data"],
+            };
+            const excelBuffer: any = XLSX.write(workbook, {
+                bookType: "xlsx",
+                type: "array",
+            });
+            this.saveAsExcelFile(excelBuffer, fileName);
+        }
+
+        private saveAsExcelFile(buffer: any, fileName: string): void {
+            const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
+            saveAs(
+                data,
+                fileName + "_export_" + new Date().getTime() + this.EXCEL_EXTENSION
+            );
+        }
+```
+
+#### Authentication Endpoints
+
+<!-- import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Subject } from "rxjs";
+import { environment } from "src/environments/environment";
+import { CustomerAuthService } from "../restaurant/api/customer-auth.service";
+import { UtilService } from "./util.service";
+
+@Injectable({
+    providedIn: "root",
+})
+export class AuthenticationService {
+    apiUrl = environment.apiUrl;
+    userDetail = new BehaviorSubject(null);
+    constructor(
+        private http: HttpClient,
+        private customerAuth: CustomerAuthService,
+        private utilService: UtilService
+    ) {}
+
+    changePassword(requestData) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/user/updatePassword`,
+            requestData
+        );
+    }
+
+    resetPassword(password: string, token: string) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/user/resetPassword/${token}`,
+            {
+                password,
+            }
+        );
+    }
+
+    register(userData) {
+        return this.http.post(`${this.apiUrl}/v1/user/signup`, userData);
+    }
+    login(userData: { email: string; password: string }) {
+        this.customerAuth.removeToken();
+        return this.http.post(`${this.apiUrl}/v1/user/login`, userData);
+    }
+    forgotPassword(email: string) {
+        return this.http.post(`${this.apiUrl}/v1/user/forgotPassword`, {
+            email,
+        });
+    }
+
+    sendEmailVerificationOtp(email: string) {
+        console.log("email", email);
+        const data = { email };
+        return this.http.post(`${this.apiUrl}/v1/user/emailVerification`, data);
+    }
+
+    verifyEmailOtp(otp: string, email: string) {
+        return this.http.put(`${this.apiUrl}/v1/user/verifyEmailOtp`, {
+            otp,
+            email,
+        });
+    }
+    setUserToken(token: string) {
+        sessionStorage.clear();
+        const driver = this.utilService.getPrinterDriver();
+        localStorage.clear();
+        if (driver) {
+            localStorage.setItem("printerDriver", JSON.stringify(driver));
+        }
+        sessionStorage.setItem("authToken", token);
+    }
+    setUserDetail(data) {
+        this.userDetail.next(data);
+        sessionStorage.setItem("userDetail", JSON.stringify(data));
+    }
+    getUserDetail() {
+        const data = sessionStorage.getItem("userDetail");
+        if (data) {
+            return JSON.parse(data);
+        }
+        return null;
+    }
+    checkUserLogin() {
+        const token = this.getUserToken();
+        if (token) {
+            return true;
+        }
+        return false;
+    }
+    getUserToken() {
+        return sessionStorage.getItem("authToken");
+    }
+    removeToken() {
+        sessionStorage.clear();
+        const driver = this.utilService.getPrinterDriver();
+        localStorage.clear();
+        if (driver) {
+            localStorage.setItem("printerDriver", JSON.stringify(driver));
+        }
+
+    }
+} -->
+
+##### changePassword
+
+- **Endpoint**: `/api/v1/user/updatePassword`
+- **Method**: PATCH
+- **Description**: Updates the user's password.
+- **Parameters**:
+
+  - Request Body:
+
+```json
+{
+    "oldPassword": "password123",
+    "newPassword": "newpassword123"
+}
+```
+
+- **Response**: Returns a success message upon updating the password.
+- **Authorization**: User authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    changePassword(requestData) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/user/updatePassword`,
+            requestData
+        );
+    }
+    ```
+
+##### resetPassword
+
+- **Endpoint**: `/api/v1/user/resetPassword/:token`
+- **Method**: PATCH
+- **Description**: Resets the user's password using a valid reset token.
+- **Parameters**:
+  - `token` (string): A unique token sent to the user's email for password reset.
+  - Request Body:
+
+```json
+{
+    "password": "newpassword123"
+}
+```
+
+- **Response**: Returns a success message upon successfully resetting the password.
+- **Authorization**: No authentication required; token-based validation.
+- **Error Handling**: Returns an error if the token is invalid, expired, or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    resetPassword(password: string, token: string) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/user/resetPassword/${token}`,
+            { password }
+        );
+    }
+    ```
+
+##### register
+
+- **Endpoint**: `/api/v1/user/signup`
+- **Method**: POST
+- **Description**: Registers a new user with the provided details.
+- **Parameters**:
+  - Request Body:
+
+```json
+{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "password123",
+    "confirmPassword": "password123"
+}
+```
+
+- **Response**: Returns a success message and user details upon successful registration.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the email is already registered or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    register(userData) {
+        return this.http.post(`${this.apiUrl}/v1/user/signup`, userData);
+    }
+    ```
+
+##### login
+
+- **Endpoint**: `/api/v1/user/login`
+- **Method**: POST
+- **Description**: Logs in a user using their email and password.
+- **Parameters**:
+  - Request Body:
+
+```json
+{
+    "email": "johndoe@example.com",
+    "password": "password123"
+}
+```
+
+- **Response**: Returns a success message, user details, and an authentication token upon successful login.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the credentials are invalid or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    login(userData: { email: string; password: string }) {
+        this.customerAuth.removeToken();
+        return this.http.post(`${this.apiUrl}/v1/user/login`, userData);
+    }
+    ```
+
+##### forgotPassword
+
+- **Endpoint**: `/api/v1/user/forgotPassword`
+- **Method**: POST
+- **Description**: Sends a password reset link to the user's email address.
+- **Parameters**:
+  - Request Body:
+
+```json
+{
+    "email": "johndoe@example.com"
+}
+```
+
+- **Response**: Returns a success message confirming that the reset link has been sent.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the email is not registered or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    forgotPassword(email: string) {
+        return this.http.post(`${this.apiUrl}/v1/user/forgotPassword`, { email });
+    }
+    ```
+
+##### sendEmailVerificationOtp
+
+- **Endpoint**: `/api/v1/user/emailVerification`
+- **Method**: POST
+- **Description**: Sends an OTP to the user's email for email verification.
+- **Parameters**:
+  - Request Body:
+
+```json
+{
+    "email": "johndoe@example.com"
+}
+```
+
+- **Response**: Returns a success message confirming that the OTP has been sent.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the email is invalid or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    sendEmailVerificationOtp(email: string) {
+        const data = { email };
+        return this.http.post(`${this.apiUrl}/v1/user/emailVerification`, data);
+    }
+    ```
+
+##### verifyEmailOtp
+
+- **Endpoint**: `/api/v1/user/verifyEmailOtp`
+- **Method**: PUT
+- **Description**: Verifies the OTP sent to the user's email.
+- **Parameters**:
+  - Request Body:
+
+```json
+{
+    "otp": "123456",
+    "email": "johndoe@example.com"
+}
+```
+
+- **Response**: Returns a success message upon successful verification of the email.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the OTP is invalid or expired.
+- **Sample Code**:
+
+    ```typescript
+    verifyEmailOtp(otp: string, email: string) {
+        return this.http.put(`${this.apiUrl}/v1/user/verifyEmailOtp`, {
+            otp,
+            email,
+        });
+    }
+    ```
+
+##### Utility Methods
+
+- **setUserToken**: Saves the user's authentication token to `sessionStorage`.
+
+    ```typescript
+    setUserToken(token: string) {
+        sessionStorage.clear();
+        const driver = this.utilService.getPrinterDriver();
+        localStorage.clear();
+        if (driver) {
+            localStorage.setItem("printerDriver", JSON.stringify(driver));
+        }
+        sessionStorage.setItem("authToken", token);
+    }
+    ```
+
+- **getUserToken**: Retrieves the user's authentication token from `sessionStorage`.
+
+    ```typescript
+    getUserToken() {
+        return sessionStorage.getItem("authToken");
+    }
+    ```
+
+- **removeToken**: Clears authentication token and resets session/local storage.
+
+    ```typescript
+    removeToken() {
+        sessionStorage.clear();
+        const driver = this.utilService.getPrinterDriver();
+        localStorage.clear();
+        if (driver) {
+            localStorage.setItem("printerDriver", JSON.stringify(driver));
+        }
+    }
+    ```
 
 ### 1.8.3. Error Codes and Handling
 
@@ -1078,38 +1647,42 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 ### 1.10.1. Screenshots of All Pages (annotated with descriptions)
 
 1. **Login Page**
-   - User authentication interface
-   - Phone number input
-   - OTP verification
+
+    - User authentication interface
+    - Phone number input
+    - OTP verification
 
 2. **Menu Page**
-   - Category-wise menu items
-   - Item details with images
-   - Add to cart functionality
+
+    - Category-wise menu items
+    - Item details with images
+    - Add to cart functionality
 
 3. **Cart Page**
-   - Order summary
-   - Item quantity adjustment
-   - Checkout process
+
+    - Order summary
+    - Item quantity adjustment
+    - Checkout process
 
 4. **Admin Dashboard**
-   - Order management
-   - Menu management
-   - Analytics overview
+    - Order management
+    - Menu management
+    - Analytics overview
 
 ### 1.10.2. Navigation Map
 
 ### 1.10.3. Design Principles Used
 
 1. **Material Design**
-   - Consistent UI components
-   - Responsive layouts
-   - Intuitive interactions
+
+    - Consistent UI components
+    - Responsive layouts
+    - Intuitive interactions
 
 2. **User Experience**
-   - Clear navigation
-   - Fast loading
-   - Error handling
+    - Clear navigation
+    - Fast loading
+    - Error handling
 
 ## 1.11. Ad Hoc Process Configuration
 
@@ -1151,9 +1724,11 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 #### 1.11.2.3. Sending Messages
 
 ```typescript
-async function sendWhatsAppMessage(to: string, template: string, params: any[]) {
-
-}
+async function sendWhatsAppMessage(
+    to: string,
+    template: string,
+    params: any[]
+) {}
 ```
 
 ## 1.12. Testing Guidelines
@@ -1161,39 +1736,42 @@ async function sendWhatsAppMessage(to: string, template: string, params: any[]) 
 ### 1.12.1. Overview of Testing Strategy
 
 1. **Unit Testing**
-   - Component testing
-   - Service testing
-   - Utility function testing
+
+    - Component testing
+    - Service testing
+    - Utility function testing
 
 2. **Integration Testing**
-   - API endpoint testing
-   - Database operations
-   - Authentication flow
+    - API endpoint testing
+    - Database operations
+    - Authentication flow
 
 ### 1.12.2. Functional Testing Scenarios
 
 1. **Order Flow Testing**
-   - Menu item selection
-   - Cart operations
-   - Checkout process
-   - Payment integration
+
+    - Menu item selection
+    - Cart operations
+    - Checkout process
+    - Payment integration
 
 2. **Admin Operations**
-   - Menu management
-   - Order processing
-   - User management
+    - Menu management
+    - Order processing
+    - User management
 
 ### 1.12.3. Technical Testing
 
 1. **Performance Testing**
-   - Load time optimization
-   - API response times
-   - Database query performance
+
+    - Load time optimization
+    - API response times
+    - Database query performance
 
 2. **Security Testing**
-   - Authentication
-   - Authorization
-   - Data encryption
+    - Authentication
+    - Authorization
+    - Data encryption
 
 ### 1.12.4. Bug Reporting Guidelines
 
@@ -1215,96 +1793,101 @@ async function sendWhatsAppMessage(to: string, template: string, params: any[]) 
 
 1. **Build Process**
 
-   ```bash
-   ng build --configuration production
-   ```
+    ```bash
+    ng build --configuration production
+    ```
 
 2. **Firebase Deployment**
 
-   ```bash
-   firebase use production
-   firebase deploy
-   ```
+    ```bash
+    firebase use production
+    firebase deploy
+    ```
 
 ### 1.13.2. Version Control Guidelines
 
 1. **Branch Strategy**
-   - main: production
-   - develop: development
-   - feature branches: new features
-   - bugfix branches: bug fixes
-   - hotfix branches: critical fixes
-   - release branches: version releases
+    - main: production
+    - develop: development
+    - feature branches: new features
+    - bugfix branches: bug fixes
+    - hotfix branches: critical fixes
+    - release branches: version releases
 2. **Commit Messages**
-   - feat: new feature
-   - fix: bug fix
-   - docs: documentation
-   - style: formatting
-   - refactor: code restructuring
+    - feat: new feature
+    - fix: bug fix
+    - docs: documentation
+    - style: formatting
+    - refactor: code restructuring
 
 ### 1.13.3. Backup and Recovery Plan
 
 1. **Database Backup**
-   - Daily automated backups
-   - Manual backup before major updates
-   - Backup verification process
+
+    - Daily automated backups
+    - Manual backup before major updates
+    - Backup verification process
 
 2. **Recovery Procedures**
-   - Database restoration
-   - Application rollback
-   - Emergency contacts
+    - Database restoration
+    - Application rollback
+    - Emergency contacts
 
 ## 1.14. Troubleshooting Guide
 
 ### 1.14.1. Common Issues and Fixes
 
 1. **Authentication Issues**
-   - Check Firebase configuration
-   - Verify API keys
-   - Clear browser cache
+
+    - Check Firebase configuration
+    - Verify API keys
+    - Clear browser cache
 
 2. **Payment Issues**
-   - Verify Razorpay integration
-   - Check webhook configuration
-   - Monitor payment logs
+    - Verify Razorpay integration
+    - Check webhook configuration
+    - Monitor payment logs
 
 ### 1.14.2. Debugging Tips for Developers
 
 1. **Frontend Debugging**
-   - Use Chrome DevTools
-   - Check console logs
-   - Monitor network requests
+
+    - Use Chrome DevTools
+    - Check console logs
+    - Monitor network requests
 
 2. **Backend Debugging**
-   - Firebase Functions logs
-   - Database queries
-   - API responses
+    - Firebase Functions logs
+    - Database queries
+    - API responses
 
 ## 1.15. Security Considerations
 
 ### 1.15.1. Security Practices Implemented
 
 1. **Authentication**
-   - Phone number verification
-   - JWT token management
-   - Session handling
+
+    - Phone number verification
+    - JWT token management
+    - Session handling
 
 2. **Data Security**
-   - HTTPS encryption
-   - Firebase security rules
-   - Input validation
+    - HTTPS encryption
+    - Firebase security rules
+    - Input validation
 
 ### 1.15.2. Guidelines for Handling Sensitive Data
 
 1. **User Data**
-   - Encryption at rest
-   - Secure transmission
-   - Access control
+
+    - Encryption at rest
+    - Secure transmission
+    - Access control
 
 2. **Payment Information**
-   - PCI compliance
-   - Tokenization
-   - Secure storage
+    - PCI compliance
+    - Tokenization
+    - Secure storage
 
 ## 1.16. FAQ
 
@@ -1337,26 +1920,28 @@ A: Use browser DevTools and Firebase Console.
 ### 1.17.1. Resources and References
 
 1. **Documentation**
-   - [Angular Documentation](https://angular.io/docs)
-   - [Firebase Documentation](https://firebase.google.com/docs)
-   - [Razorpay Documentation](https://razorpay.com/docs)
+
+    - [Angular Documentation](https://angular.io/docs)
+    - [Firebase Documentation](https://firebase.google.com/docs)
+    - [Razorpay Documentation](https://razorpay.com/docs)
 
 2. **Tutorials**
-   - Angular tutorials
-   - Firebase guides
-   - Testing guides
+    - Angular tutorials
+    - Firebase guides
+    - Testing guides
 
 ### 1.17.2. Links to Tools, Libraries, and Frameworks Used
 
 1. **Development Tools**
-   - [Visual Studio Code](https://code.visualstudio.com)
-   - [Git](https://git-scm.com)
-   - [Node.js](https://nodejs.org)
+
+    - [Visual Studio Code](https://code.visualstudio.com)
+    - [Git](https://git-scm.com)
+    - [Node.js](https://nodejs.org)
 
 2. **Frameworks and Libraries**
-   - [Angular](https://angular.io)
-   - [Angular Material](https://material.angular.io)
-   - [Firebase](https://firebase.google.com)
+    - [Angular](https://angular.io)
+    - [Angular Material](https://material.angular.io)
+    - [Firebase](https://firebase.google.com)
 
 ### 1.17.3. Glossary of Technical Terms
 

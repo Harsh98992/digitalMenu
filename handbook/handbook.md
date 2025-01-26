@@ -247,6 +247,47 @@ sequenceDiagram
 
 ### 1.4.3. Key Use Cases and Scenarios
 
+1. **User Registration and Login**
+   - Users can create an account using their email address or social media accounts.
+   - Users can log in to their account to access personalized features.
+
+2. **Browsing Restaurant Listings**
+   - Users can browse a list of available restaurants based on their location.
+   - Users can view restaurant details, including menus, reviews, and ratings.
+
+3. **Placing an Order**
+   - Users can select items from a restaurant's menu and add them to their cart.
+   - Users can customize their order with special instructions or preferences.
+   - Users can choose between delivery, pickup, or dine-in options.
+
+4. **Order Tracking**
+   - Users can track the status of their order in real-time.
+   - Users receive notifications about order updates and estimated delivery times.
+
+5. **Payment Processing**
+   - Users can pay for their order using various payment methods, including credit/debit cards, digital wallets, and UPI.
+   - Users receive a confirmation of their payment and order details.
+
+6. **Favorites and Reordering**
+   - Users can save their favorite orders for quick reordering in the future.
+   - Users can view their order history and reorder past orders with a single click.
+
+7. **User Reviews and Ratings**
+   - Users can leave reviews and ratings for restaurants they have ordered from.
+   - Users can read reviews and ratings from other customers to make informed decisions.
+
+8. **Customer Support**
+   - Users can contact customer support for assistance with their orders.
+   - Users can report issues or provide feedback about their experience.
+
+9. **Promotions and Discounts**
+   - Users can apply promotional codes or discounts to their orders.
+   - Users receive notifications about special offers and promotions.
+
+10. **Account Management**
+    - Users can update their account information, including contact details and payment methods.
+    - Users can manage their notification preferences and privacy settings.
+
 ## 1.5. Technical Architecture
 
 ### 1.5.1. Technology Stack Overview

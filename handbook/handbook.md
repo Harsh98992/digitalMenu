@@ -15,25 +15,25 @@
     - [1.3.3. Target Audience for the Website (end-users)](#133-target-audience-for-the-website-end-users)
     - [1.3.4. High-Level Overview of the Website Workflow](#134-high-level-overview-of-the-website-workflow)
     - [1.3.5. Glossary of Terms (for technical and non-technical users)](#135-glossary-of-terms-for-technical-and-non-technical-users)
-      - [General Terms](#general-terms)
-      - [Order Types](#order-types)
-      - [User Roles](#user-roles)
-      - [Technical Terms](#technical-terms)
-      - [Payment Terms](#payment-terms)
-      - [Features](#features)
+      - [1.3.5.1. General Terms](#1351-general-terms)
+      - [1.3.5.2. Order Types](#1352-order-types)
+      - [1.3.5.3. User Roles](#1353-user-roles)
+      - [1.3.5.4. Technical Terms](#1354-technical-terms)
+      - [1.3.5.5. Payment Terms](#1355-payment-terms)
+      - [1.3.5.6. Features](#1356-features)
   - [1.4. Functional Flow](#14-functional-flow)
     - [1.4.1. User Flows](#141-user-flows)
     - [1.4.2. Visual Flow Diagrams for Each User Flow](#142-visual-flow-diagrams-for-each-user-flow)
-      - [delivery order flow](#delivery-order-flow)
-      - [takeaway order flow](#takeaway-order-flow)
-      - [dine-in order flow](#dine-in-order-flow)
-    - [Use case diagrams](#use-case-diagrams)
-      - [Activity diagrams](#activity-diagrams)
-      - [State machine diagrams](#state-machine-diagrams)
-      - [Sequence diagrams](#sequence-diagrams)
-      - [Communication diagrams](#communication-diagrams)
-      - [Interaction overview diagrams](#interaction-overview-diagrams)
-    - [1.4.3. Key Use Cases and Scenarios](#143-key-use-cases-and-scenarios)
+      - [1.4.2.1. delivery order flow](#1421-delivery-order-flow)
+      - [1.4.2.2. takeaway order flow](#1422-takeaway-order-flow)
+      - [1.4.2.3. dine-in order flow](#1423-dine-in-order-flow)
+    - [1.4.3. Use case diagrams](#143-use-case-diagrams)
+      - [1.4.3.1. Activity diagrams](#1431-activity-diagrams)
+      - [1.4.3.2. State machine diagrams](#1432-state-machine-diagrams)
+      - [1.4.3.3. Sequence diagrams](#1433-sequence-diagrams)
+      - [1.4.3.4. Communication diagrams](#1434-communication-diagrams)
+      - [1.4.3.5. Interaction overview diagrams](#1435-interaction-overview-diagrams)
+    - [1.4.4. Key Use Cases and Scenarios](#144-key-use-cases-and-scenarios)
   - [1.5. Technical Architecture](#15-technical-architecture)
     - [1.5.1. Technology Stack Overview](#151-technology-stack-overview)
     - [1.5.2. High-Level Architecture Diagram](#152-high-level-architecture-diagram)
@@ -71,10 +71,10 @@
       - [1.11.1.1. Overview of Payment Gateway Used](#11111-overview-of-payment-gateway-used)
       - [1.11.1.2. API Keys, Credentials, and Configuration Steps](#11112-api-keys-credentials-and-configuration-steps)
       - [1.11.1.3. Step-by-Step Guide for Setting Up Payment Flow](#11113-step-by-step-guide-for-setting-up-payment-flow)
-    - [1.11.3. Messaging Service Integration (e.g., SMS, WhatsApp)](#1113-messaging-service-integration-eg-sms-whatsapp)
-      - [1.11.3.1. Overview of Messaging Providers](#11131-overview-of-messaging-providers)
-      - [1.11.3.2. Setting Up API Access and Authentication](#11132-setting-up-api-access-and-authentication)
-      - [1.11.3.3. Sending Messages](#11133-sending-messages)
+    - [1.11.2. Messaging Service Integration (e.g., SMS, WhatsApp)](#1112-messaging-service-integration-eg-sms-whatsapp)
+      - [1.11.2.1. Overview of Messaging Providers](#11121-overview-of-messaging-providers)
+      - [1.11.2.2. Setting Up API Access and Authentication](#11122-setting-up-api-access-and-authentication)
+      - [1.11.2.3. Sending Messages](#11123-sending-messages)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
     - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
@@ -160,27 +160,27 @@ The target audience for the website includes:
 
 ### 1.3.5. Glossary of Terms (for technical and non-technical users)
 
-#### General Terms
+#### 1.3.5.1. General Terms
 
 - **Digital Menu**: An electronic version of a restaurant's menu that can be accessed through web browsers or mobile devices
 - **POS (Point of Sale)**: The system where transactions are processed and orders are managed
 - **QR Code**: A square barcode that can be scanned by smartphones to quickly access the digital menu
 - **Cart**: A virtual collection of items selected by the customer before placing an order
 
-#### Order Types
+#### 1.3.5.2. Order Types
 
 - **Dine-in**: Customers eating at the restaurant premises
 - **Takeaway**: Customers picking up their order from the restaurant
 - **Delivery**: Food being delivered to the customer's specified location
 
-#### User Roles
+#### 1.3.5.3. User Roles
 
 - **Customer**: End-user who browses the menu and places orders
 - **Restaurant Staff**: Personnel who manage orders and update menu items
 - **Admin**: System administrator with full access to manage the platform
 - **Delivery Partner**: Person responsible for delivering orders to customers
 
-#### Technical Terms
+#### 1.3.5.4. Technical Terms
 
 - **Frontend**: The user interface that customers interact with (website/app)
 - **Backend**: Server-side system that processes requests and manages data
@@ -189,14 +189,14 @@ The target audience for the website includes:
 - **Authentication**: Process of verifying user identity
 - **Cache**: Temporary storage of frequently accessed data for faster performance
 
-#### Payment Terms
+#### 1.3.5.5. Payment Terms
 
 - **Payment Gateway**: System that processes online payments securely
 - **Transaction**: A completed order payment
 - **Payment Status**: Current state of payment (pending/completed/failed)
 - **Refund**: Return of payment to customer's account
 
-#### Features
+#### 1.3.5.6. Features
 
 - **Real-time Tracking**: Live monitoring of order status
 - **Menu Customization**: Ability to modify menu items based on availability
@@ -224,7 +224,7 @@ graph TD
 
 ### 1.4.2. Visual Flow Diagrams for Each User Flow
 
-#### delivery order flow
+#### 1.4.2.1. delivery order flow
 
 ```mermaid
 sequenceDiagram
@@ -243,7 +243,7 @@ sequenceDiagram
     DeliveryPerson->>Customer: Thank customer
 ```
 
-#### takeaway order flow
+#### 1.4.2.2. takeaway order flow
 
 ```mermaid
 sequenceDiagram
@@ -258,7 +258,7 @@ sequenceDiagram
     Restaurant->>Customer: Thank customer
 ```
 
-#### dine-in order flow
+#### 1.4.2.3. dine-in order flow
 
 ```mermaid
 sequenceDiagram
@@ -279,9 +279,9 @@ sequenceDiagram
     Restaurant->>Customer: Thank customer
 ```
 
-### Use case diagrams
+### 1.4.3. Use case diagrams
 
-#### Activity diagrams
+#### 1.4.3.1. Activity diagrams
 
 ```mermaid
 graph TD
@@ -296,7 +296,7 @@ graph TD
     G -->|Dine-in| J[Order Served]
 ```
 
-#### State machine diagrams
+#### 1.4.3.2. State machine diagrams
 
 ```mermaid
 stateDiagram
@@ -308,7 +308,7 @@ stateDiagram
     Tracking --> [*]
 ```
 
-#### Sequence diagrams
+#### 1.4.3.3. Sequence diagrams
 
 ```mermaid
 sequenceDiagram
@@ -325,7 +325,7 @@ sequenceDiagram
     Website-->>User: Display menu items
 ```
 
-#### Communication diagrams
+#### 1.4.3.4. Communication diagrams
 
 ```mermaid
 graph TB
@@ -394,7 +394,7 @@ graph TB
     SOCKET --> DB
 ```
 
-#### Interaction overview diagrams
+#### 1.4.3.5. Interaction overview diagrams
 
 ```mermaid
 graph TB
@@ -459,7 +459,7 @@ graph TB
     class BROWSE,LOGIN,VIEW_MENU,ADD_CART,PLACE_ORDER,TRACK,REST_LOGIN,ORDER_MANAGE,UPDATE_STATUS action
 ```
 
-### 1.4.3. Key Use Cases and Scenarios
+### 1.4.4. Key Use Cases and Scenarios
 
 1. **User Registration and Login**
    - Users can create an account using their phonenumber.
@@ -520,13 +520,36 @@ The website is deployed on firebase.com and hosted on Google Cloud Platform. The
 
 ### 1.5.4. Environment Setup
 
-1. create a firebase project
+<!-- 1. create a firebase project
 2. enable firestore and storage
 3. create a web app
 4. copy the firebase config and paste it in the environment.ts file
 5. run `npm run dev` to run the project in development mode
 6. run `firebase use staging` to use the staging environment
-7. run `firebase deploy` to deploy the project
+7. run `firebase deploy` to deploy the project -->
+
+1. Go to `https://firebase.google.com/` and click on `Go to console`.
+![firebase homepage]( https://i.imgur.com/Qn5lZ2k.png "firebase")
+2. Click on `Get started with a Firebase project`.
+![firebase console]( https://i.imgur.com/Y9YFFJZ.png "firebase console")
+3. Enter the project name and click on `Continue`.
+![project name](https://i.imgur.com/p8wzeI3.png "project name")
+4. Click on `Create project`.
+![create project](https://i.imgur.com/QEzwl6P.png "create project")
+5. Click on `Continue`.
+![continue](https://i.imgur.com/BhSP494.png "continue")
+6. Click on "hosting".
+![hosting](https://i.imgur.com/G4rjM8y.png "hosting")
+7. Click on `Get started`.
+![get started](https://i.imgur.com/uUtGiuC.png "get started")
+8. Install firebase tools using `npm install -g firebase-tools`.
+![install firebase](https://i.imgur.com/Ix7bYy2.png "install firebase")
+9. Login to firebase using `firebase login`.
+![login](https://i.imgur.com/E0jXBGn.png "login")
+10. Initialize firebase using `firebase init`.
+![init](https://i.imgur.com/E0jXBGn.png "init")
+11. Deploy to Firebase Hosting using `firebase deploy`.
+![deploy](https://i.imgur.com/Fe3OCQ1.png "deploy")
 
 ## 1.6. Beginner’s Guide to Programming
 
@@ -549,32 +572,88 @@ Web development is the process of building websites and web applications using a
 
 ### 1.6.3. Step-by-Step Guide to Setting Up the Project Locally
 
-1. Clone the repository from GitHub using the `git clone https://github.com/Harsh98992/digitalMenu.git` command.
+<!-- 1. Clone the repository from GitHub using the `git clone https://github.com/Harsh98992/digitalMenu.git` command.
 2. Install Node.js from the official website.
 3. Install Angular CLI using the `npm install -g @angular/cli` command.
 4. Install MongoDB from the official website.
 5. Install Git from the official website.
-6. Install Postman from the official website.
+6. Install Postman from the official website. -->
+
+1. open command prompt by pressing `windows + r` and typing `cmd` and press enter.
+![cmd](https://i.imgur.com/rKqtXCL.png "cmd")
+![cmd](https://i.imgur.com/QnGDNtv.png "cmd")
+2. Clone the repository from GitHub using the `git clone https://github.com/Harsh98992/digitalMenu.git` command.
+![clone](https://i.imgur.com/sYp8FzW.png "clone")
+3. Install Node.js from the official website `https://nodejs.org/en/`.
+![node](https://i.imgur.com/IOYDAbX.png "node")
+4. Install Angular CLI using the `npm install -g @angular/cli` command.
+5. Install MongoDB from the official website `https://www.mongodb.com/try/download/community`.
+6. Install Git from the official website `https://git-scm.com/`.
+7. Install Postman from the official website `https://www.postman.com/`.
+8. Install VS Code from the official website `https://code.visualstudio.com/`.
+9. Install Firebase CLI using the `npm install -g firebase-tools` command.
 
 ### 1.6.4. Suggested Learning Path
 
 If you are new to web development, here is a suggested learning path to get started:
 
-1. Learn HTML, CSS, and JavaScript basics.
+<!-- 1. Learn HTML, CSS, and JavaScript basics.
 2. Learn Angular basics and build a simple application.
 3. Learn Node.js basics and build a simple backend application.
 4. Learn MongoDB basics and integrate it with your backend application.
 5. Learn how to deploy your application to firebase hosting.
 6. Learn how to integrate a payment gateway like Razorpay.
 7. Learn how to integrate a messaging service like WhatsApp.
-8. Learn how to test and debug your application.
+8. Learn how to test and debug your application. -->
+
+1. **HTML, CSS, and JavaScript Basics**
+   - Learn the fundamentals of HTML from the `https://www.w3schools.com/html/` website.
+   - Learn the basics of CSS from the `https://www.w3schools.com/css/` website.
+   - Learn JavaScript basics from the `https://www.w3schools.com/js/` website.
+   - Practice building simple web pages using HTML, CSS, and JavaScript.
+
+2. **Angular Basics**
+
+   - Learn the basics of Angular from the `https://angular.io/docs` website.
+   - Build a simple Angular application using components, services, and modules.
+   - Learn how to use Angular CLI to scaffold and generate code.
+
+3. **Node.js Basics**
+   - Dive into Node.js basics from the [Node.js documentation](https://nodejs.org/en/docs/).
+   - Build a simple backend application using Express.js.
+   - Explore how to handle routing, middleware, and RESTful API endpoints.
+
+4. **MongoDB Basics**
+   - Learn MongoDB basics from the [MongoDB documentation](https://docs.mongodb.com/).
+   - Set up a MongoDB database and connect it with your Node.js backend application.
+   - Practice performing CRUD operations (Create, Read, Update, Delete).
+
+5. **Deployment to Firebase Hosting**
+   - Learn how to deploy your application using [Firebase Hosting](https://firebase.google.com/docs/hosting).
+   - Set up Firebase CLI and configure your project for deployment.
+
+6. **Payment Gateway Integration**
+   - Integrate a payment gateway like Razorpay. Check out the [Razorpay Documentation](https://razorpay.com/docs/).
+   - Implement the necessary steps to handle transactions and payments in your application.
+
+7. **Messaging Service Integration**
+   - Learn how to integrate a messaging service like WhatsApp using the [WhatsApp Business API](https://developers.facebook.com/docs/whatsapp).
+   - Set up the API and configure messaging functionalities.
+
+8. **Testing and Debugging**
+   - Learn how to test and debug your application using tools like [Jest](https://jestjs.io/) for unit testing and [Postman](https://www.postman.com/) for API testing.
+   - Implement end-to-end testing to ensure the stability of your application.
+
+Feel free to reach out if you need any more detailed guidance on any of these steps. Happy coding! 💻🚀
 
 ### 1.6.5. Debugging Basics
 
 Debugging is the process of finding and fixing errors in your code. Here are some basic debugging techniques:
 
 1. Use console.log() statements to print values and debug information.
+![console](https://i.imgur.com/U3maQ4C.png "console")
 2. Use the browser developer tools to inspect elements, view console logs, and debug JavaScript code.
+![devtools](https://i.imgur.com/vsMZqpc.png "devtools")
 3. Use breakpoints in your code to pause execution and inspect variables.
 4. Use the Angular CLI to run the project in development mode and view error messages in the console.
 5. Use the Postman tool to test APIs and view response data.
@@ -700,25 +779,25 @@ The code execution flow follows these steps:
 3. Handle payment response
 4. Verify payment status
 
-### 1.11.3. Messaging Service Integration (e.g., SMS, WhatsApp)
+### 1.11.2. Messaging Service Integration (e.g., SMS, WhatsApp)
 
-#### 1.11.3.1. Overview of Messaging Providers
+#### 1.11.2.1. Overview of Messaging Providers
 
 - WhatsApp Business API
 - Firebase Cloud Messaging
 - SMS gateway integration
 
-#### 1.11.3.2. Setting Up API Access and Authentication
+#### 1.11.2.2. Setting Up API Access and Authentication
 
 1. WhatsApp Business account setup
 2. API key configuration
 3. Template message approval
 
-#### 1.11.3.3. Sending Messages
+#### 1.11.2.3. Sending Messages
 
 ```typescript
 async function sendWhatsAppMessage(to: string, template: string, params: any[]) {
-  // Implementation
+
 }
 ```
 
@@ -797,9 +876,10 @@ async function sendWhatsAppMessage(to: string, template: string, params: any[]) 
 1. **Branch Strategy**
    - main: production
    - develop: development
-   - feature/*: new features
-   - hotfix/*: urgent fixes
-
+   - feature branches: new features
+   - bugfix branches: bug fixes
+   - hotfix branches: critical fixes
+   - release branches: version releases
 2. **Commit Messages**
    - feat: new feature
    - fix: bug fix
@@ -876,7 +956,7 @@ async function sendWhatsAppMessage(to: string, template: string, params: any[]) 
 ### 1.16.1. Common Questions by Non-Technical Staff
 
 Q: How do I update menu items?
-A: Use the admin dashboard's menu management section.
+A: Use the admin dashboard menu management section.
 
 Q: How do I process orders?
 A: Monitor the order management dashboard and update order statuses.

@@ -59,39 +59,17 @@
       - [1.11.1.1. Overview of Payment Gateway Used](#11111-overview-of-payment-gateway-used)
       - [1.11.1.2. API Keys, Credentials, and Configuration Steps](#11112-api-keys-credentials-and-configuration-steps)
       - [1.11.1.3. Step-by-Step Guide for Setting Up Payment Flow](#11113-step-by-step-guide-for-setting-up-payment-flow)
-      - [1.11.1.4. Handling Payment Status Updates (webhooks, callbacks)](#11114-handling-payment-status-updates-webhooks-callbacks)
-      - [1.11.1.5. Debugging Common Payment Issues## Ad Hoc Process Configuration](#11115-debugging-common-payment-issues-ad-hoc-process-configuration)
-    - [1.11.2. Payment Gateway Integration](#1112-payment-gateway-integration)
-      - [1.11.2.1. Overview of Payment Gateway Used](#11121-overview-of-payment-gateway-used)
-      - [1.11.2.2. API Keys, Credentials, and Configuration Steps](#11122-api-keys-credentials-and-configuration-steps)
-      - [1.11.2.3. Step-by-Step Guide for Setting Up Payment Flow](#11123-step-by-step-guide-for-setting-up-payment-flow)
-      - [1.11.2.4. Handling Payment Status Updates (webhooks, callbacks)](#11124-handling-payment-status-updates-webhooks-callbacks)
-      - [1.11.2.5. Debugging Common Payment Issues](#11125-debugging-common-payment-issues)
     - [1.11.3. Messaging Service Integration (e.g., SMS, WhatsApp)](#1113-messaging-service-integration-eg-sms-whatsapp)
-      - [1.11.3.1. Overview of Messaging Providers (e.g., Twilio, Firebase)](#11131-overview-of-messaging-providers-eg-twilio-firebase)
+      - [1.11.3.1. Overview of Messaging Providers](#11131-overview-of-messaging-providers)
       - [1.11.3.2. Setting Up API Access and Authentication](#11132-setting-up-api-access-and-authentication)
-      - [1.11.3.3. Sending SMS or WhatsApp Messages (sample code snippets)](#11133-sending-sms-or-whatsapp-messages-sample-code-snippets)
-      - [1.11.3.4. Configuring OTP Logic and Expiry Timers](#11134-configuring-otp-logic-and-expiry-timers)
-      - [1.11.3.5. Error Handling and Logging for Message Delivery Failures](#11135-error-handling-and-logging-for-message-delivery-failures)
-    - [1.11.4. WhatsApp OTP Setup](#1114-whatsapp-otp-setup)
-      - [1.11.4.1. Details of Provider (e.g., Meta’s WhatsApp Business API)](#11141-details-of-provider-eg-metas-whatsapp-business-api)
-      - [1.11.4.2. Required Credentials (Phone Numbers, API Tokens)](#11142-required-credentials-phone-numbers-api-tokens)
-      - [1.11.4.3. Configuring WhatsApp Templates for OTP Messages](#11143-configuring-whatsapp-templates-for-otp-messages)
-      - [1.11.4.4. Implementing Message Flow (request, send, verify OTP)](#11144-implementing-message-flow-request-send-verify-otp)
-      - [1.11.4.5. Troubleshooting Common WhatsApp API Issues](#11145-troubleshooting-common-whatsapp-api-issues)
-    - [1.11.5. Government Compliance-Related Processes](#1115-government-compliance-related-processes)
-      - [1.11.5.1. Overview of Compliance Requirements](#11151-overview-of-compliance-requirements)
-      - [1.11.5.2. Step-by-Step Implementation (e.g., GST APIs, Aadhaar Verification)](#11152-step-by-step-implementation-eg-gst-apis-aadhaar-verification)
-      - [1.11.5.3. Sample Data Formats for Government APIs](#11153-sample-data-formats-for-government-apis)
-      - [1.11.5.4. Error Handling and Validation for Compliance APIs](#11154-error-handling-and-validation-for-compliance-apis)
-      - [1.11.5.5. Documentation Links to Government APIs and Resources](#11155-documentation-links-to-government-apis-and-resources)
+      - [1.11.3.3. Sending Messages](#11133-sending-messages)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
     - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
     - [1.12.3. Technical Testing](#1123-technical-testing)
     - [1.12.4. Bug Reporting Guidelines](#1124-bug-reporting-guidelines)
   - [1.13. Deployment and Maintenance](#113-deployment-and-maintenance)
-    - [1.13.1. Deployment Process (step-by-step)](#1131-deployment-process-step-by-step)
+    - [1.13.1. Deployment Process](#1131-deployment-process)
     - [1.13.2. Version Control Guidelines](#1132-version-control-guidelines)
     - [1.13.3. Backup and Recovery Plan](#1133-backup-and-recovery-plan)
   - [1.14. Troubleshooting Guide](#114-troubleshooting-guide)
@@ -429,114 +407,299 @@ The code execution flow follows these steps:
 
 ### 1.10.1. Screenshots of All Pages (annotated with descriptions)
 
+1. **Login Page**
+   - User authentication interface
+   - Phone number input
+   - OTP verification
+
+2. **Menu Page**
+   - Category-wise menu items
+   - Item details with images
+   - Add to cart functionality
+
+3. **Cart Page**
+   - Order summary
+   - Item quantity adjustment
+   - Checkout process
+
+4. **Admin Dashboard**
+   - Order management
+   - Menu management
+   - Analytics overview
+
 ### 1.10.2. Navigation Map
 
+```
+Home
+├── Menu
+│   ├── Categories
+│   └── Items
+├── Cart
+│   └── Checkout
+├── Orders
+│   └── Order Details
+└── Admin
+    ├── Dashboard
+    ├── Menu Management
+    └── Orders Management
+```
+
 ### 1.10.3. Design Principles Used
+
+1. **Material Design**
+   - Consistent UI components
+   - Responsive layouts
+   - Intuitive interactions
+
+2. **User Experience**
+   - Clear navigation
+   - Fast loading
+   - Error handling
 
 ## 1.11. Ad Hoc Process Configuration
 
 ### 1.11.1. Payment Gateway Integration
 
 #### 1.11.1.1. Overview of Payment Gateway Used
+- Razorpay integration
+- Secure payment processing
+- Multiple payment methods
 
 #### 1.11.1.2. API Keys, Credentials, and Configuration Steps
+1. Obtain Razorpay API keys
+2. Configure in environment files
+3. Set up webhook endpoints
 
 #### 1.11.1.3. Step-by-Step Guide for Setting Up Payment Flow
-
-#### 1.11.1.4. Handling Payment Status Updates (webhooks, callbacks)
-
-#### 1.11.1.5. Debugging Common Payment Issues## Ad Hoc Process Configuration
-
-### 1.11.2. Payment Gateway Integration
-
-#### 1.11.2.1. Overview of Payment Gateway Used
-
-#### 1.11.2.2. API Keys, Credentials, and Configuration Steps
-
-#### 1.11.2.3. Step-by-Step Guide for Setting Up Payment Flow
-
-#### 1.11.2.4. Handling Payment Status Updates (webhooks, callbacks)
-
-#### 1.11.2.5. Debugging Common Payment Issues
+1. Initialize Razorpay
+2. Create order
+3. Handle payment response
+4. Verify payment status
 
 ### 1.11.3. Messaging Service Integration (e.g., SMS, WhatsApp)
 
-#### 1.11.3.1. Overview of Messaging Providers (e.g., Twilio, Firebase)
+#### 1.11.3.1. Overview of Messaging Providers
+- WhatsApp Business API
+- Firebase Cloud Messaging
+- SMS gateway integration
 
 #### 1.11.3.2. Setting Up API Access and Authentication
+1. WhatsApp Business account setup
+2. API key configuration
+3. Template message approval
 
-#### 1.11.3.3. Sending SMS or WhatsApp Messages (sample code snippets)
-
-#### 1.11.3.4. Configuring OTP Logic and Expiry Timers
-
-#### 1.11.3.5. Error Handling and Logging for Message Delivery Failures
-
-### 1.11.4. WhatsApp OTP Setup
-
-#### 1.11.4.1. Details of Provider (e.g., Meta’s WhatsApp Business API)
-
-#### 1.11.4.2. Required Credentials (Phone Numbers, API Tokens)
-
-#### 1.11.4.3. Configuring WhatsApp Templates for OTP Messages
-
-#### 1.11.4.4. Implementing Message Flow (request, send, verify OTP)
-
-#### 1.11.4.5. Troubleshooting Common WhatsApp API Issues
-
-### 1.11.5. Government Compliance-Related Processes
-
-#### 1.11.5.1. Overview of Compliance Requirements
-
-#### 1.11.5.2. Step-by-Step Implementation (e.g., GST APIs, Aadhaar Verification)
-
-#### 1.11.5.3. Sample Data Formats for Government APIs
-
-#### 1.11.5.4. Error Handling and Validation for Compliance APIs
-
-#### 1.11.5.5. Documentation Links to Government APIs and Resources
+#### 1.11.3.3. Sending Messages
+```typescript
+async function sendWhatsAppMessage(to: string, template: string, params: any[]) {
+  // Implementation
+}
+```
 
 ## 1.12. Testing Guidelines
 
 ### 1.12.1. Overview of Testing Strategy
 
+1. **Unit Testing**
+   - Component testing
+   - Service testing
+   - Utility function testing
+
+2. **Integration Testing**
+   - API endpoint testing
+   - Database operations
+   - Authentication flow
+
 ### 1.12.2. Functional Testing Scenarios
+
+1. **Order Flow Testing**
+   - Menu item selection
+   - Cart operations
+   - Checkout process
+   - Payment integration
+
+2. **Admin Operations**
+   - Menu management
+   - Order processing
+   - User management
 
 ### 1.12.3. Technical Testing
 
+1. **Performance Testing**
+   - Load time optimization
+   - API response times
+   - Database query performance
+
+2. **Security Testing**
+   - Authentication
+   - Authorization
+   - Data encryption
+
 ### 1.12.4. Bug Reporting Guidelines
+
+1. **Bug Report Format**
+   ```
+   Title: Brief description
+   Steps to reproduce:
+   1. Step 1
+   2. Step 2
+   Expected result:
+   Actual result:
+   Environment:
+   ```
 
 ## 1.13. Deployment and Maintenance
 
-### 1.13.1. Deployment Process (step-by-step)
+### 1.13.1. Deployment Process
+
+1. **Build Process**
+   ```bash
+   ng build --configuration production
+   ```
+
+2. **Firebase Deployment**
+   ```bash
+   firebase use production
+   firebase deploy
+   ```
 
 ### 1.13.2. Version Control Guidelines
 
+1. **Branch Strategy**
+   - main: production
+   - develop: development
+   - feature/*: new features
+   - hotfix/*: urgent fixes
+
+2. **Commit Messages**
+   - feat: new feature
+   - fix: bug fix
+   - docs: documentation
+   - style: formatting
+   - refactor: code restructuring
+
 ### 1.13.3. Backup and Recovery Plan
+
+1. **Database Backup**
+   - Daily automated backups
+   - Manual backup before major updates
+   - Backup verification process
+
+2. **Recovery Procedures**
+   - Database restoration
+   - Application rollback
+   - Emergency contacts
 
 ## 1.14. Troubleshooting Guide
 
 ### 1.14.1. Common Issues and Fixes
 
+1. **Authentication Issues**
+   - Check Firebase configuration
+   - Verify API keys
+   - Clear browser cache
+
+2. **Payment Issues**
+   - Verify Razorpay integration
+   - Check webhook configuration
+   - Monitor payment logs
+
 ### 1.14.2. Debugging Tips for Developers
+
+1. **Frontend Debugging**
+   - Use Chrome DevTools
+   - Check console logs
+   - Monitor network requests
+
+2. **Backend Debugging**
+   - Firebase Functions logs
+   - Database queries
+   - API responses
 
 ## 1.15. Security Considerations
 
 ### 1.15.1. Security Practices Implemented
 
+1. **Authentication**
+   - Phone number verification
+   - JWT token management
+   - Session handling
+
+2. **Data Security**
+   - HTTPS encryption
+   - Firebase security rules
+   - Input validation
+
 ### 1.15.2. Guidelines for Handling Sensitive Data
+
+1. **User Data**
+   - Encryption at rest
+   - Secure transmission
+   - Access control
+
+2. **Payment Information**
+   - PCI compliance
+   - Tokenization
+   - Secure storage
 
 ## 1.16. FAQ
 
 ### 1.16.1. Common Questions by Non-Technical Staff
 
+Q: How do I update menu items?
+A: Use the admin dashboard's menu management section.
+
+Q: How do I process orders?
+A: Monitor the order management dashboard and update order statuses.
+
 ### 1.16.2. Questions Related to API Usage
 
+Q: How do I test API endpoints?
+A: Use Postman or the Firebase Emulator Suite.
+
+Q: How do I handle API errors?
+A: Check error codes and implement proper error handling.
+
 ### 1.16.3. Testing and Debugging FAQs
+
+Q: How do I run tests?
+A: Use `ng test` for unit tests.
+
+Q: How do I debug issues?
+A: Use browser DevTools and Firebase Console.
 
 ## 1.17. Appendix
 
 ### 1.17.1. Resources and References
 
+1. **Documentation**
+   - [Angular Documentation](https://angular.io/docs)
+   - [Firebase Documentation](https://firebase.google.com/docs)
+   - [Razorpay Documentation](https://razorpay.com/docs)
+
+2. **Tutorials**
+   - Angular tutorials
+   - Firebase guides
+   - Testing guides
+
 ### 1.17.2. Links to Tools, Libraries, and Frameworks Used
 
+1. **Development Tools**
+   - [Visual Studio Code](https://code.visualstudio.com)
+   - [Git](https://git-scm.com)
+   - [Node.js](https://nodejs.org)
+
+2. **Frameworks and Libraries**
+   - [Angular](https://angular.io)
+   - [Angular Material](https://material.angular.io)
+   - [Firebase](https://firebase.google.com)
+
 ### 1.17.3. Glossary of Technical Terms
+
+- **Angular**: Frontend framework
+- **Firebase**: Backend platform
+- **API**: Application Programming Interface
+- **JWT**: JSON Web Token
+- **REST**: Representational State Transfer
+- **OTP**: One-Time Password
+- **UI/UX**: User Interface/User Experience
+- **CI/CD**: Continuous Integration/Continuous Deployment

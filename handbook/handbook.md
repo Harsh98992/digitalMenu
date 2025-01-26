@@ -15,12 +15,25 @@
     - [1.3.3. Target Audience for the Website (end-users)](#133-target-audience-for-the-website-end-users)
     - [1.3.4. High-Level Overview of the Website Workflow](#134-high-level-overview-of-the-website-workflow)
     - [1.3.5. Glossary of Terms (for technical and non-technical users)](#135-glossary-of-terms-for-technical-and-non-technical-users)
+      - [General Terms](#general-terms)
+      - [Order Types](#order-types)
+      - [User Roles](#user-roles)
+      - [Technical Terms](#technical-terms)
+      - [Payment Terms](#payment-terms)
+      - [Features](#features)
   - [1.4. Functional Flow](#14-functional-flow)
     - [1.4.1. User Flows](#141-user-flows)
     - [1.4.2. Visual Flow Diagrams for Each User Flow](#142-visual-flow-diagrams-for-each-user-flow)
       - [delivery order flow](#delivery-order-flow)
       - [takeaway order flow](#takeaway-order-flow)
       - [dine-in order flow](#dine-in-order-flow)
+    - [Use case diagrams](#use-case-diagrams)
+      - [Activity diagrams](#activity-diagrams)
+      - [State machine diagrams](#state-machine-diagrams)
+      - [Sequence diagrams](#sequence-diagrams)
+      - [Communication diagrams](#communication-diagrams)
+      - [Interaction overview diagrams](#interaction-overview-diagrams)
+      - [Timing diagrams](#timing-diagrams)
     - [1.4.3. Key Use Cases and Scenarios](#143-key-use-cases-and-scenarios)
   - [1.5. Technical Architecture](#15-technical-architecture)
     - [1.5.1. Technology Stack Overview](#151-technology-stack-overview)
@@ -148,6 +161,50 @@ The target audience for the website includes:
 
 ### 1.3.5. Glossary of Terms (for technical and non-technical users)
 
+#### General Terms
+
+- **Digital Menu**: An electronic version of a restaurant's menu that can be accessed through web browsers or mobile devices
+- **POS (Point of Sale)**: The system where transactions are processed and orders are managed
+- **QR Code**: A square barcode that can be scanned by smartphones to quickly access the digital menu
+- **Cart**: A virtual collection of items selected by the customer before placing an order
+
+#### Order Types
+
+- **Dine-in**: Customers eating at the restaurant premises
+- **Takeaway**: Customers picking up their order from the restaurant
+- **Delivery**: Food being delivered to the customer's specified location
+
+#### User Roles
+
+- **Customer**: End-user who browses the menu and places orders
+- **Restaurant Staff**: Personnel who manage orders and update menu items
+- **Admin**: System administrator with full access to manage the platform
+- **Delivery Partner**: Person responsible for delivering orders to customers
+
+#### Technical Terms
+
+- **Frontend**: The user interface that customers interact with (website/app)
+- **Backend**: Server-side system that processes requests and manages data
+- **API (Application Programming Interface)**: System that allows different parts of the application to communicate
+- **Database**: System that stores all menu items, orders, and user information
+- **Authentication**: Process of verifying user identity
+- **Cache**: Temporary storage of frequently accessed data for faster performance
+
+#### Payment Terms
+
+- **Payment Gateway**: System that processes online payments securely
+- **Transaction**: A completed order payment
+- **Payment Status**: Current state of payment (pending/completed/failed)
+- **Refund**: Return of payment to customer's account
+
+#### Features
+
+- **Real-time Tracking**: Live monitoring of order status
+- **Menu Customization**: Ability to modify menu items based on availability
+- **Order History**: Record of all past orders
+- **Favorites**: Saved list of frequently ordered items
+- **Reviews & Ratings**: Customer feedback system
+
 ## 1.4. Functional Flow
 
 ### 1.4.1. User Flows
@@ -221,6 +278,103 @@ sequenceDiagram
     Restaurant->>Customer: Serve food
     Customer->>Restaurant: Pay bill
     Restaurant->>Customer: Thank customer
+```
+
+### Use case diagrams
+
+#### Activity diagrams
+
+```mermaid
+graph TD
+    A[Start] --> B{User}
+    B -->|Browse Menu| C[Menu Page]
+    C -->|Select Items| D[Cart Page]
+    D -->|Review Cart| E[Checkout Page]
+    E -->|Place Order| F[Order Confirmation]
+    F -->|Track Order| G[Order Tracking]
+    G -->|Delivery| H[Order Delivered]
+    G -->|Pickup| I[Order Picked Up]
+    G -->|Dine-in| J[Order Served]
+```
+
+#### State machine diagrams
+
+```mermaid
+stateDiagram
+    [*] --> Menu
+    Menu --> Cart
+    Cart --> Checkout
+    Checkout --> Order
+    Order --> Tracking
+    Tracking --> [*]
+```
+
+#### Sequence diagrams
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Website
+    participant Backend
+    participant Database
+
+    User->>Website: Browse menu
+    Website->>Backend: Fetch menu items
+    Backend->>Database: Retrieve menu data
+    Database-->>Backend: Send menu data
+    Backend-->>Website: Return menu items
+    Website-->>User: Display menu items
+```
+
+#### Communication diagrams
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Website
+    participant Backend
+    participant Database
+
+    User->>Website: Browse menu
+    Website->>Backend: Fetch menu items
+    Backend->>Database: Retrieve menu data
+    Database-->>Backend: Send menu data
+    Backend-->>Website: Return menu items
+    Website-->>User: Display menu items
+```
+
+#### Interaction overview diagrams
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Website
+    participant Backend
+    participant Database
+
+    User->>Website: Browse menu
+    Website->>Backend: Fetch menu items
+    Backend->>Database: Retrieve menu data
+    Database-->>Backend: Send menu data
+    Backend-->>Website: Return menu items
+    Website-->>User: Display menu items
+```
+
+#### Timing diagrams
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Website
+    participant Backend
+    participant Database
+
+    User->>Website: Browse menu
+    Website->>Backend: Fetch menu items
+    Backend->>Database: Retrieve menu data
+    Database-->>Backend: Send menu data
+    Backend-->>Website: Return menu items
+    Website-->>User: Display menu items
 ```
 
 ### 1.4.3. Key Use Cases and Scenarios
@@ -429,21 +583,6 @@ The code execution flow follows these steps:
 
 ### 1.10.2. Navigation Map
 
-```
-Home
-├── Menu
-│   ├── Categories
-│   └── Items
-├── Cart
-│   └── Checkout
-├── Orders
-│   └── Order Details
-└── Admin
-    ├── Dashboard
-    ├── Menu Management
-    └── Orders Management
-```
-
 ### 1.10.3. Design Principles Used
 
 1. **Material Design**
@@ -461,16 +600,19 @@ Home
 ### 1.11.1. Payment Gateway Integration
 
 #### 1.11.1.1. Overview of Payment Gateway Used
+
 - Razorpay integration
 - Secure payment processing
 - Multiple payment methods
 
 #### 1.11.1.2. API Keys, Credentials, and Configuration Steps
+
 1. Obtain Razorpay API keys
 2. Configure in environment files
 3. Set up webhook endpoints
 
 #### 1.11.1.3. Step-by-Step Guide for Setting Up Payment Flow
+
 1. Initialize Razorpay
 2. Create order
 3. Handle payment response
@@ -479,16 +621,19 @@ Home
 ### 1.11.3. Messaging Service Integration (e.g., SMS, WhatsApp)
 
 #### 1.11.3.1. Overview of Messaging Providers
+
 - WhatsApp Business API
 - Firebase Cloud Messaging
 - SMS gateway integration
 
 #### 1.11.3.2. Setting Up API Access and Authentication
+
 1. WhatsApp Business account setup
 2. API key configuration
 3. Template message approval
 
 #### 1.11.3.3. Sending Messages
+
 ```typescript
 async function sendWhatsAppMessage(to: string, template: string, params: any[]) {
   // Implementation
@@ -537,26 +682,29 @@ async function sendWhatsAppMessage(to: string, template: string, params: any[]) 
 ### 1.12.4. Bug Reporting Guidelines
 
 1. **Bug Report Format**
-   ```
-   Title: Brief description
-   Steps to reproduce:
-   1. Step 1
-   2. Step 2
-   Expected result:
-   Actual result:
-   Environment:
-   ```
+
+    - Title: Short description of the issue
+    - Description: Detailed explanation of the problem
+    - Steps to Reproduce: Step-by-step guide to reproduce the bug
+    - Expected Behavior: What should happen
+    - Actual Behavior: What is happening
+    - Screenshots: Visual evidence of the bug
+    - Environment: Browser, device, OS
+    - Severity: Low/Medium/High
+    - Priority: Low/Medium/High
 
 ## 1.13. Deployment and Maintenance
 
 ### 1.13.1. Deployment Process
 
 1. **Build Process**
+
    ```bash
    ng build --configuration production
    ```
 
 2. **Firebase Deployment**
+
    ```bash
    firebase use production
    firebase deploy

@@ -33,7 +33,6 @@
       - [Sequence diagrams](#sequence-diagrams)
       - [Communication diagrams](#communication-diagrams)
       - [Interaction overview diagrams](#interaction-overview-diagrams)
-      - [Timing diagrams](#timing-diagrams)
     - [1.4.3. Key Use Cases and Scenarios](#143-key-use-cases-and-scenarios)
   - [1.5. Technical Architecture](#15-technical-architecture)
     - [1.5.1. Technology Stack Overview](#151-technology-stack-overview)
@@ -286,7 +285,7 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    A[Start] --> B{User}
+    A[Start] --> B[User]
     B -->|Browse Menu| C[Menu Page]
     C -->|Select Items| D[Cart Page]
     D -->|Review Cart| E[Checkout Page]
@@ -329,52 +328,135 @@ sequenceDiagram
 #### Communication diagrams
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant Website
-    participant Backend
-    participant Database
+graph TB
+    subgraph Frontend [Angular Frontend]
+        APP[App Module]
+        LANDING[Landing Module]
+        REST[Restaurant Module]
+        ADMIN[Admin Module]
+        ORDER[Order Module]
 
-    User->>Website: Browse menu
-    Website->>Backend: Fetch menu items
-    Backend->>Database: Retrieve menu data
-    Database-->>Backend: Send menu data
-    Backend-->>Website: Return menu items
-    Website-->>User: Display menu items
+        subgraph Components
+            HOME[Homepage Component]
+            LAYOUT[Layout Component]
+            MENU[Restaurant Menu Component]
+            MYORDER[My Order Component]
+        end
+
+        subgraph Services
+            AUTH[Authentication Service]
+            CUST[Customer Service]
+            REST_SVC[Restaurant Service]
+            ORDER_SVC[Order Service]
+        end
+    end
+
+    subgraph Backend [Backend]
+        API[API Server]
+        SOCKET[Socket.IO Server]
+    end
+
+    subgraph External
+        DB[(Database)]
+        FIREBASE[Firebase]
+    end
+
+    %% Frontend Module Relations
+    APP --> LANDING
+    APP --> REST
+    APP --> ADMIN
+    APP --> ORDER
+
+    %% Component Relations
+    REST --> HOME
+    REST --> LAYOUT
+    REST --> MENU
+    REST --> MYORDER
+
+    %% Service Communications
+    HOME --> AUTH
+    HOME --> REST_SVC
+    LAYOUT --> AUTH
+    LAYOUT --> ORDER_SVC
+    MENU --> REST_SVC
+    MENU --> ORDER_SVC
+    MYORDER --> ORDER_SVC
+
+    %% Backend Communications
+    AUTH --> API
+    REST_SVC --> API
+    ORDER_SVC --> API
+    ORDER_SVC --> SOCKET
+
+    %% External Communications
+    API --> DB
+    API --> FIREBASE
+    SOCKET --> DB
 ```
 
 #### Interaction overview diagrams
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant Website
-    participant Backend
-    participant Database
+graph TB
+    subgraph "User Interactions"
+        START((Start))
+        BROWSE[Browse Restaurants]
+        LOGIN[Customer Login]
+        VIEW_MENU[View Restaurant Menu]
+        ADD_CART[Add Items to Cart]
+        PLACE_ORDER[Place Order]
+        TRACK[Track Order Status]
+        END((End))
+    end
 
-    User->>Website: Browse menu
-    Website->>Backend: Fetch menu items
-    Backend->>Database: Retrieve menu data
-    Database-->>Backend: Send menu data
-    Backend-->>Website: Return menu items
-    Website-->>User: Display menu items
-```
+    subgraph "System Processes"
+        AUTH_PROC[Authentication Process]
+        MENU_LOAD[Load Menu Data]
+        CART_PROC[Cart Processing]
+        ORDER_PROC[Order Processing]
+        PAYMENT[Payment Processing]
+        NOTIFY[Real-time Notifications]
+    end
 
-#### Timing diagrams
+    subgraph "Restaurant Actions"
+        REST_LOGIN[Restaurant Login]
+        ORDER_MANAGE[Manage Orders]
+        UPDATE_STATUS[Update Order Status]
+    end
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Website
-    participant Backend
-    participant Database
+    %% Main Flow
+    START --> BROWSE
+    BROWSE --> VIEW_MENU
+    VIEW_MENU --> ADD_CART
+    ADD_CART --> LOGIN
+    LOGIN --> PLACE_ORDER
+    PLACE_ORDER --> TRACK
 
-    User->>Website: Browse menu
-    Website->>Backend: Fetch menu items
-    Backend->>Database: Retrieve menu data
-    Database-->>Backend: Send menu data
-    Backend-->>Website: Return menu items
-    Website-->>User: Display menu items
+    %% System Process Connections
+    LOGIN --> AUTH_PROC
+    VIEW_MENU --> MENU_LOAD
+    ADD_CART --> CART_PROC
+    PLACE_ORDER --> ORDER_PROC
+    ORDER_PROC --> PAYMENT
+    TRACK --> NOTIFY
+
+    %% Restaurant Flow
+    REST_LOGIN --> ORDER_MANAGE
+    ORDER_MANAGE --> UPDATE_STATUS
+    UPDATE_STATUS --> NOTIFY
+
+    %% Conditions and States
+    CART_PROC -- "Cart Empty" --> VIEW_MENU
+    AUTH_PROC -- "Auth Failed" --> LOGIN
+    PAYMENT -- "Payment Failed" --> PLACE_ORDER
+    PAYMENT -- "Success" --> TRACK
+    NOTIFY --> END
+
+    %% Styling
+    classDef process fill:#f9f,stroke:#333,stroke-width:2px
+    classDef action fill:#bbf,stroke:#333,stroke-width:2px
+    class AUTH_PROC,MENU_LOAD,CART_PROC,ORDER_PROC,PAYMENT,NOTIFY process
+    class BROWSE,LOGIN,VIEW_MENU,ADD_CART,PLACE_ORDER,TRACK,REST_LOGIN,ORDER_MANAGE,UPDATE_STATUS action
 ```
 
 ### 1.4.3. Key Use Cases and Scenarios

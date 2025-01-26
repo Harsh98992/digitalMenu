@@ -55,6 +55,13 @@
   - [1.8. API Documentation](#18-api-documentation)
     - [1.8.1. Overview of API Usage and Purpose](#181-overview-of-api-usage-and-purpose)
     - [1.8.2. API Endpoint List](#182-api-endpoint-list)
+      - [1.8.2.1. Admin Panel endpoints](#1821-admin-panel-endpoints)
+        - [1.8.2.1.1. Get Restaurants by Status](#18211-get-restaurants-by-status)
+        - [1.8.2.1.2. Get Restaurant Payment Details](#18212-get-restaurant-payment-details)
+        - [1.8.2.1.3. Get Account Transfer Details](#18213-get-account-transfer-details)
+        - [1.8.2.1.4. Get Admin Restaurant Data](#18214-get-admin-restaurant-data)
+        - [1.8.2.1.5. Change Restaurant Status](#18215-change-restaurant-status)
+        - [1.8.2.1.6. Export JSON to Excel](#18216-export-json-to-excel)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
   - [1.9. Database Design](#19-database-design)
@@ -803,7 +810,254 @@ Adhering to code standards and best practices is crucial for maintaining a high-
 
 ### 1.8.1. Overview of API Usage and Purpose
 
+The digital menu system's API infrastructure serves as the backbone of communication between the frontend application and backend services. Our APIs are built using RESTful principles and are primarily used for:
+
+1. **Menu Management**
+   - Retrieving restaurant menus and item details
+   - Managing menu items, categories, and pricing
+   - Handling menu availability and special offers
+
+2. **Order Processing**
+   - Creating and managing customer orders
+   - Tracking order status and updates
+   - Managing delivery/pickup preferences
+
+3. **User Management**
+   - Customer authentication and authorization
+   - Profile management and preferences
+   - Order history and favorites
+
+4. **Restaurant Operations**
+   - Staff authentication and role-based access
+   - Order queue management
+   - Real-time kitchen notifications
+
+All APIs use JSON for data exchange and require proper authentication using JWT tokens. The base URL for all API endpoints is `/api/v1`, and requests are secured using HTTPS protocol.
+
 ### 1.8.2. API Endpoint List
+
+#### 1.8.2.1. Admin Panel endpoints
+
+##### 1.8.2.1.1. Get Restaurants by Status
+
+- **Endpoint**: `/api/v1/admin/getRestaurantsByStatus/:restaurantVerified`
+- **Method**: GET
+- **Description**: Retrieves a list of restaurants based on their verification status.
+- **Parameters**:
+  - `restaurantVerified` (boolean): Indicates whether the restaurant is verified or not.
+  - Example: `/api/v1/admin/getRestaurantsByStatus/true`
+  - Example Response:
+
+    ```json
+    {
+      "restaurants": [
+        {
+          "id": "123",
+          "name": "Restaurant A",
+          "verified": true
+        },
+        {
+          "id": "456",
+          "name": "Restaurant B",
+          "verified": true
+        }
+      ]
+    }
+    ```
+
+- **Response**: Returns an array of restaurant objects with their details.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+  ```typescript
+  getRestaurantsByStatus(restaurantVerified: boolean) {
+      return this.http.get(
+          `${this.apiUrl}/v1/admin/getRestaurantsByStatus/${restaurantVerified}`
+      );
+  }
+  ```
+
+##### 1.8.2.1.2. Get Restaurant Payment Details
+
+- **Endpoint**: `/api/v1/payment/getAccountPaymentDetails`
+- **Method**: GET
+- **Description**: Fetches payment details for all restaurant accounts.
+- **Parameters**: None.
+- **Example Response**:
+
+  ```json
+  {
+    "payments": [
+      {
+        "restaurantId": "123",
+        "restaurantName": "Restaurant A",
+        "totalEarnings": 15000,
+        "pendingAmount": 5000,
+        "lastPaymentDate": "2025-01-10"
+      },
+      {
+        "restaurantId": "456",
+        "restaurantName": "Restaurant B",
+        "totalEarnings": 20000,
+        "pendingAmount": 3000,
+        "lastPaymentDate": "2025-01-12"
+      }
+    ]
+  }
+  ```
+
+- **Response**: Returns an array of objects containing payment information for each restaurant.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+  ```typescript
+  getRestaurantPayment() {
+      return this.http.get(
+          `${this.apiUrl}/v1/payment/getAccountPaymentDetails`
+      );
+  }
+  ```
+
+##### 1.8.2.1.3. Get Account Transfer Details
+
+- **Endpoint**: `/api/v1/payment/getAccountTransferDetails/:orderId`
+- **Method**: GET
+- **Description**: Retrieves transfer details for a specific order.
+- **Parameters**:
+  - `orderId` (string): The unique identifier for the order.
+- **Example**: `/api/v1/payment/getAccountTransferDetails/ORD12345`
+- **Example Response**:
+
+  ```json
+  {
+    "orderId": "ORD12345",
+    "restaurantId": "123",
+    "transferAmount": 2000,
+    "transferDate": "2025-01-15",
+    "status": "Completed"
+  }
+  ```
+
+- **Response**: Returns an object with the details of the account transfer related to the order.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the order ID is invalid or the request fails.
+- **Sample Code**:
+
+  ```typescript
+  getAccountTransferDetails(orderId: string) {
+      return this.http.get(
+          `${this.apiUrl}/v1/payment/getAccountTransferDetails/${orderId}`
+      );
+  }
+  ```
+
+##### 1.8.2.1.4. Get Admin Restaurant Data
+
+- **Endpoint**: `/api/v1/admin/getRestaurantDetail/:id`
+- **Method**: GET
+- **Description**: Fetches detailed information about a specific restaurant.
+- **Parameters**:
+  - `id` (string): The unique identifier for the restaurant.
+- **Example**: `/api/v1/admin/getRestaurantDetail/123`
+- **Example Response**:
+
+  ```json
+  {
+    "id": "123",
+    "name": "Restaurant A",
+    "verified": true,
+    "owner": "John Doe",
+    "contact": "123-456-7890",
+    "address": "123 Main St, City, State",
+    "cuisine": ["Italian", "Mexican"],
+    "ratings": 4.5
+  }
+  ```
+
+- **Response**: Returns detailed information about the restaurant, including owner details, address, and ratings.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
+- **Sample Code**:
+
+  ```typescript
+  getAdminRestaurantData(id: string) {
+      return this.http.get(
+          `${this.apiUrl}/v1/admin/getRestaurantDetail/${id}`
+      );
+  }
+  ```
+
+##### 1.8.2.1.5. Change Restaurant Status
+
+- **Endpoint**: `/api/v1/admin/changeRestaurantStatus/:id`
+- **Method**: PATCH
+- **Description**: Updates the verification status of a restaurant.
+- **Parameters**:
+  - `id` (string): The unique identifier for the restaurant.
+  - Request Body:
+
+    ```json
+    {
+      "verified": true
+    }
+    ```
+
+- **Example**: `/api/v1/admin/changeRestaurantStatus/123`
+- **Example Response**:
+
+  ```json
+  {
+    "message": "Restaurant status updated successfully."
+  }
+  ```
+
+- **Response**: Returns a success message upon updating the restaurant's status.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
+- **Sample Code**:
+
+  ```typescript
+  changeRestaurantStatus(id: string, data: any) {
+      return this.http.patch(
+          `${this.apiUrl}/v1/admin/changeRestaurantStatus/${id}`,
+          data
+      );
+  }
+  ```
+
+##### 1.8.2.1.6. Export JSON to Excel
+
+- **Functionality**: Exports data from JSON format into an Excel file.
+- **Usage**: Used to export restaurant or payment details for reporting purposes.
+- **Parameters**:
+  - `jsonData` (Array): The JSON data to be exported.
+  - `fileName` (string): Name of the Excel file to be saved.
+- **Sample Code**:
+
+  ```typescript
+  public exportJsonToExcel(jsonData: any[], fileName: string): void {
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
+      const workbook: XLSX.WorkBook = {
+          Sheets: { data: worksheet },
+          SheetNames: ["data"],
+      };
+      const excelBuffer: any = XLSX.write(workbook, {
+          bookType: "xlsx",
+          type: "array",
+      });
+      this.saveAsExcelFile(excelBuffer, fileName);
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+      const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
+      saveAs(
+          data,
+          fileName + "_export_" + new Date().getTime() + this.EXCEL_EXTENSION
+      );
+  }
+  ```
 
 ### 1.8.3. Error Codes and Handling
 

@@ -158,6 +158,40 @@ The target audience for the website includes:
 
 ### 1.3.4. High-Level Overview of the Website Workflow
 
+```mermaid
+graph TB
+    subgraph Client["Frontend (Angular 14)"]
+        UI[User Interface]
+        PWA[Progressive Web App]
+        Components[Angular Components]
+        Services[Angular Services]
+        MaterialUI[Angular Material UI]
+    end
+
+    subgraph Firebase["Firebase Backend"]
+        Auth[Authentication]
+        DB[(Firebase Database)]
+        Storage[Cloud Storage]
+        Hosting[Firebase Hosting]
+    end
+
+    subgraph Features["Core Features"]
+        QR[QR Code Generation/Scanning]
+        Maps[Google Maps Integration]
+        Print[Thermal Printing]
+        Payment[Payment Processing]
+        RealTime[Real-time Updates]
+    end
+
+    Client --> Firebase
+    Features --> Client
+    Socket[Socket.io] --> RealTime
+
+    style Client fill:#f9f,stroke:#333,stroke-width:2px
+    style Firebase fill:#ff9,stroke:#333,stroke-width:2px
+    style Features fill:#9f9,stroke:#333,stroke-width:2px
+```
+
 ### 1.3.5. Glossary of Terms (for technical and non-technical users)
 
 #### 1.3.5.1. General Terms

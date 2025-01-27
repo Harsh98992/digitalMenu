@@ -130,6 +130,8 @@
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
       - [1.8.3.3. Error Handling Best Practices](#1833-error-handling-best-practices)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
+      - [Basic installation and setup](#basic-installation-and-setup)
+      - [Making a request](#making-a-request)
   - [1.9. Database Design](#19-database-design)
     - [1.9.1. Database Schema Overview](#191-database-schema-overview)
     - [1.9.2. **Entities and Attributes**](#192-entities-and-attributes)
@@ -3956,6 +3958,31 @@ The application uses a centralized error dialog component (`ErrorDialogComponent
    - Session token refresh mechanisms
 
 ### 1.8.4. How to Test APIs as a Beginner
+
+Testing APIs is an essential part of software development. Here's a beginner-friendly guide to testing APIs using tools like Thunder Client.
+
+#### Basic installation and setup
+
+1. search for "Thunder Client" in the extensions marketplace.
+![Thunder Client](https://i.imgur.com/bhnJkGQ.png "Thunder Client")
+2. Install the extension and reload your VS Code window.
+![Thunder Client](https://i.imgur.com/IlvKIHG.png "Thunder Client")
+3. Open the Thunder Client extension from the sidebar.
+![Thunder Client Sidebar](https://i.imgur.com/ShC2WBK.png "Thunder Client Sidebar")
+4. Click on the `New Request` button to create a new request.
+![New Request](https://i.imgur.com/0iGHmPb.png "New Request")
+
+#### Making a request
+
+1. Enter the URL of the API endpoint you want to test.
+![Request URL](https://i.imgur.com/hQD65sc.png "Request URL")
+2. Select the HTTP method (GET, POST, PUT, DELETE, etc.).
+3. Add any required headers, query parameters, or request body.
+4. Click the `Send` button to make the request.
+5. View the response in the right-hand panel.
+![Response](https://i.imgur.com/3f6kIQx.png "Response")
+6. Check the status code, response body, and headers.
+7. Use the response data for further testing or debugging.
 
 ## 1.9. Database Design
 

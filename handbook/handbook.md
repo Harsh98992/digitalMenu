@@ -3657,6 +3657,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/updateStoreSettings`, gstData);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3669,6 +3670,7 @@ export class RestaurantPanelService {
         console.log("Store settings updated:", response);
     });
     ```
+
 ---
 
 ##### Update Restaurant Cash On Delivery
@@ -3696,6 +3698,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantCashOnDelivery`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3707,6 +3710,7 @@ export class RestaurantPanelService {
         console.log("Cash on delivery settings updated:", response);
     });
     ```
+
 ---
 
 ##### Update Restaurant Bypass Auth
@@ -3734,6 +3738,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantByPassAuth`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3745,6 +3750,7 @@ export class RestaurantPanelService {
         console.log("Bypass authentication settings updated:", response);
     });
     ```
+
 ---
 
 ##### Update Restaurant Auto Reject
@@ -3772,6 +3778,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantAutoReject`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3783,10 +3790,10 @@ export class RestaurantPanelService {
         console.log("Auto-reject settings updated:", response);
     });
     ```
+
 ---
 
 ##### Update Restaurant Dine-In GST Setting
-
 
 - **Endpoint**: `/api/v1/restaurant/updateRestaurantDineInGstSetting`
 - **Method**: PATCH
@@ -3812,6 +3819,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantDineInGstSetting`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3824,10 +3832,10 @@ export class RestaurantPanelService {
         console.log("Dine-in GST settings updated:", response);
     });
     ```
+
 ---
 
 ##### Update Contact Detail
-
 
 #### 1.8.2.8. User Service Endpoints
 

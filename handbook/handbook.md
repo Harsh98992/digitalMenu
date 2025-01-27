@@ -258,6 +258,8 @@ The target audience for the website includes:
 - Anyone who prefers the convenience of online food ordering
 - Anyone who wants to avoid the hassle of cooking
 
+<div style="page-break-after: always;"></div>
+
 ### 1.3.4. High-Level Overview of the Website Workflow
 
 ```mermaid
@@ -342,6 +344,8 @@ graph TB
 
 ## 1.4. Functional Flow
 
+<div style="page-break-after: always;"></div>
+
 ### 1.4.1. User Flows
 
 ```mermaid
@@ -357,6 +361,8 @@ graph TD
     I --> J[Order tracking]
     J --> K[Order delivery]
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 1.4.2. Visual Flow Diagrams for Each User Flow
 
@@ -379,6 +385,8 @@ sequenceDiagram
     DeliveryPerson->>Customer: Thank customer
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 1.4.2.2. takeaway order flow
 
 ```mermaid
@@ -393,6 +401,8 @@ sequenceDiagram
     Customer->>Restaurant: Pay bill
     Restaurant->>Customer: Thank customer
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### 1.4.2.3. dine-in order flow
 
@@ -415,6 +425,8 @@ sequenceDiagram
     Restaurant->>Customer: Thank customer
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 1.4.3. Use case diagrams
 
 #### 1.4.3.1. Activity diagrams
@@ -432,6 +444,8 @@ graph TD
     G -->|Dine-in| J[Order Served]
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 1.4.3.2. State machine diagrams
 
 ```mermaid
@@ -443,6 +457,8 @@ stateDiagram
     Order --> Tracking
     Tracking --> [*]
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### 1.4.3.3. Sequence diagrams
 
@@ -460,6 +476,8 @@ sequenceDiagram
     Backend-->>Website: Return menu items
     Website-->>User: Display menu items
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### 1.4.3.4. Communication diagrams
 
@@ -529,6 +547,8 @@ graph TB
     API --> FIREBASE
     SOCKET --> DB
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### 1.4.3.5. Interaction overview diagrams
 
@@ -718,13 +738,6 @@ Web development is the process of building websites and web applications using a
 
 ### 1.6.3. Step-by-Step Guide to Setting Up the Project Locally
 
-<!-- 1. Clone the repository from GitHub using the `git clone https://github.com/Harsh98992/digitalMenu.git` command.
-2. Install Node.js from the official website.
-3. Install Angular CLI using the `npm install -g @angular/cli` command.
-4. Install MongoDB from the official website.
-5. Install Git from the official website.
-6. Install Postman from the official website. -->
-
 1. open command prompt by pressing `windows + r` and typing `cmd` and press enter.
    ![cmd](https://i.imgur.com/rKqtXCL.png "cmd")
    ![cmd](https://i.imgur.com/QnGDNtv.png "cmd")
@@ -811,6 +824,8 @@ The codebase is organized into the following directories:
 - `src/app` - Contains the Angular components, services, and modules.
 - `src/assets` - Contains static assets like images, fonts, and stylesheets.
 - `src/api` - Contains API endpoints and services for interacting with the backend.
+
+<div style="page-break-after: always;"></div>
 
 ### 1.7.2. Code Execution Flow
 
@@ -4807,6 +4822,8 @@ The database schema includes several key tables, each with a distinct role in ma
 ---
 
 These tables collectively form the backbone of the system, ensuring efficient storage and retrieval of information related to customers, orders, promotions, and restaurant operations. They are designed to handle various functionalities critical for a restaurant and food delivery platform.
+
+<div style="page-break-after: always;"></div>
 
 ### 1.9.5. Entity-Relationship Diagrams (ERD)
 

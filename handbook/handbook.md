@@ -74,6 +74,29 @@
         - [1.8.2.2.6. sendEmailVerificationOtp](#18226-sendemailverificationotp)
         - [1.8.2.2.7. verifyEmailOtp](#18227-verifyemailotp)
         - [1.8.2.2.8. Utility Methods](#18228-utility-methods)
+      - [1.8.2.3. Customer Details Endpoints](#1823-customer-details-endpoints)
+        - [1.8.2.3.1. Store Customer Details](#18231-store-customer-details)
+        - [1.8.2.3.2. Get Customer Details](#18232-get-customer-details)
+      - [1.8.2.4. Customer Service Endpoints](#1824-customer-service-endpoints)
+      - [1.8.2.5. Get Customer](#1825-get-customer)
+        - [1.8.2.5.1. Add Customer Address](#18251-add-customer-address)
+        - [1.8.2.5.2. Edit Customer Address](#18252-edit-customer-address)
+        - [1.8.2.5.3. Send Email](#18253-send-email)
+        - [1.8.2.5.4. Delete Address of Requesting Customer by ID](#18254-delete-address-of-requesting-customer-by-id)
+        - [1.8.2.5.5. Get Nearby Restaurants](#18255-get-nearby-restaurants)
+        - [1.8.2.5.6. Get All Restaurants](#18256-get-all-restaurants)
+        - [1.8.2.5.7. Get Restaurant Details by URL](#18257-get-restaurant-details-by-url)
+        - [1.8.2.5.8. Get Restaurant Details by ID](#18258-get-restaurant-details-by-id)
+        - [1.8.2.5.9. Get Promo Codes for Restaurant by URL](#18259-get-promo-codes-for-restaurant-by-url)
+        - [1.8.2.5.10. Check If Promo Code is Valid](#182510-check-if-promo-code-is-valid)
+        - [1.8.2.5.11. Update Customer Data](#182511-update-customer-data)
+        - [1.8.2.5.12. Check If Dine-In is Available](#182512-check-if-dine-in-is-available)
+        - [1.8.2.5.13. Get Restaurant Status](#182513-get-restaurant-status)
+      - [1.8.2.6. Google Maps Service Endpoints](#1826-google-maps-service-endpoints)
+        - [1.8.2.6.1. Get Autocomplete Results](#18261-get-autocomplete-results)
+        - [1.8.2.6.2. Get Geocode Details](#18262-get-geocode-details)
+        - [1.8.2.6.3. Get Formatted Geocode Details](#18263-get-formatted-geocode-details)
+        - [1.8.2.6.4. Get Place Details](#18264-get-place-details)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
   - [1.9. Database Design](#19-database-design)
@@ -657,15 +680,6 @@ Web development is the process of building websites and web applications using a
 ### 1.6.4. Suggested Learning Path
 
 If you are new to web development, here is a suggested learning path to get started:
-
-<!-- 1. Learn HTML, CSS, and JavaScript basics.
-2. Learn Angular basics and build a simple application.
-3. Learn Node.js basics and build a simple backend application.
-4. Learn MongoDB basics and integrate it with your backend application.
-5. Learn how to deploy your application to firebase hosting.
-6. Learn how to integrate a payment gateway like Razorpay.
-7. Learn how to integrate a messaging service like WhatsApp.
-8. Learn how to test and debug your application. -->
 
 1. **HTML, CSS, and JavaScript Basics**
 
@@ -1296,107 +1310,6 @@ export class AdminPanelService {
 
 #### 1.8.2.2. Authentication Endpoints
 
-<!-- import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Subject } from "rxjs";
-import { environment } from "src/environments/environment";
-import { CustomerAuthService } from "../restaurant/api/customer-auth.service";
-import { UtilService } from "./util.service";
-
-@Injectable({
-    providedIn: "root",
-})
-export class AuthenticationService {
-    apiUrl = environment.apiUrl;
-    userDetail = new BehaviorSubject(null);
-    constructor(
-        private http: HttpClient,
-        private customerAuth: CustomerAuthService,
-        private utilService: UtilService
-    ) {}
-
-    changePassword(requestData) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/user/updatePassword`,
-            requestData
-        );
-    }
-
-    resetPassword(password: string, token: string) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/user/resetPassword/${token}`,
-            {
-                password,
-            }
-        );
-    }
-
-    register(userData) {
-        return this.http.post(`${this.apiUrl}/v1/user/signup`, userData);
-    }
-    login(userData: { email: string; password: string }) {
-        this.customerAuth.removeToken();
-        return this.http.post(`${this.apiUrl}/v1/user/login`, userData);
-    }
-    forgotPassword(email: string) {
-        return this.http.post(`${this.apiUrl}/v1/user/forgotPassword`, {
-            email,
-        });
-    }
-
-    sendEmailVerificationOtp(email: string) {
-        console.log("email", email);
-        const data = { email };
-        return this.http.post(`${this.apiUrl}/v1/user/emailVerification`, data);
-    }
-
-    verifyEmailOtp(otp: string, email: string) {
-        return this.http.put(`${this.apiUrl}/v1/user/verifyEmailOtp`, {
-            otp,
-            email,
-        });
-    }
-    setUserToken(token: string) {
-        sessionStorage.clear();
-        const driver = this.utilService.getPrinterDriver();
-        localStorage.clear();
-        if (driver) {
-            localStorage.setItem("printerDriver", JSON.stringify(driver));
-        }
-        sessionStorage.setItem("authToken", token);
-    }
-    setUserDetail(data) {
-        this.userDetail.next(data);
-        sessionStorage.setItem("userDetail", JSON.stringify(data));
-    }
-    getUserDetail() {
-        const data = sessionStorage.getItem("userDetail");
-        if (data) {
-            return JSON.parse(data);
-        }
-        return null;
-    }
-    checkUserLogin() {
-        const token = this.getUserToken();
-        if (token) {
-            return true;
-        }
-        return false;
-    }
-    getUserToken() {
-        return sessionStorage.getItem("authToken");
-    }
-    removeToken() {
-        sessionStorage.clear();
-        const driver = this.utilService.getPrinterDriver();
-        localStorage.clear();
-        if (driver) {
-            localStorage.setItem("printerDriver", JSON.stringify(driver));
-        }
-
-    }
-} -->
-
 ##### 1.8.2.2.1. changePassword
 
 - **Endpoint**: `/api/v1/user/updatePassword`
@@ -1626,6 +1539,868 @@ export class AuthenticationService {
             localStorage.setItem("printerDriver", JSON.stringify(driver));
         }
     }
+    ```
+
+#### 1.8.2.3. Customer Details Endpoints
+
+##### 1.8.2.3.1. Store Customer Details
+
+- **Description**: Stores the customer's name and phone number in local storage.
+- **Parameters**:
+
+  - `name` (string): The customer's name.
+  - `phoneNumber` (string): The customer's phone number.
+  - **Sample Code**:
+
+  - ```typescript
+        storeCustomerDetails(name: string, phoneNumber: string): void {
+            localStorage.setItem('customerName', name);
+            localStorage.setItem('customerPhoneNumber', phoneNumber);
+        }
+        ```
+
+- **Usage**:
+
+    ```typescript
+    customerDetailsService.storeCustomerDetails("John Doe", "123-456-7890");
+    ```
+
+##### 1.8.2.3.2. Get Customer Details
+
+- **Description**: Retrieves the customer's name and phone number from local storage.
+- **Parameters**: None.
+- **Response**: Returns an object with the customer's name and phone number.
+- **Sample Code**:
+
+    ```typescript
+    getCustomerDetails(): { name: string, phoneNumber: string } {
+        const name = localStorage.getItem('customerName');
+        const phoneNumber = localStorage.getItem('customerPhoneNumber');
+        return { name: name, phoneNumber: phoneNumber };
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const customerDetails = customerDetailsService.getCustomerDetails();
+    console.log(customerDetails);
+    ```
+
+#### 1.8.2.4. Customer Service Endpoints
+
+#### 1.8.2.5. Get Customer
+
+- **Endpoint**: `/api/v1/customer/getCustomer`
+- **Method**: GET
+- **Description**: Retrieves the details of the currently logged-in customer.
+- **Parameters**: None.
+- **Response**: Returns an object with the customer's details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getCustomer() {
+        return this.http.get(`${this.apiUrl}/v1/customer/getCustomer`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    customerService.getCustomer().subscribe((data) => {
+        console.log(data);
+    });
+    ```
+
+##### 1.8.2.5.1. Add Customer Address
+
+- **Endpoint**: `/api/v1/customer/addCustomerAddress`
+- **Method**: PATCH
+- **Description**: Adds a new address for the currently logged-in customer.
+- **Parameters**:
+
+  - `data`: An object containing the customer's address information.
+
+    - Example structure:
+
+```json
+{
+    "addressLine1": "123 Main St",
+    "addressLine2": "Apt 4B",
+    "city": "Metropolis",
+    "state": "NY",
+    "postalCode": "12345",
+    "country": "USA"
+}
+```
+
+- **Response**: Returns a confirmation message if the address is added successfully.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the address cannot be added (e.g., invalid data or server error).
+- **Sample Code**:
+
+    ```typescript
+    addCustomerAddress(data) {
+        return this.http.patch(`${this.apiUrl}/v1/customer/addCustomerAddress`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const addressData = {
+        addressLine1: "123 Main St",
+        addressLine2: "Apt 4B",
+        city: "Metropolis",
+        state: "NY",
+        postalCode: "12345",
+        country: "USA",
+    };
+
+    customerService.addCustomerAddress(addressData).subscribe((response) => {
+        console.log("Address added successfully:", response);
+    });
+    ```
+
+##### 1.8.2.5.2. Edit Customer Address
+
+- **Endpoint**: `/api/v1/customer/editCustomerAddress`
+- **Method**: PATCH
+- **Description**: Edits an existing address of the currently logged-in customer.
+- **Parameters**:
+
+  - `data`: An object containing the updated address information. It should include an address identifier (like `addressId`) and the updated address fields.
+  - Example structure:
+
+```json
+{
+    "addressId": "123",
+    "addressLine1": "456 New St",
+    "addressLine2": "Apt 7C",
+    "city": "Gotham",
+    "state": "NY",
+    "postalCode": "67890",
+    "country": "USA"
+}
+```
+
+- **Response**: Returns a confirmation message if the address is successfully updated.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the address update fails (e.g., invalid address ID, missing fields, or server error).
+- **Sample Code**:
+
+    ```typescript
+    editCustomerAddress(data) {
+        return this.http.patch(`${this.apiUrl}/v1/customer/editCustomerAddress`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const updatedAddress = {
+        addressId: "123",
+        addressLine1: "456 New St",
+        addressLine2: "Apt 7C",
+        city: "Gotham",
+        state: "NY",
+        postalCode: "67890",
+        country: "USA",
+    };
+
+    customerService
+        .editCustomerAddress(updatedAddress)
+        .subscribe((response) => {
+            console.log("Address updated successfully:", response);
+        });
+    ```
+
+##### 1.8.2.5.3. Send Email
+
+- **Endpoint**: `/api/v1/customer/contactUs`
+- **Method**: POST
+- **Description**: Sends an email message from the customer to the customer service team.
+- **Parameters**:
+
+  - `data`: An object containing the email's content (e.g., message, subject).
+
+    - Example structure:
+
+```json
+{
+    "subject": "Inquiry about Order #1234",
+    "message": "I have a question regarding my recent order. Can you help?"
+}
+```
+
+- **Response**: Returns a success message if the email is sent successfully.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the email fails to send (e.g., server error).
+- **Sample Code**:
+
+    ```typescript
+    sendEmail(data) {
+        return this.http.post(`${this.apiUrl}/v1/customer/contactUs`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const emailData = {
+        subject: "Inquiry about Order #1234",
+        message: "I have a question regarding my recent order. Can you help?",
+    };
+
+    customerService.sendEmail(emailData).subscribe((response) => {
+        console.log("Email sent successfully:", response);
+    });
+    ```
+
+##### 1.8.2.5.4. Delete Address of Requesting Customer by ID
+
+- **Endpoint**: `/api/v1/customer/deleteAddressOfRequestCustomerById/{id}`
+- **Method**: DELETE
+- **Description**: Deletes a specific address of the currently logged-in customer by its ID.
+- **Parameters**:
+  - `id`: The unique identifier of the address to be deleted.
+- **Response**: Returns a confirmation message if the address is deleted successfully.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the address cannot be deleted (e.g., invalid ID, address not found).
+- **Sample Code**:
+
+    ```typescript
+    deleteAddressOfRequestCustomerById(id) {
+        return this.http.delete(`${this.apiUrl}/v1/customer/deleteAddressOfRequestCustomerById/${id}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const addressId = "123";
+    customerService
+        .deleteAddressOfRequestCustomerById(addressId)
+        .subscribe((response) => {
+            console.log("Address deleted successfully:", response);
+        });
+    ```
+
+##### 1.8.2.5.5. Get Nearby Restaurants
+
+- **Endpoint**: `/api/v1/customer/getNearbyRestaurants`
+- **Method**: GET
+- **Description**: Retrieves a list of restaurants near a specified latitude and longitude.
+- **Parameters**:
+  - `latitude`: The latitude of the customer's location.
+  - `longitude`: The longitude of the customer's location.
+- **Response**: Returns an array of restaurant details located near the specified location.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if no restaurants are found or if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getNearbyRestaurants(latitude, longitude) {
+        return this.http.get(`${this.apiUrl}/v1/customer/getNearbyRestaurants?latitude=${latitude}&longitude=${longitude}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const latitude = 40.7128;
+    const longitude = -74.006;
+
+    customerService
+        .getNearbyRestaurants(latitude, longitude)
+        .subscribe((restaurants) => {
+            console.log("Nearby restaurants:", restaurants);
+        });
+    ```
+
+##### 1.8.2.5.6. Get All Restaurants
+
+- **Endpoint**: `/api/v1/customer/getAllRestaurants`
+- **Method**: GET
+- **Description**: Retrieves a list of all available restaurants.
+- **Parameters**: None.
+- **Response**: Returns an array of restaurant details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getAllRestaurants() {
+        return this.http.get(`${this.apiUrl}/v1/customer/getAllRestaurants`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    customerService.getAllRestaurants().subscribe((restaurants) => {
+        console.log("All restaurants:", restaurants);
+    });
+    ```
+
+##### 1.8.2.5.7. Get Restaurant Details by URL
+
+- **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantUrl/{restaurantUrl}`
+- **Method**: GET
+- **Description**: Retrieves the details of a specific restaurant using its URL.
+- **Parameters**:
+  - `restaurantUrl`: The unique URL of the restaurant.
+- **Response**: Returns the details of the restaurant.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the restaurant cannot be found.
+- **Sample Code**:
+
+    ```typescript
+    getRestaurantDetailsFromRestaurantUrl(restaurantUrl) {
+        return this.http.get(`${this.apiUrl}/v1/customer/getRestaurantDetailsFromRestaurantUrl/${restaurantUrl}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const restaurantUrl = "some-restaurant-url";
+
+    customerService
+        .getRestaurantDetailsFromRestaurantUrl(restaurantUrl)
+        .subscribe((details) => {
+            console.log("Restaurant details:", details);
+        });
+    ```
+
+##### 1.8.2.5.8. Get Restaurant Details by ID
+
+- **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantId/{restaurantId}`
+- **Method**: GET
+- **Description**: Retrieves the details of a specific restaurant using its ID.
+- **Parameters**:
+  - `restaurantId`: The unique ID of the restaurant.
+- **Response**: Returns the details of the restaurant.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the restaurant cannot be found.
+- **Sample Code**:
+
+    ```typescript
+    getRestaurantDetailsFromRestaurantId(restaurantId) {
+        return this.http.get(`${this.apiUrl}/v1/customer/getRestaurantDetailsFromRestaurantId/${restaurantId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const restaurantId = "12345";
+
+    customerService
+        .getRestaurantDetailsFromRestaurantId(restaurantId)
+        .subscribe((details) => {
+            console.log("Restaurant details:", details);
+        });
+    ```
+
+##### 1.8.2.5.9. Get Promo Codes for Restaurant by URL
+
+- **Endpoint**: `/api/v1/customer/getPromoCodesForRestaurantUrl/{restaurantUrl}`
+- **Method**: GET
+- **Description**: Retrieves a list of active promo codes for a specific restaurant using its URL.
+- **Parameters**:
+  - `restaurantUrl`: The unique URL of the restaurant.
+- **Response**: Returns an array of promo code details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if no promo codes are available or if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getPromoCodesForRestaurantUrl(restaurantUrl) {
+        return this.http.get(`${this.apiUrl}/v1/customer/getPromoCodesForRestaurantUrl/${restaurantUrl}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const restaurantUrl = "some-restaurant-url";
+
+    customerService
+        .getPromoCodesForRestaurantUrl(restaurantUrl)
+        .subscribe((promoCodes) => {
+            console.log("Promo codes:", promoCodes);
+        });
+    ```
+
+##### 1.8.2.5.10. Check If Promo Code is Valid
+
+- **Endpoint**: `/api/v1/customer/checkIfPromoCodeIsValid`
+- **Method**: POST
+- **Description**: Validates a promo code for a specific restaurant and order amount.
+- **Parameters**:
+  - `data`: An object containing the promo code, order amount, and restaurant URL.
+    - Example structure:
+            ```json
+            {
+                "promoCodeName": "SAVE20",
+                "amountToBePaid": 100,
+                "restaurantUrl": "some-restaurant-url"
+            }
+            ```
+- **Response**: Returns a success message with promo code validity details or an error message if invalid.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the promo code is invalid or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    checkIfPromoCodeIsValid(promoCodeName, amountToBePaid, restaurantUrl) {
+        const data = { promoCodeName, amountToBePaid, restaurantUrl };
+        return this.http.post(`${this.apiUrl}/v1/customer/checkIfPromoCodeIsValid`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const promoCodeData = {
+        promoCodeName: "SAVE20",
+        amountToBePaid: 100,
+        restaurantUrl: "some-restaurant-url",
+    };
+
+    customerService
+        .checkIfPromoCodeIsValid(
+            promoCodeData.promoCodeName,
+            promoCodeData.amountToBePaid,
+            promoCodeData.restaurantUrl
+        )
+        .subscribe((response) => {
+            console.log("Promo code validity:", response);
+        });
+    ```
+
+##### 1.8.2.5.11. Update Customer Data
+
+- **Endpoint**: `/api/v1/customer/updateCustomerData`
+- **Method**: POST
+- **Description**: Updates the personal information of the currently logged-in customer.
+- **Parameters**:
+  - `data`: An object containing the updated customer information.
+    - Example structure:
+            ```json
+            {
+                "name": "John Doe",
+                "email": "john.doe@example.com",
+                "phone": "1234567890"
+            }
+            ```
+- **Response**: Returns a success message with the updated customer details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the update fails (e.g., invalid data or server error).
+- **Sample Code**:
+
+    ```typescript
+    updateCustomerData(data) {
+        return this.http.post(`${this.apiUrl}/v1/customer/updateCustomerData`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const customerData = {
+        name: "John Doe",
+        email: "john.doe@example.com",
+        phone: "1234567890",
+    };
+
+    customerService.updateCustomerData(customerData).subscribe((response) => {
+        console.log("Customer data updated successfully:", response);
+    });
+    ```
+
+##### 1.8.2.5.12. Check If Dine-In is Available
+
+- **Endpoint**: `/api/v1/customer/isDineInAvailable/{restaurantId}`
+- **Method**: GET
+- **Description**: Checks if dine-in service is available at a specific restaurant.
+- **Parameters**:
+  - `restaurantId`: The unique ID of the restaurant.
+- **Response**: Returns a boolean value indicating whether dine-in is available or not.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails (e.g., invalid restaurant ID or server error).
+- **Sample Code**:
+
+    ```typescript
+    isDineInAvailable(restaurantId) {
+        return this.http.get(`${this.apiUrl}/v1/customer/isDineInAvailable/${restaurantId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const restaurantId = "12345";
+
+    customerService.isDineInAvailable(restaurantId).subscribe((isAvailable) => {
+        console.log(`Dine-in availability: ${isAvailable}`);
+    });
+    ```
+
+##### 1.8.2.5.13. Get Restaurant Status
+
+- **Endpoint**: `/api/v1/customer/getRestaurantStatus/{restaurantId}`
+- **Method**: GET
+- **Description**: Retrieves the current status of a restaurant (e.g., open or closed).
+- **Parameters**:
+  - `restaurantId`: The unique ID of the restaurant.
+- **Response**: Returns an object containing the restaurant's current status and other relevant information.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails (e.g., invalid restaurant ID or server error).
+- **Sample Code**:
+
+    ```typescript
+    getRestaurantStatus(restaurantId) {
+        return this.http.get(`${this.apiUrl}/v1/customer/getRestaurantStatus/${restaurantId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const restaurantId = "12345";
+
+    customerService.getRestaurantStatus(restaurantId).subscribe((status) => {
+        console.log("Restaurant status:", status);
+    });
+
+    ```
+
+#### 1.8.2.6. Google Maps Service Endpoints
+
+<!-- import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, catchError, map, of } from "rxjs";
+import { environment } from "src/environments/environment";
+
+@Injectable({
+    providedIn: "root",
+})
+export class GoogleMapsService {
+    apiUrl = environment.apiUrl;
+
+    constructor(private httpClient: HttpClient) {}
+
+    // Function to call the Autocomplete API and get search suggestions
+    getAutocompleteResults(query: string) {
+        if (query) {
+            const autocompleteUrl = `${this.apiUrl}/v1/google-maps/autocomplete?input=${query}`;
+            return this.httpClient.get<any>(autocompleteUrl).pipe(
+                map((response) => response.predictions),
+                catchError(() => of([]))
+            );
+        } else {
+            return of([]);
+        }
+    }
+
+    getGeocodeDetails(latitude: number, longitude: number) {
+        // const apiKey = "AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A";
+
+        let url = `${this.apiUrl}/v1/google-maps//geocode-details?latitude=${latitude}&longitude=${longitude}`;
+
+        return this.httpClient.get<any>(url).pipe(
+            map((response) => {
+                console.log("Geocoding API response:", response);
+                // return whole response will be used in the component and other functions to get the pin code
+                return response;
+            }),
+            catchError((error) => {
+                console.error("Geocoding API error:", error);
+                return of("");
+            })
+        );
+    }
+
+    getFormattedGeocodeDetails(latitude: number, longitude: number) {
+        // const apiKey = "AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A";
+
+        let url = `${this.apiUrl}/v1/google-maps//geocode-details?latitude=${latitude}&longitude=${longitude}`;
+
+        return this.httpClient.get<any>(url).pipe(
+            map((response) => {
+                console.log("Geocoding API response:", response);
+                // return whole response will be used in the component and other functions to get the pin code
+                const addressComponents =
+                    response.results[0].address_components;
+
+                const postalCodeComponent = addressComponents.find(
+                    (component) => component.types.includes("postal_code")
+                );
+
+                return {
+                    pinCode: postalCodeComponent
+                        ? postalCodeComponent.long_name
+                        : "",
+                    completeAddress: response.results[0].formatted_address,
+
+                    // Optional - You can return more details if you want
+                    // city: addressComponents.find((component) =>
+                    city: addressComponents.find((component) =>
+                        component.types.includes("locality")
+                    )
+                        ? addressComponents.find((component) =>
+                              component.types.includes("locality")
+                          ).long_name
+                        : "",
+                    state: addressComponents.find((component) =>
+                        component.types.includes("administrative_area_level_1")
+                    )
+                        ? addressComponents.find((component) =>
+                              component.types.includes(
+                                  "administrative_area_level_1"
+                              )
+                          ).long_name
+                        : "",
+                    country: addressComponents.find((component) =>
+                        component.types.includes("country")
+                    )
+                        ? addressComponents.find((component) =>
+                              component.types.includes("country")
+                          ).long_name
+                        : "",
+                };
+            }),
+            catchError((error) => {
+                console.error("Geocoding API error:", error);
+                return of("");
+            })
+        );
+    }
+
+    // Function to get the pin code using Geocoding API
+    getPinCodeFromGeocode(
+        latitude: number,
+        longitude: number
+    ): Observable<string> {
+        return this.getGeocodeDetails(latitude, longitude).pipe(
+            map((response) => {
+                console.log("Geocoding API response:", response);
+
+                if (
+                    response &&
+                    response.results &&
+                    response.results.length > 0
+                ) {
+                    const addressComponents =
+                        response.results[0].address_components;
+                    const postalCodeComponent = addressComponents.find(
+                        (component) =>
+                            component.types.includes("postal_code") ||
+                            component.types.includes("postal_code_prefix") // Optional - Use this if you want more specific postal codes
+                    );
+                    return postalCodeComponent
+                        ? postalCodeComponent.long_name
+                        : "";
+                } else {
+                    return "";
+                }
+            }),
+            catchError((error) => {
+                console.error("Geocoding API error:", error);
+                return of("");
+            })
+        );
+    }
+
+    getPlaceDetails(placeId: string) {
+        const placeDetailsUrl = `${this.apiUrl}/v1/google-maps/place-details?placeId=${placeId}`;
+        return this.httpClient.get<any>(placeDetailsUrl).pipe(
+            map((response) => response.result),
+            catchError(() => of([]))
+        );
+    }
+} -->
+
+##### 1.8.2.6.1. Get Autocomplete Results
+
+- **Endpoint**: `/api/v1/google-maps/autocomplete`
+- **Method**: GET
+- **Description**: Retrieves search suggestions based on the user's input.
+- **Parameters**:
+  - `input`: The user's search query.
+  - **Response**: Returns an array of prediction objects.
+  - **Authorization**: No authentication required.
+  - **Error Handling**: Returns an empty array if no suggestions are found or if the request fails.
+  - **Sample Code**:
+
+    ```typescript
+    getAutocompleteResults(query: string) {
+        if (query) {
+            const autocompleteUrl = `${this.apiUrl}/v1/google-maps/autocomplete?input=${query}`;
+            return this.httpClient.get<any>(autocompleteUrl).pipe(
+                map((response) => response.predictions),
+                catchError(() => of([]))
+            );
+        } else {
+            return of([]);
+        }
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    googleMapsService.getAutocompleteResults("New York").subscribe((results) => {
+        console.log("Autocomplete results:", results);
+    });
+    ```
+
+##### 1.8.2.6.2. Get Geocode Details
+
+- **Endpoint**: `/api/v1/google-maps/geocode-details`
+- **Method**: GET
+- **Description**: Retrieves the geocode details (address components) for a specific latitude and longitude.
+- **Parameters**:
+  - `latitude`: The latitude of the location.
+  - `longitude`: The longitude of the location.
+- **Response**: Returns an object with the geocode details.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getGeocodeDetails(latitude: number, longitude: number) {
+        let url = `${this.apiUrl}/v1/google-maps/geocode-details?latitude=${latitude}&longitude=${longitude}`;
+
+        return this.httpClient.get<any>(url).pipe(
+            map((response) => {
+                console.log("Geocoding API response:", response);
+                return response;
+            }),
+            catchError((error) => {
+                console.error("Geocoding API error:", error);
+                return of("");
+            })
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const latitude = 40.7128;
+    const longitude = -74.006;
+
+    googleMapsService.getGeocodeDetails(latitude, longitude).subscribe((details) => {
+        console.log("Geocode details:", details);
+    });
+    ```
+
+##### 1.8.2.6.3. Get Formatted Geocode Details
+
+- **Endpoint**: `/api/v1/google-maps/geocode-details`
+- **Method**: GET
+- **Description**: Retrieves the formatted geocode details (address components) for a specific latitude and longitude.
+- **Parameters**:
+  - `latitude`: The latitude of the location.
+  - `longitude`: The longitude of the location.
+  - **Response**: Returns an object with the formatted geocode details.
+  - **Authorization**: No authentication required.
+  - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
+  - **Sample Code**:
+
+    ```typescript
+    getFormattedGeocodeDetails(latitude: number, longitude: number) {
+        let url = `${this.apiUrl}/v1/google-maps/geocode-details?latitude=${latitude}&longitude=${longitude}`;
+
+        return this.httpClient.get<any>(url).pipe(
+            map((response) => {
+                console.log("Geocoding API response:", response);
+                const addressComponents = response.results[0].address_components;
+
+                const postalCodeComponent = addressComponents.find(
+                    (component) => component.types.includes("postal_code")
+                );
+
+                return {
+                    pinCode: postalCodeComponent ? postalCodeComponent.long_name : "",
+                    completeAddress: response.results[0].formatted_address,
+                    city: addressComponents.find((component) =>
+                        component.types.includes("locality")
+                    )
+                        ? addressComponents.find((component) =>
+                              component.types.includes("locality")
+                          ).long_name
+                        : "",
+                    state: addressComponents.find((component) =>
+                        component.types.includes("administrative_area_level_1")
+                    )
+                        ? addressComponents.find((component) =>
+                              component.types.includes("administrative_area_level_1")
+                          ).long_name
+                        : "",
+                    country: addressComponents.find((component) =>
+                        component.types.includes("country")
+                    )
+                        ? addressComponents.find((component) =>
+                              component.types.includes("country")
+                          ).long_name
+                        : "",
+                };
+            }),
+            catchError((error) => {
+                console.error("Geocoding API error:", error);
+                return of("");
+            })
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const latitude = 40.7128;
+    const longitude = -74.006;
+
+    googleMapsService.getFormattedGeocodeDetails(latitude, longitude).subscribe((details) => {
+        console.log("Formatted geocode details:", details);
+    });
+    ```
+
+##### 1.8.2.6.4. Get Place Details
+
+- **Endpoint**: `/api/v1/google-maps/place-details`
+- **Method**: GET
+- **Description**: Retrieves detailed information about a place using its place ID.
+- **Parameters**:
+  - `placeId`: The unique ID of the place.
+  - **Response**: Returns an object with the place details.
+  - **Authorization**: No authentication required.
+  - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
+  - **Sample Code**:
+
+    ```typescript
+    getPlaceDetails(placeId: string) {
+        const placeDetailsUrl = `${this.apiUrl}/v1/google-maps/place-details?placeId=${placeId}`;
+        return this.httpClient.get<any>(placeDetailsUrl).pipe(
+            map((response) => response.result),
+            catchError(() => of([]))
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const placeId = "some-place-id";
+
+    googleMapsService.getPlaceDetails(placeId).subscribe((details) => {
+        console.log("Place details:", details);
+    });
     ```
 
 ### 1.8.3. Error Codes and Handling

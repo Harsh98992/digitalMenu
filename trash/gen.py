@@ -159,5 +159,12 @@ if __name__ == "__main__":
     # files = get_files("C:/AM/Github/digitalMenu/src/app/admin/panel/customers")
 
     # C:\AM\Github\digitalMenu\src\app\admin\panel\dishes\view-dish
-    files = get_files("C:/AM/Github/digitalMenu/src/app/admin/panel/dishes/view-dish")
+
+
+    # files = get_files("C:/AM/Github/digitalMenu/src/app/admin/panel/dishes/view-dish")
+
+    # C:\AM\Github\digitalMenu\src\app\api
+
+    files = get_files("C:/AM/Github/digitalMenu/src/app/api")
+
     get_content(files)

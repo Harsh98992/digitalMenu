@@ -3867,6 +3867,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/updateContactDetail`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3881,6 +3882,7 @@ export class RestaurantPanelService {
         console.log("Contact details updated:", response);
     });
     ```
+
 ---
 
 ##### 1.8.2.7.13. Add Contact Details
@@ -4061,6 +4063,7 @@ export class RestaurantPanelService {
         return this.http.put(`${this.apiUrl}/v1/restaurant/updateImage`, imageData);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4070,6 +4073,7 @@ export class RestaurantPanelService {
         console.log("Background image updated:", response);
     });
     ```
+
 ---
 
 ##### 1.8.2.7.14. Update Restaurant Banner Image For Mobile
@@ -4097,6 +4101,7 @@ export class RestaurantPanelService {
         return this.http.put(`${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForMobile`, imageData);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4106,6 +4111,7 @@ export class RestaurantPanelService {
         console.log("Banner image for mobile updated:", response);
     });
     ```
+
 ---
 
 ##### 1.8.2.7.15. Update Restaurant Banner Image For Small
@@ -4133,6 +4139,7 @@ export class RestaurantPanelService {
         return this.http.put(`${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForSmall`, imageData);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4142,6 +4149,7 @@ export class RestaurantPanelService {
         console.log("Banner image for small devices updated:", response);
     });
     ```
+
 ---
 
 ##### 1.8.2.7.16. Create Table Entry
@@ -4171,6 +4179,7 @@ export class RestaurantPanelService {
         return this.http.post(`${this.apiUrl}/v1/restaurant/createTableEntry`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4185,6 +4194,7 @@ export class RestaurantPanelService {
         console.log("Table created successfully:", response);
     });
     ```
+
 ---
 
 ##### 1.8.2.7.17. Create Room Entry
@@ -4214,6 +4224,7 @@ export class RestaurantPanelService {
         return this.http.post(`${this.apiUrl}/v1/restaurant/createRoomEntry`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4227,6 +4238,7 @@ export class RestaurantPanelService {
         console.log("Room created successfully:", response);
     });
     ```
+
 ---
 
 #### 1.8.2.8. User Service Endpoints

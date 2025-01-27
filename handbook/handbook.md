@@ -98,6 +98,19 @@
         - [1.8.2.5.3. Get Formatted Geocode Details](#18253-get-formatted-geocode-details)
         - [1.8.2.5.4. Get Place Details](#18254-get-place-details)
       - [Order Service Endpoints](#order-service-endpoints)
+        - [Place Order](#place-order)
+        - [Store Order](#store-order)
+        - [Get Customer Active Order](#get-customer-active-order)
+        - [Get Restaurant Orders By Status](#get-restaurant-orders-by-status)
+        - [Delete Order By ID](#delete-order-by-id)
+        - [Change Order Status](#change-order-status)
+        - [Change Order Status By User](#change-order-status-by-user)
+        - [Change Order Status By User For Cash On Delivery](#change-order-status-by-user-for-cash-on-delivery)
+        - [Get Customer Order](#get-customer-order)
+        - [Get Order With Payment Order ID](#get-order-with-payment-order-id)
+        - [Get Customer Payment Pending Order](#get-customer-payment-pending-order)
+        - [Generate Bill](#generate-bill)
+        - [Download Bill](#download-bill)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
       - [1.8.3.1. Error Dialog Component](#1831-error-dialog-component)
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
@@ -909,87 +922,6 @@ The digital menu system's API infrastructure serves as the backbone of communica
 All APIs use JSON for data exchange and require proper authentication using JWT tokens. The base URL for all API endpoints is `/api/v1`, and requests are secured using HTTPS protocol.
 
 ### 1.8.2. API Endpoint List
-
-<!-- import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
-import * as XLSX from "xlsx";
-import { saveAs } from "file-saver";
-@Injectable({
-    providedIn: "root",
-})
-export class AdminPanelService {
-    apiUrl = environment.apiUrl;
-    EXCEL_TYPE =
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-    EXCEL_EXTENSION = ".xlsx";
-    constructor(private http: HttpClient) {}
-    getRestaurantsByStatus(restaurantVerified) {
-        return this.http.get(
-            `${this.apiUrl}/v1/admin/getRestaurantsByStatus/${restaurantVerified}`
-        );
-    }
-    getRestaurantPayment() {
-        return this.http.get(
-            `${this.apiUrl}/v1/payment/getAccountPaymentDetails`
-        );
-    }
-    getAccountTransferDetails(orderId) {
-        return this.http.get(
-            `${this.apiUrl}/v1/payment/getAccountTransferDetails/${orderId}`
-        );
-    }
-    getAdminRestaurantData(id: string) {
-        return this.http.get(
-            `${this.apiUrl}/v1/admin/getRestaurantDetail/${id}`
-        );
-    }
-    changeRestaurantStatus(id: string, data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/admin/changeRestaurantStatus/${id}`,
-            data
-        );
-    }
-
-    editRestaurant(id: string, data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/admin/editRestaurant/${id}`,
-            data
-        );
-    }
-
-    viewAllUsersOfRestaurant(id: string) {
-        return this.http.get(
-            `${this.apiUrl}/v1/admin/viewAllUsersOfRestaurant/${id}`
-        );
-    }
-
-    sendEmailToRestaurant(data: any) {
-        return this.http.post(
-            `${this.apiUrl}/v1/admin/sendEmailToRestaurant`,
-            data
-        );
-    }
-    public exportJsonToExcel(jsonData: any[], fileName: string): void {
-        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
-        const workbook: XLSX.WorkBook = {
-            Sheets: { data: worksheet },
-            SheetNames: ["data"],
-        };
-        const excelBuffer: any = XLSX.write(workbook, {
-            bookType: "xlsx",
-            type: "array",
-        });
-        this.saveAsExcelFile(excelBuffer, fileName);
-    }
-    private saveAsExcelFile(buffer: any, fileName: string): void {
-        const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
-        saveAs(
-            data,
-            fileName + "_export_" + new Date().getTime() + this.EXCEL_EXTENSION
-        );
-    }
-} -->
 
 #### 1.8.2.1. Admin Panel endpoints
 
@@ -2282,6 +2214,629 @@ export class AdminPanelService {
     ```
 
 #### Order Service Endpoints
+<!--
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { environment } from "src/environments/environment";
+import { PaymentDialogComponent } from "../angular-material/payment-dialog/payment-dialog.component";
+import { io } from "socket.io-client";
+
+@Injectable({
+    providedIn: "root",
+})
+export class OrderService {
+    apiUrl = environment.apiUrl;
+    constructor(private http: HttpClient, private dialog: MatDialog) {
+        this.socket = io(this.socketApiUrl);
+    }
+
+    socket: any;
+    socketApiUrl = environment.socketApiUrl;
+
+    placeOrder(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/orders/placeOrder`, data);
+    }
+    storeOrder(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/orders/storeOrder`, data);
+    }
+    getCustomerActiveOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/getCustomerActiveOrder`);
+    }
+    getRestaurantOrdersByStatus(data) {
+        return this.http.put(
+            `${this.apiUrl}/v1/orders/getRestaurantOrdersByStatus`,
+            data
+        );
+    }
+    deleteOrderById(orderId: String) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/orders/deleteOrderById/${orderId}`
+        );
+    }
+    changeOrderStatus(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/orders/changeOrderStatus`,
+            data
+        );
+    }
+    changeOrderStatusByUser(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/orders/changeOrderStatusByUser`,
+            data
+        );
+    }
+    changeOrderStatusByUserForCashOnDelivery(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/orders/changeOrderStatusByUserForCashOnDelivery`,
+            data
+        );
+    }
+    getCustomerOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/customerOrder`);
+    }
+    getOrderwithPaymentOrderId(orderId) {
+        return this.http.get(`${this.apiUrl}/v1/orders/getOrderwithPaymentOrderId/${orderId}`);
+    }
+    getCustomerPaymentPendingOrder() {
+        return this.http.get(
+            `${this.apiUrl}/v1/orders/getCustomerPaymentPendingOrder`
+        );
+    }
+    generateBill(orderId: String) {
+        return this.http.get(
+            `${this.apiUrl}/v1/orders/generateBill/${orderId}`
+        );
+    }
+    downloadBill(base64String: string, filename: string) {
+        const blob = this.base64toBlob(base64String, "application/pdf");
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+
+        window.URL.revokeObjectURL(url);
+    }
+    base64toBlob(base64: string, mimeType: string): Blob {
+        const byteCharacters = atob(base64);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+            const slice = byteCharacters.slice(offset, offset + 512);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        return new Blob(byteArrays, { type: mimeType });
+    }
+    checkForOrderWithPendingPayment() {
+        // this.getCustomerPaymentPendingOrder().subscribe({
+        //     next: (res: any) => {
+        //         if (res && res.data && res.data?.orderData?._id)
+        //             this.dialog.open(PaymentDialogComponent, {
+        //                 panelClass: "add-item-dialog",
+        //                 data: res.data.orderData,
+        //                 disableClose: true,
+        //             });
+        //     },
+        // });
+    }
+} -->
+
+##### Place Order
+
+- **Endpoint**: `/api/v1/orders/placeOrder`
+- **Method**: POST
+- **Description**: Places an order for the customer.
+- **Parameters**:
+  - `data`: An object containing the order details.
+    - Example structure:
+
+```json
+{
+    "restaurantId": "123",
+    "items": [
+        {
+            "itemId": "456",
+            "quantity": 2
+        }
+    ],
+    "totalAmount": 100,
+    "paymentMethod": "card"
+}
+```
+
+- **Response**: Returns a success message with the order details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the order placement fails (e.g., invalid data or server error).
+- **Sample Code**:
+
+    ```typescript
+    placeOrder(data) {
+        return this.http.post(`${this.apiUrl}/v1/orders/placeOrder`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const orderData = {
+        restaurantId: "123",
+        items: [
+            {
+                itemId: "456",
+                quantity: 2,
+            },
+        ],
+        totalAmount: 100,
+        paymentMethod: "card",
+    };
+
+    orderService.placeOrder(orderData).subscribe((response) => {
+        console.log("Order placed successfully:", response);
+    });
+    ```
+
+##### Store Order
+
+- **Endpoint**: `/api/v1/orders/storeOrder`
+- **Method**: POST
+- **Description**: Stores an order in the system for later processing or review.
+- **Parameters**:
+  - `data`: An object containing the order details to be stored.
+    - Example structure:
+
+```json
+{
+    "restaurantId": "123",
+    "items": [
+        {
+            "itemId": "456",
+            "quantity": 2
+        }
+    ],
+    "totalAmount": 100,
+    "paymentMethod": "card"
+}
+```
+
+- **Response**: Returns a success message with the order data.
+- **Authorization**: Customer or admin authentication required.
+- **Error Handling**: Returns an error message if storing the order fails (e.g., invalid data, server error, or missing required fields).
+- **Sample Code**:
+
+    ```typescript
+    storeOrder(data) {
+        return this.http.post(`${this.apiUrl}/v1/orders/storeOrder`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const orderData = {
+        restaurantId: "123",
+        items: [
+            {
+                itemId: "456",
+                quantity: 2,
+            },
+        ],
+        totalAmount: 100,
+        paymentMethod: "card",
+    };
+
+    orderService.storeOrder(orderData).subscribe((response) => {
+        console.log("Order stored successfully:", response);
+    });
+    ```
+
+---
+
+##### Get Customer Active Order
+
+- **Endpoint**: `/api/v1/orders/getCustomerActiveOrder`
+- **Method**: GET
+- **Description**: Retrieves the customer's active order, if any.
+- **Parameters**: None
+- **Response**: Returns the details of the active order.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if no active order is found or if there is an issue with the request.
+- **Sample Code**:
+
+    ```typescript
+    getCustomerActiveOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/getCustomerActiveOrder`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    orderService.getCustomerActiveOrder().subscribe((response) => {
+        console.log("Active order:", response);
+    });
+    ```
+
+---
+
+##### Get Restaurant Orders By Status
+
+- **Endpoint**: `/api/v1/orders/getRestaurantOrdersByStatus`
+- **Method**: PUT
+- **Description**: Retrieves orders from a restaurant based on their current status.
+- **Parameters**:
+  - `data`: An object containing the status filter criteria.
+    - Example structure:
+
+```json
+{
+    "restaurantId": "123",
+    "status": "pending"
+}
+```
+
+- **Response**: Returns a list of orders that match the status.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if no orders are found or if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getRestaurantOrdersByStatus(data) {
+        return this.http.put(`${this.apiUrl}/v1/orders/getRestaurantOrdersByStatus`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const statusData = {
+        restaurantId: "123",
+        status: "pending",
+    };
+
+    orderService.getRestaurantOrdersByStatus(statusData).subscribe((response) => {
+        console.log("Orders by status:", response);
+    });
+    ```
+
+---
+
+##### Delete Order By ID
+
+- **Endpoint**: `/api/v1/orders/deleteOrderById/:orderId`
+- **Method**: DELETE
+- **Description**: Deletes an order from the system based on the provided order ID.
+- **Parameters**:
+  - `orderId`: The unique identifier of the order to delete.
+- **Response**: Returns a success message if the order is deleted successfully.
+- **Authorization**: Admin authentication required.
+- **Error Handling**: Returns an error message if the order deletion fails (e.g., invalid order ID or server error).
+- **Sample Code**:
+
+    ```typescript
+    deleteOrderById(orderId: String) {
+        return this.http.delete(`${this.apiUrl}/v1/orders/deleteOrderById/${orderId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const orderId = "789";
+
+    orderService.deleteOrderById(orderId).subscribe((response) => {
+        console.log("Order deleted successfully:", response);
+    });
+    ```
+
+---
+
+##### Change Order Status
+
+- **Endpoint**: `/api/v1/orders/changeOrderStatus`
+- **Method**: PATCH
+- **Description**: Changes the status of an order.
+- **Parameters**:
+  - `data`: An object containing the order ID and the new status.
+    - Example structure:
+
+```json
+{
+    "orderId": "789",
+    "status": "completed"
+}
+```
+
+- **Response**: Returns the updated order details with the new status.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the status update fails (e.g., invalid status, order not found, or server error).
+- **Sample Code**:
+
+    ```typescript
+    changeOrderStatus(data) {
+        return this.http.patch(`${this.apiUrl}/v1/orders/changeOrderStatus`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const statusData = {
+        orderId: "789",
+        status: "completed",
+    };
+
+    orderService.changeOrderStatus(statusData).subscribe((response) => {
+        console.log("Order status updated:", response);
+    });
+    ```
+
+---
+
+##### Change Order Status By User
+
+- **Endpoint**: `/api/v1/orders/changeOrderStatusByUser`
+- **Method**: PATCH
+- **Description**: Allows a customer to change the status of their order.
+- **Parameters**:
+  - `data`: An object containing the order ID and the new status chosen by the user.
+    - Example structure:
+
+```json
+{
+    "orderId": "789",
+    "status": "canceled"
+}
+```
+
+- **Response**: Returns the updated order details with the new status.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the status change is invalid or the order is already completed.
+- **Sample Code**:
+
+    ```typescript
+    changeOrderStatusByUser(data) {
+        return this.http.patch(`${this.apiUrl}/v1/orders/changeOrderStatusByUser`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const statusData = {
+        orderId: "789",
+        status: "canceled",
+    };
+
+    orderService.changeOrderStatusByUser(statusData).subscribe((response) => {
+        console.log("User status updated:", response);
+    });
+    ```
+
+---
+
+##### Change Order Status By User For Cash On Delivery
+
+- **Endpoint**: `/api/v1/orders/changeOrderStatusByUserForCashOnDelivery`
+- **Method**: PATCH
+- **Description**: Allows a customer to change the status of their Cash on Delivery order.
+- **Parameters**:
+  - `data`: An object containing the order ID and the new status.
+    - Example structure:
+
+```json
+{
+    "orderId": "789",
+    "status": "waiting for payment"
+}
+```
+
+- **Response**: Returns the updated order details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    changeOrderStatusByUserForCashOnDelivery(data) {
+        return this.http.patch(`${this.apiUrl}/v1/orders/changeOrderStatusByUserForCashOnDelivery`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const statusData = {
+        orderId: "789",
+        status: "waiting for payment",
+    };
+
+    orderService.changeOrderStatusByUserForCashOnDelivery(statusData).subscribe((response) => {
+        console.log("Cash on delivery order status updated:", response);
+    });
+    ```
+
+---
+
+##### Get Customer Order
+
+- **Endpoint**: `/api/v1/orders/customerOrder`
+- **Method**: GET
+- **Description**: Retrieves all orders placed by the customer.
+- **Parameters**: None
+- **Response**: Returns a list of the customer's orders.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getCustomerOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/customerOrder`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    orderService.getCustomerOrder().subscribe((response) => {
+        console.log("Customer orders:", response);
+    });
+    ```
+
+---
+
+##### Get Order With Payment Order ID
+
+- **Endpoint**: `/api/v1/orders/getOrderwithPaymentOrderId/:orderId`
+- **Method**: GET
+- **Description**: Retrieves an order's details based on the payment order ID.
+- **Parameters**:
+  - `orderId`: The payment order ID to look up.
+- **Response**: Returns the order details corresponding to the payment order ID.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the order is not found or if the payment order ID is incorrect.
+- **Sample Code**:
+
+    ```typescript
+    getOrderwithPaymentOrderId(orderId) {
+        return this.http.get(`${this.apiUrl}/v1/orders/getOrderwithPaymentOrderId/${orderId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const orderId = "456";
+
+    orderService.get
+
+OrderwithPaymentOrderId(orderId).subscribe((response) => {
+        console.log("Order details:", response);
+    });
+    ```
+
+---
+
+##### Get Customer Payment Pending Order
+
+- **Endpoint**: `/api/v1/orders/getCustomerPaymentPendingOrder`
+- **Method**: GET
+- **Description**: Retrieves orders with pending payment for the customer.
+- **Parameters**: None
+- **Response**: Returns a list of orders with pending payments.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if there are no pending orders or the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getCustomerPaymentPendingOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/getCustomerPaymentPendingOrder`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    orderService.getCustomerPaymentPendingOrder().subscribe((response) => {
+        console.log("Payment pending orders:", response);
+    });
+    ```
+
+---
+
+##### Generate Bill
+
+- **Endpoint**: `/api/v1/orders/generateBill/:orderId`
+- **Method**: GET
+- **Description**: Generates a bill for the given order ID.
+- **Parameters**:
+  - `orderId`: The order ID to generate a bill for.
+- **Response**: Returns the generated bill (usually in PDF format).
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the order is not found or the bill generation fails.
+- **Sample Code**:
+
+    ```typescript
+    generateBill(orderId: String) {
+        return this.http.get(`${this.apiUrl}/v1/orders/generateBill/${orderId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const orderId = "789";
+
+    orderService.generateBill(orderId).subscribe((response) => {
+        console.log("Bill generated:", response);
+    });
+    ```
+
+---
+
+##### Download Bill
+
+- **Endpoint**: N/A (Method is for client-side processing)
+- **Method**: N/A
+- **Description**: Downloads the generated bill in PDF format.
+- **Parameters**:
+  - `base64String`: The base64 encoded string of the bill.
+  - `filename`: The name of the file to download.
+- **Response**: Initiates the download of the bill.
+- **Authorization**: None required.
+- **Sample Code**:
+
+    ```typescript
+    downloadBill(base64String: string, filename: string) {
+        const blob = this.base64toBlob(base64String, "application/pdf");
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+
+        window.URL.revokeObjectURL(url);
+    }
+
+    base64toBlob(base64: string, mimeType: string): Blob {
+        const byteCharacters = atob(base64);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+            const slice = byteCharacters.slice(offset, offset + 512);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        return new Blob(byteArrays, { type: mimeType });
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const base64String = "<base64 encoded string>";
+    const filename = "bill.pdf";
+
+    orderService.downloadBill(base64String, filename);
+    ```
+
+
 
 ### 1.8.3. Error Codes and Handling
 

@@ -97,20 +97,29 @@
         - [1.8.2.5.2. Get Geocode Details](#18252-get-geocode-details)
         - [1.8.2.5.3. Get Formatted Geocode Details](#18253-get-formatted-geocode-details)
         - [1.8.2.5.4. Get Place Details](#18254-get-place-details)
-      - [Order Service Endpoints](#order-service-endpoints)
-        - [Place Order](#place-order)
-        - [Store Order](#store-order)
-        - [Get Customer Active Order](#get-customer-active-order)
-        - [Get Restaurant Orders By Status](#get-restaurant-orders-by-status)
-        - [Delete Order By ID](#delete-order-by-id)
-        - [Change Order Status](#change-order-status)
-        - [Change Order Status By User](#change-order-status-by-user)
-        - [Change Order Status By User For Cash On Delivery](#change-order-status-by-user-for-cash-on-delivery)
-        - [Get Customer Order](#get-customer-order)
-        - [Get Order With Payment Order ID](#get-order-with-payment-order-id)
-        - [Get Customer Payment Pending Order](#get-customer-payment-pending-order)
+      - [1.8.2.6. Order Service Endpoints](#1826-order-service-endpoints)
+        - [1.8.2.6.1. Place Order](#18261-place-order)
+        - [1.8.2.6.2. Store Order](#18262-store-order)
+        - [1.8.2.6.3. Get Customer Active Order](#18263-get-customer-active-order)
+        - [1.8.2.6.4. Get Restaurant Orders By Status](#18264-get-restaurant-orders-by-status)
+        - [1.8.2.6.5. Delete Order By ID](#18265-delete-order-by-id)
+        - [1.8.2.6.6. Change Order Status](#18266-change-order-status)
+        - [1.8.2.6.7. Change Order Status By User](#18267-change-order-status-by-user)
+        - [1.8.2.6.8. Change Order Status By User For Cash On Delivery](#18268-change-order-status-by-user-for-cash-on-delivery)
+        - [1.8.2.6.9. Get Customer Order](#18269-get-customer-order)
+        - [1.8.2.6.10. Get Order With Payment Order ID](#182610-get-order-with-payment-order-id)
+        - [1.8.2.6.11. Get Customer Payment Pending Order](#182611-get-customer-payment-pending-order)
+        - [1.8.2.6.12. Generate Bill](#182612-generate-bill)
+        - [1.8.2.6.13. Download Bill](#182613-download-bill)
+      - [Restaurant Service Endpoints](#restaurant-service-endpoints)
         - [Generate Bill](#generate-bill)
-        - [Download Bill](#download-bill)
+        - [Change Restaurant Status](#change-restaurant-status)
+        - [Change Dine-In Status](#change-dine-in-status)
+        - [Update Restaurant Cash On Delivery](#update-restaurant-cash-on-delivery)
+        - [Update Restaurant Background Image](#update-restaurant-background-image)
+        - [Create Table Entry](#create-table-entry)
+        - [Update Restaurant Details](#update-restaurant-details)
+        - [Update Restaurant Banner Image for Mobile](#update-restaurant-banner-image-for-mobile)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
       - [1.8.3.1. Error Dialog Component](#1831-error-dialog-component)
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
@@ -2213,7 +2222,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     });
     ```
 
-#### Order Service Endpoints
+#### 1.8.2.6. Order Service Endpoints
 <!--
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -2331,7 +2340,7 @@ export class OrderService {
     }
 } -->
 
-##### Place Order
+##### 1.8.2.6.1. Place Order
 
 - **Endpoint**: `/api/v1/orders/placeOrder`
 - **Method**: POST
@@ -2385,7 +2394,7 @@ export class OrderService {
     });
     ```
 
-##### Store Order
+##### 1.8.2.6.2. Store Order
 
 - **Endpoint**: `/api/v1/orders/storeOrder`
 - **Method**: POST
@@ -2441,7 +2450,7 @@ export class OrderService {
 
 ---
 
-##### Get Customer Active Order
+##### 1.8.2.6.3. Get Customer Active Order
 
 - **Endpoint**: `/api/v1/orders/getCustomerActiveOrder`
 - **Method**: GET
@@ -2468,7 +2477,7 @@ export class OrderService {
 
 ---
 
-##### Get Restaurant Orders By Status
+##### 1.8.2.6.4. Get Restaurant Orders By Status
 
 - **Endpoint**: `/api/v1/orders/getRestaurantOrdersByStatus`
 - **Method**: PUT
@@ -2510,7 +2519,7 @@ export class OrderService {
 
 ---
 
-##### Delete Order By ID
+##### 1.8.2.6.5. Delete Order By ID
 
 - **Endpoint**: `/api/v1/orders/deleteOrderById/:orderId`
 - **Method**: DELETE
@@ -2540,7 +2549,7 @@ export class OrderService {
 
 ---
 
-##### Change Order Status
+##### 1.8.2.6.6. Change Order Status
 
 - **Endpoint**: `/api/v1/orders/changeOrderStatus`
 - **Method**: PATCH
@@ -2582,7 +2591,7 @@ export class OrderService {
 
 ---
 
-##### Change Order Status By User
+##### 1.8.2.6.7. Change Order Status By User
 
 - **Endpoint**: `/api/v1/orders/changeOrderStatusByUser`
 - **Method**: PATCH
@@ -2624,7 +2633,7 @@ export class OrderService {
 
 ---
 
-##### Change Order Status By User For Cash On Delivery
+##### 1.8.2.6.8. Change Order Status By User For Cash On Delivery
 
 - **Endpoint**: `/api/v1/orders/changeOrderStatusByUserForCashOnDelivery`
 - **Method**: PATCH
@@ -2666,7 +2675,7 @@ export class OrderService {
 
 ---
 
-##### Get Customer Order
+##### 1.8.2.6.9. Get Customer Order
 
 - **Endpoint**: `/api/v1/orders/customerOrder`
 - **Method**: GET
@@ -2693,7 +2702,7 @@ export class OrderService {
 
 ---
 
-##### Get Order With Payment Order ID
+##### 1.8.2.6.10. Get Order With Payment Order ID
 
 - **Endpoint**: `/api/v1/orders/getOrderwithPaymentOrderId/:orderId`
 - **Method**: GET
@@ -2725,7 +2734,7 @@ OrderwithPaymentOrderId(orderId).subscribe((response) => {
 
 ---
 
-##### Get Customer Payment Pending Order
+##### 1.8.2.6.11. Get Customer Payment Pending Order
 
 - **Endpoint**: `/api/v1/orders/getCustomerPaymentPendingOrder`
 - **Method**: GET
@@ -2752,7 +2761,7 @@ OrderwithPaymentOrderId(orderId).subscribe((response) => {
 
 ---
 
-##### Generate Bill
+##### 1.8.2.6.12. Generate Bill
 
 - **Endpoint**: `/api/v1/orders/generateBill/:orderId`
 - **Method**: GET
@@ -2782,7 +2791,7 @@ OrderwithPaymentOrderId(orderId).subscribe((response) => {
 
 ---
 
-##### Download Bill
+##### 1.8.2.6.13. Download Bill
 
 - **Endpoint**: N/A (Method is for client-side processing)
 - **Method**: N/A
@@ -2835,7 +2844,807 @@ OrderwithPaymentOrderId(orderId).subscribe((response) => {
 
     orderService.downloadBill(base64String, filename);
     ```
+#### Restaurant Service Endpoints
+<!--
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Subject, of } from "rxjs";
+import { environment } from "src/environments/environment";
+import { UtilService } from "./util.service";
+import { OrderService } from "./order.service";
+import { OrderRecievedDialogComponent } from "../angular-material/order-recieved-dialog/order-recieved-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
 
+@Injectable({
+    providedIn: "root",
+})
+export class RestaurantPanelService {
+    apiUrl = environment.apiUrl;
+    restaurantData = new BehaviorSubject({});
+    audio: HTMLAudioElement;
+    isPlaying: boolean = false;
+    constructor(
+        private http: HttpClient,
+        private utilService: UtilService,
+        private orderService: OrderService,
+        public dialog: MatDialog
+    ) {
+        this.audio = new Audio(
+            "assets/audio/mixkit-clear-announce-tones-2861.wav"
+        ); // Update with your audio file path
+        this.audio.muted = true;
+        this.audio.onended = () => {
+            if (this.isPlaying) {
+                this.audio.currentTime = 0;
+                this.audio.play();
+            }
+        };
+    }
+    private soundTimeout: any; // Property to store the timeout ID
+
+    playSound(flag: boolean) {
+        if (flag) {
+            if (!this.isPlaying) {
+                // Check if it's not already playing
+                this.audio.muted = false;
+                this.isPlaying = true;
+
+                this.audio.play().catch((err) => {
+                    console.log(err);
+
+                    this.showOrderPopUp();
+                });
+
+                if (this.soundTimeout) {
+                    clearTimeout(this.soundTimeout);
+                }
+
+                this.soundTimeout = setTimeout(() => {
+                    this.stopSound();
+                }, 30000);
+            }
+        } else {
+            this.stopSound();
+        }
+    }
+
+    stopSound() {
+        this.isPlaying = false;
+        this.audio.muted = true;
+        this.audio.pause();
+        this.audio.currentTime = 0;
+    }
+    generateBill(reqData:any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/generateBill`,
+            reqData
+        );
+    }
+
+    showOrderPopUp() {
+        this.dialog.open(OrderRecievedDialogComponent, {
+            panelClass: "add-item-dialog",
+            disableClose: true,
+        });
+    }
+    playDashboardActionSound() {
+        const audioElement = new Audio();
+        audioElement.src = "assets/audio/Google Chat - Notification Tone.mp3";
+        audioElement.autoplay = true;
+    }
+    callStatusApi() {
+        const reqData = {
+            orderStatus: ["pending"],
+        };
+
+        this.orderService.getRestaurantOrdersByStatus(reqData).subscribe({
+            next: (res: any) => {
+                if (
+                    res &&
+                    res?.data &&
+                    res.data &&
+                    res.data?.orderData.length
+                ) {
+                    this.playSound(true);
+                }
+            },
+        });
+    }
+    setRestaurantData(result?: any) {
+        this.getRestaurnatDetail().subscribe({
+            next: (res: any) => {
+                this.restaurantData.next(res.data.restaurantDetail);
+                if (res && res?.data) {
+                    this.setRestaurantStatus(
+                        res.data.restaurantDetail.restaurantVerified
+                    );
+                }
+                if (result && result.data) {
+                    this.utilService.openSnackBar(result.data.message);
+                }
+            },
+        });
+    }
+    changeRestaurantStatus(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/changeRestaurantStatus`,
+            data
+        );
+    }
+    changeDineInStatus(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateDineInAvailablity`,
+            data
+        );
+    }
+    setRestaurantStatus(data) {
+        sessionStorage.setItem("restaurantVerified", data);
+    }
+    getRestaurantStatus() {
+        return sessionStorage.getItem("restaurantVerified");
+    }
+    getRestaurnatDetail() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/restaurantDetail`);
+    }
+    updateRestaurantDetail(restaurantData: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/restaurantDetail`,
+            restaurantData
+        );
+    }
+    updatePaymentGateway(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/admin/updatePaymentGateway`,
+            data
+        );
+    }
+
+    updateStoreSettings(gstData: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateStoreSettings`,
+            gstData
+        );
+    }
+    updateRestaurantCashOnDelivery(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantCashOnDelivery`,
+            data
+        );
+    }
+    updateRestaurantByPassAuth(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantByPassAuth`,
+            data
+        );
+    }
+    updateRestaurantAutoReject(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantAutoReject`,
+            data
+        );
+    }
+    updateRestaurantDineInGstSetting(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantDineInGstSetting`,
+            data
+        );
+    }
+    updateContactDetail(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateContactDetail`,
+            data
+        );
+    }
+    addContactDetails(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/addContactDetail`,
+            data
+        );
+    }
+    deleteTableById(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/deleteTableById/${id}`
+        );
+    }
+    deleteRoomById(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/deleteRoomById/${id}`
+        );
+    }
+    deleteContactDetail(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/deleteContactDetail/${id}`
+        );
+    }
+    getContactDetailById(id: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/restaurant/getContactDetailById/${id}`
+        );
+    }
+    updateRestaurantBackgoundImage(imageData: { image: any }) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/updateImage`,
+            imageData
+        );
+    }
+    updateRestaurantBannerImageForMobile(imageData: { image: any }) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForMobile`,
+            imageData
+        );
+    }
+    updateRestaurantBannerImageForSmall(imageData: { image: any }) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForSmall`,
+            imageData
+        );
+    }
+
+    createTableEntry(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/createTableEntry`,
+            data
+        );
+    }
+    createRoomEntry(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/createRoomEntry`,
+            data
+        );
+    }
+    updateTable(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/editTableById`,
+            data
+        );
+    }
+    updateRoom(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/editRoomById`,
+            data
+        );
+    }
+    getAllTables() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getAllTables`);
+    }
+    getAllRooms() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getAllRooms`);
+    }
+
+    updateRestaurantImage(imageData: { image: any }) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantImage`,
+            imageData
+        );
+    }
+
+    deleteRestaurantImage(imageData: { image: any }) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/deleteRestaurantImage`,
+            imageData
+        );
+    }
+    getResataurantOrder() {
+        return this.http.get("assets/data/comapny.json");
+    }
+    updatePlaceId(data) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/placeId`, data);
+    }
+    addExtraIngredient(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents`,
+            data
+        );
+    }
+    editExtraIngredient(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/edit`,
+            data
+        );
+    }
+    deleteExtraIngredient(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/delete/${id}`
+        );
+    }
+    addDish(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/addDish`,
+            data
+        );
+    }
+    editDish(data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/editDish`,
+            data
+        );
+    }
+    deleteDish(id: string, data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteDish/${id}`,
+            data
+        );
+    }
+    addVariantsToDish(data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/addVariants`,
+            data
+        );
+    }
+    addCategory(reqBody) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
+            reqBody
+        );
+    }
+    updateCategory(reqData: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editCategory`,
+            reqData
+        );
+    }
+    getCategory() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/dishes/getCategory`);
+    }
+    addAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addAddons`,
+            data
+        );
+    }
+    addDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addDishChoices`,
+            data
+        );
+    }
+    editDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editDishChoices`,
+            data
+        );
+    }
+    editAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editAddons`,
+            data
+        );
+    }
+    deleteAddons(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteAddons/${id}`
+        );
+    }
+    deleteCategory(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteCategory/${id}`
+        );
+    }
+    deleteChoices(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteChoices/${id}`
+        );
+    }
+    setSelectedDish(data) {
+        sessionStorage.setItem("dishDetail", JSON.stringify(data));
+    }
+    getSelectedDish() {
+        const data = sessionStorage.getItem("dishDetail");
+        if (data) {
+            return JSON.parse(data);
+        }
+        return null;
+    }
+    getIndianStates() {
+        let indianStates = [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry",
+        ];
+
+        return indianStates;
+    }
+
+    getCustomerList() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
+    }
+
+    addPromoCode(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/addPromoCode`,
+            data
+        );
+    }
+
+    getPromoCode() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getPromoCode`);
+    }
+
+    // Add these methods to your RestaurantPanelService
+    toggleLoyalOrBlockStatus(
+        LoyalOrBlock: string,
+        customerId: string,
+        isLoyal: boolean
+    ) {
+        let url = `/v1/restaurant/${LoyalOrBlock}/${
+            isLoyal ? "add" : "remove"
+        }/`;
+
+        const data = {
+            customerId: customerId,
+        };
+
+        return this.http.patch(`${this.apiUrl}${url}`, data);
+    }
+} -->
+
+##### Generate Bill
+
+- **Endpoint**: `/api/v1/restaurant/generateBill`
+- **Method**: POST
+- **Description**: Generates a bill for the given order.
+- **Parameters**:
+  - `reqData`: An object containing the order ID and other details required for bill generation.
+    - Example structure:
+
+```json
+{
+    "orderId": "789",
+    "customerName": "John Doe",
+    "totalAmount": 100,
+    "items": [
+        {
+            "name": "Item 1",
+            "price": 50,
+            "quantity": 2
+        }
+    ]
+}
+```
+
+- **Response**: Returns the generated bill (usually in PDF format).
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the bill generation fails.
+- **Sample Code**:
+
+    ```typescript
+    generateBill(reqData: any) {
+        return this.http.post(`${this.apiUrl}/v1/restaurant/generateBill`, reqData);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const billData = {
+        orderId: "789",
+        customerName: "John Doe",
+        totalAmount: 100,
+        items: [
+            {
+                name: "Item 1",
+                price: 50,
+                quantity: 2,
+            },
+        ],
+    };
+
+    restaurantService.generateBill(billData).subscribe((response) => {
+        console.log("Bill generated:", response);
+    });
+    ```
+##### Change Restaurant Status
+
+- **Endpoint**: `/api/v1/restaurant/changeRestaurantStatus`
+- **Method**: PATCH
+- **Description**: Changes the operational status of the restaurant.
+- **Parameters**:
+  - `data`: An object containing the new status for the restaurant.
+    - Example structure:
+
+```json
+{
+    "status": "closed"
+}
+```
+
+- **Response**: Returns a success message with the updated status
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the status change fails.
+- **Sample Code**:
+
+    ```typescript
+    changeRestaurantStatus(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/changeRestaurantStatus`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const statusData = {
+        status: "closed",
+    };
+
+    restaurantService.changeRestaurantStatus(statusData).subscribe((response) => {
+        console.log("Restaurant status updated:", response);
+    });
+    ```
+##### Change Dine-In Status
+
+- **Endpoint**: `/api/v1/restaurant/updateDineInAvailablity`
+- **Method**: PATCH
+- **Description**: Changes the dine-in availability status for the restaurant (whether dine-in is enabled or disabled).
+- **Parameters**:
+  - `data`: An object containing the new dine-in availability status.
+    - Example structure:
+
+```json
+{
+    "dineInAvailable": true
+}
+```
+
+- **Response**: Returns a success message indicating that the dine-in status has been updated successfully.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the dine-in status change fails.
+- **Sample Code**:
+
+    ```typescript
+    changeDineInStatus(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateDineInAvailablity`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const dineInStatusData = {
+        dineInAvailable: false,
+    };
+
+    restaurantService.changeDineInStatus(dineInStatusData).subscribe((response) => {
+        console.log("Dine-in status updated:", response);
+    });
+    ```
+
+---
+
+##### Update Restaurant Cash On Delivery
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantCashOnDelivery`
+- **Method**: PATCH
+- **Description**: Updates the cash on delivery (COD) availability status for the restaurant. This determines whether COD is allowed as a payment option.
+- **Parameters**:
+  - `data`: An object containing the new COD status.
+    - Example structure:
+
+```json
+{
+    "cashOnDeliveryEnabled": true
+}
+```
+
+- **Response**: Returns a success message indicating that the COD availability status has been updated.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the COD update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantCashOnDelivery(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantCashOnDelivery`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const codStatusData = {
+        cashOnDeliveryEnabled: false,
+    };
+
+    restaurantService.updateRestaurantCashOnDelivery(codStatusData).subscribe((response) => {
+        console.log("Cash on Delivery status updated:", response);
+    });
+    ```
+
+---
+
+##### Update Restaurant Background Image
+
+- **Endpoint**: `/api/v1/restaurant/updateImage`
+- **Method**: PUT
+- **Description**: Updates the restaurant’s background image.
+- **Parameters**:
+  - `imageData`: An object containing the new image data.
+    - Example structure:
+
+```json
+{
+    "image": "base64encodedimageData"
+}
+```
+
+- **Response**: Returns a success message indicating the image update was successful.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the background image update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantBackgoundImage(imageData: { image: any }) {
+        return this.http.put(`${this.apiUrl}/v1/restaurant/updateImage`, imageData);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const imageData = {
+        image: "data:image/png;base64,...",
+    };
+
+    restaurantService.updateRestaurantBackgoundImage(imageData).subscribe((response) => {
+        console.log("Background image updated:", response);
+    });
+    ```
+
+---
+
+##### Create Table Entry
+
+- **Endpoint**: `/api/v1/restaurant/createTableEntry`
+- **Method**: POST
+- **Description**: Creates a new table entry for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the table details such as table number, capacity, etc.
+    - Example structure:
+
+```json
+{
+    "tableNumber": "5",
+    "capacity": 4
+}
+```
+
+- **Response**: Returns a success message indicating the table has been created.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the table creation fails.
+- **Sample Code**:
+
+    ```typescript
+    createTableEntry(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/restaurant/createTableEntry`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const tableData = {
+        tableNumber: "5",
+        capacity: 4,
+    };
+
+    restaurantService.createTableEntry(tableData).subscribe((response) => {
+        console.log("Table created:", response);
+    });
+    ```
+
+---
+
+##### Update Restaurant Details
+
+- **Endpoint**: `/api/v1/restaurant/restaurantDetail`
+- **Method**: POST
+- **Description**: Updates the restaurant details such as name, address, etc.
+- **Parameters**:
+  - `restaurantData`: An object containing the new details for the restaurant.
+    - Example structure:
+
+```json
+{
+    "restaurantName": "My New Restaurant",
+    "address": "1234 Main St, City, Country",
+    "contactNumber": "123-456-7890"
+}
+```
+
+- **Response**: Returns a success message indicating that the restaurant details were updated successfully.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantDetail(restaurantData: any) {
+        return this.http.post(`${this.apiUrl}/v1/restaurant/restaurantDetail`, restaurantData);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const restaurantDetail = {
+        restaurantName: "My New Restaurant",
+        address: "1234 Main St, City, Country",
+        contactNumber: "123-456-7890",
+    };
+
+    restaurantService.updateRestaurantDetail(restaurantDetail).subscribe((response) => {
+        console.log("Restaurant details updated:", response);
+    });
+    ```
+
+---
+
+##### Update Restaurant Banner Image for Mobile
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForMobile`
+- **Method**: PUT
+- **Description**: Updates the restaurant's banner image for mobile devices.
+- **Parameters**:
+  - `imageData`: An object containing the new banner image data for mobile.
+    - Example structure:
+
+```json
+{
+    "image": "base64encodedImageForMobile"
+}
+```
+
+- **Response**: Returns a success message indicating the banner image update was successful.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the banner image update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantBannerImageForMobile(imageData: { image: any }) {
+        return this.http.put(`${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForMobile`, imageData);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const bannerImageData = {
+        image: "data:image/png;base64,...",
+    };
+
+    restaurantService.updateRestaurantBannerImageForMobile(bannerImageData).subscribe((response) => {
+        console.log("Mobile banner image updated:", response);
+    });
+    ```
+
+---
 
 
 ### 1.8.3. Error Codes and Handling

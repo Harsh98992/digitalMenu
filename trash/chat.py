@@ -12,14 +12,22 @@ def get_response(message):
     )
     return response.choices[0].message.content
 
-# get all files of C:\AM\Github\digitalMenu\src\app\api
-files = glob.glob('C:/AM/Github/digitalMenu/src/app/api/**/*.ts', recursive=True)
+# # get all files of C:\AM\Github\digitalMenu\src\app\api
+# files = glob.glob('C:/AM/Github/digitalMenu/src/app/api/**/*.ts', recursive=True)
 
-for file in files:
-    with open(file) as f:
-        content = f.read()
+# for file in files:
+#     with open(file) as f:
+#         content = f.read()
 
-        content = "please generate documentation for this file in markdown format\n for " + content
-        response = get_response(content)
-        with open('documentation/' + file + '.md', 'w') as f:
-            f.write(response)
+#         content = "please generate documentation for this file in markdown format\n for " + content
+#         response = get_response(content)
+#         with open('documentation/' + file + '.md', 'w') as f:
+#             f.write(response)
+
+if __name__ == '__main__':
+    while True:
+        message = input("You: ")
+        response = get_response(message)
+        print("Bot:", response)
+        if re.search(r'\b(bye|exit|quit)\b', message, re.I):
+            break

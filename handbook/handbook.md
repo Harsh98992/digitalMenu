@@ -111,15 +111,14 @@
         - [1.8.2.6.11. Get Customer Payment Pending Order](#182611-get-customer-payment-pending-order)
         - [1.8.2.6.12. Generate Bill](#182612-generate-bill)
         - [1.8.2.6.13. Download Bill](#182613-download-bill)
-      - [Restaurant Service Endpoints](#restaurant-service-endpoints)
-        - [Generate Bill](#generate-bill)
-        - [Change Restaurant Status](#change-restaurant-status)
-        - [Change Dine-In Status](#change-dine-in-status)
-        - [Update Restaurant Cash On Delivery](#update-restaurant-cash-on-delivery)
-        - [Update Restaurant Background Image](#update-restaurant-background-image)
-        - [Create Table Entry](#create-table-entry)
-        - [Update Restaurant Details](#update-restaurant-details)
-        - [Update Restaurant Banner Image for Mobile](#update-restaurant-banner-image-for-mobile)
+      - [1.8.2.7. Restaurant Service Endpoints](#1827-restaurant-service-endpoints)
+        - [1.8.2.7.1. Generate Bill](#18271-generate-bill)
+        - [1.8.2.7.2. Change Restaurant Status](#18272-change-restaurant-status)
+        - [1.8.2.7.3. Update Dine-In Availability](#18273-update-dine-in-availability)
+        - [Get Restaurant Detail](#get-restaurant-detail)
+        - [Update Restaurant Detail](#update-restaurant-detail)
+        - [Update Payment Gateway](#update-payment-gateway)
+        - [Update Store Settings](#update-store-settings)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
       - [1.8.3.1. Error Dialog Component](#1831-error-dialog-component)
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
@@ -2844,7 +2843,8 @@ OrderwithPaymentOrderId(orderId).subscribe((response) => {
 
     orderService.downloadBill(base64String, filename);
     ```
-#### Restaurant Service Endpoints
+
+#### 1.8.2.7. Restaurant Service Endpoints
 <!--
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -3310,7 +3310,7 @@ export class RestaurantPanelService {
     }
 } -->
 
-##### Generate Bill
+##### 1.8.2.7.1. Generate Bill
 
 - **Endpoint**: `/api/v1/restaurant/generateBill`
 - **Method**: POST
@@ -3344,6 +3344,7 @@ export class RestaurantPanelService {
         return this.http.post(`${this.apiUrl}/v1/restaurant/generateBill`, reqData);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3364,223 +3365,175 @@ export class RestaurantPanelService {
         console.log("Bill generated:", response);
     });
     ```
-##### Change Restaurant Status
+
+##### 1.8.2.7.2. Change Restaurant Status
 
 - **Endpoint**: `/api/v1/restaurant/changeRestaurantStatus`
 - **Method**: PATCH
-- **Description**: Changes the operational status of the restaurant.
+- **Description**: Updates the operational status of the restaurant (e.g., open or closed).
 - **Parameters**:
-  - `data`: An object containing the new status for the restaurant.
+  - `data`: An object containing the necessary status change details.
     - Example structure:
 
-```json
-{
-    "status": "closed"
-}
-```
+      ```json
+      {
+          "status": "open"
+      }
+      ```
 
-- **Response**: Returns a success message with the updated status
-- **Authorization**: Admin or restaurant authentication required.
-- **Error Handling**: Returns an error message if the status change fails.
+- **Response**:
+  - **Success**: Returns a confirmation message indicating the updated status.
+    - Example:
+
+      ```json
+      {
+          "message": "Restaurant status updated successfully."
+      }
+      ```
+
+  - **Error**: Returns an error message if the update fails.
+
+- **Authorization**: Restaurant authentication required.
+
+- **Error Handling**:
+  - Validation errors if `status` is invalid or missing.
+  - Server errors if the operation cannot be performed.
+
 - **Sample Code**:
 
     ```typescript
     changeRestaurantStatus(data: any) {
-        return this.http.patch(`${this.apiUrl}/v1/restaurant/changeRestaurantStatus`, data);
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/changeRestaurantStatus`,
+            data
+        );
     }
     ```
+
 - **Usage**:
 
     ```typescript
     const statusData = {
-        status: "closed",
+        status: "open", // or "closed"
     };
 
     restaurantService.changeRestaurantStatus(statusData).subscribe((response) => {
-        console.log("Restaurant status updated:", response);
+        console.log("Status updated:", response);
     });
     ```
-##### Change Dine-In Status
+
+##### 1.8.2.7.3. Update Dine-In Availability
 
 - **Endpoint**: `/api/v1/restaurant/updateDineInAvailablity`
 - **Method**: PATCH
-- **Description**: Changes the dine-in availability status for the restaurant (whether dine-in is enabled or disabled).
+- **Description**: Toggles dine-in availability for the restaurant.
+
 - **Parameters**:
-  - `data`: An object containing the new dine-in availability status.
+  - `data`: An object containing the dine-in availability status.
     - Example structure:
 
-```json
-{
-    "dineInAvailable": true
-}
-```
+      ```json
+      {
+          "isDineInAvailable": true
+      }
+      ```
 
-- **Response**: Returns a success message indicating that the dine-in status has been updated successfully.
-- **Authorization**: Admin or restaurant authentication required.
-- **Error Handling**: Returns an error message if the dine-in status change fails.
+- **Response**:
+  - **Success**: Returns a confirmation message indicating the updated availability.
+    - Example:
+
+      ```json
+      {
+          "message": "Dine-in availability updated successfully."
+      }
+      ```
+
+  - **Error**: Returns an error message if the update fails.
+
+- **Authorization**: Restaurant authentication required.
+
+- **Error Handling**:
+  - Validation errors if `isDineInAvailable` is invalid or missing.
+  - Server errors if the operation cannot be performed.
+
 - **Sample Code**:
 
     ```typescript
     changeDineInStatus(data: any) {
-        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateDineInAvailablity`, data);
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateDineInAvailablity`,
+            data
+        );
     }
     ```
 
 - **Usage**:
 
     ```typescript
-    const dineInStatusData = {
-        dineInAvailable: false,
+    const dineInStatus = {
+        isDineInAvailable: true, // or false
     };
 
-    restaurantService.changeDineInStatus(dineInStatusData).subscribe((response) => {
-        console.log("Dine-in status updated:", response);
+    restaurantService.changeDineInStatus(dineInStatus).subscribe((response) => {
+        console.log("Dine-in availability updated:", response);
     });
     ```
 
----
+##### Get Restaurant Detail
 
-##### Update Restaurant Cash On Delivery
-
-- **Endpoint**: `/api/v1/restaurant/updateRestaurantCashOnDelivery`
-- **Method**: PATCH
-- **Description**: Updates the cash on delivery (COD) availability status for the restaurant. This determines whether COD is allowed as a payment option.
-- **Parameters**:
-  - `data`: An object containing the new COD status.
-    - Example structure:
-
-```json
-{
-    "cashOnDeliveryEnabled": true
-}
-```
-
-- **Response**: Returns a success message indicating that the COD availability status has been updated.
-- **Authorization**: Admin or restaurant authentication required.
-- **Error Handling**: Returns an error message if the COD update fails.
+- **Endpoint**: `/api/v1/restaurant/restaurantDetail`
+- **Method**: GET
+- **Description**: Retrieves the details of the restaurant.
+- **Parameters**: None
+- **Response**: Returns the restaurant details.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
 - **Sample Code**:
 
     ```typescript
-    updateRestaurantCashOnDelivery(data: any) {
-        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantCashOnDelivery`, data);
+    getRestaurnatDetail() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/restaurantDetail`);
     }
     ```
-
 - **Usage**:
 
     ```typescript
-    const codStatusData = {
-        cashOnDeliveryEnabled: false,
-    };
-
-    restaurantService.updateRestaurantCashOnDelivery(codStatusData).subscribe((response) => {
-        console.log("Cash on Delivery status updated:", response);
+    restaurantService.getRestaurnatDetail().subscribe((response) => {
+        console.log("Restaurant details:", response);
     });
     ```
-
 ---
 
-##### Update Restaurant Background Image
-
-- **Endpoint**: `/api/v1/restaurant/updateImage`
-- **Method**: PUT
-- **Description**: Updates the restaurant’s background image.
-- **Parameters**:
-  - `imageData`: An object containing the new image data.
-    - Example structure:
-
-```json
-{
-    "image": "base64encodedimageData"
-}
-```
-
-- **Response**: Returns a success message indicating the image update was successful.
-- **Authorization**: Admin or restaurant authentication required.
-- **Error Handling**: Returns an error message if the background image update fails.
-- **Sample Code**:
-
-    ```typescript
-    updateRestaurantBackgoundImage(imageData: { image: any }) {
-        return this.http.put(`${this.apiUrl}/v1/restaurant/updateImage`, imageData);
-    }
-    ```
-
-- **Usage**:
-
-    ```typescript
-    const imageData = {
-        image: "data:image/png;base64,...",
-    };
-
-    restaurantService.updateRestaurantBackgoundImage(imageData).subscribe((response) => {
-        console.log("Background image updated:", response);
-    });
-    ```
-
----
-
-##### Create Table Entry
-
-- **Endpoint**: `/api/v1/restaurant/createTableEntry`
-- **Method**: POST
-- **Description**: Creates a new table entry for the restaurant.
-- **Parameters**:
-  - `data`: An object containing the table details such as table number, capacity, etc.
-    - Example structure:
-
-```json
-{
-    "tableNumber": "5",
-    "capacity": 4
-}
-```
-
-- **Response**: Returns a success message indicating the table has been created.
-- **Authorization**: Admin or restaurant authentication required.
-- **Error Handling**: Returns an error message if the table creation fails.
-- **Sample Code**:
-
-    ```typescript
-    createTableEntry(data: any) {
-        return this.http.post(`${this.apiUrl}/v1/restaurant/createTableEntry`, data);
-    }
-    ```
-
-- **Usage**:
-
-    ```typescript
-    const tableData = {
-        tableNumber: "5",
-        capacity: 4,
-    };
-
-    restaurantService.createTableEntry(tableData).subscribe((response) => {
-        console.log("Table created:", response);
-    });
-    ```
-
----
-
-##### Update Restaurant Details
+##### Update Restaurant Detail
 
 - **Endpoint**: `/api/v1/restaurant/restaurantDetail`
 - **Method**: POST
-- **Description**: Updates the restaurant details such as name, address, etc.
+- **Description**: Updates the details of the restaurant.
 - **Parameters**:
-  - `restaurantData`: An object containing the new details for the restaurant.
+  - `restaurantData`: An object containing the updated restaurant details.
     - Example structure:
 
 ```json
 {
-    "restaurantName": "My New Restaurant",
-    "address": "1234 Main St, City, Country",
-    "contactNumber": "123-456-7890"
+    "restaurantName": "New Restaurant Name",
+    "restaurantPhoneNumber": "9876543210",
+    "restaurantEmail": "
+    "restaurantType": "Fast Food",
+    "openTime": "08:00 AM",
+    "closeTime": "10:00 PM",
+    "gstNumber": "GST1234567890",
+    "address": {
+        "street": "123 Main St",
+        "city": "City",
+        "state": "State",
+        "country": "Country",
+        "pincode": "123456"
+    }
 }
 ```
 
-- **Response**: Returns a success message indicating that the restaurant details were updated successfully.
-- **Authorization**: Admin or restaurant authentication required.
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
 - **Error Handling**: Returns an error message if the update fails.
 - **Sample Code**:
 
@@ -3589,63 +3542,78 @@ export class RestaurantPanelService {
         return this.http.post(`${this.apiUrl}/v1/restaurant/restaurantDetail`, restaurantData);
     }
     ```
-
 - **Usage**:
 
     ```typescript
-    const restaurantDetail = {
-        restaurantName: "My New Restaurant",
-        address: "1234 Main St, City, Country",
-        contactNumber: "123-456-7890",
+    const updatedData = {
+        restaurantName: "New Restaurant Name",
+        restaurantPhoneNumber: "9876543210",
+        restaurantEmail: "email@gmaik,com",
+
+        restaurantType: "Fast Food",
+        openTime: "08:00 AM",
+        closeTime: "10:00 PM",
+        gstNumber: "GST1234567890",
+        address: {
+            street: "123 Main St",
+            city: "City",
+            state: "State",
+            country: "Country",
+            pincode: "123456",
+        },
     };
 
-    restaurantService.updateRestaurantDetail(restaurantDetail).subscribe((response) => {
+    restaurantService.updateRestaurantDetail(updatedData).subscribe((response) => {
         console.log("Restaurant details updated:", response);
     });
     ```
-
 ---
 
-##### Update Restaurant Banner Image for Mobile
+##### Update Payment Gateway
 
-- **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForMobile`
-- **Method**: PUT
-- **Description**: Updates the restaurant's banner image for mobile devices.
+- **Endpoint**: `/api/v1/admin/updatePaymentGateway`
+- **Method**: POST
+- **Description**: Updates the razorpay payment gateway settings for the restaurant.
 - **Parameters**:
-  - `imageData`: An object containing the new banner image data for mobile.
+  - `data`: An object containing the updated payment gateway details.
     - Example structure:
 
 ```json
 {
-    "image": "base64encodedImageForMobile"
+    "paymentGateway": "razorpay",
+    "razorpayKey": "YOUR_RAZORPAY_KEY",
+    "razorpaySecret": "YOUR_RAZORPAY_SECRET"
 }
 ```
 
-- **Response**: Returns a success message indicating the banner image update was successful.
-- **Authorization**: Admin or restaurant authentication required.
-- **Error Handling**: Returns an error message if the banner image update fails.
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
 - **Sample Code**:
 
     ```typescript
-    updateRestaurantBannerImageForMobile(imageData: { image: any }) {
-        return this.http.put(`${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForMobile`, imageData);
+    updatePaymentGateway(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/admin/updatePaymentGateway`, data);
     }
     ```
-
 - **Usage**:
 
     ```typescript
-    const bannerImageData = {
-        image: "data:image/png;base64,...",
+    const paymentData = {
+        paymentGateway: "razorpay",
+        razorpayKey: "YOUR_RAZORPAY_KEY",
+        razorpaySecret: "YOUR_RAZORPAY_SECRET",
     };
 
-    restaurantService.updateRestaurantBannerImageForMobile(bannerImageData).subscribe((response) => {
-        console.log("Mobile banner image updated:", response);
+    restaurantService.updatePaymentGateway(paymentData).subscribe((response) => {
+        console.log("Payment gateway updated:", response);
     });
     ```
-
 ---
 
+##### Update Store Settings
+
+- **Endpoint**: `/api/v1/restaurant/updateStoreSettings`
 
 ### 1.8.3. Error Codes and Handling
 

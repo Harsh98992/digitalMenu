@@ -115,16 +115,16 @@
         - [1.8.2.7.1. Generate Bill](#18271-generate-bill)
         - [1.8.2.7.2. Change Restaurant Status](#18272-change-restaurant-status)
         - [1.8.2.7.3. Update Dine-In Availability](#18273-update-dine-in-availability)
-        - [Get Restaurant Detail](#get-restaurant-detail)
-        - [Update Restaurant Detail](#update-restaurant-detail)
-        - [Update Payment Gateway](#update-payment-gateway)
-      - [User Service Endpoints](#user-service-endpoints)
-        - [Get All Users](#get-all-users)
-        - [Add User](#add-user)
-        - [Delete User](#delete-user)
-        - [Edit User](#edit-user)
-        - [Get User](#get-user)
-        - [Get Me](#get-me)
+        - [1.8.2.7.4. Get Restaurant Detail](#18274-get-restaurant-detail)
+        - [1.8.2.7.5. Update Restaurant Detail](#18275-update-restaurant-detail)
+        - [1.8.2.7.6. Update Payment Gateway](#18276-update-payment-gateway)
+      - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
+        - [1.8.2.8.1. Get All Users](#18281-get-all-users)
+        - [1.8.2.8.2. Add User](#18282-add-user)
+        - [1.8.2.8.3. Delete User](#18283-delete-user)
+        - [1.8.2.8.4. Edit User](#18284-edit-user)
+        - [1.8.2.8.5. Get User](#18285-get-user)
+        - [1.8.2.8.6. Get Me](#18286-get-me)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
       - [1.8.3.1. Error Dialog Component](#1831-error-dialog-component)
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
@@ -3485,7 +3485,7 @@ export class RestaurantPanelService {
     });
     ```
 
-##### Get Restaurant Detail
+##### 1.8.2.7.4. Get Restaurant Detail
 
 - **Endpoint**: `/api/v1/restaurant/restaurantDetail`
 - **Method**: GET
@@ -3512,7 +3512,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Restaurant Detail
+##### 1.8.2.7.5. Update Restaurant Detail
 
 - **Endpoint**: `/api/v1/restaurant/restaurantDetail`
 - **Method**: POST
@@ -3579,7 +3579,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Payment Gateway
+##### 1.8.2.7.6. Update Payment Gateway
 
 - **Endpoint**: `/api/v1/admin/updatePaymentGateway`
 - **Method**: POST
@@ -3623,60 +3623,9 @@ export class RestaurantPanelService {
 
 ---
 
-#### User Service Endpoints
+#### 1.8.2.8. User Service Endpoints
 
-<!-- import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { AbstractControl } from "@angular/forms";
-import { BehaviorSubject, Subject } from "rxjs";
-import { environment } from "src/environments/environment";
-
-@Injectable({
-    providedIn: "root",
-})
-export class UserService {
-    apiUrl = environment.apiUrl;
-
-    phoneNumberValidator(
-        control: AbstractControl
-    ): { [key: string]: any } | null {
-        const phoneNumberRegex = /^\d{10}$/;
-        const isValid = phoneNumberRegex.test(control.value);
-        return isValid ? null : { invalidPhoneNumber: true };
-    }
-
-    constructor(private http: HttpClient) {}
-    private user = new BehaviorSubject<any>(null);
-
-    getAllUsers() {
-        return this.http.get(`${this.apiUrl}/v1/user/getAllUsers`);
-    }
-
-    addUser(userData) {
-        return this.http.post(`${this.apiUrl}/v1/user/addUser`, userData);
-    }
-
-    deleteUser(userId) {
-        return this.http.delete(`${this.apiUrl}/v1/user/deleteUser/${userId}`);
-    }
-
-    editUser(userId, userData) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/user/editUser/${userId}`,
-            userData
-        );
-    }
-
-    getUser(userId) {
-        return this.http.get(`${this.apiUrl}/v1/user/getUser/${userId}`);
-    }
-
-    getMe() {
-        return this.http.get(`${this.apiUrl}/v1/user/getMe`);
-    }
-} -->
-
-##### Get All Users
+##### 1.8.2.8.1. Get All Users
 
 - **Endpoint**: `/api/v1/user/getAllUsers`
 - **Method**: GET
@@ -3703,7 +3652,7 @@ export class UserService {
 
 ---
 
-##### Add User
+##### 1.8.2.8.2. Add User
 
 - **Endpoint**: `/api/v1/user/addUser`
 - **Method**: POST
@@ -3782,7 +3731,7 @@ export class UserService {
 
 ---
 
-##### Delete User
+##### 1.8.2.8.3. Delete User
 
 - **Endpoint**: `/api/v1/user/deleteUser/:userId`
 - **Method**: DELETE
@@ -3819,7 +3768,7 @@ export class UserService {
 
 ---
 
-##### Edit User
+##### 1.8.2.8.4. Edit User
 
 - **Endpoint**: `/api/v1/user/editUser/:userId`
 - **Method**: PATCH
@@ -3900,7 +3849,7 @@ export class UserService {
 
 ---
 
-##### Get User
+##### 1.8.2.8.5. Get User
 
 - **Endpoint**: `/api/v1/user/getUser/:userId`
 - **Method**: GET
@@ -3930,7 +3879,7 @@ export class UserService {
 
 ---
 
-##### Get Me
+##### 1.8.2.8.6. Get Me
 
 - **Endpoint**: `/api/v1/user/getMe`
 - **Method**: GET

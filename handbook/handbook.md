@@ -2081,150 +2081,6 @@ export class AdminPanelService {
 
 #### 1.8.2.5. Google Maps Service Endpoints
 
-<!-- import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, catchError, map, of } from "rxjs";
-import { environment } from "src/environments/environment";
-
-@Injectable({
-    providedIn: "root",
-})
-export class GoogleMapsService {
-    apiUrl = environment.apiUrl;
-
-    constructor(private httpClient: HttpClient) {}
-
-    // Function to call the Autocomplete API and get search suggestions
-    getAutocompleteResults(query: string) {
-        if (query) {
-            const autocompleteUrl = `${this.apiUrl}/v1/google-maps/autocomplete?input=${query}`;
-            return this.httpClient.get<any>(autocompleteUrl).pipe(
-                map((response) => response.predictions),
-                catchError(() => of([]))
-            );
-        } else {
-            return of([]);
-        }
-    }
-
-    getGeocodeDetails(latitude: number, longitude: number) {
-        // const apiKey = "AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A";
-
-        let url = `${this.apiUrl}/v1/google-maps//geocode-details?latitude=${latitude}&longitude=${longitude}`;
-
-        return this.httpClient.get<any>(url).pipe(
-            map((response) => {
-                console.log("Geocoding API response:", response);
-                // return whole response will be used in the component and other functions to get the pin code
-                return response;
-            }),
-            catchError((error) => {
-                console.error("Geocoding API error:", error);
-                return of("");
-            })
-        );
-    }
-
-    getFormattedGeocodeDetails(latitude: number, longitude: number) {
-        // const apiKey = "AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A";
-
-        let url = `${this.apiUrl}/v1/google-maps//geocode-details?latitude=${latitude}&longitude=${longitude}`;
-
-        return this.httpClient.get<any>(url).pipe(
-            map((response) => {
-                console.log("Geocoding API response:", response);
-                // return whole response will be used in the component and other functions to get the pin code
-                const addressComponents =
-                    response.results[0].address_components;
-
-                const postalCodeComponent = addressComponents.find(
-                    (component) => component.types.includes("postal_code")
-                );
-
-                return {
-                    pinCode: postalCodeComponent
-                        ? postalCodeComponent.long_name
-                        : "",
-                    completeAddress: response.results[0].formatted_address,
-
-                    // Optional - You can return more details if you want
-                    // city: addressComponents.find((component) =>
-                    city: addressComponents.find((component) =>
-                        component.types.includes("locality")
-                    )
-                        ? addressComponents.find((component) =>
-                              component.types.includes("locality")
-                          ).long_name
-                        : "",
-                    state: addressComponents.find((component) =>
-                        component.types.includes("administrative_area_level_1")
-                    )
-                        ? addressComponents.find((component) =>
-                              component.types.includes(
-                                  "administrative_area_level_1"
-                              )
-                          ).long_name
-                        : "",
-                    country: addressComponents.find((component) =>
-                        component.types.includes("country")
-                    )
-                        ? addressComponents.find((component) =>
-                              component.types.includes("country")
-                          ).long_name
-                        : "",
-                };
-            }),
-            catchError((error) => {
-                console.error("Geocoding API error:", error);
-                return of("");
-            })
-        );
-    }
-
-    // Function to get the pin code using Geocoding API
-    getPinCodeFromGeocode(
-        latitude: number,
-        longitude: number
-    ): Observable<string> {
-        return this.getGeocodeDetails(latitude, longitude).pipe(
-            map((response) => {
-                console.log("Geocoding API response:", response);
-
-                if (
-                    response &&
-                    response.results &&
-                    response.results.length > 0
-                ) {
-                    const addressComponents =
-                        response.results[0].address_components;
-                    const postalCodeComponent = addressComponents.find(
-                        (component) =>
-                            component.types.includes("postal_code") ||
-                            component.types.includes("postal_code_prefix") // Optional - Use this if you want more specific postal codes
-                    );
-                    return postalCodeComponent
-                        ? postalCodeComponent.long_name
-                        : "";
-                } else {
-                    return "";
-                }
-            }),
-            catchError((error) => {
-                console.error("Geocoding API error:", error);
-                return of("");
-            })
-        );
-    }
-
-    getPlaceDetails(placeId: string) {
-        const placeDetailsUrl = `${this.apiUrl}/v1/google-maps/place-details?placeId=${placeId}`;
-        return this.httpClient.get<any>(placeDetailsUrl).pipe(
-            map((response) => response.result),
-            catchError(() => of([]))
-        );
-    }
-} -->
-
 ##### 1.8.2.5.1. Get Autocomplete Results
 
 - **Endpoint**: `/api/v1/google-maps/autocomplete`
@@ -2404,6 +2260,51 @@ export class GoogleMapsService {
     ```
 
 ### 1.8.3. Error Codes and Handling
+
+The Digital Menu application implements a comprehensive error handling system using Angular's Material Dialog components and HTTP interceptors. Here's how errors are handled:
+
+#### Error Dialog Component
+The application uses a centralized error dialog component (`ErrorDialogComponent`) to display user-friendly error messages. The dialog includes:
+- A title indicating the type of error
+- A detailed error message
+- Action buttons for user response
+- Option to contact the restaurant in case of critical errors
+
+#### Common Error Scenarios
+
+1. **Authentication Errors**
+   - 401: Unauthorized access - User needs to log in
+   - 403: Forbidden - User doesn't have permission for the requested action
+
+2. **Data Errors**
+   - 404: Resource not found - Menu item, restaurant, or order doesn't exist
+   - 400: Bad request - Invalid input data or request format
+
+3. **Server Errors**
+   - 500: Internal server error - Generic server-side error
+   - 503: Service unavailable - Restaurant system temporarily down
+
+4. **Network Errors**
+   - Connection timeout
+   - Network unavailable
+   - Server unreachable
+
+#### Error Handling Best Practices
+
+1. **User Communication**
+   - Display clear, non-technical error messages
+   - Provide actionable next steps
+   - Include contact options for critical errors
+
+2. **Error Recovery**
+   - Automatic retry for network errors
+   - Graceful fallback to cached data when possible
+   - Session recovery after authentication errors
+
+3. **Error Prevention**
+   - Input validation before submission
+   - Connection status monitoring
+   - Session token refresh mechanisms
 
 ### 1.8.4. How to Test APIs as a Beginner
 

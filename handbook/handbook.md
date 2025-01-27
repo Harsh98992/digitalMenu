@@ -830,6 +830,7 @@ Key Files:
 - `src/app/app.module.ts`: Main Angular module
 - `src/app/app-routing.module.ts`: Application routing configuration
 - `src/environments/environment.ts`: Environment variables
+- `src/app/app.component.ts`: Root component
 
 <div style="page-break-after: always;"></div>
 

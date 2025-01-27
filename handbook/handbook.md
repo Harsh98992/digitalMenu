@@ -3495,6 +3495,7 @@ export class RestaurantPanelService {
         return this.http.get(`${this.apiUrl}/v1/restaurant/restaurantDetail`);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3502,6 +3503,7 @@ export class RestaurantPanelService {
         console.log("Restaurant details:", response);
     });
     ```
+
 ---
 
 ##### Update Restaurant Detail
@@ -3542,6 +3544,7 @@ export class RestaurantPanelService {
         return this.http.post(`${this.apiUrl}/v1/restaurant/restaurantDetail`, restaurantData);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3567,6 +3570,7 @@ export class RestaurantPanelService {
         console.log("Restaurant details updated:", response);
     });
     ```
+
 ---
 
 ##### Update Payment Gateway
@@ -3596,6 +3600,7 @@ export class RestaurantPanelService {
         return this.http.post(`${this.apiUrl}/v1/admin/updatePaymentGateway`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -3609,6 +3614,7 @@ export class RestaurantPanelService {
         console.log("Payment gateway updated:", response);
     });
     ```
+
 ---
 
 ##### Update Store Settings

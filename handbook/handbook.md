@@ -118,7 +118,13 @@
         - [Get Restaurant Detail](#get-restaurant-detail)
         - [Update Restaurant Detail](#update-restaurant-detail)
         - [Update Payment Gateway](#update-payment-gateway)
-        - [Update Store Settings](#update-store-settings)
+      - [User Service Endpoints](#user-service-endpoints)
+        - [Get All Users](#get-all-users)
+        - [Add User](#add-user)
+        - [Delete User](#delete-user)
+        - [Edit User](#edit-user)
+        - [Get User](#get-user)
+        - [Get Me](#get-me)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
       - [1.8.3.1. Error Dialog Component](#1831-error-dialog-component)
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
@@ -3617,9 +3623,339 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Store Settings
+#### User Service Endpoints
 
-- **Endpoint**: `/api/v1/restaurant/updateStoreSettings`
+<!-- import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { AbstractControl } from "@angular/forms";
+import { BehaviorSubject, Subject } from "rxjs";
+import { environment } from "src/environments/environment";
+
+@Injectable({
+    providedIn: "root",
+})
+export class UserService {
+    apiUrl = environment.apiUrl;
+
+    phoneNumberValidator(
+        control: AbstractControl
+    ): { [key: string]: any } | null {
+        const phoneNumberRegex = /^\d{10}$/;
+        const isValid = phoneNumberRegex.test(control.value);
+        return isValid ? null : { invalidPhoneNumber: true };
+    }
+
+    constructor(private http: HttpClient) {}
+    private user = new BehaviorSubject<any>(null);
+
+    getAllUsers() {
+        return this.http.get(`${this.apiUrl}/v1/user/getAllUsers`);
+    }
+
+    addUser(userData) {
+        return this.http.post(`${this.apiUrl}/v1/user/addUser`, userData);
+    }
+
+    deleteUser(userId) {
+        return this.http.delete(`${this.apiUrl}/v1/user/deleteUser/${userId}`);
+    }
+
+    editUser(userId, userData) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/user/editUser/${userId}`,
+            userData
+        );
+    }
+
+    getUser(userId) {
+        return this.http.get(`${this.apiUrl}/v1/user/getUser/${userId}`);
+    }
+
+    getMe() {
+        return this.http.get(`${this.apiUrl}/v1/user/getMe`);
+    }
+} -->
+
+##### Get All Users
+
+- **Endpoint**: `/api/v1/user/getAllUsers`
+- **Method**: GET
+- **Description**: Retrieves a list of all users.
+- **Parameters**: None
+- **Response**: Returns a list of user details.
+- **Authorization**: Admin authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getAllUsers() {
+        return this.http.get(`${this.apiUrl}/v1/user/getAllUsers`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    userService.getAllUsers().subscribe((response) => {
+        console.log("All users:", response);
+    });
+    ```
+
+---
+
+##### Add User
+
+- **Endpoint**: `/api/v1/user/addUser`
+- **Method**: POST
+- **Description**: Adds a new user to the system.
+- **Parameters**:
+  - **Request Body**: JSON object containing user details. Example:
+
+    ```json
+    {
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "phone": "1234567890",
+        "role": "user"
+    }
+    ```
+
+- **Response**:
+  - **Success**: Returns a success message and the details of the created user.
+    Example:
+
+    ```json
+    {
+        "message": "User added successfully",
+        "user": {
+            "id": "123",
+            "name": "John Doe",
+            "email": "johndoe@example.com",
+            "phone": "1234567890",
+            "role": "user"
+        }
+    }
+    ```
+
+  - **Error**: Returns an error message if the request fails (e.g., validation errors, missing fields). Example:
+
+    ```json
+    {
+        "message": "Invalid input data",
+        "errors": {
+            "email": "Email is already in use."
+        }
+    }
+    ```
+
+- **Authorization**: Admin authentication required.
+- **Error Handling**:
+  - Handles duplicate entries (e.g., duplicate email or phone).
+  - Validates required fields before submission.
+- **Sample Code**:
+
+    ```typescript
+    addUser(userData) {
+        return this.http.post(`${this.apiUrl}/v1/user/addUser`, userData);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const newUser = {
+        name: "Jane Smith",
+        email: "janesmith@example.com",
+        phone: "9876543210",
+        role: "admin"
+    };
+
+    userService.addUser(newUser).subscribe(
+        (response) => {
+            console.log("User added successfully:", response);
+        },
+        (error) => {
+            console.error("Error adding user:", error);
+        }
+    );
+    ```
+
+---
+
+##### Delete User
+
+- **Endpoint**: `/api/v1/user/deleteUser/:userId`
+- **Method**: DELETE
+- **Description**: Deletes a user from the system.
+- **Parameters**:
+  - `userId`: The ID of the user to delete.
+  - **Response**:
+    - **Success**: Returns a success message if the user is deleted.
+    - **Error**: Returns an error message if the deletion fails.
+    - **Authorization**: Admin authentication required.
+    - **Error Handling**: Returns an error message if the request fails.
+    - **Sample Code**:
+
+    ```typescript
+    deleteUser(userId) {
+        return this.http.delete(`${this.apiUrl}/v1/user/deleteUser/${userId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const userId = "123";
+
+    userService.deleteUser(userId).subscribe(
+        (response) => {
+            console.log("User deleted successfully:", response);
+        },
+        (error) => {
+            console.error("Error deleting user:", error);
+        }
+    );
+    ```
+
+---
+
+##### Edit User
+
+- **Endpoint**: `/api/v1/user/editUser/:userId`
+- **Method**: PATCH
+- **Description**: Updates the details of an existing user.
+- **Parameters**:
+  - `userId`: The ID of the user to edit.
+  - **Request Body**: JSON object containing the updated user details. Example:
+
+    ```json
+    {
+        "name": "Jane Doe",
+        "email": "janedoe#example.com",
+        "phone": "9876543210",
+        "role": "admin"
+    }
+    ```
+
+- **Response**:
+- **Success**: Returns a success message and the updated user details.
+  Example:
+
+  ```json
+  {
+      "message": "User updated successfully",
+        "user": {
+            "id": "123",
+            "name": "Jane Doe",
+            "email": "janedoe@example.com",
+            "phone": "9876543210",
+            "role": "admin"
+        }
+    }
+    ```
+
+  - **Error**: Returns an error message if the update fails (e.g., validation errors, missing fields). Example:
+
+```json
+{
+    "message": "Invalid input data",
+    "errors": {
+        "email": "Email is already in use."
+    }
+}
+```
+
+- **Authorization**: Admin authentication required.
+- **Error Handling**:
+  - Handles duplicate entries (e.g., duplicate email or phone).
+  - Validates required fields before submission.
+  - **Sample Code**:
+
+    ```typescript
+    editUser(userId, userData) {
+        return this.http.patch(`${this.apiUrl}/v1/user/editUser/${userId}`, userData);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const userId = "123";
+    const updatedUser = {
+        name: "Jane Doe",
+        email: "jane#example.com",
+        phone: "9876543210",
+        role: "admin"
+    };
+
+    userService.editUser(userId, updatedUser).subscribe(
+        (response) => {
+            console.log("User updated successfully:", response);
+        },
+        (error) => {
+            console.error("Error updating user:", error);
+        }
+    );
+    ```
+
+---
+
+##### Get User
+
+- **Endpoint**: `/api/v1/user/getUser/:userId`
+- **Method**: GET
+- **Description**: Retrieves the details of a specific user.
+- **Parameters**:
+  - `userId`: The ID of the user to retrieve.
+  - **Response**: Returns the details of the requested user.
+  - **Authorization**: Admin authentication required.
+  - **Error Handling**: Returns an error message if the request fails.
+  - **Sample Code**:
+
+    ```typescript
+    getUser(userId) {
+        return this.http.get(`${this.apiUrl}/v1/user/getUser/${userId}`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const userId = "123";
+
+    userService.getUser(userId).subscribe((response) => {
+        console.log("User details:", response);
+    });
+    ```
+
+---
+
+##### Get Me
+
+- **Endpoint**: `/api/v1/user/getMe`
+- **Method**: GET
+- **Description**: Retrieves the details of the currently authenticated user.
+- **Parameters**: None
+- **Response**: Returns the details of the authenticated user.
+- **Authorization**: User authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getMe() {
+        return this.http.get(`${this.apiUrl}/v1/user/getMe`);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    userService.getMe().subscribe((response) => {
+        console.log("My details:", response);
+    });
+    ```
+
+---
 
 ### 1.8.3. Error Codes and Handling
 

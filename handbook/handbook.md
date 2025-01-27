@@ -98,6 +98,9 @@
         - [1.8.2.5.3. Get Formatted Geocode Details](#18253-get-formatted-geocode-details)
         - [1.8.2.5.4. Get Place Details](#18254-get-place-details)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
+      - [Error Dialog Component](#error-dialog-component)
+      - [Common Error Scenarios](#common-error-scenarios)
+      - [Error Handling Best Practices](#error-handling-best-practices)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
   - [1.9. Database Design](#19-database-design)
     - [1.9.1. Database Schema Overview](#191-database-schema-overview)
@@ -2264,7 +2267,9 @@ export class AdminPanelService {
 The Digital Menu application implements a comprehensive error handling system using Angular's Material Dialog components and HTTP interceptors. Here's how errors are handled:
 
 #### Error Dialog Component
+
 The application uses a centralized error dialog component (`ErrorDialogComponent`) to display user-friendly error messages. The dialog includes:
+
 - A title indicating the type of error
 - A detailed error message
 - Action buttons for user response
@@ -2315,6 +2320,104 @@ The application uses a centralized error dialog component (`ErrorDialogComponent
 ### 1.9.2. Key Tables and Their Purpose
 
 ### 1.9.3. Entity-Relationship Diagrams (ERD)
+
+```mermaid
+erDiagram
+    Customer ||--|{ Order : has_many
+    Customer ||--|{ IdentifierOTP : has_many
+    Restaurant ||--|{ Order : has_many
+    Restaurant ||--|{ PromoCode : has_many
+    Restaurant ||--|{ Table : has_many
+    Restaurant ||--|{ User : has_many
+    Customer {
+        ObjectId id PK
+        String email
+        String name
+        String phoneNumber
+        String password
+        AddressSchema addresses
+        AddressSchema pastLocations
+        String socialLogin
+        PreviousRestaurantSearch previousRestaurant
+    }
+    IdentifierOTP {
+        ObjectId id PK
+        String identifier
+        String otp
+        Date firstAttempt
+        Number attempts
+        Boolean identifierVerified
+        Date otpCreatedAt
+    }
+    Order {
+        ObjectId id PK
+        Customer customer FK "The customer who placed the order"
+        Restaurant restaurant FK "The restaurant where the order is placed"
+        String orderId
+        String customerName
+        Date orderDate
+        OrderDetailSchema orderDetails
+        String customerEmail
+        Mixed customerPreferences
+        String orderStatus
+        String customerPhoneNumber
+        String reason
+        String payment_order_id
+        String payment_id
+        Boolean cashOnDeliveryAvailable
+        String payment_signature
+    }
+    PromoCode {
+        ObjectId id PK
+        Restaurant restaurant FK "The restaurant that offers the promo code"
+        IndividualPromoCodeSchema promoCodes
+    }
+    Restaurant {
+        ObjectId id PK
+        String restaurantName
+        Boolean restaurantVerified
+        String restaurantUrl
+        String restaurantBackgroundImage
+        String restaurantPhoneNumber
+        String restaurantEmail
+        String restaurantStatus
+        String restaurantType
+        String restaurantImages
+        AddressSchema address
+        time openTime
+        time closeTime
+        String gstNumber
+        Boolean isPricingInclusiveOfGST
+        Number customGSTPercentage
+        String placeId
+        AddOnSchema addOns
+        ChoicesSchema dishChoices
+        String fssaiLicenseNumber
+        SocialSchema social_links
+        CategorySchema cuisine
+        ContactSchema contact
+    }
+    Table {
+        ObjectId id PK
+        Restaurant restaurant FK "The restaurant that owns the table"
+        TableSchema tables
+    }
+    User {
+        ObjectId id PK
+        String name
+        Restaurant restaurant FK "The restaurant that employs the user"
+        String email
+        String phoneNumber
+        String role
+        String password
+        Date passwordChangedAt
+        String passwordResetToken
+        Date passwordResetExpires
+        String emailOtp
+        Boolean emailVerified
+        Boolean active
+    }
+```
 
 ### 1.9.4. Sample Queries for Common Use Cases
 

@@ -97,6 +97,7 @@
         - [1.8.2.5.2. Get Geocode Details](#18252-get-geocode-details)
         - [1.8.2.5.3. Get Formatted Geocode Details](#18253-get-formatted-geocode-details)
         - [1.8.2.5.4. Get Place Details](#18254-get-place-details)
+      - [Order Service Endpoints](#order-service-endpoints)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
       - [1.8.3.1. Error Dialog Component](#1831-error-dialog-component)
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
@@ -653,6 +654,8 @@ The website is deployed on firebase.com and hosted on Google Cloud Platform. The
     ![init](https://i.imgur.com/E0jXBGn.png "init")
 11. Deploy to Firebase Hosting using `firebase deploy`.
     ![deploy](https://i.imgur.com/Fe3OCQ1.png "deploy")
+12. deployment successful.
+    ![success](https://i.imgur.com/LyCoQqH.png "success")
 
 ## 1.6. Beginner’s Guide to Programming
 
@@ -2277,6 +2280,8 @@ export class AdminPanelService {
         console.log("Place details:", details);
     });
     ```
+
+#### Order Service Endpoints
 
 ### 1.8.3. Error Codes and Handling
 

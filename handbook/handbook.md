@@ -684,14 +684,6 @@ The website is deployed on firebase.com and hosted on Google Cloud Platform. The
 
 ### 1.5.4. Environment Setup
 
-<!-- 1. create a firebase project
-2. enable firestore and storage
-3. create a web app
-4. copy the firebase config and paste it in the environment.ts file
-5. run `npm run dev` to run the project in development mode
-6. run `firebase use staging` to use the staging environment
-7. run `firebase deploy` to deploy the project -->
-
 1. Go to `https://firebase.google.com/` and click on `Go to console`.
    ![firebase homepage](https://i.imgur.com/Qn5lZ2k.png "firebase")
 2. Click on `Get started with a Firebase project`.
@@ -818,12 +810,26 @@ Debugging is the process of finding and fixing errors in your code. Here are som
 
 ### 1.7.1. Overview of the Codebase
 
-The codebase is organized into the following directories:
+The repository is organized as follows:
 
-- `src` - Contains the source code for the Angular frontend application.
-- `src/app` - Contains the Angular components, services, and modules.
-- `src/assets` - Contains static assets like images, fonts, and stylesheets.
-- `src/api` - Contains API endpoints and services for interacting with the backend.
+- `src/`: Contains the main application source code
+  - `app/`: Angular application modules and components
+    - `admin/`: Admin panel components and routing
+    - `api/`: Services for API communication and guards
+    - `auth/`: Authentication-related components
+    - `restaurant/`: Restaurant-specific components
+  - `assets/`: Static assets like images and data files
+  - `environments/`: Environment-specific configuration files
+- `angular.json`: Angular CLI configuration file
+- `tsconfig.json`: TypeScript compiler configuration
+- `package.json`: NPM package dependencies and scripts
+
+Key Files:
+
+- `src/main.ts`: Entry point of the application
+- `src/app/app.module.ts`: Main Angular module
+- `src/app/app-routing.module.ts`: Application routing configuration
+- `src/environments/environment.ts`: Environment variables
 
 <div style="page-break-after: always;"></div>
 

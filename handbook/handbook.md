@@ -118,12 +118,17 @@
         - [1.8.2.7.4. Get Restaurant Detail](#18274-get-restaurant-detail)
         - [1.8.2.7.5. Update Restaurant Detail](#18275-update-restaurant-detail)
         - [1.8.2.7.6. Update Payment Gateway](#18276-update-payment-gateway)
-        - [Update Store Settings](#update-store-settings)
-        - [Update Restaurant Cash On Delivery](#update-restaurant-cash-on-delivery)
-        - [Update Restaurant Bypass Auth](#update-restaurant-bypass-auth)
-        - [Update Restaurant Auto Reject](#update-restaurant-auto-reject)
-        - [Update Restaurant Dine-In GST Setting](#update-restaurant-dine-in-gst-setting)
-        - [Update Contact Detail](#update-contact-detail)
+        - [1.8.2.7.7. Update Store Settings](#18277-update-store-settings)
+        - [1.8.2.7.8. Update Restaurant Cash On Delivery](#18278-update-restaurant-cash-on-delivery)
+        - [1.8.2.7.9. Update Restaurant Bypass Auth](#18279-update-restaurant-bypass-auth)
+        - [1.8.2.7.10. Update Restaurant Auto Reject](#182710-update-restaurant-auto-reject)
+        - [1.8.2.7.11. Update Restaurant Dine-In GST Setting](#182711-update-restaurant-dine-in-gst-setting)
+        - [1.8.2.7.12. Update Contact Detail](#182712-update-contact-detail)
+        - [1.8.2.7.13. Add Contact Details](#182713-add-contact-details)
+        - [1.8.2.7.14. Update Restaurant Banner Image For Mobile](#182714-update-restaurant-banner-image-for-mobile)
+        - [1.8.2.7.15. Update Restaurant Banner Image For Small](#182715-update-restaurant-banner-image-for-small)
+        - [1.8.2.7.16. Create Table Entry](#182716-create-table-entry)
+        - [1.8.2.7.17. Create Room Entry](#182717-create-room-entry)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -136,8 +141,8 @@
       - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
       - [1.8.3.3. Error Handling Best Practices](#1833-error-handling-best-practices)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
-      - [Basic installation and setup](#basic-installation-and-setup)
-      - [Making a request](#making-a-request)
+      - [1.8.4.1. Basic installation and setup](#1841-basic-installation-and-setup)
+      - [1.8.4.2. Making a request](#1842-making-a-request)
   - [1.9. Database Design](#19-database-design)
     - [1.9.1. Database Schema Overview](#191-database-schema-overview)
     - [1.9.2. **Entities and Attributes**](#192-entities-and-attributes)
@@ -3631,7 +3636,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Store Settings
+##### 1.8.2.7.7. Update Store Settings
 
 - **Endpoint**: `/api/v1/restaurant/updateStoreSettings`
 - **Method**: PATCH
@@ -3673,7 +3678,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Restaurant Cash On Delivery
+##### 1.8.2.7.8. Update Restaurant Cash On Delivery
 
 - **Endpoint**: `/api/v1/restaurant/updateRestaurantCashOnDelivery`
 - **Method**: PATCH
@@ -3713,7 +3718,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Restaurant Bypass Auth
+##### 1.8.2.7.9. Update Restaurant Bypass Auth
 
 - **Endpoint**: `/api/v1/restaurant/updateRestaurantByPassAuth`
 - **Method**: PATCH
@@ -3753,7 +3758,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Restaurant Auto Reject
+##### 1.8.2.7.10. Update Restaurant Auto Reject
 
 - **Endpoint**: `/api/v1/restaurant/updateRestaurantAutoReject`
 - **Method**: PATCH
@@ -3793,7 +3798,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Restaurant Dine-In GST Setting
+##### 1.8.2.7.11. Update Restaurant Dine-In GST Setting
 
 - **Endpoint**: `/api/v1/restaurant/updateRestaurantDineInGstSetting`
 - **Method**: PATCH
@@ -3835,7 +3840,394 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Contact Detail
+##### 1.8.2.7.12. Update Contact Detail
+
+- **Endpoint**: `/api/v1/restaurant/updateContactDetail`
+- **Method**: PATCH
+- **Description**: Updates the contact details for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated contact details.
+    - Example structure:
+
+```json
+{
+    "contactNumber": "9876543210",
+    "email": "jane@example.com",
+    "website": "https://example.com"
+    }
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateContactDetail(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateContactDetail`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const contactData = {
+        contactNumber: "9876543210",
+        email: "
+        website: "https://example.com",
+    };
+
+
+    restaurantService.updateContactDetail(contactData).subscribe((response) => {
+        console.log("Contact details updated:", response);
+    });
+    ```
+---
+
+##### 1.8.2.7.13. Add Contact Details
+
+- **Endpoint**: `/api/v1/restaurant/addContactDetail`
+- **Method**: PATCH
+- **Description**: Adds contact details for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the contact details.
+    - Example structure:
+
+```json
+{
+    "contactNumber": "9876543210",
+    "email": "jane@example.com",
+    "website": "https://example.com"
+}
+
+- **Response**: Returns a success message if the addition is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the addition fails.
+- **Sample Code**:
+
+    ```typescript
+    addContactDetails(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/addContactDetail`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const contactData = {
+        contactNumber: "9876543210",
+        email: "jane@example.com",
+        website: "https://example.com",
+    };
+
+    restaurantService.addContactDetails(contactData).subscribe((response) => {
+        console.log("Contact details added:", response);
+    });
+    ```
+---
+
+##### Delete Table By Id
+
+- **Endpoint**: `/api/v1/restaurant/deleteTableById/:id`
+- **Method**: DELETE
+- **Description**: Deletes a table from the restaurant.
+- **Parameters**:
+  - `id`: The ID of the table to delete.
+- **Response**: Returns a success message if the deletion is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the deletion fails.
+- **Sample Code**:
+
+    ```typescript
+    deleteTableById(id: string) {
+        return this.http.delete(`${this.apiUrl}/v1/restaurant/deleteTableById/${id}`);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const tableId = "123";
+
+    restaurantService.deleteTableById(tableId).subscribe((response) => {
+        console.log("Table deleted successfully:", response);
+    });
+    ```
+---
+
+##### Delete Room By Id
+
+- **Endpoint**: `/api/v1/restaurant/deleteRoomById/:id`
+- **Method**: DELETE
+- **Description**: Deletes a room from the restaurant.
+- **Parameters**:
+  - `id`: The ID of the room to delete.
+- **Response**: Returns a success message if the deletion is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the deletion fails.
+- **Sample Code**:
+
+    ```typescript
+    deleteRoomById(id: string) {
+        return this.http.delete(`${this.apiUrl}/v1/restaurant/deleteRoomById/${id}`);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const roomId = "123";
+
+    restaurantService.deleteRoomById(roomId).subscribe((response) => {
+        console.log("Room deleted successfully:", response);
+    });
+    ```
+---
+
+##### Delete Contact Detail
+
+- **Endpoint**: `/api/v1/restaurant/deleteContactDetail/:id`
+- **Method**: DELETE
+- **Description**: Deletes a contact detail from the restaurant.
+- **Parameters**:
+  - `id`: The ID of the contact detail to delete.
+- **Response**: Returns a success message if the deletion is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the deletion fails.
+- **Sample Code**:
+
+    ```typescript
+    deleteContactDetail(id: string) {
+        return this.http.delete(`${this.apiUrl}/v1/restaurant/deleteContactDetail/${id}`);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const contactId = "123";
+
+    restaurantService.deleteContactDetail(contactId).subscribe((response) => {
+        console.log("Contact detail deleted successfully:", response);
+    });
+    ```
+---
+
+##### Get Contact Detail By Id
+
+- **Endpoint**: `/api/v1/restaurant/getContactDetailById/:id`
+- **Method**: GET
+- **Description**: Retrieves a contact detail by its ID.
+- **Parameters**:
+  - `id`: The ID of the contact detail to retrieve.
+- **Response**: Returns the contact detail.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+    ```typescript
+    getContactDetailById(id: string) {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getContactDetailById/${id}`);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const contactId = "123";
+
+    restaurantService.getContactDetailById(contactId).subscribe((response) => {
+        console.log("Contact detail:", response);
+    });
+    ```
+---
+
+##### Update Restaurant Background Image
+
+- **Endpoint**: `/api/v1/restaurant/updateImage`
+- **Method**: PUT
+- **Description**: Updates the background image of the restaurant.
+- **Parameters**:
+  - `imageData`: An object containing the new image data.
+    - Example structure:
+
+```json
+{
+    "image": "base64-encoded-image-data"
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantBackgoundImage(imageData: { image: any }) {
+        return this.http.put(`${this.apiUrl}/v1/restaurant/updateImage`, imageData);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const image = { image: "base64-encoded-image-data" };
+
+    restaurantService.updateRestaurantBackgoundImage(image).subscribe((response) => {
+        console.log("Background image updated:", response);
+    });
+    ```
+---
+
+##### 1.8.2.7.14. Update Restaurant Banner Image For Mobile
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForMobile`
+- **Method**: PUT
+- **Description**: Updates the banner image for mobile devices.
+- **Parameters**:
+  - `imageData`: An object containing the new image data.
+    - Example structure:
+
+```json
+{
+    "image": "base64-encoded-image-data"
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantBannerImageForMobile(imageData: { image: any }) {
+        return this.http.put(`${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForMobile`, imageData);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const image = { image: "base64-encoded-image-data" };
+
+    restaurantService.updateRestaurantBannerImageForMobile(image).subscribe((response) => {
+        console.log("Banner image for mobile updated:", response);
+    });
+    ```
+---
+
+##### 1.8.2.7.15. Update Restaurant Banner Image For Small
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForSmall`
+- **Method**: PUT
+- **Description**: Updates the banner image for small devices.
+- **Parameters**:
+  - `imageData`: An object containing the new image data.
+    - Example structure:
+
+```json
+{
+    "image": "base64-encoded-image-data"
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantBannerImageForSmall(imageData: { image: any }) {
+        return this.http.put(`${this.apiUrl}/v1/restaurant/updateRestaurantBannerImageForSmall`, imageData);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const image = { image: "base64-encoded-image-data" };
+
+    restaurantService.updateRestaurantBannerImageForSmall(image).subscribe((response) => {
+        console.log("Banner image for small devices updated:", response);
+    });
+    ```
+---
+
+##### 1.8.2.7.16. Create Table Entry
+
+- **Endpoint**: `/api/v1/restaurant/createTableEntry`
+- **Method**: POST
+- **Description**: Adds a new table entry to the restaurant.
+- **Parameters**:
+  - `data`: An object containing the table details.
+    - Example structure:
+
+```json
+{
+    "tableNumber": "1",
+    "seats": 4,
+    "isReserved": false
+}
+```
+
+- **Response**: Returns a success message and the details of the created table.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the creation fails.
+- **Sample Code**:
+
+    ```typescript
+    createTableEntry(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/restaurant/createTableEntry`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const tableData = {
+        tableNumber: "1",
+        seats: 4,
+        isReserved: false,
+    };
+
+
+    restaurantService.createTableEntry(tableData).subscribe((response) => {
+        console.log("Table created successfully:", response);
+    });
+    ```
+---
+
+##### 1.8.2.7.17. Create Room Entry
+
+- **Endpoint**: `/api/v1/restaurant/createRoomEntry`
+- **Method**: POST
+- **Description**: Adds a new room entry to the restaurant.
+- **Parameters**:
+  - `data`: An object containing the room details.
+    - Example structure:
+
+```json
+{
+    "roomNumber": "1",
+    "seats": 4,
+    "isReserved": false
+}
+```
+
+- **Response**: Returns a success message and the details of the created room.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the creation fails.
+- **Sample Code**:
+
+    ```typescript
+    createRoomEntry(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/restaurant/createRoomEntry`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const roomData = {
+        roomNumber: "1",
+        seats: 4,
+        isReserved: false,
+    };
+
+    restaurantService.createRoomEntry(roomData).subscribe((response) => {
+        console.log("Room created successfully:", response);
+    });
+    ```
+---
 
 #### 1.8.2.8. User Service Endpoints
 
@@ -4173,7 +4565,7 @@ The application uses a centralized error dialog component (`ErrorDialogComponent
 
 Testing APIs is an essential part of software development. Here's a beginner-friendly guide to testing APIs using tools like Thunder Client.
 
-#### Basic installation and setup
+#### 1.8.4.1. Basic installation and setup
 
 1. search for "Thunder Client" in the extensions marketplace.
 ![Thunder Client](https://i.imgur.com/bhnJkGQ.png "Thunder Client")
@@ -4184,7 +4576,7 @@ Testing APIs is an essential part of software development. Here's a beginner-fri
 4. Click on the `New Request` button to create a new request.
 ![New Request](https://i.imgur.com/0iGHmPb.png "New Request")
 
-#### Making a request
+#### 1.8.4.2. Making a request
 
 1. Enter the URL of the API endpoint you want to test.
 ![Request URL](https://i.imgur.com/hQD65sc.png "Request URL")

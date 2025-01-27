@@ -78,25 +78,25 @@
         - [1.8.2.3.1. Store Customer Details](#18231-store-customer-details)
         - [1.8.2.3.2. Get Customer Details](#18232-get-customer-details)
       - [1.8.2.4. Customer Service Endpoints](#1824-customer-service-endpoints)
-      - [1.8.2.5. Get Customer](#1825-get-customer)
-        - [1.8.2.5.1. Add Customer Address](#18251-add-customer-address)
-        - [1.8.2.5.2. Edit Customer Address](#18252-edit-customer-address)
-        - [1.8.2.5.3. Send Email](#18253-send-email)
-        - [1.8.2.5.4. Delete Address of Requesting Customer by ID](#18254-delete-address-of-requesting-customer-by-id)
-        - [1.8.2.5.5. Get Nearby Restaurants](#18255-get-nearby-restaurants)
-        - [1.8.2.5.6. Get All Restaurants](#18256-get-all-restaurants)
-        - [1.8.2.5.7. Get Restaurant Details by URL](#18257-get-restaurant-details-by-url)
-        - [1.8.2.5.8. Get Restaurant Details by ID](#18258-get-restaurant-details-by-id)
-        - [1.8.2.5.9. Get Promo Codes for Restaurant by URL](#18259-get-promo-codes-for-restaurant-by-url)
-        - [1.8.2.5.10. Check If Promo Code is Valid](#182510-check-if-promo-code-is-valid)
-        - [1.8.2.5.11. Update Customer Data](#182511-update-customer-data)
-        - [1.8.2.5.12. Check If Dine-In is Available](#182512-check-if-dine-in-is-available)
-        - [1.8.2.5.13. Get Restaurant Status](#182513-get-restaurant-status)
-      - [1.8.2.6. Google Maps Service Endpoints](#1826-google-maps-service-endpoints)
-        - [1.8.2.6.1. Get Autocomplete Results](#18261-get-autocomplete-results)
-        - [1.8.2.6.2. Get Geocode Details](#18262-get-geocode-details)
-        - [1.8.2.6.3. Get Formatted Geocode Details](#18263-get-formatted-geocode-details)
-        - [1.8.2.6.4. Get Place Details](#18264-get-place-details)
+        - [1.8.2.4.1. Get Customer](#18241-get-customer)
+        - [1.8.2.4.2. Add Customer Address](#18242-add-customer-address)
+        - [1.8.2.4.3. Edit Customer Address](#18243-edit-customer-address)
+        - [1.8.2.4.4. Send Email](#18244-send-email)
+        - [1.8.2.4.5. Delete Address of Requesting Customer by ID](#18245-delete-address-of-requesting-customer-by-id)
+        - [1.8.2.4.6. Get Nearby Restaurants](#18246-get-nearby-restaurants)
+        - [1.8.2.4.7. Get All Restaurants](#18247-get-all-restaurants)
+        - [1.8.2.4.8. Get Restaurant Details by URL](#18248-get-restaurant-details-by-url)
+        - [1.8.2.4.9. Get Restaurant Details by ID](#18249-get-restaurant-details-by-id)
+        - [1.8.2.4.10. Get Promo Codes for Restaurant by URL](#182410-get-promo-codes-for-restaurant-by-url)
+        - [1.8.2.4.11. Check If Promo Code is Valid](#182411-check-if-promo-code-is-valid)
+        - [1.8.2.4.12. Update Customer Data](#182412-update-customer-data)
+        - [1.8.2.4.13. Check If Dine-In is Available](#182413-check-if-dine-in-is-available)
+        - [1.8.2.4.14. Get Restaurant Status](#182414-get-restaurant-status)
+      - [1.8.2.5. Google Maps Service Endpoints](#1825-google-maps-service-endpoints)
+        - [1.8.2.5.1. Get Autocomplete Results](#18251-get-autocomplete-results)
+        - [1.8.2.5.2. Get Geocode Details](#18252-get-geocode-details)
+        - [1.8.2.5.3. Get Formatted Geocode Details](#18253-get-formatted-geocode-details)
+        - [1.8.2.5.4. Get Place Details](#18254-get-place-details)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
   - [1.9. Database Design](#19-database-design)
@@ -1589,7 +1589,7 @@ export class AdminPanelService {
 
 #### 1.8.2.4. Customer Service Endpoints
 
-#### 1.8.2.5. Get Customer
+##### 1.8.2.4.1. Get Customer
 
 - **Endpoint**: `/api/v1/customer/getCustomer`
 - **Method**: GET
@@ -1614,7 +1614,7 @@ export class AdminPanelService {
     });
     ```
 
-##### 1.8.2.5.1. Add Customer Address
+##### 1.8.2.4.2. Add Customer Address
 
 - **Endpoint**: `/api/v1/customer/addCustomerAddress`
 - **Method**: PATCH
@@ -1664,7 +1664,7 @@ export class AdminPanelService {
     });
     ```
 
-##### 1.8.2.5.2. Edit Customer Address
+##### 1.8.2.4.3. Edit Customer Address
 
 - **Endpoint**: `/api/v1/customer/editCustomerAddress`
 - **Method**: PATCH
@@ -1717,7 +1717,7 @@ export class AdminPanelService {
         });
     ```
 
-##### 1.8.2.5.3. Send Email
+##### 1.8.2.4.4. Send Email
 
 - **Endpoint**: `/api/v1/customer/contactUs`
 - **Method**: POST
@@ -1759,7 +1759,7 @@ export class AdminPanelService {
     });
     ```
 
-##### 1.8.2.5.4. Delete Address of Requesting Customer by ID
+##### 1.8.2.4.5. Delete Address of Requesting Customer by ID
 
 - **Endpoint**: `/api/v1/customer/deleteAddressOfRequestCustomerById/{id}`
 - **Method**: DELETE
@@ -1788,7 +1788,7 @@ export class AdminPanelService {
         });
     ```
 
-##### 1.8.2.5.5. Get Nearby Restaurants
+##### 1.8.2.4.6. Get Nearby Restaurants
 
 - **Endpoint**: `/api/v1/customer/getNearbyRestaurants`
 - **Method**: GET
@@ -1820,7 +1820,7 @@ export class AdminPanelService {
         });
     ```
 
-##### 1.8.2.5.6. Get All Restaurants
+##### 1.8.2.4.7. Get All Restaurants
 
 - **Endpoint**: `/api/v1/customer/getAllRestaurants`
 - **Method**: GET
@@ -1845,7 +1845,7 @@ export class AdminPanelService {
     });
     ```
 
-##### 1.8.2.5.7. Get Restaurant Details by URL
+##### 1.8.2.4.8. Get Restaurant Details by URL
 
 - **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantUrl/{restaurantUrl}`
 - **Method**: GET
@@ -1875,7 +1875,7 @@ export class AdminPanelService {
         });
     ```
 
-##### 1.8.2.5.8. Get Restaurant Details by ID
+##### 1.8.2.4.9. Get Restaurant Details by ID
 
 - **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantId/{restaurantId}`
 - **Method**: GET
@@ -1905,7 +1905,7 @@ export class AdminPanelService {
         });
     ```
 
-##### 1.8.2.5.9. Get Promo Codes for Restaurant by URL
+##### 1.8.2.4.10. Get Promo Codes for Restaurant by URL
 
 - **Endpoint**: `/api/v1/customer/getPromoCodesForRestaurantUrl/{restaurantUrl}`
 - **Method**: GET
@@ -1935,7 +1935,7 @@ export class AdminPanelService {
         });
     ```
 
-##### 1.8.2.5.10. Check If Promo Code is Valid
+##### 1.8.2.4.11. Check If Promo Code is Valid
 
 - **Endpoint**: `/api/v1/customer/checkIfPromoCodeIsValid`
 - **Method**: POST
@@ -1982,7 +1982,7 @@ export class AdminPanelService {
         });
     ```
 
-##### 1.8.2.5.11. Update Customer Data
+##### 1.8.2.4.12. Update Customer Data
 
 - **Endpoint**: `/api/v1/customer/updateCustomerData`
 - **Method**: POST
@@ -2022,7 +2022,7 @@ export class AdminPanelService {
     });
     ```
 
-##### 1.8.2.5.12. Check If Dine-In is Available
+##### 1.8.2.4.13. Check If Dine-In is Available
 
 - **Endpoint**: `/api/v1/customer/isDineInAvailable/{restaurantId}`
 - **Method**: GET
@@ -2050,7 +2050,7 @@ export class AdminPanelService {
     });
     ```
 
-##### 1.8.2.5.13. Get Restaurant Status
+##### 1.8.2.4.14. Get Restaurant Status
 
 - **Endpoint**: `/api/v1/customer/getRestaurantStatus/{restaurantId}`
 - **Method**: GET
@@ -2079,7 +2079,7 @@ export class AdminPanelService {
 
     ```
 
-#### 1.8.2.6. Google Maps Service Endpoints
+#### 1.8.2.5. Google Maps Service Endpoints
 
 <!-- import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -2225,7 +2225,7 @@ export class GoogleMapsService {
     }
 } -->
 
-##### 1.8.2.6.1. Get Autocomplete Results
+##### 1.8.2.5.1. Get Autocomplete Results
 
 - **Endpoint**: `/api/v1/google-maps/autocomplete`
 - **Method**: GET
@@ -2259,7 +2259,7 @@ export class GoogleMapsService {
     });
     ```
 
-##### 1.8.2.6.2. Get Geocode Details
+##### 1.8.2.5.2. Get Geocode Details
 
 - **Endpoint**: `/api/v1/google-maps/geocode-details`
 - **Method**: GET
@@ -2300,7 +2300,7 @@ export class GoogleMapsService {
     });
     ```
 
-##### 1.8.2.6.3. Get Formatted Geocode Details
+##### 1.8.2.5.3. Get Formatted Geocode Details
 
 - **Endpoint**: `/api/v1/google-maps/geocode-details`
 - **Method**: GET
@@ -2371,7 +2371,7 @@ export class GoogleMapsService {
     });
     ```
 
-##### 1.8.2.6.4. Get Place Details
+##### 1.8.2.5.4. Get Place Details
 
 - **Endpoint**: `/api/v1/google-maps/place-details`
 - **Method**: GET

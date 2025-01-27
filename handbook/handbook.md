@@ -98,15 +98,31 @@
         - [1.8.2.5.3. Get Formatted Geocode Details](#18253-get-formatted-geocode-details)
         - [1.8.2.5.4. Get Place Details](#18254-get-place-details)
     - [1.8.3. Error Codes and Handling](#183-error-codes-and-handling)
-      - [Error Dialog Component](#error-dialog-component)
-      - [Common Error Scenarios](#common-error-scenarios)
-      - [Error Handling Best Practices](#error-handling-best-practices)
+      - [1.8.3.1. Error Dialog Component](#1831-error-dialog-component)
+      - [1.8.3.2. Common Error Scenarios](#1832-common-error-scenarios)
+      - [1.8.3.3. Error Handling Best Practices](#1833-error-handling-best-practices)
     - [1.8.4. How to Test APIs as a Beginner](#184-how-to-test-apis-as-a-beginner)
   - [1.9. Database Design](#19-database-design)
     - [1.9.1. Database Schema Overview](#191-database-schema-overview)
-    - [1.9.2. Key Tables and Their Purpose](#192-key-tables-and-their-purpose)
-    - [1.9.3. Entity-Relationship Diagrams (ERD)](#193-entity-relationship-diagrams-erd)
-    - [1.9.4. Sample Queries for Common Use Cases](#194-sample-queries-for-common-use-cases)
+    - [1.9.2. **Entities and Attributes**](#192-entities-and-attributes)
+      - [1.9.2.1. **Customer**](#1921-customer)
+      - [1.9.2.2. **IdentifierOTP**](#1922-identifierotp)
+      - [1.9.2.3. **Order**](#1923-order)
+      - [1.9.2.4. **PromoCode**](#1924-promocode)
+      - [1.9.2.5. **Restaurant**](#1925-restaurant)
+      - [1.9.2.6. **Table**](#1926-table)
+      - [1.9.2.7. **User**](#1927-user)
+    - [1.9.3. **Relationships**](#193-relationships)
+    - [1.9.4. Key Tables and Their Purpose](#194-key-tables-and-their-purpose)
+      - [1.9.4.1. Customer Table](#1941-customer-table)
+      - [1.9.4.2. IdentifierOTP Table](#1942-identifierotp-table)
+      - [1.9.4.3. Order Table](#1943-order-table)
+      - [1.9.4.4. PromoCode Table](#1944-promocode-table)
+      - [1.9.4.5. Restaurant Table](#1945-restaurant-table)
+      - [1.9.4.6. Table Table](#1946-table-table)
+      - [1.9.4.7. User Table](#1947-user-table)
+    - [1.9.5. Entity-Relationship Diagrams (ERD)](#195-entity-relationship-diagrams-erd)
+    - [1.9.6. Sample Queries for Common Use Cases](#196-sample-queries-for-common-use-cases)
   - [1.10. User Interface (UI)](#110-user-interface-ui)
     - [1.10.1. Screenshots of All Pages (annotated with descriptions)](#1101-screenshots-of-all-pages-annotated-with-descriptions)
     - [1.10.2. Navigation Map](#1102-navigation-map)
@@ -2266,7 +2282,7 @@ export class AdminPanelService {
 
 The Digital Menu application implements a comprehensive error handling system using Angular's Material Dialog components and HTTP interceptors. Here's how errors are handled:
 
-#### Error Dialog Component
+#### 1.8.3.1. Error Dialog Component
 
 The application uses a centralized error dialog component (`ErrorDialogComponent`) to display user-friendly error messages. The dialog includes:
 
@@ -2275,7 +2291,7 @@ The application uses a centralized error dialog component (`ErrorDialogComponent
 - Action buttons for user response
 - Option to contact the restaurant in case of critical errors
 
-#### Common Error Scenarios
+#### 1.8.3.2. Common Error Scenarios
 
 1. **Authentication Errors**
    - 401: Unauthorized access - User needs to log in
@@ -2294,7 +2310,7 @@ The application uses a centralized error dialog component (`ErrorDialogComponent
    - Network unavailable
    - Server unreachable
 
-#### Error Handling Best Practices
+#### 1.8.3.3. Error Handling Best Practices
 
 1. **User Communication**
    - Display clear, non-technical error messages
@@ -2317,9 +2333,211 @@ The application uses a centralized error dialog component (`ErrorDialogComponent
 
 ### 1.9.1. Database Schema Overview
 
-### 1.9.2. Key Tables and Their Purpose
+The database schema models the relationships and data for a restaurant management and ordering system. Below is an explanation of the entities, attributes, and their relationships:
 
-### 1.9.3. Entity-Relationship Diagrams (ERD)
+---
+
+### 1.9.2. **Entities and Attributes**
+
+#### 1.9.2.1. **Customer**
+
+- **Purpose:** Stores customer details.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `email`: Customer's email.
+  - `name`: Customer's name.
+  - `phoneNumber`: Customer's phone number.
+  - `password`: Password for account login.
+  - `addresses`: List of saved addresses (AddressSchema).
+  - `pastLocations`: Previously visited locations (AddressSchema).
+  - `socialLogin`: Social login details, if applicable.
+  - `previousRestaurant`: Customer's last searched restaurant (PreviousRestaurantSearch).
+
+---
+
+#### 1.9.2.2. **IdentifierOTP**
+
+- **Purpose:** Manages OTP-based verification for customers.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `identifier`: Email or phone number for verification.
+  - `otp`: OTP code.
+  - `firstAttempt`: Timestamp of the first verification attempt.
+  - `attempts`: Number of OTP attempts made.
+  - `identifierVerified`: Status of identifier verification (Boolean).
+  - `otpCreatedAt`: OTP creation timestamp.
+
+---
+
+#### 1.9.2.3. **Order**
+
+- **Purpose:** Represents orders placed by customers.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `customer`: Foreign key referencing the customer who placed the order.
+  - `restaurant`: Foreign key referencing the restaurant where the order was placed.
+  - `orderId`: Unique order identifier.
+  - `customerName`: Name of the customer.
+  - `orderDate`: Timestamp of the order.
+  - `orderDetails`: Details of the order (OrderDetailSchema).
+  - `customerEmail`: Customer's email.
+  - `customerPreferences`: Additional preferences provided by the customer.
+  - `orderStatus`: Status of the order (e.g., pending, completed).
+  - `reason`: Reason for order cancellation, if applicable.
+  - `payment_order_id`: ID for payment order.
+  - `payment_id`: ID for payment transaction.
+  - `cashOnDeliveryAvailable`: Indicates if cash on delivery is available.
+  - `payment_signature`: Signature for payment verification.
+
+---
+
+#### 1.9.2.4. **PromoCode**
+
+- **Purpose:** Stores promo codes offered by restaurants.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `restaurant`: Foreign key referencing the associated restaurant.
+  - `promoCodes`: Promo code details (IndividualPromoCodeSchema).
+
+---
+
+#### 1.9.2.5. **Restaurant**
+
+- **Purpose:** Represents restaurant details.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `restaurantName`: Name of the restaurant.
+  - `restaurantVerified`: Whether the restaurant is verified.
+  - `restaurantUrl`: Website URL.
+  - `restaurantBackgroundImage`: Background image URL.
+  - `restaurantPhoneNumber`: Contact number.
+  - `restaurantEmail`: Contact email.
+  - `restaurantStatus`: Operational status of the restaurant.
+  - `restaurantType`: Type/category of the restaurant.
+  - `restaurantImages`: Images of the restaurant.
+  - `address`: Address of the restaurant (AddressSchema).
+  - `openTime`: Opening time.
+  - `closeTime`: Closing time.
+  - `gstNumber`: GST registration number.
+  - `isPricingInclusiveOfGST`: Indicates if pricing includes GST.
+  - `customGSTPercentage`: Custom GST percentage, if applicable.
+  - `placeId`: Identifier for the restaurant location.
+  - `addOns`: Add-on items available at the restaurant (AddOnSchema).
+  - `dishChoices`: Options for dishes (ChoicesSchema).
+  - `fssaiLicenseNumber`: FSSAI license number.
+  - `social_links`: Social media links (SocialSchema).
+  - `cuisine`: Type of cuisines offered (CategorySchema).
+  - `contact`: Contact details (ContactSchema).
+
+---
+
+#### 1.9.2.6. **Table**
+
+- **Purpose:** Represents tables available in a restaurant.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `restaurant`: Foreign key referencing the associated restaurant.
+  - `tables`: Details of tables (TableSchema).
+
+---
+
+#### 1.9.2.7. **User**
+
+- **Purpose:** Represents employees working at restaurants.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `name`: Name of the user.
+  - `restaurant`: Foreign key referencing the associated restaurant.
+  - `email`: User's email.
+  - `phoneNumber`: User's phone number.
+  - `role`: Role of the user (e.g., manager, staff).
+  - `password`: User account password.
+  - `passwordChangedAt`: Timestamp of the last password change.
+  - `passwordResetToken`: Token for password reset.
+  - `passwordResetExpires`: Expiration timestamp for the reset token.
+  - `emailOtp`: OTP for email verification.
+  - `emailVerified`: Indicates if the email is verified.
+  - `active`: Status of the user's account (active/inactive).
+
+---
+
+### 1.9.3. **Relationships**
+
+1. **Customer ↔ Order**:
+   - One customer can place many orders (`1:N` relationship).
+2. **Customer ↔ IdentifierOTP**:
+   - One customer can have multiple OTP identifiers (`1:N` relationship).
+3. **Restaurant ↔ Order**:
+   - One restaurant can have many orders (`1:N` relationship).
+4. **Restaurant ↔ PromoCode**:
+   - One restaurant can offer multiple promo codes (`1:N` relationship).
+5. **Restaurant ↔ Table**:
+   - One restaurant can have many tables (`1:N` relationship).
+6. **Restaurant ↔ User**:
+   - One restaurant can employ many users (`1:N` relationship).
+
+---
+
+This schema is well-suited for handling complex workflows in restaurant and food delivery platforms. Each entity is designed with extensibility in mind to accommodate future growth.
+
+### 1.9.4. Key Tables and Their Purpose
+
+The database schema includes several key tables, each with a distinct role in managing customer interactions, restaurant operations, and orders. Below is an explanation of the purpose of the primary tables:
+
+---
+
+#### 1.9.4.1. Customer Table
+
+- **Purpose:**
+  The `Customer` table stores information about the users of the platform, such as personal details, contact information, and account credentials. It also tracks addresses, past locations, and previous restaurant searches for a personalized user experience.
+
+---
+
+#### 1.9.4.2. IdentifierOTP Table
+
+- **Purpose:**
+  The `IdentifierOTP` table manages the OTP verification process, storing details like the OTP code, number of attempts, and verification status for secure user authentication during registration, login, or sensitive operations.
+
+---
+
+#### 1.9.4.3. Order Table
+
+- **Purpose:**
+  The `Order` table records all details related to customer orders, including the customer placing the order, the restaurant fulfilling it, the items ordered, payment details, and the order's status. It acts as the central hub for tracking transaction and delivery details.
+
+---
+
+#### 1.9.4.4. PromoCode Table
+
+- **Purpose:**
+  The `PromoCode` table stores promotional offers provided by restaurants. It helps in managing discounts and deals, which can be associated with specific restaurants and applied during customer orders.
+
+---
+
+#### 1.9.4.5. Restaurant Table
+
+- **Purpose:**
+  The `Restaurant` table captures comprehensive details about restaurants, such as their name, address, contact information, opening and closing times, GST information, and available cuisines. It is the core table for managing restaurant-related data.
+
+---
+
+#### 1.9.4.6. Table Table
+
+- **Purpose:**
+  The `Table` table manages seating arrangements in restaurants, including table availability and details. This table can assist in reservation systems or for tracking dine-in seating.
+
+---
+
+#### 1.9.4.7. User Table
+
+- **Purpose:**
+  The `User` table stores details about employees working in restaurants, including their roles, contact information, and account credentials. It ensures restaurant staff management and operational control.
+
+---
+
+These tables collectively form the backbone of the system, ensuring efficient storage and retrieval of information related to customers, orders, promotions, and restaurant operations. They are designed to handle various functionalities critical for a restaurant and food delivery platform.
+
+### 1.9.5. Entity-Relationship Diagrams (ERD)
 
 ```mermaid
 erDiagram
@@ -2419,7 +2637,7 @@ erDiagram
     }
 ```
 
-### 1.9.4. Sample Queries for Common Use Cases
+### 1.9.6. Sample Queries for Common Use Cases
 
 ## 1.10. User Interface (UI)
 

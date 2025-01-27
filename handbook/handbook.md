@@ -118,6 +118,12 @@
         - [1.8.2.7.4. Get Restaurant Detail](#18274-get-restaurant-detail)
         - [1.8.2.7.5. Update Restaurant Detail](#18275-update-restaurant-detail)
         - [1.8.2.7.6. Update Payment Gateway](#18276-update-payment-gateway)
+        - [Update Store Settings](#update-store-settings)
+        - [Update Restaurant Cash On Delivery](#update-restaurant-cash-on-delivery)
+        - [Update Restaurant Bypass Auth](#update-restaurant-bypass-auth)
+        - [Update Restaurant Auto Reject](#update-restaurant-auto-reject)
+        - [Update Restaurant Dine-In GST Setting](#update-restaurant-dine-in-gst-setting)
+        - [Update Contact Detail](#update-contact-detail)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -3624,6 +3630,204 @@ export class RestaurantPanelService {
     ```
 
 ---
+
+##### Update Store Settings
+
+- **Endpoint**: `/api/v1/restaurant/updateStoreSettings`
+- **Method**: PATCH
+- **Description**: Updates the store settings for the restaurant.
+- **Parameters**:
+  - `gstData`: An object containing the updated GST settings.
+    - Example structure:
+
+```json
+{
+    "gstNumber": "GST1234567890",
+    "isGstEnabled": true
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateStoreSettings(gstData: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateStoreSettings`, gstData);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const gstData = {
+        gstNumber: "GST1234567890",
+        isGstEnabled: true,
+    };
+
+    restaurantService.updateStoreSettings(gstData).subscribe((response) => {
+        console.log("Store settings updated:", response);
+    });
+    ```
+---
+
+##### Update Restaurant Cash On Delivery
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantCashOnDelivery`
+- **Method**: PATCH
+- **Description**: Updates the cash on delivery settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated cash on delivery settings.
+    - Example structure:
+
+```json
+{
+    "isCashOnDeliveryEnabled": true
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantCashOnDelivery(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantCashOnDelivery`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const cashOnDeliveryData = {
+        isCashOnDeliveryEnabled: true,
+    };
+
+    restaurantService.updateRestaurantCashOnDelivery(cashOnDeliveryData).subscribe((response) => {
+        console.log("Cash on delivery settings updated:", response);
+    });
+    ```
+---
+
+##### Update Restaurant Bypass Auth
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantByPassAuth`
+- **Method**: PATCH
+- **Description**: Updates the bypass authentication settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated bypass authentication settings.
+    - Example structure:
+
+```json
+{
+    "isBypassAuthEnabled": true
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantByPassAuth(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantByPassAuth`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const bypassAuthData = {
+        isBypassAuthEnabled: true,
+    };
+
+    restaurantService.updateRestaurantByPassAuth(bypassAuthData).subscribe((response) => {
+        console.log("Bypass authentication settings updated:", response);
+    });
+    ```
+---
+
+##### Update Restaurant Auto Reject
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantAutoReject`
+- **Method**: PATCH
+- **Description**: Updates the auto-reject settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated auto-reject settings.
+    - Example structure:
+
+```json
+{
+    "isAutoRejectEnabled": true
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantAutoReject(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantAutoReject`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const autoRejectData = {
+        isAutoRejectEnabled: true,
+    };
+
+    restaurantService.updateRestaurantAutoReject(autoRejectData).subscribe((response) => {
+        console.log("Auto-reject settings updated:", response);
+    });
+    ```
+---
+
+##### Update Restaurant Dine-In GST Setting
+
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantDineInGstSetting`
+- **Method**: PATCH
+- **Description**: Updates the dine-in GST settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated dine-in GST settings.
+    - Example structure:
+
+```json
+{
+    "isDineInGstEnabled": true,
+    "dineInGstPercentage": 18
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantDineInGstSetting(data: any) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantDineInGstSetting`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const dineInGstData = {
+        isDineInGstEnabled: true,
+        dineInGstPercentage: 18,
+    };
+
+    restaurantService.updateRestaurantDineInGstSetting(dineInGstData).subscribe((response) => {
+        console.log("Dine-in GST settings updated:", response);
+    });
+    ```
+---
+
+##### Update Contact Detail
+
 
 #### 1.8.2.8. User Service Endpoints
 

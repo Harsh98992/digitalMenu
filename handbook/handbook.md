@@ -129,6 +129,12 @@
         - [1.8.2.7.15. Update Restaurant Banner Image For Small](#182715-update-restaurant-banner-image-for-small)
         - [1.8.2.7.16. Create Table Entry](#182716-create-table-entry)
         - [1.8.2.7.17. Create Room Entry](#182717-create-room-entry)
+        - [1.8.2.7.18. Update Table](#182718-update-table)
+        - [1.8.2.7.19. Update Room](#182719-update-room)
+        - [1.8.2.7.20. **Get All Tables**](#182720-get-all-tables)
+        - [1.8.2.7.21. **Get All Rooms**](#182721-get-all-rooms)
+        - [1.8.2.7.22. **Update Restaurant Image**](#182722-update-restaurant-image)
+        - [1.8.2.7.23. **Delete Restaurant Image**](#182723-delete-restaurant-image)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -4218,6 +4224,230 @@ export class RestaurantPanelService {
     ```
 
 ---
+<!--
+    createRoomEntry(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/createRoomEntry`,
+            data
+        );
+    }
+    updateTable(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/editTableById`,
+            data
+        );
+    }
+    updateRoom(data) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/editRoomById`,
+            data
+        );
+    }
+    getAllTables() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getAllTables`);
+    }
+    getAllRooms() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getAllRooms`);
+    }
+
+    updateRestaurantImage(imageData: { image: any }) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/updateRestaurantImage`,
+            imageData
+        );
+    }
+
+    deleteRestaurantImage(imageData: { image: any }) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/deleteRestaurantImage`,
+            imageData
+        );
+    }
+    getResataurantOrder() {
+        return this.http.get("assets/data/comapny.json");
+    }
+    updatePlaceId(data) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/placeId`, data);
+    }
+    addExtraIngredient(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents`,
+            data
+        );
+    }
+    editExtraIngredient(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/edit`,
+            data
+        );
+    }
+    deleteExtraIngredient(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/delete/${id}`
+        );
+    }
+    addDish(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/addDish`,
+            data
+        );
+    }
+    editDish(data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/editDish`,
+            data
+        );
+    }
+    deleteDish(id: string, data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteDish/${id}`,
+            data
+        );
+    }
+    addVariantsToDish(data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/addVariants`,
+            data
+        );
+    }
+    addCategory(reqBody) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
+            reqBody
+        );
+    }
+    updateCategory(reqData: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editCategory`,
+            reqData
+        );
+    }
+    getCategory() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/dishes/getCategory`);
+    }
+    addAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addAddons`,
+            data
+        );
+    }
+    addDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addDishChoices`,
+            data
+        );
+    }
+    editDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editDishChoices`,
+            data
+        );
+    }
+    editAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editAddons`,
+            data
+        );
+    }
+    deleteAddons(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteAddons/${id}`
+        );
+    }
+    deleteCategory(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteCategory/${id}`
+        );
+    }
+    deleteChoices(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteChoices/${id}`
+        );
+    }
+    setSelectedDish(data) {
+        sessionStorage.setItem("dishDetail", JSON.stringify(data));
+    }
+    getSelectedDish() {
+        const data = sessionStorage.getItem("dishDetail");
+        if (data) {
+            return JSON.parse(data);
+        }
+        return null;
+    }
+    getIndianStates() {
+        let indianStates = [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry",
+        ];
+
+        return indianStates;
+    }
+
+    getCustomerList() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
+    }
+
+    addPromoCode(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/addPromoCode`,
+            data
+        );
+    }
+
+    getPromoCode() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getPromoCode`);
+    }
+
+    // Add these methods to your RestaurantPanelService
+    toggleLoyalOrBlockStatus(
+        LoyalOrBlock: string,
+        customerId: string,
+        isLoyal: boolean
+    ) {
+        let url = `/v1/restaurant/${LoyalOrBlock}/${
+            isLoyal ? "add" : "remove"
+        }/`;
+
+        const data = {
+            customerId: customerId,
+        };
+
+        return this.http.patch(`${this.apiUrl}${url}`, data);
+    }
+} -->
 
 ##### 1.8.2.7.17. Create Room Entry
 
@@ -4262,6 +4492,320 @@ export class RestaurantPanelService {
     ```
 
 ---
+
+##### 1.8.2.7.18. Update Table
+
+- **Endpoint**: `/api/v1/restaurant/editTableById`
+- **Method**: PATCH
+- **Description**: Updates the details of an existing table.
+- **Parameters**:
+  - `data`: An object containing the updated table details.
+    - Example structure:
+
+```json
+{
+    "tableId": "123",
+    "tableNumber": "1",
+    "seats": 4,
+    "isReserved": false
+}
+```
+
+- **Response**: Returns a success message and the updated table details.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateTable(data) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/editTableById`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const updatedTableData = {
+        tableId: "123",
+        tableNumber: "1",
+        seats: 4,
+        isReserved: false,
+    };
+
+    restaurantService.updateTable(updatedTableData).subscribe((response) => {
+        console.log("Table updated successfully:", response);
+    });
+    ```
+---
+
+##### 1.8.2.7.19. Update Room
+
+- **Endpoint**: `/api/v1/restaurant/editRoomById`
+- **Method**: PATCH
+- **Description**: Updates the details of an existing room.
+- **Parameters**:
+  - `data`: An object containing the updated room details.
+    - Example structure:
+
+```json
+{
+    "roomId": "123",
+    "roomNumber": "1",
+    "seats": 4,
+    "isReserved": false
+}
+```
+
+- **Response**: Returns a success message and the updated room details.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updateRoom(data) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/editRoomById`, data);
+    }
+    ```
+- **Usage**:
+
+    ```typescript
+    const updatedRoomData = {
+        roomId: "123",
+        roomNumber: "1",
+        seats: 4,
+        isReserved: false,
+    };
+
+    restaurantService.updateRoom(updatedRoomData).subscribe((response) => {
+        console.log("Room updated successfully:", response);
+    });
+    ```
+
+---
+
+---
+
+##### 1.8.2.7.20. **Get All Tables**
+
+- **Endpoint**: `/api/v1/restaurant/getAllTables`
+- **Method**: GET
+- **Description**: Retrieves a list of all tables in the restaurant.
+- **Parameters**: None
+
+- **Response**:
+  - On success:
+    ```json
+    {
+        "message": "Tables retrieved successfully",
+        "tables": [
+            {
+                "id": "123",
+                "tableNumber": "1",
+                "seats": 4,
+                "isReserved": false
+            },
+            {
+                "id": "124",
+                "tableNumber": "2",
+                "seats": 6,
+                "isReserved": true
+            }
+        ]
+    }
+    ```
+  - On failure:
+    ```json
+    {
+        "message": "Failed to retrieve tables",
+        "error": "Server error or other issues"
+    }
+    ```
+
+- **Authorization**: Requires valid restaurant authentication.
+- **Sample Code**:
+
+    ```typescript
+    getAllTables() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getAllTables`);
+    }
+    ```
+
+- **Usage Example**:
+
+    ```typescript
+    restaurantService.getAllTables().subscribe({
+        next: (response) => console.log("Tables retrieved successfully:", response),
+        error: (err) => console.error("Error retrieving tables:", err),
+    });
+    ```
+
+---
+
+##### 1.8.2.7.21. **Get All Rooms**
+
+- **Endpoint**: `/api/v1/restaurant/getAllRooms`
+- **Method**: GET
+- **Description**: Retrieves a list of all rooms in the restaurant.
+- **Parameters**: None
+
+- **Response**:
+  - On success:
+    ```json
+    {
+        "message": "Rooms retrieved successfully",
+        "rooms": [
+            {
+                "id": "abc123",
+                "roomNumber": "1",
+                "seats": 4,
+                "isReserved": false
+            },
+            {
+                "id": "abc124",
+                "roomNumber": "2",
+                "seats": 6,
+                "isReserved": true
+            }
+        ]
+    }
+    ```
+  - On failure:
+    ```json
+    {
+        "message": "Failed to retrieve rooms",
+        "error": "Server error or other issues"
+    }
+    ```
+
+- **Authorization**: Requires valid restaurant authentication.
+- **Sample Code**:
+
+    ```typescript
+    getAllRooms() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getAllRooms`);
+    }
+    ```
+
+- **Usage Example**:
+
+    ```typescript
+    restaurantService.getAllRooms().subscribe({
+        next: (response) => console.log("Rooms retrieved successfully:", response),
+        error: (err) => console.error("Error retrieving rooms:", err),
+    });
+    ```
+
+---
+
+##### 1.8.2.7.22. **Update Restaurant Image**
+
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantImage`
+- **Method**: PATCH
+- **Description**: Updates the restaurant's image.
+- **Parameters**:
+  - **`imageData`** (required): An object containing the new image.
+    - Example structure:
+
+      ```json
+      {
+          "image": "base64-encoded-image-data"
+      }
+      ```
+
+- **Response**:
+  - On success:
+    ```json
+    {
+        "message": "Restaurant image updated successfully",
+        "imageUrl": "https://example.com/restaurant-image.jpg"
+    }
+    ```
+  - On failure:
+    ```json
+    {
+        "message": "Failed to update restaurant image",
+        "error": "Validation error or other issues"
+    }
+    ```
+
+- **Authorization**: Requires valid restaurant authentication.
+- **Sample Code**:
+
+    ```typescript
+    updateRestaurantImage(imageData: { image: any }) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/updateRestaurantImage`, imageData);
+    }
+    ```
+
+- **Usage Example**:
+
+    ```typescript
+    const imageData = {
+        image: "base64-encoded-image-data",
+    };
+
+    restaurantService.updateRestaurantImage(imageData).subscribe({
+        next: (response) => console.log("Image updated successfully:", response),
+        error: (err) => console.error("Error updating image:", err),
+    });
+    ```
+
+---
+
+##### 1.8.2.7.23. **Delete Restaurant Image**
+
+- **Endpoint**: `/api/v1/restaurant/deleteRestaurantImage`
+- **Method**: PATCH
+- **Description**: Deletes the restaurant's image.
+- **Parameters**:
+  - **`imageData`** (required): An object specifying the image to delete.
+    - Example structure:
+
+      ```json
+      {
+          "image": "base64-encoded-image-data"
+      }
+      ```
+
+- **Response**:
+  - On success:
+    ```json
+    {
+        "message": "Restaurant image deleted successfully"
+    }
+    ```
+  - On failure:
+    ```json
+    {
+        "message": "Failed to delete restaurant image",
+        "error": "Validation error or other issues"
+    }
+    ```
+
+- **Authorization**: Requires valid restaurant authentication.
+- **Sample Code**:
+
+    ```typescript
+    deleteRestaurantImage(imageData: { image: any }) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/deleteRestaurantImage`, imageData);
+    }
+    ```
+
+- **Usage Example**:
+
+    ```typescript
+    const imageData = {
+        image: "base64-encoded-image-data",
+    };
+
+    restaurantService.deleteRestaurantImage(imageData).subscribe({
+        next: (response) => console.log("Image deleted successfully:", response),
+        error: (err) => console.error("Error deleting image:", err),
+    });
+    ```
+
+---
+
+
 
 #### 1.8.2.8. User Service Endpoints
 

@@ -49,6 +49,11 @@
     - [1.7.1. Overview of the Codebase](#171-overview-of-the-codebase)
     - [1.7.2. Code Execution Flow](#172-code-execution-flow)
     - [1.7.3. Understanding Functions and Modules](#173-understanding-functions-and-modules)
+      - [1.7.3.1. Core Modules](#1731-core-modules)
+      - [1.7.3.2. Key Services](#1732-key-services)
+      - [1.7.3.3. Important Components](#1733-important-components)
+      - [1.7.3.4. Utility Functions](#1734-utility-functions)
+      - [1.7.3.5. Module Interactions](#1735-module-interactions)
     - [1.7.4. Step-by-Step Explanation of a Key Feature](#174-step-by-step-explanation-of-a-key-feature)
     - [1.7.5. Reading the Code](#175-reading-the-code)
     - [1.7.6. Code Standards and Best Practices](#176-code-standards-and-best-practices)
@@ -882,6 +887,58 @@ graph TD
 ```
 
 ### 1.7.3. Understanding Functions and Modules
+
+In this section, we will break down the key functions and modules used in the project to help you understand their roles and how they interact with each other.
+
+#### 1.7.3.1. Core Modules
+
+1. **AppModule**: The root module that bootstraps the Angular application. It imports essential modules like BrowserModule, AppRoutingModule, and HttpClientModule.
+
+2. **AppRoutingModule**: Manages the routing configuration for the application. It defines the routes and their corresponding components.
+
+3. **SharedModule**: Contains shared components, directives, and pipes that are used across multiple modules in the application.
+
+#### 1.7.3.2. Key Services
+
+1. **AuthService**: Handles authentication-related operations such as login, logout, and token management.
+
+2. **CustomerService**: Manages customer-related data and operations, including fetching customer details, updating profiles, and handling orders.
+
+3. **OrderService**: Responsible for order-related functionalities, such as placing orders, fetching order details, and updating order statuses.
+
+4. **RestaurantService**: Manages restaurant-specific operations, including fetching restaurant details, updating menus, and handling reservations.
+
+#### 1.7.3.3. Important Components
+
+1. **AppComponent**: The root component that initializes the application and contains the main layout.
+
+2. **HeaderComponent**: Displays the navigation bar and handles user interactions related to navigation.
+
+3. **FooterComponent**: Displays the footer content of the application.
+
+4. **HomeComponent**: The landing page component that provides an overview of the application and its features.
+
+5. **MenuComponent**: Displays the restaurant menu and allows users to add items to their cart.
+
+6. **CartComponent**: Manages the shopping cart, displaying selected items and handling checkout operations.
+
+#### 1.7.3.4. Utility Functions
+
+1. **formatDate**: A utility function that formats dates into a readable string format.
+
+2. **calculateTotal**: Calculates the total amount for the items in the cart.
+
+3. **validateEmail**: Validates email addresses to ensure they follow the correct format.
+
+#### 1.7.3.5. Module Interactions
+
+The modules and services interact with each other to provide a seamless user experience. For example:
+
+- The **AuthService** interacts with the **HttpClientModule** to make API calls for authentication.
+- The **OrderService** uses the **CustomerService** to fetch customer details when placing an order.
+- The **RestaurantService** interacts with the **MenuComponent** to display the restaurant's menu.
+
+Understanding these functions and modules will help you navigate the codebase more effectively and make necessary modifications or enhancements with confidence.
 
 ### 1.7.4. Step-by-Step Explanation of a Key Feature
 

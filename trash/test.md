@@ -14,4 +14,4 @@
 ## answer
 
 1. the capital of France is Paris
-2. 
+2.

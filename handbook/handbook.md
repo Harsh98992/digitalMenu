@@ -166,6 +166,16 @@
       - [1.9.4.7. User Table](#1947-user-table)
     - [1.9.5. Entity-Relationship Diagrams (ERD)](#195-entity-relationship-diagrams-erd)
     - [1.9.6. Sample Queries for Common Use Cases](#196-sample-queries-for-common-use-cases)
+      - [1.9.6.1. Retrieve all orders for a specific customer](#1961-retrieve-all-orders-for-a-specific-customer)
+      - [1.9.6.2. Find all restaurants offering a specific cuisine](#1962-find-all-restaurants-offering-a-specific-cuisine)
+      - [1.9.6.3. Get all active promo codes for a restaurant](#1963-get-all-active-promo-codes-for-a-restaurant)
+      - [1.9.6.4. Update the status of an order](#1964-update-the-status-of-an-order)
+      - [1.9.6.5. Delete a customer by ID](#1965-delete-a-customer-by-id)
+      - [1.9.6.6. Add a new dish to a restaurant's menu](#1966-add-a-new-dish-to-a-restaurants-menu)
+      - [1.9.6.7. Retrieve all tables in a restaurant](#1967-retrieve-all-tables-in-a-restaurant)
+      - [1.9.6.8. Find all users with a specific role](#1968-find-all-users-with-a-specific-role)
+      - [1.9.6.9. Get the details of a specific order](#1969-get-the-details-of-a-specific-order)
+      - [1.9.6.10. Update the contact information of a restaurant](#19610-update-the-contact-information-of-a-restaurant)
   - [1.10. User Interface (UI)](#110-user-interface-ui)
     - [1.10.1. Screenshots of All Pages (annotated with descriptions)](#1101-screenshots-of-all-pages-annotated-with-descriptions)
     - [1.10.2. Navigation Map](#1102-navigation-map)
@@ -872,8 +882,6 @@ graph TD
 ```
 
 ### 1.7.3. Understanding Functions and Modules
-
-
 
 ### 1.7.4. Step-by-Step Explanation of a Key Feature
 
@@ -4948,8 +4956,6 @@ Testing APIs is an essential part of software development. Here's a beginner-fri
 
 The database schema models the relationships and data for a restaurant management and ordering system. Below is an explanation of the entities, attributes, and their relationships:
 
----
-
 ### 1.9.2. **Entities and Attributes**
 
 #### 1.9.2.1. **Customer**
@@ -5254,6 +5260,75 @@ erDiagram
 
 ### 1.9.6. Sample Queries for Common Use Cases
 
+#### 1.9.6.1. Retrieve all orders for a specific customer
+
+```javascript
+db.orders.find({ customerId: ObjectId("CUSTOMER_ID") });
+```
+
+#### 1.9.6.2. Find all restaurants offering a specific cuisine
+
+```javascript
+db.restaurants.find({ cuisines: "Italian" });
+```
+
+#### 1.9.6.3. Get all active promo codes for a restaurant
+
+```javascript
+db.promoCodes.find({ restaurantId: ObjectId("RESTAURANT_ID"), isActive: true });
+```
+
+#### 1.9.6.4. Update the status of an order
+
+```javascript
+db.orders.updateOne(
+  { _id: ObjectId("ORDER_ID") },
+  { $set: { status: "Delivered" } }
+);
+```
+
+#### 1.9.6.5. Delete a customer by ID
+
+```javascript
+db.customers.deleteOne({ _id: ObjectId("CUSTOMER_ID") });
+```
+
+#### 1.9.6.6. Add a new dish to a restaurant's menu
+
+```javascript
+db.restaurants.updateOne(
+  { _id: ObjectId("RESTAURANT_ID") },
+  { $push: { menu: { name: "New Dish", price: 10.99, category: "Main Course" } } }
+);
+```
+
+#### 1.9.6.7. Retrieve all tables in a restaurant
+
+```javascript
+db.tables.find({ restaurantId: ObjectId("RESTAURANT_ID") });
+```
+
+#### 1.9.6.8. Find all users with a specific role
+
+```javascript
+db.users.find({ role: "Admin" });
+```
+
+#### 1.9.6.9. Get the details of a specific order
+
+```javascript
+db.orders.findOne({ _id: ObjectId("ORDER_ID") });
+```
+
+#### 1.9.6.10. Update the contact information of a restaurant
+
+```javascript
+db.restaurants.updateOne(
+  { _id: ObjectId("RESTAURANT_ID") },
+  { $set: { contact: { phone: "123-456-7890", email: "contact@restaurant.com" } } }
+);
+```
+
 ## 1.10. User Interface (UI)
 
 ### 1.10.1. Screenshots of All Pages (annotated with descriptions)
@@ -5261,20 +5336,30 @@ erDiagram
 1. **Login Page**
 
     - User authentication interface
+    - ![Login Page](https://i.imgur.com/TZzzO10.png "Login Page")
     - Phone number input
     - OTP verification
+    - ![OTP Verification](https://i.imgur.com/6vx1z00.png "OTP Verification")
 
 2. **Menu Page**
 
     - Category-wise menu items
+    - ![Menu Page](https://i.imgur.com/A74ZUg9.png "Menu Page")
     - Item details with images
+    - ![Menu Item Details](https://i.imgur.com/C8u0ucD.png "Menu Item Details")
     - Add to cart functionality
+    - ![Add to Cart](https://i.imgur.com/pe4wzio.png "Add to Cart")
 
 3. **Cart Page**
 
     - Order summary
+    - ![Cart Page](https://i.imgur.com/jAP8RSC.png "Cart Page")
     - Item quantity adjustment
+    - ![Item Quantity](https://i.imgur.com/JDRzxua.png "Item Quantity")
     - Checkout process
+    - ![Checkout](https://i.imgur.com/FHkHt7p.png "Checkout")
+    - payment options
+    - ![Payment Options](https://i.imgur.com/HjQO3Az.png "Payment Options")
 
 4. **Admin Dashboard**
     - Order management

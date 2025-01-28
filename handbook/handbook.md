@@ -4521,6 +4521,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/editTableById`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4535,6 +4536,7 @@ export class RestaurantPanelService {
         console.log("Table updated successfully:", response);
     });
     ```
+
 ---
 
 ##### 1.8.2.7.19. Update Room
@@ -4565,6 +4567,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/editRoomById`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4593,6 +4596,7 @@ export class RestaurantPanelService {
 
 - **Response**:
   - On success:
+
     ```json
     {
         "message": "Tables retrieved successfully",
@@ -4612,7 +4616,9 @@ export class RestaurantPanelService {
         ]
     }
     ```
+
   - On failure:
+
     ```json
     {
         "message": "Failed to retrieve tables",
@@ -4649,6 +4655,7 @@ export class RestaurantPanelService {
 
 - **Response**:
   - On success:
+
     ```json
     {
         "message": "Rooms retrieved successfully",
@@ -4668,7 +4675,9 @@ export class RestaurantPanelService {
         ]
     }
     ```
+
   - On failure:
+
     ```json
     {
         "message": "Failed to retrieve rooms",
@@ -4713,13 +4722,16 @@ export class RestaurantPanelService {
 
 - **Response**:
   - On success:
+
     ```json
     {
         "message": "Restaurant image updated successfully",
         "imageUrl": "https://example.com/restaurant-image.jpg"
     }
     ```
+
   - On failure:
+
     ```json
     {
         "message": "Failed to update restaurant image",
@@ -4768,12 +4780,15 @@ export class RestaurantPanelService {
 
 - **Response**:
   - On success:
+
     ```json
     {
         "message": "Restaurant image deleted successfully"
     }
     ```
+
   - On failure:
+
     ```json
     {
         "message": "Failed to delete restaurant image",
@@ -4804,8 +4819,6 @@ export class RestaurantPanelService {
     ```
 
 ---
-
-
 
 #### 1.8.2.8. User Service Endpoints
 

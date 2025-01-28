@@ -270,3 +270,103 @@ erDiagram
 ```
 
 ### 1.9.6. Sample Queries for Common Use Cases
+
+## Modules and Functions Summary
+
+### Admin Module
+
+#### Components
+
+- `LayoutComponent`
+  - **Description**: Main layout component for the admin panel.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getRestaurantDetail()`: Fetches restaurant details.
+    - `toggleSideBar()`: Toggles the sidebar visibility.
+    - `openOrderDialog()`: Opens the order dialog.
+    - `logout()`: Logs out the user.
+
+- `DashboardComponent`
+  - **Description**: Dashboard component displaying various statistics and information.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getOrders()`: Fetches orders based on status.
+    - `openDialog(orderDetail)`: Opens the order accept dialog.
+    - `completeOrder(orderDetail)`: Completes an order.
+
+- `CustomersComponent`
+  - **Description**: Component to manage customers.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getCustomers()`: Fetches the list of customers.
+    - `toggleLoyalStatus(row)`: Toggles the loyal status of a customer.
+    - `toggleBlockedStatus(row)`: Toggles the blocked status of a customer.
+
+#### Services
+
+- `RestaurantPanelService`
+  - **Description**: Service for interacting with the restaurant panel API.
+  - **Functions**:
+    - `getRestaurnatDetail()`: Fetches restaurant details.
+    - `getCustomerList()`: Fetches the list of customers.
+    - `toggleLoyalOrBlockStatus(type, customerId, status)`: Toggles the loyal or blocked status of a customer.
+
+- `OrderService`
+  - **Description**: Service for managing orders.
+  - **Functions**:
+    - `changeOrderStatus(reqData)`: Changes the status of an order.
+    - `getRestaurantOrdersByStatus(reqData)`: Fetches orders based on status.
+
+### Restaurant Module
+
+#### Components
+
+- `RestaurantMenuComponent`
+  - **Description**: Component displaying the restaurant menu.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getMenuItems()`: Fetches the list of menu items.
+    - `addToCart(item)`: Adds an item to the cart.
+
+- `OrderTrackingComponent`
+  - **Description**: Component for tracking orders.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getOrderStatus(orderId)`: Fetches the status of an order.
+
+#### Services
+
+- `RestaurantService`
+  - **Description**: Service for interacting with the restaurant API.
+  - **Functions**:
+    - `getMenuItems()`: Fetches the list of menu items.
+    - `placeOrder(orderData)`: Places a new order.
+    - `getOrderStatus(orderId)`: Fetches the status of an order.
+
+### Function Call Relationships
+
+#### Admin Module
+
+- `LayoutComponent`
+  - `ngOnInit()` calls `getRestaurantDetail()`.
+  - `openOrderDialog()` calls `dialog.open(OrderDialogComponent)`.
+
+- `DashboardComponent`
+  - `ngOnInit()` calls `getOrders()`.
+  - `openDialog(orderDetail)` calls `dialog.open(OrderAcceptDialogComponent)`.
+  - `completeOrder(orderDetail)` calls `orderService.changeOrderStatus()`.
+
+- `CustomersComponent`
+  - `ngOnInit()` calls `getCustomers()`.
+  - `toggleLoyalStatus(row)` calls `restaurantService.toggleLoyalOrBlockStatus()`.
+  - `toggleBlockedStatus(row)` calls `restaurantService.toggleLoyalOrBlockStatus()`.
+
+#### Restaurant Module
+
+- `RestaurantMenuComponent`
+  - `ngOnInit()` calls `getMenuItems()`.
+  - `addToCart(item)` calls `cartService.addItem()`.
+
+- `OrderTrackingComponent`
+  - `ngOnInit()` calls `getOrderStatus(orderId)`.
+

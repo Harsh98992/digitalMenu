@@ -37,12 +37,21 @@ export class AcceptOrderBypassAuthComponent implements OnInit {
       this.socket = io(this.socketApiUrl);
       this.getOrderId();
   }
+
+  /**
+   * Retrieves the order ID from the route parameters and fetches the order data from the server.
+   */
   getOrderId() {
       this.route.params.subscribe((params: any) => {
           this.orderId=params.orderId;
           this.getOrderDataFromServer();
       });
   }
+
+  /**
+   * Fetches the order data from the server using the order ID.
+   * Also fetches the restaurant data associated with the order.
+   */
   getOrderDataFromServer() {
       const orderId = this.orderId;
       if (orderId) {
@@ -70,14 +79,16 @@ export class AcceptOrderBypassAuthComponent implements OnInit {
                                   console.log(this.printWindow);
                               },
                           });
-                      // const orderSummary = res["data"]["orderData"];
-                      // this.utilService.printReceipt(orderSummary);
                   } else {
                   }
               },
           });
       }
   }
+
+  /**
+   * Sets the button text based on the current order status.
+   */
   setButtonText() {
       const orderStatus = this.orderData.orderStatus;
       this.orderStatus = orderStatus;
@@ -91,6 +102,10 @@ export class AcceptOrderBypassAuthComponent implements OnInit {
           this.buttonDisabled = true;
       }
   }
+
+  /**
+   * Accepts or completes the order based on the current order status.
+   */
   acceptOrder() {
       if (this.orderStatus.toLowerCase() === "pending") {
           const reqData = {
@@ -143,6 +158,10 @@ export class AcceptOrderBypassAuthComponent implements OnInit {
               });
       }
   }
+
+  /**
+   * Opens the cancel order dialog.
+   */
   openCancelOrderDialog() {
      const orderDetail=this.orderData
       let dialogRef = this.dialog

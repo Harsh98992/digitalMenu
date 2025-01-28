@@ -57,6 +57,10 @@ import { RestaurantRoomComponent } from './panel/restaurant-room/restaurant-room
 import { AddRoomComponent } from './panel/restaurant-room/add-room/add-room.component';
 import { RestaurantPaymentComponent } from './panel/restaurant-payment/restaurant-payment.component';
 
+/**
+ * The AdminModule is responsible for managing the admin panel of the application.
+ * It includes various components and services related to the admin functionalities.
+ */
 @NgModule({
     declarations: [
         LayoutComponent,

@@ -21,7 +21,7 @@ import { ViewDishComponent } from "./panel/dishes/view-dish/view-dish.component"
 import { VerifiedAccountGuard } from "../api/guard/verified-account.guard";
 import { VerifiedAccountChildGuard } from "../api/guard/verified-account-child.guard";
 import { UnverifyAccountComponent } from "./panel/unverify-account/unverify-account.component";
-import { VerifyAccountComponent } from "./panel/unverify-account/verify-account/verify-account.component";
+import { VerifyAccountComponent } from "./panel/unverify-account/verify-account.component";
 import { ViewUsersComponent } from "./panel/unverify-account/view-users/view-users.component";
 import { ChoicesComponent } from "./panel/dishes/choices/choices.component";
 import { EditUserComponent } from "./panel/user-managment/edit-user/edit-user.component";
@@ -29,13 +29,15 @@ import { UserProfileComponent } from "./panel/user-profile/user-profile.componen
 import { RestaurantQrCodeComponent } from "./panel/restaurant-qr-code/restaurant-qr-code.component";
 import { CategoriesComponent } from "./panel/dishes/categories/categories.component";
 import { RestaurantContactDetailsComponent } from "./panel/restaurant-contact-details/restaurant-contact-detail.component";
-import { AddContactDetailsComponent } from "./panel/restaurant-contact-details/add-contact/add-contact-detail/add-contact-detail.component";
+import { AddContactDetailsComponent } from "./panel/restaurant-contact-details/add-contact/add-contact-detail.component";
 import { RestaurantTablesComponent } from "./panel/restaurant-tables/restaurant-tables.component";
 import { PromoCodeListComponent } from "./panel/promo-code-list/promo-code-list.component";
 import { RestaurntOwnerGuard } from "../api/guard/restaurnt-owner.guard";
 import { verifiedComponent } from "./panel/unverify-account/verified/verified.component";
 import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room.component";
 import { RestaurantPaymentComponent } from "./panel/restaurant-payment/restaurant-payment.component";
+
+// Define the routes for the admin module
 const routes: Routes = [
     {
         path: "",

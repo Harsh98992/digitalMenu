@@ -873,6 +873,8 @@ graph TD
 
 ### 1.7.3. Understanding Functions and Modules
 
+
+
 ### 1.7.4. Step-by-Step Explanation of a Key Feature
 
 ### 1.7.5. Reading the Code

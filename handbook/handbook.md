@@ -5249,18 +5249,17 @@ The database schema models the relationships and data for a restaurant managemen
 
 ### 1.9.3. Relationships
 
-1. **Customer ↔ Order**:
+1. Customer ↔ Order:
    - One customer can place many orders (`1:N` relationship).
-
-2. **Customer ↔ IdentifierOTP**:
+2. Customer ↔ IdentifierOTP:
    - One customer can have multiple OTP identifiers (`1:N` relationship).
-3. **Restaurant ↔ Order**:
+3. Restaurant ↔ Order:
    - One restaurant can have many orders (`1:N` relationship).
-4. **Restaurant ↔ PromoCode**:
+4. Restaurant ↔ PromoCode:
    - One restaurant can offer multiple promo codes (`1:N` relationship).
-5. **Restaurant ↔ Table**:
+5. Restaurant ↔ Table:
    - One restaurant can have many tables (`1:N` relationship).
-6. **Restaurant ↔ User**:
+6. Restaurant ↔ User:
    - One restaurant can employ many users (`1:N` relationship).
 
 ---

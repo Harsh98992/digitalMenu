@@ -5565,6 +5565,18 @@ db.restaurants.updateOne(
 
 #### 1.11.1.1. Overview of Payment Gateway Used
 
+- **Gateway:** Razorpay
+- **Purpose:** Secure payment processing
+- **Features:**
+  - Multiple payment options
+  - Fast transactions
+  - Secure encryption
+  - Real-time payment status
+  - Refund support
+  - Easy integration
+  - Detailed documentation
+  - Webhook support
+
 ##### Razorpay integration
 
 <!-- Visit razorpay.com and sign up for a Razorpay account.

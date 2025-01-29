@@ -5530,10 +5530,20 @@ db.restaurants.updateOne(
 
 4. **Admin Dashboard**
     - Order management
+    - ![Admin Dashboard](https://i.imgur.com/iCBsH6x.png "Admin Dashboard")
     - Menu management
-    - Analytics overview
+    - ![Menu Management](https://i.imgur.com/FDUlkvZ.png "Menu Management")
 
 ### 1.10.2. Navigation Map
+
+1. **Public Pages**
+
+    - Home
+    - ![Home](https://i.imgur.com/SkjqJrZ.jpeg "Home")
+    - Login
+    - ![Login](https://i.imgur.com/WDsvkDu.png "Login")
+    - OTP Verification
+    - ![OTP Verification](https://i.imgur.com/3CqBFj1.png "OTP Verification")
 
 ### 1.10.3. Design Principles Used
 

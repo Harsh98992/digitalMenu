@@ -5588,10 +5588,13 @@ Download and save the API keys in your system.
 Open the Razorpay Web Standard Integration document -->
 
 - Visit [Razorpay](https://razorpay.com) and login.
-The credentials are provided by the admin.
+The credentials are as follows:
+- Email: `tpsgco@gmail.com`
+- Password: `Harsh@01`
 ![Razorpay](https://i.imgur.com/fgqElnO.png "Razorpay")
+- Search for the API keys in the dashboard.
+- ![API Keys](https://i.imgur.com/QawaF3K.png "API Keys")
 - Generate API keys in test mode.
--
 - Save the API keys in the environment files.
 - Open the Razorpay Web Standard Integration document.
 

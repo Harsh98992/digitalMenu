@@ -161,15 +161,15 @@
       - [1.8.4.2. Making a request](#1842-making-a-request)
   - [1.9. Database Design](#19-database-design)
     - [1.9.1. Database Schema Overview](#191-database-schema-overview)
-    - [1.9.2. **Entities and Attributes**](#192-entities-and-attributes)
-      - [1.9.2.1. **Customer**](#1921-customer)
-      - [1.9.2.2. **IdentifierOTP**](#1922-identifierotp)
-      - [1.9.2.3. **Order**](#1923-order)
-      - [1.9.2.4. **PromoCode**](#1924-promocode)
-      - [1.9.2.5. **Restaurant**](#1925-restaurant)
-      - [1.9.2.6. **Table**](#1926-table)
-      - [1.9.2.7. **User**](#1927-user)
-    - [1.9.3. **Relationships**](#193-relationships)
+    - [1.9.2. Entities and Attributes](#192-entities-and-attributes)
+      - [1.9.2.1. Customer](#1921-customer)
+      - [1.9.2.2. IdentifierOTP](#1922-identifierotp)
+      - [1.9.2.3. Order](#1923-order)
+      - [1.9.2.4. PromoCode](#1924-promocode)
+      - [1.9.2.5. Restaurant](#1925-restaurant)
+      - [1.9.2.6. Table](#1926-table)
+      - [1.9.2.7. User](#1927-user)
+    - [1.9.3. Relationships](#193-relationships)
     - [1.9.4. Key Tables and Their Purpose](#194-key-tables-and-their-purpose)
       - [1.9.4.1. Customer Table](#1941-customer-table)
       - [1.9.4.2. IdentifierOTP Table](#1942-identifierotp-table)
@@ -5119,12 +5119,13 @@ Testing APIs is an essential part of software development. Here's a beginner-fri
 
 The database schema models the relationships and data for a restaurant management and ordering system. Below is an explanation of the entities, attributes, and their relationships:
 
-### 1.9.2. **Entities and Attributes**
+### 1.9.2. Entities and Attributes
 
-#### 1.9.2.1. **Customer**
+#### 1.9.2.1. Customer
 
 - **Purpose:** Stores customer details.
 - **Attributes:**
+
   - `id`: Primary key (ObjectId).
   - `email`: Customer's email.
   - `name`: Customer's name.
@@ -5137,7 +5138,7 @@ The database schema models the relationships and data for a restaurant managemen
 
 ---
 
-#### 1.9.2.2. **IdentifierOTP**
+#### 1.9.2.2. IdentifierOTP
 
 - **Purpose:** Manages OTP-based verification for customers.
 - **Attributes:**
@@ -5151,10 +5152,11 @@ The database schema models the relationships and data for a restaurant managemen
 
 ---
 
-#### 1.9.2.3. **Order**
+#### 1.9.2.3. Order
 
 - **Purpose:** Represents orders placed by customers.
 - **Attributes:**
+
   - `id`: Primary key (ObjectId).
   - `customer`: Foreign key referencing the customer who placed the order.
   - `restaurant`: Foreign key referencing the restaurant where the order was placed.
@@ -5173,7 +5175,7 @@ The database schema models the relationships and data for a restaurant managemen
 
 ---
 
-#### 1.9.2.4. **PromoCode**
+#### 1.9.2.4. PromoCode
 
 - **Purpose:** Stores promo codes offered by restaurants.
 - **Attributes:**
@@ -5183,7 +5185,7 @@ The database schema models the relationships and data for a restaurant managemen
 
 ---
 
-#### 1.9.2.5. **Restaurant**
+#### 1.9.2.5. Restaurant
 
 - **Purpose:** Represents restaurant details.
 - **Attributes:**
@@ -5213,20 +5215,22 @@ The database schema models the relationships and data for a restaurant managemen
 
 ---
 
-#### 1.9.2.6. **Table**
+#### 1.9.2.6. Table
 
 - **Purpose:** Represents tables available in a restaurant.
 - **Attributes:**
+
   - `id`: Primary key (ObjectId).
   - `restaurant`: Foreign key referencing the associated restaurant.
   - `tables`: Details of tables (TableSchema).
 
 ---
 
-#### 1.9.2.7. **User**
+#### 1.9.2.7. User
 
 - **Purpose:** Represents employees working at restaurants.
 - **Attributes:**
+
   - `id`: Primary key (ObjectId).
   - `name`: Name of the user.
   - `restaurant`: Foreign key referencing the associated restaurant.
@@ -5243,10 +5247,11 @@ The database schema models the relationships and data for a restaurant managemen
 
 ---
 
-### 1.9.3. **Relationships**
+### 1.9.3. Relationships
 
 1. **Customer ↔ Order**:
    - One customer can place many orders (`1:N` relationship).
+
 2. **Customer ↔ IdentifierOTP**:
    - One customer can have multiple OTP identifiers (`1:N` relationship).
 3. **Restaurant ↔ Order**:

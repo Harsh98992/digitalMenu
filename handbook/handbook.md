@@ -197,6 +197,7 @@
   - [1.11. Ad Hoc Process Configuration](#111-ad-hoc-process-configuration)
     - [1.11.1. Payment Gateway Integration](#1111-payment-gateway-integration)
       - [1.11.1.1. Overview of Payment Gateway Used](#11111-overview-of-payment-gateway-used)
+        - [Razorpay integration](#razorpay-integration)
       - [1.11.1.2. API Keys, Credentials, and Configuration Steps](#11112-api-keys-credentials-and-configuration-steps)
       - [1.11.1.3. Step-by-Step Guide for Setting Up Payment Flow](#11113-step-by-step-guide-for-setting-up-payment-flow)
     - [1.11.2. Messaging Service Integration (e.g., SMS, WhatsApp)](#1112-messaging-service-integration-eg-sms-whatsapp)
@@ -5564,9 +5565,20 @@ db.restaurants.updateOne(
 
 #### 1.11.1.1. Overview of Payment Gateway Used
 
-- Razorpay integration
-- Secure payment processing
-- Multiple payment methods
+##### Razorpay integration
+
+<!-- Visit razorpay.com and sign up for a Razorpay account.
+
+Log into the Razorpay Dashboard and generate API keys in test mode.
+
+Download and save the API keys in your system.
+
+Open the Razorpay Web Standard Integration document -->
+
+- Visit [Razorpay](https://razorpay.com) and sign up for an account.
+- Generate API keys in test mode.
+- Save the API keys in the environment files.
+- Open the Razorpay Web Standard Integration document.
 
 #### 1.11.1.2. API Keys, Credentials, and Configuration Steps
 

@@ -198,8 +198,6 @@
     - [1.11.1. Payment Gateway Integration](#1111-payment-gateway-integration)
       - [1.11.1.1. Overview of Payment Gateway Used](#11111-overview-of-payment-gateway-used)
         - [Razorpay integration](#razorpay-integration)
-      - [1.11.1.2. API Keys, Credentials, and Configuration Steps](#11112-api-keys-credentials-and-configuration-steps)
-      - [1.11.1.3. Step-by-Step Guide for Setting Up Payment Flow](#11113-step-by-step-guide-for-setting-up-payment-flow)
     - [1.11.2. Messaging Service Integration (e.g., SMS, WhatsApp)](#1112-messaging-service-integration-eg-sms-whatsapp)
       - [1.11.2.1. Overview of Messaging Providers](#11121-overview-of-messaging-providers)
       - [1.11.2.2. Setting Up API Access and Authentication](#11122-setting-up-api-access-and-authentication)
@@ -5598,7 +5596,7 @@ The credentials are as follows:
 - Save the API keys in the environment files.
 - Open the Razorpay Web Standard Integration document.
 
-#### 1.11.1.2. API Keys, Credentials, and Configuration Steps
+<!-- #### 1.11.1.2. API Keys, Credentials, and Configuration Steps
 
 1. Obtain Razorpay API keys
 2. Configure in environment files
@@ -5609,7 +5607,7 @@ The credentials are as follows:
 1. Initialize Razorpay
 2. Create order
 3. Handle payment response
-4. Verify payment status
+4. Verify payment status -->
 
 ### 1.11.2. Messaging Service Integration (e.g., SMS, WhatsApp)
 

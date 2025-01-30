@@ -13,5 +13,13 @@
 
 ## answer
 
-1. the capital of France is Paris
-2.
+1. the capital of France is Paris.
+2. 16
+3. Artificial intelligence (AI) is a branch of computer science that focuses on creating machines that can perform tasks that typically require human intelligence, such as learning, problem-solving, and decision-making.
+4. Ran
+5. Once upon a time, there was a robot named Robo who loved painting. One day, Robo decided to try painting for the first time. With a little help from his friend, a human named Sarah, Robo learned how to hold a paintbrush and mix colors. After many attempts, Robo finally created a masterpiece. From that day on, Robo became a famous artist, and his paintings were admired by people all over the world.
+6. William Shakespeare
+7. Hola, ¿cómo estás?
+8. Saturday
+9. Jupiter
+10. The story of The Lion King revolves around Simba, a young lion who must take over the throne of Pride Rock after his father, Mufasa, is killed by his evil uncle, Scar. Simba grows up believing that he is responsible for his father's death, but with the help of his friends, Timon and Pumbaa, he eventually learns the truth and returns to Pride Rock to reclaim his rightful place as king.

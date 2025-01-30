@@ -5852,9 +5852,6 @@ async function sendWhatsAppMessage(
 
 ### 1.16.1. Common Questions by Non-Technical Staff
 
-Q: How do I update menu items?
-A: Use the admin dashboard menu management section. Navigate to Menu > Items and click "Edit" on the item you want to modify.
-
 Q: How do I process orders?
 A: Monitor the order management dashboard and update order statuses as follows:
 
@@ -5865,13 +5862,7 @@ A: Monitor the order management dashboard and update order statuses as follows:
 Q: How do I handle special dietary requests?
 A: Add notes to menu items using the "Special Instructions" field in the item editor.
 
-Q: How do I generate sales reports?
-A: Navigate to Reports > Sales and select your desired date range.
-
 ### 1.16.2. Questions Related to API Usage
-
-Q: How do I test API endpoints?
-A: Use Postman or the Firebase Emulator Suite. API documentation is available at `/api/docs`.
 
 Q: How do I handle API errors?
 A: Check error codes and implement proper error handling. Common error codes:

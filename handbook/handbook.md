@@ -197,7 +197,7 @@
   - [1.11. Ad Hoc Process Configuration](#111-ad-hoc-process-configuration)
     - [1.11.1. Payment Gateway Integration](#1111-payment-gateway-integration)
       - [1.11.1.1. Overview of Payment Gateway Used](#11111-overview-of-payment-gateway-used)
-        - [Razorpay integration](#razorpay-integration)
+        - [1.11.1.1.1. Razorpay integration](#111111-razorpay-integration)
     - [1.11.2. Messaging Service Integration (e.g., SMS, WhatsApp)](#1112-messaging-service-integration-eg-sms-whatsapp)
       - [1.11.2.1. Overview of Messaging Providers](#11121-overview-of-messaging-providers)
       - [1.11.2.2. Setting Up API Access and Authentication](#11122-setting-up-api-access-and-authentication)
@@ -217,6 +217,8 @@
   - [1.15. Security Considerations](#115-security-considerations)
     - [1.15.1. Security Practices Implemented](#1151-security-practices-implemented)
     - [1.15.2. Guidelines for Handling Sensitive Data](#1152-guidelines-for-handling-sensitive-data)
+    - [1.15.3. Incident Response and Disaster Recovery](#1153-incident-response-and-disaster-recovery)
+    - [1.15.4. Compliance and Regulatory Requirements](#1154-compliance-and-regulatory-requirements)
   - [1.16. FAQ](#116-faq)
     - [1.16.1. Common Questions by Non-Technical Staff](#1161-common-questions-by-non-technical-staff)
     - [1.16.2. Questions Related to API Usage](#1162-questions-related-to-api-usage)
@@ -5575,7 +5577,7 @@ db.restaurants.updateOne(
   - Detailed documentation
   - Webhook support
 
-##### Razorpay integration
+##### 1.11.1.1.1. Razorpay integration
 
 <!-- Visit razorpay.com and sign up for a Razorpay account.
 
@@ -5768,28 +5770,82 @@ async function sendWhatsAppMessage(
 ### 1.15.1. Security Practices Implemented
 
 1. **Authentication**
-
     - Phone number verification
     - JWT token management
     - Session handling
+    - Password hashing and salting
+    - Multi-factor authentication (MFA) options
 
 2. **Data Security**
     - HTTPS encryption
     - Firebase security rules
     - Input validation
+    - Regular security audits and penetration testing
+    - Secure data storage and backup procedures
+
+3. **Network Security**
+    - Firewall configuration and management
+    - Intrusion detection and prevention systems (IDPS)
+    - Secure protocols for data transmission (e.g., SFTP, SSH)
+
+4. **Application Security**
+    - Secure coding practices and code reviews
+    - Vulnerability management and patching
+    - Secure configuration and change management
 
 ### 1.15.2. Guidelines for Handling Sensitive Data
 
 1. **User Data**
-
     - Encryption at rest
     - Secure transmission
     - Access control
+    - Data minimization and retention policies
+    - User consent and data subject rights management
 
 2. **Payment Information**
     - PCI compliance
     - Tokenization
     - Secure storage
+    - Regular security assessments and compliance audits
+    - Secure payment gateway integration
+
+3. **Personal Identifiable Information (PII)**
+    - Data anonymization and pseudonymization
+    - Secure storage and access controls
+    - Data subject rights management and consent
+    - Compliance with relevant data protection regulations (e.g., GDPR, CCPA)
+
+### 1.15.3. Incident Response and Disaster Recovery
+
+1. **Incident Response Plan**
+    - Definition of incident types and severity levels
+    - Roles and responsibilities
+    - Communication and escalation procedures
+    - Containment and eradication strategies
+
+2. **Disaster Recovery Plan**
+    - Business impact analysis and risk assessment
+    - Recovery point objectives (RPOs) and recovery time objectives (RTOs)
+    - Backup and restore procedures
+    - Regular testing and exercises
+
+### 1.15.4. Compliance and Regulatory Requirements
+
+1. **Data Protection Regulations**
+    - GDPR (General Data Protection Regulation)
+    - CCPA (California Consumer Privacy Act)
+    - HIPAA (Health Insurance Portability and Accountability Act)
+    - Other relevant data protection regulations
+
+2. **Payment Card Industry (PCI) Compliance**
+    - PCI DSS (Payment Card Industry Data Security Standard)
+    - PA-DSS (Payment Application Data Security Standard)
+    - Regular security assessments and compliance audits
+
+3. **Other Regulatory Requirements**
+    - SOX (Sarbanes-Oxley Act)
+    - GLBA (Gramm-Leach-Bliley Act)
+    - Other relevant regulatory requirement
 
 ## 1.16. FAQ
 

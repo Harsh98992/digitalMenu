@@ -204,6 +204,7 @@
           - [1.11.2.1.1.1. Sending Messages](#1112111-sending-messages)
         - [1.11.2.1.2. Mobile SMS integration](#111212-mobile-sms-integration)
           - [1.11.2.1.2.1. Fast2sms API](#1112121-fast2sms-api)
+        - [Using OTP API](#using-otp-api)
           - [DLT Registration](#dlt-registration)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
@@ -5651,6 +5652,15 @@ async function sendWhatsAppMessage(
 ![API Key](https://i.imgur.com/5fs6pEC.png "API Key")
 ![API Key](https://i.imgur.com/eBlftO3.png "API Key")
 5. Use the API key for sending SMS.
+
+##### Using OTP API
+
+-click on the API section
+- ![API Section](https://i.imgur.com/tMyh6D4.png "API Section")
+- copy the overral url
+- ![API URL](https://i.imgur.com/tD0wbKm.png "API URL")
+- use the get method to send the OTP to the user
+
 
 ###### DLT Registration
 

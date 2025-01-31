@@ -145,6 +145,10 @@
         - [1.8.2.7.17. Create Room Entry](#182717-create-room-entry)
         - [1.8.2.7.18. Update Table](#182718-update-table)
         - [1.8.2.7.19. Update Room](#182719-update-room)
+        - [1.8.2.7.20. Update Place ID](#182720-update-place-id)
+        - [1.8.2.7.21. Add Extra Ingredient](#182721-add-extra-ingredient)
+        - [1.8.2.7.22. Edit Extra Ingredient](#182722-edit-extra-ingredient)
+        - [1.8.2.7.23. Delete Extra Ingredient](#182723-delete-extra-ingredient)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -204,9 +208,9 @@
           - [1.11.2.1.1.1. Sending Messages](#1112111-sending-messages)
         - [1.11.2.1.2. Mobile SMS integration](#111212-mobile-sms-integration)
           - [1.11.2.1.2.1. DLT SMS](#1112121-dlt-sms)
-        - [Using OTP API](#using-otp-api)
-        - [Using Quick SMS API](#using-quick-sms-api)
-          - [DLT Registration](#dlt-registration)
+        - [1.11.2.1.3. Using OTP API](#111213-using-otp-api)
+        - [1.11.2.1.4. Using Quick SMS API](#111214-using-quick-sms-api)
+          - [1.11.2.1.4.1. DLT Registration](#1112141-dlt-registration)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
     - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
@@ -4763,6 +4767,350 @@ export class RestaurantPanelService {
 
 ---
 
+<!--
+
+    updatePlaceId(data) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/placeId`, data);
+    }
+    addExtraIngredient(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents`,
+            data
+        );
+    }
+    editExtraIngredient(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/edit`,
+            data
+        );
+    }
+    deleteExtraIngredient(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/delete/${id}`
+        );
+    }
+    addDish(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/addDish`,
+            data
+        );
+    }
+    editDish(data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/editDish`,
+            data
+        );
+    }
+    deleteDish(id: string, data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteDish/${id}`,
+            data
+        );
+    }
+    addVariantsToDish(data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/addVariants`,
+            data
+        );
+    }
+    addCategory(reqBody) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
+            reqBody
+        );
+    }
+    updateCategory(reqData: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editCategory`,
+            reqData
+        );
+    }
+    getCategory() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/dishes/getCategory`);
+    }
+    addAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addAddons`,
+            data
+        );
+    }
+    addDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addDishChoices`,
+            data
+        );
+    }
+    editDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editDishChoices`,
+            data
+        );
+    }
+    editAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editAddons`,
+            data
+        );
+    }
+    deleteAddons(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteAddons/${id}`
+        );
+    }
+    deleteCategory(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteCategory/${id}`
+        );
+    }
+    deleteChoices(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteChoices/${id}`
+        );
+    }
+    setSelectedDish(data) {
+        sessionStorage.setItem("dishDetail", JSON.stringify(data));
+    }
+    getSelectedDish() {
+        const data = sessionStorage.getItem("dishDetail");
+        if (data) {
+            return JSON.parse(data);
+        }
+        return null;
+    }
+    getIndianStates() {
+        let indianStates = [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry",
+        ];
+
+        return indianStates;
+    }
+
+    getCustomerList() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
+    }
+
+    addPromoCode(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/addPromoCode`,
+            data
+        );
+    }
+
+    getPromoCode() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getPromoCode`);
+    }
+
+    // Add these methods to your RestaurantPanelService
+    toggleLoyalOrBlockStatus(
+        LoyalOrBlock: string,
+        customerId: string,
+        isLoyal: boolean
+    ) {
+        let url = `/v1/restaurant/${LoyalOrBlock}/${
+            isLoyal ? "add" : "remove"
+        }/`;
+
+        const data = {
+            customerId: customerId,
+        };
+
+        return this.http.patch(`${this.apiUrl}${url}`, data);
+    }
+} -->
+
+##### 1.8.2.7.20. Update Place ID
+
+- **Endpoint**: `/api/v1/restaurant/placeId`
+- **Method**: PATCH
+- **Description**: Updates the place ID for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated place ID.
+    - Example structure:
+
+```json
+{
+    "placeId": "123456"
+}
+```
+
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
+
+    ```typescript
+    updatePlaceId(data) {
+        return this.http.patch(`${this.apiUrl}/v1/restaurant/placeId`, data);
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const placeIdData = {
+        placeId: "123456",
+    };
+
+    restaurantService.updatePlaceId(placeIdData).subscribe((response) => {
+        console.log("Place ID updated:", response);
+    });
+    ```
+
+---
+
+##### 1.8.2.7.21. Add Extra Ingredient
+
+- **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents`
+- **Method**: POST
+- **Description**: Adds an extra ingredient to a dish.
+- **Parameters**:
+  - `data`: Object containing extra ingredient details.
+    - Example structure:
+
+    ```json
+    {
+        "dishId": "123",
+        "ingredientName": "Cheese",
+        "price": 1.50
+    }
+    ```
+
+- **Response**: Returns a success message if the ingredient is added.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
+
+    ```typescript
+    addExtraIngredient(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents`,
+            data
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const ingredientData = {
+        dishId: "123",
+        ingredientName: "Cheese",
+        price: 1.50
+    };
+
+    restaurantService.addExtraIngredient(ingredientData).subscribe((response) => {
+        console.log("Extra ingredient added:", response);
+    });
+    ```
+
+##### 1.8.2.7.22. Edit Extra Ingredient
+
+- **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/edit`
+- **Method**: PATCH
+- **Description**: Updates an extra ingredient for a dish.
+- **Parameters**:
+  - `data`: Object containing updated ingredient details.
+    - Example structure:
+
+    ```json
+    {
+        "ingredientId": "789",
+        "ingredientName": "Mozzarella",
+        "price": 2.00
+    }
+    ```
+
+- **Response**: Returns a success message if the ingredient is updated.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
+
+    ```typescript
+    editExtraIngredient(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/edit`,
+            data
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const updatedIngredientData = {
+        ingredientId: "789",
+        ingredientName: "Mozzarella",
+        price: 2.00
+    };
+
+    restaurantService.editExtraIngredient(updatedIngredientData).subscribe((response) => {
+        console.log("Extra ingredient updated:", response);
+    });
+    ```
+
+##### 1.8.2.7.23. Delete Extra Ingredient
+
+- **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/delete/{id}`
+- **Method**: DELETE
+- **Description**: Deletes an extra ingredient from a dish.
+- **Parameters**:
+  - `id`: The ID of the ingredient to be deleted.
+- **Response**: Returns a success message if the ingredient is deleted.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
+
+    ```typescript
+    deleteExtraIngredient(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/delete/${id}`
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const ingredientId = "789";
+
+    restaurantService.deleteExtraIngredient(ingredientId).subscribe((response) => {
+        console.log("Extra ingredient deleted:", response);
+    });
+    ```
+
+---
+
 #### 1.8.2.8. User Service Endpoints
 
 ##### 1.8.2.8.1. Get All Users
@@ -5654,7 +6002,7 @@ async function sendWhatsAppMessage(
 ![API Key](https://i.imgur.com/eBlftO3.png "API Key")
 5. Use the API key for sending SMS.
 
-##### Using OTP API
+##### 1.11.2.1.3. Using OTP API
 
 - click on the API section
 - ![API Section](https://i.imgur.com/tMyh6D4.png "API Section")
@@ -5662,7 +6010,7 @@ async function sendWhatsAppMessage(
 - ![API URL](https://i.imgur.com/tD0wbKm.png "API URL")
 - use the get method to send the OTP to the user
 
-##### Using Quick SMS API
+##### 1.11.2.1.4. Using Quick SMS API
 
 - click on the  Quick SMS section
 - ![Quick SMS Section](https://i.imgur.com/1DrKO0N.png "Quick SMS Section")
@@ -5670,13 +6018,13 @@ async function sendWhatsAppMessage(
 - ![Quick SMS](https://i.imgur.com/924ycIr.png "Quick SMS")
 - Click on the send button to send the message
 
-###### DLT Registration
+###### 1.11.2.1.4.1. DLT Registration
 
 TRAI introduced DLT Registration for Bulk SMS in INDIA. According to DLT Rules, user need to register Header (sender id) & Content Template (message text) directly from any one DLT operator.
 
 Steps For Registration In JIO DLT :
 
-- Open https://trueconnect.jio.com/ .
+- Open <https://trueconnect.jio.com/> .
 - ![JIO DLT](https://i.imgur.com/dWpNrUm.jpeg "JIO DLT")
 - Click on register & complete registration process. Click [here](https://www.fast2sms.com/help/dlt-registration-signup-process-jio/) for registration steps.
 - ![Register](https://i.imgur.com/kaMvDRy.png "Register")
@@ -5689,7 +6037,6 @@ Telemarketer ID: 1702159738863862112
 - Approve Headers (sender id) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-header-sender-id-jio-dlt/) for sender id steps.
 - Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
 - After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
-
 
 ## 1.12. Testing Guidelines
 

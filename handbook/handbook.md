@@ -5648,6 +5648,7 @@ async function sendWhatsAppMessage(
 3. Login to the dashboard.
 ![Login](https://i.imgur.com/zywoxgj.png "Login")
 4. Get the API key.
+![API Key](https://i.imgur.com/5fs6pEC.png "API Key")
 
 ###### DLT Registration
 

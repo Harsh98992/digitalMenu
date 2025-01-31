@@ -5649,6 +5649,8 @@ async function sendWhatsAppMessage(
 ![Login](https://i.imgur.com/zywoxgj.png "Login")
 4. Get the API key.
 ![API Key](https://i.imgur.com/5fs6pEC.png "API Key")
+![API Key](https://i.imgur.com/eBlftO3.png "API Key")
+5. Use the API key for sending SMS.
 
 ###### DLT Registration
 

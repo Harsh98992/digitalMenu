@@ -6030,7 +6030,24 @@ The credentials are as follows:
 - ![Credentials](https://i.imgur.com/A3iLOPv.png "Credentials")
 - Click on the `Get Started` button.
 - ![Get Started](https://i.imgur.com/4VXUCso.png "Get Started")
-- Click on the `Create App` button.
+- Verify Your Account
+- ![Verify Account](https://i.imgur.com/PZWoKac.png "Verify Account")
+- Enter the Code from the SMS.
+- ![Enter Code](https://i.imgur.com/oQzUtWB.png "Enter Code")
+- click on the `Continue` button.
+- ![Continue](https://i.imgur.com/U6LmkEw.png "Continue")
+- Review Your Email Address
+- ![Review Email](https://i.imgur.com/8QdDN81.png "Review Email")
+- Click on the `Confirm mail` button.
+- ![Confirm Mail](https://i.imgur.com/p1t4SBs.png "Confirm Mail")
+- Which of the following best describes you?
+- ![Describe](https://i.imgur.com/iPd2kqy.png "Describe")
+- Click on the `Complete registration` button.
+- ![Complete Registration](https://i.imgur.com/2ANZiIl.png "Complete Registration")
+- Click on the `create app` button.
+- ![Create App](https://i.imgur.com/okhWtpw.png "Create App")
+- Enter the App Name and click on next.
+- ![App Name](https://i.imgur.com/PaJT2pc.png "App Name")
 
 ###### 1.11.2.1.1.1. Sending Messages
 

@@ -202,7 +202,8 @@
       - [1.11.2.1. Overview of Messaging Providers](#11121-overview-of-messaging-providers)
         - [1.11.2.1.1. WhatsApp Business API](#111211-whatsapp-business-api)
           - [1.11.2.1.1.1. Sending Messages](#1112111-sending-messages)
-        - [1.11.2.1.2. SMS gateway integration](#111212-sms-gateway-integration)
+        - [1.11.2.1.2. Mobile SMS integration](#111212-mobile-sms-integration)
+          - [Fast2sms API](#fast2sms-api)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
     - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
@@ -772,6 +773,8 @@ Web development is the process of building websites and web applications using a
 7. Install Postman from the official website `https://www.postman.com/`.
 8. Install VS Code from the official website `https://code.visualstudio.com/`.
 9. Install Firebase CLI using the `npm install -g firebase-tools` command.
+10. run `npm install`
+11. run `ng serve` to run the project
 
 ### 1.6.4. Suggested Learning Path
 
@@ -5633,7 +5636,13 @@ async function sendWhatsAppMessage(
 ) {}
 ```
 
-##### 1.11.2.1.2. SMS gateway integration
+##### 1.11.2.1.2. Mobile SMS integration
+
+###### Fast2sms API
+
+1. go to [Fast2sms](https://www.fast2sms.com/)
+![Fast2sms](https://i.imgur.com/qXTGnjr.png "Fast2sms")
+1. Sign up for an account.
 
 ## 1.12. Testing Guidelines
 

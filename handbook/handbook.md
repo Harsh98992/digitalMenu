@@ -203,7 +203,8 @@
         - [1.11.2.1.1. WhatsApp Business API](#111211-whatsapp-business-api)
           - [1.11.2.1.1.1. Sending Messages](#1112111-sending-messages)
         - [1.11.2.1.2. Mobile SMS integration](#111212-mobile-sms-integration)
-          - [Fast2sms API](#fast2sms-api)
+          - [1.11.2.1.2.1. Fast2sms API](#1112121-fast2sms-api)
+          - [DLT Registration](#dlt-registration)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
     - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
@@ -5638,11 +5639,36 @@ async function sendWhatsAppMessage(
 
 ##### 1.11.2.1.2. Mobile SMS integration
 
-###### Fast2sms API
+###### 1.11.2.1.2.1. Fast2sms API
 
 1. go to [Fast2sms](https://www.fast2sms.com/)
 ![Fast2sms](https://i.imgur.com/qXTGnjr.png "Fast2sms")
-1. Sign up for an account.
+2. Sign up for an account.
+![Sign Up](https://i.imgur.com/mwlUWfP.png "Sign Up")
+3. Login to the dashboard.
+![Login](https://i.imgur.com/zywoxgj.png "Login")
+4. Get the API key.
+
+###### DLT Registration
+
+TRAI introduced DLT Registration for Bulk SMS in INDIA. According to DLT Rules, user need to register Header (sender id) & Content Template (message text) directly from any one DLT operator.
+
+Steps For Registration In JIO DLT :
+
+- Open https://trueconnect.jio.com/ .
+- ![JIO DLT](https://i.imgur.com/dWpNrUm.jpeg "JIO DLT")
+- Click on register & complete registration process. Click [here](https://www.fast2sms.com/help/dlt-registration-signup-process-jio/) for registration steps.
+- ![Register](https://i.imgur.com/kaMvDRy.png "Register")
+- ![Register](https://i.imgur.com/ScAa1kY.png "Register")
+- Add following Telemarketer ID for PE-TM Binding:
+
+Telemarketer Name: SID GROUPS
+Telemarketer ID: 1702159738863862112
+
+- Approve Headers (sender id) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-header-sender-id-jio-dlt/) for sender id steps.
+- Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
+- After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
+
 
 ## 1.12. Testing Guidelines
 

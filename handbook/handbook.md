@@ -149,6 +149,7 @@
         - [1.8.2.7.21. Add Extra Ingredient](#182721-add-extra-ingredient)
         - [1.8.2.7.22. Edit Extra Ingredient](#182722-edit-extra-ingredient)
         - [1.8.2.7.23. Delete Extra Ingredient](#182723-delete-extra-ingredient)
+        - [1.8.2.7.24. Add Dish](#182724-add-dish)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -5106,6 +5107,54 @@ export class RestaurantPanelService {
 
     restaurantService.deleteExtraIngredient(ingredientId).subscribe((response) => {
         console.log("Extra ingredient deleted:", response);
+    });
+    ```
+
+---
+
+##### 1.8.2.7.24. Add Dish
+
+- **Endpoint**: `/api/v1/restaurant/dishes/addDish`
+- **Method**: POST
+- **Description**: Adds a new dish to the restaurant menu.
+- **Parameters**:
+  - `data`: Object containing dish details.
+    - Example structure:
+
+    ```json
+    {
+        "name": "Pizza",
+        "price": 10.00,
+        "category": "Main Course",
+        "description": "Delicious pizza with cheese and toppings"
+    }
+    ```
+
+- **Response**: Returns a success message if the dish is added.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
+
+    ```typescript
+    addDish(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/restaurant/dishes/addDish`,
+            data
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const dishData = {
+        name: "Pizza",
+        price: 10.00,
+        category: "Main Course",
+        description: "Delicious pizza with cheese and toppings"
+    };
+
+    restaurantService.addDish(dishData).subscribe((response) => {
+        console.log("Dish added:", response);
     });
     ```
 

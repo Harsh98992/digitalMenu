@@ -5633,9 +5633,7 @@ async function sendWhatsAppMessage(
 ) {}
 ```
 
-
 ##### 1.11.2.1.2. SMS gateway integration
-
 
 ## 1.12. Testing Guidelines
 

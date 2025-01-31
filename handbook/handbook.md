@@ -5909,35 +5909,53 @@ A: Use Firebase Console to revert to previous deployment.
 
 1. **Documentation**
 
-    - [Angular Documentation](https://angular.io/docs)
-    - [Firebase Documentation](https://firebase.google.com/docs)
-    - [Razorpay Documentation](https://razorpay.com/docs)
+    - [Angular Documentation](https://angular.io/docs) - Official Angular framework documentation including guides, API reference, and examples
+    - [Firebase Documentation](https://firebase.google.com/docs) - Complete Firebase platform documentation covering all services and features
+    - [Razorpay Documentation](https://razorpay.com/docs) - Payment integration guides and API documentation
+    - [TypeScript Documentation](https://www.typescriptlang.org/docs) - TypeScript language documentation and handbook
+    - [RxJS Documentation](https://rxjs.dev/guide/overview) - Reactive programming library documentation
 
 2. **Tutorials**
-    - Angular tutorials
-    - Firebase guides
-    - Testing guides
+    - [Angular Tutorial for Beginners](https://angular.io/tutorial) - Official Angular heroes tutorial
+    - [Firebase Web Codelab](https://firebase.google.com/codelabs/firebase-web) - Hands-on Firebase web development guide
+    - [Testing Angular Applications](https://angular.io/guide/testing) - Comprehensive testing guide
+    - [Angular Material Getting Started](https://material.angular.io/guide/getting-started) - Material design implementation guide
+    - [Firebase Authentication](https://firebase.google.com/docs/auth/web/start) - User authentication implementation guide
 
 ### 1.17.2. Links to Tools, Libraries, and Frameworks Used
 
 1. **Development Tools**
 
-    - [Visual Studio Code](https://code.visualstudio.com)
-    - [Git](https://git-scm.com)
-    - [Node.js](https://nodejs.org)
+    - [Visual Studio Code](https://code.visualstudio.com) - Primary code editor with Angular and TypeScript support
+    - [Git](https://git-scm.com) - Version control system for tracking code changes
+    - [Node.js](https://nodejs.org) - JavaScript runtime environment
+    - [npm](https://www.npmjs.com) - Node package manager
+    - [Angular CLI](https://cli.angular.io) - Command line interface for Angular
+    - [Firebase CLI](https://firebase.google.com/docs/cli) - Command line tools for Firebase
 
 2. **Frameworks and Libraries**
-    - [Angular](https://angular.io)
-    - [Angular Material](https://material.angular.io)
-    - [Firebase](https://firebase.google.com)
+    - [Angular](https://angular.io) - Primary frontend framework (v15.0.0)
+    - [Angular Material](https://material.angular.io) - UI component library (v15.0.0)
+    - [Firebase](https://firebase.google.com) - Backend platform and services
+    - [RxJS](https://rxjs.dev) - Reactive programming library (v7.5.0)
+    - [NgRx](https://ngrx.io) - State management library (v15.0.0)
+    - [Jasmine](https://jasmine.github.io) - Testing framework
+    - [Karma](https://karma-runner.github.io) - Test runner
 
 ### 1.17.3. Glossary of Technical Terms
 
-- **Angular**: Frontend framework
-- **Firebase**: Backend platform
-- **API**: Application Programming Interface
-- **JWT**: JSON Web Token
-- **REST**: Representational State Transfer
-- **OTP**: One-Time Password
-- **UI/UX**: User Interface/User Experience
-- **CI/CD**: Continuous Integration/Continuous Deployment
+- **Angular**: A TypeScript-based open-source frontend framework developed by Google
+- **Firebase**: Google's mobile and web application development platform
+- **API**: Application Programming Interface - A set of rules for building and integrating application software
+- **JWT**: JSON Web Token - A compact, URL-safe means of representing claims between parties
+- **REST**: Representational State Transfer - An architectural style for distributed hypermedia systems
+- **OTP**: One-Time Password - A automatically generated password valid for a single login session
+- **UI/UX**: User Interface/User Experience - Visual design and user interaction aspects of applications
+- **CI/CD**: Continuous Integration/Continuous Deployment - Automated build, test and deployment processes
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript
+- **RxJS**: Reactive Extensions for JavaScript - Library for reactive programming
+- **NgRx**: State management pattern and library for Angular applications
+- **DOM**: Document Object Model - Programming interface for HTML documents
+- **SPA**: Single Page Application - Web app that loads a single HTML page
+- **AOT**: Ahead-of-Time compilation - Pre-compilation of Angular applications
+- **Lazy Loading**: Technique to load components, modules, or assets on demand

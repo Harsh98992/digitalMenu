@@ -200,8 +200,9 @@
         - [1.11.1.1.1. Razorpay integration](#111111-razorpay-integration)
     - [1.11.2. Messaging Service Integration (e.g., SMS, WhatsApp)](#1112-messaging-service-integration-eg-sms-whatsapp)
       - [1.11.2.1. Overview of Messaging Providers](#11121-overview-of-messaging-providers)
-      - [1.11.2.2. Setting Up API Access and Authentication](#11122-setting-up-api-access-and-authentication)
-      - [1.11.2.3. Sending Messages](#11123-sending-messages)
+        - [1.11.2.1.1. WhatsApp Business API](#111211-whatsapp-business-api)
+          - [1.11.2.1.1.1. Sending Messages](#1112111-sending-messages)
+        - [1.11.2.1.2. SMS gateway integration](#111212-sms-gateway-integration)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
     - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
@@ -5616,17 +5617,13 @@ The credentials are as follows:
 
 #### 1.11.2.1. Overview of Messaging Providers
 
-- WhatsApp Business API
-- Firebase Cloud Messaging
-- SMS gateway integration
-
-#### 1.11.2.2. Setting Up API Access and Authentication
+##### 1.11.2.1.1. WhatsApp Business API
 
 1. WhatsApp Business account setup
 2. API key configuration
 3. Template message approval
 
-#### 1.11.2.3. Sending Messages
+###### 1.11.2.1.1.1. Sending Messages
 
 ```typescript
 async function sendWhatsAppMessage(
@@ -5635,6 +5632,10 @@ async function sendWhatsAppMessage(
     params: any[]
 ) {}
 ```
+
+
+##### 1.11.2.1.2. SMS gateway integration
+
 
 ## 1.12. Testing Guidelines
 

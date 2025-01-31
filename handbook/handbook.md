@@ -203,8 +203,9 @@
         - [1.11.2.1.1. WhatsApp Business API](#111211-whatsapp-business-api)
           - [1.11.2.1.1.1. Sending Messages](#1112111-sending-messages)
         - [1.11.2.1.2. Mobile SMS integration](#111212-mobile-sms-integration)
-          - [1.11.2.1.2.1. Fast2sms API](#1112121-fast2sms-api)
+          - [1.11.2.1.2.1. DLT SMS](#1112121-dlt-sms)
         - [Using OTP API](#using-otp-api)
+        - [Using Quick SMS API](#using-quick-sms-api)
           - [DLT Registration](#dlt-registration)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
@@ -5640,7 +5641,7 @@ async function sendWhatsAppMessage(
 
 ##### 1.11.2.1.2. Mobile SMS integration
 
-###### 1.11.2.1.2.1. Fast2sms API
+###### 1.11.2.1.2.1. DLT SMS
 
 1. go to [Fast2sms](https://www.fast2sms.com/)
 ![Fast2sms](https://i.imgur.com/qXTGnjr.png "Fast2sms")
@@ -5655,12 +5656,19 @@ async function sendWhatsAppMessage(
 
 ##### Using OTP API
 
--click on the API section
+- click on the API section
 - ![API Section](https://i.imgur.com/tMyh6D4.png "API Section")
 - copy the overral url
 - ![API URL](https://i.imgur.com/tD0wbKm.png "API URL")
 - use the get method to send the OTP to the user
 
+##### Using Quick SMS API
+
+- click on the  Quick SMS section
+- ![Quick SMS Section](https://i.imgur.com/1DrKO0N.png "Quick SMS Section")
+- Enter the mobile number and the message
+- ![Quick SMS](https://i.imgur.com/924ycIr.png "Quick SMS")
+- Click on the send button to send the message
 
 ###### DLT Registration
 

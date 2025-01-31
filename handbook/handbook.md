@@ -6022,9 +6022,15 @@ The credentials are as follows:
 
 ##### 1.11.2.1.1. WhatsApp Business API
 
-1. WhatsApp Business account setup
-2. API key configuration
-3. Template message approval
+- Go to `https://developers.facebook.com/docs/whatsapp/`
+- ![WhatsApp Business API](https://i.imgur.com/uDRxTUy.png "WhatsApp Business API")
+- Click on the `login` button.
+- ![Login](https://i.imgur.com/6WHGGtu.png "Login")
+- Enter the credentials.
+- ![Credentials](https://i.imgur.com/A3iLOPv.png "Credentials")
+- Click on the `Get Started` button.
+- ![Get Started](https://i.imgur.com/4VXUCso.png "Get Started")
+- Click on the `Create App` button.
 
 ###### 1.11.2.1.1.1. Sending Messages
 

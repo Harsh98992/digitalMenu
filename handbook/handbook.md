@@ -191,8 +191,10 @@
       - [Clone the repository](#clone-the-repository)
       - [Install dependencies](#install-dependencies)
       - [Run the server](#run-the-server)
-      - [Connect to the MongoDB Atlas cluster](#connect-to-the-mongodb-atlas-cluster)
-      - [Use the database](#use-the-database)
+      - [Go to `http://mongodb.com/try/download/compass` to download MongoDB Compass and install the MongoDB Compass](#go-to-httpmongodbcomtrydownloadcompass-to-download-mongodb-compass-and-install-the-mongodb-compass)
+      - [Add new connection](#add-new-connection)
+      - [click on my digital menu web](#click-on-my-digital-menu-web)
+      - [Click on Open mongodb shell](#click-on-open-mongodb-shell)
       - [Run queries](#run-queries)
     - [1.9.6. Sample Queries for Common Use Cases](#196-sample-queries-for-common-use-cases)
       - [1.9.6.1. Retrieve all orders for a specific customer](#1961-retrieve-all-orders-for-a-specific-customer)
@@ -5991,26 +5993,30 @@ sudo npm install -g nodemon
 nodemon server.js
 ```
 
-#### Connect to the MongoDB Atlas cluster
+#### Go to `http://mongodb.com/try/download/compass` to download MongoDB Compass and install the MongoDB Compass
 
-```bash
-mongo "mongodb+srv://cluster0.7zq8z.mongodb.net/myFirstDatabase" --username harsh
-```
+![MongoDB Compass](https://i.imgur.com/42X5R0F.png "MongoDB Compass")
 
-#### Use the database
+#### Add new connection
 
-```bash
-use qrsay
-```
+- add connection as mongodb+srv://goqrorder:2fFhzGUn6EdNUPQJ@cluster0.bt9bmvq.mongodb.net/digitalMenuWeb
+![Connect to Database](https://i.imgur.com/WKliKpM.png "Connect to Database")
+
+#### click on my digital menu web
+
+![My Digital Menu Web](https://i.imgur.com/237XYar.png "My Digital Menu Web")
+
+#### Click on Open mongodb shell
+
+![Open Mongodb Shell](https://i.imgur.com/PGxxte8.png "Open Mongodb Shell")
 
 #### Run queries
 
 ```bash
 db.customers.find()
-db.orders.find()
-db.restaurants.find()
-db.promoCodes.find()
 ```
+
+![Run Queries](https://i.imgur.com/NM1T6D9.png "Run Queries")
 
 ### 1.9.6. Sample Queries for Common Use Cases
 

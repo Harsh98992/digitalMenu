@@ -187,6 +187,13 @@
       - [1.9.4.6. Table Table](#1946-table-table)
       - [1.9.4.7. User Table](#1947-user-table)
     - [1.9.5. Entity-Relationship Diagrams (ERD)](#195-entity-relationship-diagrams-erd)
+    - [1.9.6. How to run Database Queries](#196-how-to-run-database-queries)
+      - [Clone the repository](#clone-the-repository)
+      - [Install dependencies](#install-dependencies)
+      - [Run the server](#run-the-server)
+      - [Connect to the MongoDB Atlas cluster](#connect-to-the-mongodb-atlas-cluster)
+      - [Use the database](#use-the-database)
+      - [Run queries](#run-queries)
     - [1.9.6. Sample Queries for Common Use Cases](#196-sample-queries-for-common-use-cases)
       - [1.9.6.1. Retrieve all orders for a specific customer](#1961-retrieve-all-orders-for-a-specific-customer)
       - [1.9.6.2. Find all restaurants offering a specific cuisine](#1962-find-all-restaurants-offering-a-specific-cuisine)
@@ -1792,15 +1799,16 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - `phoneNumber` (string): The customer's phone number.
   - **Sample Code**:
 
-  - ``````typescript
-                    storeCustomerDetails(name: string, phoneNumber: string): void {
-                        localStorage.setItem('customerName', name);
-                        localStorage.setItem('customerPhoneNumber', phoneNumber);
-                    }
-                    ```
-                ````
-            `````
-        ``````
+  - ```````typescript
+                        storeCustomerDetails(name: string, phoneNumber: string): void {
+                            localStorage.setItem('customerName', name);
+                            localStorage.setItem('customerPhoneNumber', phoneNumber);
+                        }
+                        ```
+                    ````
+                `````
+            ``````
+        ```````
 
 - **Usage**:
 
@@ -2334,19 +2342,19 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - **Error Handling**: Returns an empty array if no suggestions are found or if the request fails.
   - **Sample Code**:
 
-                ```typescript
-                getAutocompleteResults(query: string) {
-                    if (query) {
-                        const autocompleteUrl = `${this.apiUrl}/v1/google-maps/autocomplete?input=${query}`;
-                        return this.httpClient.get<any>(autocompleteUrl).pipe(
-                            map((response) => response.predictions),
-                            catchError(() => of([]))
-                        );
-                    } else {
-                        return of([]);
+                    ```typescript
+                    getAutocompleteResults(query: string) {
+                        if (query) {
+                            const autocompleteUrl = `${this.apiUrl}/v1/google-maps/autocomplete?input=${query}`;
+                            return this.httpClient.get<any>(autocompleteUrl).pipe(
+                                map((response) => response.predictions),
+                                catchError(() => of([]))
+                            );
+                        } else {
+                            return of([]);
+                        }
                     }
-                }
-                ```
+                    ```
 
 - **Usage**:
 
@@ -2415,52 +2423,52 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
   - **Sample Code**:
 
-                ```typescript
-                getFormattedGeocodeDetails(latitude: number, longitude: number) {
-                    let url = `${this.apiUrl}/v1/google-maps/geocode-details?latitude=${latitude}&longitude=${longitude}`;
+                    ```typescript
+                    getFormattedGeocodeDetails(latitude: number, longitude: number) {
+                        let url = `${this.apiUrl}/v1/google-maps/geocode-details?latitude=${latitude}&longitude=${longitude}`;
 
-                    return this.httpClient.get<any>(url).pipe(
-                        map((response) => {
-                            console.log("Geocoding API response:", response);
-                            const addressComponents = response.results[0].address_components;
+                        return this.httpClient.get<any>(url).pipe(
+                            map((response) => {
+                                console.log("Geocoding API response:", response);
+                                const addressComponents = response.results[0].address_components;
 
-                            const postalCodeComponent = addressComponents.find(
-                                (component) => component.types.includes("postal_code")
-                            );
+                                const postalCodeComponent = addressComponents.find(
+                                    (component) => component.types.includes("postal_code")
+                                );
 
-                            return {
-                                pinCode: postalCodeComponent ? postalCodeComponent.long_name : "",
-                                completeAddress: response.results[0].formatted_address,
-                                city: addressComponents.find((component) =>
-                                    component.types.includes("locality")
-                                )
-                                    ? addressComponents.find((component) =>
-                                          component.types.includes("locality")
-                                      ).long_name
-                                    : "",
-                                state: addressComponents.find((component) =>
-                                    component.types.includes("administrative_area_level_1")
-                                )
-                                    ? addressComponents.find((component) =>
-                                          component.types.includes("administrative_area_level_1")
-                                      ).long_name
-                                    : "",
-                                country: addressComponents.find((component) =>
-                                    component.types.includes("country")
-                                )
-                                    ? addressComponents.find((component) =>
-                                          component.types.includes("country")
-                                      ).long_name
-                                    : "",
-                            };
-                        }),
-                        catchError((error) => {
-                            console.error("Geocoding API error:", error);
-                            return of("");
-                        })
-                    );
-                }
-                ```
+                                return {
+                                    pinCode: postalCodeComponent ? postalCodeComponent.long_name : "",
+                                    completeAddress: response.results[0].formatted_address,
+                                    city: addressComponents.find((component) =>
+                                        component.types.includes("locality")
+                                    )
+                                        ? addressComponents.find((component) =>
+                                              component.types.includes("locality")
+                                          ).long_name
+                                        : "",
+                                    state: addressComponents.find((component) =>
+                                        component.types.includes("administrative_area_level_1")
+                                    )
+                                        ? addressComponents.find((component) =>
+                                              component.types.includes("administrative_area_level_1")
+                                          ).long_name
+                                        : "",
+                                    country: addressComponents.find((component) =>
+                                        component.types.includes("country")
+                                    )
+                                        ? addressComponents.find((component) =>
+                                              component.types.includes("country")
+                                          ).long_name
+                                        : "",
+                                };
+                            }),
+                            catchError((error) => {
+                                console.error("Geocoding API error:", error);
+                                return of("");
+                            })
+                        );
+                    }
+                    ```
 
 - **Usage**:
 
@@ -2488,15 +2496,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
   - **Sample Code**:
 
-                ```typescript
-                getPlaceDetails(placeId: string) {
-                    const placeDetailsUrl = `${this.apiUrl}/v1/google-maps/place-details?placeId=${placeId}`;
-                    return this.httpClient.get<any>(placeDetailsUrl).pipe(
-                        map((response) => response.result),
-                        catchError(() => of([]))
-                    );
-                }
-                ```
+                    ```typescript
+                    getPlaceDetails(placeId: string) {
+                        const placeDetailsUrl = `${this.apiUrl}/v1/google-maps/place-details?placeId=${placeId}`;
+                        return this.httpClient.get<any>(placeDetailsUrl).pipe(
+                            map((response) => response.result),
+                            catchError(() => of([]))
+                        );
+                    }
+                    ```
 
 - **Usage**:
 
@@ -3670,11 +3678,11 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                        ```json
-                        {
-                            "status": "open"
-                        }
-                        ```
+                              ```json
+                              {
+                                  "status": "open"
+                              }
+                              ```
 
 - **Response**:
 
@@ -3682,11 +3690,11 @@ export class RestaurantPanelService {
 
     - Example:
 
-                        ```json
-                        {
-                            "message": "Restaurant status updated successfully."
-                        }
-                        ```
+                              ```json
+                              {
+                                  "message": "Restaurant status updated successfully."
+                              }
+                              ```
 
   - **Error**: Returns an error message if the update fails.
 
@@ -3734,11 +3742,11 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                        ```json
-                        {
-                            "isDineInAvailable": true
-                        }
-                        ```
+                              ```json
+                              {
+                                  "isDineInAvailable": true
+                              }
+                              ```
 
 - **Response**:
 
@@ -3746,11 +3754,11 @@ export class RestaurantPanelService {
 
     - Example:
 
-                        ```json
-                        {
-                            "message": "Dine-in availability updated successfully."
-                        }
-                        ```
+                              ```json
+                              {
+                                  "message": "Dine-in availability updated successfully."
+                              }
+                              ```
 
   - **Error**: Returns an error message if the update fails.
 
@@ -4360,7 +4368,7 @@ export class RestaurantPanelService {
 {
     "image": "base64-encoded-image-data"
 }
-````
+```
 
 - **Response**: Returns a success message if the update is successful.
 - **Authorization**: Restaurant authentication required.
@@ -5108,13 +5116,13 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                  ```json
-                  {
-                      "dishId": "123",
-                      "ingredientName": "Cheese",
-                      "price": 1.5
-                  }
-                  ```
+                        ```json
+                        {
+                            "dishId": "123",
+                            "ingredientName": "Cheese",
+                            "price": 1.5
+                        }
+                        ```
 
 - **Response**: Returns a success message if the ingredient is added.
 - **Authorization**: Restaurant authentication required.
@@ -5156,13 +5164,13 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                  ```json
-                  {
-                      "ingredientId": "789",
-                      "ingredientName": "Mozzarella",
-                      "price": 2.0
-                  }
-                  ```
+                        ```json
+                        {
+                            "ingredientId": "789",
+                            "ingredientName": "Mozzarella",
+                            "price": 2.0
+                        }
+                        ```
 
 - **Response**: Returns a success message if the ingredient is updated.
 - **Authorization**: Restaurant authentication required.
@@ -5237,14 +5245,14 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                  ```json
-                  {
-                      "name": "Pizza",
-                      "price": 10.0,
-                      "category": "Main Course",
-                      "description": "Delicious pizza with cheese and toppings"
-                  }
-                  ```
+                        ```json
+                        {
+                            "name": "Pizza",
+                            "price": 10.0,
+                            "category": "Main Course",
+                            "description": "Delicious pizza with cheese and toppings"
+                        }
+                        ```
 
 - **Response**: Returns a success message if the dish is added.
 - **Authorization**: Restaurant authentication required.
@@ -5314,43 +5322,43 @@ export class RestaurantPanelService {
 
   - **Request Body**: JSON object containing user details. Example:
 
-                ```json
-                {
-                    "name": "John Doe",
-                    "email": "johndoe@example.com",
-                    "phone": "1234567890",
-                    "role": "user"
-                }
-                ```
+                    ```json
+                    {
+                        "name": "John Doe",
+                        "email": "johndoe@example.com",
+                        "phone": "1234567890",
+                        "role": "user"
+                    }
+                    ```
 
 - **Response**:
 
   - **Success**: Returns a success message and the details of the created user.
         Example:
 
-                ```json
-                {
-                    "message": "User added successfully",
-                    "user": {
-                        "id": "123",
-                        "name": "John Doe",
-                        "email": "johndoe@example.com",
-                        "phone": "1234567890",
-                        "role": "user"
+                    ```json
+                    {
+                        "message": "User added successfully",
+                        "user": {
+                            "id": "123",
+                            "name": "John Doe",
+                            "email": "johndoe@example.com",
+                            "phone": "1234567890",
+                            "role": "user"
+                        }
                     }
-                }
-                ```
+                    ```
 
   - **Error**: Returns an error message if the request fails (e.g., validation errors, missing fields). Example:
 
-                ```json
-                {
-                    "message": "Invalid input data",
-                    "errors": {
-                        "email": "Email is already in use."
+                    ```json
+                    {
+                        "message": "Invalid input data",
+                        "errors": {
+                            "email": "Email is already in use."
+                        }
                     }
-                }
-                ```
+                    ```
 
 - **Authorization**: Admin authentication required.
 - **Error Handling**:
@@ -5402,11 +5410,11 @@ export class RestaurantPanelService {
     - **Error Handling**: Returns an error message if the request fails.
     - **Sample Code**:
 
-                  ```typescript
-                  deleteUser(userId) {
-                      return this.http.delete(`${this.apiUrl}/v1/user/deleteUser/${userId}`);
-                  }
-                  ```
+                        ```typescript
+                        deleteUser(userId) {
+                            return this.http.delete(`${this.apiUrl}/v1/user/deleteUser/${userId}`);
+                        }
+                        ```
 
 - **Usage**:
 
@@ -5435,14 +5443,14 @@ export class RestaurantPanelService {
   - `userId`: The ID of the user to edit.
   - **Request Body**: JSON object containing the updated user details. Example:
 
-                ```json
-                {
-                    "name": "Jane Doe",
-                    "email": "janedoe#example.com",
-                    "phone": "9876543210",
-                    "role": "admin"
-                }
-                ```
+                    ```json
+                    {
+                        "name": "Jane Doe",
+                        "email": "janedoe#example.com",
+                        "phone": "9876543210",
+                        "role": "admin"
+                    }
+                    ```
 
 - **Response**:
 - **Success**: Returns a success message and the updated user details.
@@ -5479,11 +5487,11 @@ export class RestaurantPanelService {
   - Validates required fields before submission.
   - **Sample Code**:
 
-                ```typescript
-                editUser(userId, userData) {
-                    return this.http.patch(`${this.apiUrl}/v1/user/editUser/${userId}`, userData);
-                }
-                ```
+                    ```typescript
+                    editUser(userId, userData) {
+                        return this.http.patch(`${this.apiUrl}/v1/user/editUser/${userId}`, userData);
+                    }
+                    ```
 
 - **Usage**:
 
@@ -5521,11 +5529,11 @@ export class RestaurantPanelService {
   - **Error Handling**: Returns an error message if the request fails.
   - **Sample Code**:
 
-                ```typescript
-                getUser(userId) {
-                    return this.http.get(`${this.apiUrl}/v1/user/getUser/${userId}`);
-                }
-                ```
+                    ```typescript
+                    getUser(userId) {
+                        return this.http.get(`${this.apiUrl}/v1/user/getUser/${userId}`);
+                    }
+                    ```
 
 - **Usage**:
 
@@ -5957,6 +5965,51 @@ erDiagram
         Boolean emailVerified
         Boolean active
     }
+```
+
+### 1.9.6. How to run Database Queries
+
+#### Clone the repository
+
+```bash
+git clone https://github.com/Harsh98992/qrsayBackend.git
+```
+
+#### Install dependencies
+
+```bash
+cd qrsayBackend
+npm install
+```
+
+<!-- we are using teh online mongodv -->
+
+#### Run the server
+
+```bash
+sudo npm install -g nodemon
+nodemon server.js
+```
+
+#### Connect to the MongoDB Atlas cluster
+
+```bash
+mongo "mongodb+srv://cluster0.7zq8z.mongodb.net/myFirstDatabase" --username harsh
+```
+
+#### Use the database
+
+```bash
+use qrsay
+```
+
+#### Run queries
+
+```bash
+db.customers.find()
+db.orders.find()
+db.restaurants.find()
+db.promoCodes.find()
 ```
 
 ### 1.9.6. Sample Queries for Common Use Cases

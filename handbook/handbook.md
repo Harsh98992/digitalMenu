@@ -6158,99 +6158,174 @@ Telemarketer ID: 1702159738863862112
 
 ### Overview of Testing Strategy
 
+A comprehensive testing strategy ensures that the application meets functional, performance, and security requirements. It involves various types of testing to validate components, integrations, and system workflows.
+
 #### Unit Testing
+
+Unit testing focuses on verifying individual components and functions to ensure they perform as expected in isolation.
 
 ##### Component Testing
 
+- Testing individual UI components to verify correct rendering and behavior.
+- Ensuring state changes and event handling work as expected.
+- Validating UI responsiveness and interaction.
+
 ##### Service Testing
+
+- Testing backend services and business logic independently.
+- Ensuring services handle edge cases correctly.
+- Mocking dependencies to isolate service functionality.
 
 ##### Utility Function Testing
 
+- Verifying helper functions and utility modules.
+- Checking correctness of data manipulation functions.
+- Ensuring consistent output across different input scenarios.
+
 #### Integration Testing
+
+Integration testing validates interactions between different modules to ensure seamless data flow and consistency.
 
 ##### API Endpoint Testing
 
+- Testing request/response cycles for correctness and efficiency.
+- Validating input handling and error responses.
+- Ensuring API versioning and backward compatibility.
+
 ##### Database Operations
+
+- Verifying CRUD (Create, Read, Update, Delete) operations.
+- Checking database migrations and rollback mechanisms.
+- Ensuring data integrity and constraints enforcement.
 
 ##### Authentication Flow
 
+- Testing user login, logout, and session management.
+- Verifying multi-factor authentication (MFA) and token expiry.
+- Ensuring correct handling of authentication errors.
+
 ### Functional Testing Scenarios
+
+Functional testing ensures that business processes work as intended and meet user requirements.
 
 #### Order Flow Testing
 
 ##### Menu Item Selection
 
+- Validating item selection and customization options.
+- Ensuring availability checks and dynamic updates.
+
 ##### Cart Operations
+
+- Adding and removing items from the cart.
+- Verifying price calculations and discount applications.
 
 ##### Checkout Process
 
+- Ensuring correct handling of shipping and billing information.
+- Testing order summary and confirmation steps.
+
 ##### Payment Integration
+
+- Validating various payment methods (credit cards, digital wallets, etc.).
+- Ensuring secure transactions and error handling.
 
 #### Admin Operations
 
 ##### Menu Management
 
+- Adding, updating, and deleting menu items.
+- Verifying category assignments and pricing updates.
+
 ##### Order Processing
+
+- Viewing and managing customer orders.
+- Ensuring correct order status transitions.
 
 ##### User Management
 
+- Adding and removing users with different roles.
+- Validating access control and permissions.
+
 ### Technical Testing
+
+Technical testing focuses on system performance, security, and stability.
 
 #### Performance Testing
 
 ##### Load Time Optimization
 
+- Measuring page load times under different network conditions.
+- Optimizing asset delivery and caching strategies.
+
 ##### API Response Times
 
+- Ensuring APIs meet performance SLAs.
+- Identifying bottlenecks in data processing.
+
 ##### Database Query Performance
+
+- Optimizing database queries for efficiency.
+- Preventing slow queries from affecting user experience.
 
 #### Security Testing
 
 ##### Authentication
 
+- Preventing brute-force attacks and credential stuffing.
+- Ensuring proper session handling and logout mechanisms.
+
 ##### Authorization
+
+- Verifying role-based access controls.
+- Preventing privilege escalation vulnerabilities.
 
 ##### Data Encryption
 
+- Ensuring data is encrypted in transit and at rest.
+- Validating secure storage of sensitive information.
+
 ### Bug Reporting Guidelines
+
+Effective bug reporting improves issue resolution time and ensures clarity in communication.
 
 #### Bug Report Format
 
 ##### Title
 
-- Short description of the issue
+- A concise summary of the issue.
 
 ##### Description
 
-- Detailed explanation of the problem
+- A detailed explanation, including affected features and conditions.
 
 ##### Steps to Reproduce
 
-- Step-by-step guide to reproduce the bug
+- A clear, step-by-step guide to reproducing the bug.
 
 ##### Expected Behavior
 
-- What should happen
+- A description of what should happen under normal conditions.
 
 ##### Actual Behavior
 
-- What is happening
+- A description of what is currently happening, including any discrepancies.
 
 ##### Screenshots
 
-- Visual evidence of the bug
+- Visual evidence of the bug (if applicable).
 
 ##### Environment
 
-- Browser, device, OS
+- Details about the browser, device, OS, and application version.
 
 ##### Severity
 
-- Low/Medium/High
+- Categorization as Low, Medium, or High based on impact.
 
 ##### Priority
 
-- Low/Medium/High
+- Prioritization as Low, Medium, or High based on urgency and business impact.
 
 ## 1.13. Deployment and Maintenance
 

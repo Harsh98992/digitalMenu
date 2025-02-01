@@ -219,11 +219,46 @@
         - [1.11.2.1.3. Using OTP API](#111213-using-otp-api)
         - [1.11.2.1.4. Using Quick SMS API](#111214-using-quick-sms-api)
           - [1.11.2.1.4.1. DLT Registration](#1112141-dlt-registration)
-  - [1.12. Testing Guidelines](#112-testing-guidelines)
-    - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
-    - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
-    - [1.12.3. Technical Testing](#1123-technical-testing)
-    - [1.12.4. Bug Reporting Guidelines](#1124-bug-reporting-guidelines)
+  - [Testing Guidelines](#testing-guidelines)
+    - [Overview of Testing Strategy](#overview-of-testing-strategy)
+      - [Unit Testing](#unit-testing)
+        - [Component Testing](#component-testing)
+        - [Service Testing](#service-testing)
+        - [Utility Function Testing](#utility-function-testing)
+      - [Integration Testing](#integration-testing)
+        - [API Endpoint Testing](#api-endpoint-testing)
+        - [Database Operations](#database-operations)
+        - [Authentication Flow](#authentication-flow)
+    - [Functional Testing Scenarios](#functional-testing-scenarios)
+      - [Order Flow Testing](#order-flow-testing)
+        - [Menu Item Selection](#menu-item-selection)
+        - [Cart Operations](#cart-operations)
+        - [Checkout Process](#checkout-process)
+        - [Payment Integration](#payment-integration)
+      - [Admin Operations](#admin-operations)
+        - [Menu Management](#menu-management)
+        - [Order Processing](#order-processing)
+        - [User Management](#user-management)
+    - [Technical Testing](#technical-testing)
+      - [Performance Testing](#performance-testing)
+        - [Load Time Optimization](#load-time-optimization)
+        - [API Response Times](#api-response-times)
+        - [Database Query Performance](#database-query-performance)
+      - [Security Testing](#security-testing)
+        - [Authentication](#authentication)
+        - [Authorization](#authorization)
+        - [Data Encryption](#data-encryption)
+    - [Bug Reporting Guidelines](#bug-reporting-guidelines)
+      - [Bug Report Format](#bug-report-format)
+        - [Title](#title)
+        - [Description](#description)
+        - [Steps to Reproduce](#steps-to-reproduce)
+        - [Expected Behavior](#expected-behavior)
+        - [Actual Behavior](#actual-behavior)
+        - [Screenshots](#screenshots)
+        - [Environment](#environment)
+        - [Severity](#severity)
+        - [Priority](#priority)
   - [1.13. Deployment and Maintenance](#113-deployment-and-maintenance)
     - [1.13.1. Deployment Process](#1131-deployment-process)
     - [1.13.2. Version Control Guidelines](#1132-version-control-guidelines)
@@ -6119,61 +6154,103 @@ Telemarketer ID: 1702159738863862112
 - Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
 - After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
 
-## 1.12. Testing Guidelines
+## Testing Guidelines
 
-### 1.12.1. Overview of Testing Strategy
+### Overview of Testing Strategy
 
-1. **Unit Testing**
+#### Unit Testing
 
-    - Component testing
-    - Service testing
-    - Utility function testing
+##### Component Testing
 
-2. **Integration Testing**
-    - API endpoint testing
-    - Database operations
-    - Authentication flow
+##### Service Testing
 
-### 1.12.2. Functional Testing Scenarios
+##### Utility Function Testing
 
-1. **Order Flow Testing**
+#### Integration Testing
 
-    - Menu item selection
-    - Cart operations
-    - Checkout process
-    - Payment integration
+##### API Endpoint Testing
 
-2. **Admin Operations**
-    - Menu management
-    - Order processing
-    - User management
+##### Database Operations
 
-### 1.12.3. Technical Testing
+##### Authentication Flow
 
-1. **Performance Testing**
+### Functional Testing Scenarios
 
-    - Load time optimization
-    - API response times
-    - Database query performance
+#### Order Flow Testing
 
-2. **Security Testing**
-    - Authentication
-    - Authorization
-    - Data encryption
+##### Menu Item Selection
 
-### 1.12.4. Bug Reporting Guidelines
+##### Cart Operations
 
-1. **Bug Report Format**
+##### Checkout Process
 
-    - Title: Short description of the issue
-    - Description: Detailed explanation of the problem
-    - Steps to Reproduce: Step-by-step guide to reproduce the bug
-    - Expected Behavior: What should happen
-    - Actual Behavior: What is happening
-    - Screenshots: Visual evidence of the bug
-    - Environment: Browser, device, OS
-    - Severity: Low/Medium/High
-    - Priority: Low/Medium/High
+##### Payment Integration
+
+#### Admin Operations
+
+##### Menu Management
+
+##### Order Processing
+
+##### User Management
+
+### Technical Testing
+
+#### Performance Testing
+
+##### Load Time Optimization
+
+##### API Response Times
+
+##### Database Query Performance
+
+#### Security Testing
+
+##### Authentication
+
+##### Authorization
+
+##### Data Encryption
+
+### Bug Reporting Guidelines
+
+#### Bug Report Format
+
+##### Title
+
+- Short description of the issue
+
+##### Description
+
+- Detailed explanation of the problem
+
+##### Steps to Reproduce
+
+- Step-by-step guide to reproduce the bug
+
+##### Expected Behavior
+
+- What should happen
+
+##### Actual Behavior
+
+- What is happening
+
+##### Screenshots
+
+- Visual evidence of the bug
+
+##### Environment
+
+- Browser, device, OS
+
+##### Severity
+
+- Low/Medium/High
+
+##### Priority
+
+- Low/Medium/High
 
 ## 1.13. Deployment and Maintenance
 

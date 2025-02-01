@@ -63,9 +63,7 @@
       - [1.7.3.8. Function Call Relationships](#1738-function-call-relationships)
         - [1.7.3.8.1. Admin Module](#17381-admin-module)
         - [1.7.3.8.2. Restaurant Module](#17382-restaurant-module)
-    - [1.7.4. Step-by-Step Explanation of a Key Feature](#174-step-by-step-explanation-of-a-key-feature)
-    - [1.7.5. Reading the Code](#175-reading-the-code)
-    - [1.7.6. Code Standards and Best Practices](#176-code-standards-and-best-practices)
+    - [1.7.4. Code Standards and Best Practices](#174-code-standards-and-best-practices)
   - [1.8. API Documentation](#18-api-documentation)
     - [1.8.1. Overview of API Usage and Purpose](#181-overview-of-api-usage-and-purpose)
     - [1.8.2. API Endpoint List](#182-api-endpoint-list)
@@ -139,22 +137,22 @@
         - [1.8.2.7.11. Update Restaurant Dine-In GST Setting](#182711-update-restaurant-dine-in-gst-setting)
         - [1.8.2.7.12. Update Contact Detail](#182712-update-contact-detail)
         - [1.8.2.7.13. Add Contact Details](#182713-add-contact-details)
-        - [Delete Table By Id](#delete-table-by-id)
-        - [Delete Room By Id](#delete-room-by-id)
-        - [Delete Contact Detail](#delete-contact-detail)
-        - [Get Contact Detail By Id](#get-contact-detail-by-id)
-        - [Update Restaurant Background Image](#update-restaurant-background-image)
-        - [1.8.2.7.14. Update Restaurant Banner Image For Mobile](#182714-update-restaurant-banner-image-for-mobile)
-        - [1.8.2.7.15. Update Restaurant Banner Image For Small](#182715-update-restaurant-banner-image-for-small)
-        - [1.8.2.7.16. Create Table Entry](#182716-create-table-entry)
-        - [1.8.2.7.17. Create Room Entry](#182717-create-room-entry)
-        - [1.8.2.7.18. Update Table](#182718-update-table)
-        - [1.8.2.7.19. Update Room](#182719-update-room)
-        - [1.8.2.7.20. Update Place ID](#182720-update-place-id)
-        - [1.8.2.7.21. Add Extra Ingredient](#182721-add-extra-ingredient)
-        - [1.8.2.7.22. Edit Extra Ingredient](#182722-edit-extra-ingredient)
-        - [1.8.2.7.23. Delete Extra Ingredient](#182723-delete-extra-ingredient)
-        - [1.8.2.7.24. Add Dish](#182724-add-dish)
+        - [1.8.2.7.14. Delete Table By Id](#182714-delete-table-by-id)
+        - [1.8.2.7.15. Delete Room By Id](#182715-delete-room-by-id)
+        - [1.8.2.7.16. Delete Contact Detail](#182716-delete-contact-detail)
+        - [1.8.2.7.17. Get Contact Detail By Id](#182717-get-contact-detail-by-id)
+        - [1.8.2.7.18. Update Restaurant Background Image](#182718-update-restaurant-background-image)
+        - [1.8.2.7.19. Update Restaurant Banner Image For Mobile](#182719-update-restaurant-banner-image-for-mobile)
+        - [1.8.2.7.20. Update Restaurant Banner Image For Small](#182720-update-restaurant-banner-image-for-small)
+        - [1.8.2.7.21. Create Table Entry](#182721-create-table-entry)
+        - [1.8.2.7.22. Create Room Entry](#182722-create-room-entry)
+        - [1.8.2.7.23. Update Table](#182723-update-table)
+        - [1.8.2.7.24. Update Room](#182724-update-room)
+        - [1.8.2.7.25. Update Place ID](#182725-update-place-id)
+        - [1.8.2.7.26. Add Extra Ingredient](#182726-add-extra-ingredient)
+        - [1.8.2.7.27. Edit Extra Ingredient](#182727-edit-extra-ingredient)
+        - [1.8.2.7.28. Delete Extra Ingredient](#182728-delete-extra-ingredient)
+        - [1.8.2.7.29. Add Dish](#182729-add-dish)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -224,46 +222,46 @@
         - [1.11.2.1.3. Using OTP API](#111213-using-otp-api)
         - [1.11.2.1.4. Using Quick SMS API](#111214-using-quick-sms-api)
           - [1.11.2.1.4.1. DLT Registration](#1112141-dlt-registration)
-  - [Testing Guidelines](#testing-guidelines)
-    - [Overview of Testing Strategy](#overview-of-testing-strategy)
-      - [Unit Testing](#unit-testing)
-        - [Component Testing](#component-testing)
-        - [Service Testing](#service-testing)
-        - [Utility Function Testing](#utility-function-testing)
-      - [Integration Testing](#integration-testing)
-        - [API Endpoint Testing](#api-endpoint-testing)
-        - [Database Operations](#database-operations)
-        - [Authentication Flow](#authentication-flow)
-    - [Functional Testing Scenarios](#functional-testing-scenarios)
-      - [Order Flow Testing](#order-flow-testing)
-        - [Menu Item Selection](#menu-item-selection)
-        - [Cart Operations](#cart-operations)
-        - [Checkout Process](#checkout-process)
-        - [Payment Integration](#payment-integration)
-      - [Admin Operations](#admin-operations)
-        - [Menu Management](#menu-management)
-        - [Order Processing](#order-processing)
-        - [User Management](#user-management)
-    - [Technical Testing](#technical-testing)
-      - [Performance Testing](#performance-testing)
-        - [Load Time Optimization](#load-time-optimization)
-        - [API Response Times](#api-response-times)
-        - [Database Query Performance](#database-query-performance)
-      - [Security Testing](#security-testing)
-        - [Authentication](#authentication)
-        - [Authorization](#authorization)
-        - [Data Encryption](#data-encryption)
-    - [Bug Reporting Guidelines](#bug-reporting-guidelines)
-      - [Bug Report Format](#bug-report-format)
-        - [Title](#title)
-        - [Description](#description)
-        - [Steps to Reproduce](#steps-to-reproduce)
-        - [Expected Behavior](#expected-behavior)
-        - [Actual Behavior](#actual-behavior)
-        - [Screenshots](#screenshots)
-        - [Environment](#environment)
-        - [Severity](#severity)
-        - [Priority](#priority)
+  - [1.12. Testing Guidelines](#112-testing-guidelines)
+    - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
+      - [1.12.1.1. Unit Testing](#11211-unit-testing)
+        - [1.12.1.1.1. Component Testing](#112111-component-testing)
+        - [1.12.1.1.2. Service Testing](#112112-service-testing)
+        - [1.12.1.1.3. Utility Function Testing](#112113-utility-function-testing)
+      - [1.12.1.2. Integration Testing](#11212-integration-testing)
+        - [1.12.1.2.1. API Endpoint Testing](#112121-api-endpoint-testing)
+        - [1.12.1.2.2. Database Operations](#112122-database-operations)
+        - [1.12.1.2.3. Authentication Flow](#112123-authentication-flow)
+    - [1.12.2. Functional Testing Scenarios](#1122-functional-testing-scenarios)
+      - [1.12.2.1. Order Flow Testing](#11221-order-flow-testing)
+        - [1.12.2.1.1. Menu Item Selection](#112211-menu-item-selection)
+        - [1.12.2.1.2. Cart Operations](#112212-cart-operations)
+        - [1.12.2.1.3. Checkout Process](#112213-checkout-process)
+        - [1.12.2.1.4. Payment Integration](#112214-payment-integration)
+      - [1.12.2.2. Admin Operations](#11222-admin-operations)
+        - [1.12.2.2.1. Menu Management](#112221-menu-management)
+        - [1.12.2.2.2. Order Processing](#112222-order-processing)
+        - [1.12.2.2.3. User Management](#112223-user-management)
+    - [1.12.3. Technical Testing](#1123-technical-testing)
+      - [1.12.3.1. Performance Testing](#11231-performance-testing)
+        - [1.12.3.1.1. Load Time Optimization](#112311-load-time-optimization)
+        - [1.12.3.1.2. API Response Times](#112312-api-response-times)
+        - [1.12.3.1.3. Database Query Performance](#112313-database-query-performance)
+      - [1.12.3.2. Security Testing](#11232-security-testing)
+        - [1.12.3.2.1. Authentication](#112321-authentication)
+        - [1.12.3.2.2. Authorization](#112322-authorization)
+        - [1.12.3.2.3. Data Encryption](#112323-data-encryption)
+    - [1.12.4. Bug Reporting Guidelines](#1124-bug-reporting-guidelines)
+      - [1.12.4.1. Bug Report Format](#11241-bug-report-format)
+        - [1.12.4.1.1. Title](#112411-title)
+        - [1.12.4.1.2. Description](#112412-description)
+        - [1.12.4.1.3. Steps to Reproduce](#112413-steps-to-reproduce)
+        - [1.12.4.1.4. Expected Behavior](#112414-expected-behavior)
+        - [1.12.4.1.5. Actual Behavior](#112415-actual-behavior)
+        - [1.12.4.1.6. Screenshots](#112416-screenshots)
+        - [1.12.4.1.7. Environment](#112417-environment)
+        - [1.12.4.1.8. Severity](#112418-severity)
+        - [1.12.4.1.9. Priority](#112419-priority)
   - [1.13. Deployment and Maintenance](#113-deployment-and-maintenance)
     - [1.13.1. Deployment Process](#1131-deployment-process)
     - [1.13.2. Version Control Guidelines](#1132-version-control-guidelines)
@@ -1114,11 +1112,7 @@ Understanding these functions and modules will help you navigate the codebase mo
 - `OrderTrackingComponent`
   - `ngOnInit()` calls `getOrderStatus(orderId)`.
 
-### 1.7.4. Step-by-Step Explanation of a Key Feature
-
-### 1.7.5. Reading the Code
-
-### 1.7.6. Code Standards and Best Practices
+### 1.7.4. Code Standards and Best Practices
 
 Adhering to code standards and best practices is crucial for maintaining a high-quality codebase. Below are some guidelines to follow:
 
@@ -4233,7 +4227,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Delete Table By Id
+##### 1.8.2.7.14. Delete Table By Id
 
 - **Endpoint**: `/api/v1/restaurant/deleteTableById/:id`
 - **Method**: DELETE
@@ -4263,7 +4257,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Delete Room By Id
+##### 1.8.2.7.15. Delete Room By Id
 
 - **Endpoint**: `/api/v1/restaurant/deleteRoomById/:id`
 - **Method**: DELETE
@@ -4293,7 +4287,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Delete Contact Detail
+##### 1.8.2.7.16. Delete Contact Detail
 
 - **Endpoint**: `/api/v1/restaurant/deleteContactDetail/:id`
 - **Method**: DELETE
@@ -4323,7 +4317,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Get Contact Detail By Id
+##### 1.8.2.7.17. Get Contact Detail By Id
 
 - **Endpoint**: `/api/v1/restaurant/getContactDetailById/:id`
 - **Method**: GET
@@ -4353,7 +4347,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### Update Restaurant Background Image
+##### 1.8.2.7.18. Update Restaurant Background Image
 
 - **Endpoint**: `/api/v1/restaurant/updateImage`
 - **Method**: PUT
@@ -4393,7 +4387,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### 1.8.2.7.14. Update Restaurant Banner Image For Mobile
+##### 1.8.2.7.19. Update Restaurant Banner Image For Mobile
 
 - **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForMobile`
 - **Method**: PUT
@@ -4433,7 +4427,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### 1.8.2.7.15. Update Restaurant Banner Image For Small
+##### 1.8.2.7.20. Update Restaurant Banner Image For Small
 
 - **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForSmall`
 - **Method**: PUT
@@ -4473,7 +4467,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### 1.8.2.7.16. Create Table Entry
+##### 1.8.2.7.21. Create Table Entry
 
 - **Endpoint**: `/api/v1/restaurant/createTableEntry`
 - **Method**: POST
@@ -4742,7 +4736,7 @@ export class RestaurantPanelService {
     }
 } -->
 
-##### 1.8.2.7.17. Create Room Entry
+##### 1.8.2.7.22. Create Room Entry
 
 - **Endpoint**: `/api/v1/restaurant/createRoomEntry`
 - **Method**: POST
@@ -4786,7 +4780,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### 1.8.2.7.18. Update Table
+##### 1.8.2.7.23. Update Table
 
 - **Endpoint**: `/api/v1/restaurant/editTableById`
 - **Method**: PATCH
@@ -4832,7 +4826,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### 1.8.2.7.19. Update Room
+##### 1.8.2.7.24. Update Room
 
 - **Endpoint**: `/api/v1/restaurant/editRoomById`
 - **Method**: PATCH
@@ -5063,7 +5057,7 @@ export class RestaurantPanelService {
     }
 } -->
 
-##### 1.8.2.7.20. Update Place ID
+##### 1.8.2.7.25. Update Place ID
 
 - **Endpoint**: `/api/v1/restaurant/placeId`
 - **Method**: PATCH
@@ -5103,7 +5097,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### 1.8.2.7.21. Add Extra Ingredient
+##### 1.8.2.7.26. Add Extra Ingredient
 
 - **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents`
 - **Method**: POST
@@ -5151,7 +5145,7 @@ export class RestaurantPanelService {
         });
     ```
 
-##### 1.8.2.7.22. Edit Extra Ingredient
+##### 1.8.2.7.27. Edit Extra Ingredient
 
 - **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/edit`
 - **Method**: PATCH
@@ -5199,7 +5193,7 @@ export class RestaurantPanelService {
         });
     ```
 
-##### 1.8.2.7.23. Delete Extra Ingredient
+##### 1.8.2.7.28. Delete Extra Ingredient
 
 - **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/delete/{id}`
 - **Method**: DELETE
@@ -5232,7 +5226,7 @@ export class RestaurantPanelService {
 
 ---
 
-##### 1.8.2.7.24. Add Dish
+##### 1.8.2.7.29. Add Dish
 
 - **Endpoint**: `/api/v1/restaurant/dishes/addDish`
 - **Method**: POST
@@ -6254,176 +6248,176 @@ Telemarketer ID: 1702159738863862112
 - Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
 - After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
 
-## Testing Guidelines
+## 1.12. Testing Guidelines
 
-### Overview of Testing Strategy
+### 1.12.1. Overview of Testing Strategy
 
 A comprehensive testing strategy ensures that the application meets functional, performance, and security requirements. It involves various types of testing to validate components, integrations, and system workflows.
 
-#### Unit Testing
+#### 1.12.1.1. Unit Testing
 
 Unit testing focuses on verifying individual components and functions to ensure they perform as expected in isolation.
 
-##### Component Testing
+##### 1.12.1.1.1. Component Testing
 
 - Testing individual UI components to verify correct rendering and behavior.
 - Ensuring state changes and event handling work as expected.
 - Validating UI responsiveness and interaction.
 
-##### Service Testing
+##### 1.12.1.1.2. Service Testing
 
 - Testing backend services and business logic independently.
 - Ensuring services handle edge cases correctly.
 - Mocking dependencies to isolate service functionality.
 
-##### Utility Function Testing
+##### 1.12.1.1.3. Utility Function Testing
 
 - Verifying helper functions and utility modules.
 - Checking correctness of data manipulation functions.
 - Ensuring consistent output across different input scenarios.
 
-#### Integration Testing
+#### 1.12.1.2. Integration Testing
 
 Integration testing validates interactions between different modules to ensure seamless data flow and consistency.
 
-##### API Endpoint Testing
+##### 1.12.1.2.1. API Endpoint Testing
 
 - Testing request/response cycles for correctness and efficiency.
 - Validating input handling and error responses.
 - Ensuring API versioning and backward compatibility.
 
-##### Database Operations
+##### 1.12.1.2.2. Database Operations
 
 - Verifying CRUD (Create, Read, Update, Delete) operations.
 - Checking database migrations and rollback mechanisms.
 - Ensuring data integrity and constraints enforcement.
 
-##### Authentication Flow
+##### 1.12.1.2.3. Authentication Flow
 
 - Testing user login, logout, and session management.
 - Verifying multi-factor authentication (MFA) and token expiry.
 - Ensuring correct handling of authentication errors.
 
-### Functional Testing Scenarios
+### 1.12.2. Functional Testing Scenarios
 
 Functional testing ensures that business processes work as intended and meet user requirements.
 
-#### Order Flow Testing
+#### 1.12.2.1. Order Flow Testing
 
-##### Menu Item Selection
+##### 1.12.2.1.1. Menu Item Selection
 
 - Validating item selection and customization options.
 - Ensuring availability checks and dynamic updates.
 
-##### Cart Operations
+##### 1.12.2.1.2. Cart Operations
 
 - Adding and removing items from the cart.
 - Verifying price calculations and discount applications.
 
-##### Checkout Process
+##### 1.12.2.1.3. Checkout Process
 
 - Ensuring correct handling of shipping and billing information.
 - Testing order summary and confirmation steps.
 
-##### Payment Integration
+##### 1.12.2.1.4. Payment Integration
 
 - Validating various payment methods (credit cards, digital wallets, etc.).
 - Ensuring secure transactions and error handling.
 
-#### Admin Operations
+#### 1.12.2.2. Admin Operations
 
-##### Menu Management
+##### 1.12.2.2.1. Menu Management
 
 - Adding, updating, and deleting menu items.
 - Verifying category assignments and pricing updates.
 
-##### Order Processing
+##### 1.12.2.2.2. Order Processing
 
 - Viewing and managing customer orders.
 - Ensuring correct order status transitions.
 
-##### User Management
+##### 1.12.2.2.3. User Management
 
 - Adding and removing users with different roles.
 - Validating access control and permissions.
 
-### Technical Testing
+### 1.12.3. Technical Testing
 
 Technical testing focuses on system performance, security, and stability.
 
-#### Performance Testing
+#### 1.12.3.1. Performance Testing
 
-##### Load Time Optimization
+##### 1.12.3.1.1. Load Time Optimization
 
 - Measuring page load times under different network conditions.
 - Optimizing asset delivery and caching strategies.
 
-##### API Response Times
+##### 1.12.3.1.2. API Response Times
 
 - Ensuring APIs meet performance SLAs.
 - Identifying bottlenecks in data processing.
 
-##### Database Query Performance
+##### 1.12.3.1.3. Database Query Performance
 
 - Optimizing database queries for efficiency.
 - Preventing slow queries from affecting user experience.
 
-#### Security Testing
+#### 1.12.3.2. Security Testing
 
-##### Authentication
+##### 1.12.3.2.1. Authentication
 
 - Preventing brute-force attacks and credential stuffing.
 - Ensuring proper session handling and logout mechanisms.
 
-##### Authorization
+##### 1.12.3.2.2. Authorization
 
 - Verifying role-based access controls.
 - Preventing privilege escalation vulnerabilities.
 
-##### Data Encryption
+##### 1.12.3.2.3. Data Encryption
 
 - Ensuring data is encrypted in transit and at rest.
 - Validating secure storage of sensitive information.
 
-### Bug Reporting Guidelines
+### 1.12.4. Bug Reporting Guidelines
 
 Effective bug reporting improves issue resolution time and ensures clarity in communication.
 
-#### Bug Report Format
+#### 1.12.4.1. Bug Report Format
 
-##### Title
+##### 1.12.4.1.1. Title
 
 - A concise summary of the issue.
 
-##### Description
+##### 1.12.4.1.2. Description
 
 - A detailed explanation, including affected features and conditions.
 
-##### Steps to Reproduce
+##### 1.12.4.1.3. Steps to Reproduce
 
 - A clear, step-by-step guide to reproducing the bug.
 
-##### Expected Behavior
+##### 1.12.4.1.4. Expected Behavior
 
 - A description of what should happen under normal conditions.
 
-##### Actual Behavior
+##### 1.12.4.1.5. Actual Behavior
 
 - A description of what is currently happening, including any discrepancies.
 
-##### Screenshots
+##### 1.12.4.1.6. Screenshots
 
 - Visual evidence of the bug (if applicable).
 
-##### Environment
+##### 1.12.4.1.7. Environment
 
 - Details about the browser, device, OS, and application version.
 
-##### Severity
+##### 1.12.4.1.8. Severity
 
 - Categorization as Low, Medium, or High based on impact.
 
-##### Priority
+##### 1.12.4.1.9. Priority
 
 - Prioritization as Low, Medium, or High based on urgency and business impact.
 

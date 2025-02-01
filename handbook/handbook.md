@@ -5999,7 +5999,7 @@ nodemon server.js
 
 #### Add new connection
 
-- add connection as mongodb+srv://goqrorder:2fFhzGUn6EdNUPQJ@cluster0.bt9bmvq.mongodb.net/digitalMenuWeb
+- add connection as `mongodb+srv://goqrorder:2fFhzGUn6EdNUPQJ@cluster0.bt9bmvq.mongodb.net/digitalMenuWeb`.
 ![Connect to Database](https://i.imgur.com/WKliKpM.png "Connect to Database")
 
 #### click on my digital menu web

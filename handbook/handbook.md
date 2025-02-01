@@ -139,6 +139,11 @@
         - [1.8.2.7.11. Update Restaurant Dine-In GST Setting](#182711-update-restaurant-dine-in-gst-setting)
         - [1.8.2.7.12. Update Contact Detail](#182712-update-contact-detail)
         - [1.8.2.7.13. Add Contact Details](#182713-add-contact-details)
+        - [Delete Table By Id](#delete-table-by-id)
+        - [Delete Room By Id](#delete-room-by-id)
+        - [Delete Contact Detail](#delete-contact-detail)
+        - [Get Contact Detail By Id](#get-contact-detail-by-id)
+        - [Update Restaurant Background Image](#update-restaurant-background-image)
         - [1.8.2.7.14. Update Restaurant Banner Image For Mobile](#182714-update-restaurant-banner-image-for-mobile)
         - [1.8.2.7.15. Update Restaurant Banner Image For Small](#182715-update-restaurant-banner-image-for-small)
         - [1.8.2.7.16. Create Table Entry](#182716-create-table-entry)
@@ -4193,12 +4198,13 @@ export class RestaurantPanelService {
   - `data`: An object containing the contact details.
     - Example structure:
 
-````json
+```json
 {
     "contactNumber": "9876543210",
     "email": "jane@example.com",
     "website": "https://example.com"
 }
+```
 
 - **Response**: Returns a success message if the addition is successful.
 - **Authorization**: Restaurant authentication required.
@@ -4210,6 +4216,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}/v1/restaurant/addContactDetail`, data);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4223,6 +4230,7 @@ export class RestaurantPanelService {
         console.log("Contact details added:", response);
     });
     ```
+
 ---
 
 ##### Delete Table By Id
@@ -4242,6 +4250,7 @@ export class RestaurantPanelService {
         return this.http.delete(`${this.apiUrl}/v1/restaurant/deleteTableById/${id}`);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4251,6 +4260,7 @@ export class RestaurantPanelService {
         console.log("Table deleted successfully:", response);
     });
     ```
+
 ---
 
 ##### Delete Room By Id
@@ -4270,6 +4280,7 @@ export class RestaurantPanelService {
         return this.http.delete(`${this.apiUrl}/v1/restaurant/deleteRoomById/${id}`);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4279,6 +4290,7 @@ export class RestaurantPanelService {
         console.log("Room deleted successfully:", response);
     });
     ```
+
 ---
 
 ##### Delete Contact Detail
@@ -4298,6 +4310,7 @@ export class RestaurantPanelService {
         return this.http.delete(`${this.apiUrl}/v1/restaurant/deleteContactDetail/${id}`);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4307,6 +4320,7 @@ export class RestaurantPanelService {
         console.log("Contact detail deleted successfully:", response);
     });
     ```
+
 ---
 
 ##### Get Contact Detail By Id
@@ -4326,6 +4340,7 @@ export class RestaurantPanelService {
         return this.http.get(`${this.apiUrl}/v1/restaurant/getContactDetailById/${id}`);
     }
     ```
+
 - **Usage**:
 
     ```typescript
@@ -4335,6 +4350,7 @@ export class RestaurantPanelService {
         console.log("Contact detail:", response);
     });
     ```
+
 ---
 
 ##### Update Restaurant Background Image

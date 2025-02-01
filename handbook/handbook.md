@@ -197,8 +197,15 @@
       - [1.9.6.10. Update the contact information of a restaurant](#19610-update-the-contact-information-of-a-restaurant)
   - [1.10. User Interface (UI)](#110-user-interface-ui)
     - [1.10.1. Screenshots of All Pages (annotated with descriptions)](#1101-screenshots-of-all-pages-annotated-with-descriptions)
+      - [1.10.1.1. Login Page](#11011-login-page)
+      - [1.10.1.2. Menu Page](#11012-menu-page)
+      - [1.10.1.3. Cart Page](#11013-cart-page)
+      - [1.10.1.4. Admin Dashboard](#11014-admin-dashboard)
     - [1.10.2. Navigation Map](#1102-navigation-map)
+      - [1.10.2.1. Public Pages](#11021-public-pages)
     - [1.10.3. Design Principles Used](#1103-design-principles-used)
+      - [1.10.3.1. Material Design](#11031-material-design)
+      - [1.10.3.2. User Experience](#11032-user-experience)
   - [1.11. Ad Hoc Process Configuration](#111-ad-hoc-process-configuration)
     - [1.11.1. Payment Gateway Integration](#1111-payment-gateway-integration)
       - [1.11.1.1. Overview of Payment Gateway Used](#11111-overview-of-payment-gateway-used)
@@ -5906,63 +5913,65 @@ db.restaurants.updateOne(
 
 ### 1.10.1. Screenshots of All Pages (annotated with descriptions)
 
-1. **Login Page**
+#### 1.10.1.1. Login Page
 
-    - User authentication interface
-    - ![Login Page](https://i.imgur.com/TZzzO10.png "Login Page")
-    - Phone number input
-    - OTP verification
-    - ![OTP Verification](https://i.imgur.com/6vx1z00.png "OTP Verification")
+- User authentication interface
+- ![Login Page](https://i.imgur.com/TZzzO10.png "Login Page")
+- Phone number input
+- OTP verification
+- ![OTP Verification](https://i.imgur.com/6vx1z00.png "OTP Verification")
 
-2. **Menu Page**
+#### 1.10.1.2. Menu Page
 
-    - Category-wise menu items
-    - ![Menu Page](https://i.imgur.com/A74ZUg9.png "Menu Page")
-    - Item details with images
-    - ![Menu Item Details](https://i.imgur.com/C8u0ucD.png "Menu Item Details")
-    - Add to cart functionality
-    - ![Add to Cart](https://i.imgur.com/pe4wzio.png "Add to Cart")
+- Category-wise menu items
+- ![Menu Page](https://i.imgur.com/A74ZUg9.png "Menu Page")
+- Item details with images
+- ![Menu Item Details](https://i.imgur.com/C8u0ucD.png "Menu Item Details")
+- Add to cart functionality
+- ![Add to Cart](https://i.imgur.com/pe4wzio.png "Add to Cart")
 
-3. **Cart Page**
+#### 1.10.1.3. Cart Page
 
-    - Order summary
-    - ![Cart Page](https://i.imgur.com/jAP8RSC.png "Cart Page")
-    - Item quantity adjustment
-    - ![Item Quantity](https://i.imgur.com/JDRzxua.png "Item Quantity")
-    - Checkout process
-    - ![Checkout](https://i.imgur.com/FHkHt7p.png "Checkout")
-    - payment options
-    - ![Payment Options](https://i.imgur.com/HjQO3Az.png "Payment Options")
+- Order summary
+- ![Cart Page](https://i.imgur.com/jAP8RSC.png "Cart Page")
+- Item quantity adjustment
+- ![Item Quantity](https://i.imgur.com/JDRzxua.png "Item Quantity")
+- Checkout process
+- ![Checkout](https://i.imgur.com/FHkHt7p.png "Checkout")
+- payment options
+- ![Payment Options](https://i.imgur.com/HjQO3Az.png "Payment Options")
 
-4. **Admin Dashboard**
-    - Order management
-    - ![Admin Dashboard](https://i.imgur.com/iCBsH6x.png "Admin Dashboard")
-    - Menu management
-    - ![Menu Management](https://i.imgur.com/FDUlkvZ.png "Menu Management")
+#### 1.10.1.4. Admin Dashboard
+
+- Order management
+- ![Admin Dashboard](https://i.imgur.com/iCBsH6x.png "Admin Dashboard")
+- Menu management
+- ![Menu Management](https://i.imgur.com/FDUlkvZ.png "Menu Management")
 
 ### 1.10.2. Navigation Map
 
-1. **Public Pages**
+#### 1.10.2.1. Public Pages
 
-    - Home
-    - ![Home](https://i.imgur.com/SkjqJrZ.jpeg "Home")
-    - Login
-    - ![Login](https://i.imgur.com/WDsvkDu.png "Login")
-    - OTP Verification
-    - ![OTP Verification](https://i.imgur.com/3CqBFj1.png "OTP Verification")
+- Home
+- ![Home](https://i.imgur.com/SkjqJrZ.jpeg "Home")
+- Login
+- ![Login](https://i.imgur.com/WDsvkDu.png "Login")
+- OTP Verification
+- ![OTP Verification](https://i.imgur.com/3CqBFj1.png "OTP Verification")
 
 ### 1.10.3. Design Principles Used
 
-1. **Material Design**
+#### 1.10.3.1. Material Design
 
-    - Consistent UI components
-    - Responsive layouts
-    - Intuitive interactions
+- Consistent UI components
+- Responsive layouts
+- Intuitive interactions
 
-2. **User Experience**
-    - Clear navigation
-    - Fast loading
-    - Error handling
+#### 1.10.3.2. User Experience
+
+- Clear navigation
+- Fast loading
+- Error handling
 
 ## 1.11. Ad Hoc Process Configuration
 

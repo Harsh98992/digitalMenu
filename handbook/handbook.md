@@ -295,13 +295,13 @@ The purpose of this handbook is to provide a comprehensive guide to the website'
 
 The target audience for this handbook includes:
 
--   Developers who need to understand the codebase, APIs, and database design.
--   Testers who need to know how to test the website and report bugs.
--   Marketers who need to understand the website's features and target audience.
--   Project managers who need to oversee the development and deployment of the website.
--   Non-technical staff who need a high-level overview of the website's functionality.
--   New team members who need to onboard quickly and understand the project.
--   Anyone interested in learning about web development and programming.
+- Developers who need to understand the codebase, APIs, and database design.
+- Testers who need to know how to test the website and report bugs.
+- Marketers who need to understand the website's features and target audience.
+- Project managers who need to oversee the development and deployment of the website.
+- Non-technical staff who need a high-level overview of the website's functionality.
+- New team members who need to onboard quickly and understand the project.
+- Anyone interested in learning about web development and programming.
 
 ### 1.2.4. How to Use This Handbook
 
@@ -317,26 +317,26 @@ The vision of the website is to provide a seamless and convenient online orderin
 
 The website offers the following key features and offerings:
 
--   User registration and account creation
--   Restaurant listings with menus and reviews
--   Order placement for delivery, pickup, or dine-in
--   Real-time order tracking
--   Favorite orders and reordering
--   Payment gateway integration
--   Messaging service integration for order updates
+- User registration and account creation
+- Restaurant listings with menus and reviews
+- Order placement for delivery, pickup, or dine-in
+- Real-time order tracking
+- Favorite orders and reordering
+- Payment gateway integration
+- Messaging service integration for order updates
 
 ### 1.3.3. Target Audience for the Website (end-users)
 
 The target audience for the website includes:
 
--   Working professionals who want to order food for lunch or dinner
--   Families looking to order meals for home delivery
--   Students who want to order food for study sessions
--   Tourists and travelers looking for local cuisine
--   Food enthusiasts who want to explore new restaurants
--   Event organizers who need catering services
--   Anyone who prefers the convenience of online food ordering
--   Anyone who wants to avoid the hassle of cooking
+- Working professionals who want to order food for lunch or dinner
+- Families looking to order meals for home delivery
+- Students who want to order food for study sessions
+- Tourists and travelers looking for local cuisine
+- Food enthusiasts who want to explore new restaurants
+- Event organizers who need catering services
+- Anyone who prefers the convenience of online food ordering
+- Anyone who wants to avoid the hassle of cooking
 
 <div style="page-break-after: always;"></div>
 
@@ -380,47 +380,47 @@ graph TB
 
 #### 1.3.5.1. General Terms
 
--   **Digital Menu**: An electronic version of a restaurant's menu that can be accessed through web browsers or mobile devices
--   **POS (Point of Sale)**: The system where transactions are processed and orders are managed
--   **QR Code**: A square barcode that can be scanned by smartphones to quickly access the digital menu
--   **Cart**: A virtual collection of items selected by the customer before placing an order
+- **Digital Menu**: An electronic version of a restaurant's menu that can be accessed through web browsers or mobile devices
+- **POS (Point of Sale)**: The system where transactions are processed and orders are managed
+- **QR Code**: A square barcode that can be scanned by smartphones to quickly access the digital menu
+- **Cart**: A virtual collection of items selected by the customer before placing an order
 
 #### 1.3.5.2. Order Types
 
--   **Dine-in**: Customers eating at the restaurant premises
--   **Takeaway**: Customers picking up their order from the restaurant
--   **Delivery**: Food being delivered to the customer's specified location
+- **Dine-in**: Customers eating at the restaurant premises
+- **Takeaway**: Customers picking up their order from the restaurant
+- **Delivery**: Food being delivered to the customer's specified location
 
 #### 1.3.5.3. User Roles
 
--   **Customer**: End-user who browses the menu and places orders
--   **Restaurant Staff**: Personnel who manage orders and update menu items
--   **Admin**: System administrator with full access to manage the platform
--   **Delivery Partner**: Person responsible for delivering orders to customers
+- **Customer**: End-user who browses the menu and places orders
+- **Restaurant Staff**: Personnel who manage orders and update menu items
+- **Admin**: System administrator with full access to manage the platform
+- **Delivery Partner**: Person responsible for delivering orders to customers
 
 #### 1.3.5.4. Technical Terms
 
--   **Frontend**: The user interface that customers interact with (website/app)
--   **Backend**: Server-side system that processes requests and manages data
--   **API (Application Programming Interface)**: System that allows different parts of the application to communicate
--   **Database**: System that stores all menu items, orders, and user information
--   **Authentication**: Process of verifying user identity
--   **Cache**: Temporary storage of frequently accessed data for faster performance
+- **Frontend**: The user interface that customers interact with (website/app)
+- **Backend**: Server-side system that processes requests and manages data
+- **API (Application Programming Interface)**: System that allows different parts of the application to communicate
+- **Database**: System that stores all menu items, orders, and user information
+- **Authentication**: Process of verifying user identity
+- **Cache**: Temporary storage of frequently accessed data for faster performance
 
 #### 1.3.5.5. Payment Terms
 
--   **Payment Gateway**: System that processes online payments securely
--   **Transaction**: A completed order payment
--   **Payment Status**: Current state of payment (pending/completed/failed)
--   **Refund**: Return of payment to customer's account
+- **Payment Gateway**: System that processes online payments securely
+- **Transaction**: A completed order payment
+- **Payment Status**: Current state of payment (pending/completed/failed)
+- **Refund**: Return of payment to customer's account
 
 #### 1.3.5.6. Features
 
--   **Real-time Tracking**: Live monitoring of order status
--   **Menu Customization**: Ability to modify menu items based on availability
--   **Order History**: Record of all past orders
--   **Favorites**: Saved list of frequently ordered items
--   **Reviews & Ratings**: Customer feedback system
+- **Real-time Tracking**: Live monitoring of order status
+- **Menu Customization**: Ability to modify menu items based on availability
+- **Order History**: Record of all past orders
+- **Favorites**: Saved list of frequently ordered items
+- **Reviews & Ratings**: Customer feedback system
 
 ## 1.4. Functional Flow
 
@@ -445,6 +445,7 @@ graph TD
 <div style="page-break-after: always;"></div>
 
 ### 1.4.2. Visual Flow Diagrams for Each User Flow
+
 #### 1.4.2.1. delivery order flow
 
 ```mermaid
@@ -747,13 +748,13 @@ graph TB
 
 The website is built using the following technologies:
 
--   Frontend: Angular - angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you import into your apps.
--   Backend: Node.js - Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
--   Database: MongoDB - MongoDB is a general-purpose, document-based, distributed database built for modern application developers and for the cloud era.
--   Hosting: firebase.com - Firebase is a platform developed by Google for creating mobile and web applications. It was originally an independent company founded in 2011. In 2014, Google acquired the platform and it is now their flagship offering for app development.
--   Payment Gateway: razorpay - Razorpay is a payment gateway that allows businesses to accept, process, and disburse payments with its product suite.
--   Messaging Service: whatsapp - WhatsApp is a messaging service that allows users to send text messages, voice messages, images, and videos over the internet.
--   Other Tools: Git, Postman, VS Code - Git is a distributed version control system for tracking changes in source code during software development. Postman is a collaboration platform for API development that allows users to design, mock, document, monitor, and test APIs. VS Code is a source-code editor developed by Microsoft for Windows, Linux, and macOS.
+- Frontend: Angular - angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you import into your apps.
+- Backend: Node.js - Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
+- Database: MongoDB - MongoDB is a general-purpose, document-based, distributed database built for modern application developers and for the cloud era.
+- Hosting: firebase.com - Firebase is a platform developed by Google for creating mobile and web applications. It was originally an independent company founded in 2011. In 2014, Google acquired the platform and it is now their flagship offering for app development.
+- Payment Gateway: razorpay - Razorpay is a payment gateway that allows businesses to accept, process, and disburse payments with its product suite.
+- Messaging Service: whatsapp - WhatsApp is a messaging service that allows users to send text messages, voice messages, images, and videos over the internet.
+- Other Tools: Git, Postman, VS Code - Git is a distributed version control system for tracking changes in source code during software development. Postman is a collaboration platform for API development that allows users to design, mock, document, monitor, and test APIs. VS Code is a source-code editor developed by Microsoft for Windows, Linux, and macOS.
 
 ### 1.5.2. High-Level Architecture Diagram
 
@@ -893,25 +894,25 @@ Debugging is the process of finding and fixing errors in your code. Here are som
 
 The repository is organized as follows:
 
--   `src/`: Contains the main application source code
-    -   `app/`: Angular application modules and components
-        -   `admin/`: Admin panel components and routing
-        -   `api/`: Services for API communication and guards
-        -   `auth/`: Authentication-related components
-        -   `restaurant/`: Restaurant-specific components
-    -   `assets/`: Static assets like images and data files
-    -   `environments/`: Environment-specific configuration files
--   `angular.json`: Angular CLI configuration file
--   `tsconfig.json`: TypeScript compiler configuration
--   `package.json`: NPM package dependencies and scripts
+- `src/`: Contains the main application source code
+  - `app/`: Angular application modules and components
+    - `admin/`: Admin panel components and routing
+    - `api/`: Services for API communication and guards
+    - `auth/`: Authentication-related components
+    - `restaurant/`: Restaurant-specific components
+  - `assets/`: Static assets like images and data files
+  - `environments/`: Environment-specific configuration files
+- `angular.json`: Angular CLI configuration file
+- `tsconfig.json`: TypeScript compiler configuration
+- `package.json`: NPM package dependencies and scripts
 
 Key Files:
 
--   `src/main.ts`: Entry point of the application
--   `src/app/app.module.ts`: Main Angular module
--   `src/app/app-routing.module.ts`: Application routing configuration
--   `src/environments/environment.ts`: Environment variables
--   `src/app/app.component.ts`: Root component
+- `src/main.ts`: Entry point of the application
+- `src/app/app.module.ts`: Main Angular module
+- `src/app/app-routing.module.ts`: Application routing configuration
+- `src/environments/environment.ts`: Environment variables
+- `src/app/app.component.ts`: Root component
 
 <div style="page-break-after: always;"></div>
 
@@ -998,9 +999,9 @@ In this section, we will break down the key functions and modules used in the pr
 
 The modules and services interact with each other to provide a seamless user experience. For example:
 
--   The **AuthService** interacts with the **HttpClientModule** to make API calls for authentication.
--   The **OrderService** uses the **CustomerService** to fetch customer details when placing an order.
--   The **RestaurantService** interacts with the **MenuComponent** to display the restaurant's menu.
+- The **AuthService** interacts with the **HttpClientModule** to make API calls for authentication.
+- The **OrderService** uses the **CustomerService** to fetch customer details when placing an order.
+- The **RestaurantService** interacts with the **MenuComponent** to display the restaurant's menu.
 
 Understanding these functions and modules will help you navigate the codebase more effectively and make necessary modifications or enhancements with confidence.
 
@@ -1008,105 +1009,105 @@ Understanding these functions and modules will help you navigate the codebase mo
 
 ##### 1.7.3.6.1. Components
 
--   `LayoutComponent`
+- `LayoutComponent`
 
-    -   **Description**: Main layout component for the admin panel.
-    -   **Functions**:
-        -   `ngOnInit()`: Initializes the component.
-        -   `getRestaurantDetail()`: Fetches restaurant details.
-        -   `toggleSideBar()`: Toggles the sidebar visibility.
-        -   `openOrderDialog()`: Opens the order dialog.
-        -   `logout()`: Logs out the user.
+  - **Description**: Main layout component for the admin panel.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getRestaurantDetail()`: Fetches restaurant details.
+    - `toggleSideBar()`: Toggles the sidebar visibility.
+    - `openOrderDialog()`: Opens the order dialog.
+    - `logout()`: Logs out the user.
 
--   `DashboardComponent`
+- `DashboardComponent`
 
-    -   **Description**: Dashboard component displaying various statistics and information.
-    -   **Functions**:
-        -   `ngOnInit()`: Initializes the component.
-        -   `getOrders()`: Fetches orders based on status.
-        -   `openDialog(orderDetail)`: Opens the order accept dialog.
-        -   `completeOrder(orderDetail)`: Completes an order.
+  - **Description**: Dashboard component displaying various statistics and information.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getOrders()`: Fetches orders based on status.
+    - `openDialog(orderDetail)`: Opens the order accept dialog.
+    - `completeOrder(orderDetail)`: Completes an order.
 
--   `CustomersComponent`
-    -   **Description**: Component to manage customers.
-    -   **Functions**:
-        -   `ngOnInit()`: Initializes the component.
-        -   `getCustomers()`: Fetches the list of customers.
-        -   `toggleLoyalStatus(row)`: Toggles the loyal status of a customer.
-        -   `toggleBlockedStatus(row)`: Toggles the blocked status of a customer.
+- `CustomersComponent`
+  - **Description**: Component to manage customers.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getCustomers()`: Fetches the list of customers.
+    - `toggleLoyalStatus(row)`: Toggles the loyal status of a customer.
+    - `toggleBlockedStatus(row)`: Toggles the blocked status of a customer.
 
 ##### 1.7.3.6.2. Services
 
--   `RestaurantPanelService`
+- `RestaurantPanelService`
 
-    -   **Description**: Service for interacting with the restaurant panel API.
-    -   **Functions**:
-        -   `getRestaurnatDetail()`: Fetches restaurant details.
-        -   `getCustomerList()`: Fetches the list of customers.
-        -   `toggleLoyalOrBlockStatus(type, customerId, status)`: Toggles the loyal or blocked status of a customer.
+  - **Description**: Service for interacting with the restaurant panel API.
+  - **Functions**:
+    - `getRestaurnatDetail()`: Fetches restaurant details.
+    - `getCustomerList()`: Fetches the list of customers.
+    - `toggleLoyalOrBlockStatus(type, customerId, status)`: Toggles the loyal or blocked status of a customer.
 
--   `OrderService`
-    -   **Description**: Service for managing orders.
-    -   **Functions**:
-        -   `changeOrderStatus(reqData)`: Changes the status of an order.
-        -   `getRestaurantOrdersByStatus(reqData)`: Fetches orders based on status.
+- `OrderService`
+  - **Description**: Service for managing orders.
+  - **Functions**:
+    - `changeOrderStatus(reqData)`: Changes the status of an order.
+    - `getRestaurantOrdersByStatus(reqData)`: Fetches orders based on status.
 
 #### 1.7.3.7. Restaurant Module
 
 ##### 1.7.3.7.1. Components
 
--   `RestaurantMenuComponent`
+- `RestaurantMenuComponent`
 
-    -   **Description**: Component displaying the restaurant menu.
-    -   **Functions**:
-        -   `ngOnInit()`: Initializes the component.
-        -   `getMenuItems()`: Fetches the list of menu items.
-        -   `addToCart(item)`: Adds an item to the cart.
+  - **Description**: Component displaying the restaurant menu.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getMenuItems()`: Fetches the list of menu items.
+    - `addToCart(item)`: Adds an item to the cart.
 
--   `OrderTrackingComponent`
-    -   **Description**: Component for tracking orders.
-    -   **Functions**:
-        -   `ngOnInit()`: Initializes the component.
-        -   `getOrderStatus(orderId)`: Fetches the status of an order.
+- `OrderTrackingComponent`
+  - **Description**: Component for tracking orders.
+  - **Functions**:
+    - `ngOnInit()`: Initializes the component.
+    - `getOrderStatus(orderId)`: Fetches the status of an order.
 
 ##### 1.7.3.7.2. Services
 
--   `RestaurantService`
-    -   **Description**: Service for interacting with the restaurant API.
-    -   **Functions**:
-        -   `getMenuItems()`: Fetches the list of menu items.
-        -   `placeOrder(orderData)`: Places a new order.
-        -   `getOrderStatus(orderId)`: Fetches the status of an order.
+- `RestaurantService`
+  - **Description**: Service for interacting with the restaurant API.
+  - **Functions**:
+    - `getMenuItems()`: Fetches the list of menu items.
+    - `placeOrder(orderData)`: Places a new order.
+    - `getOrderStatus(orderId)`: Fetches the status of an order.
 
 #### 1.7.3.8. Function Call Relationships
 
 ##### 1.7.3.8.1. Admin Module
 
--   `LayoutComponent`
+- `LayoutComponent`
 
-    -   `ngOnInit()` calls `getRestaurantDetail()`.
-    -   `openOrderDialog()` calls `dialog.open(OrderDialogComponent)`.
+  - `ngOnInit()` calls `getRestaurantDetail()`.
+  - `openOrderDialog()` calls `dialog.open(OrderDialogComponent)`.
 
--   `DashboardComponent`
+- `DashboardComponent`
 
-    -   `ngOnInit()` calls `getOrders()`.
-    -   `openDialog(orderDetail)` calls `dialog.open(OrderAcceptDialogComponent)`.
-    -   `completeOrder(orderDetail)` calls `orderService.changeOrderStatus()`.
+  - `ngOnInit()` calls `getOrders()`.
+  - `openDialog(orderDetail)` calls `dialog.open(OrderAcceptDialogComponent)`.
+  - `completeOrder(orderDetail)` calls `orderService.changeOrderStatus()`.
 
--   `CustomersComponent`
-    -   `ngOnInit()` calls `getCustomers()`.
-    -   `toggleLoyalStatus(row)` calls `restaurantService.toggleLoyalOrBlockStatus()`.
-    -   `toggleBlockedStatus(row)` calls `restaurantService.toggleLoyalOrBlockStatus()`.
+- `CustomersComponent`
+  - `ngOnInit()` calls `getCustomers()`.
+  - `toggleLoyalStatus(row)` calls `restaurantService.toggleLoyalOrBlockStatus()`.
+  - `toggleBlockedStatus(row)` calls `restaurantService.toggleLoyalOrBlockStatus()`.
 
 ##### 1.7.3.8.2. Restaurant Module
 
--   `RestaurantMenuComponent`
+- `RestaurantMenuComponent`
 
-    -   `ngOnInit()` calls `getMenuItems()`.
-    -   `addToCart(item)` calls `cartService.addItem()`.
+  - `ngOnInit()` calls `getMenuItems()`.
+  - `addToCart(item)` calls `cartService.addItem()`.
 
--   `OrderTrackingComponent`
-    -   `ngOnInit()` calls `getOrderStatus(orderId)`.
+- `OrderTrackingComponent`
+  - `ngOnInit()` calls `getOrderStatus(orderId)`.
 
 ### 1.7.4. Step-by-Step Explanation of a Key Feature
 
@@ -1213,14 +1214,14 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.1. Get Restaurants by Status
 
--   **Endpoint**: `/api/v1/admin/getRestaurantsByStatus/:restaurantVerified`
--   **Method**: GET
--   **Description**: Retrieves a list of restaurants based on their verification status.
--   **Parameters**:
+- **Endpoint**: `/api/v1/admin/getRestaurantsByStatus/:restaurantVerified`
+- **Method**: GET
+- **Description**: Retrieves a list of restaurants based on their verification status.
+- **Parameters**:
 
-    -   `restaurantVerified` (boolean): Indicates whether the restaurant is verified or not.
-    -   Example: `/api/v1/admin/getRestaurantsByStatus/true`
-    -   Example Response:
+  - `restaurantVerified` (boolean): Indicates whether the restaurant is verified or not.
+  - Example: `/api/v1/admin/getRestaurantsByStatus/true`
+  - Example Response:
 
 ```json
 {
@@ -1239,10 +1240,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns an array of restaurant objects with their details.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Response**: Returns an array of restaurant objects with their details.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getRestaurantsByStatus(restaurantVerified: boolean) {
@@ -1254,11 +1255,11 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.2. Get Restaurant Payment Details
 
--   **Endpoint**: `/api/v1/payment/getAccountPaymentDetails`
--   **Method**: GET
--   **Description**: Fetches payment details for all restaurant accounts.
--   **Parameters**: None.
--   **Example Response**:
+- **Endpoint**: `/api/v1/payment/getAccountPaymentDetails`
+- **Method**: GET
+- **Description**: Fetches payment details for all restaurant accounts.
+- **Parameters**: None.
+- **Example Response**:
 
     ```json
     {
@@ -1281,10 +1282,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Response**: Returns an array of objects containing payment information for each restaurant.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Response**: Returns an array of objects containing payment information for each restaurant.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getRestaurantPayment() {
@@ -1296,13 +1297,13 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.3. Get Account Transfer Details
 
--   **Endpoint**: `/api/v1/payment/getAccountTransferDetails/:orderId`
--   **Method**: GET
--   **Description**: Retrieves transfer details for a specific order.
--   **Parameters**:
-    -   `orderId` (string): The unique identifier for the order.
--   **Example**: `/api/v1/payment/getAccountTransferDetails/ORD12345`
--   **Example Response**:
+- **Endpoint**: `/api/v1/payment/getAccountTransferDetails/:orderId`
+- **Method**: GET
+- **Description**: Retrieves transfer details for a specific order.
+- **Parameters**:
+  - `orderId` (string): The unique identifier for the order.
+- **Example**: `/api/v1/payment/getAccountTransferDetails/ORD12345`
+- **Example Response**:
 
     ```json
     {
@@ -1314,10 +1315,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Response**: Returns an object with the details of the account transfer related to the order.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the order ID is invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns an object with the details of the account transfer related to the order.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the order ID is invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     getAccountTransferDetails(orderId: string) {
@@ -1329,13 +1330,13 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.4. Get Admin Restaurant Data
 
--   **Endpoint**: `/api/v1/admin/getRestaurantDetail/:id`
--   **Method**: GET
--   **Description**: Fetches detailed information about a specific restaurant.
--   **Parameters**:
-    -   `id` (string): The unique identifier for the restaurant.
--   **Example**: `/api/v1/admin/getRestaurantDetail/123`
--   **Example Response**:
+- **Endpoint**: `/api/v1/admin/getRestaurantDetail/:id`
+- **Method**: GET
+- **Description**: Fetches detailed information about a specific restaurant.
+- **Parameters**:
+  - `id` (string): The unique identifier for the restaurant.
+- **Example**: `/api/v1/admin/getRestaurantDetail/123`
+- **Example Response**:
 
     ```json
     {
@@ -1350,10 +1351,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Response**: Returns detailed information about the restaurant, including owner details, address, and ratings.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns detailed information about the restaurant, including owner details, address, and ratings.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     getAdminRestaurantData(id: string) {
@@ -1365,13 +1366,13 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.5. Change Restaurant Status
 
--   **Endpoint**: `/api/v1/admin/changeRestaurantStatus/:id`
--   **Method**: PATCH
--   **Description**: Updates the verification status of a restaurant.
--   **Parameters**:
+- **Endpoint**: `/api/v1/admin/changeRestaurantStatus/:id`
+- **Method**: PATCH
+- **Description**: Updates the verification status of a restaurant.
+- **Parameters**:
 
-    -   `id` (string): The unique identifier for the restaurant.
-    -   Request Body:
+  - `id` (string): The unique identifier for the restaurant.
+  - Request Body:
 
 ```json
 {
@@ -1379,8 +1380,8 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Example**: `/api/v1/admin/changeRestaurantStatus/123`
--   **Example Response**:
+- **Example**: `/api/v1/admin/changeRestaurantStatus/123`
+- **Example Response**:
 
     ```json
     {
@@ -1388,10 +1389,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Response**: Returns a success message upon updating the restaurant's status.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message upon updating the restaurant's status.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     changeRestaurantStatus(id: string, data: any) {
@@ -1404,13 +1405,13 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.6. Edit Restaurant Details
 
--   **Endpoint**: `/api/v1/admin/editRestaurant/:id`
--   **Method**: PATCH
--   **Description**: Updates the details of a restaurant.
--   **Parameters**:
+- **Endpoint**: `/api/v1/admin/editRestaurant/:id`
+- **Method**: PATCH
+- **Description**: Updates the details of a restaurant.
+- **Parameters**:
 
-    -   `id` (string): The unique identifier for the restaurant.
-    -   Request Body:
+  - `id` (string): The unique identifier for the restaurant.
+  - Request Body:
 
 ```json
 {
@@ -1421,8 +1422,8 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Example**: `/api/v1/admin/editRestaurant/123`
--   **Example Response**:
+- **Example**: `/api/v1/admin/editRestaurant/123`
+- **Example Response**:
 
     ```json
     {
@@ -1430,10 +1431,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Response**: Returns a success message upon updating the restaurant's details.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message upon updating the restaurant's details.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     editRestaurant(id: string, data: any) {
@@ -1446,14 +1447,14 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.7. View All Users of a Restaurant
 
--   **Endpoint**: `/api/v1/admin/viewAllUsersOfRestaurant/:id`
--   **Method**: GET
--   **Description**: Retrieves a list of all users associated with a specific restaurant.
--   **Parameters**:
+- **Endpoint**: `/api/v1/admin/viewAllUsersOfRestaurant/:id`
+- **Method**: GET
+- **Description**: Retrieves a list of all users associated with a specific restaurant.
+- **Parameters**:
 
-    -   `id` (string): The unique identifier for the restaurant.
-    -   Example: `/api/v1/admin/viewAllUsersOfRestaurant/123`
-    -   Example Response:
+  - `id` (string): The unique identifier for the restaurant.
+  - Example: `/api/v1/admin/viewAllUsersOfRestaurant/123`
+  - Example Response:
 
 ```json
 {
@@ -1474,10 +1475,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns an array of user objects with their details.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns an array of user objects with their details.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the restaurant ID is invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     viewAllUsersOfRestaurant(id: string) {
@@ -1489,10 +1490,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.8. Send Email to Restaurant
 
--   **Endpoint**: `/api/v1/admin/sendEmailToRestaurant`
--   **Method**: POST
--   **Description**: Sends an email notification to a restaurant.
--   **Request Body**:
+- **Endpoint**: `/api/v1/admin/sendEmailToRestaurant`
+- **Method**: POST
+- **Description**: Sends an email notification to a restaurant.
+- **Request Body**:
 
     ```json
     {
@@ -1502,10 +1503,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Response**: Returns a success message upon sending the email.
--   **Authorization**: Admin role required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message upon sending the email.
+- **Authorization**: Admin role required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     sendEmailToRestaurant(data: any) {
@@ -1518,12 +1519,12 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.1.9. Export JSON to Excel
 
--   **Description**: Converts JSON data to an Excel file and downloads it.
--   **Parameters**:
+- **Description**: Converts JSON data to an Excel file and downloads it.
+- **Parameters**:
 
-    -   `jsonData` (array): The JSON data to export.
-    -   `fileName` (string): The name of the Excel file.
-    -   **Sample Code**:
+  - `jsonData` (array): The JSON data to export.
+  - `fileName` (string): The name of the Excel file.
+  - **Sample Code**:
 
 ```typescript
         exportJsonToExcel(jsonData: any[], fileName: string): void {
@@ -1552,12 +1553,12 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.1. changePassword
 
--   **Endpoint**: `/api/v1/user/updatePassword`
--   **Method**: PATCH
--   **Description**: Updates the user's password.
--   **Parameters**:
+- **Endpoint**: `/api/v1/user/updatePassword`
+- **Method**: PATCH
+- **Description**: Updates the user's password.
+- **Parameters**:
 
-    -   Request Body:
+  - Request Body:
 
 ```json
 {
@@ -1566,10 +1567,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message upon updating the password.
--   **Authorization**: User authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message upon updating the password.
+- **Authorization**: User authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     changePassword(requestData) {
@@ -1582,12 +1583,12 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.2. resetPassword
 
--   **Endpoint**: `/api/v1/user/resetPassword/:token`
--   **Method**: PATCH
--   **Description**: Resets the user's password using a valid reset token.
--   **Parameters**:
-    -   `token` (string): A unique token sent to the user's email for password reset.
-    -   Request Body:
+- **Endpoint**: `/api/v1/user/resetPassword/:token`
+- **Method**: PATCH
+- **Description**: Resets the user's password using a valid reset token.
+- **Parameters**:
+  - `token` (string): A unique token sent to the user's email for password reset.
+  - Request Body:
 
 ```json
 {
@@ -1595,10 +1596,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message upon successfully resetting the password.
--   **Authorization**: No authentication required; token-based validation.
--   **Error Handling**: Returns an error if the token is invalid, expired, or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message upon successfully resetting the password.
+- **Authorization**: No authentication required; token-based validation.
+- **Error Handling**: Returns an error if the token is invalid, expired, or the request fails.
+- **Sample Code**:
 
     ```typescript
     resetPassword(password: string, token: string) {
@@ -1611,11 +1612,11 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.3. register
 
--   **Endpoint**: `/api/v1/user/signup`
--   **Method**: POST
--   **Description**: Registers a new user with the provided details.
--   **Parameters**:
-    -   Request Body:
+- **Endpoint**: `/api/v1/user/signup`
+- **Method**: POST
+- **Description**: Registers a new user with the provided details.
+- **Parameters**:
+  - Request Body:
 
 ```json
 {
@@ -1626,10 +1627,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message and user details upon successful registration.
--   **Authorization**: No authentication required.
--   **Error Handling**: Returns an error if the email is already registered or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message and user details upon successful registration.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the email is already registered or the request fails.
+- **Sample Code**:
 
     ```typescript
     register(userData) {
@@ -1639,11 +1640,11 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.4. login
 
--   **Endpoint**: `/api/v1/user/login`
--   **Method**: POST
--   **Description**: Logs in a user using their email and password.
--   **Parameters**:
-    -   Request Body:
+- **Endpoint**: `/api/v1/user/login`
+- **Method**: POST
+- **Description**: Logs in a user using their email and password.
+- **Parameters**:
+  - Request Body:
 
 ```json
 {
@@ -1652,10 +1653,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message, user details, and an authentication token upon successful login.
--   **Authorization**: No authentication required.
--   **Error Handling**: Returns an error if the credentials are invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message, user details, and an authentication token upon successful login.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the credentials are invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     login(userData: { email: string; password: string }) {
@@ -1666,11 +1667,11 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.5. forgotPassword
 
--   **Endpoint**: `/api/v1/user/forgotPassword`
--   **Method**: POST
--   **Description**: Sends a password reset link to the user's email address.
--   **Parameters**:
-    -   Request Body:
+- **Endpoint**: `/api/v1/user/forgotPassword`
+- **Method**: POST
+- **Description**: Sends a password reset link to the user's email address.
+- **Parameters**:
+  - Request Body:
 
 ```json
 {
@@ -1678,10 +1679,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message confirming that the reset link has been sent.
--   **Authorization**: No authentication required.
--   **Error Handling**: Returns an error if the email is not registered or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message confirming that the reset link has been sent.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the email is not registered or the request fails.
+- **Sample Code**:
 
     ```typescript
     forgotPassword(email: string) {
@@ -1691,11 +1692,11 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.6. sendEmailVerificationOtp
 
--   **Endpoint**: `/api/v1/user/emailVerification`
--   **Method**: POST
--   **Description**: Sends an OTP to the user's email for email verification.
--   **Parameters**:
-    -   Request Body:
+- **Endpoint**: `/api/v1/user/emailVerification`
+- **Method**: POST
+- **Description**: Sends an OTP to the user's email for email verification.
+- **Parameters**:
+  - Request Body:
 
 ```json
 {
@@ -1703,10 +1704,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message confirming that the OTP has been sent.
--   **Authorization**: No authentication required.
--   **Error Handling**: Returns an error if the email is invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message confirming that the OTP has been sent.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the email is invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     sendEmailVerificationOtp(email: string) {
@@ -1717,11 +1718,11 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.7. verifyEmailOtp
 
--   **Endpoint**: `/api/v1/user/verifyEmailOtp`
--   **Method**: PUT
--   **Description**: Verifies the OTP sent to the user's email.
--   **Parameters**:
-    -   Request Body:
+- **Endpoint**: `/api/v1/user/verifyEmailOtp`
+- **Method**: PUT
+- **Description**: Verifies the OTP sent to the user's email.
+- **Parameters**:
+  - Request Body:
 
 ```json
 {
@@ -1730,10 +1731,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message upon successful verification of the email.
--   **Authorization**: No authentication required.
--   **Error Handling**: Returns an error if the OTP is invalid or expired.
--   **Sample Code**:
+- **Response**: Returns a success message upon successful verification of the email.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an error if the OTP is invalid or expired.
+- **Sample Code**:
 
     ```typescript
     verifyEmailOtp(otp: string, email: string) {
@@ -1746,7 +1747,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.2.8. Utility Methods
 
--   **setUserToken**: Saves the user's authentication token to `sessionStorage`.
+- **setUserToken**: Saves the user's authentication token to `sessionStorage`.
 
     ```typescript
     setUserToken(token: string) {
@@ -1760,7 +1761,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **getUserToken**: Retrieves the user's authentication token from `sessionStorage`.
+- **getUserToken**: Retrieves the user's authentication token from `sessionStorage`.
 
     ```typescript
     getUserToken() {
@@ -1768,7 +1769,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **removeToken**: Clears authentication token and resets session/local storage.
+- **removeToken**: Clears authentication token and resets session/local storage.
 
     ```typescript
     removeToken() {
@@ -1785,14 +1786,14 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.3.1. Store Customer Details
 
--   **Description**: Stores the customer's name and phone number in local storage.
--   **Parameters**:
+- **Description**: Stores the customer's name and phone number in local storage.
+- **Parameters**:
 
-    -   `name` (string): The customer's name.
-    -   `phoneNumber` (string): The customer's phone number.
-    -   **Sample Code**:
+  - `name` (string): The customer's name.
+  - `phoneNumber` (string): The customer's phone number.
+  - **Sample Code**:
 
-    -   `````typescript
+  - `````typescript
                 storeCustomerDetails(name: string, phoneNumber: string): void {
                     localStorage.setItem('customerName', name);
                     localStorage.setItem('customerPhoneNumber', phoneNumber);
@@ -1801,7 +1802,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
             ````
         `````
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     customerDetailsService.storeCustomerDetails("John Doe", "123-456-7890");
@@ -1809,10 +1810,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.3.2. Get Customer Details
 
--   **Description**: Retrieves the customer's name and phone number from local storage.
--   **Parameters**: None.
--   **Response**: Returns an object with the customer's name and phone number.
--   **Sample Code**:
+- **Description**: Retrieves the customer's name and phone number from local storage.
+- **Parameters**: None.
+- **Response**: Returns an object with the customer's name and phone number.
+- **Sample Code**:
 
     ```typescript
     getCustomerDetails(): { name: string, phoneNumber: string } {
@@ -1822,7 +1823,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const customerDetails = customerDetailsService.getCustomerDetails();
@@ -1833,14 +1834,14 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.1. Get Customer
 
--   **Endpoint**: `/api/v1/customer/getCustomer`
--   **Method**: GET
--   **Description**: Retrieves the details of the currently logged-in customer.
--   **Parameters**: None.
--   **Response**: Returns an object with the customer's details.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/getCustomer`
+- **Method**: GET
+- **Description**: Retrieves the details of the currently logged-in customer.
+- **Parameters**: None.
+- **Response**: Returns an object with the customer's details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getCustomer() {
@@ -1848,7 +1849,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     customerService.getCustomer().subscribe((data) => {
@@ -1858,14 +1859,14 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.2. Add Customer Address
 
--   **Endpoint**: `/api/v1/customer/addCustomerAddress`
--   **Method**: PATCH
--   **Description**: Adds a new address for the currently logged-in customer.
--   **Parameters**:
+- **Endpoint**: `/api/v1/customer/addCustomerAddress`
+- **Method**: PATCH
+- **Description**: Adds a new address for the currently logged-in customer.
+- **Parameters**:
 
-    -   `data`: An object containing the customer's address information.
+  - `data`: An object containing the customer's address information.
 
-        -   Example structure:
+    - Example structure:
 
 ```json
 {
@@ -1878,10 +1879,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a confirmation message if the address is added successfully.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the address cannot be added (e.g., invalid data or server error).
--   **Sample Code**:
+- **Response**: Returns a confirmation message if the address is added successfully.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the address cannot be added (e.g., invalid data or server error).
+- **Sample Code**:
 
     ```typescript
     addCustomerAddress(data) {
@@ -1889,7 +1890,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const addressData = {
@@ -1908,13 +1909,13 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.3. Edit Customer Address
 
--   **Endpoint**: `/api/v1/customer/editCustomerAddress`
--   **Method**: PATCH
--   **Description**: Edits an existing address of the currently logged-in customer.
--   **Parameters**:
+- **Endpoint**: `/api/v1/customer/editCustomerAddress`
+- **Method**: PATCH
+- **Description**: Edits an existing address of the currently logged-in customer.
+- **Parameters**:
 
-    -   `data`: An object containing the updated address information. It should include an address identifier (like `addressId`) and the updated address fields.
-    -   Example structure:
+  - `data`: An object containing the updated address information. It should include an address identifier (like `addressId`) and the updated address fields.
+  - Example structure:
 
 ```json
 {
@@ -1928,10 +1929,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a confirmation message if the address is successfully updated.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the address update fails (e.g., invalid address ID, missing fields, or server error).
--   **Sample Code**:
+- **Response**: Returns a confirmation message if the address is successfully updated.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the address update fails (e.g., invalid address ID, missing fields, or server error).
+- **Sample Code**:
 
     ```typescript
     editCustomerAddress(data) {
@@ -1939,7 +1940,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const updatedAddress = {
@@ -1961,14 +1962,14 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.4. Send Email
 
--   **Endpoint**: `/api/v1/customer/contactUs`
--   **Method**: POST
--   **Description**: Sends an email message from the customer to the customer service team.
--   **Parameters**:
+- **Endpoint**: `/api/v1/customer/contactUs`
+- **Method**: POST
+- **Description**: Sends an email message from the customer to the customer service team.
+- **Parameters**:
 
-    -   `data`: An object containing the email's content (e.g., message, subject).
+  - `data`: An object containing the email's content (e.g., message, subject).
 
-        -   Example structure:
+    - Example structure:
 
 ```json
 {
@@ -1977,10 +1978,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 }
 ```
 
--   **Response**: Returns a success message if the email is sent successfully.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the email fails to send (e.g., server error).
--   **Sample Code**:
+- **Response**: Returns a success message if the email is sent successfully.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the email fails to send (e.g., server error).
+- **Sample Code**:
 
     ```typescript
     sendEmail(data) {
@@ -1988,7 +1989,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const emailData = {
@@ -2003,15 +2004,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.5. Delete Address of Requesting Customer by ID
 
--   **Endpoint**: `/api/v1/customer/deleteAddressOfRequestCustomerById/{id}`
--   **Method**: DELETE
--   **Description**: Deletes a specific address of the currently logged-in customer by its ID.
--   **Parameters**:
-    -   `id`: The unique identifier of the address to be deleted.
--   **Response**: Returns a confirmation message if the address is deleted successfully.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the address cannot be deleted (e.g., invalid ID, address not found).
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/deleteAddressOfRequestCustomerById/{id}`
+- **Method**: DELETE
+- **Description**: Deletes a specific address of the currently logged-in customer by its ID.
+- **Parameters**:
+  - `id`: The unique identifier of the address to be deleted.
+- **Response**: Returns a confirmation message if the address is deleted successfully.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the address cannot be deleted (e.g., invalid ID, address not found).
+- **Sample Code**:
 
     ```typescript
     deleteAddressOfRequestCustomerById(id) {
@@ -2019,7 +2020,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const addressId = "123";
@@ -2032,16 +2033,16 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.6. Get Nearby Restaurants
 
--   **Endpoint**: `/api/v1/customer/getNearbyRestaurants`
--   **Method**: GET
--   **Description**: Retrieves a list of restaurants near a specified latitude and longitude.
--   **Parameters**:
-    -   `latitude`: The latitude of the customer's location.
-    -   `longitude`: The longitude of the customer's location.
--   **Response**: Returns an array of restaurant details located near the specified location.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if no restaurants are found or if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/getNearbyRestaurants`
+- **Method**: GET
+- **Description**: Retrieves a list of restaurants near a specified latitude and longitude.
+- **Parameters**:
+  - `latitude`: The latitude of the customer's location.
+  - `longitude`: The longitude of the customer's location.
+- **Response**: Returns an array of restaurant details located near the specified location.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if no restaurants are found or if the request fails.
+- **Sample Code**:
 
     ```typescript
     getNearbyRestaurants(latitude, longitude) {
@@ -2049,7 +2050,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const latitude = 40.7128;
@@ -2064,14 +2065,14 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.7. Get All Restaurants
 
--   **Endpoint**: `/api/v1/customer/getAllRestaurants`
--   **Method**: GET
--   **Description**: Retrieves a list of all available restaurants.
--   **Parameters**: None.
--   **Response**: Returns an array of restaurant details.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/getAllRestaurants`
+- **Method**: GET
+- **Description**: Retrieves a list of all available restaurants.
+- **Parameters**: None.
+- **Response**: Returns an array of restaurant details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getAllRestaurants() {
@@ -2079,7 +2080,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     customerService.getAllRestaurants().subscribe((restaurants) => {
@@ -2089,15 +2090,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.8. Get Restaurant Details by URL
 
--   **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantUrl/{restaurantUrl}`
--   **Method**: GET
--   **Description**: Retrieves the details of a specific restaurant using its URL.
--   **Parameters**:
-    -   `restaurantUrl`: The unique URL of the restaurant.
--   **Response**: Returns the details of the restaurant.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the restaurant cannot be found.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantUrl/{restaurantUrl}`
+- **Method**: GET
+- **Description**: Retrieves the details of a specific restaurant using its URL.
+- **Parameters**:
+  - `restaurantUrl`: The unique URL of the restaurant.
+- **Response**: Returns the details of the restaurant.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the restaurant cannot be found.
+- **Sample Code**:
 
     ```typescript
     getRestaurantDetailsFromRestaurantUrl(restaurantUrl) {
@@ -2105,7 +2106,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const restaurantUrl = "some-restaurant-url";
@@ -2119,15 +2120,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.9. Get Restaurant Details by ID
 
--   **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantId/{restaurantId}`
--   **Method**: GET
--   **Description**: Retrieves the details of a specific restaurant using its ID.
--   **Parameters**:
-    -   `restaurantId`: The unique ID of the restaurant.
--   **Response**: Returns the details of the restaurant.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the restaurant cannot be found.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/getRestaurantDetailsFromRestaurantId/{restaurantId}`
+- **Method**: GET
+- **Description**: Retrieves the details of a specific restaurant using its ID.
+- **Parameters**:
+  - `restaurantId`: The unique ID of the restaurant.
+- **Response**: Returns the details of the restaurant.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the restaurant cannot be found.
+- **Sample Code**:
 
     ```typescript
     getRestaurantDetailsFromRestaurantId(restaurantId) {
@@ -2135,7 +2136,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const restaurantId = "12345";
@@ -2149,15 +2150,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.10. Get Promo Codes for Restaurant by URL
 
--   **Endpoint**: `/api/v1/customer/getPromoCodesForRestaurantUrl/{restaurantUrl}`
--   **Method**: GET
--   **Description**: Retrieves a list of active promo codes for a specific restaurant using its URL.
--   **Parameters**:
-    -   `restaurantUrl`: The unique URL of the restaurant.
--   **Response**: Returns an array of promo code details.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if no promo codes are available or if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/getPromoCodesForRestaurantUrl/{restaurantUrl}`
+- **Method**: GET
+- **Description**: Retrieves a list of active promo codes for a specific restaurant using its URL.
+- **Parameters**:
+  - `restaurantUrl`: The unique URL of the restaurant.
+- **Response**: Returns an array of promo code details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if no promo codes are available or if the request fails.
+- **Sample Code**:
 
     ```typescript
     getPromoCodesForRestaurantUrl(restaurantUrl) {
@@ -2165,7 +2166,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const restaurantUrl = "some-restaurant-url";
@@ -2179,12 +2180,12 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.11. Check If Promo Code is Valid
 
--   **Endpoint**: `/api/v1/customer/checkIfPromoCodeIsValid`
--   **Method**: POST
--   **Description**: Validates a promo code for a specific restaurant and order amount.
--   **Parameters**:
-    -   `data`: An object containing the promo code, order amount, and restaurant URL.
-        -   Example structure:
+- **Endpoint**: `/api/v1/customer/checkIfPromoCodeIsValid`
+- **Method**: POST
+- **Description**: Validates a promo code for a specific restaurant and order amount.
+- **Parameters**:
+  - `data`: An object containing the promo code, order amount, and restaurant URL.
+    - Example structure:
             `json
 {
     "promoCodeName": "SAVE20",
@@ -2192,10 +2193,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     "restaurantUrl": "some-restaurant-url"
 }
 `
--   **Response**: Returns a success message with promo code validity details or an error message if invalid.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the promo code is invalid or the request fails.
--   **Sample Code**:
+- **Response**: Returns a success message with promo code validity details or an error message if invalid.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the promo code is invalid or the request fails.
+- **Sample Code**:
 
     ```typescript
     checkIfPromoCodeIsValid(promoCodeName, amountToBePaid, restaurantUrl) {
@@ -2204,7 +2205,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const promoCodeData = {
@@ -2226,12 +2227,12 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.12. Update Customer Data
 
--   **Endpoint**: `/api/v1/customer/updateCustomerData`
--   **Method**: POST
--   **Description**: Updates the personal information of the currently logged-in customer.
--   **Parameters**:
-    -   `data`: An object containing the updated customer information.
-        -   Example structure:
+- **Endpoint**: `/api/v1/customer/updateCustomerData`
+- **Method**: POST
+- **Description**: Updates the personal information of the currently logged-in customer.
+- **Parameters**:
+  - `data`: An object containing the updated customer information.
+    - Example structure:
             `json
 {
     "name": "John Doe",
@@ -2239,10 +2240,10 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     "phone": "1234567890"
 }
 `
--   **Response**: Returns a success message with the updated customer details.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the update fails (e.g., invalid data or server error).
--   **Sample Code**:
+- **Response**: Returns a success message with the updated customer details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the update fails (e.g., invalid data or server error).
+- **Sample Code**:
 
     ```typescript
     updateCustomerData(data) {
@@ -2250,7 +2251,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const customerData = {
@@ -2266,15 +2267,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.13. Check If Dine-In is Available
 
--   **Endpoint**: `/api/v1/customer/isDineInAvailable/{restaurantId}`
--   **Method**: GET
--   **Description**: Checks if dine-in service is available at a specific restaurant.
--   **Parameters**:
-    -   `restaurantId`: The unique ID of the restaurant.
--   **Response**: Returns a boolean value indicating whether dine-in is available or not.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the request fails (e.g., invalid restaurant ID or server error).
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/isDineInAvailable/{restaurantId}`
+- **Method**: GET
+- **Description**: Checks if dine-in service is available at a specific restaurant.
+- **Parameters**:
+  - `restaurantId`: The unique ID of the restaurant.
+- **Response**: Returns a boolean value indicating whether dine-in is available or not.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails (e.g., invalid restaurant ID or server error).
+- **Sample Code**:
 
     ```typescript
     isDineInAvailable(restaurantId) {
@@ -2282,7 +2283,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const restaurantId = "12345";
@@ -2294,15 +2295,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.4.14. Get Restaurant Status
 
--   **Endpoint**: `/api/v1/customer/getRestaurantStatus/{restaurantId}`
--   **Method**: GET
--   **Description**: Retrieves the current status of a restaurant (e.g., open or closed).
--   **Parameters**:
-    -   `restaurantId`: The unique ID of the restaurant.
--   **Response**: Returns an object containing the restaurant's current status and other relevant information.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the request fails (e.g., invalid restaurant ID or server error).
--   **Sample Code**:
+- **Endpoint**: `/api/v1/customer/getRestaurantStatus/{restaurantId}`
+- **Method**: GET
+- **Description**: Retrieves the current status of a restaurant (e.g., open or closed).
+- **Parameters**:
+  - `restaurantId`: The unique ID of the restaurant.
+- **Response**: Returns an object containing the restaurant's current status and other relevant information.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails (e.g., invalid restaurant ID or server error).
+- **Sample Code**:
 
     ```typescript
     getRestaurantStatus(restaurantId) {
@@ -2310,7 +2311,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const restaurantId = "12345";
@@ -2324,16 +2325,16 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.5.1. Get Autocomplete Results
 
--   **Endpoint**: `/api/v1/google-maps/autocomplete`
--   **Method**: GET
--   **Description**: Retrieves search suggestions based on the user's input.
--   **Parameters**:
+- **Endpoint**: `/api/v1/google-maps/autocomplete`
+- **Method**: GET
+- **Description**: Retrieves search suggestions based on the user's input.
+- **Parameters**:
 
-    -   `input`: The user's search query.
-    -   **Response**: Returns an array of prediction objects.
-    -   **Authorization**: No authentication required.
-    -   **Error Handling**: Returns an empty array if no suggestions are found or if the request fails.
-    -   **Sample Code**:
+  - `input`: The user's search query.
+  - **Response**: Returns an array of prediction objects.
+  - **Authorization**: No authentication required.
+  - **Error Handling**: Returns an empty array if no suggestions are found or if the request fails.
+  - **Sample Code**:
 
             ```typescript
             getAutocompleteResults(query: string) {
@@ -2349,7 +2350,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
             }
             ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     googleMapsService
@@ -2361,16 +2362,16 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.5.2. Get Geocode Details
 
--   **Endpoint**: `/api/v1/google-maps/geocode-details`
--   **Method**: GET
--   **Description**: Retrieves the geocode details (address components) for a specific latitude and longitude.
--   **Parameters**:
-    -   `latitude`: The latitude of the location.
-    -   `longitude`: The longitude of the location.
--   **Response**: Returns an object with the geocode details.
--   **Authorization**: No authentication required.
--   **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/google-maps/geocode-details`
+- **Method**: GET
+- **Description**: Retrieves the geocode details (address components) for a specific latitude and longitude.
+- **Parameters**:
+  - `latitude`: The latitude of the location.
+  - `longitude`: The longitude of the location.
+- **Response**: Returns an object with the geocode details.
+- **Authorization**: No authentication required.
+- **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
+- **Sample Code**:
 
     ```typescript
     getGeocodeDetails(latitude: number, longitude: number) {
@@ -2389,7 +2390,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const latitude = 40.7128;
@@ -2404,17 +2405,17 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.5.3. Get Formatted Geocode Details
 
--   **Endpoint**: `/api/v1/google-maps/geocode-details`
--   **Method**: GET
--   **Description**: Retrieves the formatted geocode details (address components) for a specific latitude and longitude.
--   **Parameters**:
+- **Endpoint**: `/api/v1/google-maps/geocode-details`
+- **Method**: GET
+- **Description**: Retrieves the formatted geocode details (address components) for a specific latitude and longitude.
+- **Parameters**:
 
-    -   `latitude`: The latitude of the location.
-    -   `longitude`: The longitude of the location.
-    -   **Response**: Returns an object with the formatted geocode details.
-    -   **Authorization**: No authentication required.
-    -   **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
-    -   **Sample Code**:
+  - `latitude`: The latitude of the location.
+  - `longitude`: The longitude of the location.
+  - **Response**: Returns an object with the formatted geocode details.
+  - **Authorization**: No authentication required.
+  - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
+  - **Sample Code**:
 
             ```typescript
             getFormattedGeocodeDetails(latitude: number, longitude: number) {
@@ -2463,7 +2464,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
             }
             ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const latitude = 40.7128;
@@ -2478,16 +2479,16 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 
 ##### 1.8.2.5.4. Get Place Details
 
--   **Endpoint**: `/api/v1/google-maps/place-details`
--   **Method**: GET
--   **Description**: Retrieves detailed information about a place using its place ID.
--   **Parameters**:
+- **Endpoint**: `/api/v1/google-maps/place-details`
+- **Method**: GET
+- **Description**: Retrieves detailed information about a place using its place ID.
+- **Parameters**:
 
-    -   `placeId`: The unique ID of the place.
-    -   **Response**: Returns an object with the place details.
-    -   **Authorization**: No authentication required.
-    -   **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
-    -   **Sample Code**:
+  - `placeId`: The unique ID of the place.
+  - **Response**: Returns an object with the place details.
+  - **Authorization**: No authentication required.
+  - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
+  - **Sample Code**:
 
             ```typescript
             getPlaceDetails(placeId: string) {
@@ -2499,7 +2500,7 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
             }
             ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const placeId = "some-place-id";
@@ -2630,12 +2631,12 @@ export class OrderService {
 
 ##### 1.8.2.6.1. Place Order
 
--   **Endpoint**: `/api/v1/orders/placeOrder`
--   **Method**: POST
--   **Description**: Places an order for the customer.
--   **Parameters**:
-    -   `data`: An object containing the order details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/orders/placeOrder`
+- **Method**: POST
+- **Description**: Places an order for the customer.
+- **Parameters**:
+  - `data`: An object containing the order details.
+    - Example structure:
 
 ```json
 {
@@ -2651,10 +2652,10 @@ export class OrderService {
 }
 ```
 
--   **Response**: Returns a success message with the order details.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the order placement fails (e.g., invalid data or server error).
--   **Sample Code**:
+- **Response**: Returns a success message with the order details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the order placement fails (e.g., invalid data or server error).
+- **Sample Code**:
 
     ```typescript
     placeOrder(data) {
@@ -2662,7 +2663,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const orderData = {
@@ -2684,12 +2685,12 @@ export class OrderService {
 
 ##### 1.8.2.6.2. Store Order
 
--   **Endpoint**: `/api/v1/orders/storeOrder`
--   **Method**: POST
--   **Description**: Stores an order in the system for later processing or review.
--   **Parameters**:
-    -   `data`: An object containing the order details to be stored.
-        -   Example structure:
+- **Endpoint**: `/api/v1/orders/storeOrder`
+- **Method**: POST
+- **Description**: Stores an order in the system for later processing or review.
+- **Parameters**:
+  - `data`: An object containing the order details to be stored.
+    - Example structure:
 
 ```json
 {
@@ -2705,10 +2706,10 @@ export class OrderService {
 }
 ```
 
--   **Response**: Returns a success message with the order data.
--   **Authorization**: Customer or admin authentication required.
--   **Error Handling**: Returns an error message if storing the order fails (e.g., invalid data, server error, or missing required fields).
--   **Sample Code**:
+- **Response**: Returns a success message with the order data.
+- **Authorization**: Customer or admin authentication required.
+- **Error Handling**: Returns an error message if storing the order fails (e.g., invalid data, server error, or missing required fields).
+- **Sample Code**:
 
     ```typescript
     storeOrder(data) {
@@ -2716,7 +2717,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const orderData = {
@@ -2740,14 +2741,14 @@ export class OrderService {
 
 ##### 1.8.2.6.3. Get Customer Active Order
 
--   **Endpoint**: `/api/v1/orders/getCustomerActiveOrder`
--   **Method**: GET
--   **Description**: Retrieves the customer's active order, if any.
--   **Parameters**: None
--   **Response**: Returns the details of the active order.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if no active order is found or if there is an issue with the request.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/orders/getCustomerActiveOrder`
+- **Method**: GET
+- **Description**: Retrieves the customer's active order, if any.
+- **Parameters**: None
+- **Response**: Returns the details of the active order.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if no active order is found or if there is an issue with the request.
+- **Sample Code**:
 
     ```typescript
     getCustomerActiveOrder() {
@@ -2755,7 +2756,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     orderService.getCustomerActiveOrder().subscribe((response) => {
@@ -2767,12 +2768,12 @@ export class OrderService {
 
 ##### 1.8.2.6.4. Get Restaurant Orders By Status
 
--   **Endpoint**: `/api/v1/orders/getRestaurantOrdersByStatus`
--   **Method**: PUT
--   **Description**: Retrieves orders from a restaurant based on their current status.
--   **Parameters**:
-    -   `data`: An object containing the status filter criteria.
-        -   Example structure:
+- **Endpoint**: `/api/v1/orders/getRestaurantOrdersByStatus`
+- **Method**: PUT
+- **Description**: Retrieves orders from a restaurant based on their current status.
+- **Parameters**:
+  - `data`: An object containing the status filter criteria.
+    - Example structure:
 
 ```json
 {
@@ -2781,10 +2782,10 @@ export class OrderService {
 }
 ```
 
--   **Response**: Returns a list of orders that match the status.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if no orders are found or if the request fails.
--   **Sample Code**:
+- **Response**: Returns a list of orders that match the status.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if no orders are found or if the request fails.
+- **Sample Code**:
 
     ```typescript
     getRestaurantOrdersByStatus(data) {
@@ -2792,7 +2793,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const statusData = {
@@ -2811,15 +2812,15 @@ export class OrderService {
 
 ##### 1.8.2.6.5. Delete Order By ID
 
--   **Endpoint**: `/api/v1/orders/deleteOrderById/:orderId`
--   **Method**: DELETE
--   **Description**: Deletes an order from the system based on the provided order ID.
--   **Parameters**:
-    -   `orderId`: The unique identifier of the order to delete.
--   **Response**: Returns a success message if the order is deleted successfully.
--   **Authorization**: Admin authentication required.
--   **Error Handling**: Returns an error message if the order deletion fails (e.g., invalid order ID or server error).
--   **Sample Code**:
+- **Endpoint**: `/api/v1/orders/deleteOrderById/:orderId`
+- **Method**: DELETE
+- **Description**: Deletes an order from the system based on the provided order ID.
+- **Parameters**:
+  - `orderId`: The unique identifier of the order to delete.
+- **Response**: Returns a success message if the order is deleted successfully.
+- **Authorization**: Admin authentication required.
+- **Error Handling**: Returns an error message if the order deletion fails (e.g., invalid order ID or server error).
+- **Sample Code**:
 
     ```typescript
     deleteOrderById(orderId: String) {
@@ -2827,7 +2828,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const orderId = "789";
@@ -2841,12 +2842,12 @@ export class OrderService {
 
 ##### 1.8.2.6.6. Change Order Status
 
--   **Endpoint**: `/api/v1/orders/changeOrderStatus`
--   **Method**: PATCH
--   **Description**: Changes the status of an order.
--   **Parameters**:
-    -   `data`: An object containing the order ID and the new status.
-        -   Example structure:
+- **Endpoint**: `/api/v1/orders/changeOrderStatus`
+- **Method**: PATCH
+- **Description**: Changes the status of an order.
+- **Parameters**:
+  - `data`: An object containing the order ID and the new status.
+    - Example structure:
 
 ```json
 {
@@ -2855,10 +2856,10 @@ export class OrderService {
 }
 ```
 
--   **Response**: Returns the updated order details with the new status.
--   **Authorization**: Admin or restaurant authentication required.
--   **Error Handling**: Returns an error message if the status update fails (e.g., invalid status, order not found, or server error).
--   **Sample Code**:
+- **Response**: Returns the updated order details with the new status.
+- **Authorization**: Admin or restaurant authentication required.
+- **Error Handling**: Returns an error message if the status update fails (e.g., invalid status, order not found, or server error).
+- **Sample Code**:
 
     ```typescript
     changeOrderStatus(data) {
@@ -2866,7 +2867,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const statusData = {
@@ -2883,12 +2884,12 @@ export class OrderService {
 
 ##### 1.8.2.6.7. Change Order Status By User
 
--   **Endpoint**: `/api/v1/orders/changeOrderStatusByUser`
--   **Method**: PATCH
--   **Description**: Allows a customer to change the status of their order.
--   **Parameters**:
-    -   `data`: An object containing the order ID and the new status chosen by the user.
-        -   Example structure:
+- **Endpoint**: `/api/v1/orders/changeOrderStatusByUser`
+- **Method**: PATCH
+- **Description**: Allows a customer to change the status of their order.
+- **Parameters**:
+  - `data`: An object containing the order ID and the new status chosen by the user.
+    - Example structure:
 
 ```json
 {
@@ -2897,10 +2898,10 @@ export class OrderService {
 }
 ```
 
--   **Response**: Returns the updated order details with the new status.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the status change is invalid or the order is already completed.
--   **Sample Code**:
+- **Response**: Returns the updated order details with the new status.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the status change is invalid or the order is already completed.
+- **Sample Code**:
 
     ```typescript
     changeOrderStatusByUser(data) {
@@ -2908,7 +2909,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const statusData = {
@@ -2925,12 +2926,12 @@ export class OrderService {
 
 ##### 1.8.2.6.8. Change Order Status By User For Cash On Delivery
 
--   **Endpoint**: `/api/v1/orders/changeOrderStatusByUserForCashOnDelivery`
--   **Method**: PATCH
--   **Description**: Allows a customer to change the status of their Cash on Delivery order.
--   **Parameters**:
-    -   `data`: An object containing the order ID and the new status.
-        -   Example structure:
+- **Endpoint**: `/api/v1/orders/changeOrderStatusByUserForCashOnDelivery`
+- **Method**: PATCH
+- **Description**: Allows a customer to change the status of their Cash on Delivery order.
+- **Parameters**:
+  - `data`: An object containing the order ID and the new status.
+    - Example structure:
 
 ```json
 {
@@ -2939,10 +2940,10 @@ export class OrderService {
 }
 ```
 
--   **Response**: Returns the updated order details.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Response**: Returns the updated order details.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     changeOrderStatusByUserForCashOnDelivery(data) {
@@ -2950,7 +2951,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const statusData = {
@@ -2969,14 +2970,14 @@ export class OrderService {
 
 ##### 1.8.2.6.9. Get Customer Order
 
--   **Endpoint**: `/api/v1/orders/customerOrder`
--   **Method**: GET
--   **Description**: Retrieves all orders placed by the customer.
--   **Parameters**: None
--   **Response**: Returns a list of the customer's orders.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/orders/customerOrder`
+- **Method**: GET
+- **Description**: Retrieves all orders placed by the customer.
+- **Parameters**: None
+- **Response**: Returns a list of the customer's orders.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getCustomerOrder() {
@@ -2984,7 +2985,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     orderService.getCustomerOrder().subscribe((response) => {
@@ -2996,15 +2997,15 @@ export class OrderService {
 
 ##### 1.8.2.6.10. Get Order With Payment Order ID
 
--   **Endpoint**: `/api/v1/orders/getOrderwithPaymentOrderId/:orderId`
--   **Method**: GET
--   **Description**: Retrieves an order's details based on the payment order ID.
--   **Parameters**:
-    -   `orderId`: The payment order ID to look up.
--   **Response**: Returns the order details corresponding to the payment order ID.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the order is not found or if the payment order ID is incorrect.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/orders/getOrderwithPaymentOrderId/:orderId`
+- **Method**: GET
+- **Description**: Retrieves an order's details based on the payment order ID.
+- **Parameters**:
+  - `orderId`: The payment order ID to look up.
+- **Response**: Returns the order details corresponding to the payment order ID.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the order is not found or if the payment order ID is incorrect.
+- **Sample Code**:
 
     ```typescript
     getOrderwithPaymentOrderId(orderId) {
@@ -3012,7 +3013,7 @@ export class OrderService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const orderId = "456";
@@ -3028,14 +3029,14 @@ console.log("Order details:", response);
 
 ##### 1.8.2.6.11. Get Customer Payment Pending Order
 
--   **Endpoint**: `/api/v1/orders/getCustomerPaymentPendingOrder`
--   **Method**: GET
--   **Description**: Retrieves orders with pending payment for the customer.
--   **Parameters**: None
--   **Response**: Returns a list of orders with pending payments.
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if there are no pending orders or the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/orders/getCustomerPaymentPendingOrder`
+- **Method**: GET
+- **Description**: Retrieves orders with pending payment for the customer.
+- **Parameters**: None
+- **Response**: Returns a list of orders with pending payments.
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if there are no pending orders or the request fails.
+- **Sample Code**:
 
     ```typescript
     getCustomerPaymentPendingOrder() {
@@ -3043,7 +3044,7 @@ console.log("Order details:", response);
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     orderService.getCustomerPaymentPendingOrder().subscribe((response) => {
@@ -3055,15 +3056,15 @@ console.log("Order details:", response);
 
 ##### 1.8.2.6.12. Generate Bill
 
--   **Endpoint**: `/api/v1/orders/generateBill/:orderId`
--   **Method**: GET
--   **Description**: Generates a bill for the given order ID.
--   **Parameters**:
-    -   `orderId`: The order ID to generate a bill for.
--   **Response**: Returns the generated bill (usually in PDF format).
--   **Authorization**: Customer authentication required.
--   **Error Handling**: Returns an error message if the order is not found or the bill generation fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/orders/generateBill/:orderId`
+- **Method**: GET
+- **Description**: Generates a bill for the given order ID.
+- **Parameters**:
+  - `orderId`: The order ID to generate a bill for.
+- **Response**: Returns the generated bill (usually in PDF format).
+- **Authorization**: Customer authentication required.
+- **Error Handling**: Returns an error message if the order is not found or the bill generation fails.
+- **Sample Code**:
 
     ```typescript
     generateBill(orderId: String) {
@@ -3071,7 +3072,7 @@ console.log("Order details:", response);
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const orderId = "789";
@@ -3085,15 +3086,15 @@ console.log("Order details:", response);
 
 ##### 1.8.2.6.13. Download Bill
 
--   **Endpoint**: N/A (Method is for client-side processing)
--   **Method**: N/A
--   **Description**: Downloads the generated bill in PDF format.
--   **Parameters**:
-    -   `base64String`: The base64 encoded string of the bill.
-    -   `filename`: The name of the file to download.
--   **Response**: Initiates the download of the bill.
--   **Authorization**: None required.
--   **Sample Code**:
+- **Endpoint**: N/A (Method is for client-side processing)
+- **Method**: N/A
+- **Description**: Downloads the generated bill in PDF format.
+- **Parameters**:
+  - `base64String`: The base64 encoded string of the bill.
+  - `filename`: The name of the file to download.
+- **Response**: Initiates the download of the bill.
+- **Authorization**: None required.
+- **Sample Code**:
 
     ```typescript
     downloadBill(base64String: string, filename: string) {
@@ -3128,7 +3129,7 @@ console.log("Order details:", response);
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const base64String = "<base64 encoded string>";
@@ -3606,12 +3607,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.1. Generate Bill
 
--   **Endpoint**: `/api/v1/restaurant/generateBill`
--   **Method**: POST
--   **Description**: Generates a bill for the given order.
--   **Parameters**:
-    -   `reqData`: An object containing the order ID and other details required for bill generation.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/generateBill`
+- **Method**: POST
+- **Description**: Generates a bill for the given order.
+- **Parameters**:
+  - `reqData`: An object containing the order ID and other details required for bill generation.
+    - Example structure:
 
 ```json
 {
@@ -3628,10 +3629,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns the generated bill (usually in PDF format).
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the bill generation fails.
--   **Sample Code**:
+- **Response**: Returns the generated bill (usually in PDF format).
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the bill generation fails.
+- **Sample Code**:
 
     ```typescript
     generateBill(reqData: any) {
@@ -3639,7 +3640,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const billData = {
@@ -3662,14 +3663,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.2. Change Restaurant Status
 
--   **Endpoint**: `/api/v1/restaurant/changeRestaurantStatus`
--   **Method**: PATCH
--   **Description**: Updates the operational status of the restaurant (e.g., open or closed).
--   **Parameters**:
+- **Endpoint**: `/api/v1/restaurant/changeRestaurantStatus`
+- **Method**: PATCH
+- **Description**: Updates the operational status of the restaurant (e.g., open or closed).
+- **Parameters**:
 
-    -   `data`: An object containing the necessary status change details.
+  - `data`: An object containing the necessary status change details.
 
-        -   Example structure:
+    - Example structure:
 
                   ```json
                   {
@@ -3677,11 +3678,11 @@ export class RestaurantPanelService {
                   }
                   ```
 
--   **Response**:
+- **Response**:
 
-    -   **Success**: Returns a confirmation message indicating the updated status.
+  - **Success**: Returns a confirmation message indicating the updated status.
 
-        -   Example:
+    - Example:
 
                   ```json
                   {
@@ -3689,16 +3690,16 @@ export class RestaurantPanelService {
                   }
                   ```
 
-    -   **Error**: Returns an error message if the update fails.
+  - **Error**: Returns an error message if the update fails.
 
--   **Authorization**: Restaurant authentication required.
+- **Authorization**: Restaurant authentication required.
 
--   **Error Handling**:
+- **Error Handling**:
 
-    -   Validation errors if `status` is invalid or missing.
-    -   Server errors if the operation cannot be performed.
+  - Validation errors if `status` is invalid or missing.
+  - Server errors if the operation cannot be performed.
 
--   **Sample Code**:
+- **Sample Code**:
 
     ```typescript
     changeRestaurantStatus(data: any) {
@@ -3709,7 +3710,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const statusData = {
@@ -3725,15 +3726,15 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.3. Update Dine-In Availability
 
--   **Endpoint**: `/api/v1/restaurant/updateDineInAvailablity`
--   **Method**: PATCH
--   **Description**: Toggles dine-in availability for the restaurant.
+- **Endpoint**: `/api/v1/restaurant/updateDineInAvailablity`
+- **Method**: PATCH
+- **Description**: Toggles dine-in availability for the restaurant.
 
--   **Parameters**:
+- **Parameters**:
 
-    -   `data`: An object containing the dine-in availability status.
+  - `data`: An object containing the dine-in availability status.
 
-        -   Example structure:
+    - Example structure:
 
                   ```json
                   {
@@ -3741,11 +3742,11 @@ export class RestaurantPanelService {
                   }
                   ```
 
--   **Response**:
+- **Response**:
 
-    -   **Success**: Returns a confirmation message indicating the updated availability.
+  - **Success**: Returns a confirmation message indicating the updated availability.
 
-        -   Example:
+    - Example:
 
                   ```json
                   {
@@ -3753,16 +3754,16 @@ export class RestaurantPanelService {
                   }
                   ```
 
-    -   **Error**: Returns an error message if the update fails.
+  - **Error**: Returns an error message if the update fails.
 
--   **Authorization**: Restaurant authentication required.
+- **Authorization**: Restaurant authentication required.
 
--   **Error Handling**:
+- **Error Handling**:
 
-    -   Validation errors if `isDineInAvailable` is invalid or missing.
-    -   Server errors if the operation cannot be performed.
+  - Validation errors if `isDineInAvailable` is invalid or missing.
+  - Server errors if the operation cannot be performed.
 
--   **Sample Code**:
+- **Sample Code**:
 
     ```typescript
     changeDineInStatus(data: any) {
@@ -3773,7 +3774,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const dineInStatus = {
@@ -3787,14 +3788,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.4. Get Restaurant Detail
 
--   **Endpoint**: `/api/v1/restaurant/restaurantDetail`
--   **Method**: GET
--   **Description**: Retrieves the details of the restaurant.
--   **Parameters**: None
--   **Response**: Returns the restaurant details.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/restaurant/restaurantDetail`
+- **Method**: GET
+- **Description**: Retrieves the details of the restaurant.
+- **Parameters**: None
+- **Response**: Returns the restaurant details.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getRestaurnatDetail() {
@@ -3802,7 +3803,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     restaurantService.getRestaurnatDetail().subscribe((response) => {
@@ -3814,12 +3815,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.5. Update Restaurant Detail
 
--   **Endpoint**: `/api/v1/restaurant/restaurantDetail`
--   **Method**: POST
--   **Description**: Updates the details of the restaurant.
--   **Parameters**:
-    -   `restaurantData`: An object containing the updated restaurant details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/restaurantDetail`
+- **Method**: POST
+- **Description**: Updates the details of the restaurant.
+- **Parameters**:
+  - `restaurantData`: An object containing the updated restaurant details.
+    - Example structure:
 
 ```json
 {
@@ -3840,10 +3841,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantDetail(restaurantData: any) {
@@ -3851,7 +3852,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const updatedData = {
@@ -3883,12 +3884,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.6. Update Payment Gateway
 
--   **Endpoint**: `/api/v1/admin/updatePaymentGateway`
--   **Method**: POST
--   **Description**: Updates the razorpay payment gateway settings for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the updated payment gateway details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/admin/updatePaymentGateway`
+- **Method**: POST
+- **Description**: Updates the razorpay payment gateway settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated payment gateway details.
+    - Example structure:
 
 ```json
 {
@@ -3898,10 +3899,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updatePaymentGateway(data: any) {
@@ -3909,7 +3910,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const paymentData = {
@@ -3929,12 +3930,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.7. Update Store Settings
 
--   **Endpoint**: `/api/v1/restaurant/updateStoreSettings`
--   **Method**: PATCH
--   **Description**: Updates the store settings for the restaurant.
--   **Parameters**:
-    -   `gstData`: An object containing the updated GST settings.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateStoreSettings`
+- **Method**: PATCH
+- **Description**: Updates the store settings for the restaurant.
+- **Parameters**:
+  - `gstData`: An object containing the updated GST settings.
+    - Example structure:
 
 ```json
 {
@@ -3943,10 +3944,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateStoreSettings(gstData: any) {
@@ -3954,7 +3955,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const gstData = {
@@ -3971,12 +3972,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.8. Update Restaurant Cash On Delivery
 
--   **Endpoint**: `/api/v1/restaurant/updateRestaurantCashOnDelivery`
--   **Method**: PATCH
--   **Description**: Updates the cash on delivery settings for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the updated cash on delivery settings.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantCashOnDelivery`
+- **Method**: PATCH
+- **Description**: Updates the cash on delivery settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated cash on delivery settings.
+    - Example structure:
 
 ```json
 {
@@ -3984,10 +3985,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantCashOnDelivery(data: any) {
@@ -3995,7 +3996,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const cashOnDeliveryData = {
@@ -4013,12 +4014,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.9. Update Restaurant Bypass Auth
 
--   **Endpoint**: `/api/v1/restaurant/updateRestaurantByPassAuth`
--   **Method**: PATCH
--   **Description**: Updates the bypass authentication settings for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the updated bypass authentication settings.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantByPassAuth`
+- **Method**: PATCH
+- **Description**: Updates the bypass authentication settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated bypass authentication settings.
+    - Example structure:
 
 ```json
 {
@@ -4026,10 +4027,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantByPassAuth(data: any) {
@@ -4037,7 +4038,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const bypassAuthData = {
@@ -4055,12 +4056,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.10. Update Restaurant Auto Reject
 
--   **Endpoint**: `/api/v1/restaurant/updateRestaurantAutoReject`
--   **Method**: PATCH
--   **Description**: Updates the auto-reject settings for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the updated auto-reject settings.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantAutoReject`
+- **Method**: PATCH
+- **Description**: Updates the auto-reject settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated auto-reject settings.
+    - Example structure:
 
 ```json
 {
@@ -4068,10 +4069,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantAutoReject(data: any) {
@@ -4079,7 +4080,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const autoRejectData = {
@@ -4097,12 +4098,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.11. Update Restaurant Dine-In GST Setting
 
--   **Endpoint**: `/api/v1/restaurant/updateRestaurantDineInGstSetting`
--   **Method**: PATCH
--   **Description**: Updates the dine-in GST settings for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the updated dine-in GST settings.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantDineInGstSetting`
+- **Method**: PATCH
+- **Description**: Updates the dine-in GST settings for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated dine-in GST settings.
+    - Example structure:
 
 ```json
 {
@@ -4111,10 +4112,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantDineInGstSetting(data: any) {
@@ -4122,7 +4123,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const dineInGstData = {
@@ -4141,12 +4142,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.12. Update Contact Detail
 
--   **Endpoint**: `/api/v1/restaurant/updateContactDetail`
--   **Method**: PATCH
--   **Description**: Updates the contact details for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the updated contact details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateContactDetail`
+- **Method**: PATCH
+- **Description**: Updates the contact details for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated contact details.
+    - Example structure:
 
 ```json
 {
@@ -4156,10 +4157,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateContactDetail(data: any) {
@@ -4167,7 +4168,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const contactData = {
@@ -4186,12 +4187,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.13. Add Contact Details
 
--   **Endpoint**: `/api/v1/restaurant/addContactDetail`
--   **Method**: PATCH
--   **Description**: Adds contact details for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the contact details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/addContactDetail`
+- **Method**: PATCH
+- **Description**: Adds contact details for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the contact details.
+    - Example structure:
 
 ````json
 {
@@ -4352,10 +4353,10 @@ export class RestaurantPanelService {
 }
 ````
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantBackgoundImage(imageData: { image: any }) {
@@ -4363,7 +4364,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const image = { image: "base64-encoded-image-data" };
@@ -4379,12 +4380,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.14. Update Restaurant Banner Image For Mobile
 
--   **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForMobile`
--   **Method**: PUT
--   **Description**: Updates the banner image for mobile devices.
--   **Parameters**:
-    -   `imageData`: An object containing the new image data.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForMobile`
+- **Method**: PUT
+- **Description**: Updates the banner image for mobile devices.
+- **Parameters**:
+  - `imageData`: An object containing the new image data.
+    - Example structure:
 
 ```json
 {
@@ -4392,10 +4393,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantBannerImageForMobile(imageData: { image: any }) {
@@ -4403,7 +4404,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const image = { image: "base64-encoded-image-data" };
@@ -4419,12 +4420,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.15. Update Restaurant Banner Image For Small
 
--   **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForSmall`
--   **Method**: PUT
--   **Description**: Updates the banner image for small devices.
--   **Parameters**:
-    -   `imageData`: An object containing the new image data.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/updateRestaurantBannerImageForSmall`
+- **Method**: PUT
+- **Description**: Updates the banner image for small devices.
+- **Parameters**:
+  - `imageData`: An object containing the new image data.
+    - Example structure:
 
 ```json
 {
@@ -4432,10 +4433,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRestaurantBannerImageForSmall(imageData: { image: any }) {
@@ -4443,7 +4444,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const image = { image: "base64-encoded-image-data" };
@@ -4459,12 +4460,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.16. Create Table Entry
 
--   **Endpoint**: `/api/v1/restaurant/createTableEntry`
--   **Method**: POST
--   **Description**: Adds a new table entry to the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the table details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/createTableEntry`
+- **Method**: POST
+- **Description**: Adds a new table entry to the restaurant.
+- **Parameters**:
+  - `data`: An object containing the table details.
+    - Example structure:
 
 ```json
 {
@@ -4474,10 +4475,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message and the details of the created table.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the creation fails.
--   **Sample Code**:
+- **Response**: Returns a success message and the details of the created table.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the creation fails.
+- **Sample Code**:
 
     ```typescript
     createTableEntry(data: any) {
@@ -4485,7 +4486,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const tableData = {
@@ -4728,12 +4729,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.17. Create Room Entry
 
--   **Endpoint**: `/api/v1/restaurant/createRoomEntry`
--   **Method**: POST
--   **Description**: Adds a new room entry to the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the room details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/createRoomEntry`
+- **Method**: POST
+- **Description**: Adds a new room entry to the restaurant.
+- **Parameters**:
+  - `data`: An object containing the room details.
+    - Example structure:
 
 ```json
 {
@@ -4743,10 +4744,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message and the details of the created room.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the creation fails.
--   **Sample Code**:
+- **Response**: Returns a success message and the details of the created room.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the creation fails.
+- **Sample Code**:
 
     ```typescript
     createRoomEntry(data: any) {
@@ -4754,7 +4755,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const roomData = {
@@ -4772,12 +4773,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.18. Update Table
 
--   **Endpoint**: `/api/v1/restaurant/editTableById`
--   **Method**: PATCH
--   **Description**: Updates the details of an existing table.
--   **Parameters**:
-    -   `data`: An object containing the updated table details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/editTableById`
+- **Method**: PATCH
+- **Description**: Updates the details of an existing table.
+- **Parameters**:
+  - `data`: An object containing the updated table details.
+    - Example structure:
 
 ```json
 {
@@ -4788,10 +4789,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message and the updated table details.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message and the updated table details.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateTable(data) {
@@ -4799,7 +4800,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const updatedTableData = {
@@ -4818,12 +4819,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.19. Update Room
 
--   **Endpoint**: `/api/v1/restaurant/editRoomById`
--   **Method**: PATCH
--   **Description**: Updates the details of an existing room.
--   **Parameters**:
-    -   `data`: An object containing the updated room details.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/editRoomById`
+- **Method**: PATCH
+- **Description**: Updates the details of an existing room.
+- **Parameters**:
+  - `data`: An object containing the updated room details.
+    - Example structure:
 
 ```json
 {
@@ -4834,10 +4835,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message and the updated room details.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message and the updated room details.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updateRoom(data) {
@@ -4845,7 +4846,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const updatedRoomData = {
@@ -5049,12 +5050,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.20. Update Place ID
 
--   **Endpoint**: `/api/v1/restaurant/placeId`
--   **Method**: PATCH
--   **Description**: Updates the place ID for the restaurant.
--   **Parameters**:
-    -   `data`: An object containing the updated place ID.
-        -   Example structure:
+- **Endpoint**: `/api/v1/restaurant/placeId`
+- **Method**: PATCH
+- **Description**: Updates the place ID for the restaurant.
+- **Parameters**:
+  - `data`: An object containing the updated place ID.
+    - Example structure:
 
 ```json
 {
@@ -5062,10 +5063,10 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Response**: Returns a success message if the update is successful.
--   **Authorization**: Restaurant authentication required.
--   **Error Handling**: Returns an error message if the update fails.
--   **Sample Code**:
+- **Response**: Returns a success message if the update is successful.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the update fails.
+- **Sample Code**:
 
     ```typescript
     updatePlaceId(data) {
@@ -5073,7 +5074,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const placeIdData = {
@@ -5089,14 +5090,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.21. Add Extra Ingredient
 
--   **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents`
--   **Method**: POST
--   **Description**: Adds an extra ingredient to a dish.
--   **Parameters**:
+- **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents`
+- **Method**: POST
+- **Description**: Adds an extra ingredient to a dish.
+- **Parameters**:
 
-    -   `data`: Object containing extra ingredient details.
+  - `data`: Object containing extra ingredient details.
 
-        -   Example structure:
+    - Example structure:
 
             ```json
             {
@@ -5106,9 +5107,9 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Response**: Returns a success message if the ingredient is added.
--   **Authorization**: Restaurant authentication required.
--   **Sample Code**:
+- **Response**: Returns a success message if the ingredient is added.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
 
     ```typescript
     addExtraIngredient(data: any) {
@@ -5119,7 +5120,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const ingredientData = {
@@ -5137,14 +5138,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.22. Edit Extra Ingredient
 
--   **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/edit`
--   **Method**: PATCH
--   **Description**: Updates an extra ingredient for a dish.
--   **Parameters**:
+- **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/edit`
+- **Method**: PATCH
+- **Description**: Updates an extra ingredient for a dish.
+- **Parameters**:
 
-    -   `data`: Object containing updated ingredient details.
+  - `data`: Object containing updated ingredient details.
 
-        -   Example structure:
+    - Example structure:
 
             ```json
             {
@@ -5154,9 +5155,9 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Response**: Returns a success message if the ingredient is updated.
--   **Authorization**: Restaurant authentication required.
--   **Sample Code**:
+- **Response**: Returns a success message if the ingredient is updated.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
 
     ```typescript
     editExtraIngredient(data: any) {
@@ -5167,7 +5168,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const updatedIngredientData = {
@@ -5185,14 +5186,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.23. Delete Extra Ingredient
 
--   **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/delete/{id}`
--   **Method**: DELETE
--   **Description**: Deletes an extra ingredient from a dish.
--   **Parameters**:
-    -   `id`: The ID of the ingredient to be deleted.
--   **Response**: Returns a success message if the ingredient is deleted.
--   **Authorization**: Restaurant authentication required.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/restaurant/dishes/extraIngredents/delete/{id}`
+- **Method**: DELETE
+- **Description**: Deletes an extra ingredient from a dish.
+- **Parameters**:
+  - `id`: The ID of the ingredient to be deleted.
+- **Response**: Returns a success message if the ingredient is deleted.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
 
     ```typescript
     deleteExtraIngredient(id: string) {
@@ -5202,7 +5203,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const ingredientId = "789";
@@ -5218,14 +5219,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.7.24. Add Dish
 
--   **Endpoint**: `/api/v1/restaurant/dishes/addDish`
--   **Method**: POST
--   **Description**: Adds a new dish to the restaurant menu.
--   **Parameters**:
+- **Endpoint**: `/api/v1/restaurant/dishes/addDish`
+- **Method**: POST
+- **Description**: Adds a new dish to the restaurant menu.
+- **Parameters**:
 
-    -   `data`: Object containing dish details.
+  - `data`: Object containing dish details.
 
-        -   Example structure:
+    - Example structure:
 
             ```json
             {
@@ -5236,9 +5237,9 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Response**: Returns a success message if the dish is added.
--   **Authorization**: Restaurant authentication required.
--   **Sample Code**:
+- **Response**: Returns a success message if the dish is added.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
 
     ```typescript
     addDish(data: any) {
@@ -5249,7 +5250,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const dishData = {
@@ -5270,14 +5271,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.8.1. Get All Users
 
--   **Endpoint**: `/api/v1/user/getAllUsers`
--   **Method**: GET
--   **Description**: Retrieves a list of all users.
--   **Parameters**: None
--   **Response**: Returns a list of user details.
--   **Authorization**: Admin authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/user/getAllUsers`
+- **Method**: GET
+- **Description**: Retrieves a list of all users.
+- **Parameters**: None
+- **Response**: Returns a list of user details.
+- **Authorization**: Admin authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getAllUsers() {
@@ -5285,7 +5286,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     userService.getAllUsers().subscribe((response) => {
@@ -5297,12 +5298,12 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.8.2. Add User
 
--   **Endpoint**: `/api/v1/user/addUser`
--   **Method**: POST
--   **Description**: Adds a new user to the system.
--   **Parameters**:
+- **Endpoint**: `/api/v1/user/addUser`
+- **Method**: POST
+- **Description**: Adds a new user to the system.
+- **Parameters**:
 
-    -   **Request Body**: JSON object containing user details. Example:
+  - **Request Body**: JSON object containing user details. Example:
 
             ```json
             {
@@ -5313,9 +5314,9 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Response**:
+- **Response**:
 
-    -   **Success**: Returns a success message and the details of the created user.
+  - **Success**: Returns a success message and the details of the created user.
         Example:
 
             ```json
@@ -5331,7 +5332,7 @@ export class RestaurantPanelService {
             }
             ```
 
-    -   **Error**: Returns an error message if the request fails (e.g., validation errors, missing fields). Example:
+  - **Error**: Returns an error message if the request fails (e.g., validation errors, missing fields). Example:
 
             ```json
             {
@@ -5342,11 +5343,11 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Authorization**: Admin authentication required.
--   **Error Handling**:
-    -   Handles duplicate entries (e.g., duplicate email or phone).
-    -   Validates required fields before submission.
--   **Sample Code**:
+- **Authorization**: Admin authentication required.
+- **Error Handling**:
+  - Handles duplicate entries (e.g., duplicate email or phone).
+  - Validates required fields before submission.
+- **Sample Code**:
 
     ```typescript
     addUser(userData) {
@@ -5354,7 +5355,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const newUser = {
@@ -5378,19 +5379,19 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.8.3. Delete User
 
--   **Endpoint**: `/api/v1/user/deleteUser/:userId`
--   **Method**: DELETE
--   **Description**: Deletes a user from the system.
--   **Parameters**:
+- **Endpoint**: `/api/v1/user/deleteUser/:userId`
+- **Method**: DELETE
+- **Description**: Deletes a user from the system.
+- **Parameters**:
 
-    -   `userId`: The ID of the user to delete.
-    -   **Response**:
+  - `userId`: The ID of the user to delete.
+  - **Response**:
 
-        -   **Success**: Returns a success message if the user is deleted.
-        -   **Error**: Returns an error message if the deletion fails.
-        -   **Authorization**: Admin authentication required.
-        -   **Error Handling**: Returns an error message if the request fails.
-        -   **Sample Code**:
+    - **Success**: Returns a success message if the user is deleted.
+    - **Error**: Returns an error message if the deletion fails.
+    - **Authorization**: Admin authentication required.
+    - **Error Handling**: Returns an error message if the request fails.
+    - **Sample Code**:
 
             ```typescript
             deleteUser(userId) {
@@ -5398,7 +5399,7 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const userId = "123";
@@ -5417,13 +5418,13 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.8.4. Edit User
 
--   **Endpoint**: `/api/v1/user/editUser/:userId`
--   **Method**: PATCH
--   **Description**: Updates the details of an existing user.
--   **Parameters**:
+- **Endpoint**: `/api/v1/user/editUser/:userId`
+- **Method**: PATCH
+- **Description**: Updates the details of an existing user.
+- **Parameters**:
 
-    -   `userId`: The ID of the user to edit.
-    -   **Request Body**: JSON object containing the updated user details. Example:
+  - `userId`: The ID of the user to edit.
+  - **Request Body**: JSON object containing the updated user details. Example:
 
             ```json
             {
@@ -5434,8 +5435,8 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Response**:
--   **Success**: Returns a success message and the updated user details.
+- **Response**:
+- **Success**: Returns a success message and the updated user details.
     Example:
 
     ```json
@@ -5451,7 +5452,7 @@ export class RestaurantPanelService {
     }
     ```
 
-    -   **Error**: Returns an error message if the update fails (e.g., validation errors, missing fields). Example:
+  - **Error**: Returns an error message if the update fails (e.g., validation errors, missing fields). Example:
 
 ```json
 {
@@ -5462,12 +5463,12 @@ export class RestaurantPanelService {
 }
 ```
 
--   **Authorization**: Admin authentication required.
--   **Error Handling**:
+- **Authorization**: Admin authentication required.
+- **Error Handling**:
 
-    -   Handles duplicate entries (e.g., duplicate email or phone).
-    -   Validates required fields before submission.
-    -   **Sample Code**:
+  - Handles duplicate entries (e.g., duplicate email or phone).
+  - Validates required fields before submission.
+  - **Sample Code**:
 
             ```typescript
             editUser(userId, userData) {
@@ -5475,7 +5476,7 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const userId = "123";
@@ -5500,16 +5501,16 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.8.5. Get User
 
--   **Endpoint**: `/api/v1/user/getUser/:userId`
--   **Method**: GET
--   **Description**: Retrieves the details of a specific user.
--   **Parameters**:
+- **Endpoint**: `/api/v1/user/getUser/:userId`
+- **Method**: GET
+- **Description**: Retrieves the details of a specific user.
+- **Parameters**:
 
-    -   `userId`: The ID of the user to retrieve.
-    -   **Response**: Returns the details of the requested user.
-    -   **Authorization**: Admin authentication required.
-    -   **Error Handling**: Returns an error message if the request fails.
-    -   **Sample Code**:
+  - `userId`: The ID of the user to retrieve.
+  - **Response**: Returns the details of the requested user.
+  - **Authorization**: Admin authentication required.
+  - **Error Handling**: Returns an error message if the request fails.
+  - **Sample Code**:
 
             ```typescript
             getUser(userId) {
@@ -5517,7 +5518,7 @@ export class RestaurantPanelService {
             }
             ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     const userId = "123";
@@ -5531,14 +5532,14 @@ export class RestaurantPanelService {
 
 ##### 1.8.2.8.6. Get Me
 
--   **Endpoint**: `/api/v1/user/getMe`
--   **Method**: GET
--   **Description**: Retrieves the details of the currently authenticated user.
--   **Parameters**: None
--   **Response**: Returns the details of the authenticated user.
--   **Authorization**: User authentication required.
--   **Error Handling**: Returns an error message if the request fails.
--   **Sample Code**:
+- **Endpoint**: `/api/v1/user/getMe`
+- **Method**: GET
+- **Description**: Retrieves the details of the currently authenticated user.
+- **Parameters**: None
+- **Response**: Returns the details of the authenticated user.
+- **Authorization**: User authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
     ```typescript
     getMe() {
@@ -5546,7 +5547,7 @@ export class RestaurantPanelService {
     }
     ```
 
--   **Usage**:
+- **Usage**:
 
     ```typescript
     userService.getMe().subscribe((response) => {
@@ -5564,10 +5565,10 @@ The Digital Menu application implements a comprehensive error handling system us
 
 The application uses a centralized error dialog component (`ErrorDialogComponent`) to display user-friendly error messages. The dialog includes:
 
--   A title indicating the type of error
--   A detailed error message
--   Action buttons for user response
--   Option to contact the restaurant in case of critical errors
+- A title indicating the type of error
+- A detailed error message
+- Action buttons for user response
+- Option to contact the restaurant in case of critical errors
 
 #### 1.8.3.2. Common Error Scenarios
 
@@ -5647,127 +5648,127 @@ The database schema models the relationships and data for a restaurant managemen
 
 #### 1.9.2.1. Customer
 
--   **Purpose:** Stores customer details.
--   **Attributes:**
+- **Purpose:** Stores customer details.
+- **Attributes:**
 
-    -   `id`: Primary key (ObjectId).
-    -   `email`: Customer's email.
-    -   `name`: Customer's name.
-    -   `phoneNumber`: Customer's phone number.
-    -   `password`: Password for account login.
-    -   `addresses`: List of saved addresses (AddressSchema).
-    -   `pastLocations`: Previously visited locations (AddressSchema).
-    -   `socialLogin`: Social login details, if applicable.
-    -   `previousRestaurant`: Customer's last searched restaurant (PreviousRestaurantSearch).
+  - `id`: Primary key (ObjectId).
+  - `email`: Customer's email.
+  - `name`: Customer's name.
+  - `phoneNumber`: Customer's phone number.
+  - `password`: Password for account login.
+  - `addresses`: List of saved addresses (AddressSchema).
+  - `pastLocations`: Previously visited locations (AddressSchema).
+  - `socialLogin`: Social login details, if applicable.
+  - `previousRestaurant`: Customer's last searched restaurant (PreviousRestaurantSearch).
 
 ---
 
 #### 1.9.2.2. IdentifierOTP
 
--   **Purpose:** Manages OTP-based verification for customers.
--   **Attributes:**
-    -   `id`: Primary key (ObjectId).
-    -   `identifier`: Email or phone number for verification.
-    -   `otp`: OTP code.
-    -   `firstAttempt`: Timestamp of the first verification attempt.
-    -   `attempts`: Number of OTP attempts made.
-    -   `identifierVerified`: Status of identifier verification (Boolean).
-    -   `otpCreatedAt`: OTP creation timestamp.
+- **Purpose:** Manages OTP-based verification for customers.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `identifier`: Email or phone number for verification.
+  - `otp`: OTP code.
+  - `firstAttempt`: Timestamp of the first verification attempt.
+  - `attempts`: Number of OTP attempts made.
+  - `identifierVerified`: Status of identifier verification (Boolean).
+  - `otpCreatedAt`: OTP creation timestamp.
 
 ---
 
 #### 1.9.2.3. Order
 
--   **Purpose:** Represents orders placed by customers.
--   **Attributes:**
+- **Purpose:** Represents orders placed by customers.
+- **Attributes:**
 
-    -   `id`: Primary key (ObjectId).
-    -   `customer`: Foreign key referencing the customer who placed the order.
-    -   `restaurant`: Foreign key referencing the restaurant where the order was placed.
-    -   `orderId`: Unique order identifier.
-    -   `customerName`: Name of the customer.
-    -   `orderDate`: Timestamp of the order.
-    -   `orderDetails`: Details of the order (OrderDetailSchema).
-    -   `customerEmail`: Customer's email.
-    -   `customerPreferences`: Additional preferences provided by the customer.
-    -   `orderStatus`: Status of the order (e.g., pending, completed).
-    -   `reason`: Reason for order cancellation, if applicable.
-    -   `payment_order_id`: ID for payment order.
-    -   `payment_id`: ID for payment transaction.
-    -   `cashOnDeliveryAvailable`: Indicates if cash on delivery is available.
-    -   `payment_signature`: Signature for payment verification.
+  - `id`: Primary key (ObjectId).
+  - `customer`: Foreign key referencing the customer who placed the order.
+  - `restaurant`: Foreign key referencing the restaurant where the order was placed.
+  - `orderId`: Unique order identifier.
+  - `customerName`: Name of the customer.
+  - `orderDate`: Timestamp of the order.
+  - `orderDetails`: Details of the order (OrderDetailSchema).
+  - `customerEmail`: Customer's email.
+  - `customerPreferences`: Additional preferences provided by the customer.
+  - `orderStatus`: Status of the order (e.g., pending, completed).
+  - `reason`: Reason for order cancellation, if applicable.
+  - `payment_order_id`: ID for payment order.
+  - `payment_id`: ID for payment transaction.
+  - `cashOnDeliveryAvailable`: Indicates if cash on delivery is available.
+  - `payment_signature`: Signature for payment verification.
 
 ---
 
 #### 1.9.2.4. PromoCode
 
--   **Purpose:** Stores promo codes offered by restaurants.
--   **Attributes:**
-    -   `id`: Primary key (ObjectId).
-    -   `restaurant`: Foreign key referencing the associated restaurant.
-    -   `promoCodes`: Promo code details (IndividualPromoCodeSchema).
+- **Purpose:** Stores promo codes offered by restaurants.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `restaurant`: Foreign key referencing the associated restaurant.
+  - `promoCodes`: Promo code details (IndividualPromoCodeSchema).
 
 ---
 
 #### 1.9.2.5. Restaurant
 
--   **Purpose:** Represents restaurant details.
--   **Attributes:**
-    -   `id`: Primary key (ObjectId).
-    -   `restaurantName`: Name of the restaurant.
-    -   `restaurantVerified`: Whether the restaurant is verified.
-    -   `restaurantUrl`: Website URL.
-    -   `restaurantBackgroundImage`: Background image URL.
-    -   `restaurantPhoneNumber`: Contact number.
-    -   `restaurantEmail`: Contact email.
-    -   `restaurantStatus`: Operational status of the restaurant.
-    -   `restaurantType`: Type/category of the restaurant.
-    -   `restaurantImages`: Images of the restaurant.
-    -   `address`: Address of the restaurant (AddressSchema).
-    -   `openTime`: Opening time.
-    -   `closeTime`: Closing time.
-    -   `gstNumber`: GST registration number.
-    -   `isPricingInclusiveOfGST`: Indicates if pricing includes GST.
-    -   `customGSTPercentage`: Custom GST percentage, if applicable.
-    -   `placeId`: Identifier for the restaurant location.
-    -   `addOns`: Add-on items available at the restaurant (AddOnSchema).
-    -   `dishChoices`: Options for dishes (ChoicesSchema).
-    -   `fssaiLicenseNumber`: FSSAI license number.
-    -   `social_links`: Social media links (SocialSchema).
-    -   `cuisine`: Type of cuisines offered (CategorySchema).
-    -   `contact`: Contact details (ContactSchema).
+- **Purpose:** Represents restaurant details.
+- **Attributes:**
+  - `id`: Primary key (ObjectId).
+  - `restaurantName`: Name of the restaurant.
+  - `restaurantVerified`: Whether the restaurant is verified.
+  - `restaurantUrl`: Website URL.
+  - `restaurantBackgroundImage`: Background image URL.
+  - `restaurantPhoneNumber`: Contact number.
+  - `restaurantEmail`: Contact email.
+  - `restaurantStatus`: Operational status of the restaurant.
+  - `restaurantType`: Type/category of the restaurant.
+  - `restaurantImages`: Images of the restaurant.
+  - `address`: Address of the restaurant (AddressSchema).
+  - `openTime`: Opening time.
+  - `closeTime`: Closing time.
+  - `gstNumber`: GST registration number.
+  - `isPricingInclusiveOfGST`: Indicates if pricing includes GST.
+  - `customGSTPercentage`: Custom GST percentage, if applicable.
+  - `placeId`: Identifier for the restaurant location.
+  - `addOns`: Add-on items available at the restaurant (AddOnSchema).
+  - `dishChoices`: Options for dishes (ChoicesSchema).
+  - `fssaiLicenseNumber`: FSSAI license number.
+  - `social_links`: Social media links (SocialSchema).
+  - `cuisine`: Type of cuisines offered (CategorySchema).
+  - `contact`: Contact details (ContactSchema).
 
 ---
 
 #### 1.9.2.6. Table
 
--   **Purpose:** Represents tables available in a restaurant.
--   **Attributes:**
+- **Purpose:** Represents tables available in a restaurant.
+- **Attributes:**
 
-    -   `id`: Primary key (ObjectId).
-    -   `restaurant`: Foreign key referencing the associated restaurant.
-    -   `tables`: Details of tables (TableSchema).
+  - `id`: Primary key (ObjectId).
+  - `restaurant`: Foreign key referencing the associated restaurant.
+  - `tables`: Details of tables (TableSchema).
 
 ---
 
 #### 1.9.2.7. User
 
--   **Purpose:** Represents employees working at restaurants.
--   **Attributes:**
+- **Purpose:** Represents employees working at restaurants.
+- **Attributes:**
 
-    -   `id`: Primary key (ObjectId).
-    -   `name`: Name of the user.
-    -   `restaurant`: Foreign key referencing the associated restaurant.
-    -   `email`: User's email.
-    -   `phoneNumber`: User's phone number.
-    -   `role`: Role of the user (e.g., manager, staff).
-    -   `password`: User account password.
-    -   `passwordChangedAt`: Timestamp of the last password change.
-    -   `passwordResetToken`: Token for password reset.
-    -   `passwordResetExpires`: Expiration timestamp for the reset token.
-    -   `emailOtp`: OTP for email verification.
-    -   `emailVerified`: Indicates if the email is verified.
-    -   `active`: Status of the user's account (active/inactive).
+  - `id`: Primary key (ObjectId).
+  - `name`: Name of the user.
+  - `restaurant`: Foreign key referencing the associated restaurant.
+  - `email`: User's email.
+  - `phoneNumber`: User's phone number.
+  - `role`: Role of the user (e.g., manager, staff).
+  - `password`: User account password.
+  - `passwordChangedAt`: Timestamp of the last password change.
+  - `passwordResetToken`: Token for password reset.
+  - `passwordResetExpires`: Expiration timestamp for the reset token.
+  - `emailOtp`: OTP for email verification.
+  - `emailVerified`: Indicates if the email is verified.
+  - `active`: Status of the user's account (active/inactive).
 
 ---
 
@@ -5798,49 +5799,49 @@ The database schema includes several key tables, each with a distinct role in ma
 
 #### 1.9.4.1. Customer Table
 
--   **Purpose:**
+- **Purpose:**
     The `Customer` table stores information about the users of the platform, such as personal details, contact information, and account credentials. It also tracks addresses, past locations, and previous restaurant searches for a personalized user experience.
 
 ---
 
 #### 1.9.4.2. IdentifierOTP Table
 
--   **Purpose:**
+- **Purpose:**
     The `IdentifierOTP` table manages the OTP verification process, storing details like the OTP code, number of attempts, and verification status for secure user authentication during registration, login, or sensitive operations.
 
 ---
 
 #### 1.9.4.3. Order Table
 
--   **Purpose:**
+- **Purpose:**
     The `Order` table records all details related to customer orders, including the customer placing the order, the restaurant fulfilling it, the items ordered, payment details, and the order's status. It acts as the central hub for tracking transaction and delivery details.
 
 ---
 
 #### 1.9.4.4. PromoCode Table
 
--   **Purpose:**
+- **Purpose:**
     The `PromoCode` table stores promotional offers provided by restaurants. It helps in managing discounts and deals, which can be associated with specific restaurants and applied during customer orders.
 
 ---
 
 #### 1.9.4.5. Restaurant Table
 
--   **Purpose:**
+- **Purpose:**
     The `Restaurant` table captures comprehensive details about restaurants, such as their name, address, contact information, opening and closing times, GST information, and available cuisines. It is the core table for managing restaurant-related data.
 
 ---
 
 #### 1.9.4.6. Table Table
 
--   **Purpose:**
+- **Purpose:**
     The `Table` table manages seating arrangements in restaurants, including table availability and details. This table can assist in reservation systems or for tracking dine-in seating.
 
 ---
 
 #### 1.9.4.7. User Table
 
--   **Purpose:**
+- **Purpose:**
     The `User` table stores details about employees working in restaurants, including their roles, contact information, and account credentials. It ensures restaurant staff management and operational control.
 
 ---
@@ -6034,63 +6035,63 @@ db.restaurants.updateOne(
 
 #### 1.10.1.1. Login Page
 
--   User authentication interface
--   ![Login Page](https://i.imgur.com/TZzzO10.png "Login Page")
--   Phone number input
--   OTP verification
--   ![OTP Verification](https://i.imgur.com/6vx1z00.png "OTP Verification")
+- User authentication interface
+- ![Login Page](https://i.imgur.com/TZzzO10.png "Login Page")
+- Phone number input
+- OTP verification
+- ![OTP Verification](https://i.imgur.com/6vx1z00.png "OTP Verification")
 
 #### 1.10.1.2. Menu Page
 
--   Category-wise menu items
--   ![Menu Page](https://i.imgur.com/A74ZUg9.png "Menu Page")
--   Item details with images
--   ![Menu Item Details](https://i.imgur.com/C8u0ucD.png "Menu Item Details")
--   Add to cart functionality
--   ![Add to Cart](https://i.imgur.com/pe4wzio.png "Add to Cart")
+- Category-wise menu items
+- ![Menu Page](https://i.imgur.com/A74ZUg9.png "Menu Page")
+- Item details with images
+- ![Menu Item Details](https://i.imgur.com/C8u0ucD.png "Menu Item Details")
+- Add to cart functionality
+- ![Add to Cart](https://i.imgur.com/pe4wzio.png "Add to Cart")
 
 #### 1.10.1.3. Cart Page
 
--   Order summary
--   ![Cart Page](https://i.imgur.com/jAP8RSC.png "Cart Page")
--   Item quantity adjustment
--   ![Item Quantity](https://i.imgur.com/JDRzxua.png "Item Quantity")
--   Checkout process
--   ![Checkout](https://i.imgur.com/FHkHt7p.png "Checkout")
--   payment options
--   ![Payment Options](https://i.imgur.com/HjQO3Az.png "Payment Options")
+- Order summary
+- ![Cart Page](https://i.imgur.com/jAP8RSC.png "Cart Page")
+- Item quantity adjustment
+- ![Item Quantity](https://i.imgur.com/JDRzxua.png "Item Quantity")
+- Checkout process
+- ![Checkout](https://i.imgur.com/FHkHt7p.png "Checkout")
+- payment options
+- ![Payment Options](https://i.imgur.com/HjQO3Az.png "Payment Options")
 
 #### 1.10.1.4. Admin Dashboard
 
--   Order management
--   ![Admin Dashboard](https://i.imgur.com/iCBsH6x.png "Admin Dashboard")
--   Menu management
--   ![Menu Management](https://i.imgur.com/FDUlkvZ.png "Menu Management")
+- Order management
+- ![Admin Dashboard](https://i.imgur.com/iCBsH6x.png "Admin Dashboard")
+- Menu management
+- ![Menu Management](https://i.imgur.com/FDUlkvZ.png "Menu Management")
 
 ### 1.10.2. Navigation Map
 
 #### 1.10.2.1. Public Pages
 
--   Home
--   ![Home](https://i.imgur.com/SkjqJrZ.jpeg "Home")
--   Login
--   ![Login](https://i.imgur.com/WDsvkDu.png "Login")
--   OTP Verification
--   ![OTP Verification](https://i.imgur.com/3CqBFj1.png "OTP Verification")
+- Home
+- ![Home](https://i.imgur.com/SkjqJrZ.jpeg "Home")
+- Login
+- ![Login](https://i.imgur.com/WDsvkDu.png "Login")
+- OTP Verification
+- ![OTP Verification](https://i.imgur.com/3CqBFj1.png "OTP Verification")
 
 ### 1.10.3. Design Principles Used
 
 #### 1.10.3.1. Material Design
 
--   Consistent UI components
--   Responsive layouts
--   Intuitive interactions
+- Consistent UI components
+- Responsive layouts
+- Intuitive interactions
 
 #### 1.10.3.2. User Experience
 
--   Clear navigation
--   Fast loading
--   Error handling
+- Clear navigation
+- Fast loading
+- Error handling
 
 ## 1.11. Ad Hoc Process Configuration
 
@@ -6098,17 +6099,17 @@ db.restaurants.updateOne(
 
 #### 1.11.1.1. Overview of Payment Gateway Used
 
--   **Gateway:** Razorpay
--   **Purpose:** Secure payment processing
--   **Features:**
-    -   Multiple payment options
-    -   Fast transactions
-    -   Secure encryption
-    -   Real-time payment status
-    -   Refund support
-    -   Easy integration
-    -   Detailed documentation
-    -   Webhook support
+- **Gateway:** Razorpay
+- **Purpose:** Secure payment processing
+- **Features:**
+  - Multiple payment options
+  - Fast transactions
+  - Secure encryption
+  - Real-time payment status
+  - Refund support
+  - Easy integration
+  - Detailed documentation
+  - Webhook support
 
 ##### 1.11.1.1.1. Razorpay integration
 
@@ -6120,16 +6121,16 @@ Download and save the API keys in your system.
 
 Open the Razorpay Web Standard Integration document -->
 
--   Visit [Razorpay](https://razorpay.com) and login.
+- Visit [Razorpay](https://razorpay.com) and login.
     The credentials are as follows:
--   Email: `tpsgco@gmail.com`
--   Password: `Harsh@01`
+- Email: `tpsgco@gmail.com`
+- Password: `Harsh@01`
     ![Razorpay](https://i.imgur.com/fgqElnO.png "Razorpay")
--   Search for the API keys in the dashboard.
--   ![API Keys](https://i.imgur.com/QawaF3K.png "API Keys")
--   Generate API keys in test mode.
--   Save the API keys in the environment files.
--   Open the Razorpay Web Standard Integration document.
+- Search for the API keys in the dashboard.
+- ![API Keys](https://i.imgur.com/QawaF3K.png "API Keys")
+- Generate API keys in test mode.
+- Save the API keys in the environment files.
+- Open the Razorpay Web Standard Integration document.
 
 <!-- #### 1.11.1.2. API Keys, Credentials, and Configuration Steps
 
@@ -6150,32 +6151,32 @@ Open the Razorpay Web Standard Integration document -->
 
 ##### 1.11.2.1.1. WhatsApp Business API
 
--   Go to `https://developers.facebook.com/docs/whatsapp/`
--   ![WhatsApp Business API](https://i.imgur.com/uDRxTUy.png "WhatsApp Business API")
--   Click on the `login` button.
--   ![Login](https://i.imgur.com/6WHGGtu.png "Login")
--   Enter the credentials.
--   ![Credentials](https://i.imgur.com/A3iLOPv.png "Credentials")
--   Click on the `Get Started` button.
--   ![Get Started](https://i.imgur.com/4VXUCso.png "Get Started")
--   Verify Your Account
--   ![Verify Account](https://i.imgur.com/PZWoKac.png "Verify Account")
--   Enter the Code from the SMS.
--   ![Enter Code](https://i.imgur.com/oQzUtWB.png "Enter Code")
--   click on the `Continue` button.
--   ![Continue](https://i.imgur.com/U6LmkEw.png "Continue")
--   Review Your Email Address
--   ![Review Email](https://i.imgur.com/8QdDN81.png "Review Email")
--   Click on the `Confirm mail` button.
--   ![Confirm Mail](https://i.imgur.com/p1t4SBs.png "Confirm Mail")
--   Which of the following best describes you?
--   ![Describe](https://i.imgur.com/iPd2kqy.png "Describe")
--   Click on the `Complete registration` button.
--   ![Complete Registration](https://i.imgur.com/2ANZiIl.png "Complete Registration")
--   Click on the `create app` button.
--   ![Create App](https://i.imgur.com/okhWtpw.png "Create App")
--   Enter the App Name and click on next.
--   ![App Name](https://i.imgur.com/PaJT2pc.png "App Name")
+- Go to `https://developers.facebook.com/docs/whatsapp/`
+- ![WhatsApp Business API](https://i.imgur.com/uDRxTUy.png "WhatsApp Business API")
+- Click on the `login` button.
+- ![Login](https://i.imgur.com/6WHGGtu.png "Login")
+- Enter the credentials.
+- ![Credentials](https://i.imgur.com/A3iLOPv.png "Credentials")
+- Click on the `Get Started` button.
+- ![Get Started](https://i.imgur.com/4VXUCso.png "Get Started")
+- Verify Your Account
+- ![Verify Account](https://i.imgur.com/PZWoKac.png "Verify Account")
+- Enter the Code from the SMS.
+- ![Enter Code](https://i.imgur.com/oQzUtWB.png "Enter Code")
+- click on the `Continue` button.
+- ![Continue](https://i.imgur.com/U6LmkEw.png "Continue")
+- Review Your Email Address
+- ![Review Email](https://i.imgur.com/8QdDN81.png "Review Email")
+- Click on the `Confirm mail` button.
+- ![Confirm Mail](https://i.imgur.com/p1t4SBs.png "Confirm Mail")
+- Which of the following best describes you?
+- ![Describe](https://i.imgur.com/iPd2kqy.png "Describe")
+- Click on the `Complete registration` button.
+- ![Complete Registration](https://i.imgur.com/2ANZiIl.png "Complete Registration")
+- Click on the `create app` button.
+- ![Create App](https://i.imgur.com/okhWtpw.png "Create App")
+- Enter the App Name and click on next.
+- ![App Name](https://i.imgur.com/PaJT2pc.png "App Name")
 
 ###### 1.11.2.1.1.1. Sending Messages
 
@@ -6204,19 +6205,19 @@ async function sendWhatsAppMessage(
 
 ##### 1.11.2.1.3. Using OTP API
 
--   click on the API section
--   ![API Section](https://i.imgur.com/tMyh6D4.png "API Section")
--   copy the overral url
--   ![API URL](https://i.imgur.com/tD0wbKm.png "API URL")
--   use the get method to send the OTP to the user
+- click on the API section
+- ![API Section](https://i.imgur.com/tMyh6D4.png "API Section")
+- copy the overral url
+- ![API URL](https://i.imgur.com/tD0wbKm.png "API URL")
+- use the get method to send the OTP to the user
 
 ##### 1.11.2.1.4. Using Quick SMS API
 
--   click on the Quick SMS section
--   ![Quick SMS Section](https://i.imgur.com/1DrKO0N.png "Quick SMS Section")
--   Enter the mobile number and the message
--   ![Quick SMS](https://i.imgur.com/924ycIr.png "Quick SMS")
--   Click on the send button to send the message
+- click on the Quick SMS section
+- ![Quick SMS Section](https://i.imgur.com/1DrKO0N.png "Quick SMS Section")
+- Enter the mobile number and the message
+- ![Quick SMS](https://i.imgur.com/924ycIr.png "Quick SMS")
+- Click on the send button to send the message
 
 ###### 1.11.2.1.4.1. DLT Registration
 
@@ -6224,19 +6225,19 @@ TRAI introduced DLT Registration for Bulk SMS in INDIA. According to DLT Rules, 
 
 Steps For Registration In JIO DLT :
 
--   Open <https://trueconnect.jio.com/> .
--   ![JIO DLT](https://i.imgur.com/dWpNrUm.jpeg "JIO DLT")
--   Click on register & complete registration process. Click [here](https://www.fast2sms.com/help/dlt-registration-signup-process-jio/) for registration steps.
--   ![Register](https://i.imgur.com/kaMvDRy.png "Register")
--   ![Register](https://i.imgur.com/ScAa1kY.png "Register")
--   Add following Telemarketer ID for PE-TM Binding:
+- Open <https://trueconnect.jio.com/> .
+- ![JIO DLT](https://i.imgur.com/dWpNrUm.jpeg "JIO DLT")
+- Click on register & complete registration process. Click [here](https://www.fast2sms.com/help/dlt-registration-signup-process-jio/) for registration steps.
+- ![Register](https://i.imgur.com/kaMvDRy.png "Register")
+- ![Register](https://i.imgur.com/ScAa1kY.png "Register")
+- Add following Telemarketer ID for PE-TM Binding:
 
 Telemarketer Name: SID GROUPS
 Telemarketer ID: 1702159738863862112
 
--   Approve Headers (sender id) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-header-sender-id-jio-dlt/) for sender id steps.
--   Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
--   After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
+- Approve Headers (sender id) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-header-sender-id-jio-dlt/) for sender id steps.
+- Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
+- After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
 
 ## Testing Guidelines
 
@@ -6250,21 +6251,21 @@ Unit testing focuses on verifying individual components and functions to ensure 
 
 ##### Component Testing
 
--   Testing individual UI components to verify correct rendering and behavior.
--   Ensuring state changes and event handling work as expected.
--   Validating UI responsiveness and interaction.
+- Testing individual UI components to verify correct rendering and behavior.
+- Ensuring state changes and event handling work as expected.
+- Validating UI responsiveness and interaction.
 
 ##### Service Testing
 
--   Testing backend services and business logic independently.
--   Ensuring services handle edge cases correctly.
--   Mocking dependencies to isolate service functionality.
+- Testing backend services and business logic independently.
+- Ensuring services handle edge cases correctly.
+- Mocking dependencies to isolate service functionality.
 
 ##### Utility Function Testing
 
--   Verifying helper functions and utility modules.
--   Checking correctness of data manipulation functions.
--   Ensuring consistent output across different input scenarios.
+- Verifying helper functions and utility modules.
+- Checking correctness of data manipulation functions.
+- Ensuring consistent output across different input scenarios.
 
 #### Integration Testing
 
@@ -6272,21 +6273,21 @@ Integration testing validates interactions between different modules to ensure s
 
 ##### API Endpoint Testing
 
--   Testing request/response cycles for correctness and efficiency.
--   Validating input handling and error responses.
--   Ensuring API versioning and backward compatibility.
+- Testing request/response cycles for correctness and efficiency.
+- Validating input handling and error responses.
+- Ensuring API versioning and backward compatibility.
 
 ##### Database Operations
 
--   Verifying CRUD (Create, Read, Update, Delete) operations.
--   Checking database migrations and rollback mechanisms.
--   Ensuring data integrity and constraints enforcement.
+- Verifying CRUD (Create, Read, Update, Delete) operations.
+- Checking database migrations and rollback mechanisms.
+- Ensuring data integrity and constraints enforcement.
 
 ##### Authentication Flow
 
--   Testing user login, logout, and session management.
--   Verifying multi-factor authentication (MFA) and token expiry.
--   Ensuring correct handling of authentication errors.
+- Testing user login, logout, and session management.
+- Verifying multi-factor authentication (MFA) and token expiry.
+- Ensuring correct handling of authentication errors.
 
 ### Functional Testing Scenarios
 
@@ -6296,40 +6297,40 @@ Functional testing ensures that business processes work as intended and meet use
 
 ##### Menu Item Selection
 
--   Validating item selection and customization options.
--   Ensuring availability checks and dynamic updates.
+- Validating item selection and customization options.
+- Ensuring availability checks and dynamic updates.
 
 ##### Cart Operations
 
--   Adding and removing items from the cart.
--   Verifying price calculations and discount applications.
+- Adding and removing items from the cart.
+- Verifying price calculations and discount applications.
 
 ##### Checkout Process
 
--   Ensuring correct handling of shipping and billing information.
--   Testing order summary and confirmation steps.
+- Ensuring correct handling of shipping and billing information.
+- Testing order summary and confirmation steps.
 
 ##### Payment Integration
 
--   Validating various payment methods (credit cards, digital wallets, etc.).
--   Ensuring secure transactions and error handling.
+- Validating various payment methods (credit cards, digital wallets, etc.).
+- Ensuring secure transactions and error handling.
 
 #### Admin Operations
 
 ##### Menu Management
 
--   Adding, updating, and deleting menu items.
--   Verifying category assignments and pricing updates.
+- Adding, updating, and deleting menu items.
+- Verifying category assignments and pricing updates.
 
 ##### Order Processing
 
--   Viewing and managing customer orders.
--   Ensuring correct order status transitions.
+- Viewing and managing customer orders.
+- Ensuring correct order status transitions.
 
 ##### User Management
 
--   Adding and removing users with different roles.
--   Validating access control and permissions.
+- Adding and removing users with different roles.
+- Validating access control and permissions.
 
 ### Technical Testing
 
@@ -6339,35 +6340,35 @@ Technical testing focuses on system performance, security, and stability.
 
 ##### Load Time Optimization
 
--   Measuring page load times under different network conditions.
--   Optimizing asset delivery and caching strategies.
+- Measuring page load times under different network conditions.
+- Optimizing asset delivery and caching strategies.
 
 ##### API Response Times
 
--   Ensuring APIs meet performance SLAs.
--   Identifying bottlenecks in data processing.
+- Ensuring APIs meet performance SLAs.
+- Identifying bottlenecks in data processing.
 
 ##### Database Query Performance
 
--   Optimizing database queries for efficiency.
--   Preventing slow queries from affecting user experience.
+- Optimizing database queries for efficiency.
+- Preventing slow queries from affecting user experience.
 
 #### Security Testing
 
 ##### Authentication
 
--   Preventing brute-force attacks and credential stuffing.
--   Ensuring proper session handling and logout mechanisms.
+- Preventing brute-force attacks and credential stuffing.
+- Ensuring proper session handling and logout mechanisms.
 
 ##### Authorization
 
--   Verifying role-based access controls.
--   Preventing privilege escalation vulnerabilities.
+- Verifying role-based access controls.
+- Preventing privilege escalation vulnerabilities.
 
 ##### Data Encryption
 
--   Ensuring data is encrypted in transit and at rest.
--   Validating secure storage of sensitive information.
+- Ensuring data is encrypted in transit and at rest.
+- Validating secure storage of sensitive information.
 
 ### Bug Reporting Guidelines
 
@@ -6377,39 +6378,39 @@ Effective bug reporting improves issue resolution time and ensures clarity in co
 
 ##### Title
 
--   A concise summary of the issue.
+- A concise summary of the issue.
 
 ##### Description
 
--   A detailed explanation, including affected features and conditions.
+- A detailed explanation, including affected features and conditions.
 
 ##### Steps to Reproduce
 
--   A clear, step-by-step guide to reproducing the bug.
+- A clear, step-by-step guide to reproducing the bug.
 
 ##### Expected Behavior
 
--   A description of what should happen under normal conditions.
+- A description of what should happen under normal conditions.
 
 ##### Actual Behavior
 
--   A description of what is currently happening, including any discrepancies.
+- A description of what is currently happening, including any discrepancies.
 
 ##### Screenshots
 
--   Visual evidence of the bug (if applicable).
+- Visual evidence of the bug (if applicable).
 
 ##### Environment
 
--   Details about the browser, device, OS, and application version.
+- Details about the browser, device, OS, and application version.
 
 ##### Severity
 
--   Categorization as Low, Medium, or High based on impact.
+- Categorization as Low, Medium, or High based on impact.
 
 ##### Priority
 
--   Prioritization as Low, Medium, or High based on urgency and business impact.
+- Prioritization as Low, Medium, or High based on urgency and business impact.
 
 ## 1.13. Deployment and Maintenance
 
@@ -6594,10 +6595,10 @@ A: Add notes to menu items using the "Special Instructions" field in the item ed
 Q: How do I handle API errors?
 A: Check error codes and implement proper error handling. Common error codes:
 
--   401: Authentication required
--   403: Insufficient permissions
--   404: Resource not found
--   500: Server error
+- 401: Authentication required
+- 403: Insufficient permissions
+- 404: Resource not found
+- 500: Server error
 
 Q: How do I authenticate API requests?
 A: Include the JWT token in the Authorization header: `Bearer <token>`.
@@ -6618,10 +6619,10 @@ A: Use browser DevTools and Firebase Console. Common debugging steps:
 Q: How do I report bugs?
 A: Submit issues on the project's GitHub repository with:
 
--   Steps to reproduce
--   Expected behavior
--   Actual behavior
--   Screenshots if applicable
+- Steps to reproduce
+- Expected behavior
+- Actual behavior
+- Screenshots if applicable
 
 ### 1.16.4. Deployment and Updates
 
@@ -6672,18 +6673,18 @@ A: Use Firebase Console to revert to previous deployment.
 
 ### 1.17.3. Glossary of Technical Terms
 
--   **Angular**: A TypeScript-based open-source frontend framework developed by Google
--   **Firebase**: Google's mobile and web application development platform
--   **API**: Application Programming Interface - A set of rules for building and integrating application software
--   **JWT**: JSON Web Token - A compact, URL-safe means of representing claims between parties
--   **REST**: Representational State Transfer - An architectural style for distributed hypermedia systems
--   **OTP**: One-Time Password - A automatically generated password valid for a single login session
--   **UI/UX**: User Interface/User Experience - Visual design and user interaction aspects of applications
--   **CI/CD**: Continuous Integration/Continuous Deployment - Automated build, test and deployment processes
--   **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript
--   **RxJS**: Reactive Extensions for JavaScript - Library for reactive programming
--   **NgRx**: State management pattern and library for Angular applications
--   **DOM**: Document Object Model - Programming interface for HTML documents
--   **SPA**: Single Page Application - Web app that loads a single HTML page
--   **AOT**: Ahead-of-Time compilation - Pre-compilation of Angular applications
--   **Lazy Loading**: Technique to load components, modules, or assets on demand
+- **Angular**: A TypeScript-based open-source frontend framework developed by Google
+- **Firebase**: Google's mobile and web application development platform
+- **API**: Application Programming Interface - A set of rules for building and integrating application software
+- **JWT**: JSON Web Token - A compact, URL-safe means of representing claims between parties
+- **REST**: Representational State Transfer - An architectural style for distributed hypermedia systems
+- **OTP**: One-Time Password - A automatically generated password valid for a single login session
+- **UI/UX**: User Interface/User Experience - Visual design and user interaction aspects of applications
+- **CI/CD**: Continuous Integration/Continuous Deployment - Automated build, test and deployment processes
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript
+- **RxJS**: Reactive Extensions for JavaScript - Library for reactive programming
+- **NgRx**: State management pattern and library for Angular applications
+- **DOM**: Document Object Model - Programming interface for HTML documents
+- **SPA**: Single Page Application - Web app that loads a single HTML page
+- **AOT**: Ahead-of-Time compilation - Pre-compilation of Angular applications
+- **Lazy Loading**: Technique to load components, modules, or assets on demand

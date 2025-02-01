@@ -1793,14 +1793,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - `phoneNumber` (string): The customer's phone number.
   - **Sample Code**:
 
-  - `````typescript
-                storeCustomerDetails(name: string, phoneNumber: string): void {
-                    localStorage.setItem('customerName', name);
-                    localStorage.setItem('customerPhoneNumber', phoneNumber);
-                }
-                ```
-            ````
-        `````
+  - ``````typescript
+                    storeCustomerDetails(name: string, phoneNumber: string): void {
+                        localStorage.setItem('customerName', name);
+                        localStorage.setItem('customerPhoneNumber', phoneNumber);
+                    }
+                    ```
+                ````
+            `````
+        ``````
 
 - **Usage**:
 
@@ -2184,9 +2185,8 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 - **Method**: POST
 - **Description**: Validates a promo code for a specific restaurant and order amount.
 - **Parameters**:
-  - `data`: An object containing the promo code, order amount, and restaurant URL.
-    - Example structure:
-            `json
+  - `data`: An object containing the promo code, order amount, and restaurant URL. - Example structure:
+        `json
 {
     "promoCodeName": "SAVE20",
     "amountToBePaid": 100,
@@ -2231,9 +2231,8 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
 - **Method**: POST
 - **Description**: Updates the personal information of the currently logged-in customer.
 - **Parameters**:
-  - `data`: An object containing the updated customer information.
-    - Example structure:
-            `json
+  - `data`: An object containing the updated customer information. - Example structure:
+        `json
 {
     "name": "John Doe",
     "email": "john.doe@example.com",
@@ -2336,19 +2335,19 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - **Error Handling**: Returns an empty array if no suggestions are found or if the request fails.
   - **Sample Code**:
 
-            ```typescript
-            getAutocompleteResults(query: string) {
-                if (query) {
-                    const autocompleteUrl = `${this.apiUrl}/v1/google-maps/autocomplete?input=${query}`;
-                    return this.httpClient.get<any>(autocompleteUrl).pipe(
-                        map((response) => response.predictions),
-                        catchError(() => of([]))
-                    );
-                } else {
-                    return of([]);
+                ```typescript
+                getAutocompleteResults(query: string) {
+                    if (query) {
+                        const autocompleteUrl = `${this.apiUrl}/v1/google-maps/autocomplete?input=${query}`;
+                        return this.httpClient.get<any>(autocompleteUrl).pipe(
+                            map((response) => response.predictions),
+                            catchError(() => of([]))
+                        );
+                    } else {
+                        return of([]);
+                    }
                 }
-            }
-            ```
+                ```
 
 - **Usage**:
 
@@ -2417,52 +2416,52 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
   - **Sample Code**:
 
-            ```typescript
-            getFormattedGeocodeDetails(latitude: number, longitude: number) {
-                let url = `${this.apiUrl}/v1/google-maps/geocode-details?latitude=${latitude}&longitude=${longitude}`;
+                ```typescript
+                getFormattedGeocodeDetails(latitude: number, longitude: number) {
+                    let url = `${this.apiUrl}/v1/google-maps/geocode-details?latitude=${latitude}&longitude=${longitude}`;
 
-                return this.httpClient.get<any>(url).pipe(
-                    map((response) => {
-                        console.log("Geocoding API response:", response);
-                        const addressComponents = response.results[0].address_components;
+                    return this.httpClient.get<any>(url).pipe(
+                        map((response) => {
+                            console.log("Geocoding API response:", response);
+                            const addressComponents = response.results[0].address_components;
 
-                        const postalCodeComponent = addressComponents.find(
-                            (component) => component.types.includes("postal_code")
-                        );
+                            const postalCodeComponent = addressComponents.find(
+                                (component) => component.types.includes("postal_code")
+                            );
 
-                        return {
-                            pinCode: postalCodeComponent ? postalCodeComponent.long_name : "",
-                            completeAddress: response.results[0].formatted_address,
-                            city: addressComponents.find((component) =>
-                                component.types.includes("locality")
-                            )
-                                ? addressComponents.find((component) =>
-                                      component.types.includes("locality")
-                                  ).long_name
-                                : "",
-                            state: addressComponents.find((component) =>
-                                component.types.includes("administrative_area_level_1")
-                            )
-                                ? addressComponents.find((component) =>
-                                      component.types.includes("administrative_area_level_1")
-                                  ).long_name
-                                : "",
-                            country: addressComponents.find((component) =>
-                                component.types.includes("country")
-                            )
-                                ? addressComponents.find((component) =>
-                                      component.types.includes("country")
-                                  ).long_name
-                                : "",
-                        };
-                    }),
-                    catchError((error) => {
-                        console.error("Geocoding API error:", error);
-                        return of("");
-                    })
-                );
-            }
-            ```
+                            return {
+                                pinCode: postalCodeComponent ? postalCodeComponent.long_name : "",
+                                completeAddress: response.results[0].formatted_address,
+                                city: addressComponents.find((component) =>
+                                    component.types.includes("locality")
+                                )
+                                    ? addressComponents.find((component) =>
+                                          component.types.includes("locality")
+                                      ).long_name
+                                    : "",
+                                state: addressComponents.find((component) =>
+                                    component.types.includes("administrative_area_level_1")
+                                )
+                                    ? addressComponents.find((component) =>
+                                          component.types.includes("administrative_area_level_1")
+                                      ).long_name
+                                    : "",
+                                country: addressComponents.find((component) =>
+                                    component.types.includes("country")
+                                )
+                                    ? addressComponents.find((component) =>
+                                          component.types.includes("country")
+                                      ).long_name
+                                    : "",
+                            };
+                        }),
+                        catchError((error) => {
+                            console.error("Geocoding API error:", error);
+                            return of("");
+                        })
+                    );
+                }
+                ```
 
 - **Usage**:
 
@@ -2490,15 +2489,15 @@ All APIs use JSON for data exchange and require proper authentication using JWT 
   - **Error Handling**: Returns an empty object if the details cannot be retrieved or if the request fails.
   - **Sample Code**:
 
-            ```typescript
-            getPlaceDetails(placeId: string) {
-                const placeDetailsUrl = `${this.apiUrl}/v1/google-maps/place-details?placeId=${placeId}`;
-                return this.httpClient.get<any>(placeDetailsUrl).pipe(
-                    map((response) => response.result),
-                    catchError(() => of([]))
-                );
-            }
-            ```
+                ```typescript
+                getPlaceDetails(placeId: string) {
+                    const placeDetailsUrl = `${this.apiUrl}/v1/google-maps/place-details?placeId=${placeId}`;
+                    return this.httpClient.get<any>(placeDetailsUrl).pipe(
+                        map((response) => response.result),
+                        catchError(() => of([]))
+                    );
+                }
+                ```
 
 - **Usage**:
 
@@ -3672,11 +3671,11 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                  ```json
-                  {
-                      "status": "open"
-                  }
-                  ```
+                        ```json
+                        {
+                            "status": "open"
+                        }
+                        ```
 
 - **Response**:
 
@@ -3684,11 +3683,11 @@ export class RestaurantPanelService {
 
     - Example:
 
-                  ```json
-                  {
-                      "message": "Restaurant status updated successfully."
-                  }
-                  ```
+                        ```json
+                        {
+                            "message": "Restaurant status updated successfully."
+                        }
+                        ```
 
   - **Error**: Returns an error message if the update fails.
 
@@ -3736,11 +3735,11 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                  ```json
-                  {
-                      "isDineInAvailable": true
-                  }
-                  ```
+                        ```json
+                        {
+                            "isDineInAvailable": true
+                        }
+                        ```
 
 - **Response**:
 
@@ -3748,11 +3747,11 @@ export class RestaurantPanelService {
 
     - Example:
 
-                  ```json
-                  {
-                      "message": "Dine-in availability updated successfully."
-                  }
-                  ```
+                        ```json
+                        {
+                            "message": "Dine-in availability updated successfully."
+                        }
+                        ```
 
   - **Error**: Returns an error message if the update fails.
 
@@ -5099,13 +5098,13 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-            ```json
-            {
-                "dishId": "123",
-                "ingredientName": "Cheese",
-                "price": 1.5
-            }
-            ```
+                  ```json
+                  {
+                      "dishId": "123",
+                      "ingredientName": "Cheese",
+                      "price": 1.5
+                  }
+                  ```
 
 - **Response**: Returns a success message if the ingredient is added.
 - **Authorization**: Restaurant authentication required.
@@ -5147,13 +5146,13 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-            ```json
-            {
-                "ingredientId": "789",
-                "ingredientName": "Mozzarella",
-                "price": 2.0
-            }
-            ```
+                  ```json
+                  {
+                      "ingredientId": "789",
+                      "ingredientName": "Mozzarella",
+                      "price": 2.0
+                  }
+                  ```
 
 - **Response**: Returns a success message if the ingredient is updated.
 - **Authorization**: Restaurant authentication required.
@@ -5228,14 +5227,14 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-            ```json
-            {
-                "name": "Pizza",
-                "price": 10.0,
-                "category": "Main Course",
-                "description": "Delicious pizza with cheese and toppings"
-            }
-            ```
+                  ```json
+                  {
+                      "name": "Pizza",
+                      "price": 10.0,
+                      "category": "Main Course",
+                      "description": "Delicious pizza with cheese and toppings"
+                  }
+                  ```
 
 - **Response**: Returns a success message if the dish is added.
 - **Authorization**: Restaurant authentication required.
@@ -5305,43 +5304,43 @@ export class RestaurantPanelService {
 
   - **Request Body**: JSON object containing user details. Example:
 
-            ```json
-            {
-                "name": "John Doe",
-                "email": "johndoe@example.com",
-                "phone": "1234567890",
-                "role": "user"
-            }
-            ```
+                ```json
+                {
+                    "name": "John Doe",
+                    "email": "johndoe@example.com",
+                    "phone": "1234567890",
+                    "role": "user"
+                }
+                ```
 
 - **Response**:
 
   - **Success**: Returns a success message and the details of the created user.
         Example:
 
-            ```json
-            {
-                "message": "User added successfully",
-                "user": {
-                    "id": "123",
-                    "name": "John Doe",
-                    "email": "johndoe@example.com",
-                    "phone": "1234567890",
-                    "role": "user"
+                ```json
+                {
+                    "message": "User added successfully",
+                    "user": {
+                        "id": "123",
+                        "name": "John Doe",
+                        "email": "johndoe@example.com",
+                        "phone": "1234567890",
+                        "role": "user"
+                    }
                 }
-            }
-            ```
+                ```
 
   - **Error**: Returns an error message if the request fails (e.g., validation errors, missing fields). Example:
 
-            ```json
-            {
-                "message": "Invalid input data",
-                "errors": {
-                    "email": "Email is already in use."
+                ```json
+                {
+                    "message": "Invalid input data",
+                    "errors": {
+                        "email": "Email is already in use."
+                    }
                 }
-            }
-            ```
+                ```
 
 - **Authorization**: Admin authentication required.
 - **Error Handling**:
@@ -5393,11 +5392,11 @@ export class RestaurantPanelService {
     - **Error Handling**: Returns an error message if the request fails.
     - **Sample Code**:
 
-            ```typescript
-            deleteUser(userId) {
-                return this.http.delete(`${this.apiUrl}/v1/user/deleteUser/${userId}`);
-            }
-            ```
+                  ```typescript
+                  deleteUser(userId) {
+                      return this.http.delete(`${this.apiUrl}/v1/user/deleteUser/${userId}`);
+                  }
+                  ```
 
 - **Usage**:
 
@@ -5426,14 +5425,14 @@ export class RestaurantPanelService {
   - `userId`: The ID of the user to edit.
   - **Request Body**: JSON object containing the updated user details. Example:
 
-            ```json
-            {
-                "name": "Jane Doe",
-                "email": "janedoe#example.com",
-                "phone": "9876543210",
-                "role": "admin"
-            }
-            ```
+                ```json
+                {
+                    "name": "Jane Doe",
+                    "email": "janedoe#example.com",
+                    "phone": "9876543210",
+                    "role": "admin"
+                }
+                ```
 
 - **Response**:
 - **Success**: Returns a success message and the updated user details.
@@ -5470,11 +5469,11 @@ export class RestaurantPanelService {
   - Validates required fields before submission.
   - **Sample Code**:
 
-            ```typescript
-            editUser(userId, userData) {
-                return this.http.patch(`${this.apiUrl}/v1/user/editUser/${userId}`, userData);
-            }
-            ```
+                ```typescript
+                editUser(userId, userData) {
+                    return this.http.patch(`${this.apiUrl}/v1/user/editUser/${userId}`, userData);
+                }
+                ```
 
 - **Usage**:
 
@@ -5512,11 +5511,11 @@ export class RestaurantPanelService {
   - **Error Handling**: Returns an error message if the request fails.
   - **Sample Code**:
 
-            ```typescript
-            getUser(userId) {
-                return this.http.get(`${this.apiUrl}/v1/user/getUser/${userId}`);
-            }
-            ```
+                ```typescript
+                getUser(userId) {
+                    return this.http.get(`${this.apiUrl}/v1/user/getUser/${userId}`);
+                }
+                ```
 
 - **Usage**:
 

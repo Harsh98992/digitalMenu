@@ -5984,8 +5984,6 @@ cd qrsayBackend
 npm install
 ```
 
-<!-- we are using teh online mongodv -->
-
 #### Run the server
 
 ```bash

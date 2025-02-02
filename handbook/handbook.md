@@ -231,6 +231,7 @@
         - [1.11.2.1.3. Using OTP API](#111213-using-otp-api)
         - [1.11.2.1.4. Using Quick SMS API](#111214-using-quick-sms-api)
           - [1.11.2.1.4.1. DLT Registration](#1112141-dlt-registration)
+    - [CloudFlare ssl certificate](#cloudflare-ssl-certificate)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
       - [1.12.1.1. Unit Testing](#11211-unit-testing)
@@ -6304,6 +6305,10 @@ Telemarketer ID: 1702159738863862112
 - Approve Headers (sender id) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-header-sender-id-jio-dlt/) for sender id steps.
 - Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
 - After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
+
+### CloudFlare ssl certificate
+
+- follow `https://www.multimediaxp.com/post/154/how-to-add-a-godaddy-domain-to-cloudflare`.
 
 ## 1.12. Testing Guidelines
 

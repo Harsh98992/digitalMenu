@@ -420,7 +420,6 @@ graph TB
 - **Authentication**: Process of verifying user identity
 - **Cache**: Temporary storage of frequently accessed data for faster performance
 
-
 #### 1.3.5.5. Payment Terms
 
 - **Payment Gateway**: System that processes online payments securely

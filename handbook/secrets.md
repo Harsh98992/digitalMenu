@@ -7,6 +7,7 @@
   - [1.4. GOOGLE\_MAPS\_API\_KEY](#14-google_maps_api_key)
   - [1.5. google login](#15-google-login)
   - [SMS DLT](#sms-dlt)
+  - [Fast2sms](#fast2sms)
   - [1.6. backend deployment](#16-backend-deployment)
   - [1.7. frontend deployment](#17-frontend-deployment)
   - [1.8. code](#18-code)
@@ -58,6 +59,11 @@
 
 - **Email**: `chiraggogetter@gmail.com`
 - **Password**: `vx2VTRLJbCa!`
+
+## Fast2sms
+
+- **Mobile**: `9310415024`
+- **Password**: `79rea2`
 
 ## 1.6. backend deployment
 

@@ -3836,7 +3836,7 @@ export class RestaurantPanelService {
 {
     "restaurantName": "New Restaurant Name",
     "restaurantPhoneNumber": "9876543210",
-    "restaurantEmail": "
+    "restaurantEmail": "example@example.com",
     "restaurantType": "Fast Food",
     "openTime": "08:00 AM",
     "closeTime": "10:00 PM",

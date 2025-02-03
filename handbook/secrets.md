@@ -17,12 +17,9 @@
 
 ## GOOGLE_MAPS_API_KEY
 
-- **Email**: `done goqrorder@gmail.com`
+- **Email**: `goqrorder@gmail.com`
 - **Password**: `Hh@9911392743`
-
-## SMS_API_KEY
-
-- **api key**: `bPVhEJ1KzMtZp7IsmwCoFNcDXiR29OYul34q8vHLkGT0rBxnWab3Vg7jaWAskhnoDTImBZXcxJvF48lU`
+- **API_KEY**: `AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A`
 
 ## google login
 
@@ -99,10 +96,6 @@
 ## encryptionAlogrithm
 
 - `aes-256-gcm`
-
-## GOOGLE_MAPS_API_KEY
-
-- `AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A`
 
 ## SMS_API_KEY
 

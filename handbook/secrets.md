@@ -6,6 +6,7 @@
   - [1.3. Razorpay](#13-razorpay)
   - [1.4. GOOGLE\_MAPS\_API\_KEY](#14-google_maps_api_key)
   - [1.5. google login](#15-google-login)
+  - [SMS DLT](#sms-dlt)
   - [1.6. backend deployment](#16-backend-deployment)
   - [1.7. frontend deployment](#17-frontend-deployment)
   - [1.8. code](#18-code)
@@ -51,7 +52,12 @@
 ## 1.5. google login
 
 - **Email**: `qrsayteam@gmail.com`
-- **Password**: `login using google account`
+- **Password**: `Harsh@01`
+
+## SMS DLT
+
+- **Email**: `chiraggogetter@gmail.com`
+- **Password**: `vx2VTRLJbCa!`
 
 ## 1.6. backend deployment
 

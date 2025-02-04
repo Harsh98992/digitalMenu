@@ -11,6 +11,8 @@
   - [1.8. backend deployment](#18-backend-deployment)
   - [1.9. frontend deployment](#19-frontend-deployment)
   - [1.10. code](#110-code)
+  - [Godaddy](#godaddy)
+  - [Meta account for WhatsApp Business API](#meta-account-for-whatsapp-business-api)
   - [1.11. DB\_CONNECTION\_STRING](#111-db_connection_string)
   - [1.12. DB\_Test\_CONNECTION\_STRING](#112-db_test_connection_string)
   - [1.13. PORT](#113-port)
@@ -79,6 +81,15 @@
 
 - **Email**: `qrsayteam@gmail.com`
 - **Password**: `Harsh@123456` (github)
+
+## Godaddy
+
+- Harsh have control over this account
+
+## Meta account for WhatsApp Business API
+
+- **Email**: `amanv1011@gmail.com`
+- **Password**: `patanahi`
 
 ## 1.11. DB_CONNECTION_STRING
 

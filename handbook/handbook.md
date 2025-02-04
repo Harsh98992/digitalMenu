@@ -154,6 +154,8 @@
         - [1.8.2.7.28. Delete Extra Ingredient](#182728-delete-extra-ingredient)
         - [1.8.2.7.29. Add Dish](#182729-add-dish)
         - [1.8.2.7.30. Edit Dish](#182730-edit-dish)
+        - [1.8.2.7.31. Delete Dish](#182731-delete-dish)
+        - [1.8.2.7.32. Add Variants To Dish](#182732-add-variants-to-dish)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -189,25 +191,25 @@
       - [1.9.4.7. User Table](#1947-user-table)
     - [1.9.5. Entity-Relationship Diagrams (ERD)](#195-entity-relationship-diagrams-erd)
     - [1.9.6. How to run Database Queries](#196-how-to-run-database-queries)
-      - [Clone the repository](#clone-the-repository)
-      - [Install dependencies](#install-dependencies)
-      - [Run the server](#run-the-server)
-      - [Go to `http://mongodb.com/try/download/compass` to download MongoDB Compass and install the MongoDB Compass](#go-to-httpmongodbcomtrydownloadcompass-to-download-mongodb-compass-and-install-the-mongodb-compass)
-      - [Add new connection](#add-new-connection)
-      - [click on my digital menu web](#click-on-my-digital-menu-web)
-      - [Click on Open mongodb shell](#click-on-open-mongodb-shell)
-      - [Run queries](#run-queries)
-    - [1.9.6. Sample Queries for Common Use Cases](#196-sample-queries-for-common-use-cases)
-      - [1.9.6.1. Retrieve all orders for a specific customer](#1961-retrieve-all-orders-for-a-specific-customer)
-      - [1.9.6.2. Find all restaurants offering a specific cuisine](#1962-find-all-restaurants-offering-a-specific-cuisine)
-      - [1.9.6.3. Get all active promo codes for a restaurant](#1963-get-all-active-promo-codes-for-a-restaurant)
-      - [1.9.6.4. Update the status of an order](#1964-update-the-status-of-an-order)
-      - [1.9.6.5. Delete a customer by ID](#1965-delete-a-customer-by-id)
-      - [1.9.6.6. Add a new dish to a restaurant's menu](#1966-add-a-new-dish-to-a-restaurants-menu)
-      - [1.9.6.7. Retrieve all tables in a restaurant](#1967-retrieve-all-tables-in-a-restaurant)
-      - [1.9.6.8. Find all users with a specific role](#1968-find-all-users-with-a-specific-role)
-      - [1.9.6.9. Get the details of a specific order](#1969-get-the-details-of-a-specific-order)
-      - [1.9.6.10. Update the contact information of a restaurant](#19610-update-the-contact-information-of-a-restaurant)
+      - [1.9.6.1. Clone the repository](#1961-clone-the-repository)
+      - [1.9.6.2. Install dependencies](#1962-install-dependencies)
+      - [1.9.6.3. Run the server](#1963-run-the-server)
+      - [1.9.6.4. Go to `http://mongodb.com/try/download/compass` to download MongoDB Compass and install the MongoDB Compass](#1964-go-to-httpmongodbcomtrydownloadcompass-to-download-mongodb-compass-and-install-the-mongodb-compass)
+      - [1.9.6.5. Add new connection](#1965-add-new-connection)
+      - [1.9.6.6. click on my digital menu web](#1966-click-on-my-digital-menu-web)
+      - [1.9.6.7. Click on Open mongodb shell](#1967-click-on-open-mongodb-shell)
+      - [1.9.6.8. Run queries](#1968-run-queries)
+    - [1.9.7. Sample Queries for Common Use Cases](#197-sample-queries-for-common-use-cases)
+      - [1.9.7.1. Retrieve all orders for a specific customer](#1971-retrieve-all-orders-for-a-specific-customer)
+      - [1.9.7.2. Find all restaurants offering a specific cuisine](#1972-find-all-restaurants-offering-a-specific-cuisine)
+      - [1.9.7.3. Get all active promo codes for a restaurant](#1973-get-all-active-promo-codes-for-a-restaurant)
+      - [1.9.7.4. Update the status of an order](#1974-update-the-status-of-an-order)
+      - [1.9.7.5. Delete a customer by ID](#1975-delete-a-customer-by-id)
+      - [1.9.7.6. Add a new dish to a restaurant's menu](#1976-add-a-new-dish-to-a-restaurants-menu)
+      - [1.9.7.7. Retrieve all tables in a restaurant](#1977-retrieve-all-tables-in-a-restaurant)
+      - [1.9.7.8. Find all users with a specific role](#1978-find-all-users-with-a-specific-role)
+      - [1.9.7.9. Get the details of a specific order](#1979-get-the-details-of-a-specific-order)
+      - [1.9.7.10. Update the contact information of a restaurant](#19710-update-the-contact-information-of-a-restaurant)
   - [1.10. User Interface (UI)](#110-user-interface-ui)
     - [1.10.1. Screenshots of All Pages (annotated with descriptions)](#1101-screenshots-of-all-pages-annotated-with-descriptions)
       - [1.10.1.1. Login Page](#11011-login-page)
@@ -232,7 +234,7 @@
         - [1.11.2.1.3. Using OTP API](#111213-using-otp-api)
         - [1.11.2.1.4. Using Quick SMS API](#111214-using-quick-sms-api)
           - [1.11.2.1.4.1. DLT Registration](#1112141-dlt-registration)
-    - [CloudFlare ssl certificate](#cloudflare-ssl-certificate)
+    - [1.11.3. CloudFlare ssl certificate](#1113-cloudflare-ssl-certificate)
   - [1.12. Testing Guidelines](#112-testing-guidelines)
     - [1.12.1. Overview of Testing Strategy](#1121-overview-of-testing-strategy)
       - [1.12.1.1. Unit Testing](#11211-unit-testing)
@@ -5084,6 +5086,7 @@ export class RestaurantPanelService {
     "description": "Delicious pizza with cheese and toppings"
 }
 ```
+
 - **Response**: Returns a success message if the dish is updated.
 - **Authorization**: Restaurant authentication required.
 - **Sample Code**:
@@ -5115,7 +5118,89 @@ export class RestaurantPanelService {
 
 ---
 
+##### 1.8.2.7.31. Delete Dish
 
+- **Endpoint**: `/api/v1/restaurant/dishes/deleteDish`
+- **Method**: DELETE
+- **Description**: Deletes a dish from the restaurant menu.
+- **Parameters**:
+
+  - `dishId`: The ID of the dish to be deleted.
+
+- **Response**: Returns a success message if the dish is deleted.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
+- **Usage**:
+
+    ```typescript
+    deleteDish(id: string, data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteDish/${id}`,
+            data
+        );
+    }
+    ```
+
+    ```typescript
+    const dishId = "123";
+    restaurantService.deleteDish(dishId, data).subscribe((response) => {
+        console.log("Dish deleted:", response);
+    });
+    ```
+
+---
+
+##### 1.8.2.7.32. Add Variants To Dish
+
+- **Endpoint**: `/api/v1/restaurant/dishes/addVariants`
+- **Method**: PUT
+- **Description**: Adds variants to a dish.
+- **Parameters**: Object containing variant details.
+  - Example structure:
+
+```json
+{
+    "dishId": "123",
+    "variants": [
+        {
+            "name": "Size",
+            "options": ["Small", "Medium", "Large"]
+        }
+    ]
+}
+```
+
+- **Response**: Returns a success message if the variants are added.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
+
+    ```typescript
+    addVariants(data: any) {
+        return this.http.put(
+            `${this.apiUrl}/v1/restaurant/dishes/addVariants`,
+            data
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const variantData = {
+        dishId: "123",
+        variants: [
+            {
+                name: "Size",
+                options: ["Small", "Medium", "Large"],
+            },
+        ],
+    };
+    restaurantService.addVariants(variantData).subscribe((response) => {
+        console.log("Variants added:", response);
+    });
+    ```
+
+---
 
 #### 1.8.2.8. User Service Endpoints
 
@@ -5802,44 +5887,44 @@ erDiagram
 
 ### 1.9.6. How to run Database Queries
 
-#### Clone the repository
+#### 1.9.6.1. Clone the repository
 
 ```bash
 git clone https://github.com/Harsh98992/qrsayBackend.git
 ```
 
-#### Install dependencies
+#### 1.9.6.2. Install dependencies
 
 ```bash
 cd qrsayBackend
 npm install
 ```
 
-#### Run the server
+#### 1.9.6.3. Run the server
 
 ```bash
 sudo npm install -g nodemon
 nodemon server.js
 ```
 
-#### Go to `http://mongodb.com/try/download/compass` to download MongoDB Compass and install the MongoDB Compass
+#### 1.9.6.4. Go to `http://mongodb.com/try/download/compass` to download MongoDB Compass and install the MongoDB Compass
 
 ![MongoDB Compass](https://i.imgur.com/42X5R0F.png "MongoDB Compass")
 
-#### Add new connection
+#### 1.9.6.5. Add new connection
 
 - add connection as `mongodb+srv://goqrorder:2fFhzGUn6EdNUPQJ@cluster0.bt9bmvq.mongodb.net/digitalMenuWeb`.
     ![Connect to Database](https://i.imgur.com/WKliKpM.png "Connect to Database")
 
-#### click on my digital menu web
+#### 1.9.6.6. click on my digital menu web
 
 ![My Digital Menu Web](https://i.imgur.com/237XYar.png "My Digital Menu Web")
 
-#### Click on Open mongodb shell
+#### 1.9.6.7. Click on Open mongodb shell
 
 ![Open Mongodb Shell](https://i.imgur.com/PGxxte8.png "Open Mongodb Shell")
 
-#### Run queries
+#### 1.9.6.8. Run queries
 
 ```bash
 db.customers.find()
@@ -5847,27 +5932,27 @@ db.customers.find()
 
 ![Run Queries](https://i.imgur.com/NM1T6D9.png "Run Queries")
 
-### 1.9.6. Sample Queries for Common Use Cases
+### 1.9.7. Sample Queries for Common Use Cases
 
-#### 1.9.6.1. Retrieve all orders for a specific customer
+#### 1.9.7.1. Retrieve all orders for a specific customer
 
 ```javascript
 db.orders.find({ customerId: ObjectId("CUSTOMER_ID") });
 ```
 
-#### 1.9.6.2. Find all restaurants offering a specific cuisine
+#### 1.9.7.2. Find all restaurants offering a specific cuisine
 
 ```javascript
 db.restaurants.find({ cuisines: "Italian" });
 ```
 
-#### 1.9.6.3. Get all active promo codes for a restaurant
+#### 1.9.7.3. Get all active promo codes for a restaurant
 
 ```javascript
 db.promoCodes.find({ restaurantId: ObjectId("RESTAURANT_ID"), isActive: true });
 ```
 
-#### 1.9.6.4. Update the status of an order
+#### 1.9.7.4. Update the status of an order
 
 ```javascript
 db.orders.updateOne(
@@ -5876,13 +5961,13 @@ db.orders.updateOne(
 );
 ```
 
-#### 1.9.6.5. Delete a customer by ID
+#### 1.9.7.5. Delete a customer by ID
 
 ```javascript
 db.customers.deleteOne({ _id: ObjectId("CUSTOMER_ID") });
 ```
 
-#### 1.9.6.6. Add a new dish to a restaurant's menu
+#### 1.9.7.6. Add a new dish to a restaurant's menu
 
 ```javascript
 db.restaurants.updateOne(
@@ -5895,25 +5980,25 @@ db.restaurants.updateOne(
 );
 ```
 
-#### 1.9.6.7. Retrieve all tables in a restaurant
+#### 1.9.7.7. Retrieve all tables in a restaurant
 
 ```javascript
 db.tables.find({ restaurantId: ObjectId("RESTAURANT_ID") });
 ```
 
-#### 1.9.6.8. Find all users with a specific role
+#### 1.9.7.8. Find all users with a specific role
 
 ```javascript
 db.users.find({ role: "Admin" });
 ```
 
-#### 1.9.6.9. Get the details of a specific order
+#### 1.9.7.9. Get the details of a specific order
 
 ```javascript
 db.orders.findOne({ _id: ObjectId("ORDER_ID") });
 ```
 
-#### 1.9.6.10. Update the contact information of a restaurant
+#### 1.9.7.10. Update the contact information of a restaurant
 
 ```javascript
 db.restaurants.updateOne(
@@ -6136,7 +6221,7 @@ Telemarketer ID: 1702159738863862112
 - Approve Content Template (message text) in JIO DLT. Click [here](https://www.fast2sms.com/help/add-content-template-jio-dlt/) for content template steps.
 - After approval, connect your approved Headers & Content Template into Fast2SMS DLT SMS [section](https://www.fast2sms.com/dashboard/dlt).
 
-### CloudFlare ssl certificate
+### 1.11.3. CloudFlare ssl certificate
 
 - Go to `https://www.cloudflare.com/` and Login with the following credentials:
 - Email: `goqrorder@gmail.com`

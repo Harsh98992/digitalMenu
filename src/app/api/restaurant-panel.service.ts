@@ -429,7 +429,9 @@ export class RestaurantPanelService {
         return indianStates;
     }
 
+//This function returns a list of customers from the API
     getCustomerList() {
+        //Make a GET request to the API endpoint for getting the customer list
         return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
     }
 

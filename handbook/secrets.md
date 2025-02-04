@@ -11,25 +11,25 @@
   - [1.8. backend deployment](#18-backend-deployment)
   - [1.9. frontend deployment](#19-frontend-deployment)
   - [1.10. code](#110-code)
-  - [Godaddy](#godaddy)
-  - [Meta account for WhatsApp Business API](#meta-account-for-whatsapp-business-api)
-  - [1.11. DB\_CONNECTION\_STRING](#111-db_connection_string)
-  - [1.12. DB\_Test\_CONNECTION\_STRING](#112-db_test_connection_string)
-  - [1.13. PORT](#113-port)
-  - [1.14. NODE\_ENV](#114-node_env)
-  - [1.15. JWT\_SECRET](#115-jwt_secret)
-  - [1.16. JWT\_EXPIRES\_IN](#116-jwt_expires_in)
-  - [1.17. EMAIL\_USERNAME](#117-email_username)
-  - [1.18. EMAIL\_PASSWORD](#118-email_password)
-  - [1.19. razorpay\_key\_id](#119-razorpay_key_id)
-  - [1.20. razorpay\_prod\_key\_id](#120-razorpay_prod_key_id)
-  - [1.21. razorpay\_prod\_key\_secret](#121-razorpay_prod_key_secret)
-  - [1.22. razorpay\_key\_secret](#122-razorpay_key_secret)
-  - [1.23. payment\_secret](#123-payment_secret)
-  - [1.24. encryptionAlogrithm](#124-encryptionalogrithm)
-  - [1.25. SMS\_API\_KEY](#125-sms_api_key)
-  - [1.26. IMGUR\_CLIENT\_ID](#126-imgur_client_id)
-  - [1.27. IMGUR\_CLIENT\_SECRET](#127-imgur_client_secret)
+  - [1.11. Godaddy](#111-godaddy)
+  - [1.12. Meta account for WhatsApp Business API](#112-meta-account-for-whatsapp-business-api)
+  - [1.13. DB\_CONNECTION\_STRING](#113-db_connection_string)
+  - [1.14. DB\_Test\_CONNECTION\_STRING](#114-db_test_connection_string)
+  - [1.15. PORT](#115-port)
+  - [1.16. NODE\_ENV](#116-node_env)
+  - [1.17. JWT\_SECRET](#117-jwt_secret)
+  - [1.18. JWT\_EXPIRES\_IN](#118-jwt_expires_in)
+  - [1.19. EMAIL\_USERNAME](#119-email_username)
+  - [1.20. EMAIL\_PASSWORD](#120-email_password)
+  - [1.21. razorpay\_key\_id](#121-razorpay_key_id)
+  - [1.22. razorpay\_prod\_key\_id](#122-razorpay_prod_key_id)
+  - [1.23. razorpay\_prod\_key\_secret](#123-razorpay_prod_key_secret)
+  - [1.24. razorpay\_key\_secret](#124-razorpay_key_secret)
+  - [1.25. payment\_secret](#125-payment_secret)
+  - [1.26. encryptionAlogrithm](#126-encryptionalogrithm)
+  - [1.27. SMS\_API\_KEY](#127-sms_api_key)
+  - [1.28. IMGUR\_CLIENT\_ID](#128-imgur_client_id)
+  - [1.29. IMGUR\_CLIENT\_SECRET](#129-imgur_client_secret)
 
 ## 1.1. Cloud Flare
 
@@ -82,79 +82,79 @@
 - **Email**: `qrsayteam@gmail.com`
 - **Password**: `Harsh@123456` (github)
 
-## Godaddy
+## 1.11. Godaddy
 
 - Harsh have control over this account
 
-## Meta account for WhatsApp Business API
+## 1.12. Meta account for WhatsApp Business API
 
 - **Email**: `amanv1011@gmail.com`
 - **Password**: `patanahi`
 
-## 1.11. DB_CONNECTION_STRING
+## 1.13. DB_CONNECTION_STRING
 
 - `mongodb+srv://goqrorder:2fFhzGUn6EdNUPQJ@cluster0.bt9bmvq.mongodb.net/digitalMenuWeb`
 
-## 1.12. DB_Test_CONNECTION_STRING
+## 1.14. DB_Test_CONNECTION_STRING
 
 - `mongodb+srv://goqrorder:2fFhzGUn6EdNUPQJ@cluster0.bt9bmvq.mongodb.net/testdb1`
 
-## 1.13. PORT
+## 1.15. PORT
 
 - `8080`
 
-## 1.14. NODE_ENV
+## 1.16. NODE_ENV
 
 - `dev`
 
-## 1.15. JWT_SECRET
+## 1.17. JWT_SECRET
 
 - `secret`
 
-## 1.16. JWT_EXPIRES_IN
+## 1.18. JWT_EXPIRES_IN
 
 - `1d`
 
-## 1.17. EMAIL_USERNAME
+## 1.19. EMAIL_USERNAME
 
 - `info@qrsay.com`
 
-## 1.18. EMAIL_PASSWORD
+## 1.20. EMAIL_PASSWORD
 
 - `Harsh@123`
 
-## 1.19. razorpay_key_id
+## 1.21. razorpay_key_id
 
 - `rzp_test_riSm0PLxWxsyrG`
 
-## 1.20. razorpay_prod_key_id
+## 1.22. razorpay_prod_key_id
 
 - `rzp_live_QEAKYdNlLVbqvB`
 
-## 1.21. razorpay_prod_key_secret
+## 1.23. razorpay_prod_key_secret
 
 - `h91lWciJSRFD2y6tIXiZBnpP`
 
-## 1.22. razorpay_key_secret
+## 1.24. razorpay_key_secret
 
 - `mjtYQKFjhmMN7qSBJbjLdi5L`
 
-## 1.23. payment_secret
+## 1.25. payment_secret
 
 - `05b534e5c60447031a9df60ba3c7bfb2`
 
-## 1.24. encryptionAlogrithm
+## 1.26. encryptionAlogrithm
 
 - `aes-256-gcm`
 
-## 1.25. SMS_API_KEY
+## 1.27. SMS_API_KEY
 
 - `bPVhEJ1KzMtZp7IsmwCoFNcDXiR29OYul34q8vHLkGT0rBxnWab3Vg7jaWAskhnoDTImBZXcxJvF48lU`
 
-## 1.26. IMGUR_CLIENT_ID
+## 1.28. IMGUR_CLIENT_ID
 
 - `869f294e59431cd`
 
-## 1.27. IMGUR_CLIENT_SECRET
+## 1.29. IMGUR_CLIENT_SECRET
 
 - `e2aa0949267297997c95e1d430a6dcdfb48c93eb`

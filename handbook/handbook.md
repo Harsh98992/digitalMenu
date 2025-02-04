@@ -5027,14 +5027,14 @@ export class RestaurantPanelService {
 
     - Example structure:
 
-                              ```json
-                              {
-                                  "name": "Pizza",
-                                  "price": 10.0,
-                                  "category": "Main Course",
-                                  "description": "Delicious pizza with cheese and toppings"
-                              }
-                              ```
+    ```json
+    {
+        "name": "Pizza",
+        "price": 10.0,
+        "category": "Main Course",
+        "description": "Delicious pizza with cheese and toppings"
+    }
+    ```
 
 - **Response**: Returns a success message if the dish is added.
 - **Authorization**: Restaurant authentication required.

@@ -153,6 +153,7 @@
         - [1.8.2.7.27. Edit Extra Ingredient](#182727-edit-extra-ingredient)
         - [1.8.2.7.28. Delete Extra Ingredient](#182728-delete-extra-ingredient)
         - [1.8.2.7.29. Add Dish](#182729-add-dish)
+        - [1.8.2.7.30. Edit Dish](#182730-edit-dish)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -5062,6 +5063,59 @@ export class RestaurantPanelService {
     ```
 
 ---
+
+##### 1.8.2.7.30. Edit Dish
+
+- **Endpoint**: `/api/v1/restaurant/dishes/editDish`
+- **Method**: PATCH
+- **Description**: Updates the details of an existing dish.
+- **Parameters**:
+
+  - `data`: Object containing updated dish details.
+
+    - Example structure:
+
+```json
+{
+    "dishId": "123",
+    "name": "Pizza",
+    "price": 12.0,
+    "category": "Main Course",
+    "description": "Delicious pizza with cheese and toppings"
+}
+```
+- **Response**: Returns a success message if the dish is updated.
+- **Authorization**: Restaurant authentication required.
+- **Sample Code**:
+
+    ```typescript
+    editDish(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editDish`,
+            data
+        );
+    }
+    ```
+
+- **Usage**:
+
+    ```typescript
+    const updatedDishData = {
+        dishId: "123",
+        name: "Pizza",
+        price: 12.0,
+        category: "Main Course",
+        description: "Delicious pizza with cheese and toppings",
+    };
+
+    restaurantService.editDish(updatedDishData).subscribe((response) => {
+        console.log("Dish updated:", response);
+    });
+    ```
+
+---
+
+
 
 #### 1.8.2.8. User Service Endpoints
 

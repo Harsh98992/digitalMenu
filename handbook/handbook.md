@@ -156,6 +156,7 @@
         - [1.8.2.7.30. Edit Dish](#182730-edit-dish)
         - [1.8.2.7.31. Delete Dish](#182731-delete-dish)
         - [1.8.2.7.32. Add Variants To Dish](#182732-add-variants-to-dish)
+        - [Add Category](#add-category)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -4662,191 +4663,6 @@ export class RestaurantPanelService {
 
 ---
 
-<!--
-
-    updatePlaceId(data) {
-        return this.http.patch(`${this.apiUrl}/v1/restaurant/placeId`, data);
-    }
-    addExtraIngredient(data: any) {
-        return this.http.post(
-            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents`,
-            data
-        );
-    }
-    editExtraIngredient(data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/edit`,
-            data
-        );
-    }
-    deleteExtraIngredient(id: string) {
-        return this.http.delete(
-            `${this.apiUrl}/v1/restaurant/dishes/extraIngredents/delete/${id}`
-        );
-    }
-    addDish(data: any) {
-        return this.http.post(
-            `${this.apiUrl}/v1/restaurant/dishes/addDish`,
-            data
-        );
-    }
-    editDish(data: any) {
-        return this.http.put(
-            `${this.apiUrl}/v1/restaurant/dishes/editDish`,
-            data
-        );
-    }
-    deleteDish(id: string, data: any) {
-        return this.http.put(
-            `${this.apiUrl}/v1/restaurant/dishes/deleteDish/${id}`,
-            data
-        );
-    }
-    addVariantsToDish(data: any) {
-        return this.http.put(
-            `${this.apiUrl}/v1/restaurant/dishes/addVariants`,
-            data
-        );
-    }
-    addCategory(reqBody) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
-            reqBody
-        );
-    }
-    updateCategory(reqData: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/dishes/editCategory`,
-            reqData
-        );
-    }
-    getCategory() {
-        return this.http.get(`${this.apiUrl}/v1/restaurant/dishes/getCategory`);
-    }
-    addAddons(data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/dishes/addAddons`,
-            data
-        );
-    }
-    addDishChoices(data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/dishes/addDishChoices`,
-            data
-        );
-    }
-    editDishChoices(data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/dishes/editDishChoices`,
-            data
-        );
-    }
-    editAddons(data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/dishes/editAddons`,
-            data
-        );
-    }
-    deleteAddons(id: string) {
-        return this.http.delete(
-            `${this.apiUrl}/v1/restaurant/dishes/deleteAddons/${id}`
-        );
-    }
-    deleteCategory(id: string) {
-        return this.http.delete(
-            `${this.apiUrl}/v1/restaurant/dishes/deleteCategory/${id}`
-        );
-    }
-    deleteChoices(id: string) {
-        return this.http.delete(
-            `${this.apiUrl}/v1/restaurant/dishes/deleteChoices/${id}`
-        );
-    }
-    setSelectedDish(data) {
-        sessionStorage.setItem("dishDetail", JSON.stringify(data));
-    }
-    getSelectedDish() {
-        const data = sessionStorage.getItem("dishDetail");
-        if (data) {
-            return JSON.parse(data);
-        }
-        return null;
-    }
-    getIndianStates() {
-        let indianStates = [
-            "Andhra Pradesh",
-            "Arunachal Pradesh",
-            "Assam",
-            "Bihar",
-            "Chhattisgarh",
-            "Goa",
-            "Gujarat",
-            "Haryana",
-            "Himachal Pradesh",
-            "Jharkhand",
-            "Karnataka",
-            "Kerala",
-            "Madhya Pradesh",
-            "Maharashtra",
-            "Manipur",
-            "Meghalaya",
-            "Mizoram",
-            "Nagaland",
-            "Odisha",
-            "Punjab",
-            "Rajasthan",
-            "Sikkim",
-            "Tamil Nadu",
-            "Telangana",
-            "Tripura",
-            "Uttar Pradesh",
-            "Uttarakhand",
-            "West Bengal",
-            "Andaman and Nicobar Islands",
-            "Chandigarh",
-            "Dadra and Nagar Haveli and Daman and Diu",
-            "Delhi",
-            "Ladakh",
-            "Lakshadweep",
-            "Puducherry",
-        ];
-
-        return indianStates;
-    }
-
-    getCustomerList() {
-        return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
-    }
-
-    addPromoCode(data: any) {
-        return this.http.patch(
-            `${this.apiUrl}/v1/restaurant/addPromoCode`,
-            data
-        );
-    }
-
-    getPromoCode() {
-        return this.http.get(`${this.apiUrl}/v1/restaurant/getPromoCode`);
-    }
-
-    // Add these methods to your RestaurantPanelService
-    toggleLoyalOrBlockStatus(
-        LoyalOrBlock: string,
-        customerId: string,
-        isLoyal: boolean
-    ) {
-        let url = `/v1/restaurant/${LoyalOrBlock}/${
-            isLoyal ? "add" : "remove"
-        }/`;
-
-        const data = {
-            customerId: customerId,
-        };
-
-        return this.http.patch(`${this.apiUrl}${url}`, data);
-    }
-} -->
-
 ##### 1.8.2.7.25. Update Place ID
 
 - **Endpoint**: `/api/v1/restaurant/placeId`
@@ -5201,6 +5017,189 @@ export class RestaurantPanelService {
     ```
 
 ---
+<!-- addCategory(reqBody) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addCategory`,
+            reqBody
+        );
+    }
+    updateCategory(reqData: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editCategory`,
+            reqData
+        );
+    }
+    getCategory() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/dishes/getCategory`);
+    }
+    addAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addAddons`,
+            data
+        );
+    }
+    addDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/addDishChoices`,
+            data
+        );
+    }
+    editDishChoices(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editDishChoices`,
+            data
+        );
+    }
+    editAddons(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/dishes/editAddons`,
+            data
+        );
+    }
+    deleteAddons(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteAddons/${id}`
+        );
+    }
+    deleteCategory(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteCategory/${id}`
+        );
+    }
+    deleteChoices(id: string) {
+        return this.http.delete(
+            `${this.apiUrl}/v1/restaurant/dishes/deleteChoices/${id}`
+        );
+    }
+    setSelectedDish(data) {
+        sessionStorage.setItem("dishDetail", JSON.stringify(data));
+    }
+    getSelectedDish() {
+        const data = sessionStorage.getItem("dishDetail");
+        if (data) {
+            return JSON.parse(data);
+        }
+        return null;
+    }
+    getIndianStates() {
+        let indianStates = [
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry",
+        ];
+
+        return indianStates;
+    }
+
+//This function returns a list of customers from the API
+    getCustomerList() {
+        //Make a GET request to the API endpoint for getting the customer list
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
+    }
+
+    addPromoCode(data: any) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/restaurant/addPromoCode`,
+            data
+        );
+    }
+
+    getPromoCode() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/getPromoCode`);
+    }
+
+    // Add these methods to your RestaurantPanelService
+    toggleLoyalOrBlockStatus(
+        LoyalOrBlock: string,
+        customerId: string,
+        isLoyal: boolean
+    ) {
+        let url = `/v1/restaurant/${LoyalOrBlock}/${
+            isLoyal ? "add" : "remove"
+        }/`;
+
+        const data = {
+            customerId: customerId,
+        };
+
+        return this.http.patch(`${this.apiUrl}${url}`, data);
+    }
+} -->
+##### Add Category
+
+- **Endpoint**: `/api/v1/restaurant/dishes/addCategory`
+- **Method**: PATCH
+- **Description**: Adds a new category to the restaurant menu.
+- **Parameters**:
+
+  - `reqBody`: Object containing category details.
+
+    - Example structure:
+
+```json
+{
+    "categoryName": "Desserts"
+}
+```
+- **Response**:
+
+  - **Success**: Returns a success message and the details of the created category.
+  - **Error**: Returns an error message if the request fails.
+
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+addCategory(reqBody: any) {
+    return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/addCategory`, reqBody);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.addCategory({ categoryName: 'Desserts' }).subscribe((response) => {
+
+    console.log('Category added successfully:', response);
+});
+```
+
+---
+
+
 
 #### 1.8.2.8. User Service Endpoints
 

@@ -5219,6 +5219,7 @@ restaurantService.addCategory({ categoryName: 'Desserts' }).subscribe((response)
     "categoryName": "Desserts"
 }
 ```
+
 - **Response**:
 
   - **Success**: Returns a success message and the details of the updated category.
@@ -5260,6 +5261,7 @@ restaurantService.updateCategory({ categoryId: '123', categoryName: 'Desserts' }
       - **Authorization**: Restaurant authentication required.
       - **Error Handling**: Returns an error message if the request fails.
       - **Sample Code**:
+
 ```typescript
 deleteCategory(categoryId: string) {
     return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/deleteCategory`, { categoryId: categoryId });
@@ -5276,8 +5278,6 @@ restaurantService.deleteCategory('123').subscribe((response) => {
 ```
 
 ---
-
-
 
 #### 1.8.2.8. User Service Endpoints
 

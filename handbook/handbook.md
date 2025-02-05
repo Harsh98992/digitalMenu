@@ -158,7 +158,21 @@
         - [1.8.2.7.32. Add Variants To Dish](#182732-add-variants-to-dish)
         - [1.8.2.7.33. Add Category](#182733-add-category)
         - [1.8.2.7.34. Update Category](#182734-update-category)
-        - [1.8.2.7.35. Delete Category](#182735-delete-category)
+        - [1.8.2.7.35. Get Category](#182735-get-category)
+        - [1.8.2.7.36. Add Addons](#182736-add-addons)
+        - [1.8.2.7.37. Add Dish Choices](#182737-add-dish-choices)
+        - [1.8.2.7.38. Edit Dish Choices](#182738-edit-dish-choices)
+        - [1.8.2.7.39. Edit Addons](#182739-edit-addons)
+        - [1.8.2.7.40. Delete Addons](#182740-delete-addons)
+        - [1.8.2.7.41. Delete Category](#182741-delete-category)
+        - [1.8.2.7.42. Delete Choices](#182742-delete-choices)
+        - [1.8.2.7.43. Set Selected Dish](#182743-set-selected-dish)
+        - [1.8.2.7.44. Get Selected Dish](#182744-get-selected-dish)
+        - [1.8.2.7.45. Get Indian States](#182745-get-indian-states)
+        - [1.8.2.7.46. Get Customer List](#182746-get-customer-list)
+        - [1.8.2.7.47. Add Promo Code](#182747-add-promo-code)
+        - [1.8.2.7.48. Get Promo Code](#182748-get-promo-code)
+        - [1.8.2.7.49. Toggle Loyal or Block Status](#182749-toggle-loyal-or-block-status)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -5246,25 +5260,228 @@ restaurantService.updateCategory({ categoryId: '123', categoryName: 'Desserts' }
 
 ---
 
-##### 1.8.2.7.35. Delete Category
+##### 1.8.2.7.35. Get Category
 
-- **Endpoint**: `/api/v1/restaurant/dishes/deleteCategory`
-- **Method**: PATCH
-- **Description**: Deletes a category from the restaurant menu.
-  - **Parameters**:
-
-    - `categoryId`: The ID of the category to be deleted.
-    - **Response**:
-
-      - **Success**: Returns a success message if the category is deleted.
-      - **Error**: Returns an error message if the request fails.
-      - **Authorization**: Restaurant authentication required.
-      - **Error Handling**: Returns an error message if the request fails.
-      - **Sample Code**:
+- **Endpoint**: `/api/v1/restaurant/dishes/getCategory`
+- **Method**: GET
+- **Description**: Retrieves a list of categories from the restaurant menu.
+- **Parameters**: None
+- **Response**:
+- **Success**: Returns a list of category objects.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
 
 ```typescript
-deleteCategory(categoryId: string) {
-    return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/deleteCategory`, { categoryId: categoryId });
+getCategory() {
+  return this.http.get(`${this.apiUrl}/v1/restaurant/dishes/getCategory`);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.getCategory().subscribe((response) => {
+  console.log('Categories retrieved successfully:', response);
+});
+```
+
+##### 1.8.2.7.36. Add Addons
+
+- **Endpoint**: `/api/v1/restaurant/dishes/addAddons`
+- **Method**: PATCH
+- **Description**: Adds new addons to the restaurant menu.
+- **Parameters**:
+- `data`: Object containing addon details.
+- Example structure:
+
+```json
+{
+  "addonName": "Extra Cheese",
+  "price": 1.99
+}
+```
+
+- **Response**:
+- **Success**: Returns a success message and the details of the created addon.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+addAddons(data: any) {
+  return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/addAddons`, data);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.addAddons({ addonName: 'Extra Cheese', price: 1.99 }).subscribe((response) => {
+  console.log('Addon added successfully:', response);
+});
+```
+
+##### 1.8.2.7.37. Add Dish Choices
+
+- **Endpoint**: `/api/v1/restaurant/dishes/addDishChoices`
+- **Method**: PATCH
+- **Description**: Adds new dish choices to the restaurant menu.
+- **Parameters**:
+- `data`: Object containing dish choice details.
+- Example structure:
+
+```json
+{
+  "dishChoiceName": "Veggie Burger",
+  "price": 9.99
+}
+```
+
+- **Response**:
+- **Success**: Returns a success message and the details of the created dish choice.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+addDishChoices(data: any) {
+  return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/addDishChoices`, data);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.addDishChoices({ dishChoiceName: 'Veggie Burger', price: 9.99 }).subscribe((response) => {
+  console.log('Dish choice added successfully:', response);
+});
+```
+
+##### 1.8.2.7.38. Edit Dish Choices
+
+- **Endpoint**: `/api/v1/restaurant/dishes/editDishChoices`
+- **Method**: PATCH
+- **Description**: Edits existing dish choices in the restaurant menu.
+- **Parameters**:
+- `data`: Object containing dish choice details.
+- Example structure:
+
+```json
+{
+  "dishChoiceId": "123",
+  "dishChoiceName": "Veggie Burger",
+  "price": 10.99
+}
+```
+
+- **Response**:
+- **Success**: Returns a success message and the details of the updated dish choice.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+editDishChoices(data: any) {
+  return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/editDishChoices`, data);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.editDishChoices({ dishChoiceId: '123', dishChoiceName: 'Veggie Burger', price: 10.99 }).subscribe((response) => {
+  console.log('Dish choice updated successfully:', response);
+});
+```
+
+##### 1.8.2.7.39. Edit Addons
+
+- **Endpoint**: `/api/v1/restaurant/dishes/editAddons`
+- **Method**: PATCH
+- **Description**: Edits existing addons in the restaurant menu.
+- **Parameters**:
+- `data`: Object containing addon details.
+- Example structure:
+
+```json
+{
+  "addonId": "123",
+  "addonName": "Extra Cheese",
+  "price": 2.99
+}
+```
+
+- **Response**:
+- **Success**: Returns a success message and the details of the updated addon.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+editAddons(data: any) {
+  return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/editAddons`, data);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.editAddons({ addonId: '123', addonName: 'Extra Cheese', price: 2.99 }).subscribe((response) => {
+  console.log('Addon updated successfully:', response);
+});
+```
+
+##### 1.8.2.7.40. Delete Addons
+
+- **Endpoint**: `/api/v1/restaurant/dishes/deleteAddons/{id}`
+- **Method**: DELETE
+- **Description**: Deletes an existing addon from the restaurant menu.
+- **Parameters**:
+- `id`: The ID of the addon to delete.
+- **Response**:
+- **Success**: Returns a success message.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+deleteAddons(id: string) {
+  return this.http.delete(`${this.apiUrl}/v1/restaurant/dishes/deleteAddons/${id}`);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.deleteAddons('123').subscribe((response) => {
+  console.log('Addon deleted successfully:', response);
+});
+```
+
+##### 1.8.2.7.41. Delete Category
+
+- **Endpoint**: `/api/v1/restaurant/dishes/deleteCategory/{id}`
+- **Method**: DELETE
+- **Description**: Deletes an existing category from the restaurant menu.
+- **Parameters**:
+- `id`: The ID of the category to delete.
+- **Response**:
+- **Success**: Returns a success message.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+deleteCategory(id: string) {
+  return this.http.delete(`${this.apiUrl}/v1/restaurant/dishes/deleteCategory/${id}`);
 }
 ```
 
@@ -5272,12 +5489,273 @@ deleteCategory(categoryId: string) {
 
 ```typescript
 restaurantService.deleteCategory('123').subscribe((response) => {
-
-    console.log('Category deleted successfully:', response);
+  console.log('Category deleted successfully:', response);
 });
 ```
 
----
+##### 1.8.2.7.42. Delete Choices
+
+- **Endpoint**: `/api/v1/restaurant/dishes/deleteChoices/{id}`
+- **Method**: DELETE
+- **Description**: Deletes an existing dish choice from the restaurant menu.
+- **Parameters**:
+- `id`: The ID of the dish choice to delete.
+- **Response**:
+- **Success**: Returns a success message.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+deleteChoices(id: string) {
+  return this.http.delete(`${this.apiUrl}/v1/restaurant/dishes/deleteChoices/${id}`);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.deleteChoices('123').subscribe((response) => {
+  console.log('Dish choice deleted successfully:', response);
+});
+```
+
+##### 1.8.2.7.43. Set Selected Dish
+
+- **Endpoint**: None
+- **Method**: None
+- **Description**: Sets the selected dish in session storage.
+- **Parameters**:
+- `data`: The dish object to set.
+- **Response**: None
+- **Authorization**: None
+- **Error Handling**: None
+- **Sample Code**:
+
+```typescript
+setSelectedDish(data) {
+  sessionStorage.setItem("dishDetail", JSON.stringify(data));
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.setSelectedDish({ dishName: 'Veggie Burger', price: 9.99 });
+```
+
+##### 1.8.2.7.44. Get Selected Dish
+
+- **Endpoint**: None
+- **Method**: None
+- **Description**: Retrieves the selected dish from session storage.
+- **Parameters**: None
+- **Response**: The selected dish object or null if not set.
+- **Authorization**: None
+- **Error Handling**: None
+- **Sample Code**:
+
+```typescript
+getSelectedDish() {
+  const data = sessionStorage.getItem("dishDetail");
+  if (data) {
+    return JSON.parse(data);
+  }
+  return null;
+}
+```
+
+- **Usage**:
+
+```typescript
+const selectedDish = restaurantService.getSelectedDish();
+console.log('Selected dish:', selectedDish);
+```
+
+##### 1.8.2.7.45. Get Indian States
+
+- **Endpoint**: None
+- **Method**: None
+- **Description**: Returns a list of Indian states.
+- **Parameters**: None
+- **Response**: A list of Indian states.
+- **Authorization**: None
+- **Error Handling**: None
+- **Sample Code**:
+
+```typescript
+getIndianStates() {
+  let indianStates = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Ladakh",
+    "Lakshadweep",
+    "Puducherry",
+  ];
+  return indianStates;
+}
+```
+
+- **Usage**:
+
+```typescript
+const indianStates = restaurantService.getIndianStates();
+console.log('Indian states:', indianStates);
+```
+
+##### 1.8.2.7.46. Get Customer List
+
+- **Endpoint**: `/api/v1/restaurant/getCustomerList`
+- **Method**: GET
+- **Description**: Retrieves a list of customers.
+- **Parameters**: None
+- **Response**: A list of customer objects.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+getCustomerList() {
+  return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.getCustomerList().subscribe((response) => {
+  console.log('Customers retrieved successfully:', response);
+});
+```
+
+##### 1.8.2.7.47. Add Promo Code
+
+- **Endpoint**: `/api/v1/restaurant/addPromoCode`
+- **Method**: PATCH
+- **Description**: Adds a new promo code.
+- **Parameters**:
+- `data`: Object containing promo code details.
+- Example structure:
+
+```json
+{
+  "promoCode": "NEWYEAR10",
+  "discount": 10
+}
+```
+
+- **Response**:
+- **Success**: Returns a success message and the details of the created promo code.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+addPromoCode(data: any) {
+  return this.http.patch(`${this.apiUrl}/v1/restaurant/addPromoCode`, data);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.addPromoCode({ promoCode: 'NEWYEAR10', discount: 10 }).subscribe((response) => {
+  console.log('Promo code added successfully:', response);
+});
+```
+
+##### 1.8.2.7.48. Get Promo Code
+
+- **Endpoint**: `/api/v1/restaurant/getPromoCode`
+- **Method**: GET
+- **Description**: Retrieves a list of promo codes.
+- **Parameters**: None
+- **Response**: A list of promo code objects.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+getPromoCode() {
+  return this.http.get(`${this.apiUrl}/v1/restaurant/getPromoCode`);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.getPromoCode().subscribe((response) => {
+  console.log('Promo codes retrieved successfully:', response);
+});
+```
+
+##### 1.8.2.7.49. Toggle Loyal or Block Status
+
+- **Endpoint**: `/api/v1/restaurant/{LoyalOrBlock}/{add|remove}/`
+- **Method**: PATCH
+- **Description**: Toggles the loyal or block status of a customer.
+- **Parameters**:
+- `LoyalOrBlock`: The type of status to toggle (loyal or block).
+- `customerId`: The ID of the customer to toggle.
+- `isLoyal`: A boolean indicating whether to add or remove the status.
+- **Response**:
+- **Success**: Returns a success message.
+- **Error**: Returns an error message if the request fails.
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+toggleLoyalOrBlockStatus(LoyalOrBlock: string, customerId: string, isLoyal: boolean) {
+  let url = `/v1/restaurant/${LoyalOrBlock}/${
+    isLoyal ? "add" : "remove"
+  }/`;
+  const data = {
+    customerId: customerId,
+  };
+  return this.http.patch(`${this.apiUrl}${url}`, data);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.toggleLoyalOrBlockStatus('loyal', '123', true).subscribe((response) => {
+  console.log('Loyal status toggled successfully:', response);
+});
+```
 
 #### 1.8.2.8. User Service Endpoints
 

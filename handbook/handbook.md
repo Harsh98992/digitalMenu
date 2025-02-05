@@ -156,7 +156,9 @@
         - [1.8.2.7.30. Edit Dish](#182730-edit-dish)
         - [1.8.2.7.31. Delete Dish](#182731-delete-dish)
         - [1.8.2.7.32. Add Variants To Dish](#182732-add-variants-to-dish)
-        - [Add Category](#add-category)
+        - [1.8.2.7.33. Add Category](#182733-add-category)
+        - [1.8.2.7.34. Update Category](#182734-update-category)
+        - [1.8.2.7.35. Delete Category](#182735-delete-category)
       - [1.8.2.8. User Service Endpoints](#1828-user-service-endpoints)
         - [1.8.2.8.1. Get All Users](#18281-get-all-users)
         - [1.8.2.8.2. Add User](#18282-add-user)
@@ -5157,7 +5159,7 @@ export class RestaurantPanelService {
         return this.http.patch(`${this.apiUrl}${url}`, data);
     }
 } -->
-##### Add Category
+##### 1.8.2.7.33. Add Category
 
 - **Endpoint**: `/api/v1/restaurant/dishes/addCategory`
 - **Method**: PATCH
@@ -5199,6 +5201,83 @@ restaurantService.addCategory({ categoryName: 'Desserts' }).subscribe((response)
 ```
 
 ---
+
+##### 1.8.2.7.34. Update Category
+
+- **Endpoint**: `/api/v1/restaurant/dishes/updateCategory`
+- **Method**: PATCH
+- **Description**: Updates an existing category in the restaurant menu.
+- **Parameters**:
+
+  - `reqBody`: Object containing category details.
+
+    - Example structure:
+
+```json
+{
+    "categoryId": "123",
+    "categoryName": "Desserts"
+}
+```
+- **Response**:
+
+  - **Success**: Returns a success message and the details of the updated category.
+  - **Error**: Returns an error message if the request fails.
+
+- **Authorization**: Restaurant authentication required.
+- **Error Handling**: Returns an error message if the request fails.
+- **Sample Code**:
+
+```typescript
+updateCategory(reqBody: any) {
+    return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/updateCategory`, reqBody);
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.updateCategory({ categoryId: '123', categoryName: 'Desserts' }).subscribe((response) => {
+
+    console.log('Category updated successfully:', response);
+});
+```
+
+---
+
+##### 1.8.2.7.35. Delete Category
+
+- **Endpoint**: `/api/v1/restaurant/dishes/deleteCategory`
+- **Method**: PATCH
+- **Description**: Deletes a category from the restaurant menu.
+  - **Parameters**:
+
+    - `categoryId`: The ID of the category to be deleted.
+    - **Response**:
+
+      - **Success**: Returns a success message if the category is deleted.
+      - **Error**: Returns an error message if the request fails.
+      - **Authorization**: Restaurant authentication required.
+      - **Error Handling**: Returns an error message if the request fails.
+      - **Sample Code**:
+```typescript
+deleteCategory(categoryId: string) {
+    return this.http.patch(`${this.apiUrl}/v1/restaurant/dishes/deleteCategory`, { categoryId: categoryId });
+}
+```
+
+- **Usage**:
+
+```typescript
+restaurantService.deleteCategory('123').subscribe((response) => {
+
+    console.log('Category deleted successfully:', response);
+});
+```
+
+---
+
+
 
 #### 1.8.2.8. User Service Endpoints
 

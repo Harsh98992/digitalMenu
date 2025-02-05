@@ -354,7 +354,7 @@ The target audience for the website includes:
 - Anyone who prefers the convenience of online food ordering
 - Anyone who wants to avoid the hassle of cooking
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div> <!-- This line of code adds a page break after the current element -->
 
 ### 1.3.4. High-Level Overview of the Website Workflow
 

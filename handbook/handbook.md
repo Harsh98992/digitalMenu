@@ -5173,6 +5173,7 @@ export class RestaurantPanelService {
     "categoryName": "Desserts"
 }
 ```
+
 - **Response**:
 
   - **Success**: Returns a success message and the details of the created category.
@@ -5198,8 +5199,6 @@ restaurantService.addCategory({ categoryName: 'Desserts' }).subscribe((response)
 ```
 
 ---
-
-
 
 #### 1.8.2.8. User Service Endpoints
 

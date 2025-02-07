@@ -96,11 +96,10 @@ export class SmartNotificationService {
                 icon: "assets/icons/icon-72x72.png",
             });
         } else {
-
             // Fallback to snackbar if notification is blocked
             this.snackBar.open(message, "Close", {
                 duration: 5000,
             });
-            }
+        }
     }
 }

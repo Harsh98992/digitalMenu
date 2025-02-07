@@ -1,0 +1,23 @@
+<!-- Make a simple html csi javascriptapp web page that shows a notification when the page is loaded. The notification should be a pop-up message that says "Hello, World!". -->
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>Notification</title>
+	<script type="text/javascript">
+		permission = Notification.permission;
+        if(permission == "granted"){
+            var notification = new Notification("Hello, World!");
+        }
+        else if(permission != "denied"){
+            Notification.requestPermission().then(function(permission){
+                if(permission == "granted"){
+                    var notification = new Notification("Hello, World!");
+                }
+            });
+        }
+	</script>
+</head>
+<body>
+
+</body>
+</html>

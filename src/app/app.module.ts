@@ -24,7 +24,11 @@ import { NgbTimepickerModule } from "@ng-bootstrap/ng-bootstrap";
 import { DatePipe } from "@angular/common";
 import { BnNgIdleService } from "bn-ng-idle";
 import { ThermalPrintModule } from "ng-thermal-print";
-import { AcceptOrderBypassAuthComponent } from './accept-order-bypass-auth/accept-order-bypass-auth.component';
+import { AcceptOrderBypassAuthComponent } from "./accept-order-bypass-auth/accept-order-bypass-auth.component";
+import { UserBehaviorService } from "./services/user-behavior.service";
+import { ReinforcementLearningNotificationService } from "./services/reinforcement-learning-notification.service";
+import { SmartNotificationService } from "./services/smart-notification.service";
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -44,7 +48,7 @@ import { AcceptOrderBypassAuthComponent } from './accept-order-bypass-auth/accep
         HttpClientModule,
         ReactiveFormsModule, // Add ReactiveFormsModule
         NgbTimepickerModule, // Add NgbTimepickerModule
-        ThermalPrintModule ,
+        ThermalPrintModule,
 
         FormsModule,
         ReactiveFormsModule,
@@ -84,7 +88,10 @@ import { AcceptOrderBypassAuthComponent } from './accept-order-bypass-auth/accep
             useClass: LoadingInterceptor,
             multi: true,
         },
-        BnNgIdleService
+        BnNgIdleService,
+        UserBehaviorService,
+        ReinforcementLearningNotificationService,
+        SmartNotificationService,
     ],
     bootstrap: [AppComponent],
 })

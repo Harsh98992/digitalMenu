@@ -5,6 +5,7 @@ import { CustomerAuthService } from "./restaurant/api/customer-auth.service";
 import { OrderService } from "./api/order.service";
 import { Subject } from "rxjs";
 import { BnNgIdleService } from "bn-ng-idle";
+import { SmartNotificationService } from "./services/smart-notification.service";
 
 @Component({
     selector: "app-root",
@@ -20,16 +21,22 @@ export class AppComponent implements OnInit {
         private authService: AuthenticationService,
         private customerAuthService: CustomerAuthService,
         private orderService: OrderService,
-        private bnIdle: BnNgIdleService
+        private bnIdle: BnNgIdleService,
+        private notificationService: SmartNotificationService,
     ) {
         this.checkLogin();
     }
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+        // Request notification permission on startup
+        await this.notificationService.showNotification(
+            "Welcome to Digital Menu!"
+        );
+
         this.bnIdle
             .startWatching(this.idleDuration)
             .subscribe((isTimedOut: boolean) => {
                 if (isTimedOut) {
-                    console.log("session expired")
+                    console.log("session expired");
                     this.refreshPage();
                 }
             });

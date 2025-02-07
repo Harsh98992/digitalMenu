@@ -1,12 +1,16 @@
 import { Injectable } from "@angular/core";
 import { ReinforcementLearningNotificationService } from "./reinforcement-learning-notification.service";
-import { interval } from 'rxjs';
+import { interval } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
     providedIn: "root",
 })
 export class SmartNotificationService {
-    constructor(private rlService: ReinforcementLearningNotificationService) {
+    constructor(
+        private rlService: ReinforcementLearningNotificationService,
+        private snackBar: MatSnackBar
+    ) {
         this.initializeNotificationSchedule();
     }
     private initializeNotificationSchedule() {
@@ -56,20 +60,54 @@ export class SmartNotificationService {
         return notifications[predictedAction] || "";
     }
 
-    private async showNotification(message: string) {
-        // Implement your notification display logic here
-        // This could be a toast, push notification, or in-app alert
-        // this will be a push notification
+    public async showNotification(message: string): Promise<void> {
+        if (!("Notification" in window)) {
+            this.snackBar.open(
+                "Your browser doesn't support notifications",
+                "Close",
+                {
+                    duration: 5000,
+                }
+            );
+            return;
+        }
 
-        // ask the user to allow notifications
         const permission = await Notification.requestPermission();
-        if (permission === "granted") {
-            new Notification("Smart Notification", {
+        console.log(permission);
+        if (permission === "denied") {
+            this.snackBar
+                .open(
+                    "Enable notifications for a better experience",
+                    "Enable",
+                    {
+                        duration: 7000,
+                    }
+                )
+                .onAction()
+                .subscribe(() => {
+                    window.open(
+                        "chrome://settings/content/notifications",
+                        "_blank"
+                    );
+                });
+        } else if (permission === "granted") {
+            new Notification("Qrsay", {
                 body: message,
+                icon: "assets/icons/icon-72x72.png",
             });
-
-            // You can also use a service worker to show notifications
-            // if the user is not on the page
+        } else {
+            this.snackBar
+                .open(
+                    "Please allow notifications for a better experience",
+                    "Allow",
+                    {
+                        duration: 5000,
+                    }
+                )
+                .onAction()
+                .subscribe(async () => {
+                    await Notification.requestPermission();
+                });
         }
     }
 }

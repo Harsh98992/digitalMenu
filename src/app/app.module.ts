@@ -28,6 +28,7 @@ import { AcceptOrderBypassAuthComponent } from "./accept-order-bypass-auth/accep
 import { UserBehaviorService } from "./services/user-behavior.service";
 import { ReinforcementLearningNotificationService } from "./services/reinforcement-learning-notification.service";
 import { SmartNotificationService } from "./services/smart-notification.service";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { SmartNotificationService } from "./services/smart-notification.service"
         AppRoutingModule,
         BrowserAnimationsModule,
         AngularMaterialModule,
+        MatSnackBarModule,
         HttpClientModule,
         ReactiveFormsModule, // Add ReactiveFormsModule
         NgbTimepickerModule, // Add NgbTimepickerModule

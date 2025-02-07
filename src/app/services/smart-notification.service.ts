@@ -77,10 +77,10 @@ export class SmartNotificationService {
         if (permission === "denied") {
             this.snackBar
                 .open(
-                    "Enable notifications for a better experience",
-                    "Enable",
+                    "Notification permission denied. Please enable notifications in your browser settings.",
+                    "Close",
                     {
-                        duration: 7000,
+                        duration: 5000,
                     }
                 )
                 .onAction()

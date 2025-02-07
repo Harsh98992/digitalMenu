@@ -72,7 +72,7 @@ export class SmartNotificationService {
             return;
         }
 
-        const permission = await Notification.permission;
+        const permission = await Notification.requestPermission();
         console.log(permission);
         if (permission === "denied") {
             this.snackBar
@@ -96,10 +96,11 @@ export class SmartNotificationService {
                 icon: "assets/icons/icon-72x72.png",
             });
         } else {
-            await Notification.requestPermission();
-            this.showNotification(message);
 
-            console.log("Notification permission requested");
-        }
+            // Fallback to snackbar if notification is blocked
+            this.snackBar.open(message, "Close", {
+                duration: 5000,
+            });
+            }
     }
 }

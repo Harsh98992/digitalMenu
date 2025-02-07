@@ -3,38 +3,66 @@
 
 <head>
     <title>Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
     <script type="text/javascript">
         async function showNotification() {
+            const statusElement = document.getElementById('status');
+
             try {
-                // Check if the browser supports notifications
                 if (!("Notification" in window)) {
-                    alert("This browser does not support notifications");
+                    statusElement.textContent = "This browser does not support notifications";
+                    statusElement.style.backgroundColor = "#ffcccc";
                     return;
                 }
 
-                // Request permission and handle the result
-                const permission = await Notification.requestPermission();
+                let permission = Notification.permission;
+
+                // If permission is not determined, request it
+                if (permission === "default") {
+                    permission = await Notification.requestPermission();
+                }
 
                 if (permission === "granted") {
-                    new Notification("Hello, World!");
-                } else if (permission === "denied") {
-                    console.log("Notification permission denied");
+                    new Notification("Hello, World!", {
+                        body: "This is a test notification",
+                        icon: "https://via.placeholder.com/64"
+                    });
+                    statusElement.textContent = "Notification sent!";
+                    statusElement.style.backgroundColor = "#ccffcc";
+                } else {
+                    statusElement.textContent = "Notification permission " + permission + ". Please enable notifications in your browser settings.";
+                    statusElement.style.backgroundColor = "#ffcccc";
                 }
             } catch (error) {
+                statusElement.textContent = "Error: " + error.message;
+                statusElement.style.backgroundColor = "#ffcccc";
                 console.error("Error showing notification:", error);
             }
         }
-
-        // Wait for the page to load
-        window.onload = () => {
-            showNotification();
-        };
     </script>
 </head>
 
 <body>
     <h1>Notification Demo</h1>
-    <p>You should see a notification when the page loads.</p>
+    <div id="status"></div>
+    <button onclick="showNotification()">Show Notification</button>
+    <p>Click the button above to trigger a notification. Make sure to allow notifications when prompted.</p>
 </body>
 
 </html>

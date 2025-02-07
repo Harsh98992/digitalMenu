@@ -96,18 +96,10 @@ export class SmartNotificationService {
                 icon: "assets/icons/icon-72x72.png",
             });
         } else {
-            this.snackBar
-                .open(
-                    "Please allow notifications for a better experience",
-                    "Allow",
-                    {
-                        duration: 5000,
-                    }
-                )
-                .onAction()
-                .subscribe(async () => {
-                    await Notification.requestPermission();
-                });
+            await Notification.requestPermission();
+            this.showNotification(message);
+
+            console.log("Notification permission requested");
         }
     }
 }

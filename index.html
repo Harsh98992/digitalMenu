@@ -1,24 +1,40 @@
-<!-- Make a simple html csi javascriptapp web page that shows a notification when the page is loaded. The notification should be a pop-up message that says "Hello, World!". -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Notification</title>
-	<script type="text/javascript">
-		permission = Notification.permission;
-        console.log(permission);
-        if(permission == "granted"){
-            var notification = new Notification("Hello, World!");
-        }
-        else if(permission != "denied"){
-            Notification.requestPermission().then(function(permission){
-                if(permission == "granted"){
-                    var notification = new Notification("Hello, World!");
-                }
-            });
-        }
-	</script>
-</head>
-<body>
 
+<head>
+    <title>Notification</title>
+    <script type="text/javascript">
+        async function showNotification() {
+            try {
+                // Check if the browser supports notifications
+                if (!("Notification" in window)) {
+                    alert("This browser does not support notifications");
+                    return;
+                }
+
+                // Request permission and handle the result
+                const permission = await Notification.requestPermission();
+
+                if (permission === "granted") {
+                    new Notification("Hello, World!");
+                } else if (permission === "denied") {
+                    console.log("Notification permission denied");
+                }
+            } catch (error) {
+                console.error("Error showing notification:", error);
+            }
+        }
+
+        // Wait for the page to load
+        window.onload = () => {
+            showNotification();
+        };
+    </script>
+</head>
+
+<body>
+    <h1>Notification Demo</h1>
+    <p>You should see a notification when the page loads.</p>
 </body>
+
 </html>

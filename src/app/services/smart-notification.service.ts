@@ -80,7 +80,7 @@ export class SmartNotificationService {
                     "Notification permission denied. Please enable notifications in your browser settings.",
                     "Close",
                     {
-                        duration: 5000,
+                        duration: 50000,
                     }
                 )
                 .onAction()

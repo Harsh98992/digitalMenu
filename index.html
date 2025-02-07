@@ -5,6 +5,7 @@
 	<title>Notification</title>
 	<script type="text/javascript">
 		permission = Notification.permission;
+        console.log(permission);
         if(permission == "granted"){
             var notification = new Notification("Hello, World!");
         }

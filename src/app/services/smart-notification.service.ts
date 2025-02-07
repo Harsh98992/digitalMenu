@@ -72,7 +72,7 @@ export class SmartNotificationService {
             return;
         }
 
-        const permission = await Notification.requestPermission();
+        const permission = await Notification.permission;
         console.log(permission);
         if (permission === "denied") {
             this.snackBar

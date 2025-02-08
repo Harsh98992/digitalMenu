@@ -14,15 +14,15 @@ export class SmartNotificationService {
         this.initializeNotificationSchedule();
     }
     private initializeNotificationSchedule() {
-        // Check every hour
-        interval(3600000).subscribe(() => {
+        // Check every second
+        interval(1000).subscribe(() => {
             const currentHour = new Date().getHours();
+            this.sendPersonalizedNotification();
 
             // Common meal times
             const mealTimes = [8, 12, 18]; // 8AM, 12PM, 6PM
 
             if (mealTimes.includes(currentHour)) {
-                this.sendPersonalizedNotification();
             }
         });
     }

@@ -17,12 +17,12 @@ export class SmartNotificationService {
         // Check every second
         interval(1000).subscribe(() => {
             const currentHour = new Date().getHours();
-            this.sendPersonalizedNotification();
 
             // Common meal times
             const mealTimes = [8, 12, 18]; // 8AM, 12PM, 6PM
 
             if (mealTimes.includes(currentHour)) {
+                this.sendPersonalizedNotification();
             }
         });
     }

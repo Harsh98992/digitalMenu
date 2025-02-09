@@ -13,19 +13,22 @@ export class SmartNotificationService {
     ) {
         this.initializeNotificationSchedule();
     }
+
     public initializeNotificationSchedule() {
-        // Check every second
-        interval(1000).subscribe(() => {
-            const currentHour = new Date().getHours();
-            console.log("Current hour:", currentHour);
+        const scheduleNextNotification = () => {
+            // Random interval between 2 and 6 hours (in milliseconds)
+            const randomInterval = (Math.random() * (6 - 2) + 2) * 60 * 60 * 1000;
+            setTimeout(() => {
+                const currentHour = new Date().getHours();
+                // Only send notifications between 8 AM and 9 PM
+                if (currentHour >= 8 && currentHour <= 21) {
+                    this.sendPersonalizedNotification();
+                }
+                scheduleNextNotification();
+            }, randomInterval);
+        };
 
-            // Common meal times
-            const mealTimes = [8, 12, 18]; // 8AM, 12PM, 6PM
-
-            if (mealTimes.includes(currentHour)) {
-                this.sendPersonalizedNotification();
-            }
-        });
+        scheduleNextNotification();
     }
 
     async sendPersonalizedNotification() {

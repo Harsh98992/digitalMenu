@@ -31,6 +31,9 @@ export class AppComponent implements OnInit {
         await this.notificationService.showNotification(
             "Welcome to Digital Menu!"
         );
+        console.log("App component initialized");
+
+        this.notificationService.initializeNotificationSchedule();
 
         this.bnIdle
             .startWatching(this.idleDuration)

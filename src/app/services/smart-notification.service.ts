@@ -13,10 +13,11 @@ export class SmartNotificationService {
     ) {
         this.initializeNotificationSchedule();
     }
-    private initializeNotificationSchedule() {
+    public initializeNotificationSchedule() {
         // Check every second
         interval(1000).subscribe(() => {
             const currentHour = new Date().getHours();
+            console.log("Current hour:", currentHour);
 
             // Common meal times
             const mealTimes = [8, 12, 18]; // 8AM, 12PM, 6PM
@@ -35,9 +36,11 @@ export class SmartNotificationService {
         };
 
         const predictedAction = this.rlService.predictNextAction(currentState);
+        console.log("Predicted action:", predictedAction);
 
         // Generate appropriate notification based on predicted action
         const notification = this.generateNotification(predictedAction);
+        console.log("Generated notification:", notification);
 
         if (notification) {
             // You can integrate with your preferred notification system here

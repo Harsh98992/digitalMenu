@@ -30,6 +30,7 @@ export class ReinforcementLearningNotificationService {
 
         const currentState = this.getCurrentState(actions);
         const nextAction = this.predictNextAction(currentState);
+        console.log("Next action predicted:", nextAction);
         this.updateQTable(currentState, nextAction);
     }
 
@@ -44,9 +45,11 @@ export class ReinforcementLearningNotificationService {
     predictNextAction(state: State): string {
         const stateKey = JSON.stringify(state);
         const actionValues = this.qTable.get(stateKey) || new Map();
-        return Array.from(actionValues.entries()).reduce((a, b) =>
+        const predictedAction = Array.from(actionValues.entries()).reduce((a, b) =>
             a[1] > b[1] ? a : b
         )[0];
+        console.log("Predicted action:", predictedAction, "State:", state);
+        return predictedAction;
     }
 
     private updateQTable(state: State, action: string) {
@@ -67,12 +70,15 @@ export class ReinforcementLearningNotificationService {
                     oldValue);
 
         actionValues.set(action, newValue);
+        console.log("QTable updated for state:", state, "action:", action, "newValue:", newValue);
     }
 
     private getMaxFutureValue(state: State): number {
         const stateKey = JSON.stringify(state);
         const actionValues = this.qTable.get(stateKey);
         if (!actionValues) return 0;
-        return Math.max(...Array.from(actionValues.values()));
+        const maxValue = Math.max(...Array.from(actionValues.values()));
+        console.log("Max future value:", maxValue, "State:", state);
+        return maxValue;
     }
 }

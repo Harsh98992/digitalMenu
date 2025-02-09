@@ -58,6 +58,15 @@ export class OrderService {
     getCustomerOrder() {
         return this.http.get(`${this.apiUrl}/v1/orders/customerOrder`);
     }
+
+    getLastOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/getLastOrder`);
+    }
+
+    getLatestOrder() {
+        return this.http.get(`${this.apiUrl}/v1/orders/getLatestOrder`);
+    }
+
     getOrderwithPaymentOrderId(orderId) {
         return this.http.get(`${this.apiUrl}/v1/orders/getOrderwithPaymentOrderId/${orderId}`);
     }

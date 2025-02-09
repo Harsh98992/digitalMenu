@@ -75,7 +75,7 @@ export class LayoutComponent implements OnInit {
         // get current url
         this.currentUrl = this.router.url;
 
-        // chceck if current url is homepage http://localhost:4200/restaurant?detail=PAG
+        // check if current url is homepage http://localhost:4200/restaurant?detail=PAG
         if (this.currentUrl.includes("restaurant")) {
             this.checkIfhomepage = false;
         }

@@ -10,11 +10,11 @@ import { filter } from "rxjs";
 import { UserLoginComponent } from "src/app/user-auth/user-login/user-login.component";
 import { CustomerAuthService } from "../../api/customer-auth.service";
 import { MatSidenav } from "@angular/material/sidenav";
-
 import { FormBuilder } from "@angular/forms";
 import { environment } from "src/environments/environment";
 import { io } from "socket.io-client";
 import { OrderService } from "src/app/api/order.service";
+import { SmartNotificationService } from "src/app/services/smart-notification.service";
 
 @Component({
     selector: "app-layout",
@@ -32,7 +32,8 @@ export class LayoutComponent implements OnInit {
         private router: Router,
         private dialog: MatDialog,
         private customerAuthService: CustomerAuthService,
-        public orderService: OrderService
+        public orderService: OrderService,
+        private notificationService: SmartNotificationService
     ) {
         this.socket = io(this.socketApiUrl);
 
@@ -64,7 +65,12 @@ export class LayoutComponent implements OnInit {
         this.socket.emit(this.socketOrderPlacedEvent, data);
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+        // Initialize notifications in Layout component
+        this.notificationService.initializeNotificationSchedule();
+        
+        // Show welcome notification when layout loads
+        await this.notificationService.showNotification("Welcome to Digital Menu!");
         
         // get current url
         this.currentUrl = this.router.url;
@@ -76,10 +82,12 @@ export class LayoutComponent implements OnInit {
         this.getCurrentRoute();
         this.checkLogin();
     }
+    
     logout() {
         this.router.navigateByUrl("/");
         this.customerAuthService.removeToken();
     }
+    
     checkLogin() {
         this.customerAuthService.customerDetail.subscribe({
             next: (res) => {
@@ -94,6 +102,7 @@ export class LayoutComponent implements OnInit {
             },
         });
     }
+    
     getCustomerActiveOrder() {
         this.orderService.getCustomerActiveOrder().subscribe({
             next: (res: any) => {
@@ -103,6 +112,7 @@ export class LayoutComponent implements OnInit {
             },
         });
     }
+    
     getCurrentRoute() {
         this.route.queryParams.subscribe((params: any) => {
             if (params && params?.detail) {
@@ -112,10 +122,10 @@ export class LayoutComponent implements OnInit {
             }
         });
     }
+    
     openLoginDialog() {
         this.dialog.open(UserLoginComponent, {
             minWidth: "400px",
-
             disableClose: true,
         });
     }

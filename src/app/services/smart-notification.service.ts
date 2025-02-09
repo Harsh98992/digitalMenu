@@ -32,9 +32,10 @@ export class SmartNotificationService {
         const currentState = {
             timeOfDay: new Date().getHours(),
             dayOfWeek: new Date().getDay(),
-            lastActions: [], // Get from recent actions
+            lastActions: ['viewMenu'], // Set a default action to start with
         };
 
+        console.log('Sending notification with state:', currentState);
         const predictedAction = this.rlService.predictNextAction(currentState);
         console.log("Predicted action:", predictedAction);
 
@@ -49,6 +50,7 @@ export class SmartNotificationService {
     }
 
     private generateNotification(predictedAction: string): string {
+        console.log('Generating notification for action:', predictedAction);
         const notifications: { [key: string]: string } = {
             viewMenu:
                 "Looking for something to eat? Check out our latest menu!",

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes, PreloadAllModules } from "@angular/router";
+import { RouterModule, Routes, NoPreloading } from "@angular/router";
 import { ResetPasswordComponent } from "./auth/reset-password/reset-password.component";
 import { ForgotPasswordComponent } from "./auth/forgot-password/forgot-password.component";
 import { LoginComponent } from "./auth/login/login.component";
@@ -17,6 +17,7 @@ const routes: Routes = [
             import("./restaurant/restaurant.module").then(
                 (m) => m.RestaurantModule
             ),
+        data: { preload: true }
     },
     {
         path: "admin/register",
@@ -79,7 +80,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {
-        preloadingStrategy: PreloadAllModules,
+        preloadingStrategy: NoPreloading,
         scrollPositionRestoration: 'enabled'
     })],
     exports: [RouterModule],

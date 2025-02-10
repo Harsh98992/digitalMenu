@@ -56,30 +56,12 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         ReactiveFormsModule,
 
         NgxSpinnerModule.forRoot({ type: "square-jelly-box" }),
-        // ServiceWorkerModule.register("ngsw-worker.js", {
-        //     enabled: environment.production,
-        //     // Register the ServiceWorker as soon as the application is stable
-        //     // or after 30 seconds (whichever comes first).
-        //     registrationStrategy: "registerWhenStable:30000",
-        // }),
+  
     ],
     providers: [
         RestaurantAuthGuard,
         DatePipe,
-        // {
-        //     provide: "SocialAuthServiceConfig",
-        //     useValue: {
-        //         autoLogin: false,
-        //         providers: [
-        //             // {
-        //             //     id: GoogleLoginProvider.PROVIDER_ID,
-        //             //     provider: new GoogleLoginProvider(
-        //             //         "503347741402-6md4jq747sncq0i21goufb0uc39m351k.apps.googleusercontent.com"
-        //             //     ),
-        //             // },
-        //         ],
-        //     } as SocialAuthServiceConfig,
-        // },
+
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

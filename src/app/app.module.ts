@@ -48,14 +48,15 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         AngularMaterialModule,
         MatSnackBarModule,
         HttpClientModule,
-        NgbTimepickerModule, // Add NgbTimepickerModule
+        NgbTimepickerModule,
         ThermalPrintModule,
-
         FormsModule,
         ReactiveFormsModule,
-
         NgxSpinnerModule.forRoot({ type: "square-jelly-box" }),
-  
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [
         RestaurantAuthGuard,

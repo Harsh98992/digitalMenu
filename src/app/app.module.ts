@@ -48,7 +48,6 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         AngularMaterialModule,
         MatSnackBarModule,
         HttpClientModule,
-        ReactiveFormsModule, // Add ReactiveFormsModule
         NgbTimepickerModule, // Add NgbTimepickerModule
         ThermalPrintModule,
 

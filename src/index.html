@@ -7,22 +7,44 @@
   <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="cache-control" content="no-cache" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <script src="https://kit.fontawesome.com/d7947f879e.js" crossorigin="anonymous"></script>
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A&amp;libraries=places"
-    defer=""></script>
-  <!-- <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#1976d2"> -->
+  <!-- Add resource hints -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://maps.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://checkout.razorpay.com" crossorigin />
+  <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+
+  <!-- Optimize font loading -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" media="print" onload="this.media='all'" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" media="print" onload="this.media='all'" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <!-- Load scripts with proper attributes -->
+  <script src="https://kit.fontawesome.com/d7947f879e.js" crossorigin="anonymous" async></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA565Z7yEHcoZ1TMV4Asu3TZQGn0W2Np_A&libraries=places" async defer></script>
+
+  <!-- Enhanced font fallback -->
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      font-display: swap;
+    }
+  </style>
+
+  <!-- Enable PWA support -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
 </head>
 
 <body>
   <app-root></app-root>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
+  <!-- Load Razorpay script only when needed -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 

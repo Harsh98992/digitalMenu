@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { RestaurantService } from "../../api/restaurant.service";
+import { CustomerAuthService } from "../../api/customer-auth.service";
 
 @Component({
     selector: "app-feedback-dialog",
@@ -26,6 +27,7 @@ export class FeedbackDialogComponent implements OnInit {
         private dialogRef: MatDialogRef<FeedbackDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private restaurantService: RestaurantService,
+        private customerAuthService: CustomerAuthService,
         private snackBar: MatSnackBar
     ) {}
 
@@ -74,23 +76,91 @@ export class FeedbackDialogComponent implements OnInit {
         this.isSubmitting = true;
 
         // Get user info if available
-        const userInfo = localStorage.getItem("userData");
-        let customerInfo = {};
+        let customerInfo: {
+            customerId?: string;
+            name?: string;
+            email?: string;
+        } = {};
 
-        if (userInfo) {
-            try {
-                const userData = JSON.parse(userInfo);
-                if (userData) {
-                    customerInfo = {
-                        customerId: userData._id,
-                        name: userData.name,
-                        email: userData.email,
-                    };
+        // Try to get customer data directly from the customer auth service
+        const customerData = this.customerAuthService.getUserDetail();
+        if (customerData) {
+            console.log("Found customer data from auth service:", customerData);
+            customerInfo = {
+                customerId: customerData._id,
+                name: customerData.name,
+                email: customerData.email,
+            };
+        } else {
+            // Try to get customer data from customerDetail in localStorage
+            const customerDetail = localStorage.getItem("customerDetail");
+            if (customerDetail) {
+                try {
+                    const parsedCustomerData = JSON.parse(customerDetail);
+                    if (parsedCustomerData) {
+                        console.log(
+                            "Found customer data from localStorage:",
+                            parsedCustomerData
+                        );
+                        customerInfo = {
+                            customerId: parsedCustomerData._id,
+                            name: parsedCustomerData.name,
+                            email: parsedCustomerData.email,
+                        };
+                    }
+                } catch (e) {
+                    console.error("Error parsing customer data:", e);
                 }
-            } catch (e) {
-                console.error("Error parsing user data:", e);
+            }
+
+            // If no customer data found, try userData as fallback
+            if (!customerInfo.customerId) {
+                const userInfo = localStorage.getItem("userData");
+                if (userInfo) {
+                    try {
+                        const userData = JSON.parse(userInfo);
+                        if (userData) {
+                            console.log(
+                                "Found user data from localStorage:",
+                                userData
+                            );
+                            customerInfo = {
+                                customerId: userData._id,
+                                name: userData.name,
+                                email: userData.email,
+                            };
+                        }
+                    } catch (e) {
+                        console.error("Error parsing user data:", e);
+                    }
+                }
+            }
+
+            // If still no customer info, try userDetail from sessionStorage
+            if (!customerInfo.customerId) {
+                const userDetail = sessionStorage.getItem("userDetail");
+                if (userDetail) {
+                    try {
+                        const userData = JSON.parse(userDetail);
+                        if (userData) {
+                            console.log(
+                                "Found user detail from sessionStorage:",
+                                userData
+                            );
+                            customerInfo = {
+                                customerId: userData._id,
+                                name: userData.name,
+                                email: userData.email,
+                            };
+                        }
+                    } catch (e) {
+                        console.error("Error parsing user detail:", e);
+                    }
+                }
             }
         }
+
+        console.log("Final customer info for feedback:", customerInfo);
 
         // Ensure restaurant ID is available
         if (!this.data || !this.data.restaurantId) {

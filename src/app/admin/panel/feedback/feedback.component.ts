@@ -122,51 +122,23 @@ export class FeedbackComponent implements OnInit, AfterViewInit {
                     this.loadFeedback();
                     this.loadFeedbackStats();
                 } else {
-                    // Method 4: Find any restaurant in the system
-                    this.findAnyRestaurant();
+                    // If no restaurant ID is found, use a default one for testing
+                    // This is just for demonstration purposes
+                    this.restaurantId = "5f9f1b9b9b9b9b9b9b9b9b9b"; // Replace with a valid ID if known
+                    console.log(
+                        "Using default restaurant ID for testing:",
+                        this.restaurantId
+                    );
+                    this.loadFeedback();
+                    this.loadFeedbackStats();
                 }
             },
             error: (err) => {
                 console.error("Error getting restaurant details:", err);
-                // Method 4: Find any restaurant in the system
-                this.findAnyRestaurant();
-            },
-        });
-    }
-
-    /**
-     * Find any restaurant in the system to use for feedback
-     */
-    findAnyRestaurant() {
-        console.log("Trying to find any restaurant in the system...");
-        this.restaurantService.getAllRestaurants().subscribe({
-            next: (res: any) => {
-                if (res && res.data && res.data.length > 0 && res.data[0]._id) {
-                    this.restaurantId = res.data[0]._id;
-                    console.log(
-                        "Found a restaurant from the system:",
-                        this.restaurantId
-                    );
-                    this.loadFeedback();
-                    this.loadFeedbackStats();
-                } else {
-                    console.warn("No restaurants found in the system");
-                    // Use a default ID as last resort
-                    this.restaurantId = "5f9f1b9b9b9b9b9b9b9b9b9b"; // Replace with a valid ID if known
-                    console.log(
-                        "Using default restaurant ID as last resort:",
-                        this.restaurantId
-                    );
-                    this.loadFeedback();
-                    this.loadFeedbackStats();
-                }
-            },
-            error: (err) => {
-                console.error("Error finding any restaurant:", err);
-                // Use a default ID as last resort
+                // If no restaurant ID is found, use a default one for testing
                 this.restaurantId = "5f9f1b9b9b9b9b9b9b9b9b9b"; // Replace with a valid ID if known
                 console.log(
-                    "Using default restaurant ID as last resort:",
+                    "Using default restaurant ID for testing:",
                     this.restaurantId
                 );
                 this.loadFeedback();
@@ -219,7 +191,9 @@ export class FeedbackComponent implements OnInit, AfterViewInit {
                                 ...item,
                                 emojiIcon: this.emojiMap[item.emoji] || "😐",
                                 customerName:
-                                    item.customerInfo?.name || "Anonymous",
+                                    item.customerInfo && item.customerInfo.name
+                                        ? item.customerInfo.name
+                                        : "Anonymous",
                             };
                         }
                     );
@@ -315,49 +289,9 @@ export class FeedbackComponent implements OnInit, AfterViewInit {
         this.feedbackStats = {};
         this.totalFeedback = 0;
         this.averageRating = 0;
-
-        // Check if feedback collection exists
-        this.checkFeedbackCollection();
+        this.isLoading = true;
 
         // Force reload restaurant data
         this.loadRestaurantData();
-    }
-
-    /**
-     * Check if the feedback collection exists in the database
-     */
-    checkFeedbackCollection() {
-        this.restaurantService.checkFeedbackCollection().subscribe({
-            next: (response: any) => {
-                console.log("Feedback collection check:", response);
-                if (response && response.data) {
-                    const {
-                        feedbackCollectionExists,
-                        feedbackCount,
-                        collections,
-                    } = response.data;
-                    console.log(
-                        `Feedback collection exists: ${feedbackCollectionExists}`
-                    );
-                    console.log(`Feedback count: ${feedbackCount}`);
-                    console.log(
-                        `Available collections: ${collections.join(", ")}`
-                    );
-
-                    if (!feedbackCollectionExists) {
-                        console.warn(
-                            "Feedback collection does not exist in the database!"
-                        );
-                    } else if (feedbackCount === 0) {
-                        console.warn(
-                            "Feedback collection exists but is empty!"
-                        );
-                    }
-                }
-            },
-            error: (error) => {
-                console.error("Error checking feedback collection:", error);
-            },
-        });
     }
 }

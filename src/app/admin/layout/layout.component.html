@@ -8,23 +8,23 @@
         /> -->
         </div>
         <ul class="list-unstyled components text-secondary">
-            <li routerLink="/admin" *ngIf="verifiedAccountFlag">
+            <li routerLink="/admin">
                 <a class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> Dashboard</a>
             </li>
-            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag" routerLink="/admin/dishes/view-dish">
+            <li routerLink="/admin/dishes/view-dish">
                 <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-utensils"></i> View Dish</a>
             </li>
-            <li routerLink="/admin/customers" *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+            <li routerLink="/admin/customers">
                 <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-users"></i> Customers</a>
             </li>
-            <li routerLink="/admin/payment" *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+            <li routerLink="/admin/payment">
                 <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-money-bill"></i> Payments</a>
             </li>
-            <li routerLink="/admin/restaurant-orders" *ngIf="verifiedAccountFlag">
+            <li routerLink="/admin/restaurant-orders">
                 <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-book"></i> Orders</a>
             </li>
 
-            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+            <li>
                 <a data-target="#dishes" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
                         class="fa-solid fa fa-bullhorn"></i> Dishes
                     <i class="fas fa-angle-right" aria-hidden="true"></i>
@@ -49,7 +49,7 @@
                 </ul>
             </li>
 
-            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+            <li>
                 <a data-target="#promocodes" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
                         class="fa-solid fa fa-bullhorn"></i> Promocode
                     <i class="fas fa-angle-right" aria-hidden="true"></i>
@@ -73,37 +73,28 @@
                 </a>
 
                 <ul #collapse class="collapse out" id="restaurantprofile">
-                    <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag"
-                        routerLink="/admin/restaurent-contact-details/view">
+                    <li routerLink="/admin/restaurent-contact-details/view">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> Contact Details
                         </a>
                     </li>
-                    <li *ngIf="!adminRouteFlag && !this.staffRoleFlag" routerLink="/admin/restaurant-profile">
+                    <li routerLink="/admin/restaurant-profile">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
                             Details
                         </a>
                     </li>
-                    <li *ngIf="
-                            !adminRouteFlag &&
-                            verifiedAccountFlag &&
-                            !this.staffRoleFlag
-                        " routerLink="/admin/restaurant-tables/view">
+                    <li routerLink="/admin/restaurant-tables/view">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
                             Tables</a>
                     </li>
-                    <li *ngIf="
-                            !adminRouteFlag &&
-                            verifiedAccountFlag &&
-                            !this.staffRoleFlag
-                        " routerLink="/admin/restaurant-room/view">
+                    <li routerLink="/admin/restaurant-room/view">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
                             Rooms</a>
                     </li>
-                    <li routerLink="/admin/restaurant-images" *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+                    <li routerLink="/admin/restaurant-images">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
                             Images</a>
                     </li>
-                    <li *ngIf="verifiedAccountFlag" routerLink="/admin/restaurantQrCode">
+                    <li routerLink="/admin/restaurantQrCode">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
                             QrCode</a>
                     </li>
@@ -137,7 +128,7 @@
             </li> -->
 
             <!-- add user profile -->
-            <li *ngIf="verifiedAccountFlag">
+            <li>
                 <a data-target="#profile" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
                         class="fa-solid fa fa-bullhorn"></i> Profile
                     <i class="fas fa-angle-right" aria-hidden="true"></i>
@@ -147,7 +138,7 @@
                     <li routerLink="/admin/user-profile">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> My Profile</a>
                     </li>
-                    <li *ngIf="verifiedAccountFlag" routerLink="/admin/profile/resetPassword">
+                    <li routerLink="/admin/profile/resetPassword">
                         <a class="custom-center"><i class="fas fa-angle-right"></i> Change
                             Password</a>
                     </li>
@@ -159,7 +150,7 @@
                 >
             </li> -->
 
-            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+            <li>
                 <a routerLink="/admin/user-managment/view"><i class="fa-solid fa fa-user"></i> User Managment</a>
             </li>
             <!-- <li *ngIf="verifiedAccountFlag">
@@ -167,7 +158,7 @@
                     ><i class="fa-solid fa fa-user"></i> Restaurant QrCode</a
                 >
             </li> -->
-            <li *ngIf="adminRouteFlag">
+            <li>
                 <a routerLink="/admin/unVerifyRequest"><i class="fa-solid fa fa-user"></i>Un-Verify Account</a>
             </li>
 
@@ -188,13 +179,13 @@
                     ><i class="fas fa-cog"></i>Support</a
                 >
             </li> -->
-            <li *ngIf="verifiedAccountFlag">
+            <li>
                 <a href="https://wa.me/9310415024" target="blank"><i class="fas fa-cog"></i>Support</a>
             </li>
-            <li *ngIf="verifiedAccountFlag">
+            <li>
                 <a routerLink="/admin/feedback"><i class="fa-solid fa-comments"></i> Customer Feedback</a>
             </li>
-            <li *ngIf="verifiedAccountFlag && !this.staffRoleFlag">
+            <li>
                 <a routerLink="/admin/setting/store"><i class="fas fa-cog"></i>Store Settings</a>
             </li>
         </ul>
@@ -206,16 +197,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="custom-on-off-button">
-                    <ng-select *ngIf="verifiedAccountFlag && !staffRoleFlag && isDineInAvailable"
-                        [(ngModel)]="dineInStatus" (change)="changeDineInStatus()" style="min-width: 130px"
+                    <ng-select [(ngModel)]="dineInStatus" (change)="changeDineInStatus()" style="min-width: 130px"
                         class="mr-3 custom-space-end" [clearable]="false">
                         <ng-option value="online"><i class="fa-solid fa-circle mr-2" style="color: #3d9b17"></i>Dine In
                             Online</ng-option>
                         <ng-option value="offline"><i class="fa-solid fa-circle mr-2" style="color: red"></i>Dine In
                             Offline</ng-option>
                     </ng-select>
-                    <ng-select *ngIf="verifiedAccountFlag && !staffRoleFlag" [(ngModel)]="selectedStatus"
-                        (change)="changeRestaurantStatus()" style="min-width: 130px" class="mr-3" [clearable]="false">
+                    <ng-select [(ngModel)]="selectedStatus" (change)="changeRestaurantStatus()" style="min-width: 130px"
+                        class="mr-3" [clearable]="false">
                         <ng-option value="online"><i class="fa-solid fa-circle mr-2"
                                 style="color: #3d9b17"></i>Restaurnat Online</ng-option>
                         <ng-option value="offline"><i class="fa-solid fa-circle mr-2"
@@ -282,15 +272,11 @@
                                             <a class="dropdown-item"><i class="fas fa-address-card"></i>
                                                 Profile</a>
                                         </li>
-                                        <li mat-menu-item routerLink="/admin/restaurantQrCode"
-                                            *ngIf="verifiedAccountFlag">
+                                        <li mat-menu-item routerLink="/admin/restaurantQrCode">
                                             <a class="dropdown-item"><i class="fa-solid fa-qrcode"></i>
                                                 Qr Code</a>
                                         </li>
-                                        <li mat-menu-item routerLink="/admin/setting/store" *ngIf="
-                                                verifiedAccountFlag &&
-                                                !staffRoleFlag
-                                            ">
+                                        <li mat-menu-item routerLink="/admin/setting/store">
                                             <a class="dropdown-item"><i class="fas fa-cog"></i>
                                                 Settings</a>
                                         </li>

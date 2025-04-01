@@ -97,7 +97,11 @@
                 <td class="mat-cell" colspan="4">
                   <div class="no-data-message">
                     <mat-icon>sentiment_dissatisfied</mat-icon>
-                    <p>No feedback data available</p>
+                    <p>No feedback data available for this restaurant</p>
+                    <small *ngIf="restaurantId">Restaurant ID: {{restaurantId}}</small>
+                    <button mat-raised-button color="primary" class="mt-3" (click)="loadFeedback()">
+                      <mat-icon>refresh</mat-icon> Refresh
+                    </button>
                   </div>
                 </td>
               </tr>

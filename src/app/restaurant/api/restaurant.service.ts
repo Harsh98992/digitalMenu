@@ -109,6 +109,14 @@ export class RestaurantService {
             `${this.apiUrl}/v1/feedback/stats/${restaurantId}`
         );
     }
+
+    searchRestaurants(query: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/restaurant/search?query=${encodeURIComponent(
+                query
+            )}`
+        );
+    }
     storeRestaurnat(data) {
         return this.http.post(
             `${this.apiUrl}/v1/customer/storeRestaurant`,

@@ -92,6 +92,18 @@ export class FeedbackDialogComponent implements OnInit {
             }
         }
 
+        // Ensure restaurant ID is available
+        if (!this.data || !this.data.restaurantId) {
+            this.isSubmitting = false;
+            this.snackBar.open(
+                "Error: Restaurant information is missing",
+                "Close",
+                { duration: 3000 }
+            );
+            this.dialogRef.close();
+            return;
+        }
+
         const feedbackData = {
             restaurantId: this.data.restaurantId,
             emoji: this.selectedEmoji,

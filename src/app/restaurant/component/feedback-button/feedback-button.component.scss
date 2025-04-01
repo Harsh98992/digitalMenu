@@ -1,13 +1,79 @@
 .feedback-button {
-  position: fixed;
-  bottom: 70px;
-  right: 20px;
-  z-index: 100;
-  background: linear-gradient(135deg, #ff7b14 40%, #ffd700);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    z-index: 100;
+    background: linear-gradient(135deg, #ff7b14 40%, #ffd700);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 30px;
+    padding: 8px 16px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+}
+
+.feedback-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-content mat-icon {
+    margin-right: 8px;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+}
+
+.feedback-content span {
+    font-size: 14px;
+    letter-spacing: 0.5px;
 }
 
 .feedback-button:hover {
-  transform: scale(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.feedback-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Add a subtle animation */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 6px 12px rgba(255, 123, 20, 0.3);
+    }
+    100% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.feedback-button {
+    animation: pulse 3s infinite ease-in-out, fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

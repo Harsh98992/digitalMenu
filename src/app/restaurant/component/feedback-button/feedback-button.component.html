@@ -1,9 +1,6 @@
-<button 
-  mat-mini-fab 
-  color="accent" 
-  class="feedback-button" 
-  (click)="openFeedbackDialog()" 
-  matTooltip="Give Feedback"
->
-  <mat-icon>feedback</mat-icon>
+<button class="feedback-button" (click)="openFeedbackDialog()" matTooltip="Share your experience with us">
+  <div class="feedback-content">
+    <mat-icon>rate_review</mat-icon>
+    <span>Feedback</span>
+  </div>
 </button>

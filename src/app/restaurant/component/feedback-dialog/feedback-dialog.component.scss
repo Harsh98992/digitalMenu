@@ -1,42 +1,99 @@
+.dialog-title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.dialog-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
 .emoji-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 30px;
+    flex-wrap: wrap;
 }
 
 .emoji-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 18%;
+    box-sizing: border-box;
 }
 
 .emoji-option:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px);
 }
 
 .emoji-option.selected {
-  background-color: rgba(255, 123, 20, 0.2);
-  transform: scale(1.2);
+    background-color: rgba(255, 123, 20, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .emoji {
-  font-size: 2rem;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+
+.emoji-label {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    line-height: 1.2;
 }
 
 .feedback-form {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .full-width {
-  width: 100%;
+    width: 100%;
 }
 
 .spinner {
-  display: inline-block;
-  margin-right: 8px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Dialog action buttons */
+::ng-deep .mat-dialog-actions {
+    padding: 12px 0;
+    margin-bottom: 0;
+    justify-content: flex-end;
+}
+
+::ng-deep .mat-dialog-actions button {
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.cancel-button {
+    color: #666;
+}
+
+.submit-button {
+    padding: 0 24px;
+    height: 36px;
+}
+
+::ng-deep .mat-raised-button.mat-primary {
+    background: linear-gradient(135deg, #ff7b14 40%, #ffd700);
+    box-shadow: 0 3px 5px rgba(255, 123, 20, 0.3);
+}
+
+::ng-deep .mat-raised-button.mat-primary:hover {
+    box-shadow: 0 5px 10px rgba(255, 123, 20, 0.4);
 }

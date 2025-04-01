@@ -68,26 +68,50 @@ export class LayoutComponent implements OnInit {
     async ngOnInit(): Promise<void> {
         // Initialize notifications in Layout component
         this.notificationService.initializeNotificationSchedule();
-        
+
         // Show welcome notification when layout loads
-        await this.notificationService.showNotification("Welcome to Digital Menu!");
-        
+        await this.notificationService.showNotification(
+            "Welcome to Digital Menu!"
+        );
+
         // get current url
         this.currentUrl = this.router.url;
 
         // check if current url is homepage http://localhost:4200/restaurant?detail=PAG
-        if (this.currentUrl.includes("restaurant")) {
-            this.checkIfhomepage = false;
-        }
+        this.updateHomepageFlag();
+
+        // Subscribe to router events to update the homepage flag when the route changes
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.currentUrl = event.url;
+                this.updateHomepageFlag();
+            }
+        });
+
         this.getCurrentRoute();
         this.checkLogin();
     }
-    
+
     logout() {
         this.router.navigateByUrl("/");
         this.customerAuthService.removeToken();
     }
-    
+
+    /**
+     * Update the homepage flag based on the current URL
+     */
+    updateHomepageFlag() {
+        // If URL includes 'restaurant' and has a detail parameter, it's a restaurant page
+        if (
+            this.currentUrl.includes("restaurant") &&
+            this.currentUrl.includes("detail=")
+        ) {
+            this.checkIfhomepage = false;
+        } else {
+            this.checkIfhomepage = true;
+        }
+    }
+
     checkLogin() {
         this.customerAuthService.customerDetail.subscribe({
             next: (res) => {
@@ -102,7 +126,7 @@ export class LayoutComponent implements OnInit {
             },
         });
     }
-    
+
     getCustomerActiveOrder() {
         this.orderService.getCustomerActiveOrder().subscribe({
             next: (res: any) => {
@@ -112,7 +136,7 @@ export class LayoutComponent implements OnInit {
             },
         });
     }
-    
+
     getCurrentRoute() {
         this.route.queryParams.subscribe((params: any) => {
             if (params && params?.detail) {
@@ -122,7 +146,7 @@ export class LayoutComponent implements OnInit {
             }
         });
     }
-    
+
     openLoginDialog() {
         this.dialog.open(UserLoginComponent, {
             minWidth: "400px",

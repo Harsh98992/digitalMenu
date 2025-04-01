@@ -56,6 +56,7 @@
     <router-outlet></router-outlet>
 </main>
 
-<app-feedback-button></app-feedback-button>
+<!-- Only show feedback button on restaurant pages, not on homepage -->
+<app-feedback-button *ngIf="!checkIfhomepage"></app-feedback-button>
 
 <app-footer></app-footer>

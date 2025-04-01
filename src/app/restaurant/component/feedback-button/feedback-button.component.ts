@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router, NavigationEnd } from "@angular/router";
+import { Subscription } from "rxjs";
 import { FeedbackDialogComponent } from "../feedback-dialog/feedback-dialog.component";
 import { RestaurantService } from "../../api/restaurant.service";
 
@@ -9,17 +11,49 @@ import { RestaurantService } from "../../api/restaurant.service";
     templateUrl: "./feedback-button.component.html",
     styleUrls: ["./feedback-button.component.scss"],
 })
-export class FeedbackButtonComponent implements OnInit {
+export class FeedbackButtonComponent implements OnInit, OnDestroy {
     restaurantId: string;
+    private routerSubscription: Subscription;
 
     constructor(
         private dialog: MatDialog,
         private restaurantService: RestaurantService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
-        this.getRestaurantIdFromUrl();
+        // Check current URL
+        this.checkUrlAndGetRestaurantId(this.router.url);
+
+        // Subscribe to router events to update when the route changes
+        this.routerSubscription = this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.checkUrlAndGetRestaurantId(event.url);
+            }
+        });
+    }
+
+    ngOnDestroy(): void {
+        // Unsubscribe to prevent memory leaks
+        if (this.routerSubscription) {
+            this.routerSubscription.unsubscribe();
+        }
+    }
+
+    /**
+     * Check if the URL is for a specific restaurant page and get the restaurant ID if it is
+     */
+    private checkUrlAndGetRestaurantId(url: string): void {
+        if (url.includes("restaurant") && url.includes("detail=")) {
+            this.getRestaurantIdFromUrl();
+        } else {
+            console.log(
+                "Not on a specific restaurant page, feedback button should not be visible"
+            );
+            // Clear restaurant ID to prevent feedback dialog from opening
+            this.restaurantId = null;
+        }
     }
 
     /**

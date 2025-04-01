@@ -99,14 +99,18 @@ export class RestaurantService {
     }
 
     getFeedbackByRestaurant(restaurantId: string) {
+        // Add timestamp to prevent caching
+        const timestamp = new Date().getTime();
         return this.http.get(
-            `${this.apiUrl}/v1/feedback/restaurant/${restaurantId}`
+            `${this.apiUrl}/v1/feedback/restaurant/${restaurantId}?_=${timestamp}`
         );
     }
 
     getFeedbackStats(restaurantId: string) {
+        // Add timestamp to prevent caching
+        const timestamp = new Date().getTime();
         return this.http.get(
-            `${this.apiUrl}/v1/feedback/stats/${restaurantId}`
+            `${this.apiUrl}/v1/feedback/stats/${restaurantId}?_=${timestamp}`
         );
     }
 
@@ -116,6 +120,14 @@ export class RestaurantService {
                 query
             )}`
         );
+    }
+
+    checkFeedbackCollection() {
+        return this.http.get(`${this.apiUrl}/v1/feedback/check-collection`);
+    }
+
+    getAllRestaurants() {
+        return this.http.get(`${this.apiUrl}/v1/restaurant/all`);
     }
     storeRestaurnat(data) {
         return this.http.post(

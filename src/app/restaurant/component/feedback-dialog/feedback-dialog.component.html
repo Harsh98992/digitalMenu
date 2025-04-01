@@ -7,7 +7,6 @@
     <div *ngFor="let emoji of emojis" class="emoji-option" [class.selected]="selectedEmoji === emoji.value"
       (click)="selectEmoji(emoji.value)" [matTooltip]="emoji.label">
       <span class="emoji">{{ emoji.icon }}</span>
-      <span class="emoji-label">{{ emoji.label }}</span>
     </div>
   </div>
 

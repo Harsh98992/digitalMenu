@@ -82,13 +82,32 @@ export class RestaurantService {
         return this.http.get(`${this.apiUrl}/v1/restaurant/reviews/${placeId}`);
     }
     validationBeforeOrder(data) {
-        return this.http.post(`${this.apiUrl}/v1/orders/validationBeforeOrder`, data);
+        return this.http.post(
+            `${this.apiUrl}/v1/orders/validationBeforeOrder`,
+            data
+        );
     }
     placeOrder(data) {
         return this.http.post(`${this.apiUrl}/v1/payment/getCheckSum`, data);
     }
     razorPay(data: any) {
         return this.http.post(`${this.apiUrl}/v1/payment/razorpay`, data);
+    }
+
+    submitFeedback(data: any) {
+        return this.http.post(`${this.apiUrl}/v1/feedback`, data);
+    }
+
+    getFeedbackByRestaurant(restaurantId: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/feedback/restaurant/${restaurantId}`
+        );
+    }
+
+    getFeedbackStats(restaurantId: string) {
+        return this.http.get(
+            `${this.apiUrl}/v1/feedback/stats/${restaurantId}`
+        );
     }
     storeRestaurnat(data) {
         return this.http.post(

@@ -50,12 +50,13 @@ import { RestaurantContactDetailsComponent } from "./panel/restaurant-contact-de
 import { RestaurantTablesComponent } from "./panel/restaurant-tables/restaurant-tables.component";
 import { AddTableComponent } from "./panel/restaurant-tables/add-table/add-table.component";
 import { PromocodeComponent } from "./panel/promocode/promocode.component";
-import { PromoCodeListComponent } from './panel/promo-code-list/promo-code-list.component';
-import { AddPaymentComponent } from './panel/settings/add-payment/add-payment.component';
-import { verifiedComponent } from './panel/unverify-account/verified/verified.component';
-import { RestaurantRoomComponent } from './panel/restaurant-room/restaurant-room.component';
-import { AddRoomComponent } from './panel/restaurant-room/add-room/add-room.component';
-import { RestaurantPaymentComponent } from './panel/restaurant-payment/restaurant-payment.component';
+import { PromoCodeListComponent } from "./panel/promo-code-list/promo-code-list.component";
+import { AddPaymentComponent } from "./panel/settings/add-payment/add-payment.component";
+import { verifiedComponent } from "./panel/unverify-account/verified/verified.component";
+import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room.component";
+import { AddRoomComponent } from "./panel/restaurant-room/add-room/add-room.component";
+import { RestaurantPaymentComponent } from "./panel/restaurant-payment/restaurant-payment.component";
+import { FeedbackComponent } from "./panel/feedback/feedback.component";
 
 @NgModule({
     declarations: [
@@ -108,6 +109,7 @@ import { RestaurantPaymentComponent } from './panel/restaurant-payment/restauran
         RestaurantRoomComponent,
         AddRoomComponent,
         RestaurantPaymentComponent,
+        FeedbackComponent,
     ],
     imports: [
         CommonModule,

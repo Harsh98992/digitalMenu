@@ -1,0 +1,42 @@
+.emoji-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.emoji-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.emoji-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+.emoji-option.selected {
+  background-color: rgba(255, 123, 20, 0.2);
+  transform: scale(1.2);
+}
+
+.emoji {
+  font-size: 2rem;
+}
+
+.feedback-form {
+  margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.spinner {
+  display: inline-block;
+  margin-right: 8px;
+}

@@ -20,6 +20,10 @@ import { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.componen
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatChipsModule } from "@angular/material/chips";
 import { RepeatDialogComponent } from "./repeat-dialog/repeat-dialog.component";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 import { MatRadioModule } from "@angular/material/radio";
 import { NotFoundComponent } from "./not-found/not-found.component";
@@ -35,17 +39,15 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { FileUploadModule } from "@iplab/ngx-file-upload";
 import { PhoneOtpComponent } from "./phone-otp/phone-otp.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { OrderRecievedDialogComponent } from './order-recieved-dialog/order-recieved-dialog.component';
-import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
-import { CustomerNameDialogComponent } from './customer-name-dialog/customer-name-dialog.component';
-import { RedirectComponent } from './redirect/redirect.component';
-import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-import { PaymentDetailDialogComponent } from './payment-detail-dialog/payment-detail-dialog.component';
-import { PrintSpecificKotDialogComponent } from './print-specific-kot-dialog/print-specific-kot-dialog.component';
-import { TansferDetailDialogComponent } from './tansfer-detail-dialog/tansfer-detail-dialog.component';
-
-
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { OrderRecievedDialogComponent } from "./order-recieved-dialog/order-recieved-dialog.component";
+import { PaymentDialogComponent } from "./payment-dialog/payment-dialog.component";
+import { CustomerNameDialogComponent } from "./customer-name-dialog/customer-name-dialog.component";
+import { RedirectComponent } from "./redirect/redirect.component";
+import { ErrorDialogComponent } from "./error-dialog/error-dialog.component";
+import { PaymentDetailDialogComponent } from "./payment-detail-dialog/payment-detail-dialog.component";
+import { PrintSpecificKotDialogComponent } from "./print-specific-kot-dialog/print-specific-kot-dialog.component";
+import { TansferDetailDialogComponent } from "./tansfer-detail-dialog/tansfer-detail-dialog.component";
 
 @NgModule({
     declarations: [
@@ -102,7 +104,11 @@ import { TansferDetailDialogComponent } from './tansfer-detail-dialog/tansfer-de
         AvatarModule,
         MatAutocompleteModule,
         FileUploadModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatProgressSpinnerModule,
     ],
 })
 export class AngularMaterialModule {}

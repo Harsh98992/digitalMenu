@@ -1,0 +1,13 @@
+.feedback-button {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 100;
+  background: linear-gradient(135deg, #ff7b14 40%, #ffd700);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.feedback-button:hover {
+  transform: scale(1.1);
+}

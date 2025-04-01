@@ -36,6 +36,7 @@ import { RestaurntOwnerGuard } from "../api/guard/restaurnt-owner.guard";
 import { verifiedComponent } from "./panel/unverify-account/verified/verified.component";
 import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room.component";
 import { RestaurantPaymentComponent } from "./panel/restaurant-payment/restaurant-payment.component";
+import { FeedbackComponent } from "./panel/feedback/feedback.component";
 const routes: Routes = [
     {
         path: "",
@@ -141,6 +142,11 @@ const routes: Routes = [
             {
                 path: "review",
                 component: ReviewComponent,
+                canActivate: [VerifiedAccountGuard],
+            },
+            {
+                path: "feedback",
+                component: FeedbackComponent,
                 canActivate: [VerifiedAccountGuard],
             },
 

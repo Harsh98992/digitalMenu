@@ -37,11 +37,13 @@ import { CancellationPolicyComponent } from "./component/policy/cancellation-pol
 import { ShoppingDeliveryPolicyComponent } from "./component/policy/shopping-delivery-policy/shopping-delivery-policy.component";
 import { OrderTrackingComponent } from "./component/order-tracking/order-tracking.component";
 import { PromoCodeDetailsDialogComponent } from "./component/restaurant-menu/cart-helper/promo-code-details-dialog/promo-code-details-dialog.component";
-import { AddMissingInfoDialogComponent } from './component/restaurant-menu/add-missing-info-dialog/add-missing-info-dialog.component';
-import { RoomNoDialogComponent } from './component/restaurant-menu/room-no-dialog/room-no-dialog.component';
-import { NamePhonenumberForRoomServiceComponent } from './component/restaurant-menu/name-phonenumber-for-room-service/name-phonenumber-for-room-service.component';
-import { TrackingComponent } from './component/restaurant-menu/tracking/tracking.component';
-import { TrackOrderComponent } from './component/track-order/track-order.component';
+import { AddMissingInfoDialogComponent } from "./component/restaurant-menu/add-missing-info-dialog/add-missing-info-dialog.component";
+import { RoomNoDialogComponent } from "./component/restaurant-menu/room-no-dialog/room-no-dialog.component";
+import { NamePhonenumberForRoomServiceComponent } from "./component/restaurant-menu/name-phonenumber-for-room-service/name-phonenumber-for-room-service.component";
+import { TrackingComponent } from "./component/restaurant-menu/tracking/tracking.component";
+import { TrackOrderComponent } from "./component/track-order/track-order.component";
+import { FeedbackButtonComponent } from "./component/feedback-button/feedback-button.component";
+import { FeedbackDialogComponent } from "./component/feedback-dialog/feedback-dialog.component";
 
 @NgModule({
     declarations: [
@@ -79,6 +81,8 @@ import { TrackOrderComponent } from './component/track-order/track-order.compone
         NamePhonenumberForRoomServiceComponent,
         TrackingComponent,
         TrackOrderComponent,
+        FeedbackButtonComponent,
+        FeedbackDialogComponent,
     ],
     imports: [
         CommonModule,

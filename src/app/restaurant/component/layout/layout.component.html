@@ -1,95 +1,47 @@
-<mat-toolbar
-    [ngClass]="fixedHeaderFlag ? 'fixed-top' : ''"
-    color="accent"
-    style="
+<mat-toolbar [ngClass]="fixedHeaderFlag ? 'fixed-top' : ''" color="accent" style="
         background: linear-gradient(135deg, #ff7b14 40%, #ffd700);
         height: 50px;
         z-index: 101;
-    "
->
-<div *ngIf="checkIfhomepage">
+    ">
+    <div *ngIf="checkIfhomepage">
 
-    <span routerLink="/">QrSay</span>
-</div>
+        <span routerLink="/">QrSay</span>
+    </div>
     <span class="example-spacer"></span>
-    <button
-        *ngIf="userLoginFlag"
-        mat-icon-button
-        class="example-icon favorite-icon mr-2"
-        aria-label="Example icon-button with heart icon"
-        routerLink="/orders"
-    >
-        <mat-icon
-            class="icon-display"
-            [matBadge]="orderCount"
-            matBadgeColor="warn"
-            routerLink="/orders"
-            >shopping_cart</mat-icon
-        >
+    <button *ngIf="userLoginFlag" mat-icon-button class="example-icon favorite-icon mr-2"
+        aria-label="Example icon-button with heart icon" routerLink="/orders">
+        <mat-icon class="icon-display" [matBadge]="orderCount" matBadgeColor="warn"
+            routerLink="/orders">shopping_cart</mat-icon>
     </button>
-    <button
-        mat-icon-button
-        class="example-icon favorite-icon mr-2"
-        aria-label="Example icon-button with heart icon"
-        routerLinkActive="active"
-        routerLink="/orders"
-        [routerLinkActiveOptions]="{ exact: true }"
-    >
+    <button mat-icon-button class="example-icon favorite-icon mr-2" aria-label="Example icon-button with heart icon"
+        routerLinkActive="active" routerLink="/orders" [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon class="icon-display">qr_code_scanner</mat-icon>
     </button>
 
-    <button
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        class="example-icon"
-        aria-label="Example icon-button with share icon"
-    >
-        <ngx-avatars
-            *ngIf="userDetail?.name"
-            [name]="userDetail?.name"
-            size="35"
-        ></ngx-avatars>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon"
+        aria-label="Example icon-button with share icon">
+        <ngx-avatars *ngIf="userDetail?.name" [name]="userDetail?.name" size="35"></ngx-avatars>
 
         <i *ngIf="!userDetail?.name" class="fa-solid fa-circle-user fa-2xl"></i>
     </button>
     <mat-menu #menu="matMenu">
-        <button
-            mat-menu-item
-            *ngIf="userLoginFlag"
-            routerLinkActive="active"
-            [routerLink]="['/customer-profile']"
-            [routerLinkActiveOptions]="{ exact: true }"
-            [queryParams]="{ page: 'profile' }"
-        >
+        <button mat-menu-item *ngIf="userLoginFlag" routerLinkActive="active" [routerLink]="['/customer-profile']"
+            [routerLinkActiveOptions]="{ exact: true }" [queryParams]="{ page: 'profile' }">
             <mat-icon>manage_accounts</mat-icon>
             <span>Profile</span>
         </button>
-        <button
-            mat-menu-item
-            *ngIf="userLoginFlag"
-            routerLinkActive="active"
-            routerLink="/orders"
-            [routerLinkActiveOptions]="{ exact: true }"
-        >
+        <button mat-menu-item *ngIf="userLoginFlag" routerLinkActive="active" routerLink="/orders"
+            [routerLinkActiveOptions]="{ exact: true }">
             <mat-icon>shopping_basket</mat-icon>
 
             <span>My Orders</span>
         </button>
-        <button
-        mat-menu-item
-       
-        routerLinkActive="active"
-        [routerLink]="['/trackOrder']"
-        [routerLinkActiveOptions]="{ exact: true }"
-    >
-    <mat-icon>art_track</mat-icon>
-        <span>Track Order</span>
-    </button>
-        <button
-            mat-menu-item
-            *ngIf="!userLoginFlag"
-            (click)="openLoginDialog()"
-        >
+        <button mat-menu-item routerLinkActive="active" [routerLink]="['/trackOrder']"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon>art_track</mat-icon>
+            <span>Track Order</span>
+        </button>
+        <button mat-menu-item *ngIf="!userLoginFlag" (click)="openLoginDialog()">
             <mat-icon>login</mat-icon>
             <span> Log In</span>
         </button>
@@ -103,5 +55,7 @@
 <main class="bg_gray dashMain">
     <router-outlet></router-outlet>
 </main>
+
+<app-feedback-button></app-feedback-button>
 
 <app-footer></app-footer>

@@ -1,0 +1,86 @@
+.stats-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.rating-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.rating-stars {
+  font-size: 2rem;
+}
+
+.emoji-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emoji-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emoji-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  text-align: center;
+}
+
+.progress-container {
+  flex-grow: 1;
+}
+
+.progress {
+  height: 12px;
+  border-radius: 6px;
+}
+
+.count {
+  width: 40px;
+  text-align: right;
+  font-weight: 500;
+}
+
+.emoji-cell {
+  font-size: 1.5rem;
+}
+
+.no-data-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: #888;
+}
+
+.no-data-message mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin-bottom: 10px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-emoji {
+  width: 80px;
+}
+
+.mat-column-createdAt {
+  width: 180px;
+}

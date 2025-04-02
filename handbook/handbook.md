@@ -830,6 +830,7 @@ Web development is the process of building websites and web applications using a
 
 ### 1.6.2. Overview of Tools and Software to Install
 
+To get started with web development, you will need to install the following tools and software, google the softwares to download them:
 1. Node.js - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. You can download Node.js from the official website and install it on your machine.
 2. Angular CLI - The Angular CLI is a command-line interface tool that you use to initialize, develop, scaffold, and maintain Angular applications directly from a command shell.
     You can install Angular CLI using npm (Node Package Manager) which comes with Node.js.

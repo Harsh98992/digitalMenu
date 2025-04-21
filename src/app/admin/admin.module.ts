@@ -57,6 +57,7 @@ import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room
 import { AddRoomComponent } from "./panel/restaurant-room/add-room/add-room.component";
 import { RestaurantPaymentComponent } from "./panel/restaurant-payment/restaurant-payment.component";
 import { FeedbackComponent } from "./panel/feedback/feedback.component";
+import { WaiterCallsComponent } from "./panel/waiter-calls/waiter-calls.component";
 
 @NgModule({
     declarations: [
@@ -110,6 +111,7 @@ import { FeedbackComponent } from "./panel/feedback/feedback.component";
         AddRoomComponent,
         RestaurantPaymentComponent,
         FeedbackComponent,
+        WaiterCallsComponent,
     ],
     imports: [
         CommonModule,

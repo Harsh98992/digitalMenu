@@ -44,6 +44,7 @@ import { TrackingComponent } from "./component/restaurant-menu/tracking/tracking
 import { TrackOrderComponent } from "./component/track-order/track-order.component";
 import { FeedbackButtonComponent } from "./component/feedback-button/feedback-button.component";
 import { FeedbackDialogComponent } from "./component/feedback-dialog/feedback-dialog.component";
+import { CallWaiterDialogComponent } from "./component/restaurant-menu/call-waiter-dialog/call-waiter-dialog.component";
 
 @NgModule({
     declarations: [
@@ -83,6 +84,7 @@ import { FeedbackDialogComponent } from "./component/feedback-dialog/feedback-di
         TrackOrderComponent,
         FeedbackButtonComponent,
         FeedbackDialogComponent,
+        CallWaiterDialogComponent,
     ],
     imports: [
         CommonModule,

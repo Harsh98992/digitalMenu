@@ -15,6 +15,9 @@ import { environment } from "src/environments/environment";
 import { io } from "socket.io-client";
 import { OrderService } from "src/app/api/order.service";
 import { SmartNotificationService } from "src/app/services/smart-notification.service";
+import { RestaurantService } from "../../api/restaurant.service";
+import { CallWaiterDialogComponent } from "../restaurant-menu/call-waiter-dialog/call-waiter-dialog.component";
+import { UtilService } from "src/app/api/util.service";
 
 @Component({
     selector: "app-layout",
@@ -26,6 +29,9 @@ export class LayoutComponent implements OnInit {
     userLoginFlag = false;
     userDetail = null;
     orderCount: any;
+    showCallWaiterButton = false;
+    currentRestaurantData: any = null;
+    tableData: any[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -33,7 +39,9 @@ export class LayoutComponent implements OnInit {
         private dialog: MatDialog,
         private customerAuthService: CustomerAuthService,
         public orderService: OrderService,
-        private notificationService: SmartNotificationService
+        private notificationService: SmartNotificationService,
+        private restaurantService: RestaurantService,
+        private utilService: UtilService
     ) {
         this.socket = io(this.socketApiUrl);
 
@@ -107,9 +115,95 @@ export class LayoutComponent implements OnInit {
             this.currentUrl.includes("detail=")
         ) {
             this.checkIfhomepage = false;
+            this.loadRestaurantData();
         } else {
             this.checkIfhomepage = true;
+            this.showCallWaiterButton = false;
         }
+    }
+
+    loadRestaurantData() {
+        // Extract restaurant URL from the current URL
+        const urlParams = new URLSearchParams(this.currentUrl.split("?")[1]);
+        const restaurantUrl = urlParams.get("detail");
+
+        if (restaurantUrl) {
+            this.restaurantService.getRestaurantData(restaurantUrl).subscribe({
+                next: (res: any) => {
+                    if (res && res.data) {
+                        this.currentRestaurantData = res.data;
+                        this.checkForTables();
+                    }
+                },
+                error: (err) => {
+                    console.error("Error loading restaurant data:", err);
+                    this.showCallWaiterButton = false;
+                },
+            });
+        }
+    }
+
+    checkForTables() {
+        if (this.currentRestaurantData && this.currentRestaurantData._id) {
+            // Get tables for the restaurant
+            this.restaurantService
+                .checkActiveDineIn(this.currentRestaurantData._id)
+                .subscribe({
+                    next: (res: any) => {
+                        console.log("Tables response:", res);
+                        if (
+                            res &&
+                            res.data &&
+                            res.data.tables &&
+                            res.data.tables.tables
+                        ) {
+                            this.tableData = res.data.tables.tables.filter(
+                                (table) => table.isAvailable
+                            );
+                            // Only show Call Waiter button if there are available tables
+                            this.showCallWaiterButton =
+                                this.tableData.length > 0;
+                            console.log(
+                                "Call Waiter button visible:",
+                                this.showCallWaiterButton
+                            );
+                            console.log("Available tables:", this.tableData);
+                        } else {
+                            this.showCallWaiterButton = false;
+                            console.log("No tables available");
+                        }
+                    },
+                    error: (err) => {
+                        console.error("Error loading tables:", err);
+                        this.showCallWaiterButton = false;
+                    },
+                });
+        }
+    }
+
+    openCallWaiterDialog() {
+        if (!this.currentRestaurantData || this.tableData.length === 0) {
+            console.log("No tables available for calling a waiter");
+            return;
+        }
+
+        const dialogRef = this.dialog.open(CallWaiterDialogComponent, {
+            width: "400px",
+            panelClass: "call-waiter-dialog",
+            disableClose: false,
+            data: {
+                restaurantData: this.currentRestaurantData,
+                tableData: this.tableData,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result && result.success) {
+                console.log("Waiter call was successful");
+                // Refresh the table data
+                this.checkForTables();
+            }
+        });
     }
 
     checkLogin() {

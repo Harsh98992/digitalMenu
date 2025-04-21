@@ -66,7 +66,7 @@ export class RestaurantPanelService {
         this.audio.pause();
         this.audio.currentTime = 0;
     }
-    generateBill(reqData:any) {
+    generateBill(reqData: any) {
         return this.http.post(
             `${this.apiUrl}/v1/restaurant/generateBill`,
             reqData
@@ -429,7 +429,7 @@ export class RestaurantPanelService {
         return indianStates;
     }
 
-//This function returns a list of customers from the API
+    //This function returns a list of customers from the API
     getCustomerList() {
         //Make a GET request to the API endpoint for getting the customer list
         return this.http.get(`${this.apiUrl}/v1/restaurant/getCustomerList`);
@@ -461,5 +461,30 @@ export class RestaurantPanelService {
         };
 
         return this.http.patch(`${this.apiUrl}${url}`, data);
+    }
+
+    // Waiter call methods
+    getWaiterCalls() {
+        console.log("getWaiterCalls called"); // Debugging line
+        // Add a timestamp parameter to prevent caching
+        const timestamp = new Date().getTime();
+        // Make a GET request to the API endpoint for getting waiter calls with cache busting
+        return this.http.get(
+            `${this.apiUrl}/v1/waiter/getWaiterCalls?_t=${timestamp}`
+        );
+    }
+
+    updateWaiterCallStatus(data: any) {
+        console.log(
+            "Restaurant service sending updateWaiterCallStatus request with data:",
+            data
+        );
+        // Add a timestamp parameter to prevent caching
+        const timestamp = new Date().getTime();
+        // Use the public endpoint for testing
+        return this.http.post(
+            `${this.apiUrl}/v1/waiter/updateStatusPublic?_t=${timestamp}`,
+            data
+        );
     }
 }

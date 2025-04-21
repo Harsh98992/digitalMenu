@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
     processingOrder = [];
     activeDine = [];
     pendingPayment = [];
+    waiterCalls = [];
     private socket: any;
     apiUrl = environment.apiUrl;
     socketUrl = environment.socketApiUrl;
@@ -97,37 +98,138 @@ export class DashboardComponent implements OnInit {
     totalBillForDineIn(details) {
         let total = 0;
         for (const order of details.orderDetails) {
-            total += order.orderAmount + order.gstAmount + order.deliveryAmount-order.discountAmount;
+            total +=
+                order.orderAmount +
+                order.gstAmount +
+                order.deliveryAmount -
+                order.discountAmount;
         }
         return total;
     }
     ngOnInit(): void {
         this.getOrders();
+
+        this.restaurantService.getRestaurnatDetail().subscribe({
+            next: (res: any) => {
+                if (res && res.data && res.data.restaurantDetail) {
+                    this.restaurantId = res.data.restaurantDetail._id;
+                    this.restaurantDetail = res.data.restaurantDetail;
+                    console.log("Restaurant ID:", this.restaurantId);
+                }
+
+                this.getWaiterCalls();
+            },
+            error: (err) => {
+                console.error("Error getting restaurant details:", err);
+            },
+        });
+
         this.socket = io(this.socketUrl, {});
-        console.log(this.socket);
+        console.log("Socket initialized:", this.socket);
 
         this.socket.on("connect", () => {
-            console.log("connected");
+            console.log("Socket connected successfully");
 
             this.restaurantService.getRestaurnatDetail().subscribe({
                 next: (res: any) => {
                     if (res && res.data && res.data.restaurantDetail) {
                         this.restaurantId = res.data.restaurantDetail._id;
                         this.restaurantDetail = res.data.restaurantDetail;
+                        console.log("Restaurant ID:", this.restaurantId);
+
+                        // Join the restaurant's room
+                        this.socket.emit(
+                            "joinRestaurantRoom",
+                            this.restaurantId
+                        );
+                        console.log(
+                            "Attempting to join restaurant room:",
+                            this.restaurantId
+                        );
+
+                        // Listen for confirmation that we've joined the room
+                        this.socket.on("joined_restaurant_room", (data) => {
+                            console.log(
+                                "Successfully joined restaurant room:",
+                                data
+                            );
+                        });
+
+                        // Get initial waiter calls
+                        this.getWaiterCalls();
+                    } else {
+                        console.error("Failed to get restaurant details");
                     }
-
-                    console.log("restaurantId", this.restaurantId);
-                    this.socket.emit("joinRestaurantRoom", this.restaurantId); // Join the restaurant's room
-
-                    console.log("called joinRestaurantRoom", this.restaurantId);
+                },
+                error: (err) => {
+                    console.error("Error getting restaurant details:", err);
                 },
             });
-            this.socket.on("orderUpdate", (updatedOrder: any) => {
-                console.log("called orderUpdate", updatedOrder);
+        });
 
-                // this.handleOrderUpdate(updatedOrder);
-                this.getOrders();
+        // Listen for order updates
+        this.socket.on("orderUpdate", (updatedOrder: any) => {
+            console.log("Order update received:", updatedOrder);
+            this.getOrders();
+        });
+
+        // Listen for new waiter calls
+        this.socket.on("new_waiter_call", (data: any) => {
+            console.log("New waiter call received:", data);
+            // Add the new call to the top of the list if it doesn't already exist
+            const exists = this.waiterCalls.some(
+                (call) => call.callId === data.callId
+            );
+            if (!exists) {
+                this.waiterCalls = [data, ...this.waiterCalls];
+                // Play notification sound
+                this.restaurantService.playDashboardActionSound();
+                // Update the tab to show the new count
+                this.selectTab("tab5");
+            }
+        });
+
+        // Listen for waiter call status updates
+        this.socket.on("waiter_call_status_updated", (data: any) => {
+            console.log("Waiter call status updated:", data);
+            // Update the status of the call in the list
+            let found = false;
+            this.waiterCalls = this.waiterCalls.map((call) => {
+                if (call.callId === data.callId) {
+                    found = true;
+                    return { ...call, status: data.status };
+                }
+                return call;
             });
+
+            // If the call wasn't found in our list, refresh the list from the server
+            if (!found) {
+                console.log("Call not found in list, refreshing from server");
+                this.getWaiterCalls();
+            }
+
+            // If status is resolved, remove from the list after a delay
+            if (data.status === "resolved") {
+                setTimeout(() => {
+                    this.waiterCalls = this.waiterCalls.filter(
+                        (call) => call.callId !== data.callId
+                    );
+                }, 5000);
+            }
+        });
+
+        // Handle socket connection errors
+        this.socket.on("connect_error", (error) => {
+            console.error("Socket connection error:", error);
+        });
+
+        this.socket.on("disconnect", (reason) => {
+            console.log("Socket disconnected:", reason);
+        });
+
+        // Listen for pong response from server
+        this.socket.on("pong_socket", (data) => {
+            console.log("Received pong from server:", data);
         });
     }
     selectTab(tab: string) {
@@ -324,6 +426,144 @@ export class DashboardComponent implements OnInit {
         }
     }
 
+    // Get waiter calls from the backend
+    isRefreshing = false;
+
+    getWaiterCalls() {
+        console.log("Fetching waiter calls...");
+        this.isRefreshing = true;
+        this.restaurantService.getWaiterCalls().subscribe({
+            next: (res: any) => {
+                console.log("Waiter calls response:", res);
+                if (res && res.data && res.data.waiterCalls) {
+                    // Filter out resolved calls that are older than 5 minutes
+                    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+
+                    const calls = res.data.waiterCalls
+                        .filter((call) => {
+                            // Keep all non-resolved calls
+                            if (call.status !== "resolved") return true;
+                            // For resolved calls, only keep recent ones
+                            const callDate = new Date(call.createdAt);
+                            return callDate > fiveMinutesAgo;
+                        })
+                        .map((call) => ({
+                            callId: call._id,
+                            restaurantId: call.restaurantId,
+                            tableId: call.tableId,
+                            tableName: call.tableName,
+                            customerName: call.customerName,
+                            message: call.message || "No message",
+                            createdAt: new Date(
+                                call.createdAt
+                            ).toLocaleString(),
+                            status: call.status,
+                            rawDate: new Date(call.createdAt),
+                        }));
+
+                    // Sort by date (newest first)
+                    calls.sort((a, b) => b.rawDate - a.rawDate);
+
+                    // Update the waiter calls array
+                    this.waiterCalls = calls;
+                    console.log("Processed waiter calls:", this.waiterCalls);
+
+                    // Send a ping to the socket server to check connection
+                    this.socket.emit("ping_socket", {
+                        message: "Ping from dashboard",
+                        timestamp: new Date(),
+                    });
+                } else {
+                    console.log(
+                        "No waiter calls found or invalid response format"
+                    );
+                    this.waiterCalls = [];
+                }
+                this.apiCalledFlag = true;
+                this.isRefreshing = false;
+            },
+            error: (err) => {
+                console.error("Error fetching waiter calls:", err);
+                this.waiterCalls = [];
+                this.apiCalledFlag = true;
+                this.isRefreshing = false;
+            },
+        });
+    }
+
+    // Acknowledge a waiter call
+    acknowledgeWaiterCall(call: any) {
+        const data = {
+            callId: call.callId,
+            status: "acknowledged",
+            restaurantId: this.restaurantId, // Add restaurant ID to the request
+        };
+        console.log("Sending acknowledge request with data:", data);
+        this.restaurantService.updateWaiterCallStatus(data).subscribe({
+            next: (res: any) => {
+                console.log("Waiter call acknowledged successfully:", res);
+                // Update the call status in the local array
+                this.waiterCalls = this.waiterCalls.map((c) => {
+                    if (c.callId === call.callId) {
+                        return { ...c, status: "acknowledged" };
+                    }
+                    return c;
+                });
+                // Also refresh from server to ensure data consistency
+                setTimeout(() => this.getWaiterCalls(), 500);
+            },
+            error: (err) => {
+                console.error("Error acknowledging waiter call:", err);
+                // Refresh anyway to ensure UI is in sync with server
+                setTimeout(() => this.getWaiterCalls(), 500);
+            },
+        });
+    }
+
+    // Resolve a waiter call
+    resolveWaiterCall(call: any) {
+        const data = {
+            callId: call.callId,
+            status: "resolved",
+            restaurantId: this.restaurantId, // Add restaurant ID to the request
+        };
+
+        console.log("Sending resolve request with data:", data);
+        this.restaurantService.updateWaiterCallStatus(data).subscribe({
+            next: (res: any) => {
+                console.log("Waiter call resolved successfully:", res);
+                // Update the call status in the local array
+                this.waiterCalls = this.waiterCalls.map((c) => {
+                    if (c.callId === call.callId) {
+                        return { ...c, status: "resolved" };
+                    }
+                    return c;
+                });
+                // Also refresh from server to ensure data consistency
+                setTimeout(() => this.getWaiterCalls(), 500);
+            },
+            error: (err) => {
+                console.error("Error resolving waiter call:", err);
+                // Refresh anyway to ensure UI is in sync with server
+                setTimeout(() => this.getWaiterCalls(), 500);
+            },
+        });
+    }
+
+    // Get CSS class for waiter call status badge
+    getWaiterCallStatusClass(status: string): string {
+        switch (status) {
+            case "pending":
+                return "badge-warning";
+            case "acknowledged":
+                return "badge-info";
+            case "resolved":
+                return "badge-success";
+            default:
+                return "badge-secondary";
+        }
+    }
+
     ngOnDestroy() {
         this.socket.disconnect(); // Disconnect the socket when component is destroyed
     }
@@ -350,12 +590,18 @@ export class DashboardComponent implements OnInit {
                                 true
                             );
                         } else {
-                            this.utilityService.printKTOHelper(orderData,this.restaurantDetail);
+                            this.utilityService.printKTOHelper(
+                                orderData,
+                                this.restaurantDetail
+                            );
                         }
                     }, 2000);
                 },
                 (err) => {
-                    this.utilityService.printKTOHelper(orderData,this.restaurantDetail);
+                    this.utilityService.printKTOHelper(
+                        orderData,
+                        this.restaurantDetail
+                    );
                 }
             );
         } else {
@@ -375,7 +621,7 @@ export class DashboardComponent implements OnInit {
         //     },
         // });
     }
-   
+
     printEPOSRecieptHelper(orderDetail, restaurantDetail, flag = false) {
         this.utilityService.printEPOSReciept(
             orderDetail,

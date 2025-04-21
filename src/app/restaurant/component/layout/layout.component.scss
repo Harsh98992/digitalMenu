@@ -49,7 +49,41 @@ mat-sidenav {
         width: 100%;
     }
 }
-.color{
-    background-color:#FF9542 ;
-    color: #352E29;
+.color {
+    background-color: #ff9542;
+    color: #352e29;
+}
+
+.call-waiter-btn {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 123, 20, 0.1);
+    border-radius: 20px;
+    padding: 0 10px;
+    height: 36px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+
+}
+
+.call-waiter-btn:hover {
+    background-color: rgba(255, 123, 20, 0.2);
+}
+
+.call-waiter-text {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .call-waiter-text {
+        display: none;
+    }
+
+    .call-waiter-btn {
+        padding: 0;
+        background-color: transparent;
+    }
 }

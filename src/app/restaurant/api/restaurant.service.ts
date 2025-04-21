@@ -152,4 +152,9 @@ export class RestaurantService {
             `${this.apiUrl}/v1/restaurant/checkAciveDineIn/${restaurantId}`
         );
     }
+
+    // Call waiter API
+    callWaiter(data) {
+        return this.http.post(`${this.apiUrl}/v1/waiter/callWaiter`, data);
+    }
 }

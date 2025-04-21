@@ -8,6 +8,14 @@
         <span routerLink="/">QrSay</span>
     </div>
     <span class="example-spacer"></span>
+    <!-- Call Waiter Button - Only visible on restaurant pages with tables -->
+    <button *ngIf="!checkIfhomepage && showCallWaiterButton" mat-icon-button
+        class="example-icon favorite-icon mr-2 call-waiter-btn" aria-label="Call waiter button"
+        (click)="openCallWaiterDialog()">
+        <mat-icon class="icon-display" matTooltip="Call Waiter">support_agent</mat-icon>
+        <span class="call-waiter-text"></span>
+    </button>
+
     <button *ngIf="userLoginFlag" mat-icon-button class="example-icon favorite-icon mr-2"
         aria-label="Example icon-button with heart icon" routerLink="/orders">
         <mat-icon class="icon-display" [matBadge]="orderCount" matBadgeColor="warn"

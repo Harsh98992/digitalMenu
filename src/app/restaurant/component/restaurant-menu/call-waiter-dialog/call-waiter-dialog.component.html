@@ -1,0 +1,81 @@
+<div class="small-dialog-header">
+    <h3>Call Waiter</h3>
+    <a mat-dialog-close class="close_panel_mobile"><span class="icon_close_alt"></span></a>
+</div>
+
+<mat-dialog-content>
+    <div class="container mt-3">
+        <form [formGroup]="waiterForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name" class="required">Your Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    class="form-control" 
+                    formControlName="name"
+                    [ngClass]="{'is-invalid': hasError('name', 'required')}"
+                >
+                <div *ngIf="hasError('name', 'required')" class="invalid-feedback">
+                    Name is required
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="tableId" class="required">Select Your Table</label>
+                <select 
+                    id="tableId" 
+                    class="form-control" 
+                    formControlName="tableId"
+                    [ngClass]="{'is-invalid': hasError('tableId', 'required')}"
+                >
+                    <option value="">-- Select a table --</option>
+                    <option *ngFor="let table of tableData" [value]="table._id">
+                        Table {{ table.tableName | titlecase }}
+                    </option>
+                </select>
+                <div *ngIf="hasError('tableId', 'required')" class="invalid-feedback">
+                    Please select a table
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="message">Message (Optional)</label>
+                <textarea 
+                    id="message" 
+                    class="form-control" 
+                    formControlName="message"
+                    rows="3"
+                    placeholder="Add any specific request or information for the waiter"
+                ></textarea>
+            </div>
+
+            <div *ngIf="successMessage" class="alert alert-success mt-3">
+                {{ successMessage }}
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                {{ errorMessage }}
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <button 
+                    type="submit" 
+                    class="btn_1 full-width" 
+                    (click)="onSubmit()" 
+                    [disabled]="isLoading"
+                >
+                    <span *ngIf="!isLoading">Call Waiter</span>
+                    <span *ngIf="isLoading">
+                        <i class="fa fa-spinner fa-spin"></i> Calling...
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-actions>

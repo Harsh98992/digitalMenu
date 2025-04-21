@@ -4,12 +4,8 @@
         <div class="card-body">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item" (click)="selectTab('tab1')">
-                    <a
-                        class="nav-link"
-                        [class.active]="activeTab === 'tab1'"
-                        aria-current="page"
-                        >Order Recieved ({{ this.pendingOrder.length }})</a
-                    >
+                    <a class="nav-link" [class.active]="activeTab === 'tab1'" aria-current="page">Order Recieved ({{
+                        this.pendingOrder.length }})</a>
                 </li>
                 <!-- <li class="nav-item" (click)="selectTab('tab2')">
                     <a class="nav-link" [class.active]="activeTab === 'tab2'"
@@ -17,27 +13,23 @@
                     >
                 </li> -->
                 <li class="nav-item" (click)="selectTab('tab3')">
-                    <a class="nav-link" [class.active]="activeTab === 'tab3'"
-                        >Order In Process ({{ this.processingOrder.length }})</a
-                    >
+                    <a class="nav-link" [class.active]="activeTab === 'tab3'">Order In Process ({{
+                        this.processingOrder.length }})</a>
                 </li>
                 <li class="nav-item" (click)="selectTab('tab4')">
-                    <a class="nav-link" [class.active]="activeTab === 'tab4'"
-                        >Table Status ({{ this.activeDine.length }})</a
-                    >
+                    <a class="nav-link" [class.active]="activeTab === 'tab4'">Table Status ({{ this.activeDine.length
+                        }})</a>
+                </li>
+                <li class="nav-item" (click)="selectTab('tab5')">
+                    <a class="nav-link" [class.active]="activeTab === 'tab5'">Call Waiter ({{ this.waiterCalls.length
+                        }})</a>
                 </li>
             </ul>
             <ng-container *ngIf="activeTab === 'tab1'">
-                <h4
-                    class="text-center"
-                    *ngIf="this.apiCalledFlag && !this.pendingOrder?.length"
-                >
+                <h4 class="text-center" *ngIf="this.apiCalledFlag && !this.pendingOrder?.length">
                     There are currently no order recieved .
                 </h4>
-                <div
-                    class="order-card mt-3"
-                    *ngFor="let details of this.pendingOrder"
-                >
+                <div class="order-card mt-3" *ngFor="let details of this.pendingOrder">
                     <div class="row mt-3">
                         <div class="col-md-4">
                             <div class="row">
@@ -45,70 +37,62 @@
                                     <div class="delivery-address">
                                         <h4>
                                             {{
-                                                details.customerPreferences.preference.toLowerCase() ===
-                                                "grab and go"
-                                                    ? "Take away"
-                                                    : (details
-                                                          .customerPreferences
-                                                          .preference
-                                                      | titlecase)
+                                            details.customerPreferences.preference.toLowerCase() ===
+                                            "grab and go"
+                                            ? "Take away"
+                                            : (details
+                                            .customerPreferences
+                                            .preference
+                                            | titlecase)
                                             }}
                                         </h4>
-                                        <h4
-                                            *ngIf="
+                                        <h4 *ngIf="
                                                 details.customerPreferences
                                                     .preference === 'Dine In' ||
                                                 details.customerPreferences.preference.toLowerCase() ===
                                                     'dining'
-                                            "
-                                        >
+                                            ">
                                             Table Name:-
                                             {{
-                                                details.customerPreferences
-                                                    ?.value
+                                            details.customerPreferences
+                                            ?.value
                                             }}
                                         </h4>
-                                        <h4
-                                            *ngIf="
+                                        <h4 *ngIf="
                                                 details.customerPreferences.preference.toLowerCase() ===
                                                 'room service'
-                                            "
-                                        >
+                                            ">
                                             Room Number:-
                                             {{
-                                                details.customerPreferences
-                                                    ?.value
+                                            details.customerPreferences
+                                            ?.value
                                             }}
                                         </h4>
-                                        <h4
-                                            *ngIf="
+                                        <h4 *ngIf="
                                                 takeAwayOptions.includes(
                                                     details.customerPreferences.preference.toLowerCase()
                                                 )
-                                            "
-                                        >
+                                            ">
                                             {{
-                                                details.customerPreferences
-                                                    .value
+                                            details.customerPreferences
+                                            .value
                                             }}
                                         </h4>
-                                        <h4
-                                            *ngIf="
+                                        <h4 *ngIf="
                                                 details.customerPreferences
                                                     .preference === 'delivery'
-                                            "
-                                        >
+                                            ">
                                             {{
-                                                details.customerPreferences
-                                                    ?.value.address
+                                            details.customerPreferences
+                                            ?.value.address
                                             }},
                                             {{
-                                                details.customerPreferences
-                                                    ?.value
-                                                    .googleLocationAddress
+                                            details.customerPreferences
+                                            ?.value
+                                            .googleLocationAddress
                                             }},{{
-                                                details.customerPreferences
-                                                    ?.value.pincode
+                                            details.customerPreferences
+                                            ?.value.pincode
                                             }}
                                         </h4>
                                     </div>
@@ -125,58 +109,43 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <p class="dateText">
-                                        <img
-                                            class="green-tick logo"
-                                            src="assets\img\green-tick.png"
-                                            alt="tick"
-                                        />Placed at
+                                        <img class="green-tick logo" src="assets\img\green-tick.png" alt="tick" />Placed
+                                        at
                                         {{
-                                            details.orderDate | date : "medium"
+                                        details.orderDate | date : "medium"
                                         }}
                                     </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p
-                                        class="dateText"
-                                        *ngIf="
+                                    <p class="dateText" *ngIf="
                                             details.payment_method.toLowerCase() !==
                                             'Cash On Delivery'.toLowerCase()
-                                        "
-                                    >
+                                        ">
                                         Payment Method :- Paid via
                                         {{ details.payment_method }}
                                     </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="
+                                    <p class="dateText" *ngIf="
                                             details.payment_method.toLowerCase() ===
                                             'Cash On Delivery'.toLowerCase()
-                                        "
-                                    >
+                                        ">
                                         Payment Method :- Cash
                                     </p>
-                                    <p
-                                        class="dateText"
-                                        *ngIf="details.payment_amount"
-                                    >
+                                    <p class="dateText" *ngIf="details.payment_amount">
                                         Payment Amount :-
 
                                         {{
-                                            details.payment_amount
-                                                | currency
-                                                    : "INR"
-                                                    : "symbol"
-                                                    : "1.0-0"
+                                        details.payment_amount
+                                        | currency
+                                        : "INR"
+                                        : "symbol"
+                                        : "1.0-0"
                                         }}
                                     </p>
-                                    <button
-                                        class="btn btn-secondary"
-                                        (click)="
+                                    <button class="btn btn-secondary" (click)="
                                             openPaymentDetailDialog(details)
-                                        "
-                                    >
+                                        ">
                                         View Payment Details
                                     </button>
                                 </div>
@@ -186,74 +155,58 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div
-                                        class="order-items"
-                                        *ngFor="
+                                    <div class="order-items" *ngFor="
                                             let order of details.orderDetails[0]
                                                 .orderSummary
-                                        "
-                                    >
+                                        ">
                                         <p>
-                                            <img
-                                                src="assets\img\non-veg food icon.png"
-                                                alt="Non-Veg Item"
-                                                *ngIf="
+                                            <img src="assets\img\non-veg food icon.png" alt="Non-Veg Item" *ngIf="
                                                     order.dishType === 'nonVeg'
-                                                "
-                                            />
-                                            <img
-                                                src="assets\img\veg food icon.png"
-                                                alt="Veg Item"
-                                                *ngIf="order.dishType === 'veg'"
-                                            />{{ order.dishQuantity }} x
+                                                " />
+                                            <img src="assets\img\veg food icon.png" alt="Veg Item"
+                                                *ngIf="order.dishType === 'veg'" />{{ order.dishQuantity }} x
                                             {{ order.dishName }}
-                                            <ng-container
-                                                *ngIf="
+                                            <ng-container *ngIf="
                                                     order.itemSizeSelected?.size
-                                                "
-                                            >
+                                                ">
                                                 <span>
                                                     [Size:-{{
-                                                        order.itemSizeSelected
-                                                            .size
+                                                    order.itemSizeSelected
+                                                    .size
                                                     }}]
                                                 </span>
                                             </ng-container>
-                                            <ng-container
-                                                *ngIf="
+                                            <ng-container *ngIf="
                                                     order.extraSelected &&
                                                     order.extraSelected.length
-                                                "
-                                            >
+                                                ">
                                                 [ Extras:-
                                                 {{
-                                                    getExtrasList(
-                                                        order.extraSelected
-                                                    )
+                                                getExtrasList(
+                                                order.extraSelected
+                                                )
                                                 }}
                                                 ]
                                             </ng-container>
-                                            <ng-container
-                                                *ngIf="
+                                            <ng-container *ngIf="
                                                     order.dishChoicesSelected &&
                                                     order.dishChoicesSelected
                                                         .length
-                                                "
-                                            >
+                                                ">
                                                 [Choices:-
                                                 {{
-                                                    getChoicesList(
-                                                        order.dishChoicesSelected
-                                                    )
+                                                getChoicesList(
+                                                order.dishChoicesSelected
+                                                )
                                                 }}
                                                 ]
                                             </ng-container>
                                             ({{
-                                                order.totalPrice
-                                                    | currency
-                                                        : "INR"
-                                                        : "symbol"
-                                                        : "1.0-0"
+                                            order.totalPrice
+                                            | currency
+                                            : "INR"
+                                            : "symbol"
+                                            : "1.0-0"
                                             }})
                                         </p>
                                     </div>
@@ -266,23 +219,20 @@
                                         <p>
                                             Total:
                                             {{
-                                                details.orderDetails[0]
-                                                    .orderAmount +
-                                                    details.orderDetails[0]
-                                                        .gstAmount +
-                                                    details.orderDetails[0]
-                                                        .deliveryAmount
-                                                    | currency
-                                                        : "INR"
-                                                        : "symbol"
-                                                        : "1.0-0"
+                                            details.orderDetails[0]
+                                            .orderAmount +
+                                            details.orderDetails[0]
+                                            .gstAmount +
+                                            details.orderDetails[0]
+                                            .deliveryAmount
+                                            | currency
+                                            : "INR"
+                                            : "symbol"
+                                            : "1.0-0"
                                             }}
                                         </p>
 
-                                        <div
-                                            id="print-section"
-                                            style="display: none"
-                                        >
+                                        <div id="print-section" style="display: none">
                                             <h1>Order Details</h1>
                                             <p>
                                                 Order Id: {{ details.orderId }}
@@ -294,49 +244,34 @@
 
                             <div class="row">
                                 <div class="col-md-12 order-ready-div">
-                                    <button
-                                        class="btn btn-success"
-                                        *ngIf="
+                                    <button class="btn btn-success" *ngIf="
                                             details.orderStatus === 'pending'
-                                        "
-                                        (click)="openAcceptDialog(details)"
-                                    >
+                                        " (click)="openAcceptDialog(details)">
                                         Accept order
                                     </button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 order-ready-div">
-                                    <button
-                                        class="btn btn-success"
-                                        *ngIf="
+                                    <button class="btn btn-success" *ngIf="
                                             details.orderStatus === 'processing'
-                                        "
-                                        (click)="completeOrder(details)"
-                                    >
+                                        " (click)="completeOrder(details)">
                                         Complete Order
                                     </button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 order-ready-div">
-                                    <button
-                                        (click)="openCancelOrderDialog(details)"
-                                        class="btn btn-danger"
-                                        *ngIf="
+                                    <button (click)="openCancelOrderDialog(details)" class="btn btn-danger" *ngIf="
                                             details.orderStatus !== 'completed'
-                                        "
-                                    >
+                                        ">
                                         Reject Order
                                     </button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 order-ready-div">
-                                    <button
-                                        class="btn btn-info"
-                                        (click)="openDialog(details)"
-                                    >
+                                    <button class="btn btn-info" (click)="openDialog(details)">
                                         View full order
                                     </button>
                                 </div>
@@ -346,14 +281,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h3>{{ details.customerName }}</h3>
-                                    <span
-                                        class="badge badge-warning"
-                                        *ngIf="details.customerName"
-                                    >
+                                    <span class="badge badge-warning" *ngIf="details.customerName">
                                         {{
-                                            details.loyalFlag ? "Loyal" : "New"
-                                        }}</span
-                                    >
+                                        details.loyalFlag ? "Loyal" : "New"
+                                        }}</span>
                                     <p class="small">
                                         {{ details.customerEmail }}
                                     </p>
@@ -365,49 +296,31 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="support">
-                                        <i
-                                            class="fa-solid fa-cash-register"
-                                        ></i>
-                                        <span *ngIf="!details.payment_method"
-                                            >Payment Method :- Pending</span
-                                        >
-                                        <span
-                                            *ngIf="
+                                        <i class="fa-solid fa-cash-register"></i>
+                                        <span *ngIf="!details.payment_method">Payment Method :- Pending</span>
+                                        <span *ngIf="
                                                 details?.payment_method.toLowerCase() !==
                                                 'Cash On Delivery'.toLowerCase()
-                                            "
-                                            >Payment Method :-
+                                            ">Payment Method :-
                                             {{
-                                                "Paid via " +
-                                                    details.payment_method
-                                                    | titlecase
-                                            }}</span
-                                        >
-                                        <span
-                                            *ngIf="
+                                            "Paid via " +
+                                            details.payment_method
+                                            | titlecase
+                                            }}</span>
+                                        <span *ngIf="
                                                 details?.payment_method.toLowerCase() ===
                                                 'Cash On Delivery'.toLowerCase()
-                                            "
-                                        >
-                                            Payment Method :- Cash</span
-                                        >
+                                            ">
+                                            Payment Method :- Cash</span>
                                         <div class="my-3">
-                                            <a
-                                                class="print-reciept pointer"
-                                                (click)="printReceipt(details)"
-                                            >
+                                            <a class="print-reciept pointer" (click)="printReceipt(details)">
                                                 <i class="fas fa-print"></i>
-                                                Print bill</a
-                                            >
+                                                Print bill</a>
                                         </div>
                                         <div>
-                                            <a
-                                                class="print-reciept pointer"
-                                                (click)="printKTO(details)"
-                                            >
+                                            <a class="print-reciept pointer" (click)="printKTO(details)">
                                                 <i class="fas fa-print"></i>
-                                                Print KOT</a
-                                            >
+                                                Print KOT</a>
                                         </div>
                                     </div>
                                 </div>
@@ -415,20 +328,16 @@
                             <div class="row">
                                 <div class="col-md-12 mt-2">
                                     <div class="support">
-                                        <button
-                                            class="btn btn-info"
-                                            *ngIf="
+                                        <button class="btn btn-info" *ngIf="
                                                 details.customerName &&
                                                 !bypassOptions.includes(
                                                     details.customerPreferences.preference.toLowerCase()
                                                 )
-                                            "
-                                            (click)="toggleLoyalStatus(details)"
-                                        >
+                                            " (click)="toggleLoyalStatus(details)">
                                             {{
-                                                details?.loyalFlag
-                                                    ? "Remove Loyal"
-                                                    : "Add Loyal"
+                                            details?.loyalFlag
+                                            ? "Remove Loyal"
+                                            : "Add Loyal"
                                             }}
                                         </button>
                                     </div>
@@ -676,823 +585,724 @@
                 </div>
             </ng-container> -->
             <ng-container *ngIf="activeTab === 'tab3'">
-                <h4
-                    class="text-center"
-                    *ngIf="this.apiCalledFlag && !this.processingOrder?.length"
-                >
+                <h4 class="text-center" *ngIf="this.apiCalledFlag && !this.processingOrder?.length">
                     There are currently no order in process .
                 </h4>
-                <div
-                    class="order-card mt-3"
-                    *ngFor="let details of this.processingOrder"
-                >
-                <div class="row mt-3">
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="delivery-address">
-                                    <h4>
-                                        {{
+                <div class="order-card mt-3" *ngFor="let details of this.processingOrder">
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="delivery-address">
+                                        <h4>
+                                            {{
                                             details.customerPreferences.preference.toLowerCase() ===
                                             "grab and go"
-                                                ? "Take away"
-                                                : (details
-                                                      .customerPreferences
-                                                      .preference
-                                                  | titlecase)
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            ? "Take away"
+                                            : (details
+                                            .customerPreferences
+                                            .preference
+                                            | titlecase)
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             details.customerPreferences
                                                 .preference === 'Dine In' ||
                                             details.customerPreferences.preference.toLowerCase() ===
                                                 'dining'
-                                        "
-                                    >
-                                        Table Name:-
-                                        {{
+                                        ">
+                                            Table Name:-
+                                            {{
                                             details.customerPreferences
-                                                ?.value
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            ?.value
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             details.customerPreferences.preference.toLowerCase() ===
                                             'room service'
-                                        "
-                                    >
-                                        Room Number:-
-                                        {{
+                                        ">
+                                            Room Number:-
+                                            {{
                                             details.customerPreferences
-                                                ?.value
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            ?.value
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             takeAwayOptions.includes(
                                                 details.customerPreferences.preference.toLowerCase()
                                             )
-                                        "
-                                    >
-                                        {{
+                                        ">
+                                            {{
                                             details.customerPreferences
-                                                .value
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            .value
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             details.customerPreferences
                                                 .preference === 'delivery'
-                                        "
-                                    >
-                                        {{
+                                        ">
+                                            {{
                                             details.customerPreferences
-                                                ?.value.address
-                                        }},
-                                        {{
+                                            ?.value.address
+                                            }},
+                                            {{
                                             details.customerPreferences
-                                                ?.value
-                                                .googleLocationAddress
-                                        }},{{
+                                            ?.value
+                                            .googleLocationAddress
+                                            }},{{
                                             details.customerPreferences
-                                                ?.value.pincode
-                                        }}
-                                    </h4>
+                                            ?.value.pincode
+                                            }}
+                                        </h4>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>
-                                    <strong>ID: </strong>
-                                    {{ details.orderId }}
-                                </p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        <strong>ID: </strong>
+                                        {{ details.orderId }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="dateText">
-                                    <img
-                                        class="green-tick logo"
-                                        src="assets\img\green-tick.png"
-                                        alt="tick"
-                                    />Placed at
-                                    {{
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="dateText">
+                                        <img class="green-tick logo" src="assets\img\green-tick.png" alt="tick" />Placed
+                                        at
+                                        {{
                                         details.orderDate | date : "medium"
-                                    }}
-                                </p>
+                                        }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p
-                                    class="dateText"
-                                    *ngIf="
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="dateText" *ngIf="
                                         details.payment_method.toLowerCase() !==
                                         'Cash On Delivery'.toLowerCase()
-                                    "
-                                >
-                                    Payment Method :- Paid via
-                                    {{ details.payment_method }}
-                                </p>
-                                <p
-                                    class="dateText"
-                                    *ngIf="
+                                    ">
+                                        Payment Method :- Paid via
+                                        {{ details.payment_method }}
+                                    </p>
+                                    <p class="dateText" *ngIf="
                                         details.payment_method.toLowerCase() ===
                                         'Cash On Delivery'.toLowerCase()
-                                    "
-                                >
-                                    Payment Method :- Cash
-                                </p>
-                                <p
-                                    class="dateText"
-                                    *ngIf="details.payment_amount"
-                                >
-                                    Payment Amount :-
+                                    ">
+                                        Payment Method :- Cash
+                                    </p>
+                                    <p class="dateText" *ngIf="details.payment_amount">
+                                        Payment Amount :-
 
-                                    {{
+                                        {{
                                         details.payment_amount
-                                            | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                    }}
-                                </p>
-                                <button
-                                    class="btn btn-secondary"
-                                    (click)="
+                                        | currency
+                                        : "INR"
+                                        : "symbol"
+                                        : "1.0-0"
+                                        }}
+                                    </p>
+                                    <button class="btn btn-secondary" (click)="
                                         openPaymentDetailDialog(details)
-                                    "
-                                >
-                                    View Payment Details
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div
-                                    class="order-items"
-                                    *ngFor="
-                                        let order of details.orderDetails[0]
-                                            .orderSummary
-                                    "
-                                >
-                                    <p>
-                                        <img
-                                            src="assets\img\non-veg food icon.png"
-                                            alt="Non-Veg Item"
-                                            *ngIf="
-                                                order.dishType === 'nonVeg'
-                                            "
-                                        />
-                                        <img
-                                            src="assets\img\veg food icon.png"
-                                            alt="Veg Item"
-                                            *ngIf="order.dishType === 'veg'"
-                                        />{{ order.dishQuantity }} x
-                                        {{ order.dishName }}
-                                        <ng-container
-                                            *ngIf="
-                                                order.itemSizeSelected?.size
-                                            "
-                                        >
-                                            <span>
-                                                [Size:-{{
-                                                    order.itemSizeSelected
-                                                        .size
-                                                }}]
-                                            </span>
-                                        </ng-container>
-                                        <ng-container
-                                            *ngIf="
-                                                order.extraSelected &&
-                                                order.extraSelected.length
-                                            "
-                                        >
-                                            [ Extras:-
-                                            {{
-                                                getExtrasList(
-                                                    order.extraSelected
-                                                )
-                                            }}
-                                            ]
-                                        </ng-container>
-                                        <ng-container
-                                            *ngIf="
-                                                order.dishChoicesSelected &&
-                                                order.dishChoicesSelected
-                                                    .length
-                                            "
-                                        >
-                                            [Choices:-
-                                            {{
-                                                getChoicesList(
-                                                    order.dishChoicesSelected
-                                                )
-                                            }}
-                                            ]
-                                        </ng-container>
-                                        ({{
-                                            order.totalPrice
-                                                | currency
-                                                    : "INR"
-                                                    : "symbol"
-                                                    : "1.0-0"
-                                        }})
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="total-bill">
-                                    <p>
-                                        Total:
-                                        {{
-                                            details.orderDetails[0]
-                                                .orderAmount +
-                                                details.orderDetails[0]
-                                                    .gstAmount +
-                                                details.orderDetails[0]
-                                                    .deliveryAmount
-                                                | currency
-                                                    : "INR"
-                                                    : "symbol"
-                                                    : "1.0-0"
-                                        }}
-                                    </p>
-
-                                    <div
-                                        id="print-section"
-                                        style="display: none"
-                                    >
-                                        <h1>Order Details</h1>
-                                        <p>
-                                            Order Id: {{ details.orderId }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    class="btn btn-success"
-                                    *ngIf="
-                                        details.orderStatus === 'pending'
-                                    "
-                                    (click)="openAcceptDialog(details)"
-                                >
-                                    Accept order
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    class="btn btn-success"
-                                    *ngIf="
-                                        details.orderStatus === 'processing'
-                                    "
-                                    (click)="completeOrder(details)"
-                                >
-                                    Complete Order
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    (click)="openCancelOrderDialog(details)"
-                                    class="btn btn-danger"
-                                    *ngIf="
-                                        details.orderStatus !== 'completed'
-                                    "
-                                >
-                                    Reject Order
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    class="btn btn-info"
-                                    (click)="openDialog(details)"
-                                >
-                                    View full order
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>{{ details.customerName }}</h3>
-                                <span
-                                    class="badge badge-warning"
-                                    *ngIf="details.customerName"
-                                >
-                                    {{
-                                        details.loyalFlag ? "Loyal" : "New"
-                                    }}</span
-                                >
-                                <p class="small">
-                                    {{ details.customerEmail }}
-                                </p>
-                                <p class="small">
-                                    {{ details.customerPhoneNumber }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="support">
-                                    <i
-                                        class="fa-solid fa-cash-register"
-                                    ></i>
-                                    <span *ngIf="!details.payment_method"
-                                        >Payment Method :- Pending</span
-                                    >
-                                    <span
-                                        *ngIf="
-                                            details?.payment_method.toLowerCase() !==
-                                            'Cash On Delivery'.toLowerCase()
-                                        "
-                                        >Payment Method :-
-                                        {{
-                                            "Paid via " +
-                                                details.payment_method
-                                                | titlecase
-                                        }}</span
-                                    >
-                                    <span
-                                        *ngIf="
-                                            details?.payment_method.toLowerCase() ===
-                                            'Cash On Delivery'.toLowerCase()
-                                        "
-                                    >
-                                        Payment Method :- Cash</span
-                                    >
-                                    <div class="my-3">
-                                        <a
-                                            class="print-reciept pointer"
-                                            (click)="printReceipt(details)"
-                                        >
-                                            <i class="fas fa-print"></i>
-                                            Print bill</a
-                                        >
-                                    </div>
-                                    <div>
-                                        <a
-                                            class="print-reciept pointer"
-                                            (click)="printKTO(details)"
-                                        >
-                                            <i class="fas fa-print"></i>
-                                            Print KOT</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mt-2">
-                                <div class="support">
-                                    <button
-                                        class="btn btn-info"
-                                        *ngIf="
-                                            details.customerName &&
-                                            !bypassOptions.includes(
-                                                details.customerPreferences.preference.toLowerCase()
-                                            )
-                                        "
-                                        (click)="toggleLoyalStatus(details)"
-                                    >
-                                        {{
-                                            details?.loyalFlag
-                                                ? "Remove Loyal"
-                                                : "Add Loyal"
-                                        }}
+                                    ">
+                                        View Payment Details
                                     </button>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="order-items" *ngFor="
+                                        let order of details.orderDetails[0]
+                                            .orderSummary
+                                    ">
+                                        <p>
+                                            <img src="assets\img\non-veg food icon.png" alt="Non-Veg Item" *ngIf="
+                                                order.dishType === 'nonVeg'
+                                            " />
+                                            <img src="assets\img\veg food icon.png" alt="Veg Item"
+                                                *ngIf="order.dishType === 'veg'" />{{ order.dishQuantity }} x
+                                            {{ order.dishName }}
+                                            <ng-container *ngIf="
+                                                order.itemSizeSelected?.size
+                                            ">
+                                                <span>
+                                                    [Size:-{{
+                                                    order.itemSizeSelected
+                                                    .size
+                                                    }}]
+                                                </span>
+                                            </ng-container>
+                                            <ng-container *ngIf="
+                                                order.extraSelected &&
+                                                order.extraSelected.length
+                                            ">
+                                                [ Extras:-
+                                                {{
+                                                getExtrasList(
+                                                order.extraSelected
+                                                )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            <ng-container *ngIf="
+                                                order.dishChoicesSelected &&
+                                                order.dishChoicesSelected
+                                                    .length
+                                            ">
+                                                [Choices:-
+                                                {{
+                                                getChoicesList(
+                                                order.dishChoicesSelected
+                                                )
+                                                }}
+                                                ]
+                                            </ng-container>
+                                            ({{
+                                            order.totalPrice
+                                            | currency
+                                            : "INR"
+                                            : "symbol"
+                                            : "1.0-0"
+                                            }})
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="total-bill">
+                                        <p>
+                                            Total:
+                                            {{
+                                            details.orderDetails[0]
+                                            .orderAmount +
+                                            details.orderDetails[0]
+                                            .gstAmount +
+                                            details.orderDetails[0]
+                                            .deliveryAmount
+                                            | currency
+                                            : "INR"
+                                            : "symbol"
+                                            : "1.0-0"
+                                            }}
+                                        </p>
+
+                                        <div id="print-section" style="display: none">
+                                            <h1>Order Details</h1>
+                                            <p>
+                                                Order Id: {{ details.orderId }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button class="btn btn-success" *ngIf="
+                                        details.orderStatus === 'pending'
+                                    " (click)="openAcceptDialog(details)">
+                                        Accept order
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button class="btn btn-success" *ngIf="
+                                        details.orderStatus === 'processing'
+                                    " (click)="completeOrder(details)">
+                                        Complete Order
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button (click)="openCancelOrderDialog(details)" class="btn btn-danger" *ngIf="
+                                        details.orderStatus !== 'completed'
+                                    ">
+                                        Reject Order
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button class="btn btn-info" (click)="openDialog(details)">
+                                        View full order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>{{ details.customerName }}</h3>
+                                    <span class="badge badge-warning" *ngIf="details.customerName">
+                                        {{
+                                        details.loyalFlag ? "Loyal" : "New"
+                                        }}</span>
+                                    <p class="small">
+                                        {{ details.customerEmail }}
+                                    </p>
+                                    <p class="small">
+                                        {{ details.customerPhoneNumber }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="support">
+                                        <i class="fa-solid fa-cash-register"></i>
+                                        <span *ngIf="!details.payment_method">Payment Method :- Pending</span>
+                                        <span *ngIf="
+                                            details?.payment_method.toLowerCase() !==
+                                            'Cash On Delivery'.toLowerCase()
+                                        ">Payment Method :-
+                                            {{
+                                            "Paid via " +
+                                            details.payment_method
+                                            | titlecase
+                                            }}</span>
+                                        <span *ngIf="
+                                            details?.payment_method.toLowerCase() ===
+                                            'Cash On Delivery'.toLowerCase()
+                                        ">
+                                            Payment Method :- Cash</span>
+                                        <div class="my-3">
+                                            <a class="print-reciept pointer" (click)="printReceipt(details)">
+                                                <i class="fas fa-print"></i>
+                                                Print bill</a>
+                                        </div>
+                                        <div>
+                                            <a class="print-reciept pointer" (click)="printKTO(details)">
+                                                <i class="fas fa-print"></i>
+                                                Print KOT</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <div class="support">
+                                        <button class="btn btn-info" *ngIf="
+                                            details.customerName &&
+                                            !bypassOptions.includes(
+                                                details.customerPreferences.preference.toLowerCase()
+                                            )
+                                        " (click)="toggleLoyalStatus(details)">
+                                            {{
+                                            details?.loyalFlag
+                                            ? "Remove Loyal"
+                                            : "Add Loyal"
+                                            }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 </div>
             </ng-container>
 
             <ng-container *ngIf="activeTab === 'tab4'">
-                <h4
-                    class="text-center"
-                    *ngIf="this.apiCalledFlag && !this.activeDine?.length"
-                >
+                <h4 class="text-center" *ngIf="this.apiCalledFlag && !this.activeDine?.length">
                     There are currently no active dine in orders.
                 </h4>
-                <div
-                    class="order-card mt-3"
-                    *ngFor="let details of this.activeDine"
-                >
-                <div class="row mt-3">
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="delivery-address">
-                                    <h4>
-                                        {{
+                <div class="order-card mt-3" *ngFor="let details of this.activeDine">
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="delivery-address">
+                                        <h4>
+                                            {{
                                             details.customerPreferences.preference.toLowerCase() ===
                                             "grab and go"
-                                                ? "Take away"
-                                                : (details
-                                                      .customerPreferences
-                                                      .preference
-                                                  | titlecase)
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            ? "Take away"
+                                            : (details
+                                            .customerPreferences
+                                            .preference
+                                            | titlecase)
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             details.customerPreferences
                                                 .preference === 'Dine In' ||
                                             details.customerPreferences.preference.toLowerCase() ===
                                                 'dining'
-                                        "
-                                    >
-                                        Table Name:-
-                                        {{
+                                        ">
+                                            Table Name:-
+                                            {{
                                             details.customerPreferences
-                                                ?.value
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            ?.value
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             details.customerPreferences.preference.toLowerCase() ===
                                             'room service'
-                                        "
-                                    >
-                                        Room Number:-
-                                        {{
+                                        ">
+                                            Room Number:-
+                                            {{
                                             details.customerPreferences
-                                                ?.value
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            ?.value
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             takeAwayOptions.includes(
                                                 details.customerPreferences.preference.toLowerCase()
                                             )
-                                        "
-                                    >
-                                        {{
+                                        ">
+                                            {{
                                             details.customerPreferences
-                                                .value
-                                        }}
-                                    </h4>
-                                    <h4
-                                        *ngIf="
+                                            .value
+                                            }}
+                                        </h4>
+                                        <h4 *ngIf="
                                             details.customerPreferences
                                                 .preference === 'delivery'
-                                        "
-                                    >
+                                        ">
+                                            {{
+                                            details.customerPreferences
+                                            ?.value.address
+                                            }},
+                                            {{
+                                            details.customerPreferences
+                                            ?.value
+                                            .googleLocationAddress
+                                            }},{{
+                                            details.customerPreferences
+                                            ?.value.pincode
+                                            }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        <strong>ID: </strong>
+                                        {{ details.orderId }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="dateText">
+                                        <img class="green-tick logo" src="assets\img\green-tick.png" alt="tick" />Placed
+                                        at
                                         {{
-                                            details.customerPreferences
-                                                ?.value.address
-                                        }},
-                                        {{
-                                            details.customerPreferences
-                                                ?.value
-                                                .googleLocationAddress
-                                        }},{{
-                                            details.customerPreferences
-                                                ?.value.pincode
+                                        details.orderDate | date : "medium"
                                         }}
-                                    </h4>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="dateText" *ngIf="
+                                        details.payment_method.toLowerCase() !==
+                                        'Cash On Delivery'.toLowerCase()
+                                    ">
+                                        Payment Method :- Paid via
+                                        {{ details.payment_method }}
+                                    </p>
+                                    <p class="dateText" *ngIf="
+                                        details.payment_method.toLowerCase() ===
+                                        'Cash On Delivery'.toLowerCase()
+                                    ">
+                                        Payment Method :- Cash
+                                    </p>
+                                    <p class="dateText" *ngIf="details.payment_amount">
+                                        Payment Amount :-
+
+                                        {{
+                                        details.payment_amount
+                                        | currency
+                                        : "INR"
+                                        : "symbol"
+                                        : "1.0-0"
+                                        }}
+                                    </p>
+                                    <button class="btn btn-secondary" (click)="
+                                        openPaymentDetailDialog(details)
+                                    ">
+                                        View Payment Details
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>
-                                    <strong>ID: </strong>
-                                    {{ details.orderId }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="dateText">
-                                    <img
-                                        class="green-tick logo"
-                                        src="assets\img\green-tick.png"
-                                        alt="tick"
-                                    />Placed at
-                                    {{
-                                        details.orderDate | date : "medium"
-                                    }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p
-                                    class="dateText"
-                                    *ngIf="
-                                        details.payment_method.toLowerCase() !==
-                                        'Cash On Delivery'.toLowerCase()
-                                    "
-                                >
-                                    Payment Method :- Paid via
-                                    {{ details.payment_method }}
-                                </p>
-                                <p
-                                    class="dateText"
-                                    *ngIf="
-                                        details.payment_method.toLowerCase() ===
-                                        'Cash On Delivery'.toLowerCase()
-                                    "
-                                >
-                                    Payment Method :- Cash
-                                </p>
-                                <p
-                                    class="dateText"
-                                    *ngIf="details.payment_amount"
-                                >
-                                    Payment Amount :-
 
-                                    {{
-                                        details.payment_amount
-                                            | currency
-                                                : "INR"
-                                                : "symbol"
-                                                : "1.0-0"
-                                    }}
-                                </p>
-                                <button
-                                    class="btn btn-secondary"
-                                    (click)="
-                                        openPaymentDetailDialog(details)
-                                    "
-                                >
-                                    View Payment Details
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ng-container *ngFor="let orderTemp of details.orderDetails">
-                                <div
-                                    class="order-items"
-                                    *ngFor="
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ng-container *ngFor="let orderTemp of details.orderDetails">
+                                        <div class="order-items" *ngFor="
                                         let order of orderTemp
                                             .orderSummary
-                                    "
-                                >
-                                    <p>
-                                        <img
-                                            src="assets\img\non-veg food icon.png"
-                                            alt="Non-Veg Item"
-                                            *ngIf="
+                                    ">
+                                            <p>
+                                                <img src="assets\img\non-veg food icon.png" alt="Non-Veg Item" *ngIf="
                                                 order.dishType === 'nonVeg'
-                                            "
-                                        />
-                                        <img
-                                            src="assets\img\veg food icon.png"
-                                            alt="Veg Item"
-                                            *ngIf="order.dishType === 'veg'"
-                                        />{{ order.dishQuantity }} x
-                                        {{ order.dishName }}
-                                        <ng-container
-                                            *ngIf="
+                                            " />
+                                                <img src="assets\img\veg food icon.png" alt="Veg Item"
+                                                    *ngIf="order.dishType === 'veg'" />{{ order.dishQuantity }} x
+                                                {{ order.dishName }}
+                                                <ng-container *ngIf="
                                                 order.itemSizeSelected?.size
-                                            "
-                                        >
-                                            <span>
-                                                [Size:-{{
-                                                    order.itemSizeSelected
+                                            ">
+                                                    <span>
+                                                        [Size:-{{
+                                                        order.itemSizeSelected
                                                         .size
-                                                }}]
-                                            </span>
-                                        </ng-container>
-                                        <ng-container
-                                            *ngIf="
+                                                        }}]
+                                                    </span>
+                                                </ng-container>
+                                                <ng-container *ngIf="
                                                 order.extraSelected &&
                                                 order.extraSelected.length
-                                            "
-                                        >
-                                            [ Extras:-
-                                            {{
-                                                getExtrasList(
+                                            ">
+                                                    [ Extras:-
+                                                    {{
+                                                    getExtrasList(
                                                     order.extraSelected
-                                                )
-                                            }}
-                                            ]
-                                        </ng-container>
-                                        <ng-container
-                                            *ngIf="
+                                                    )
+                                                    }}
+                                                    ]
+                                                </ng-container>
+                                                <ng-container *ngIf="
                                                 order.dishChoicesSelected &&
                                                 order.dishChoicesSelected
                                                     .length
-                                            "
-                                        >
-                                            [Choices:-
-                                            {{
-                                                getChoicesList(
+                                            ">
+                                                    [Choices:-
+                                                    {{
+                                                    getChoicesList(
                                                     order.dishChoicesSelected
-                                                )
-                                            }}
-                                            ]
-                                        </ng-container>
-                                        ({{
-                                            order.totalPrice
+                                                    )
+                                                    }}
+                                                    ]
+                                                </ng-container>
+                                                ({{
+                                                order.totalPrice
                                                 | currency
-                                                    : "INR"
-                                                    : "symbol"
-                                                    : "1.0-0"
-                                        }})
-                                    </p>
+                                                : "INR"
+                                                : "symbol"
+                                                : "1.0-0"
+                                                }})
+                                            </p>
+                                        </div>
+                                    </ng-container>
                                 </div>
-                                </ng-container>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="total-bill">
-                                    <p>
-                                        Total:
-                                        {{
-                                            totalBillForDineIn(details)
-                                                | currency
-                                                    : "INR"
-                                                    : "symbol"
-                                                    : "1.0-0"
-                                        }}
-                                    </p>
-
-                                    <div
-                                        id="print-section"
-                                        style="display: none"
-                                    >
-                                        <h1>Order Details</h1>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="total-bill">
                                         <p>
-                                            Order Id: {{ details.orderId }}
+                                            Total:
+                                            {{
+                                            totalBillForDineIn(details)
+                                            | currency
+                                            : "INR"
+                                            : "symbol"
+                                            : "1.0-0"
+                                            }}
                                         </p>
+
+                                        <div id="print-section" style="display: none">
+                                            <h1>Order Details</h1>
+                                            <p>
+                                                Order Id: {{ details.orderId }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    class="btn btn-success"
-                                    *ngIf="
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button class="btn btn-success" *ngIf="
                                         details.orderStatus === 'pending'
-                                    "
-                                    (click)="openAcceptDialog(details)"
-                                >
-                                    Accept order
-                                </button>
+                                    " (click)="openAcceptDialog(details)">
+                                        Accept order
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    class="btn btn-success"
-                                    *ngIf="
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button class="btn btn-success" *ngIf="
                                         details.orderStatus === 'processing'
-                                    "
-                                    (click)="completeOrder(details)"
-                                >
-                                    Complete Order
-                                </button>
+                                    " (click)="completeOrder(details)">
+                                        Complete Order
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    (click)="openCancelOrderDialog(details)"
-                                    class="btn btn-danger"
-                                    *ngIf="
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button (click)="openCancelOrderDialog(details)" class="btn btn-danger" *ngIf="
                                         details.orderStatus !== 'completed'
-                                    "
-                                >
-                                    Reject Order
-                                </button>
+                                    ">
+                                        Reject Order
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 order-ready-div">
+                                    <button class="btn btn-info" (click)="openDialog(details)">
+                                        View full order
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 order-ready-div">
-                                <button
-                                    class="btn btn-info"
-                                    (click)="openDialog(details)"
-                                >
-                                    View full order
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3>{{ details.customerName }}</h3>
-                                <span
-                                    class="badge badge-warning"
-                                    *ngIf="details.customerName"
-                                >
-                                    {{
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>{{ details.customerName }}</h3>
+                                    <span class="badge badge-warning" *ngIf="details.customerName">
+                                        {{
                                         details.loyalFlag ? "Loyal" : "New"
-                                    }}</span
-                                >
-                                <p class="small">
-                                    {{ details.customerEmail }}
-                                </p>
-                                <p class="small">
-                                    {{ details.customerPhoneNumber }}
-                                </p>
+                                        }}</span>
+                                    <p class="small">
+                                        {{ details.customerEmail }}
+                                    </p>
+                                    <p class="small">
+                                        {{ details.customerPhoneNumber }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="support">
-                                    <i
-                                        class="fa-solid fa-cash-register"
-                                    ></i>
-                                    <span *ngIf="!details.payment_method"
-                                        >Payment Method :- Pending</span
-                                    >
-                                    <span
-                                        *ngIf="
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="support">
+                                        <i class="fa-solid fa-cash-register"></i>
+                                        <span *ngIf="!details.payment_method">Payment Method :- Pending</span>
+                                        <span *ngIf="
                                             details?.payment_method.toLowerCase() !==
                                             'Cash On Delivery'.toLowerCase()
-                                        "
-                                        >Payment Method :-
-                                        {{
+                                        ">Payment Method :-
+                                            {{
                                             "Paid via " +
-                                                details.payment_method
-                                                | titlecase
-                                        }}</span
-                                    >
-                                    <span
-                                        *ngIf="
+                                            details.payment_method
+                                            | titlecase
+                                            }}</span>
+                                        <span *ngIf="
                                             details?.payment_method.toLowerCase() ===
                                             'Cash On Delivery'.toLowerCase()
-                                        "
-                                    >
-                                        Payment Method :- Cash</span
-                                    >
-                                    <div class="my-3">
-                                        <a
-                                            class="print-reciept pointer"
-                                            (click)="printReceipt(details)"
-                                        >
-                                            <i class="fas fa-print"></i>
-                                            Print bill</a
-                                        >
-                                    </div>
-                                    <div>
-                                        <a
-                                            class="print-reciept pointer"
-                                            (click)="printKTO(details)"
-                                        >
-                                            <i class="fas fa-print"></i>
-                                            Print KOT</a
-                                        >
+                                        ">
+                                            Payment Method :- Cash</span>
+                                        <div class="my-3">
+                                            <a class="print-reciept pointer" (click)="printReceipt(details)">
+                                                <i class="fas fa-print"></i>
+                                                Print bill</a>
+                                        </div>
+                                        <div>
+                                            <a class="print-reciept pointer" (click)="printKTO(details)">
+                                                <i class="fas fa-print"></i>
+                                                Print KOT</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mt-2">
-                                <div class="support">
-                                    <button
-                                        class="btn btn-info"
-                                        *ngIf="
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <div class="support">
+                                        <button class="btn btn-info" *ngIf="
                                             details.customerName &&
                                             !bypassOptions.includes(
                                                 details.customerPreferences.preference.toLowerCase()
                                             )
-                                        "
-                                        (click)="toggleLoyalStatus(details)"
-                                    >
-                                        {{
+                                        " (click)="toggleLoyalStatus(details)">
+                                            {{
                                             details?.loyalFlag
-                                                ? "Remove Loyal"
-                                                : "Add Loyal"
-                                        }}
-                                    </button>
+                                            ? "Remove Loyal"
+                                            : "Add Loyal"
+                                            }}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </ng-container>
+
+            <!-- Waiter Calls Tab -->
+            <ng-container *ngIf="activeTab === 'tab5'">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="m-0" *ngIf="this.apiCalledFlag && !this.waiterCalls?.length">
+                        There are currently no waiter calls.
+                    </h4>
+                    <button class="btn btn-outline-primary" (click)="getWaiterCalls()" [disabled]="isRefreshing">
+                        <i class="fa" [ngClass]="{'fa-refresh': !isRefreshing, 'fa-spinner fa-spin': isRefreshing}"></i>
+                        {{ isRefreshing ? 'Loading...' : 'Refresh' }}
+                    </button>
+                </div>
+                <div class="order-card mt-3" *ngFor="let call of this.waiterCalls">
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="delivery-address">
+                                        <h4>Table: {{ call.tableName }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p><strong>ID: </strong>{{ call.callId }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="dateText">
+                                        <i class="fa-solid fa-clock"></i> Called at
+                                        {{ call.createdAt }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="message-box">
+                                        <h5>Message:</h5>
+                                        <p>{{ call.message || 'No message provided' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-3">
+                                    <div class="status-box">
+                                        <span class="badge" [ngClass]="getWaiterCallStatusClass(call.status)">
+                                            {{ call.status | titlecase }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>{{ call.customerName }}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-3">
+                                    <button class="btn btn-info mr-2" *ngIf="call.status === 'pending'"
+                                        (click)="acknowledgeWaiterCall(call)">
+                                        <i class="fa fa-check"></i> Acknowledge
+                                    </button>
+                                    <button class="btn btn-success" *ngIf="call.status !== 'resolved'"
+                                        (click)="resolveWaiterCall(call)">
+                                        <i class="fa fa-check-double"></i> Resolve
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </ng-container>
         </div>

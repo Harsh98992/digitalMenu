@@ -20,9 +20,12 @@
         </div>
     </div>
     <div *ngIf="cartItems && cartItems.length > 0" class="d-flex justify-content-end mt-2">
-        <button (click)="emptyCart()" class="empty-cart-btn">
-            <i class="fa-solid fa-trash-can mr-1"></i> Empty Cart
-        </button>
+        <div class="price-and-trash">
+            <span class="empty-cart-text">Empty Cart</span>
+            <button (click)="emptyCart()" class="trash-btn">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
     </div>
 </div>
 <div class="bg-white p-3 py-3 border-bottom clearfix" *ngIf="!showCartItem()">

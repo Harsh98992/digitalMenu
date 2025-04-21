@@ -80,22 +80,39 @@
     color: green;
 }
 
-.empty-cart-btn {
-    background-color: #f44336;
-    color: white;
-    font-size: 0.85rem;
-    padding: 6px 12px;
+.price-and-trash {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.empty-cart-text {
+    color: #666666;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-right: 4px;
+}
+
+.trash-btn {
+    background-color: white;
+    color: #f44336;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
     &:hover {
-        background-color: #d32f2f;
+        background-color: #f8f8f8;
+    }
+
+    i {
+        font-size: 1rem;
     }
 }
 .coupon-button {

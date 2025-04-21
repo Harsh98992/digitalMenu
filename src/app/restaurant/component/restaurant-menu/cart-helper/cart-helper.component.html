@@ -1,26 +1,28 @@
-<div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
-    <img
-        alt="osahan"
-        [src]="
-            restaurantData.restaurantBackgroundImageForSmall
-                ? restaurantData.restaurantBackgroundImageForSmall
-                : 'assets/img/hero_general.jpg'
-        "
-        class="mr-3 rounded-circle img-fluid"
-        style="height: 50px; width: 50px"
-    />
-    <div class="d-flex flex-column">
-        <h6 class="mb-1 font-weight-bold">
-            {{ restaurantData.restaurantName | titlecase }}
-        </h6>
-        <p class="mb-0 small text-muted">
-            <i class="feather-map-pin"></i>
-            {{ restaurantData.address.street }} ,{{
+<div class="border-bottom osahan-cart-item-profile bg-white p-3">
+    <div class="d-flex align-items-center" style="flex: 1;">
+        <img alt="osahan" [src]="
+                restaurantData.restaurantBackgroundImageForSmall
+                    ? restaurantData.restaurantBackgroundImageForSmall
+                    : 'assets/img/hero_general.jpg'
+            " class="mr-3 rounded-circle img-fluid" style="height: 50px; width: 50px" />
+        <div class="d-flex flex-column">
+            <h6 class="mb-1 font-weight-bold">
+                {{ restaurantData.restaurantName | titlecase }}
+            </h6>
+            <p class="mb-0 small text-muted">
+                <i class="feather-map-pin"></i>
+                {{ restaurantData.address.street }} ,{{
                 restaurantData.address.city
-            }},{{ restaurantData.address.state }}
-            (Pin Code:-
-            {{ restaurantData.address.pinCode }})
-        </p>
+                }},{{ restaurantData.address.state }}
+                (Pin Code:-
+                {{ restaurantData.address.pinCode }})
+            </p>
+        </div>
+    </div>
+    <div *ngIf="cartItems && cartItems.length > 0" class="d-flex justify-content-end mt-2">
+        <button (click)="emptyCart()" class="empty-cart-btn">
+            <i class="fa-solid fa-trash-can mr-1"></i> Empty Cart
+        </button>
     </div>
 </div>
 <div class="bg-white p-3 py-3 border-bottom clearfix" *ngIf="!showCartItem()">
@@ -31,84 +33,50 @@
 <ng-container *ngIf="showCartItem()">
     <ng-container *ngFor="let item of cartItems; index as cartItemIndex">
         <div class="bg-white border-bottom py-2">
-            <div
-                class="gold-members d-flex align-items-center justify-content-between border-bottom cartItem"
-                *ngFor="let cartItem of item.cartItems; index as i"
-            >
+            <div class="gold-members d-flex align-items-center justify-content-between border-bottom cartItem"
+                *ngFor="let cartItem of item.cartItems; index as i">
                 <div class="media align-items-center">
-                    <img
-                        *ngIf="cartItem['dishDetail']['dishType'] === 'veg'"
-                        src="assets/img/vegGreenIcon.png"
-                        class="vegIcon"
-                        alt="veg"
-                    />
-                    <img
-                        *ngIf="cartItem['dishDetail']['dishType'] === 'nonVeg'"
-                        src="assets/img/nonVeg.png"
-                        class="vegIcon"
-                        alt="veg"
-                    />
+                    <img *ngIf="cartItem['dishDetail']['dishType'] === 'veg'" src="assets/img/vegGreenIcon.png"
+                        class="vegIcon" alt="veg" />
+                    <img *ngIf="cartItem['dishDetail']['dishType'] === 'nonVeg'" src="assets/img/nonVeg.png"
+                        class="vegIcon" alt="veg" />
                     <div class="media-body">
                         <p class="m-0 cartItemName">
                             {{ cartItem["dishDetail"]["dishName"] | titlecase }}
 
-                            <span
-                                *ngIf="
+                            <span *ngIf="
                                     cartItem['itemSizeSelected'] &&
                                     cartItem['itemSizeSelected']['size']
-                                "
-                            >
+                                ">
                                 ({{
-                                    cartItem["itemSizeSelected"]["size"]
-                                }})</span
-                            >
-                            <i
-                                *ngIf="
+                                cartItem["itemSizeSelected"]["size"]
+                                }})</span>
+                            <i *ngIf="
                                     (cartItem['extraSelected'] &&
                                         cartItem['extraSelected'].length) ||
                                     (cartItem['dishChoicesSelected'] &&
                                         cartItem['dishChoicesSelected'].length)
-                                "
-                                class="fa-solid fa-eye ml-1"
-                                style="color: #e54750"
-                                (click)="showOptionDetail(cartItem)"
-                            ></i>
+                                " class="fa-solid fa-eye ml-1" style="color: #e54750"
+                                (click)="showOptionDetail(cartItem)"></i>
                         </p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center w-37">
-                    <span class="count-number float-right"
-                        ><button
-                            style="border-radius: 5px"
-                            type="button"
-                            class="btn-sm left dec btn btn-outline-secondary"
-                            (click)="changeQuantity('dec', cartItem)"
-                        >
-                            <i class="fa-solid fa-minus"></i></button
-                        ><input
-                            class="count-number-input"
-                            type="text"
-                            readonly=""
-                            [value]="cartItem['dishQuantity']" /><button
-                            style="border-radius: 5px"
-                            type="button"
-                            class="btn-sm right inc btn btn-outline-secondary"
-                            (click)="changeQuantity('inc', cartItem)"
-                        >
-                            <i class="fa-solid fa-plus"></i></button
-                    ></span>
-                    <p
-                        class="text-gray mb-0 cart-item-price float-right ml-2 text-muted small"
-                    >
+                    <span class="count-number float-right"><button style="border-radius: 5px" type="button"
+                            class="btn-sm left dec btn btn-outline-secondary" (click)="changeQuantity('dec', cartItem)">
+                            <i class="fa-solid fa-minus"></i></button><input class="count-number-input" type="text"
+                            readonly="" [value]="cartItem['dishQuantity']" /><button style="border-radius: 5px"
+                            type="button" class="btn-sm right inc btn btn-outline-secondary"
+                            (click)="changeQuantity('inc', cartItem)">
+                            <i class="fa-solid fa-plus"></i></button></span>
+                    <p class="text-gray mb-0 cart-item-price float-right ml-2 text-muted small">
                         {{
-                            cartItem["totalPrice"]
-                                | currency : "INR" : "symbol" : "1.0-0"
+                        cartItem["totalPrice"]
+                        | currency : "INR" : "symbol" : "1.0-0"
                         }}
                     </p>
-                    <i
-                        class="fa-solid fa-trash bin-color pointer ml-2"
-                        (click)="removeItem(item, i, cartItemIndex)"
-                    ></i>
+                    <i class="fa-solid fa-trash bin-color pointer ml-2"
+                        (click)="removeItem(item, i, cartItemIndex)"></i>
                 </div>
             </div>
         </div>
@@ -127,97 +95,43 @@
         </div>
 
         <div class="row my-3">
-            <mat-radio-group
-                aria-label="Select an option"
-                [(ngModel)]="orderOption"
-            >
-                <span
-                    class="col-4 d-block"
-                    *ngIf="
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="orderOption">
+                <span class="col-4 d-block" *ngIf="
                         isDineInAvailable &&
                         !isByPassAuthFlag &&
                         !dineInMenuFlag
-                    "
-                >
-                    <mat-radio-button
-                        value="dineIn"
-                        (click)="changeOption($event, 'dineIn')"
-                        >Dine In
-                        <span
-                            class="icon_info_alt"
-                            triggers="click:blur"
-                            ngbTooltip="Place an order, choose the table, and we will serve"
-                        ></span></mat-radio-button
-                ></span>
-                <span
-                    class="text-danger"
-                    *ngIf="
+                    ">
+                    <mat-radio-button value="dineIn" (click)="changeOption($event, 'dineIn')">Dine In
+                        <span class="icon_info_alt" triggers="click:blur"
+                            ngbTooltip="Place an order, choose the table, and we will serve"></span></mat-radio-button></span>
+                <span class="text-danger" *ngIf="
                         !isDineInAvailable && isByPassAuthFlag && dineInMenuFlag
-                    "
-                >
+                    ">
                     Dining not available currently
                 </span>
-                <span
-                    class="col-4 d-block"
-                    *ngIf="
+                <span class="col-4 d-block" *ngIf="
                         isDineInAvailable && isByPassAuthFlag && dineInMenuFlag
-                    "
-                >
-                    <mat-radio-button
-                        value="dining"
-                        (click)="changeOption($event, 'dining')"
-                        >Dining
-                        <span
-                            class="icon_info_alt"
-                            triggers="click:blur"
-                            ngbTooltip="Place an order, choose the table, and we will serve"
-                        ></span></mat-radio-button
-                ></span>
+                    ">
+                    <mat-radio-button value="dining" (click)="changeOption($event, 'dining')">Dining
+                        <span class="icon_info_alt" triggers="click:blur"
+                            ngbTooltip="Place an order, choose the table, and we will serve"></span></mat-radio-button></span>
                 <span class="col-4 d-block">
-                    <mat-radio-button
-                        *ngIf="
+                    <mat-radio-button *ngIf="
                             restaurantData.provideDelivery && !dineInMenuFlag
-                        "
-                        value="delivery"
-                        [disabled]="deliveryDisabled"
-                        (click)="changeOption($event, 'delivery')"
-                        >{{ deliveryRadioText }}
-                        <span
-                            class="icon_info_alt"
-                            triggers="click:blur"
-                            ngbTooltip="Place an order, set the address and time, and we deliver"
-                        ></span
-                    ></mat-radio-button>
+                        " value="delivery" [disabled]="deliveryDisabled" (click)="changeOption($event, 'delivery')">{{
+                        deliveryRadioText }}
+                        <span class="icon_info_alt" triggers="click:blur"
+                            ngbTooltip="Place an order, set the address and time, and we deliver"></span></mat-radio-button>
                 </span>
-                <span
-                    class="col-4 d-block"
-                    *ngIf="!isByPassAuthFlag && !dineInMenuFlag"
-                >
-                    <mat-radio-button
-                        value="takeAway"
-                        (click)="changeOption($event, 'takeAway')"
-                        >Take away
-                        <span
-                            class="icon_info_alt"
-                            triggers="click:blur"
-                            ngbTooltip="Order the food, set the time, we will keep your order packed"
-                        ></span
-                    ></mat-radio-button>
+                <span class="col-4 d-block" *ngIf="!isByPassAuthFlag && !dineInMenuFlag">
+                    <mat-radio-button value="takeAway" (click)="changeOption($event, 'takeAway')">Take away
+                        <span class="icon_info_alt" triggers="click:blur"
+                            ngbTooltip="Order the food, set the time, we will keep your order packed"></span></mat-radio-button>
                 </span>
-                <span
-                    class="col-4 d-block"
-                    *ngIf="isByPassAuthFlag && !dineInMenuFlag"
-                >
-                    <mat-radio-button
-                        value="grabAndGo"
-                        (click)="changeOption($event, 'grabAndGo')"
-                        >Take away
-                        <span
-                            class="icon_info_alt"
-                            triggers="click:blur"
-                            ngbTooltip="Order the food, set the time, we will keep your order packed"
-                        ></span
-                    ></mat-radio-button>
+                <span class="col-4 d-block" *ngIf="isByPassAuthFlag && !dineInMenuFlag">
+                    <mat-radio-button value="grabAndGo" (click)="changeOption($event, 'grabAndGo')">Take away
+                        <span class="icon_info_alt" triggers="click:blur"
+                            ngbTooltip="Order the food, set the time, we will keep your order packed"></span></mat-radio-button>
                 </span>
                 <!-- <span class="col-4 d-block">
                     <mat-radio-button
@@ -234,95 +148,60 @@
 
                 <!-- </mat-radio-button>
                 </span> -->
-                <span
-                    class="col-4 d-block"
-                    *ngIf="rooms && rooms.length && !dineInMenuFlag"
-                >
-                    <mat-radio-button
-                        value="roomService"
-                        (click)="changeOption($event, 'roomService')"
-                        >Room Service
-                        <span
-                            class="icon_info_alt"
-                            triggers="click:blur"
-                            ngbTooltip="Order the food, and we will deliver to your room"
-                        ></span
-                    ></mat-radio-button>
+                <span class="col-4 d-block" *ngIf="rooms && rooms.length && !dineInMenuFlag">
+                    <mat-radio-button value="roomService" (click)="changeOption($event, 'roomService')">Room Service
+                        <span class="icon_info_alt" triggers="click:blur"
+                            ngbTooltip="Order the food, and we will deliver to your room"></span></mat-radio-button>
                 </span>
             </mat-radio-group>
         </div>
 
         <div class="content mb-3">
             <p>
-                <b (click)="toggleCookingRequest()"
-                    >Cooking and Serving Request
+                <b (click)="toggleCookingRequest()">Cooking and Serving Request
                     <div>
-                        <a
-                            *ngIf="!showCookingRequestFlag"
-                            class="btn-link btnServing"
-                        >
-                            <i class="fa fa-plus-circle"></i> Add</a
-                        >
+                        <a *ngIf="!showCookingRequestFlag" class="btn-link btnServing">
+                            <i class="fa fa-plus-circle"></i> Add</a>
                     </div>
                     <div>
-                        <a
-                            *ngIf="showCookingRequestFlag"
-                            class="btn-link btnServing"
-                        >
-                            <i class="fa fa-times-circle"></i> Remove</a
-                        >
+                        <a *ngIf="showCookingRequestFlag" class="btn-link btnServing">
+                            <i class="fa fa-times-circle"></i> Remove</a>
                     </div>
                 </b>
             </p>
-            <div
-                [ngClass]="{ active: showCookingRequestFlag }"
-                class="form-group cokking-request-container"
-            >
-                <textarea
-                    [ngClass]="{ active: showCookingRequestFlag }"
-                    [(ngModel)]="cookingInstruction"
-                    class="form-control"
-                    maxlength="100"
-                    id="cooking_request"
-                    placeholder="Enter here..."
-                ></textarea>
+            <div [ngClass]="{ active: showCookingRequestFlag }" class="form-group cokking-request-container">
+                <textarea [ngClass]="{ active: showCookingRequestFlag }" [(ngModel)]="cookingInstruction"
+                    class="form-control" maxlength="100" id="cooking_request" placeholder="Enter here..."></textarea>
             </div>
         </div>
     </div>
+    <!-- Empty Cart button removed from here -->
     <div class="bg-white p-3 margin-bottom clearfix border-bottom">
         <p class="mb-1 cartItemName" style="font-weight: 400">
             Item Total
             <span class="float-right text-dark" style="font-weight: 600">{{
                 itemTotalAmountShowed | currency : "INR" : "symbol" : "1.0-0"
-            }}</span>
+                }}</span>
         </p>
 
         <p class="mb-1 cartItemName" style="font-weight: 400" *ngIf="gstAmount">
             Goods and Services Tax (GST)
             <span class="float-right text-dark" style="font-weight: 600">{{
                 gstAmount | currency : "INR" : "symbol" : "1.0-0"
-            }}</span>
+                }}</span>
         </p>
-        <p
-            class="mb-1 cartItemName"
-            style="font-weight: 600"
-            *ngIf="deliveryAmount"
-        >
+        <p class="mb-1 cartItemName" style="font-weight: 600" *ngIf="deliveryAmount">
             Delivery Amount
             <span class="float-right text-dark">{{
                 deliveryAmount | currency : "INR" : "symbol" : "1.0-0"
-            }}</span>
+                }}</span>
         </p>
 
-        <p
-            class="mb-1 cartItemName"
-            style="font-weight: 600"
-            *ngIf="discountAmount"
-        >
+        <p class="mb-1 cartItemName" style="font-weight: 600" *ngIf="discountAmount">
             Discount
             <span class="float-right text-danger">{{
                 discountAmount | currency : "INR" : "symbol" : "1.0-0"
-            }}</span>
+                }}</span>
         </p>
 
         <hr />
@@ -330,53 +209,43 @@
             TO PAY
             <span class="float-right">{{
                 amountToBePaid | currency : "INR" : "symbol" : "1.0-0"
-            }}</span>
+                }}</span>
         </h6>
         <hr />
         <h6 class="font-weight-bold mb-0" *ngIf="orderOptionFlag">
             {{ this.userPreference?.preference | titlecase }}
             <span class="float-right">
-                <button
-                    (click)="openOrderOptionDialog()"
-                    class="btn btn-outline-secondary btn-sm"
-                    style="
+                <button (click)="openOrderOptionDialog()" class="btn btn-outline-secondary btn-sm" style="
                         box-shadow: 1px 3px 3px -1px #888888;
 
                         font-size: 13px;
                         padding: 0px 10px;
-                    "
-                >
+                    ">
                     Change
                 </button>
             </span>
 
-            <h6
-                *ngIf="
+            <h6 *ngIf="
                     this.userPreference.preference === 'Dine In' ||
                     this.userPreference.preference === 'Dining'
-                "
-            >
+                ">
                 Table Name:- {{ this.userPreference?.value }}
             </h6>
-            <h6
-                *ngIf="
+            <h6 *ngIf="
                     this.userPreference.preference === 'Take Away' ||
                     this.userPreference.preference === 'Scheduled Dining'
-                "
-            >
+                ">
                 {{ this.userPreference?.value }}
             </h6>
             <h6 *ngIf="this.userPreference.preference === 'delivery'">
                 {{ this.userPreference?.value.address }},{{
-                    this.userPreference?.value.pincode
+                this.userPreference?.value.pincode
                 }}
             </h6>
-            <h6
-                *ngIf="
+            <h6 *ngIf="
                     this.userPreference.preference.toLowerCase() ===
                     'room service'
-                "
-            >
+                ">
                 Room Number:-
                 {{ this.userPreference.value | titlecase }}
             </h6>

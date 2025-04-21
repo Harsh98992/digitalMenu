@@ -618,23 +618,25 @@ export class CartHelperComponent implements OnInit {
             };
         }
         if (paymentData.method === "payOnlineWithStore") {
-            this.orderService.getOrderwithPaymentOrderId(event.detail["razorpay_order_id"]).subscribe({
-                next:(res)=>{
-                    const orderData = res["data"]["orderData"];
-                    this.restaurantService.bypassGaurd = true;
-                    this.dialog.closeAll();
-                    this.restaurantService.setCartItem([]);
-                    this.restaurantService.setRestaurantUrl(null);
-                    this.restaurantService.amountToBePaidSubject.next(null);
-                    if (orderData && this.isByPassAuthFlag) {
-                        this.router.navigateByUrl(
-                            `/order-tracking/${orderData.orderId}/${orderData.restaurantId}`
-                        );
-                    } else {
-                        this.router.navigateByUrl("/orders");
-                    }
-                }
-            })
+            this.orderService
+                .getOrderwithPaymentOrderId(event.detail["razorpay_order_id"])
+                .subscribe({
+                    next: (res) => {
+                        const orderData = res["data"]["orderData"];
+                        this.restaurantService.bypassGaurd = true;
+                        this.dialog.closeAll();
+                        this.restaurantService.setCartItem([]);
+                        this.restaurantService.setRestaurantUrl(null);
+                        this.restaurantService.amountToBePaidSubject.next(null);
+                        if (orderData && this.isByPassAuthFlag) {
+                            this.router.navigateByUrl(
+                                `/order-tracking/${orderData.orderId}/${orderData.restaurantId}`
+                            );
+                        } else {
+                            this.router.navigateByUrl("/orders");
+                        }
+                    },
+                });
         } else {
             this.orderService.placeOrder(reqData).subscribe({
                 next: (res: any) => {
@@ -663,6 +665,23 @@ export class CartHelperComponent implements OnInit {
     }
 
     deliveryDisabled = false;
+
+    emptyCart() {
+        // Clear the cart items
+        this.cartItems = [];
+
+        // Update the cart in the service
+        this.restaurantService.setCartItem([]);
+
+        // Reset cart state
+        this.restaurantService.setCartSate({});
+
+        // Reset amount to be paid
+        this.restaurantService.amountToBePaidSubject.next(null);
+
+        // Recalculate totals
+        this.calculateItemTotal();
+    }
 
     getDeliveryRadiobuttonText() {
         if (this.itemTotal < this.restaurantData.minOrderValueForDelivery) {

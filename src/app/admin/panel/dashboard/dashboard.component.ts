@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { OrderService } from "src/app/api/order.service";
 import { RestaurantPanelService } from "src/app/api/restaurant-panel.service";
@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 const _ = require("lodash");
 // Import the socket.io-client library
 import { io } from "socket.io-client"; // Import the socket.io-client library
-import { finalize } from "rxjs";
+import { finalize, interval, Subscription } from "rxjs";
 import { DatePipe } from "@angular/common";
 import { UtilService } from "src/app/api/util.service";
 import { CancelDialogComponent } from "../../layout/order-dialog/cancel-dialog/cancel-dialog.component";
@@ -25,7 +25,7 @@ import { PrintService, UsbDriver, WebPrintDriver } from "ng-thermal-print";
     styleUrls: ["./dashboard.component.scss"],
     encapsulation: ViewEncapsulation.None,
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
     status: boolean = false;
     usbPrintDriver: UsbDriver;
     webPrintDriver: WebPrintDriver;
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
     apiUrl = environment.apiUrl;
     socketUrl = environment.socketApiUrl;
     restaurantId: any;
+    private waiterCallsInterval: Subscription;
 
     allOrders = [];
     activeTab = "tab1";
@@ -230,6 +231,12 @@ export class DashboardComponent implements OnInit {
         // Listen for pong response from server
         this.socket.on("pong_socket", (data) => {
             console.log("Received pong from server:", data);
+        });
+
+        // Set up interval to refresh waiter calls every 30 seconds
+        this.waiterCallsInterval = interval(30000).subscribe(() => {
+            console.log("Auto-refreshing waiter calls (30-second interval)...");
+            this.getWaiterCalls();
         });
     }
     selectTab(tab: string) {
@@ -566,6 +573,11 @@ export class DashboardComponent implements OnInit {
 
     ngOnDestroy() {
         this.socket.disconnect(); // Disconnect the socket when component is destroyed
+
+        // Clean up the interval subscription to prevent memory leaks
+        if (this.waiterCallsInterval) {
+            this.waiterCallsInterval.unsubscribe();
+        }
     }
 
     getTotalDineIn(orderData) {

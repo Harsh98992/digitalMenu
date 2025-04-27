@@ -33,12 +33,15 @@ ng serve
 4. copy the firebase config and paste it in the environment.ts file
 5. run `npm run dev` to run the project in development mode
 6. run `firebase use staging` to use the staging environment
+- firebase login >> If it doesn't work, install firebase(npm install firebase-tools -g)
+
 7. run `firebase deploy` to deploy the project
 
 or paste the following command in your terminal
 ng build --configuration production
 
 ```bash
+
 
 npm run prod
 firebase use qrsay-c617e

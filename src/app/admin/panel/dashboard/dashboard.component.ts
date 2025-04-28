@@ -114,10 +114,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.getOrders();
 
         // Set up interval to refresh orders every 10 seconds
-        // this.ordersInterval = interval(30000).subscribe(() => {
-        //     console.log("Auto-refreshing orders (30-second interval)...");
-        //     this.getOrders();
-        // });
+        this.ordersInterval = interval(30000).subscribe(() => {
+            console.log("Auto-refreshing orders (30-second interval)...");
+            this.getOrders();
+        });
 
         this.restaurantService.getRestaurnatDetail().subscribe({
             next: (res: any) => {

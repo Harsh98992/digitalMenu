@@ -41,6 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     restaurantId: any;
     private waiterCallsInterval: Subscription;
     private ordersInterval: Subscription;
+    private socketReconnectInterval: Subscription;
 
     allOrders = [];
     activeTab = "tab1";
@@ -113,10 +114,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.getOrders();
 
         // Set up interval to refresh orders every 10 seconds
-        this.ordersInterval = interval(30000).subscribe(() => {
-            console.log("Auto-refreshing orders (30-second interval)...");
-            this.getOrders();
-        });
+        // this.ordersInterval = interval(30000).subscribe(() => {
+        //     console.log("Auto-refreshing orders (30-second interval)...");
+        //     this.getOrders();
+        // });
 
         this.restaurantService.getRestaurnatDetail().subscribe({
             next: (res: any) => {
@@ -133,8 +134,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
             },
         });
 
-        this.socket = io(this.socketUrl, {});
-        console.log("Socket initialized:", this.socket);
+        // Initialize Socket.io with proper transport options and reconnection settings
+        this.socket = io(this.socketUrl, {
+            transports: ["websocket", "polling"],
+            reconnection: true,
+            reconnectionAttempts: Infinity,
+            reconnectionDelay: 1000,
+            timeout: 20000,
+        });
+        console.log("Socket initialized with transport options:", this.socket);
 
         this.socket.on("connect", () => {
             console.log("Socket connected successfully");
@@ -227,13 +235,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
             }
         });
 
-        // Handle socket connection errors
-        this.socket.on("connect_error", (error) => {
+        // Enhanced error handling for socket connection
+        this.socket.on("connect_error", (error: any) => {
             console.error("Socket connection error:", error);
+            // Attempt to reconnect with different transport if needed
+            if (this.socket.io.opts.transports.indexOf("polling") === 0) {
+                console.log("Switching to WebSocket transport...");
+                this.socket.io.opts.transports = ["websocket"];
+            } else if (
+                this.socket.io.opts.transports.indexOf("websocket") === 0
+            ) {
+                console.log("Switching back to polling transport...");
+                this.socket.io.opts.transports = ["polling", "websocket"];
+            }
         });
 
-        this.socket.on("disconnect", (reason) => {
+        this.socket.on("disconnect", (reason: string) => {
             console.log("Socket disconnected:", reason);
+            // If the server disconnected us, try to reconnect manually
+            if (reason === "io server disconnect") {
+                console.log(
+                    "Server disconnected the socket, attempting to reconnect..."
+                );
+                this.socket.connect();
+            }
         });
 
         // Listen for pong response from server
@@ -242,9 +267,30 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
 
         // Set up interval to refresh waiter calls every 30 seconds
-        this.waiterCallsInterval = interval(30000).subscribe(() => {
-            console.log("Auto-refreshing waiter calls (30-second interval)...");
-            this.getWaiterCalls();
+        // this.waiterCallsInterval = interval(30000).subscribe(() => {
+        //     console.log("Auto-refreshing waiter calls (30-second interval)...");
+        //     this.getWaiterCalls();
+        // });
+
+        // Set up a socket reconnection check every 60 seconds
+        this.socketReconnectInterval = interval(60000).subscribe(() => {
+            if (!this.socket.connected) {
+                console.log("Socket disconnected, attempting to reconnect...");
+                // Try to reconnect with both transport options
+                this.socket.io.opts.transports = ["websocket", "polling"];
+                this.socket.connect();
+
+                // Send a ping after reconnection attempt
+                setTimeout(() => {
+                    if (this.socket.connected) {
+                        console.log("Socket reconnected, sending ping...");
+                        this.socket.emit("ping_socket", {
+                            message: "Ping after reconnection",
+                            timestamp: new Date(),
+                        });
+                    }
+                }, 2000);
+            }
         });
     }
     selectTab(tab: string) {
@@ -580,7 +626,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.socket.disconnect(); // Disconnect the socket when component is destroyed
+        // Disconnect the socket when component is destroyed
+        if (this.socket) {
+            console.log("Disconnecting socket in ngOnDestroy");
+            this.socket.disconnect();
+        }
 
         // Clean up the interval subscriptions to prevent memory leaks
         if (this.waiterCallsInterval) {
@@ -590,6 +640,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         // Clean up the orders refresh interval
         if (this.ordersInterval) {
             this.ordersInterval.unsubscribe();
+        }
+
+        // Clean up the socket reconnection interval
+        if (this.socketReconnectInterval) {
+            this.socketReconnectInterval.unsubscribe();
         }
     }
 

@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     socketUrl = environment.socketApiUrl;
     restaurantId: any;
     private waiterCallsInterval: Subscription;
+    private ordersInterval: Subscription;
 
     allOrders = [];
     activeTab = "tab1";
@@ -108,7 +109,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         return total;
     }
     ngOnInit(): void {
+        // Initial orders fetch
         this.getOrders();
+
+        // Set up interval to refresh orders every 10 seconds
+        this.ordersInterval = interval(30000).subscribe(() => {
+            console.log("Auto-refreshing orders (30-second interval)...");
+            this.getOrders();
+        });
 
         this.restaurantService.getRestaurnatDetail().subscribe({
             next: (res: any) => {
@@ -574,9 +582,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.socket.disconnect(); // Disconnect the socket when component is destroyed
 
-        // Clean up the interval subscription to prevent memory leaks
+        // Clean up the interval subscriptions to prevent memory leaks
         if (this.waiterCallsInterval) {
             this.waiterCallsInterval.unsubscribe();
+        }
+
+        // Clean up the orders refresh interval
+        if (this.ordersInterval) {
+            this.ordersInterval.unsubscribe();
         }
     }
 

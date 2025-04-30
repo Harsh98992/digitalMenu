@@ -16,7 +16,7 @@
   - [1.11. Godaddy](#111-godaddy)
   - [1.12. Meta account for WhatsApp Business API](#112-meta-account-for-whatsapp-business-api)
   - [1.13. mongodb](#113-mongodb)
-  - [email sending](#email-sending)
+  - [1.14. email sending](#114-email-sending)
 
 ## 1.1. Cloud Flare
 
@@ -90,7 +90,7 @@
 - **Email**: `goqrorder@gmail.com` (Renderer)
 - **Password**: `login using google account`
 
-## email sending
+## 1.14. email sending
 
 - **Email**: `info@qrsay.com`
 - **Password**: `login through go daddy`

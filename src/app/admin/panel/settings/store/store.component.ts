@@ -64,7 +64,6 @@ export class StoreComponent implements OnInit {
             autoRejectFlag: [true],
         });
 
-
         this.getGSTFormDetails();
 
         this.gstForm.disable();
@@ -156,7 +155,8 @@ export class StoreComponent implements OnInit {
                 byPassAuth: res["data"]["restaurantDetail"]["byPassAuth"],
             });
             this.autoRejectForm.patchValue({
-                autoRejectFlag: res["data"]["restaurantDetail"]["autoRejectFlag"] ?? true,
+                autoRejectFlag:
+                    res["data"]["restaurantDetail"]["autoRejectFlag"] ?? true,
             });
 
             this.gstForm.patchValue({
@@ -245,12 +245,22 @@ export class StoreComponent implements OnInit {
     }
     updateAutoRejectValue() {
         const reqData = {
-            autoRejectFlag: this.bypassForm.value.autoRejectFlag ?? false,
+            autoRejectFlag: this.autoRejectForm.value.autoRejectFlag ?? false,
         };
         this.restaurantPanelService
             .updateRestaurantAutoReject(reqData)
             .subscribe({
-                next: (res) => {},
+                next: (res) => {
+                    console.log(res);
+
+                    this.getGSTFormDetails();
+                    this.autoRejectForm.disable();
+
+                    this.utilService.openSnackBar(
+                        "Auto Reject setting updated successfully"
+                    );
+                    this.isEditingAutoReject = !this.isEditingAutoReject;
+                },
             });
     }
     updateBypassAuth() {

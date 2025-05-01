@@ -136,7 +136,11 @@ export class RestaurantPanelService {
         return sessionStorage.getItem("restaurantVerified");
     }
     getRestaurnatDetail() {
-        return this.http.get(`${this.apiUrl}/v1/restaurant/restaurantDetail`);
+        // Add a timestamp parameter to prevent caching
+        const timestamp = new Date().getTime();
+        return this.http.get(
+            `${this.apiUrl}/v1/restaurant/restaurantDetail?_t=${timestamp}`
+        );
     }
     updateRestaurantDetail(restaurantData: any) {
         return this.http.post(

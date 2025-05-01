@@ -70,9 +70,11 @@ export class MyOrderComponent implements OnInit {
         //don't use auto refresh for now
         this.getCustomerOrders();
 
+        console.log("customer order", this.completedOrder);
+
         // Set the selected tab to the first tab
         this.selectedTab = this.tabs[0].key;
-        
+
     }
     changeStatus(tab) {
         this.selectedTab = tab.key;
@@ -86,6 +88,7 @@ export class MyOrderComponent implements OnInit {
                         const date2 = new Date(b["orderDate"]) as any;
                         return date2 - date1;
                     });
+                    console.log("orderData", orderData);
 
                     this.setOrder(orderData);
                 }

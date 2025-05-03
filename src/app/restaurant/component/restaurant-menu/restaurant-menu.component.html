@@ -27,20 +27,20 @@
 
                             <!-- amn -->
 
-                            <div class="restaurent-info" *ngIf="!greenPalmFlag">
+                            <!-- <div class="restaurent-info" *ngIf="!greenPalmFlag">
                                 <h1 class="restaurant-title">
                                     {{ restaurantDetail.restaurantName }}
                                 </h1>
                                 <div class="restaurentAdd">
-                                    <!-- <div>
+                                     <div>
                                         {{ restaurantDetail.address.street }}
                                         ,{{ restaurantDetail.address.city }},{{
                                             restaurantDetail.address.state
                                         }}
                                         (Pin Code:-
                                         {{ restaurantDetail.address.pinCode }})
-                                    </div> -->
-                                    <!-- <span
+                                    </div>
+                                    <span
                                         style="
                                             margin-left: 20px;
                                             background: -webkit-linear-gradient(
@@ -63,9 +63,9 @@
                                                     width: 20px;
                                                 "
                                             ></i></a
-                                    ></span> -->
+                                    ></span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="socail-icons">
                                 <a
@@ -121,7 +121,7 @@
                                 <p>Closing Time: {{ formatTime(restaurantDetail.closeTime) }}</p>
                             </div> -->
 
-                            <div class="gst-number" *ngIf="!greenPalmFlag">
+                            <!-- <div class="gst-number" *ngIf="!greenPalmFlag">
                                 <span
                                     >Time -
                                     {{ formatTime(restaurantDetail.openTime) }}
@@ -131,7 +131,7 @@
                                         formatTime(restaurantDetail.closeTime)
                                     }}</span
                                 >
-                            </div>
+                            </div> -->
 
                             <div class="gst-number">
                                 <span
@@ -143,7 +143,7 @@
                                     {{ restaurantDetail.gstNumber }}</span
                                 >
 
-                                <span
+                                <!-- <span
                                     *ngIf="
                                         restaurantDetail.fssaiLicenseNumber &&
                                         !greenPalmFlag
@@ -152,7 +152,7 @@
                                     {{
                                         restaurantDetail.fssaiLicenseNumber
                                     }}</span
-                                >
+                                > -->
                             </div>
                         </div>
                         <div

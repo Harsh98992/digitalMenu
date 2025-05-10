@@ -28,6 +28,10 @@
 3. Go to the "Profile" section.
 4. Update the email address as required.
 5. Save the changes.
+
+new email address: `qrsayit@gmail.com`
+new password: `Hh@9911392743`
+
 ## 1.2. Email For Sending Mail
 
 - **Email**: `info@qrsay.com`
@@ -57,10 +61,15 @@
 3. Find the API key associated with the Google Maps API.
 4. Update the API key in the codebase where it is used for Google Maps integration.
 
+- not using now
+
 ## 1.5. google login
 
 - **Email**: `qrsayteam@gmail.com`
 - **Password**: `Harsh@01`
+
+new email address: `qrsayit@gmail.com`
+new password: `Qrsay@1908`
 
 1. login to the google account using new email address.
 

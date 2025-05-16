@@ -1,0 +1,1 @@
+The feedback button is visible on the iphone web page and the desktop web page, but it is not visible on the Android web page Please make the feedback visible on the Android web page on the restaurant page Don't make it visible anywhere else only on the restaurant page

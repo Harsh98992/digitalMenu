@@ -9,94 +9,140 @@
         </div>
         <ul class="list-unstyled components text-secondary">
             <li routerLink="/admin">
-                <a class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> Dashboard</a>
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fas fa-home"></i> Dashboard</a
+                >
+            </li>
+            <li routerLink="/admin/room-customer-link">
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa-link"></i> Room-Customer Links</a
+                >
             </li>
             <li routerLink="/admin/dishes/view-dish">
-                <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-utensils"></i> View Dish</a>
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-utensils"></i> View Dish</a
+                >
             </li>
             <li routerLink="/admin/customers">
-                <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-users"></i> Customers</a>
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-users"></i> Customers</a
+                >
             </li>
             <li routerLink="/admin/payment">
-                <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-money-bill"></i> Payments</a>
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-money-bill"></i> Payments</a
+                >
             </li>
             <li routerLink="/admin/restaurant-orders">
-                <a class="dropdown-toggle no-caret-down"><i class="fa-solid fa fa-book"></i> Orders</a>
+                <a class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-book"></i> Orders</a
+                >
             </li>
 
             <li>
-                <a data-target="#dishes" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
-                        class="fa-solid fa fa-bullhorn"></i> Dishes
+                <a
+                    data-target="#dishes"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Dishes
                     <i class="fas fa-angle-right" aria-hidden="true"></i>
                 </a>
 
                 <ul #collapse class="collapse out" id="dishes">
                     <li routerLink="/admin/dishes/view-category">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Categories</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Categories</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/extras">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Extras</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Extras</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/choices">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i>Dish Choices</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i>Dish Choices</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/add-dish">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Add Dish</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Add Dish</a
+                        >
                     </li>
                     <li routerLink="/admin/dishes/view-dish">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> View Dish</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> View Dish</a
+                        >
                     </li>
                 </ul>
             </li>
 
             <li>
-                <a data-target="#promocodes" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
-                        class="fa-solid fa fa-bullhorn"></i> Promocode
+                <a
+                    data-target="#promocodes"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Promocode
                     <i class="fas fa-angle-right" aria-hidden="true"></i>
                 </a>
 
                 <ul #collapse class="collapse out" id="promocodes">
                     <li routerLink="/admin/promocode/view">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> View
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> View
                         </a>
                     </li>
                     <li routerLink="/admin/promocode/add">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Create
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Create
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a data-target="#restaurantprofile" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
-                        class="fa-solid fa fa-bullhorn"></i> Restaurant Profile
+                <a
+                    data-target="#restaurantprofile"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Restaurant Profile
                     <i class="fas fa-angle-right" aria-hidden="true"></i>
                 </a>
 
                 <ul #collapse class="collapse out" id="restaurantprofile">
                     <li routerLink="/admin/restaurent-contact-details/view">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Contact Details
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Contact Details
                         </a>
                     </li>
                     <li routerLink="/admin/restaurant-profile">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
                             Details
                         </a>
                     </li>
                     <li routerLink="/admin/restaurant-tables/view">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
-                            Tables</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Tables</a
+                        >
                     </li>
                     <li routerLink="/admin/restaurant-room/view">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
-                            Rooms</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Rooms</a
+                        >
                     </li>
                     <li routerLink="/admin/restaurant-images">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
-                            Images</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            Images</a
+                        >
                     </li>
                     <li routerLink="/admin/restaurantQrCode">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Restaurant
-                            QrCode</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Restaurant
+                            QrCode</a
+                        >
                     </li>
                 </ul>
             </li>
@@ -129,18 +175,25 @@
 
             <!-- add user profile -->
             <li>
-                <a data-target="#profile" data-toggle="collapse" class="dropdown-toggle no-caret-down"><i
-                        class="fa-solid fa fa-bullhorn"></i> Profile
+                <a
+                    data-target="#profile"
+                    data-toggle="collapse"
+                    class="dropdown-toggle no-caret-down"
+                    ><i class="fa-solid fa fa-bullhorn"></i> Profile
                     <i class="fas fa-angle-right" aria-hidden="true"></i>
                 </a>
 
                 <ul #collapse class="collapse out" id="profile">
                     <li routerLink="/admin/user-profile">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> My Profile</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> My Profile</a
+                        >
                     </li>
                     <li routerLink="/admin/profile/resetPassword">
-                        <a class="custom-center"><i class="fas fa-angle-right"></i> Change
-                            Password</a>
+                        <a class="custom-center"
+                            ><i class="fas fa-angle-right"></i> Change
+                            Password</a
+                        >
                     </li>
                 </ul>
             </li>
@@ -151,7 +204,9 @@
             </li> -->
 
             <li>
-                <a routerLink="/admin/user-managment/view"><i class="fa-solid fa fa-user"></i> User Managment</a>
+                <a routerLink="/admin/user-managment/view"
+                    ><i class="fa-solid fa fa-user"></i> User Managment</a
+                >
             </li>
             <!-- <li *ngIf="verifiedAccountFlag">
                 <a routerLink="/admin/restaurantQrCode"
@@ -180,39 +235,82 @@
                 >
             </li> -->
             <li>
-                <a href="https://wa.me/9310415024" target="blank"><i class="fas fa-cog"></i>Support</a>
+                <a href="https://wa.me/9310415024" target="blank"
+                    ><i class="fas fa-cog"></i>Support</a
+                >
             </li>
             <li>
-                <a routerLink="/admin/feedback"><i class="fa-solid fa-comments"></i> Customer Feedback</a>
+                <a routerLink="/admin/feedback"
+                    ><i class="fa-solid fa-comments"></i> Customer Feedback</a
+                >
             </li>
             <li>
-                <a routerLink="/admin/waiter-calls"><i class="fa-solid fa-bell-concierge"></i> Waiter Calls</a>
+                <a routerLink="/admin/waiter-calls"
+                    ><i class="fa-solid fa-bell-concierge"></i> Waiter Calls</a
+                >
             </li>
             <li>
-                <a routerLink="/admin/setting/store"><i class="fas fa-cog"></i>Store Settings</a>
+                <a routerLink="/admin/setting/store"
+                    ><i class="fas fa-cog"></i>Store Settings</a
+                >
             </li>
         </ul>
     </nav>
     <div id="body" class="active">
         <nav class="navbar navbar-expand-lg navbar-white bg-white">
-            <button type="button" id="sidebarCollapse" class="btn btn-light" (click)="toggleSideBar()">
+            <button
+                type="button"
+                id="sidebarCollapse"
+                class="btn btn-light"
+                (click)="toggleSideBar()"
+            >
                 <i class="fas fa-bars"></i><span></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="custom-on-off-button">
-                    <ng-select [(ngModel)]="dineInStatus" (change)="changeDineInStatus()" style="min-width: 130px"
-                        class="mr-3 custom-space-end" [clearable]="false">
-                        <ng-option value="online"><i class="fa-solid fa-circle mr-2" style="color: #3d9b17"></i>Dine In
-                            Online</ng-option>
-                        <ng-option value="offline"><i class="fa-solid fa-circle mr-2" style="color: red"></i>Dine In
-                            Offline</ng-option>
+                    <ng-select
+                        [(ngModel)]="dineInStatus"
+                        (change)="changeDineInStatus()"
+                        style="min-width: 130px"
+                        class="mr-3 custom-space-end"
+                        [clearable]="false"
+                    >
+                        <ng-option value="online"
+                            ><i
+                                class="fa-solid fa-circle mr-2"
+                                style="color: #3d9b17"
+                            ></i
+                            >Dine In Online</ng-option
+                        >
+                        <ng-option value="offline"
+                            ><i
+                                class="fa-solid fa-circle mr-2"
+                                style="color: red"
+                            ></i
+                            >Dine In Offline</ng-option
+                        >
                     </ng-select>
-                    <ng-select [(ngModel)]="selectedStatus" (change)="changeRestaurantStatus()" style="min-width: 130px"
-                        class="mr-3" [clearable]="false">
-                        <ng-option value="online"><i class="fa-solid fa-circle mr-2"
-                                style="color: #3d9b17"></i>Restaurnat Online</ng-option>
-                        <ng-option value="offline"><i class="fa-solid fa-circle mr-2"
-                                style="color: red"></i>Offline</ng-option>
+                    <ng-select
+                        [(ngModel)]="selectedStatus"
+                        (change)="changeRestaurantStatus()"
+                        style="min-width: 130px"
+                        class="mr-3"
+                        [clearable]="false"
+                    >
+                        <ng-option value="online"
+                            ><i
+                                class="fa-solid fa-circle mr-2"
+                                style="color: #3d9b17"
+                            ></i
+                            >Restaurnat Online</ng-option
+                        >
+                        <ng-option value="offline"
+                            ><i
+                                class="fa-solid fa-circle mr-2"
+                                style="color: red"
+                            ></i
+                            >Offline</ng-option
+                        >
                     </ng-select>
                     <!-- <button
                     type="button"
@@ -262,33 +360,65 @@
                 <ul class="nav navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <div class="nav-dropdown">
-                            <a [matMenuTriggerFor]="userMenu" class="nav-item nav-link dropdown-toggle text-secondary"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a
+                                [matMenuTriggerFor]="userMenu"
+                                class="nav-item nav-link dropdown-toggle text-secondary"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
                                 <!-- <i class="fas fa-user"></i>
                  -->
-                                <ngx-avatars *ngIf="userDetail?.name" [name]="userDetail?.name" size="35"></ngx-avatars>
+                                <ngx-avatars
+                                    *ngIf="userDetail?.name"
+                                    [name]="userDetail?.name"
+                                    size="35"
+                                ></ngx-avatars>
                             </a>
                             <div>
                                 <ul class="nav-list">
                                     <mat-menu #userMenu="matMenu">
-                                        <li mat-menu-item routerLink="/admin/user-profile">
-                                            <a class="dropdown-item"><i class="fas fa-address-card"></i>
-                                                Profile</a>
+                                        <li
+                                            mat-menu-item
+                                            routerLink="/admin/user-profile"
+                                        >
+                                            <a class="dropdown-item"
+                                                ><i
+                                                    class="fas fa-address-card"
+                                                ></i>
+                                                Profile</a
+                                            >
                                         </li>
-                                        <li mat-menu-item routerLink="/admin/restaurantQrCode">
-                                            <a class="dropdown-item"><i class="fa-solid fa-qrcode"></i>
-                                                Qr Code</a>
+                                        <li
+                                            mat-menu-item
+                                            routerLink="/admin/restaurantQrCode"
+                                        >
+                                            <a class="dropdown-item"
+                                                ><i
+                                                    class="fa-solid fa-qrcode"
+                                                ></i>
+                                                Qr Code</a
+                                            >
                                         </li>
-                                        <li mat-menu-item routerLink="/admin/setting/store">
-                                            <a class="dropdown-item"><i class="fas fa-cog"></i>
-                                                Settings</a>
+                                        <li
+                                            mat-menu-item
+                                            routerLink="/admin/setting/store"
+                                        >
+                                            <a class="dropdown-item"
+                                                ><i class="fas fa-cog"></i>
+                                                Settings</a
+                                            >
                                         </li>
 
                                         <div class="dropdown-divider"></div>
                                         <li mat-menu-item>
-                                            <a (click)="logout()" class="dropdown-item"><i
-                                                    class="fas fa-sign-out-alt"></i>
-                                                Logout</a>
+                                            <a
+                                                (click)="logout()"
+                                                class="dropdown-item"
+                                                ><i
+                                                    class="fas fa-sign-out-alt"
+                                                ></i>
+                                                Logout</a
+                                            >
                                         </li>
                                     </mat-menu>
                                 </ul>
@@ -301,7 +431,10 @@
 
         <div class="content" [ngClass]="!showSideBarFlag ? 'content-max' : ''">
             <div class="container">
-                <div [ngClass]="!showSideBarFlag ? 'image-overlay' : ''" (click)="hideSideBar()"></div>
+                <div
+                    [ngClass]="!showSideBarFlag ? 'image-overlay' : ''"
+                    (click)="hideSideBar()"
+                ></div>
                 <router-outlet></router-outlet>
             </div>
         </div>

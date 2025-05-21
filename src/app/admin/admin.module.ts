@@ -56,6 +56,8 @@ import { verifiedComponent } from "./panel/unverify-account/verified/verified.co
 import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room.component";
 import { AddRoomComponent } from "./panel/restaurant-room/add-room/add-room.component";
 import { RestaurantPaymentComponent } from "./panel/restaurant-payment/restaurant-payment.component";
+import { RoomCustomerLinkComponent } from "./panel/room-customer-link/room-customer-link.component";
+import { AddRoomCustomerLinkComponent } from "./panel/room-customer-link/add-room-customer-link/add-room-customer-link.component";
 import { FeedbackComponent } from "./panel/feedback/feedback.component";
 import { WaiterCallsComponent } from "./panel/waiter-calls/waiter-calls.component";
 
@@ -110,6 +112,8 @@ import { WaiterCallsComponent } from "./panel/waiter-calls/waiter-calls.componen
         RestaurantRoomComponent,
         AddRoomComponent,
         RestaurantPaymentComponent,
+        RoomCustomerLinkComponent,
+        AddRoomCustomerLinkComponent,
         FeedbackComponent,
         WaiterCallsComponent,
     ],

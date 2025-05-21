@@ -36,6 +36,7 @@ import { RestaurntOwnerGuard } from "../api/guard/restaurnt-owner.guard";
 import { verifiedComponent } from "./panel/unverify-account/verified/verified.component";
 import { RestaurantRoomComponent } from "./panel/restaurant-room/restaurant-room.component";
 import { RestaurantPaymentComponent } from "./panel/restaurant-payment/restaurant-payment.component";
+import { RoomCustomerLinkComponent } from "./panel/room-customer-link/room-customer-link.component";
 import { FeedbackComponent } from "./panel/feedback/feedback.component";
 import { WaiterCallsComponent } from "./panel/waiter-calls/waiter-calls.component";
 const routes: Routes = [
@@ -153,6 +154,11 @@ const routes: Routes = [
             {
                 path: "waiter-calls",
                 component: WaiterCallsComponent,
+                // canActivate: [VerifiedAccountGuard],
+            },
+            {
+                path: "room-customer-link",
+                component: RoomCustomerLinkComponent,
                 // canActivate: [VerifiedAccountGuard],
             },
 

@@ -21,13 +21,23 @@ export class NamePhonenumberForRoomServiceComponent implements OnInit {
 
     ngOnInit(): void {
         this.setHeadingString();
+
+        // Check if a pre-populated phone number was provided in the dialog data
+        const prePopulatedPhoneNumber =
+            this.roomData?.prePopulatedPhoneNumber || "";
+        console.log(
+            "[DEBUG] Pre-populated phone number:",
+            prePopulatedPhoneNumber
+        );
+
         this.userForm = this.fb.group({
             name: ["", [Validators.required, Validators.minLength(3)]],
             phoneNumber: [
-                "",
+                prePopulatedPhoneNumber,
                 [Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
             ], // Indian phone number pattern
         });
+
         this.restaurantService.amountToBePaidSubject.subscribe({
             next: (res) => {
                 this.amountToBePaid = res;

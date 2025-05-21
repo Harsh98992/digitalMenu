@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { MatDialog } from "@angular/material/dialog";
 import { AddressSelectionComponent } from "../address/address-selection/address-selection.component";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Injector, Input, OnInit } from "@angular/core";
 import { ConfirmDialogComponent } from "src/app/angular-material/confirm-dialog/confirm-dialog.component";
 import { CustomerAuthService } from "src/app/restaurant/api/customer-auth.service";
 import { CustomerService } from "src/app/api/customer.service";
@@ -19,6 +19,7 @@ import { UserLoginComponent } from "src/app/user-auth/user-login/user-login.comp
 import { PaymentDialogComponent } from "src/app/angular-material/payment-dialog/payment-dialog.component";
 import { RoomNoDialogComponent } from "../room-no-dialog/room-no-dialog.component";
 import { CustomerDetailsService } from "src/app/api/customer-details.service";
+import { RestaurantMenuComponent } from "../restaurant-menu.component";
 
 @Component({
     selector: "app-cart-helper",
@@ -67,7 +68,8 @@ export class CartHelperComponent implements OnInit {
         private router: Router,
         private customerService: CustomerService,
         private utilityService: UtilService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private injector: Injector
     ) {}
 
     applyPromoCode() {
@@ -279,33 +281,51 @@ export class CartHelperComponent implements OnInit {
         }
     }
     openSelectRoomNoDialog() {
-        this.dialog
-            .open(RoomNoDialogComponent, {
-                panelClass: "add-item-dialog",
-                disableClose: true,
-                data: {
-                    restaurantData: this.restaurantData,
-                    roomData: this.rooms,
-                },
-            })
-            .afterClosed()
-            .subscribe((resp) => {
-                if (resp && resp.selectedRoom) {
-                    console.log("resp", resp);
-                    this.orderOptionFlag = true;
+        // Check if URL parameters for room-customer link are present in the parent component
+        const restaurantMenuComponent = this.injector.get(
+            RestaurantMenuComponent,
+            null
+        );
+        if (
+            restaurantMenuComponent &&
+            restaurantMenuComponent.urlRoomName &&
+            restaurantMenuComponent.urlPhoneNumber
+        ) {
+            console.log(
+                "[DEBUG] Cart helper: URL parameters found, delegating to restaurant menu component"
+            );
+            // Delegate to the restaurant menu component's implementation
+            restaurantMenuComponent.openSelectRoomNoDialog();
+        } else {
+            // No URL parameters, proceed with normal room selection dialog
+            this.dialog
+                .open(RoomNoDialogComponent, {
+                    panelClass: "add-item-dialog",
+                    disableClose: true,
+                    data: {
+                        restaurantData: this.restaurantData,
+                        roomData: this.rooms,
+                    },
+                })
+                .afterClosed()
+                .subscribe((resp) => {
+                    if (resp && resp.selectedRoom) {
+                        console.log("resp", resp);
+                        this.orderOptionFlag = true;
 
-                    this.userPreference = {
-                        preference: "room service",
-                        value: resp.selectedRoom.roomName,
-                        userDetail: {
-                            name: resp.name,
-                            phoneNumber: resp.phoneNumber,
-                        },
-                    };
-                    this.setCartStateHelper();
-                    this.placeOrder();
-                }
-            });
+                        this.userPreference = {
+                            preference: "room service",
+                            value: resp.selectedRoom.roomName,
+                            userDetail: {
+                                name: resp.name,
+                                phoneNumber: resp.phoneNumber,
+                            },
+                        };
+                        this.setCartStateHelper();
+                        this.placeOrder();
+                    }
+                });
+        }
     }
     openSelectTableNumberDialog(dining = false) {
         console.log(this.tableData, "tableData");

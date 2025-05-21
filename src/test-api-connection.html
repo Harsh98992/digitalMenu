@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .test-result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .failure {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .log {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Connection Test</h1>
+    
+    <div class="test-section">
+        <div class="test-title">Health Endpoint Test</div>
+        <button id="test-health">Test Health Endpoint</button>
+        <div id="health-result" class="test-result"></div>
+        <div id="health-log" class="log"></div>
+    </div>
+    
+    <div class="test-section">
+        <div class="test-title">Room-Customer Link Endpoint Test</div>
+        <div>
+            <label for="phone-number">Phone Number:</label>
+            <input type="text" id="phone-number" value="1234567890">
+        </div>
+        <div>
+            <label for="room-name">Room Name:</label>
+            <input type="text" id="room-name" value="TestRoom">
+        </div>
+        <button id="test-room-customer-link">Test Room-Customer Link Endpoint</button>
+        <div id="room-customer-link-result" class="test-result"></div>
+        <div id="room-customer-link-log" class="log"></div>
+    </div>
+    
+    <div class="test-section">
+        <div class="test-title">CORS Test</div>
+        <button id="test-cors">Test CORS Configuration</button>
+        <div id="cors-result" class="test-result"></div>
+        <div id="cors-log" class="log"></div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:8080/api';
+        const HEALTH_ENDPOINT = '/health';
+        const ROOM_CUSTOMER_LINK_ENDPOINT = '/v1/room-customer-link/validate';
+
+        // Utility functions
+        function logMessage(logElement, message, isError = false) {
+            const timestamp = new Date().toISOString();
+            const logEntry = document.createElement('div');
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            if (isError) {
+                logEntry.style.color = '#dc3545';
+            }
+            logElement.appendChild(logEntry);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        function setResult(resultElement, success, message) {
+            resultElement.textContent = message;
+            resultElement.className = 'test-result ' + (success ? 'success' : 'failure');
+        }
+
+        // Test functions
+        async function testHealthEndpoint() {
+            const resultElement = document.getElementById('health-result');
+            const logElement = document.getElementById('health-log');
+            
+            logElement.innerHTML = '';
+            resultElement.textContent = 'Testing...';
+            resultElement.className = 'test-result';
+            
+            const url = `${API_BASE_URL}${HEALTH_ENDPOINT}`;
+            logMessage(logElement, `Testing health endpoint: ${url}`);
+            
+            try {
+                const response = await fetch(url);
+                logMessage(logElement, `Health endpoint status: ${response.status}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    logMessage(logElement, `Health endpoint response: ${JSON.stringify(data, null, 2)}`);
+                    setResult(resultElement, true, 'Health endpoint test: PASSED');
+                    return true;
+                } else {
+                    logMessage(logElement, `Health endpoint returned status: ${response.status}`, true);
+                    setResult(resultElement, false, 'Health endpoint test: FAILED');
+                    return false;
+                }
+            } catch (error) {
+                logMessage(logElement, `Health endpoint error: ${error.message}`, true);
+                setResult(resultElement, false, 'Health endpoint test: FAILED');
+                return false;
+            }
+        }
+
+        async function testRoomCustomerLinkEndpoint() {
+            const resultElement = document.getElementById('room-customer-link-result');
+            const logElement = document.getElementById('room-customer-link-log');
+            
+            logElement.innerHTML = '';
+            resultElement.textContent = 'Testing...';
+            resultElement.className = 'test-result';
+            
+            const phoneNumber = document.getElementById('phone-number').value;
+            const roomName = document.getElementById('room-name').value;
+            
+            const url = `${API_BASE_URL}${ROOM_CUSTOMER_LINK_ENDPOINT}?phoneNumber=${encodeURIComponent(phoneNumber)}&roomName=${encodeURIComponent(roomName)}`;
+            logMessage(logElement, `Testing room-customer link endpoint: ${url}`);
+            
+            try {
+                const response = await fetch(url);
+                logMessage(logElement, `Room-customer link endpoint status: ${response.status}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    logMessage(logElement, `Room-customer link endpoint response: ${JSON.stringify(data, null, 2)}`);
+                    setResult(resultElement, true, 'Room-customer link endpoint test: PASSED');
+                    return true;
+                } else {
+                    logMessage(logElement, `Room-customer link endpoint returned status: ${response.status}`, true);
+                    try {
+                        const errorData = await response.json();
+                        logMessage(logElement, `Error details: ${JSON.stringify(errorData, null, 2)}`, true);
+                    } catch (e) {
+                        logMessage(logElement, 'Could not parse error response', true);
+                    }
+                    setResult(resultElement, false, 'Room-customer link endpoint test: FAILED');
+                    return false;
+                }
+            } catch (error) {
+                logMessage(logElement, `Room-customer link endpoint error: ${error.message}`, true);
+                setResult(resultElement, false, 'Room-customer link endpoint test: FAILED');
+                return false;
+            }
+        }
+
+        async function testCorsConfiguration() {
+            const resultElement = document.getElementById('cors-result');
+            const logElement = document.getElementById('cors-log');
+            
+            logElement.innerHTML = '';
+            resultElement.textContent = 'Testing...';
+            resultElement.className = 'test-result';
+            
+            const url = `${API_BASE_URL}${HEALTH_ENDPOINT}`;
+            logMessage(logElement, `Testing CORS configuration for: ${url}`);
+            
+            try {
+                // First try a simple GET request with no-cors mode
+                logMessage(logElement, 'Testing server reachability with no-cors mode...');
+                try {
+                    const noCorsFetch = await fetch(url, {
+                        method: 'GET',
+                        mode: 'no-cors'
+                    });
+                    logMessage(logElement, `Server is reachable (no-cors): ${noCorsFetch.type}`);
+                } catch (noCorsFetchError) {
+                    logMessage(logElement, `Server is not reachable even with no-cors mode: ${noCorsFetchError.message}`, true);
+                    setResult(resultElement, false, 'CORS test: FAILED - Server not reachable');
+                    return false;
+                }
+                
+                // Now try a proper CORS preflight request
+                logMessage(logElement, 'Testing CORS preflight with OPTIONS request...');
+                const response = await fetch(url, {
+                    method: 'OPTIONS',
+                    mode: 'cors',
+                    headers: {
+                        'Origin': window.location.origin,
+                        'Access-Control-Request-Method': 'GET',
+                        'Access-Control-Request-Headers': 'Content-Type, Authorization'
+                    }
+                });
+                
+                logMessage(logElement, `CORS preflight response status: ${response.status}`);
+                
+                // Check if the response has the necessary CORS headers
+                const allowOrigin = response.headers.get('Access-Control-Allow-Origin');
+                const allowMethods = response.headers.get('Access-Control-Allow-Methods');
+                const allowHeaders = response.headers.get('Access-Control-Allow-Headers');
+                
+                logMessage(logElement, `CORS headers:
+- Access-Control-Allow-Origin: ${allowOrigin || 'not present'}
+- Access-Control-Allow-Methods: ${allowMethods || 'not present'}
+- Access-Control-Allow-Headers: ${allowHeaders || 'not present'}`);
+                
+                if (!allowOrigin) {
+                    logMessage(logElement, 'The API server does not have CORS enabled (missing Access-Control-Allow-Origin header)', true);
+                    setResult(resultElement, false, 'CORS test: FAILED - Missing CORS headers');
+                    return false;
+                }
+                
+                // Check if our origin is allowed
+                if (allowOrigin !== '*' && allowOrigin !== window.location.origin) {
+                    logMessage(logElement, `The API server does not allow requests from this origin (${window.location.origin})`, true);
+                    setResult(resultElement, false, 'CORS test: FAILED - Origin not allowed');
+                    return false;
+                }
+                
+                // Try a real GET request with CORS mode
+                logMessage(logElement, 'Testing actual GET request with CORS mode...');
+                try {
+                    const getResponse = await fetch(url, {
+                        method: 'GET',
+                        mode: 'cors',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    logMessage(logElement, `GET response status: ${getResponse.status}`);
+                    
+                    if (getResponse.ok) {
+                        setResult(resultElement, true, 'CORS test: PASSED');
+                        return true;
+                    } else {
+                        logMessage(logElement, `GET request failed with status: ${getResponse.status}`, true);
+                        setResult(resultElement, false, 'CORS test: FAILED - GET request failed');
+                        return false;
+                    }
+                } catch (getError) {
+                    logMessage(logElement, `GET request failed: ${getError.message}`, true);
+                    setResult(resultElement, false, 'CORS test: FAILED - GET request error');
+                    return false;
+                }
+            } catch (error) {
+                logMessage(logElement, `CORS check failed: ${error.message}`, true);
+                setResult(resultElement, false, 'CORS test: FAILED - General error');
+                return false;
+            }
+        }
+
+        // Event listeners
+        document.getElementById('test-health').addEventListener('click', testHealthEndpoint);
+        document.getElementById('test-room-customer-link').addEventListener('click', testRoomCustomerLinkEndpoint);
+        document.getElementById('test-cors').addEventListener('click', testCorsConfiguration);
+    </script>
+</body>
+</html>

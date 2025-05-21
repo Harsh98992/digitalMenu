@@ -97,31 +97,9 @@ export class RestaurantCartComponent implements OnInit {
     customerPhoneNumber: string;
 
     openSelectRoomNoDialog() {
-        this.dialog
-            .open(RoomNoDialogComponent, {
-                panelClass: "add-item-dialog",
-                disableClose: true,
-                data: {
-                    restaurantData: this.restaurantData,
-                },
-            })
-            .afterClosed()
-            .subscribe((resp) => {
-                if (resp && resp.selectedRoom) {
-                    console.log("resp", resp);
-                    this.orderOptionFlag = true;
-                    this.userPreference = {
-                        preference: "room service",
-                        value: resp.selectedRoom.roomName,
-                        userDetail: {
-                            name: resp.name,
-                            phoneNumber: resp.phoneNumber,
-                        },
-                    };
-                    this.setCartStateData();
-                    this.placeOrder();
-                }
-            });
+        // Delegate to the cart helper component's implementation
+        // which will check for URL parameters and handle accordingly
+        this.cartHelperComponent.openSelectRoomNoDialog();
     }
     //This one
     openOrderOptionDialog() {

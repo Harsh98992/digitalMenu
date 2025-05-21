@@ -1,0 +1,172 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h4 class="card-title">Room-Customer Links</h4>
+                        </div>
+                        <div class="col-4 text-right">
+                            <button
+                                class="btn btn-primary"
+                                (click)="openAddLinkDialog()"
+                            >
+                                <i class="fa fa-plus"></i> Link Room to Customer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Search..."
+                                    [(ngModel)]="searchTerm"
+                                    (keyup)="applyFilter()"
+                                />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ngx-datatable
+                        #myTable
+                        class="bootstrap"
+                        [rows]="filteredData || rows"
+                        [columns]="columns"
+                        [columnMode]="ColumnMode.force"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        rowHeight="auto"
+                        [limit]="10"
+                    >
+                        <!-- Room Name Column -->
+                        <ngx-datatable-column name="Room Name" prop="roomName">
+                            <ng-template
+                                let-row="row"
+                                ngx-datatable-cell-template
+                            >
+                                {{ row.roomName }}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <!-- Customer Phone Column -->
+                        <ngx-datatable-column
+                            name="Customer Phone"
+                            prop="customerPhoneNumber"
+                        >
+                            <ng-template
+                                let-row="row"
+                                ngx-datatable-cell-template
+                            >
+                                {{ row.customerPhoneNumber }}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <!-- Customer Name Column -->
+                        <ngx-datatable-column
+                            name="Customer Name"
+                            prop="customerName"
+                        >
+                            <ng-template
+                                let-row="row"
+                                ngx-datatable-cell-template
+                            >
+                                {{ row.customerName || "Not provided" }}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <!-- Created Date Column -->
+                        <ngx-datatable-column name="Created" prop="createdAt">
+                            <ng-template
+                                let-row="row"
+                                ngx-datatable-cell-template
+                            >
+                                {{ row.createdAt }}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <!-- Expires Date Column -->
+                        <ngx-datatable-column name="Expires" prop="expiresAt">
+                            <ng-template
+                                let-row="row"
+                                ngx-datatable-cell-template
+                            >
+                                {{ row.expiresAt }}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <!-- Status Column -->
+                        <ngx-datatable-column name="Status" prop="status">
+                            <ng-template
+                                let-row="row"
+                                ngx-datatable-cell-template
+                            >
+                                <span
+                                    [ngClass]="{
+                                        'badge badge-success':
+                                            row.notificationSent,
+                                        'badge badge-warning':
+                                            !row.notificationSent
+                                    }"
+                                >
+                                    {{ row.status }}
+                                </span>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                        <!-- Actions Column -->
+                        <ngx-datatable-column name="Actions" sortable="false">
+                            <ng-template
+                                let-row="row"
+                                ngx-datatable-cell-template
+                            >
+                                <button
+                                    class="btn btn-sm btn-primary mr-2"
+                                    (click)="
+                                        copyLinkToClipboard(row.orderingUrl)
+                                    "
+                                    title="Copy link"
+                                >
+                                    <i class="icon_clipboard"></i>
+                                </button>
+                                <button
+                                    class="btn btn-sm btn-info mr-2"
+                                    (click)="resendNotification(row._id)"
+                                    title="Resend notification"
+                                >
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
+                                <button
+                                    class="btn btn-sm btn-danger"
+                                    (click)="deactivateLink(row._id)"
+                                    title="Deactivate link"
+                                >
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+
+                    <div *ngIf="rows.length === 0" class="text-center mt-4">
+                        <p>No active room-customer links found.</p>
+                        <button
+                            class="btn btn-primary"
+                            (click)="openAddLinkDialog()"
+                        >
+                            Create a new link
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

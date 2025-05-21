@@ -13,4 +13,16 @@ export const environment = {
     // socketApiUrl: "https://qrsaybackend-ksaw.onrender.com/",
     apiUrl: "http://localhost:8080/api",
     socketApiUrl: "http://localhost:8080/",
+
+        // API server health check endpoint
+    healthEndpoint: "/health",
+
+    // Debug settings
+    debug: {
+        // Enable detailed logging for API requests
+        logApiRequests: true,
+        // Enable detailed logging for CORS issues
+        logCorsIssues: true,
+    }
+
 };

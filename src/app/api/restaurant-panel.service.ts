@@ -491,4 +491,34 @@ export class RestaurantPanelService {
             data
         );
     }
+
+    // Room-Customer Link methods
+    createRoomCustomerLink(data: any) {
+        return this.http.post(
+            `${this.apiUrl}/v1/room-customer-link/create`,
+            data
+        );
+    }
+
+    getActiveRoomCustomerLinks() {
+        // Add a timestamp parameter to prevent caching
+        const timestamp = new Date().getTime();
+        return this.http.get(
+            `${this.apiUrl}/v1/room-customer-link/active?_t=${timestamp}`
+        );
+    }
+
+    deactivateRoomCustomerLink(linkId: string) {
+        return this.http.patch(
+            `${this.apiUrl}/v1/room-customer-link/deactivate/${linkId}`,
+            {}
+        );
+    }
+
+    resendRoomCustomerLinkNotification(linkId: string) {
+        return this.http.post(
+            `${this.apiUrl}/v1/room-customer-link/resend-notification/${linkId}`,
+            {}
+        );
+    }
 }

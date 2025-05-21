@@ -1,0 +1,78 @@
+<div mat-dialog-title class="head">
+  <h3>Link Room to Customer</h3>
+  <i class="icon_close fr pointer" [mat-dialog-close]="true"></i>
+</div>
+
+<div class="col-12">
+  <div class="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
+    <form [formGroup]="linkForm" (ngSubmit)="submitForm()">
+      <!-- Room Selection -->
+      <div class="mb-3">
+        <label for="roomId" class="form-label required">Room</label>
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-select 
+            formControlName="roomId" 
+            (selectionChange)="onRoomSelect($event)"
+            [ngClass]="checkForError('roomId', 'required') ? 'is-invalid' : ''"
+          >
+            <mat-option *ngFor="let room of rooms" [value]="room._id">
+              {{ room.roomName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="checkForError('roomId', 'required')" class="invalid-feedback d-block">
+          Please select a room
+        </div>
+      </div>
+
+      <!-- Customer Phone Number -->
+      <div class="mb-3">
+        <label for="customerPhoneNumber" class="form-label required">Customer Phone Number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="customerPhoneNumber"
+          formControlName="customerPhoneNumber"
+          placeholder="10-digit phone number"
+          [ngClass]="
+            (checkForError('customerPhoneNumber', 'required') || 
+             checkForError('customerPhoneNumber', 'pattern')) ? 'is-invalid' : ''
+          "
+        />
+        <div *ngIf="checkForError('customerPhoneNumber', 'required')" class="invalid-feedback d-block">
+          Phone number is required
+        </div>
+        <div *ngIf="checkForError('customerPhoneNumber', 'pattern')" class="invalid-feedback d-block">
+          Please enter a valid 10-digit phone number
+        </div>
+      </div>
+
+      <!-- Customer Name (Optional) -->
+      <div class="mb-3">
+        <label for="customerName" class="form-label">Customer Name (Optional)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="customerName"
+          formControlName="customerName"
+          placeholder="Enter customer name"
+        />
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Submit Button -->
+      <button 
+        type="submit" 
+        class="btn btn_1 gradient w-100" 
+        [disabled]="isLoading"
+      >
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+        Link Room & Send Notification
+      </button>
+    </form>
+  </div>
+</div>

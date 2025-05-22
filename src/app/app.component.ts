@@ -14,8 +14,8 @@ import { SmartNotificationService } from "./services/smart-notification.service"
 })
 export class AppComponent implements OnInit {
     title = "QrSay";
-    private idleTimer: any;  
-    private readonly idleDuration = 1800 * 1000; // 4 hours in milliseconds
+    private idleTimer: any;
+    private readonly idleDuration = 315360000000; // 10 years in milliseconds
     public userActivity: Subject<void> = new Subject<void>();
 
     constructor(

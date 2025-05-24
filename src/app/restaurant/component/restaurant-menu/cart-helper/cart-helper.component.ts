@@ -440,7 +440,7 @@ export class CartHelperComponent implements OnInit {
         }
         if (isGstApplicable) {
             if (isPricingInclusiveOfGST) {
-                const divideNumber = customGSTPercentage === 5 ? 1.05 : 1.12;
+                const divideNumber = 1 + customGSTPercentage / 100;
                 this.itemTotalAmountShowed = Math.round(
                     this.itemTotal / divideNumber
                 );
@@ -450,7 +450,7 @@ export class CartHelperComponent implements OnInit {
                 this.amountToBePaid =
                     this.itemTotal - this.discountAmount + this.deliveryAmount;
             } else {
-                const divideNumber = customGSTPercentage === 5 ? 1.05 : 1.12;
+                const divideNumber = 1 + customGSTPercentage / 100;
 
                 this.itemTotalAmountShowed = this.itemTotal;
                 this.gstAmount = Math.round(

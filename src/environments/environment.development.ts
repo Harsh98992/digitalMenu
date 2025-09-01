@@ -9,8 +9,8 @@ export const environment = {
 
     // apiUrl: "https://qrsaybackend-gurg.onrender.com/api",
     // socketApiUrl: "https://qrsaybackend-gurg.onrender.com/",
-    // apiUrl: "https://qrsaybackend-ksaw.onrender.com/api",
-    // socketApiUrl: "https://qrsaybackend-ksaw.onrender.com/",
-    apiUrl: "http://localhost:8080/api",
-    socketApiUrl: "http://localhost:8080/",
+    apiUrl: "https://qrsaybackend-testing-f67e.onrender.com/api",
+    socketApiUrl: "https://qrsaybackend-testing-f67e.onrender.com/",
+    // apiUrl: "http://localhost:8080/api",
+    // socketApiUrl: "http://localhost:8080/",
 };

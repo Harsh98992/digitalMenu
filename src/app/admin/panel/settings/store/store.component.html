@@ -68,6 +68,7 @@
                                     >
                                         <ng-option [value]="5">5%</ng-option>
                                         <ng-option [value]="12">12%</ng-option>
+                                        <ng-option [value]="18">18%</ng-option>
                                     </ng-select>
                                 </div>
                             </div>
@@ -79,7 +80,10 @@
         <div class="card">
             <div class="card-header">
                 Dine In GST Setting
-                <button class="btn btn-primary" (click)="toggleEditModeDineIn()">
+                <button
+                    class="btn btn-primary"
+                    (click)="toggleEditModeDineIn()"
+                >
                     {{ isEditingDineIn ? "Save" : "Edit" }}
                 </button>
             </div>
@@ -105,7 +109,9 @@
                             <div
                                 class="col-lg-4"
                                 *ngIf="
-                                    this.gstDineInForm.get('isDineInGstApplicable')?.value
+                                    this.gstDineInForm.get(
+                                        'isDineInGstApplicable'
+                                    )?.value
                                 "
                             >
                                 <div class="mb-3">
@@ -129,7 +135,9 @@
                             <div
                                 class="col-lg-4"
                                 *ngIf="
-                                    this.gstDineInForm.get('isDineInGstApplicable')?.value
+                                    this.gstDineInForm.get(
+                                        'isDineInGstApplicable'
+                                    )?.value
                                 "
                             >
                                 <div class="mb-3">
@@ -143,6 +151,7 @@
                                     >
                                         <ng-option [value]="5">5%</ng-option>
                                         <ng-option [value]="12">12%</ng-option>
+                                        <ng-option [value]="18">18%</ng-option>
                                     </ng-select>
                                 </div>
                             </div>
@@ -154,7 +163,10 @@
         <div class="card">
             <div class="card-header">
                 Cash On Delivery Setting
-                <button class="btn btn-primary" (click)="toggleCashOnDeliveryEditMode()">
+                <button
+                    class="btn btn-primary"
+                    (click)="toggleCashOnDeliveryEditMode()"
+                >
                     {{ isEditingCashOnDelivery ? "Save" : "Edit" }}
                 </button>
             </div>

@@ -64,7 +64,6 @@ export class StoreComponent implements OnInit {
             autoRejectFlag: [true],
         });
 
-
         this.getGSTFormDetails();
 
         this.gstForm.disable();
@@ -156,7 +155,8 @@ export class StoreComponent implements OnInit {
                 byPassAuth: res["data"]["restaurantDetail"]["byPassAuth"],
             });
             this.autoRejectForm.patchValue({
-                autoRejectFlag: res["data"]["restaurantDetail"]["autoRejectFlag"] ?? true,
+                autoRejectFlag:
+                    res["data"]["restaurantDetail"]["autoRejectFlag"] ?? true,
             });
 
             this.gstForm.patchValue({
@@ -245,12 +245,33 @@ export class StoreComponent implements OnInit {
     }
     updateAutoRejectValue() {
         const reqData = {
-            autoRejectFlag: this.bypassForm.value.autoRejectFlag ?? false,
+            autoRejectFlag: this.autoRejectForm.value.autoRejectFlag ?? false,
         };
         this.restaurantPanelService
             .updateRestaurantAutoReject(reqData)
             .subscribe({
-                next: (res) => {},
+                next: (res) => {
+                    console.log(res);
+
+                    // Add a small delay to ensure the database update has completed
+                    setTimeout(() => {
+                        this.getGSTFormDetails();
+                    }, 300);
+
+                    this.autoRejectForm.disable();
+
+                    this.utilService.openSnackBar(
+                        "Auto Reject setting updated successfully"
+                    );
+                    this.isEditingAutoReject = !this.isEditingAutoReject;
+                },
+                error: (err) => {
+                    console.error("Error updating Auto Reject setting:", err);
+                    this.utilService.openSnackBar(
+                        "Failed to update Auto Reject setting. Please try again.",
+                        true
+                    );
+                },
             });
     }
     updateBypassAuth() {
@@ -260,7 +281,31 @@ export class StoreComponent implements OnInit {
         this.restaurantPanelService
             .updateRestaurantByPassAuth(reqData)
             .subscribe({
-                next: (res) => {},
+                next: (res) => {
+                    console.log(res);
+
+                    // Add a small delay to ensure the database update has completed
+                    setTimeout(() => {
+                        this.getGSTFormDetails();
+                    }, 300);
+
+                    this.bypassForm.disable();
+
+                    this.utilService.openSnackBar(
+                        "Bypass Authentication setting updated successfully"
+                    );
+                    this.isEditingByPassAuth = !this.isEditingByPassAuth;
+                },
+                error: (err) => {
+                    console.error(
+                        "Error updating Bypass Authentication setting:",
+                        err
+                    );
+                    this.utilService.openSnackBar(
+                        "Failed to update Bypass Authentication setting. Please try again.",
+                        true
+                    );
+                },
             });
     }
     toggleCashOnDeliveryEditMode() {
@@ -279,7 +324,32 @@ export class StoreComponent implements OnInit {
         this.restaurantPanelService
             .updateRestaurantCashOnDelivery(reqData)
             .subscribe({
-                next: (res) => {},
+                next: (res) => {
+                    console.log(res);
+
+                    // Add a small delay to ensure the database update has completed
+                    setTimeout(() => {
+                        this.getGSTFormDetails();
+                    }, 300);
+
+                    this.cashOnDeliveryForm.disable();
+
+                    this.utilService.openSnackBar(
+                        "Cash On Delivery setting updated successfully"
+                    );
+                    this.isEditingCashOnDelivery =
+                        !this.isEditingCashOnDelivery;
+                },
+                error: (err) => {
+                    console.error(
+                        "Error updating Cash On Delivery setting:",
+                        err
+                    );
+                    this.utilService.openSnackBar(
+                        "Failed to update Cash On Delivery setting. Please try again.",
+                        true
+                    );
+                },
             });
     }
 

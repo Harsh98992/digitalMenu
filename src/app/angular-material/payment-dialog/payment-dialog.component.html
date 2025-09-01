@@ -86,6 +86,15 @@
                         </div>
                     </div>
                 </div> -->
+
+                <div *ngIf="paymentMethod === 'payOnline'" class="mt-3 mb-3">
+                    <re-captcha
+                        [siteKey]="siteKey"
+                        (resolved)="onCaptchaResolved($event)"
+                        (error)="onCaptchaError($event)"
+                        (expired)="onCaptchaExpired()">
+                    </re-captcha>
+                </div>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
@@ -93,7 +102,7 @@
         type="button"
         class="btn btn_1 gradient w-100"
         (click)="completePayment()"
-    >
-        Proceed to payment
+        [disabled]="paymentMethod === 'payOnline' && !captchaResolved">
+        {{ paymentMethod === 'payOnline' && !captchaResolved ? 'Complete Captcha First' : 'Proceed to payment' }}
     </button>
 </mat-dialog-actions>

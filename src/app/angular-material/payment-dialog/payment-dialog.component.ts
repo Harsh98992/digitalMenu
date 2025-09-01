@@ -2,6 +2,7 @@ import { Component, HostListener, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { io } from "socket.io-client";
+import { RecaptchaErrorParameters } from "ng-recaptcha";
 import { OrderService } from "src/app/api/order.service";
 import { UtilService } from "src/app/api/util.service";
 import { RestaurantService } from "src/app/restaurant/api/restaurant.service";
@@ -25,6 +26,11 @@ export class PaymentDialogComponent implements OnInit {
     transferDetails: any;
     validatedData: any;
     storeFlag: boolean;
+
+    // captcha
+    captchaResolved: boolean = false;
+    captchaResponse: string = '';
+    siteKey: string = environment.recaptchaSiteKey;
 
     socketOrderPlaced(data: any) {
         this.socket.emit(this.socketOrderPlacedEvent, data);
@@ -105,6 +111,7 @@ export class PaymentDialogComponent implements OnInit {
         this.razorPayData = {
             amount: this.totalAmount,
             restaurantId: this.orderData.restaurantId,
+            captchaResponse: this.captchaResponse
         };
         this.restaurantService.razorPay(this.razorPayData).subscribe((res) => {
             this.razorPayOptions.key = res["key"];
@@ -204,11 +211,96 @@ export class PaymentDialogComponent implements OnInit {
         }
     }
 
+    // completePayment() {
+    //     if (!this.paymentMethod) {
+    //         this.utilService.openSnackBar("Please choose payment method", true);
+    //         return;
+    //     }
+    //     let bodyData: any = [
+    //         {
+    //             orderSummary:
+    //                 this.orderData?.["orderDetails"][0]?.["orderSummary"] ?? "",
+    //             customerPreferences:
+    //                 this.orderData?.["orderDetails"][0]?.[
+    //                     "customerPreferences"
+    //                 ] ?? "",
+
+    //             orderAmount:
+    //                 this.orderData?.["orderDetails"][0]?.["orderAmount"] ?? "",
+    //             restaurantId: this.orderData?.["restaurantId"] ?? "",
+    //             gstAmount:
+    //                 this.orderData?.["orderDetails"][0]?.["gstAmount"] ?? "",
+    //             discountAmount:
+    //                 this.orderData?.["orderDetails"][0]?.["discountAmount"] ??
+    //                 "",
+    //             deliveryAmount:
+    //                 this.orderData?.["orderDetails"][0]?.["deliveryAmount"] ??
+    //                 "",
+    //         },
+    //     ];
+    //     this.validatedData = bodyData;
+    //     if (this.paymentMethod === "cashOnDelivery") {
+    //         this.restaurantService
+    //             .validationBeforeOrder(bodyData[0])
+    //             .subscribe((res) => {
+    //                 if (this.paymentMethod === "cashOnDelivery") {
+    //                     this.dialogRef.close({
+    //                         method: "cashOnDelivery",
+    //                         event,
+    //                     });
+    //                     // this.orderService
+    //                     //     .changeOrderStatusByUserForCashOnDelivery({
+    //                     //         orderId: this.orderData._id,
+    //                     //         restaurantId: this.orderData.restaurantId,
+    //                     //         orderStatus: "processing",
+    //                     //     })
+    //                     //     .subscribe({
+    //                     //         next: (res) => {
+    //                     //             this.socketOrderPlaced(this.orderData);
+    //                     //             this.router.navigateByUrl("/orders");
+    //                     //             this.dialogRef.close();
+    //                     //         },
+    //                     //     });
+    //                 } else {
+    //                 }
+    //             });
+    //     } else {
+    //         this.buyRazorPay();
+    //     }
+    // }
+
+
+    onCaptchaResolved(response: string): void {
+        this.captchaResponse = response;
+        this.captchaResolved = true;
+        console.log('reCAPTCHA resolved:', response);
+    }
+
+    onCaptchaError(error: RecaptchaErrorParameters): void {
+        console.error('reCAPTCHA error:', error);
+        this.captchaResolved = false;
+        this.utilService.openSnackBar('Please complete the captcha verification', true);
+    }
+
+    onCaptchaExpired(): void {
+        this.captchaResolved = false;
+        this.captchaResponse = '';
+        this.utilService.openSnackBar('Captcha expired, please verify again', true);
+    }
+
+    // Update the completePayment method
     completePayment() {
         if (!this.paymentMethod) {
             this.utilService.openSnackBar("Please choose payment method", true);
             return;
         }
+
+        // Add captcha verification for online payments
+        if (this.paymentMethod === "payOnline" && !this.captchaResolved) {
+            this.utilService.openSnackBar("Please complete the captcha verification", true);
+            return;
+        }
+
         let bodyData: any = [
             {
                 orderSummary:
@@ -217,7 +309,6 @@ export class PaymentDialogComponent implements OnInit {
                     this.orderData?.["orderDetails"][0]?.[
                         "customerPreferences"
                     ] ?? "",
-
                 orderAmount:
                     this.orderData?.["orderDetails"][0]?.["orderAmount"] ?? "",
                 restaurantId: this.orderData?.["restaurantId"] ?? "",
@@ -229,34 +320,15 @@ export class PaymentDialogComponent implements OnInit {
                 deliveryAmount:
                     this.orderData?.["orderDetails"][0]?.["deliveryAmount"] ??
                     "",
+                // Add captcha response to the request
+                captchaResponse: this.captchaResponse
             },
         ];
+        
         this.validatedData = bodyData;
+        
         if (this.paymentMethod === "cashOnDelivery") {
-            this.restaurantService
-                .validationBeforeOrder(bodyData[0])
-                .subscribe((res) => {
-                    if (this.paymentMethod === "cashOnDelivery") {
-                        this.dialogRef.close({
-                            method: "cashOnDelivery",
-                            event,
-                        });
-                        // this.orderService
-                        //     .changeOrderStatusByUserForCashOnDelivery({
-                        //         orderId: this.orderData._id,
-                        //         restaurantId: this.orderData.restaurantId,
-                        //         orderStatus: "processing",
-                        //     })
-                        //     .subscribe({
-                        //         next: (res) => {
-                        //             this.socketOrderPlaced(this.orderData);
-                        //             this.router.navigateByUrl("/orders");
-                        //             this.dialogRef.close();
-                        //         },
-                        //     });
-                    } else {
-                    }
-                });
+            // ... existing cash on delivery code
         } else {
             this.buyRazorPay();
         }

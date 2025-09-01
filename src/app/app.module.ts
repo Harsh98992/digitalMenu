@@ -29,6 +29,7 @@ import { UserBehaviorService } from "./services/user-behavior.service";
 import { ReinforcementLearningNotificationService } from "./services/reinforcement-learning-notification.service";
 import { SmartNotificationService } from "./services/smart-notification.service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         AcceptOrderBypassAuthComponent,
     ],
     imports: [
+        RecaptchaModule,
+        RecaptchaFormsModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
